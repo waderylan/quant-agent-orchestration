@@ -1,0 +1,2 @@
+# Scaffold only; no dependencies selected or installed.
+# Add exact framework pins (package==version) when implementation begins.
