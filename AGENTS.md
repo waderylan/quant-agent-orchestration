@@ -1,31 +1,23 @@
 # AGENTS.md
 
-CSCI 599 Assignment 2 — Multi-Agent System with RAG and Orchestration
-
-This repository contains an individual course project to build and deploy a multi-agent system with RAG, inspectable cross-provider routing, and a streaming frontend. The completed project must satisfy the implementation, deployment, testing, documentation, and submission requirements in `docs/assignment/Assignment_2_Description.md`.
-
-This file is the canonical coordination guide for coding agents in this repository. It intentionally does not repeat the assignment specification.
+CSCI 599 Assignment 2 — canonical shared instructions.
 
 ## 1. Assignment Ground Truth
 
-- Read `docs/assignment/Assignment_2_Description.md` completely before making project decisions or changing code, configuration, documentation, tests, deployment, or submission artifacts. This Markdown transcription preserves the complete assignment text; `docs/assignment/Assignment_2_Description.pdf` is the authoritative original for visual formatting.
-- Treat `docs/assignment/Assignment_2_Description.md` as the ground truth for all project requirements, grading criteria, academic-integrity rules, technical contracts, and deliverables.
-- Do not rely on summaries in chat or agent memory when the assignment document can answer the question directly.
-- If repository code, documentation, or a user request appears inconsistent with the assignment, identify the conflict before proceeding.
-- Follow higher-priority user and platform instructions when they conflict with this file.
+- `docs/assignment/Assignment_2_Description.md` governs requirements, grading, academic integrity, and deliverables. The PDF beside it governs visual formatting.
+- Consult the assignment directly rather than chat summaries. Identify conflicts before proceeding; user and platform instructions take precedence.
 
 ## 2. Required Agent Workflow
 
-At the start of every agent session:
+At the start of each session:
 
-1. Read this file completely.
-2. Read `docs/assignment/Assignment_2_Description.md` completely.
-   Read `docs/planning/PROJECT_SPEC.md` before project decisions or changes; it defines the chosen project and incremental development approach.
-3. If you are the top-level agent, generate one session UUID for working context only. Do not write a session-start entry.
-4. Complete the user's request while preserving the assignment contract.
-5. Only if the completed work qualifies under §3, the top-level agent appends exactly one event entry using §4.1 and §4.2 immediately before sending the response.
+1. Read this file and the assignment Markdown completely.
+2. Read `docs/planning/PROJECT_SPEC.md` before project decisions or changes.
+3. The top-level agent generates one session UUID for working context; no session-start entry.
+4. Complete the authorized work within the assignment contract.
+5. Immediately before responding, append one consolidated transcript event only if §3 qualifies, following §4.
 
-The top-level agent is the only transcript writer for its conversation. Sub-agents must never write to the transcript; they report qualifying work to the parent, which includes it in one consolidated entry. Separate top-level sessions and worktrees share the transcript and must use the concurrency-safe append protocol in §4.2.
+Only the top-level agent writes transcripts. Sub-agents report qualifying work to their parent. Concurrent sessions/worktrees must use §4.2.
 
 ## 3. Transcript Location and Safety
 
@@ -103,41 +95,28 @@ For every qualifying event entry:
 - Confirm no secrets or sensitive PII were logged.
 - Confirm the content that preceded the old EOF marker was not changed.
 
-## 5. Minimal Repository Guardrails
+## 5. Repository Guardrails
 
-- Never commit or expose credentials. Use environment variables and ignored local secret files as directed by the assignment.
-- Do not claim that code, tests, tools, deployment, or verification worked unless the relevant action was actually performed and inspected.
-- Do not fabricate personal experiences, prompts, lessons, or reflections for `PROCESS_LOG.md`; ask Rylan Wade when personal input is required.
+- Never commit or expose credentials; use environment variables and ignored secret files.
+- Claim success only for actions actually performed and inspected.
 - Preserve user-authored and unrelated changes.
 - Keep `CLAUDE.md` as the single-line import `@AGENTS.md`.
-- Keep project behavior and documentation aligned with `docs/assignment/Assignment_2_Description.md`.
+- Keep documentation factual; never invent decisions, measurements, or personal reflections.
 
-## 6. Project Status and Assignment 2 Conventions
+## 6. Project Workflow
 
-- Chosen project: **Public-Company Research Assistant**, specified in [`docs/planning/PROJECT_SPEC.md`](docs/planning/PROJECT_SPEC.md). The assignment specification remains the ground truth if the planning spec conflicts with it.
-- Current status: scaffold with a selected project and high-level spec; implementation has not been authorized. Use the spec's initial scope and five application agents. Leave its milestones blank until Rylan Wade requests milestone planning.
-- Build incrementally when implementation is requested. Work within the authorized milestone, provide a runnable demonstration and correctness evidence, and obtain Rylan Wade's feedback at the checkpoint before starting the next milestone unless he explicitly authorizes a different sequence. Include formal evaluation results once the evaluation harness exists.
-- Development and testing are local through Rylan Wade's Codex and Claude Code subscriptions. Run browser/container checks locally; deploy to Cloud Run only at the end and retest the live service. Do not follow the superseded suggestion of an early cloud deployment.
-- Test individual application agents directly in Codex sessions with their role instructions, permitted tools, and source-checked questions. Bypass Kessel for these tests; gateway availability must not block single-agent testing.
-- Use Rylan Wade's existing [Kessel gateway](../../kessel/README.md) for full-application local generation and compatible automated evaluation judges through the Codex/Claude Code subscriptions. Verify HW2 client compatibility in the first model-backed milestone. Keep Kessel local and outside the deployed image; use explicit endpoint profiles and measure the actual deployment providers at final acceptance. Record direct Codex role tests and Kessel application tests separately.
-- Nebius Token Factory is selected as one runtime provider; NVIDIA-hosted NIM is tentative as the second. Models remain unselected. Use subscription-backed Codex/Claude Code agents for development tests; defer Nebius/NVIDIA generation calls and separate paid judge calls to final integration/deployment. Verify runtime integration locally before deploying, and distinguish subscription-backed tests from actual provider measurements.
-- Start with exploratory local demonstrations, direct Codex agent testing, basic correctness checks, and Rylan Wade's feedback. Do not require benchmark datasets, model judges, RAGAS scores, or evaluation framework setup in the first milestone. Select a formal evaluation checkpoint after working research and financial-analysis capabilities clarify the intended behavior, then follow the spec's evaluation approach and complete the assignment-required report before submission.
-- Resolve the spec's open decisions when the relevant work requires them. Verify external tools, model IDs, pricing, and access before selecting or configuring them.
-- Keep the extracted instructor references (`docs/cost_analysis.md`, `docs/frontend_vibecode_prompt.md`, and `docs/alternative_*.md`) separate from student-authored deliverables. They are reference guidance, not completed project documentation.
-- Pin selected framework dependencies to exact versions in `requirements.txt` when implementation begins. The scaffold intentionally installs no dependencies.
-- Verify current deployable model IDs and pricing when selecting providers; assignment examples are not verification.
-- Keep `docs/architecture.md` and `docs/evaluation.md` factual. Do not fill placeholders with invented decisions, measurements, or evaluation results.
-- Keep `PROCESS_LOG.md` as a template until Rylan Wade supplies his reflection. The final log is 200–300 words across the four required sections.
-- The project spec's final completion checklist ends with Rylan Wade completing `PROCESS_LOG.md` after deployment and deployed retesting. Remind him at that final checkpoint, keep submission readiness pending until it is complete, and include the completed log in the submission archive.
-- Do not copy HW1 implementation, credentials, deployment configuration, generated artifacts, or personal reflections into HW2.
+- Chosen project: **Public-Company Research Assistant**. [Project spec](docs/planning/PROJECT_SPEC.md) defines scope, five application agents, providers, local integration, open decisions, and the final checklist. The assignment takes precedence over the spec.
+- Current stage: planning/scaffold. Project selection does not authorize implementation. Leave milestones blank until milestone planning is requested.
+- Implement only the authorized increment. Provide a runnable demonstration and correctness evidence; get Rylan Wade's feedback before starting the next milestone unless he authorizes another sequence.
+- Develop/test locally through Codex/Claude Code subscriptions. Test individual agents directly in Codex; Kessel supports full-application runs and compatible judges. Keep those results distinct.
+- Defer Nebius/NVIDIA generation and separate paid judge calls to final integration. Verify provider integration locally, then deploy to Cloud Run and retest. Keep Kessel outside the deployed image.
+- Begin with exploratory demos and basic correctness checks. Select formal evaluations after working research/financial-analysis capabilities clarify expected behavior; complete required evaluation reporting before submission.
+- Resolve open decisions when needed. Verify current model IDs, pricing, access, and external-tool compatibility; pin framework dependencies exactly in `requirements.txt`.
+- Instructor files (`docs/cost_analysis.md`, `docs/frontend_vibecode_prompt.md`, `docs/alternative_*.md`) are reference guidance, separate from student-authored deliverables.
+- Keep `PROCESS_LOG.md` a template until Rylan Wade supplies his actual reflection. After deployment/retesting, remind him to complete 200–300 words across its four sections as the final checklist step. Submission readiness remains pending until the completed log is included in the archive.
+- Do not copy HW1 implementation, credentials, deployment configuration, artifacts, or reflections.
 
 ## 7. Idea Documents
 
-- Keep product exploration in `docs/ideas/`, with one Markdown document per idea. The selected project spec lives in `docs/planning/PROJECT_SPEC.md` and governs the selected scope where the original exploration differs.
-- The law and ski ideas remain unselected alternatives. Selection and documentation alone do not authorize implementation.
-- Idea documents:
-  - `docs/ideas/course-grounded-law-study.md`: law study tool with course-material, recent-case, and outline agents.
-  - `docs/ideas/ski-road-trip-planner.md`: US/Canada ski road-trip planner with resort data, resort review, and ski itinerary agents. Resort fit and review reasoning are central; driving estimates come from existing services.
-  - `docs/ideas/public-company-research-assistant.md`: original exploration for the chosen company research assistant; see the planning spec for current scope, agents, evaluation direction, and open decisions.
-- Keep product purpose, student experience, agent responsibilities, scope, open decisions, and assignment fit together in each idea document. Leave engineering design and implementation plans for after selection and authorization.
-- Follow the assignment specification if an idea document conflicts with it.
+- `docs/ideas/` contains product exploration. The company idea is selected; law and ski remain alternatives. The planning spec governs selected scope.
+- Keep one document per idea. Idea revisions do not authorize implementation; all ideas remain subject to the assignment.
