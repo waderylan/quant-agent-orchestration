@@ -183,7 +183,7 @@
 - The filing inventory contains 33 rows. Markdown whitespace, encoding, and code-fence checks pass.
 - Source snapshots reside outside the repository as temporary inspection material. The repository contains source evidence and links; complete corpus collection and ingestion are pending.
 - Application agents, model integration, RAG, MCP tools, frontend, container, deployment, and formal evaluations are unimplemented or unstarted.
-- M1 scope/source feasibility is complete. M2 is undefined and unstarted.
+- M1 scope/source feasibility is complete. M2 source collection is planned and unstarted; see the [milestone skeleton](PROJECT_SPEC.md#milestones) for the next increment.
 
 ### Inspection path
 
