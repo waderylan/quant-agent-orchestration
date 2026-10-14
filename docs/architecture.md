@@ -1,119 +1,76 @@
 # Architecture
 
-- Status: **M2 source preparation implemented and verified; accepted**. The application design is selected; application agents and runtime components are unimplemented.
-- Design contract: [project spec](planning/PROJECT_SPEC.md).
-- Source evidence: [M1 feasibility](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
+- Owner: Rylan Wade.
+- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Remaining workers, formal evaluations, containers, and deployment are unimplemented.
+- Contract: [assignment](assignment/Assignment_2_Description.md), [project scope](planning/PROJECT_SPEC.md), and [M3 demonstration](planning/M3_FIRST_RAG_RESEARCH_DEMO.md).
 
-## Selected orchestration design
+## Local request path
 
-- LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary.
-- Workers return findings through supervisor-managed state. The supervisor selects tasks, requests bounded follow-up, handles partial failures, and synthesizes cited evidence.
-- The graph, prompts, tools, API routes, and frontend do not exist yet. The diagram describes the selected design.
+```mermaid
+flowchart LR
+    UI[Vanilla browser chat] -->|POST + SSE| API[FastAPI]
+    API --> S[LangGraph scope supervisor]
+    S --> R[Filings Research]
+    R --> LC[LCEL retrieval + augmentation]
+    LC --> V[Persistent Chroma + CPU MiniLM]
+    R <-->|Dynamic tools + answer deltas| CX[Direct Codex app-server]
+    R --> C[Citations + exact source passages]
+    C --> API
+    API --> UI
+```
 
-~~~mermaid
-flowchart TB
-    UI["Vanilla HTML/JS: answer tokens, sources, routing, traces"]
-    API["FastAPI + SSE"]
-    S["LangGraph Supervisor"]
-    R["Filings Research"]
-    D["Financial Data"]
-    Q["Financial Analysis / Quant"]
-    K["Risk Summary"]
-    MCP["Shared source-lookup MCP"]
-    V["Original-document RAG index"]
-    DATA["Structured observations + filing metadata"]
-    LIVE["Tavily Remote MCP"]
-    RUN["Bounded analysis execution"]
-    DIFF["Risk-section comparison"]
+- `main.py` serves the vanilla HTML/JS document and SSE. `src/research_workflow.py` owns the graph, worker, scope validation, LCEL pipeline, and request-local evidence registry.
+- Graph: `START → supervisor → research → finish → END`; unsupported scope routes directly from supervisor to finish. The supervisor applies explicit coverage rules and delegates the task; learned routing and multi-worker cooperation are unimplemented.
+- State contains question, companies, fiscal years, answer, and error. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
+- Filings Research uses its own [role prompt](../prompts/filings_research.md) and two actual tools: `search_sources` and `inspect_source`. The same worker runs independently through `scripts/research.py agent`.
+- Financial Data, Quant, Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented.
 
-    UI <--> API
-    API <--> S
-    S <--> R
-    S <--> D
-    S <--> Q
-    S <--> K
-    R <--> MCP
-    K <--> MCP
-    V --> MCP
-    R <--> LIVE
-    D <--> DATA
-    Q <--> RUN
-    K <--> DIFF
-~~~
+## Corpus and ingestion
 
-### State contract
+- All 41 M2 originals/extractions are verified: 32 original filings, eight full-year/Q4 earnings releases, and AMD's FY2025 amendment. NVIDIA covers FY2025–2026; AMD/Intel/Qualcomm cover FY2024–2025. Fiscal dates and access evidence are in [M1](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) and [M2](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md).
+- `src/research_index.py` loads the verified M2 manifest and checks prepared UTF-8 text hashes before ingestion. It preserves SEC filing identity, separate amendments, and original source bytes.
+- Persistent Chroma stores **10,681 chunks** in ignored `chroma_index/`. A fingerprint covers embedding/chunk settings and source/provenance/extraction metadata. Complete ingestion publishes `active.json`; queries reject a fingerprint mismatch. Ingestion resumes existing chunk IDs and verifies the final count before publication.
+- MiniLM `all-MiniLM-L6-v2` generates normalized 384-dimensional embeddings through CPU ONNX inference. Chroma 1.5.9 pins the implementation; the 79.3 MiB archive has SHA-256 `913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3`. First ingestion downloads it to the Chroma user cache. CPU sessions use four intra-op threads and one inter-op thread.
+- Chunking uses the model WordPiece tokenizer with **220 tokens and 40-token overlap**. Chunking disables tokenizer truncation/padding; embedding retains its 256-token limit. Chunks never cross a prepared PDF page or selected risk/MD&A section boundary. Offsets refer to original prepared text, including Unicode and PDF layout spacing.
+- Chunks retain document ID, company, fiscal year, source kind/form, period end, version, canonical URL, section, page, character range, and text hash. IDs derive from document identity, text hash, and offsets.
+- AMD's amendment has corrected MD&A and no replacement risks. Quarterly risks remain updates; inspection retains their annual/context note.
 
-- Planned shared state carries the question, selected companies/periods, task status, evidence references, calculations, gaps, routing decisions, and failures.
-- Exact field names, types, worker schemas, follow-up limits, and persistence interfaces are unresolved.
-- Initial requests are self-contained; no durable conversation-state claim exists.
+## Retrieval, augmentation, and grounding
 
-## Agent responsibilities and tool access
+- Cosine Chroma search requires company/fiscal-year filters, with optional form, section, and original/amendment filters. Default top-k is six, bounded to 1–12.
+- Initial augmentation retrieves four passages per selected company/year so one company cannot monopolize a comparison. The HTTP request permits four companies and two fiscal-year labels; every selected pair must have coverage.
+- LCEL composes `RunnableLambda(retrieve) | RunnableLambda(augment)`. Augmentation contains the actual worker prompt, question, explicit scope, and source passages assigned request-local `[S1]` identifiers. Source quotations are marked untrusted evidence.
+- `search_sources(query, company?, year?, form?, section?, version?)` cannot broaden the selected company/year scope. `inspect_source(source_id)` accepts an already registered passage and returns exact text plus up to 500 surrounding characters on each side.
+- Complete answers require registered citation IDs and hash-checked exact source text for cited passages. Unknown IDs, absent citations, or empty answers produce an unverified result. Identifier/provenance checks do not establish claim-level faithfulness; formal evaluation and claim review remain pending.
+- Unsupported company/year selections, question/selection mismatches, and explicit current/live requests produce coverage explanations before generation. Missing retrieval, corrupt text, stale index, unavailable models, and timeouts produce explicit failure events.
+- Scope parsing is conservative. Fiscal labels and calendar dates can require clarification; unrecognized company names rely on worker abstention and remain a limitation.
 
-| Agent | Selected responsibility | Intended access | Implementation |
-| --- | --- | --- | --- |
-| Filings Research | Disclosure interpretation and relevant current research | RAG, shared source inspection, Tavily search/extract | Pending |
-| Financial Data | Comparable financial observations and provenance | Structured data and filing metadata | Pending |
-| Financial Analysis / Quant | Checked calculations, tables, charts | Bounded code execution over supplied observations | Pending; execution limits undecided |
-| Risk Summary | Cited before/after disclosure comparison | Section alignment/comparison; shared source inspection | Pending |
-| Supervisor | Task coordination, bounded follow-up, failure handling, synthesis | LangGraph delegation and state inspection | Pending |
+## Direct Codex generation
 
-## Generation routing
+- `src/codex_model.py` uses the installed CLI's JSON-RPC app-server protocol. Verified CLI: **0.162.1**; default model: **gpt-6.1-sol**. `RESEARCH_MODEL` selects another accessible model. [Official protocol](https://learn.chatgpt.com/docs/app-server).
+- The adapter initializes experimental dynamic tools, starts a fresh ephemeral read-only thread, submits augmented evidence, executes application-owned tool calls, and yields final-answer text deltas. Commentary is excluded from answer tokens.
+- Local generation uses `codex login`; HW2 does not read/copy credential stores or require an application generation API key. The adapter requests disabled shell/browser/application tools and supplies explicit research instructions. It is a local research workflow, not a code-execution sandbox for untrusted users.
+- Model work is bounded to 180 seconds/eight dynamic tool calls. Unexpected server requests are rejected. Cancellation/timeout closes the owned process. FastAPI permits two concurrent turns per process; distributed scheduling and production concurrency acceptance are pending.
+- Traces identify the actual Codex subscription provider/model/reason. Nebius Token Factory and the tentative NVIDIA-hosted provider remain unverified. Subscription observations do not establish their price, quality, or latency.
 
-| Profile | Provider direction | Verified integration |
-| --- | --- | --- |
-| Local development | Codex/Claude Code subscription routes through the existing Kessel gateway | HW2 integration untested |
-| Deployment | Nebius Token Factory selected; NVIDIA-hosted NIM tentative | Both untested in HW2 |
+## HTTP and browser contracts
 
-- The deployment design requires two distinct serving providers exercised under normal supported workloads, with visible cost/capability reasons.
-- Model IDs, routing thresholds, account access, and budgets are unresolved. No worker has a fixed verified provider assignment.
-- Record serving provider separately from model publisher and client library.
-- Kessel is local infrastructure and remains outside the deployed image. HW2 owns tool validation/execution.
-- Runtime-provider integration and measurements belong to final integration, first locally and then on Cloud Run.
+| Route | Behavior |
+| --- | --- |
+| `GET /` | Single vanilla HTML/CSS/JS page; no frontend build. |
+| `GET /api/coverage` | Verified companies and fiscal-year labels. |
+| `POST /api/chat` | Validated self-contained question/companies/years; SSE. |
+| `GET /api/sources/{chunk_id}` | Hash-checked exact passage/context, fiscal dates, version, source links. |
+| `GET /api/originals/{document_id}` | Hash-checked collected original as an attachment. |
 
-## Corpus and financial sources
+- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `error`, terminal `complete`. Status distinguishes completed, coverage gap, unverified, and failed.
+- The fetch-based consumer decodes fragmented UTF-8/SSE frames, displays live answer tokens, links citations to highlighted exact passages, exposes routing/tools, and supports Stop through cancellation. A bounded 128-event queue and 0.5-second keep-alive frames keep delivery responsive during model waits. Cleanup shields graph-task cancellation from repeated ASGI cancellation; a real disconnect check leaves zero owned Codex children after two seconds.
+- Model/source text uses DOM text nodes. Prepared HTML originals download as attachments. Links provide SEC, official retrieval source, and collected original; SEC access can return 403.
+- Sources/index are ignored reproducible data. Source refresh requires explicit ingestion and an application restart; no automatic freshness service exists.
 
-- Initial companies: NVIDIA, AMD, Intel, Qualcomm. Coverage expansion toward approximately 20 companies is planned after source checks, working demonstrations, and feedback.
-- Selected years: NVIDIA FY2025–2026; AMD/Intel/Qualcomm FY2024–2025. Actual fiscal dates are in the [M1 coverage table](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md#2-company-and-period-coverage).
-- Collection target: 32 10-K/10-Q reports, eight Q4/full-year releases, and AMD's FY2025 amendment; **41 documents**.
-- SEC submissions provide filing discovery; Company Facts provides structured financial observations. SEC accession remains canonical identity while retrieval URLs identify official mirrors/CDNs.
-- Metadata and aligned USD inputs are verified for 32/32 original reports. All 41 bodies and readable extractions are verified. [M2 preparation](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) records source/table/section evidence and no collection gaps.
-- Direct local SEC Archives probes return 403. Qualcomm's gross-profit input requires subtraction; its FY2024 has 53 weeks. AMD's corrected MD&A remains linked to its original filing.
-- Initial metrics use consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow. Observation selection and revision reconciliation are unimplemented.
+## Verification and remaining work
 
-## RAG pipeline
-
-- Required stages: original-document ingestion, chunking, embeddings, vector storage, top-k retrieval, prompt augmentation, and generation with source-chunk citations.
-- Pinecone versus Chroma, local embedding model, chunking rules, retrieval filters/k, and augmentation template remain undecided.
-- Original-document collection and readable preparation are implemented. Chunking, embeddings, vector index, retrieval, augmentation, and generation are unimplemented.
-- Structured financial queries complement original-document RAG; they do not replace it.
-
-## Live knowledge and MCP sharing
-
-- Tavily Remote MCP is the selected live-knowledge path. Public source access and provider documentation are verified; authenticated MCP initialization and tool calls are untested.
-- Filings Research and Risk Summary share a source-lookup MCP tool for different evidence tasks.
-- The shared tool is unimplemented. Evidence of both workers invoking it remains required; A2A is not the selected integration path.
-
-## Frontend, deployment, and persistence
-
-- Selected interface: FastAPI-served vanilla HTML/JS with SSE answer-token streaming, citations, routing decisions, and orchestration traces.
-- Endpoint contracts, source-inspection interaction, SSE handling, and local Docker configuration are unresolved.
-- Deployment target: Google Cloud Run after local acceptance. No image, service, public URL, or runtime measurements exist.
-- Initial requests are single-turn. Durable conversation persistence is unnecessary for that boundary; any future durability promise requires an external store and instance-replacement verification.
-- RAG index storage is a separate decision from conversation persistence.
-
-## Outstanding verification
-
-- Review M2's source-preparation demonstration before authorizing RAG implementation.
-- Implement and verify the graph, role tools, financial calculations, RAG pipeline, shared MCP use, and SSE contract.
-- Check local Kessel client compatibility and Docker-to-host access.
-- Run formal evaluations after working research/analysis demonstrations.
-- Verify final serving providers locally, deploy, and repeat relevant cloud acceptance/evaluation checks.
-
-## Implemented source preparation
-
-- `scripts/collect_sources.py` exposes collect/refresh, offline preparation/verification, status, inspection, compact report export, future fiscal-window discovery, and explicit release addition. `src/source_collection.py` owns source validation, extraction, and content-addressed storage; `src/source_inventory.py` owns future discovery.
-- `data/source_inventory.json` defines 41 logical documents. SEC accession is filing identity; official mirrors remain retrieval candidates. Amendments have separate identities and parent links. Quarterly risk records retain annual context and identify prior annual reports outside initial coverage.
-- Sequential requests use an identifying User-Agent, a one-second request interval, 30-second timeouts, two attempts for transient failures, and no retries for 403/404. Official feed discovery does not treat publisher listing dates as fiscal ends.
-- Original bytes and SEC snapshots are content-addressed by SHA-256. Prepared UTF-8 text has its own checksum, page/section offsets, and table details. Immutable run manifests retain retrieval dates, identities, versions, validation outcomes, and failed refreshes.
-- HTML extraction excludes hidden XBRL/scripts, keeps table cells and row/column spans, and selects news article headers/body. PDF extraction uses fixed-width layout and plain-text fallback for text omitted by layout mode. Standard reports use Item boundaries; Intel uses body titles and its SEC cross-reference index.
-- All downloaded/prepared data is local and ignored under `data/corpus/`. Inventories and compact evidence reports are tracked. uv manages Python 3.13, exact direct pins, `uv.lock`, and exported assignment requirements.
+- Focused tests cover scope isolation, Unicode offsets/boundaries, corrupt/stale sources, unsupported coverage, citation identifiers, and terminal failures. M2 tests remain applicable.
+- Actual results: 19 tests pass; four company retrieval/application questions pass; three unsupported/current requests return coverage gaps; one separate direct AMD worker run and one Chromium citation/trace demonstration pass. The HTTP checks verify an original-file hash, missing-source 404, and invalid-request 422. An unavailable Codex model fails explicitly; live request cancellation closes the owned process.
+- [Demonstration evidence](research/M3_DEMONSTRATION_RESULTS.json) records actual retrieval, application turns, tools, cited passages, and local timing. [Browser evidence](research/M3_BROWSER_RESULTS.json) records Chromium chat/source interaction.
+- Formal RAGAS/AgentEvals, financial calculations, risk alignment, shared/live MCP, additional generation providers, Docker, Cloud Run, and deployment measurements remain pending under M4–M12.

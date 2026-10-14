@@ -2,7 +2,7 @@
 
 - Owner: Rylan Wade.
 - Product name: TBD.
-- Status: selected project; M1 and M2 implemented and verified, with M2 accepted. Application implementation is unstarted.
+- Status: selected project; M1–M3 implemented and verified, with M2 and M3 accepted. M3 provides local filings research and exact source inspection.
 - Selected scope and development constraints: [project spec](../planning/PROJECT_SPEC.md).
 - Source availability and financial evidence: [M1 feasibility](../planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
 
@@ -25,7 +25,7 @@ The product is a research tool. Its initial scope excludes trading, personalized
 
 - Company coverage starts with these four and is planned to expand toward approximately 20, subject to source checks, working demonstrations, and feedback.
 - Initial collection comprises 32 original 10-K/10-Q reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment: **41 documents**.
-- All four companies use domestic SEC forms. All 41 selected bodies and readable extractions are verified; RAG ingestion is unstarted.
+- All four companies use domestic SEC forms. All 41 selected bodies and readable extractions are verified; RAG ingestion uses local MiniLM embeddings and persistent Chroma.
 - SEC metadata and matching-duration USD financial inputs are verified for all 32 original reports. Source preparation includes risk/MD&A boundaries, table fidelity checks, and the distinct AMD amendment. [M2 preparation](../planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) defines inspection, refresh, and future-data CLI commands.
 - Initial metrics are consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
 - Within-company comparisons take priority. Cross-company comparisons must show fiscal dates and explain timing and business-mix limits.
@@ -41,7 +41,7 @@ The product is a research tool. Its initial scope excludes trading, personalized
 4. Open the exact passage or observation behind a claim. Inspect the source inputs, fiscal dates, units, and formula behind a calculation.
 5. Submit a revised self-contained request to compare another period, peer, or assumption.
 
-The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer tokens, linked sources, visible provider routing, and inspectable traces. The interface is unimplemented. Initial requests carry no conversation-memory or cross-session persistence promise.
+The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer tokens, linked sources, visible provider routing, and inspectable traces. The local interface provides streamed research answers, exact source passages, and routing/tool traces. Initial requests carry no conversation-memory or cross-session persistence promise.
 
 ## Application roles
 
@@ -56,7 +56,7 @@ The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer t
 - The selected design contains four specialized workers and one supervisor. Each worker requires distinct prompts and meaningful tool access.
 - Risk Summary requires document comparison; a repeated filings summary does not satisfy that role.
 - Generation routing is shared infrastructure. Evaluation runs outside the application and is not an additional agent.
-- All application roles and tools are unimplemented.
+- Filings Research and a minimal scope/delegation supervisor are implemented. Financial Data, Quant, Risk Summary, live retrieval, and shared MCP remain unimplemented.
 
 ## Intended investigations
 
@@ -82,10 +82,10 @@ For financial questions, Filings Research supplies management's explanation, Fin
 
 ## Development and remaining work
 
-- Development and testing use local Codex/Claude Code subscriptions. Individual-role tests bypass Kessel; full model-backed application runs use the existing local Kessel gateway.
+- Development and testing use local Codex/Claude Code subscriptions. Individual-role and full model-backed application runs use Codex app-server directly. Direct worker runs bypass the supervisor and browser.
 - Nebius Token Factory is selected for deployment generation. NVIDIA-hosted NIM is tentative; exact models, access, pricing, budgets, and routing thresholds remain unverified.
 - Runtime-provider generation and separate paid judges belong to final integration. Cloud Run deployment follows local acceptance.
-- RAG storage, embeddings, chunking, retrieval settings, observation/revision policy, Quant execution limits, Tavily integration, and frontend interaction details remain unresolved.
+- M3 uses Chroma, CPU MiniLM, 220-token chunks with 40-token overlap, scoped semantic retrieval, and exact-passage source inspection. Observation/revision policy, Quant execution limits, Tavily integration, and report/chart refinement remain pending.
 - Formal evaluations are unstarted. The evaluation checkpoint follows working research and financial-analysis demonstrations.
-- Latency and cost targets require actual measurements; no runtime performance or cost results exist.
+- Latency and cost targets require actual measurements; local observations are exploratory and do not establish deployment performance or cost.
 - M2's source-preparation demonstration is runnable with uv; M2 is accepted. The [project spec](../planning/PROJECT_SPEC.md) lists remaining decisions and submission requirements.

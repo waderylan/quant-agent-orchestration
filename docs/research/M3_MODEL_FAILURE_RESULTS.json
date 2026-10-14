@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-14T18:04:41.660219+00:00",
+  "test": "explicit inaccessible model",
+  "passed": true,
+  "error_type": "RuntimeError",
+  "error": "Codex turn failed: {'message': '{\"type\":\"error\",\"status\":400,\"error\":{\"type\":\"invalid_request_error\",\"message\":\"The \\'unavailable-hw2-model\\' model is not supported when using Codex with a ChatGPT account.\"}}', 'codexErrorInfo': 'other', 'additionalDetails': None, 'misalignment': None}",
+  "events": [
+    {
+      "type": "trace",
+      "data": {
+        "agent": "Filings Research",
+        "provider": "Codex subscription",
+        "model": "unavailable-hw2-model",
+        "reason": "Historical filing research using local evidence"
+      }
+    }
+  ]
+}

@@ -108,5 +108,5 @@ uv run --locked python scripts/collect_sources.py --inventory data/amd-fy2025-ex
 - Track: source inventory, collection/discovery code, demonstration script, targeted tests, uv project/lockfile, exported requirements, documentation, and compact evidence reports.
 - Ignore: `data/corpus/` originals, extracted text, table/page metadata, source snapshots, and run manifests; `.venv/` and temporary inspection material. Files are local reproducible artifacts and can change during refresh.
 - Material collection gaps: none within the 41-document scope. Complex PDF tables still require original-page inspection; source text is not a universal structured financial parser. No guarantee is made about every table, arbitrary companies, unsupported forms, future publisher markup, or historical sources outside declared coverage.
-- RAG ingestion/indexing, application workers, frontend, financial observation resolution, risk-change classification, live MCP, model integration, formal evaluations, and deployment are unstarted.
-- M2 is accepted for commit and push. M3 requires separate authorization.
+- M3 implements RAG ingestion/indexing, Filings Research, a minimal supervisor, direct Codex generation, and the local browser. Financial observation resolution, risk-change classification, live/shared MCP, remaining workers, formal evaluation, containers, and deployment are unstarted.
+- M2 is accepted. M3 research implementation is authorized; later milestones require feedback and authorization.

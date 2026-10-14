@@ -1,14 +1,44 @@
 # Public-Company Research Assistant
 
 - Owner: Rylan Wade.
-- Status: **M2 source collection and preparation implemented and verified; accepted**. Application implementation is unstarted.
+- Status: **M3 local filings-research demo implemented and verified; accepted**. M1/M2 are verified; M2 is accepted.
 - Initial company set: NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM).
 - Company coverage starts with these four and is planned to expand. Approximately 20 companies is the expansion target, subject to source coverage, working demonstrations, and feedback.
 - Selected years: NVIDIA FY2025–2026; AMD, Intel, and Qualcomm FY2024–2025. Fiscal dates differ and must remain visible in comparisons.
-- Verified corpus: **41/41 documents** — 32 annual/quarterly reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. RAG ingestion is unstarted.
+- Verified corpus: **41/41 documents** — 32 annual/quarterly reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The local Chroma index contains 10,681 chunks.
 - Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
 
-Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. The application, RAG pipeline, shared MCP tool, SSE frontend, and deployment are not implemented.
+Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, Quant, Risk Summary, live/shared MCP, multi-provider routing, containers, and deployment remain unimplemented.
+
+## Run local research
+
+```powershell
+uv sync --locked
+codex login
+uv run --locked python scripts/collect_sources.py collect
+uv run --locked python scripts/research.py ingest
+uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
+```
+
+- Install Codex CLI and authenticate with `codex login`; local generation uses its subscription. Open `http://127.0.0.1:8080` and ask a question with explicit company/fiscal-year selection.
+- Inspect live answer tokens, routing/tool traces, and clickable citations. The source panel highlights exact passages and links to canonical filings, official mirrors, and collected originals.
+- Local embeddings use CPU ONNX MiniLM; first ingestion downloads its pinned model. Chroma and corpus data are gitignored reproducible artifacts. No paid generation APIs are called by this local profile.
+- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained; financial calculations, live research, and conversation memory are unavailable.
+
+```powershell
+uv run --locked python scripts/research.py status
+uv run --locked python scripts/research.py search "Client unit shipments average selling price" --company AMD --year 2025 --section mda --version amendment
+uv run --locked python scripts/research.py inspect CHUNK_ID
+uv run --locked python scripts/research.py agent "What does AMD's amended FY2025 MD&A correct?" --company AMD --year 2025
+uv run --locked python scripts/demo_research.py
+uv run --locked playwright install chromium
+uv run --locked python scripts/demo_browser.py
+uv run --locked pytest -q
+```
+
+- `agent` runs the actual worker without supervisor/browser; `ask` runs the graph in the terminal. `search`/`inspect`/`status` use the local index without generation.
+- Refresh sources with `collect --refresh`, re-run `research.py ingest`, and restart the application. Separate future corpora use `research.py --corpus PATH --index PATH ingest`; application settings are in `.env.example`.
+- [M3 report](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) records current settings, actual checks, commands, and gaps; [architecture](docs/architecture.md) describes the implementation.
 
 ## Verified source feasibility
 
@@ -29,7 +59,7 @@ uv sync --locked
 uv run --locked python scripts/collect_sources.py collect
 uv run --locked python scripts/collect_sources.py verify
 uv run --locked python scripts/demo_sources.py
-uv run --locked python -m unittest discover -s tests -v
+uv run --locked pytest -q
 ```
 
 - `collect` resumes intact bodies; `collect --refresh` retrieves sources again and preserves raw versions and run histories. `collect --offline` prepares cached originals without network requests.
@@ -40,11 +70,11 @@ uv run --locked python -m unittest discover -s tests -v
 
 ## Development and testing
 
-- Application development and acceptance use local Codex/Claude Code subscriptions. Individual-agent tests bypass Kessel; model-backed application runs use the local Kessel gateway.
+- Local research generation uses Codex app-server directly with the authenticated Codex CLI and gpt-6.1-sol. No application generation API key is required. Direct worker runs, application/browser demonstrations, fixture checks, and final-provider results remain separate evidence.
 - Nebius Token Factory is selected for deployment generation; NVIDIA-hosted NIM is tentative. Exact model IDs, access, budgets, and routing thresholds are unverified.
 - Runtime-provider generation calls and separate paid judges are deferred to final integration. Cloud Run deployment follows local acceptance.
 - Formal evaluations are unstarted and follow working research/financial-analysis demonstrations.
-- Application startup, container, and deployment commands are unavailable because the application is unimplemented. Source-preparation commands above are runnable.
+- Local startup and demonstrations are runnable below. Container/deployment commands remain pending under M4/M12.
 
 ## Documentation
 
@@ -53,6 +83,7 @@ uv run --locked python -m unittest discover -s tests -v
 | [Project spec](docs/planning/PROJECT_SPEC.md) | Selected scope, architecture direction, development constraints, and open decisions. |
 | [M1 feasibility](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) | Dated source evidence, financial inputs, access limitations, and filing inventory. |
 | [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) | Verified corpus, extraction decisions, inspection commands, future collection, and limits. |
+| [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) | Local RAG, direct Codex generation, browser/source inspection, and actual verification. |
 | [Architecture](docs/architecture.md) | Selected design and component implementation status. |
 | [Evaluation](docs/evaluation.md) | Evaluation status and required reporting areas; no runtime scores or performance results. |
 | [Company product description](docs/ideas/public-company-research-assistant.md) | Selected product, audience, and capability boundaries. |

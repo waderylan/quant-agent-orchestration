@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-14T18:13:27.234137+00:00",
+  "browser": "156.0.8078.4",
+  "url": "http://127.0.0.1:8080",
+  "status": "Complete · citations verified",
+  "answer": "- NVIDIA’s FY2026 revenue rose 65% to $215.9 billion for the year ended January 25, 2026. Growth was led by Data Center, where revenue increased 68%, driven by the shift toward accelerated computing and AI. [S11] [S12]\n- Blackwell demand drove Data Center computing revenue growth of 59%. Data Center networking revenue grew 142%, driven by the introduction and continued ramp of NVLink compute fabric for GB200 and GB300 systems, plus growth in Ethernet and InfiniBand platforms. [S10] [S7]\n- Other businesses also contributed: Gaming revenue rose 41% on strong Blackwell demand; Professional Visualization grew 70% on Blackwell demand and the launch of DGX Spark; Automotive grew 39% through continued adoption of NVIDIA’s self-driving platforms. [S11]",
+  "citation_links": 5,
+  "inspected_passage": "2.94                         Up 67%\n\nRevenue for fiscal year 2026 was $215.9 billion, up 65% from a year ago.\n\nData Center revenue for fiscal year 2026 was up 68% from a year ago. The strong year-on-year growth was driven by the major platform shifts – accelerated\ncomputing and AI.\n\nGaming revenue for fiscal year 2026 was up 41% from a year ago, driven by strong Blackwell demand. We expect supply constraints to be a headwind to\nGaming in the first quarter of fiscal 2027 and beyond.\n\nProfessional Visualization revenue for fiscal year 2026 was up 70% from a year ago, driven by exceptional demand for Blackwell as well as the launch of our\nnew DGX Spark.\n\nAutomotive revenue for fiscal year 2026 was up 39% from a year ago, driven by continued adoption of our self-driving platforms.\n\nGross margin decreased in fiscal year 2026 as our business model transitioned from offering Hopper HGX systems to Blackwell full-scale datacenter solutions.\nThe gross margin decrease was also impacted by a $4.5 billion charge associated with",
+  "source_label": "NVDA · FY2026 · 10-K · 2026-01-25 · original · other · page 37 SEC filing · Official retrieval source · Collected original ·",
+  "page_errors": [],
+  "routing_and_tools_visible": true,
+  "screenshot": "artifacts/m3-browser.png",
+  "passed": true
+}

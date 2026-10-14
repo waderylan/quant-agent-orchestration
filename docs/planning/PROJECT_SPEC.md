@@ -1,7 +1,7 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: M1 and M2 implemented and verified; M2 accepted. M3–M12, application agents, provider integration, formal evaluations, and deployment are unstarted.
+- Status: M1–M3 implemented and verified; M2 and M3 accepted. M4–M12, remaining workers, deployment-provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
 - Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
@@ -18,7 +18,7 @@
 
 - Initial company set: **NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM)**. All four use domestic SEC 10-K/10-Q reporting forms.
 - Coverage starts with these four companies and is planned to expand toward approximately 20, subject to verified source coverage, working demonstrations, and feedback. Foreign issuers require a separate reporting-format decision.
-- Initial corpus: **41 verified documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. [M2 preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records originals, readable extraction, section/table checks, and provenance. RAG ingestion is unstarted.
+- Initial corpus: **41 verified documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. [M2 preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records originals, readable extraction, section/table checks, and provenance. RAG ingestion uses local MiniLM embeddings and persistent Chroma.
 - Selected coverage is two completed fiscal years per company, with actual dates shown below. NVIDIA's year labels differ from the other companies. These are explicit historical windows, not a claim of latest-report coverage.
 
 | Company | Selected fiscal years | Fiscal start → end |
@@ -41,8 +41,8 @@
 
 - Use uv for dependency management and execution. Python 3.13 is selected in `.python-version` and `pyproject.toml`; exact direct pins and `uv.lock` govern the environment. Export exact `requirements.txt` pins for the assignment with the documented uv command. Use `uv sync --locked` and `uv run --locked` for reproducible local commands.
 - Develop and test locally using Rylan Wade's Codex and Claude Code subscriptions for coding, independent testing, and review. Provide local browser demonstrations and run the deployment container locally before cloud deployment.
-- Test individual application agents directly in Codex sessions, with their role instructions, permitted tools, and evaluation questions. These tests must run independently of Kessel.
-- Use [Kessel](../../../../kessel/README.md), Rylan Wade's existing localhost gateway, for full-application local generation and compatible automated evaluation-judge calls. Its OpenAI-compatible Codex and Claude Code routes let the application call the authenticated subscription-backed CLIs through a normal model-client interface. Kessel integration in HW2 is planned, not yet tested.
+- Test individual application agents directly in Codex sessions, with their role instructions, permitted tools, and evaluation questions. These runs must be independently reproducible without the supervisor or browser.
+- Use Codex app-server directly for local generation, dynamic research-tool calls, and streamed answers. The installed CLI retains authentication; HW2 does not read or copy credentials. CLI version/model and actual demonstration results belong in the M3 evidence.
 - Deploy to Cloud Run at the end, after local acceptance. Repeat the relevant end-to-end and evaluation checks against the live service, including cloud-specific cold starts, resource use, concurrency, and streaming.
 - Nebius Token Factory is selected as one application generation provider. Its API is OpenAI-compatible; using a compatible client does not make OpenAI the hosting provider. Exact models remain unselected. [Nebius API reference](https://api.tokenfactory.nebius.com/docs).
 - NVIDIA-hosted NIM is the tentative second provider. NVIDIA advertises free developer access for prototyping; verify the selected endpoint's access, limits, and suitability for the coursework deployment before confirming it. Do not assume a specific credit allowance or unrestricted production service. [NVIDIA developer access](https://developer.nvidia.com/nim).
@@ -50,32 +50,31 @@
 - Decide model assignments and routing thresholds from measured task performance, latency, and cost. Do not assume which provider is cheaper or more capable before comparing the chosen models.
 - Use subscription-backed Codex and Claude Code agents for local development testing. Do not call Nebius/NVIDIA generation APIs or separate paid judge APIs during development. In the final integration/deployment milestone, configure the selected runtime providers, verify their integration locally, then deploy and retest on Cloud Run. Do not treat subscription-assisted tests as measurements of the selected runtime providers.
 
-## Kessel local integration
+## Direct Codex local integration
 
-- Local request path: **browser → HW2 FastAPI/LangGraph → Kessel on localhost → Codex or Claude Code CLI**. Use the same application agents, role prompts, tools, state, and evaluation datasets that will be used with deployed providers.
-- Kessel's documented OpenAI-compatible base URLs are `http://127.0.0.1:4880/v1/codex` and `http://127.0.0.1:4880/v1/claude`, with a private local Kessel key. These are SDK base URLs, not full chat-completion paths. Kessel keeps CLI authentication under the installed provider CLIs; its local key authenticates access to the gateway.
-- Prefer app-managed Kessel startup through its existing `kessel run` workflow. Do not copy Kessel source or credential stores into HW2, expose the gateway remotely, or include it in the Cloud Run application image. Record the tested Kessel version and optional local setup instructions when integration begins.
-- Keep local Kessel configuration separate from the Nebius/NVIDIA deployment configuration. Select the endpoint profile explicitly; switching profiles should preserve orchestration and tools while changing model clients and model IDs. Never send a Kessel key to an external provider.
-- HW2 owns tool execution. Kessel returns tool-call names/arguments; the application validates and invokes the actual retrieval, data, comparison, or analysis tools and supplies the results in the next model request. Kessel's CLI processes need no direct access to the HW2 tools.
-- Use Kessel for model-backed end-to-end local runs and, where compatible, RAGAS/AgentEvals judge calls. Keep independently checked reference values and calibrate model judgments with human review.
-- Verify LangChain client compatibility in the first model-backed application increment and RAGAS compatibility at the formal evaluation checkpoint: ordinary generation, streamed text, tool-call round trips, structured outputs, model selection, errors, and concurrency. Kessel implements a defined API subset; its current schema excludes JSON Schema references and strict function-tool schemas. Configure compatible schemas and do not assume unsupported sampling controls are effective.
-- Kessel's documented API routes do not include embeddings. Prefer a local embedding model for subscription-based development; choose and verify its quality during the retrieval work. This is separate from generation-provider routing.
-- Keep local Kessel latency/token observations separate from deployment-provider measurements. Kessel/CLI overhead and subscription usage do not establish Nebius/NVIDIA latency, billing, or answer quality.
-- Run local container checks with an explicitly tested connection to the host gateway; container localhost does not refer to the host Kessel process. The connection method is a local integration detail to resolve before container testing.
+- Local request path: **browser → HW2 FastAPI/LangGraph → Codex app-server → authenticated Codex subscription**.
+- HW2 starts an ephemeral, read-only Codex thread per supported request and supplies the Filings Research role prompt and dynamic tools. The application validates arguments, executes retrieval/inspection, and returns evidence to Codex.
+- Codex's JSON-RPC app-server protocol provides text deltas and tool-call round trips. The application streams final-answer deltas; commentary does not enter the answer. [Official app-server protocol](https://learn.chatgpt.com/docs/app-server).
+- Local generation defaults to `gpt-6.1-sol`; `RESEARCH_MODEL` selects another accessible Codex model. Tool calls are bounded to eight and the model phase to 180 seconds. Requests use fresh threads and no conversation-memory promise.
+- Local embedding generation uses CPU ONNX MiniLM; it requires no generation API key. Chroma persists the versioned index under ignored `chroma_index/`.
+- Full application runs and direct worker runs share the actual role prompt/tools. Direct runs bypass LangGraph and the browser, so their evidence remains separate from application/browser acceptance.
+- Subscription latency does not establish Nebius/NVIDIA price, latency, or quality. Deployment-provider clients and formal judge compatibility remain separate acceptance work.
+- Container acceptance must verify the local Codex connection, executable availability, authentication isolation, and cancellation explicitly. Keep credentials outside source archives and deployment images.
 
 ## Local testing paths
 
 | Test scope | Execution path | Evidence to retain |
 | --- | --- | --- |
-| Individual specialist or supervisor role | Fresh direct Codex session with the role prompt and permitted local tools/MCP access; bypass Kessel. | Question, prompt/tool configuration, actual calls and returned data, answer, source/calculation checks, and failures. |
+| Individual specialist or supervisor role | Fresh direct Codex worker run with its role prompt and permitted local tools. | Question, prompt/tool configuration, actual calls and returned data, answer, source/calculation checks, and failures. |
 | Deterministic components and graph transitions | Ordinary local tests with fixtures or scripted model responses. | Assertions for extraction, financial values, state transitions, errors, and streaming contracts. |
-| Full model-backed application and automated model judges | Local FastAPI/LangGraph and compatible evaluators through Kessel. | Application traces, worker handoffs, citations, artifacts, evaluator outputs, and gateway errors. |
+| Full model-backed application | Local FastAPI/LangGraph through direct Codex app-server. | Application traces, worker handoffs, citations, artifacts, streaming, and model errors. |
+| Formal model judges | Subscription-backed adapters with verified evaluator compatibility. | Actual evaluator outputs, calibration, and integration failures; currently pending. |
 | Final provider and deployed acceptance | Selected Nebius/second-provider endpoints, first locally and then on Cloud Run. | Actual provider quality, routing, latency, cost, and cloud-specific behavior. |
 
 - Reuse the source-checked questions and reference evidence across direct Codex tests and application tests. Give each direct session only the intended role's tool access; keep implementation and evaluation sessions distinct.
-- Direct Codex testing is the default for single-agent development and debugging. Kessel availability must not block those tests or become a dependency of their runner.
+- Direct Codex testing is the default for single-agent development and debugging. `scripts/research.py agent` invokes Filings Research independently of the application graph.
 - Direct role tests assess that role's prompts, tools, and evidence use. Full application tests separately verify the production graph, model adapters, and frontend integration.
-- If Kessel fails, retain the gateway failure as integration evidence and continue independent direct Codex tests. Do not silently substitute a direct session for a passed full-application run or switch to paid APIs.
+- Model failures produce explicit unsuccessful terminal events. Do not count an independent role run as a passed browser/application run or switch silently to paid APIs.
 
 ## User experience
 
@@ -97,11 +96,12 @@
 | Supervisor | Coordinate the investigation and assemble the final response. | LangGraph delegation and task-state inspection. Selects workers, requests bounded follow-up, handles incomplete results, and synthesizes the evidence. |
 
 - Four specialized workers exceed the three-worker minimum. The supervisor does not count toward that minimum.
+- Filings Research and the minimal supervisor are implemented in M3; Financial Data, Quant, and Risk Summary remain planned. The four-worker design describes the final assignment scope.
 - Keep five agents. Evaluation runs outside the application workflow; it does not introduce a sixth verification agent.
 - Each worker needs a distinct prompt and meaningful tool access. Risk Summary must perform document comparison rather than repeat Filings Research.
 - Workers return findings through the supervisor. Shared state carries the question, selected companies/periods, task status, evidence references, calculations, gaps, routing decisions, and failures; the detailed schema comes later.
 
-## High-level diagram
+## Selected full-system design
 
 ```mermaid
 flowchart TB
@@ -128,7 +128,7 @@ flowchart TB
 
     SRC["Original filings and earnings releases"]
     ING["Ingest, chunk, embed"]
-    V["RAG index: Pinecone or Chroma"]
+    V["RAG index: persistent Chroma + local MiniLM"]
     MCP["Shared source-lookup MCP tool"]
     FD["Structured financial observations"]
     LIVE["Tavily Remote MCP: current sources"]
@@ -147,17 +147,13 @@ flowchart TB
     ROUTE["Generation routing policy: cost and capability"]
     A["Nebius Token Factory: model TBD"]
     B["NVIDIA-hosted NIM: tentative, model TBD"]
-    KG["Local Kessel gateway"]
-    CX["Codex subscription route"]
-    CC["Claude Code subscription route"]
+    CX["Direct Codex app-server subscription route"]
     S -.->|Generation calls| ROUTE
     R -.-> ROUTE
     D -.-> ROUTE
     Q -.-> ROUTE
     K -.-> ROUTE
-    ROUTE -->|Local profile| KG
-    KG --> CX
-    KG --> CC
+    ROUTE -->|Local research profile| CX
     ROUTE -->|Deployment profile| A
     ROUTE -->|Deployment profile| B
 
@@ -170,7 +166,7 @@ flowchart TB
 - Financial Data passes observations to Financial Analysis through supervisor-managed state. Document collection and structured-data preparation happen separately from normal chat requests.
 - Routing is a service used by the five agents. Evals are development infrastructure. Neither is an extra specialist.
 - Both deployed generation providers must be exercised under normal supported workloads, with visible reasons. Provider choice depends on task difficulty and cost/capability needs rather than permanently assigning each worker one provider. Local experiments identify the actual Codex/Claude Code route; they must not be labeled as Nebius/NVIDIA runs.
-- The diagram shows the application execution path. Direct single-agent Codex tests are a separate development path that bypasses Kessel.
+- The diagram describes the selected full-system design; the current M3 execution path is in [architecture](../architecture.md). Direct single-worker Codex runs bypass the supervisor and browser.
 
 ## Planned investigation workflow
 
@@ -197,7 +193,7 @@ flowchart TB
 - Start by building small working capabilities and trying ordinary questions in direct Codex sessions and the local application. Inspect sources, figures, tool calls, and failures, and collect Rylan Wade's feedback to discover what the system can usefully do.
 - Keep basic correctness and integration tests alongside implementation. Early milestones do not require a benchmark dataset, model judge, RAGAS scores, evaluation framework setup, or predefined quality thresholds. Retain useful traces and failures so later evaluation design is based on observed behavior.
 - Begin formal evaluation after the initial research and financial-analysis workflows have been demonstrated and their intended behavior is clearer. Choose the evaluation checkpoint with Rylan Wade based on that feedback; do not force it into the first milestone.
-- At that checkpoint, define supported task families, source-checked reference cases, held-out questions, a reproducible evaluation command, and suitable metrics. Integrate RAGAS through compatible Kessel-backed generation/judges and add trajectory evaluation for the working graph. Verify client compatibility before counting scores; keep any unsupported metric pending rather than silently using paid APIs.
+- At that checkpoint, define supported task families, source-checked reference cases, held-out questions, a reproducible evaluation command, and suitable metrics. Integrate RAGAS through verified subscription-backed generation/judge adapters and add trajectory evaluation for the working graph. Verify client compatibility before counting scores; keep any unsupported metric pending rather than silently using paid APIs.
 - Use a contemporary evaluation approach: assess the final answer, retrieved evidence, agent actions, and operational behavior separately. Tool selection alone does not establish correctness, and a grounded answer can still rely on the wrong period or stale source.
 - Use **RAGAS** for the required faithfulness, answer relevance, context precision, and context recall report. Its current metric catalog also includes agent/tool-use metrics. Select exact metrics and pin compatible versions during implementation. [RAGAS metric documentation](https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/).
 - Use **AgentEvals** for evaluating agent trajectories: the recorded tool calls and graph steps. It supports matching tool calls/arguments and model-based judgments of trajectories. Prefer flexible checks where several valid execution paths exist. [AgentEvals documentation](https://github.com/langchain-ai/agentevals).
@@ -216,10 +212,10 @@ flowchart TB
 - When formal evaluation begins, start with independently checked examples informed by exploratory use. Expand with real failures and user feedback. Keep development examples separate from a held-out set used to assess generalization.
 - Record source snapshots, expected evidence, reference calculations, allowed tool behaviors, dataset versions, prompts, provider/model IDs, and code revision. Separate repeatable snapshot tests from dated live-retrieval probes.
 - Combine fast offline checks with real-model runs and real MCP integration checks. Fixtures are useful for replay; they do not prove that deployed tools or current sources work.
-- Use direct Codex subscription-backed sessions for individual-agent tests and independent inspection of local tools, sources, calculations, and outputs. Codex supports local MCP servers, subagent workflows, and scripted `codex exec` runs that reuse saved CLI authentication. A subscription-backed session can exercise actual tool calls and return a structured test report without Kessel. [Codex MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), and [non-interactive execution](https://learn.chatgpt.com/docs/non-interactive-mode).
+- Use direct Codex subscription-backed sessions for individual-agent tests and independent inspection of local tools, sources, calculations, and outputs. Codex supports local MCP servers, subagent workflows, and scripted `codex exec` runs that reuse saved CLI authentication. A subscription-backed session can exercise actual tool calls and return a structured test report independently of the application graph. [Codex MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents), and [non-interactive execution](https://learn.chatgpt.com/docs/non-interactive-mode).
 - Give direct testing agents the relevant role instructions and tool access. During exploration, try ordinary questions and inspect actual calls, returned evidence, calculations, and failure behavior. Add fixed question sets and source-based scoring rubrics at the formal evaluation checkpoint. Use fixture/scripted model responses to check graph transitions, SSE handling, and failure paths locally as those components are built.
-- Use the existing Kessel gateway for API-based full-application runs and compatible automated judges before building another gateway adapter. Prove model-backed graph execution, structured outputs, trace capture, and evaluator compatibility through its existing API. Keep direct Codex single-agent tests independent of that integration.
-- Label Kessel-backed end-to-end runs, independent testing-agent reports, scripted graph tests, and target-provider integration tests separately. Re-run the required evaluations with the actual deployment configuration during final integration; measure Nebius/NVIDIA quality, latency, routing, and cost then.
+- Use direct Codex app-server for full-application generation and prove model-backed graph execution, tool round trips, answer streaming, and trace capture. Verify formal evaluator-client compatibility at the evaluation checkpoint; keep direct worker runs separately reproducible.
+- Label direct Codex application runs, independent worker runs, scripted graph tests, and target-provider integration tests separately. Re-run the required evaluations with the actual deployment configuration during final integration; measure Nebius/NVIDIA quality, latency, routing, and cost then.
 - Calibrate model judges against human-reviewed good and bad answers, including deliberately wrong periods, unsupported citations, and incorrect calculations. Inspect judge disagreements and retain their explanations. Do not let an unreviewed model-generated reference answer define truth.
 - Once the formal evaluation harness exists, compare substantial changes with the preceding version and a simple baseline on the same dataset. Use blinded pairwise review for explanation quality; run a small repeated sample to expose variability. Report sample sizes and uncertainty rather than treating a tiny score change as conclusive.
 - Define formal quality thresholds after the intended behavior is understood and a baseline is measured. Continue rejecting fabricated source identifiers and invalid financial comparisons during ordinary correctness checks; choosing benchmark scores is a later decision.
@@ -227,7 +223,7 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Development proceeds one authorized milestone at a time. M1 and M2 are implemented and verified; M2 is accepted. M3–M12 remain planned and unstarted.
+- Development proceeds one authorized milestone at a time. M1–M3 are implemented and verified; M2 and M3 are accepted. M4–M12 remain planned and unstarted.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
 - Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
@@ -242,14 +238,14 @@ flowchart TB
 | --- | --- |
 | Coverage expansion and additional reporting formats | Source collection is verified for all 41 selected documents. Future discovery/refresh CLI is implemented; expand application coverage only after source checks, demonstrations, and feedback. |
 | Observation selection, fiscal alignment, candidate-tag validation, amendments/restatements, and missing-data behavior | Structured-data and financial-analysis implementation; consolidated GAAP scope and known source constraints are fixed. |
-| Chunking, embeddings, retrieval filters/k, and Pinecone versus Chroma | First RAG implementation and retrieval experiment. |
+| Retrieval refinement and corpus expansion | M3 uses 220-token chunks, 40-token overlap, CPU MiniLM, cosine Chroma, and explicit company/fiscal-year/form/section/version filters. Refine from observed evidence and feedback. |
 | NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
-| Kessel/LangChain compatibility, local endpoint profiles, and host access from Docker | First model-backed application tests and container checks. |
+| Local Codex executable/authentication access from Docker | M4 container checks; direct app-server tools and streaming are verified locally. |
 | Formal evaluation checkpoint, supported task families, and RAGAS/AgentEvals compatibility | After working research and financial-analysis demos clarify what should be measured. |
 | Quant execution boundaries and permitted analysis libraries | Code execution. |
 | Judge model, evaluation dataset size/splits, calibration rubric, and final integration budgets | First model-judged evaluations; use subscriptions during development and verify the final reporting path before submission. |
 | Optional LangSmith hosted comparison/reporting | Any requested hosted evaluation/reporting integration. |
-| Report/chart presentation and source-inspection interaction | First frontend demonstration. |
+| Report/chart presentation and source-view refinements | M3 provides exact passages, citations, official source links, and collected originals. Refine through feedback. |
 | Conversation context and whether memory must survive instance replacement | Any multi-turn promise; external durable state is required if that survival is claimed. |
 | Refresh policy for financial observations and current sources | Documents support explicit CLI refresh and future inventories; no scheduler or automatic freshness promise. Decide observation/live-source policies before freshness claims. |
 | Cloud Run resource/concurrency limits and acceptable latency | Deployment acceptance, based on measurements. |
@@ -276,8 +272,8 @@ flowchart TB
 | --- | --- | --- |
 | M1 — Scope and source feasibility | Complete | Four companies, two fiscal years each, 41-document target, 32/32 reports with aligned financial inputs, source-access evidence, and unresolved gaps in [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md). |
 | M2 — Source collection and preparation | Implemented and verified; accepted | 41/41 bodies and extractions, versioned provenance, 32 risk/MD&A sections, AMD amendment, table checks, reusable uv CLI, and no collection gaps. [Evidence](M2_SOURCE_COLLECTION_AND_PREPARATION.md). |
-| M3 — First RAG research demo | Planned; unstarted | Filings Research worker, minimal supervisor, local browser chat, streamed answers, and source inspection. |
-| M4 — Local container acceptance | Planned; unstarted | The working research slice runs in Docker with local gateway connectivity checked. |
+| M3 — First RAG research demo | Implemented and verified; accepted | 41 documents/10,681 chunks, four real cited application turns, direct worker/browser demonstrations, coverage gaps, and cancellation/failure checks. [Evidence](M3_FIRST_RAG_RESEARCH_DEMO.md). |
+| M4 — Local container acceptance | Planned; unstarted | The working research slice runs in Docker with local Codex connectivity and authentication isolation checked. |
 | M5 — Financial Data agent | Planned; unstarted | Source-linked financial observations with correct units, dates, and revision basis. |
 | M6 — Financial Analysis / Quant agent | Planned; unstarted | Bounded code execution, checked calculations, and tables/charts. |
 | M7 — Risk Summary agent | Planned; unstarted | Cited comparisons of disclosure versions and relevant quarterly updates. |
@@ -289,7 +285,7 @@ flowchart TB
 
 - This skeleton defines the sequence and boundaries; it does not authorize implementation of future milestones. Before each increment, resolve its necessary open decisions and confirm its concrete acceptance demonstration within the authorized scope.
 - Each handoff records changed files, commands to reproduce the demonstration/checks, verified results, gaps, and the next feedback decision. Update milestone status from actual evidence and obtain Rylan Wade's feedback before proceeding.
-- Individual-agent testing uses direct Codex. Full model-backed application runs use Kessel; basic code/contract checks use local fixtures where appropriate. No Cloud Run deployment or Nebius/NVIDIA generation calls before M12.
+- Individual-agent testing uses direct Codex. Full model-backed application runs use direct Codex app-server; basic code/contract checks use local fixtures where appropriate. No Cloud Run deployment or Nebius/NVIDIA generation calls before M12.
 - Formal evaluation starts at a feedback-approved checkpoint after the research and numerical workflows are useful. It may begin after M6; M11 is the required local evaluation and consolidation gate. Early milestones need demonstrations and correctness checks, not benchmark scores.
 
 ### M2 — Source collection and preparation
@@ -303,15 +299,16 @@ flowchart TB
 ### M3 — First RAG research demo
 
 - **Inputs/dependency:** accepted M2 collection and extraction/provenance records.
-- **Scope:** choose and pin local embeddings, vector store, chunking, and retrieval filters; implement ingest → retrieve → augment → generate. Build source lookup/inspection tools, the Filings Research worker, a minimal LangGraph supervisor, and a simple FastAPI-served vanilla browser chat with answer-token SSE. Verify Kessel model-client/tool-call compatibility; expose research tools for direct Codex testing.
+- **Scope:** choose and pin local embeddings, vector store, chunking, and retrieval filters; implement ingest → retrieve → augment → generate. Build source lookup/inspection tools, the Filings Research worker, a minimal LangGraph supervisor, and a simple FastAPI-served vanilla browser chat with answer-token SSE. Verify direct Codex app-server/tool-call compatibility; expose research tools for direct Codex testing.
 - **Demonstration/exit:** ordinary questions retrieve the correct company/period and return supporting citations that open the original passage. Inspect tool calls and show missing-source/unsupported-coverage behavior, plus a full local model-backed application turn. Record retrieval and prompt settings in the architecture document.
 - **Boundary:** this is the first usable slice, not the full four-worker supervisor. Choose source-view interactions through feedback; defer visual polish, live research, and formal scoring.
+- **Implemented/verified:** CPU MiniLM and cosine Chroma with scoped retrieval, exact passage inspection, LCEL augmentation, Filings Research, a minimal LangGraph supervisor, and direct Codex answer-token SSE. Four-company application turns, the independent AMD worker, Chromium citations/traces, missing coverage, unavailable model, and disconnect cleanup pass. [M3 evidence](M3_FIRST_RAG_RESEARCH_DEMO.md) records actual outputs/settings/limits; M3 is accepted.
 
 ### M4 — Local container acceptance
 
 - **Inputs/dependency:** working M3 application.
-- **Scope:** containerize the research slice using the assignment's build/runtime requirements. Verify startup, PORT handling, assets/index access, local Kessel connectivity, SSE, and resource use. Test the host-gateway connection explicitly rather than assuming container localhost reaches Kessel; Kessel stays outside the deployment image.
-- **Demonstration/exit:** start the local container from documented commands and complete a cited streaming question. Inspect a fresh container start, client disconnect, and gateway-unavailable behavior; record observations without labeling them Cloud Run measurements.
+- **Scope:** containerize the research slice using the assignment's build/runtime requirements. Verify startup, PORT handling, assets/index access, local Codex connectivity, SSE, and resource use. Verify the actual executable/connection and credential isolation; CLI credentials remain outside the application image.
+- **Demonstration/exit:** start the local container from documented commands and complete a cited streaming question. Inspect a fresh container start, client disconnect, and model-unavailable behavior; record observations without labeling them Cloud Run measurements.
 - **Boundary:** local Docker only. Cloud resources, deployment credentials, and cloud acceptance remain M12 work.
 
 ### M5 — Financial Data agent
@@ -352,7 +349,7 @@ flowchart TB
 ### M10 — Inspectable provider routing
 
 - **Inputs/dependency:** working local multi-agent application and explicit endpoint profiles.
-- **Scope:** implement task-sensitive generation routing with visible provider/model selection and reasons. Exercise Codex/Claude Code routes through Kessel for local integration; prepare separate Nebius/second-provider configuration and trace fields. Document provisional routing dimensions and fallback behavior.
+- **Scope:** implement task-sensitive generation routing with visible provider/model selection and reasons. Exercise distinct subscription-backed generation routes through verified local adapters; prepare separate Nebius/second-provider configuration and trace fields. Document provisional routing dimensions and fallback behavior.
 - **Demonstration/exit:** simple and demanding supported tasks exercise both local routes with honest labels. Verify routing inputs, selection reasons, failures, and configuration isolation. Do not report local subscription measurements as Nebius/NVIDIA price, latency, or quality evidence.
 - **Boundary:** confirm deployment models, the second provider, and actual performance-based policy adjustments in M12. No deployment-provider generation calls here.
 
