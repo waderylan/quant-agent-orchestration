@@ -1,0 +1,410 @@
+{
+  "checked_at": "2026-10-14T02:43:48.906257+00:00",
+  "summary": {
+    "targets": 41,
+    "verified": 41,
+    "gaps": 0
+  },
+  "passed": true,
+  "failures": [],
+  "source_samples": [
+    {
+      "company": "NVDA",
+      "document_id": "nvda-0001045810-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "retrieval_url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/q4/10K-NVDA.pdf",
+      "body_path": "raw/a056b59e4170c0123217a8e861a39af4a4a48d2df0d27b641017a618a280a396.pdf",
+      "text_path": "prepared/nvda-0001045810-26-000021/m2-v1/a056b59e4170c0123217a8e861a39af4a4a48d2df0d27b641017a618a280a396.txt",
+      "mda_opening": "Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations\nThe following discussion and analysis of our financial condition and results of operations should be read in conjunction with “Item 1A. Risk Factors,” our\nConsolidated Financial Statements and related Notes thereto, as well as other cautionary statements and risks described elsewhere in this Annual Report on\nForm 10-K, before deciding to purchase, hold, or sell shares of our common stock.\n\nOverview\nOur Company and Our Businesses\nNVIDIA  pioneered  accelerated  computing  to  help  solve  the  most  challenging  computational  problems.  Since  our  original  focus  on  PC  graphics,  we  have\nexpanded to several other large and important computationally intensive fields. Fueled by the sustained demand for exceptional 3D graphics and the scale of the\ngaming market, NVIDIA has leveraged its GPU architecture to create platforms for scientific computing, AI, data science, autonomous vehicles, robo"
+    },
+    {
+      "company": "AMD",
+      "document_id": "amd-0000002488-26-000018",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "retrieval_url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000018/amd-20251227.htm",
+      "body_path": "raw/afefea55a2f7c013912403fa45547d4d7910e8f012d4bba6c1c63a37d0c2b050.html",
+      "text_path": "prepared/amd-0000002488-26-000018/m2-v1/afefea55a2f7c013912403fa45547d4d7910e8f012d4bba6c1c63a37d0c2b050.txt",
+      "mda_opening": "ITEM 7. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS\nThe following discussion should be read in conjunction with the Consolidated Financial Statements as of December 27, 2025 and December 28, 2024 and for each of the three years in the period ended December 27, 2025 and related notes, which are included in this Annual Report on Form 10-K as well as with the other sections of this Annual Report on Form 10-K, “Part II, Item 8: Financial Statements and Supplementary Data.”\nIntroduction\nIn this section, we will describe the general financial condition and the results of operations of Advanced Micro Devices, Inc. and its wholly-owned subsidiaries (collectively, “us,” “our” or “AMD”), including a discussion of our results of operations for 2025 compared to 2024, an analysis of changes in our financial condition and a discussion of our off-balance sheet arrangements. Discussions of 2023 items and year-to-year comparisons between 2024 and 2023 that are "
+    },
+    {
+      "company": "INTC",
+      "document_id": "intc-0000050863-26-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "retrieval_url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-26-000011/intc-20251227.htm",
+      "body_path": "raw/67af52d83cdc32a0c52d6007ba0b1031f25c50bc1cae5ee0d626721c9989e42d.html",
+      "text_path": "prepared/intc-0000050863-26-000011/m2-v1/67af52d83cdc32a0c52d6007ba0b1031f25c50bc1cae5ee0d626721c9989e42d.txt",
+      "mda_opening": "Management's Discussion and Analysis |\n|\nOverview\nOur MD&A begins with an overview of significant events and key developments in 2025 that meaningfully impacted our financial results and/or business. We then provide a detailed discussion of our operating segment results, followed by our consolidated results of operations and other required disclosures for 2025, 2024 and 2023. We conclude with a discussion of our critical accounting estimates.\nSignificant Events and Trends Impacting Results\nThe following discussion highlights significant events, key developments, and trends that we believe meaningfully impacted our consolidated financial results and financial position during 2025 and that we believe may continue to influence our future operating results and financial position, as well as specific matters that occurred in 2024 that impact the comparability of our results.\nU.S. Government Agreements\nOn August 22, 2025, we entered into a Warrant and Common Stock Agreement (U.S. Government "
+    },
+    {
+      "company": "QCOM",
+      "document_id": "qcom-0000804328-25-000085",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+      "retrieval_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/QCOM-09-28-25-FY2025-10-K-Final.pdf",
+      "body_path": "raw/90852abbb69e24e6c4a2a1ca8fc3ca9cd458f1a23fe3cf7765a4b0fad5ba14a5.pdf",
+      "text_path": "prepared/qcom-0000804328-25-000085/m2-v1/90852abbb69e24e6c4a2a1ca8fc3ca9cd458f1a23fe3cf7765a4b0fad5ba14a5.txt",
+      "mda_opening": "Item 7.                                                                                                                                                                      Management’s Discussion and Analysis of Financial Condition and Results of Operations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "
+    }
+  ],
+  "annual_table_checks": [
+    {
+      "document_id": "nvda-0001045810-25-000023",
+      "revenue_usd_millions": "130,497",
+      "cash_flow_usd_millions": "64,089",
+      "revenue_row": "Revenue                                                                                                      $            130,497         $             60,922                         Up 114%",
+      "cash_flow_row": "Net cash provided by operating activities                                                                                                          $               64,089      $               28,090"
+    },
+    {
+      "document_id": "nvda-0001045810-26-000021",
+      "revenue_usd_millions": "215,938",
+      "cash_flow_usd_millions": "102,718",
+      "revenue_row": "Revenue                                                                                                       $            215,938         $            130,497                           Up 65%",
+      "cash_flow_row": "Net cash provided by operating activities                                                                                                         $             102,718       $              64,089"
+    },
+    {
+      "document_id": "amd-0000002488-25-000012",
+      "revenue_usd_millions": "25,785",
+      "cash_flow_usd_millions": "3,041",
+      "revenue_row": "Total net revenue | $ | 25,785 | | | $ | 22,680 |",
+      "cash_flow_row": "Operating activities | $ | 3,041 | | | $ | 1,667 |"
+    },
+    {
+      "document_id": "amd-0000002488-26-000018",
+      "revenue_usd_millions": "34,639",
+      "cash_flow_usd_millions": "7,709",
+      "revenue_row": "Total net revenue | $ | 34,639 | | | $ | 25,785 |",
+      "cash_flow_row": "Operating activities | 7,709 | | | 3,041 |"
+    },
+    {
+      "document_id": "intc-0000050863-25-000009",
+      "revenue_usd_millions": "53,101",
+      "cash_flow_usd_millions": "8,288",
+      "revenue_row": "Net revenue | | $ | 53,101 | | | 100.0 | % | | $ | 54,228 | | | 100.0 | % | | $ | 63,054 | | | 100.0 | %",
+      "cash_flow_row": "Net cash provided by (used for) operating activities | | $ | 8,288 | | | $ | 11,471 | | | $ | 15,433 |"
+    },
+    {
+      "document_id": "intc-0000050863-26-000011",
+      "revenue_usd_millions": "52,853",
+      "cash_flow_usd_millions": "9,697",
+      "revenue_row": "Net revenue | | $ | 52,853 | | | 100.0 | % | | $ | 53,101 | | | 100.0 | % | | $ | 54,228 | | | 100.0 | %",
+      "cash_flow_row": "Net cash provided by (used for) operating activities | | | $ | 9,697 | | | $ | 8,288 | | | $ | 11,471 |"
+    },
+    {
+      "document_id": "qcom-0000804328-24-000075",
+      "revenue_usd_millions": "38,962",
+      "cash_flow_usd_millions": "12,202",
+      "revenue_row": "Total revenues                                                                                                                                                                                                                                                                                                                             38,962                                                                35,820                                                                44,200",
+      "cash_flow_row": "Net cash provided by operating activities                                                                                                                                                                                                                                       $           12,202                                      $           11,299                                     $                903"
+    },
+    {
+      "document_id": "qcom-0000804328-25-000085",
+      "revenue_usd_millions": "44,284",
+      "cash_flow_usd_millions": "14,012",
+      "revenue_row": "Total revenues                                                                                                                                                                                                                                                                                                                    44,284                                                              38,962                                                              35,820",
+      "cash_flow_row": "Net cash provided by operating activities                                                                                                                                                                                                                                                                        $           14,012                                            $           12,202                                            $             1,810"
+    }
+  ],
+  "risk_section_checks": [
+    {
+      "document_id": "nvda-0001045810-24-000124",
+      "form": "10-Q",
+      "characters": 39706,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January 28, 2024.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January          28, 2024, and below. Any one of those risks could harm our business, financial condition and results of operations or\nreputation, which could cause our stock price to decline. Additional risks, trends and uncertainties not presently known to us or that we cu",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-24-000264",
+      "form": "10-Q",
+      "characters": 39125,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January 28, 2024 and Item 1A                                                 of our Quarterly Report on Form 10-Q for the fiscal quarter ended April 28, 2024.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January 28,          2024, and Item 1A of our Quarterly Report on Form 10-Q for the fiscal quarter ended April 28, 2024, and below. An",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-24-000316",
+      "form": "10-Q",
+      "characters": 36831,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January 28,          2024 and Item 1A of our Quarterly Reports on Form 10-Q for the fiscal quarters ended April 28, 2024 and July\n28, 2024.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January 28,          2024, and Item 1A of our Quarterly Reports on Form 10-Q for the fiscal quarters ended April 28, 2024 and July 28,\n2024, and below. A",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000023",
+      "form": "10-K",
+      "characters": 114915,
+      "opening": "Item 1A. Risk Factors\nThe following risk factors should be considered in addition to the other information in this Annual Report on Form 10-K. The following risks could harm our\nbusiness, financial condition, results of operations or reputation, which could cause our stock\n\n\n\n                                                                                               13\n[PDF page 14]\nTable of Contents\n\n\n\nprice to decline. Additional risks, trends and uncertainties not presently known to us or that we currently believe are immaterial may also harm our business,\nfinancial condition, results of operations or reputation.\n\nRisk Factors Summary\n\nRisks Related to Our Industry and Markets\n     •",
+      "following_heading": "Item 1B. Unresolved Staff Comments",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "nvda-0001045810-25-000116",
+      "form": "10-Q",
+      "characters": 37041,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January 26, 2025.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January          26, 2025, and below. Any one of those risks could harm our business, financial condition and results of operations or\nreputation, which could cause our stock price to decline. Additional risks, trends and uncertainties not presently known to us or that we cu",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000209",
+      "form": "10-Q",
+      "characters": 31665,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January 26, 2025 and Item 1A                                                 of our Quarterly Report on Form 10-Q for the fiscal quarter ended April 27, 2025.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January          26, 2025, and Item 1A of our Quarterly Report on Form 10-Q for the fiscal quarter ended April      27, 2025, and belo",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000230",
+      "form": "10-Q",
+      "characters": 48277,
+      "opening": "Item 1A. Risk Factors\nOther than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on\nForm 10-K for the fiscal year ended January          26, 2025 and Item 1A of our Quarterly Reports on Form 10-Q for the fiscal quarters ended April 27, 2025 and\nJuly 27, 2025.\n\nPurchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form\n10-K for the fiscal year ended January 26, 2025, and Item 1A                                           of our Quarterly",
+      "following_heading": "Item 2. Unregistered Sales of Equity Securities and Use of Proceeds",
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-26-000021",
+      "form": "10-K",
+      "characters": 119106,
+      "opening": "Item 1A. Risk Factors\nThe following risk factors should be considered in addition to the other information in this Annual Report on Form 10-K. The following risks could harm our\nbusiness, financial condition, results of operations or reputation, which could cause our stock price to decline. Additional risks, trends and uncertainties not\npresently known to us or that we currently believe are immaterial may also harm our business, financial condition, results of operations or reputation.\n\nRisk Factors Summary\n\nRisks Related to Our Industry and Markets\n     •    Failure to meet the evolving needs of our industry and markets may adversely impact our financial results.\n\n     •    Competition coul",
+      "following_heading": "Item 1B. Unresolved Staff Comments",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "amd-0000002488-24-000056",
+      "form": "10-Q",
+      "characters": 120570,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•Intel Corporation’s dominance of the microprocessor market and its aggressive business practices may limit our ability to compete effectively",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-24-000123",
+      "form": "10-Q",
+      "characters": 121110,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•Intel Corporation’s dominance of the microprocessor market and its aggressive business practices may limit our ability to compete effectively",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-24-000163",
+      "form": "10-Q",
+      "characters": 124814,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•Intel Corporation’s dominance of the microprocessor market and its aggressive business practices may limit our ability to compete effectively",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-25-000012",
+      "form": "10-K",
+      "characters": 125990,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n◦Intel Corporation’s dominance of the microprocessor market and its aggressive business practices may limit our ability to compete effectively",
+      "following_heading": "ITEM 1B. UNRESOLVED STAFF COMMENTS",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "amd-0000002488-25-000047",
+      "form": "10-Q",
+      "characters": 131463,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•Intel Corporation’s dominance of the microprocessor market and its aggressive business practices may limit our ability to compete effectively",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-25-000108",
+      "form": "10-Q",
+      "characters": 128082,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•The markets in which our products are sold are highly competitive and rapidly evolving.\n•The semiconductor industry is highly cyclical and ha",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-25-000166",
+      "form": "10-Q",
+      "characters": 128920,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•The markets in which our products are sold are highly competitive and rapidly evolving.\n•The semiconductor industry is highly cyclical and ha",
+      "following_heading": "ITEM 2. | UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-26-000018",
+      "form": "10-K",
+      "characters": 131742,
+      "opening": "ITEM 1A. RISK FACTORS\nThe risks and uncertainties described below are not the only ones we face. If any of the following risks actually occurs, our business, financial condition or results of operations could be materially adversely affected. In addition, you should consider the interrelationship and compounding effects of two or more risks occurring simultaneously.\nRisk Factors Summary\nThe following is a summary of the principal risks that could adversely affect our business, financial condition and results of operations.\nEconomic and Strategic Risks\n•The markets in which our products are sold are highly competitive and rapidly evolving.\n•The semiconductor industry is highly cyclical and ha",
+      "following_heading": "ITEM 1B. UNRESOLVED STAFF COMMENTS",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "intc-0000050863-24-000076",
+      "form": "10-Q",
+      "characters": 894,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Other Key Information in our 2023 Form 10-K could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be used to anticipate results or trends in future periods. Refer als",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-24-000124",
+      "form": "10-Q",
+      "characters": 2583,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Other Key Information in our 2023 Form 10-K could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be used to anticipate results or trends in future periods. Refer als",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-24-000149",
+      "form": "10-Q",
+      "characters": 894,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Other Key Information in our 2023 Form 10-K could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be used to anticipate results or trends in future periods. Refer als",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-25-000009",
+      "form": "10-K",
+      "characters": 109168,
+      "opening": "Risk Factors\nThe following summarizes the material factors that make an investment in our securities speculative or risky. When any one or more of the following risks materialize from time to time, our business, reputation, financial condition, cash flows, and results of operations can be materially and adversely affected, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face; our operations can also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations, or by various risks that are generally applicable to most companies. Due to risks and uncertainties, known and",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "intc-0000050863-25-000074",
+      "form": "10-Q",
+      "characters": 5153,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Other Key Information in our 2024 Form 10-K could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be used to anticipate results or trends in future periods. In additi",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-25-000109",
+      "form": "10-Q",
+      "characters": 9821,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Risk Factors and Other Key Information in our 2024 Form 10-K and in our Q1 2025 Form 10-Q could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be used to anticipate",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-25-000179",
+      "form": "10-Q",
+      "characters": 9304,
+      "opening": "Risk Factors\nThe risks described in \"Risk Factors\" within Risk Factors and Other Key Information in our 2024 Form 10-K, our Q1 2025 Form 10-Q and our Q2 2025 Form 10-Q could materially and adversely affect our business, financial condition, and results of operations, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face—our operations could also be affected by factors that are not presently known to us or that we currently consider to be immaterial to our operations. Due to risks and uncertainties, known and unknown, our past financial results may not be a reliable indicator of future performance and historical trends should not be",
+      "following_heading": "Quantitative and Qualitative Disclosures About Market Risk",
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-26-000011",
+      "form": "10-K",
+      "characters": 96529,
+      "opening": "Risk Factors |\n|\nThe following summarizes what we believe to be the material factors that make an investment in our securities speculative or risky. When any one or more of the following risks materialize from time to time, our business, reputation, financial condition, cash flows and results of operations may be materially and adversely affected, and the trading price of our common stock could decline. These risk factors do not identify all risks that we face; we may also be affected by factors that are not presently known to us or that we currently consider to be immaterial, or by various risks that are generally applicable to most companies. Due to risks and uncertainties, known and unkno",
+      "following_heading": "Other Key Information |",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "qcom-0000804328-24-000017",
+      "form": "10-Q",
+      "characters": 707,
+      "opening": "ITEM 1A. RISK FACTORS\n                 We have provided updated Risk Factors in the section labeled “Risk Factors” in “Part I, Item 2, Management’s\nDiscussion and Analysis of Financial Condition and Results of Operations.” We do not believe those updates have materially\nchanged the type or magnitude of the risks we face in comparison to the disclosure provided in our                                                                                                                                                                                                                                                                                                2023                 Annual Report on\nForm",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES, USE OF PROCEEDS, AND ISSUER PURCHASES",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000039",
+      "form": "10-Q",
+      "characters": 697,
+      "opening": "ITEM 1A. RISK FACTORS\n                 We have provided updated Risk Factors in the section labeled “Risk Factors” in “Part I, Item 2, Management’s\nDiscussion and Analysis of Financial Condition and Results of Operations.” We do not believe those updates have materially\nchanged the type or magnitude of the risks we face in comparison to the disclosure provided in our                                                                                                                                                                                                                                                                                       2023                Annual Report on\nForm 10-K.",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES                                                                                                                                                                                                                       AND USE OF PROCEEDS",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000056",
+      "form": "10-Q",
+      "characters": 695,
+      "opening": "ITEM 1A. RISK FACTORS\n                 We have provided updated Risk Factors in the section labeled “Risk Factors” in “Part I, Item 2, Management’s\nDiscussion and Analysis of Financial Condition and Results of Operations.” We do not believe those updates have materially\nchanged the type or magnitude of the risks we face in comparison to the disclosure provided in our                                                                                                                                                                                                                                                                                     2023                Annual Report on\nForm 10-K.",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000075",
+      "form": "10-K",
+      "characters": 143445,
+      "opening": "Item 1A. Risk Factors\n              You should consider each of the following factors in evaluating our business and our prospects                                                                                                                                                                                                                           , any of which could\nnegatively impact our business, results of operations, cash flows and financial condition, and require significant management\ntime and attention. Further,                                                              the risks and uncertainties described below are not the only ones we face. Additional risks and\nuncertainties not",
+      "following_heading": "Item 1B. Unresolved Staff Comments",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    },
+    {
+      "document_id": "qcom-0000804328-25-000011",
+      "form": "10-Q",
+      "characters": 150814,
+      "opening": "ITEM 1A. RISK FACTORS\n               You should consider each of the following factors in evaluating our business and our prospects, any of which could\nnegatively impact our business, results of operations, cash flows and financial condition, and require significant management\ntime and attention. Further, the risks and uncertainties described below are not the only ones we face. Additional risks and\nuncertainties not presently known to us or that we currently consider immaterial may also negatively impact our business,\nresults of operations, cash flows and financial condition, and require significant management time and attention. In such\ncases, the trading price of our common stock could de",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000031",
+      "form": "10-Q",
+      "characters": 151668,
+      "opening": "ITEM 1A. RISK FACTORS\n               You should consider each of the following factors in evaluating our business and our prospects, any of which could\nnegatively impact our business, results of operations, cash flows and financial condition, and require significant management\ntime and attention. Further, the risks and uncertainties described below are not the only ones we face. Additional risks and\nuncertainties not presently known to us or that we currently consider immaterial may also negatively impact our business,\nresults of operations, cash flows and financial condition, and require significant management time and attention. In such\ncases, the trading price of our common stock could de",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000045",
+      "form": "10-Q",
+      "characters": 151145,
+      "opening": "ITEM 1A. RISK FACTORS\n               You should consider each of the following factors in evaluating our business and our prospects, any of which could\nnegatively impact our business, results of operations, cash flows and financial condition, and require significant management\ntime and attention. Further, the risks and uncertainties described below are not the only ones we face. Additional risks and\nuncertainties not presently known to us or that we currently consider immaterial may also negatively impact our business,\nresults of operations, cash flows and financial condition, and require significant management time and attention. In such\ncases, the trading price of our common stock could de",
+      "following_heading": "ITEM 2. UNREGISTERED SALES OF EQUITY SECURITIES AND USE OF PROCEEDS",
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000085",
+      "form": "10-K",
+      "characters": 152776,
+      "opening": "Item 1A. Risk Factors\n                   You should consider each of the following factors in evaluating our business and our prospects                                                                                                                                                                                                                                                 , any of which could\n   negatively impact our business, results of operations, cash flows and financial condition, and require significant management\n   time and attention. Further,                                                                      the risks and uncertainties described below are not the only ones we f",
+      "following_heading": "Item 1B. Unresolved Staff Comments",
+      "prior_annual_document_id": null,
+      "risk_context_note": null
+    }
+  ],
+  "amd_mda_passages": {
+    "amd-0000002488-26-000018": {
+      "passage": "Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 31% increase in unit shipments of processors and a 15% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.",
+      "unit_shipment_change_percent": 31,
+      "asp_change_percent": 15,
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm"
+    },
+    "amd-0000002488-26-000021": {
+      "passage": "Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.",
+      "unit_shipment_change_percent": 15,
+      "asp_change_percent": 31,
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000021/amd-20251227.htm"
+    }
+  }
+}

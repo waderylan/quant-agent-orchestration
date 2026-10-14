@@ -1,7 +1,7 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: M1 scope and source feasibility complete. Application implementation, M2, provider integration, formal evaluations, and deployment are unstarted.
+- Status: M1 and M2 implemented and verified; M2 accepted. M3–M12, application agents, provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
 - Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
@@ -18,7 +18,7 @@
 
 - Initial company set: **NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM)**. All four use domestic SEC 10-K/10-Q reporting forms.
 - Coverage starts with these four companies and is planned to expand toward approximately 20, subject to verified source coverage, working demonstrations, and feedback. Foreign issuers require a separate reporting-format decision.
-- Initial collection target: **41 original documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. Full corpus collection and ingestion are pending.
+- Initial corpus: **41 verified documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. [M2 preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records originals, readable extraction, section/table checks, and provenance. RAG ingestion is unstarted.
 - Selected coverage is two completed fiscal years per company, with actual dates shown below. NVIDIA's year labels differ from the other companies. These are explicit historical windows, not a claim of latest-report coverage.
 
 | Company | Selected fiscal years | Fiscal start → end |
@@ -28,7 +28,7 @@
 | Intel | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
 | Qualcomm | FY2024; FY2025 | 2023-09-25 → 2024-09-29; 2024-09-30 → 2025-09-28 |
 
-- SEC metadata and matching-duration USD inputs are verified for all 32 original reports. Official AMD/Intel report bodies and all eight selected earnings releases have verified local download paths. Complete NVIDIA/Qualcomm body collection and section extraction remain pending.
+- SEC metadata and matching-duration USD inputs are verified for all 32 original reports. All 41 selected bodies and extractions are verified, with no collection gaps. All 32 original risk and MD&A sections are available; AMD's amendment supplies corrected MD&A without replacing original risks.
 - Source access constraints: direct local SEC Archives probes returned 403; use verified official IR mirrors/CDNs and validate actual content. Qualcomm gross profit requires revenue minus cost of revenue; its FY2024 has 53 weeks versus 52 in FY2025. Preserve AMD's amendment and corrected MD&A alongside its original annual report.
 - Prefer within-company financial comparisons. Cross-company comparisons must display fiscal dates and timing/business-mix qualifications. Initial metrics use consolidated US GAAP figures; segment metrics, transcripts, additional years, and additional companies require separate coverage checks and feedback.
 - Support company explanations, financial comparisons, changes in disclosed risks, and current developments related to those questions.
@@ -39,6 +39,7 @@
 
 ## Development environment and provider direction
 
+- Use uv for dependency management and execution. Python 3.13 is selected in `.python-version` and `pyproject.toml`; exact direct pins and `uv.lock` govern the environment. Export exact `requirements.txt` pins for the assignment with the documented uv command. Use `uv sync --locked` and `uv run --locked` for reproducible local commands.
 - Develop and test locally using Rylan Wade's Codex and Claude Code subscriptions for coding, independent testing, and review. Provide local browser demonstrations and run the deployment container locally before cloud deployment.
 - Test individual application agents directly in Codex sessions, with their role instructions, permitted tools, and evaluation questions. These tests must run independently of Kessel.
 - Use [Kessel](../../../../kessel/README.md), Rylan Wade's existing localhost gateway, for full-application local generation and compatible automated evaluation-judge calls. Its OpenAI-compatible Codex and Claude Code routes let the application call the authenticated subscription-backed CLIs through a normal model-client interface. Kessel integration in HW2 is planned, not yet tested.
@@ -226,7 +227,7 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Development proceeds one authorized milestone at a time. M1 scope/source feasibility is complete. M2–M12 are planned in the milestone skeleton below; implementation remains unstarted.
+- Development proceeds one authorized milestone at a time. M1 and M2 are implemented and verified; M2 is accepted. M3–M12 remain planned and unstarted.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
 - Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
@@ -239,7 +240,7 @@ flowchart TB
 
 | Decision | Resolve before |
 | --- | --- |
-| Complete source-body collection, extraction fidelity, and coverage expansion | Initial collection acceptance; expand the selected four-company/two-year scope only after demonstrations and feedback. |
+| Coverage expansion and additional reporting formats | Source collection is verified for all 41 selected documents. Future discovery/refresh CLI is implemented; expand application coverage only after source checks, demonstrations, and feedback. |
 | Observation selection, fiscal alignment, candidate-tag validation, amendments/restatements, and missing-data behavior | Structured-data and financial-analysis implementation; consolidated GAAP scope and known source constraints are fixed. |
 | Chunking, embeddings, retrieval filters/k, and Pinecone versus Chroma | First RAG implementation and retrieval experiment. |
 | NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
@@ -250,7 +251,7 @@ flowchart TB
 | Optional LangSmith hosted comparison/reporting | Any requested hosted evaluation/reporting integration. |
 | Report/chart presentation and source-inspection interaction | First frontend demonstration. |
 | Conversation context and whether memory must survive instance replacement | Any multi-turn promise; external durable state is required if that survival is claimed. |
-| Refresh policy for documents, financial observations, and current sources | Freshness claims in user-visible answers. |
+| Refresh policy for financial observations and current sources | Documents support explicit CLI refresh and future inventories; no scheduler or automatic freshness promise. Decide observation/live-source policies before freshness claims. |
 | Cloud Run resource/concurrency limits and acceptable latency | Deployment acceptance, based on measurements. |
 | Product name and optional coverage/features | Feedback showing the initial workflow is useful. |
 
@@ -274,7 +275,7 @@ flowchart TB
 | Milestone | Status | Outcome |
 | --- | --- | --- |
 | M1 — Scope and source feasibility | Complete | Four companies, two fiscal years each, 41-document target, 32/32 reports with aligned financial inputs, source-access evidence, and unresolved gaps in [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md). |
-| M2 — Source collection and preparation | Planned; unstarted | Original documents, readable extraction, provenance, and an honest coverage inventory. |
+| M2 — Source collection and preparation | Implemented and verified; accepted | 41/41 bodies and extractions, versioned provenance, 32 risk/MD&A sections, AMD amendment, table checks, reusable uv CLI, and no collection gaps. [Evidence](M2_SOURCE_COLLECTION_AND_PREPARATION.md). |
 | M3 — First RAG research demo | Planned; unstarted | Filings Research worker, minimal supervisor, local browser chat, streamed answers, and source inspection. |
 | M4 — Local container acceptance | Planned; unstarted | The working research slice runs in Docker with local gateway connectivity checked. |
 | M5 — Financial Data agent | Planned; unstarted | Source-linked financial observations with correct units, dates, and revision basis. |
@@ -297,6 +298,7 @@ flowchart TB
 - **Scope:** collect the 41-document target using verified original/official mirror paths; resolve remaining NVIDIA/Qualcomm downloads. Save original bodies, readable extracted text, canonical identities, retrieval URLs/dates, versions, and collection status. Validate HTML/PDF content and section/table fidelity; a successful HTTP response is insufficient. Deduplicate mirrors without merging amendments into originals.
 - **Demonstration/exit:** inspect one source and its extraction for each company, AMD's original/amended MD&A, and annual/quarterly risk sections. Account for all 41 targets with verified bodies or explicit failures; unresolved material gaps require a coverage decision before acceptance. Provide repeatable collection commands with bounded retries and source-identifying requests.
 - **Boundary:** no vector index, application workers, frontend, or formal evaluation harness. Preserve the four-company historical coverage unless feedback authorizes a change.
+- **Implemented:** `data/source_inventory.json`, collection/discovery CLI, ignored content-addressed originals and prepared files, explicit refresh/run history, and offline inspection/verification. `uv` is the project standard. [M2 report](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records current decisions, demonstration, evidence, and limits; M2 is accepted.
 
 ### M3 — First RAG research demo
 

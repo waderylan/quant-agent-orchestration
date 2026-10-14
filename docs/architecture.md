@@ -1,6 +1,6 @@
 # Architecture
 
-- Status: **selected design; unimplemented application**. M1 scope and source feasibility is complete; M2 is unstarted.
+- Status: **M2 source preparation implemented and verified; accepted**. The application design is selected; application agents and runtime components are unimplemented.
 - Design contract: [project spec](planning/PROJECT_SPEC.md).
 - Source evidence: [M1 feasibility](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
 
@@ -76,7 +76,7 @@ flowchart TB
 - Selected years: NVIDIA FY2025–2026; AMD/Intel/Qualcomm FY2024–2025. Actual fiscal dates are in the [M1 coverage table](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md#2-company-and-period-coverage).
 - Collection target: 32 10-K/10-Q reports, eight Q4/full-year releases, and AMD's FY2025 amendment; **41 documents**.
 - SEC submissions provide filing discovery; Company Facts provides structured financial observations. SEC accession remains canonical identity while retrieval URLs identify official mirrors/CDNs.
-- Metadata and aligned USD inputs are verified for 32/32 original reports. All AMD/Intel bodies and eight releases have verified download paths. Complete NVIDIA/Qualcomm collection and section extraction are pending.
+- Metadata and aligned USD inputs are verified for 32/32 original reports. All 41 bodies and readable extractions are verified. [M2 preparation](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) records source/table/section evidence and no collection gaps.
 - Direct local SEC Archives probes return 403. Qualcomm's gross-profit input requires subtraction; its FY2024 has 53 weeks. AMD's corrected MD&A remains linked to its original filing.
 - Initial metrics use consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow. Observation selection and revision reconciliation are unimplemented.
 
@@ -84,7 +84,7 @@ flowchart TB
 
 - Required stages: original-document ingestion, chunking, embeddings, vector storage, top-k retrieval, prompt augmentation, and generation with source-chunk citations.
 - Pinecone versus Chroma, local embedding model, chunking rules, retrieval filters/k, and augmentation template remain undecided.
-- Full corpus collection, ingestion, vector index, and retrieval are unimplemented.
+- Original-document collection and readable preparation are implemented. Chunking, embeddings, vector index, retrieval, augmentation, and generation are unimplemented.
 - Structured financial queries complement original-document RAG; they do not replace it.
 
 ## Live knowledge and MCP sharing
@@ -103,8 +103,17 @@ flowchart TB
 
 ## Outstanding verification
 
-- Complete original-document collection and check section/table extraction fidelity.
+- Review M2's source-preparation demonstration before authorizing RAG implementation.
 - Implement and verify the graph, role tools, financial calculations, RAG pipeline, shared MCP use, and SSE contract.
 - Check local Kessel client compatibility and Docker-to-host access.
 - Run formal evaluations after working research/analysis demonstrations.
 - Verify final serving providers locally, deploy, and repeat relevant cloud acceptance/evaluation checks.
+
+## Implemented source preparation
+
+- `scripts/collect_sources.py` exposes collect/refresh, offline preparation/verification, status, inspection, compact report export, future fiscal-window discovery, and explicit release addition. `src/source_collection.py` owns source validation, extraction, and content-addressed storage; `src/source_inventory.py` owns future discovery.
+- `data/source_inventory.json` defines 41 logical documents. SEC accession is filing identity; official mirrors remain retrieval candidates. Amendments have separate identities and parent links. Quarterly risk records retain annual context and identify prior annual reports outside initial coverage.
+- Sequential requests use an identifying User-Agent, a one-second request interval, 30-second timeouts, two attempts for transient failures, and no retries for 403/404. Official feed discovery does not treat publisher listing dates as fiscal ends.
+- Original bytes and SEC snapshots are content-addressed by SHA-256. Prepared UTF-8 text has its own checksum, page/section offsets, and table details. Immutable run manifests retain retrieval dates, identities, versions, validation outcomes, and failed refreshes.
+- HTML extraction excludes hidden XBRL/scripts, keeps table cells and row/column spans, and selects news article headers/body. PDF extraction uses fixed-width layout and plain-text fallback for text omitted by layout mode. Standard reports use Item boundaries; Intel uses body titles and its SEC cross-reference index.
+- All downloaded/prepared data is local and ignored under `data/corpus/`. Inventories and compact evidence reports are tracked. uv manages Python 3.13, exact direct pins, `uv.lock`, and exported assignment requirements.

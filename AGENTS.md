@@ -99,6 +99,7 @@ For every qualifying event entry:
 
 - Never commit or expose credentials; use environment variables and ignored secret files.
 - Claim success only for actions actually performed and inspected.
+- Keep tests slim and useful. Every test, assertion, and line of test code must protect meaningful behavior or catch a plausible failure; omit trivial checks and tests added only to increase coverage or test counts.
 - Preserve user-authored and unrelated changes.
 - Keep `CLAUDE.md` as the single-line import `@AGENTS.md`.
 - Keep documentation factual; never invent decisions, measurements, or personal reflections.
@@ -107,12 +108,13 @@ For every qualifying event entry:
 ## 6. Project Workflow
 
 - Chosen project: **Public-Company Research Assistant**. [Project spec](docs/planning/PROJECT_SPEC.md) defines scope, five application agents, providers, local integration, open decisions, and the final checklist. The assignment takes precedence over the spec.
-- Current stage: M1 scope and source feasibility complete; application implementation and M2 are unstarted. Initial scope is NVIDIA, AMD, Intel, and Qualcomm with a 41-document collection target. Broader company coverage is planned after source checks, working demonstrations, and feedback. [M1 source evidence](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) records verified access and remaining collection gaps. Follow the spec's M2–M12 skeleton; record completed milestones factually and refine later scopes through feedback.
+- Current stage: M1 and M2 implemented and verified; M2 is accepted. The initial corpus contains all 41 selected NVIDIA, AMD, Intel, and Qualcomm documents. [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) records source preparation, verification, CLI commands, and limits. M3–M12 remain unstarted; advance only after feedback and authorization.
 - Implement only the authorized increment. Provide a runnable demonstration and correctness evidence; get Rylan Wade's feedback before starting the next milestone unless he authorizes another sequence.
 - Develop/test locally through Codex/Claude Code subscriptions. Test individual agents directly in Codex; Kessel supports full-application runs and compatible judges. Keep those results distinct.
 - Defer Nebius/NVIDIA generation and separate paid judge calls to final integration. Verify provider integration locally, then deploy to Cloud Run and retest. Keep Kessel outside the deployed image.
 - Begin with exploratory demos and basic correctness checks. Select formal evaluations after working research/financial-analysis capabilities clarify expected behavior; complete required evaluation reporting before submission.
-- Resolve open decisions when needed. Verify current model IDs, pricing, access, and external-tool compatibility; pin framework dependencies exactly in `requirements.txt`.
+- Use uv as the project standard: Python 3.13, `uv sync --locked`, and `uv run --locked`. Maintain exact direct dependency pins in `pyproject.toml`, commit `uv.lock`, and export the assignment's `requirements.txt` with `uv export --frozen --no-dev --no-hashes --no-emit-project --output-file requirements.txt`.
+- Resolve open decisions when needed. Verify current model IDs, pricing, access, and external-tool compatibility.
 - Instructor files (`docs/cost_analysis.md`, `docs/frontend_vibecode_prompt.md`, `docs/alternative_*.md`) are reference guidance, separate from student-authored deliverables.
 - Keep `PROCESS_LOG.md` a template until Rylan Wade supplies his actual reflection. After deployment/retesting, remind him to complete 200–300 words across its four sections as the final checklist step. Submission readiness remains pending until the completed log is included in the archive.
 - Do not copy HW1 implementation, credentials, deployment configuration, artifacts, or reflections.

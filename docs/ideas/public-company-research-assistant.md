@@ -2,7 +2,7 @@
 
 - Owner: Rylan Wade.
 - Product name: TBD.
-- Status: selected project; M1 scope and source feasibility complete. Application implementation and M2 are unstarted.
+- Status: selected project; M1 and M2 implemented and verified, with M2 accepted. Application implementation is unstarted.
 - Selected scope and development constraints: [project spec](../planning/PROJECT_SPEC.md).
 - Source availability and financial evidence: [M1 feasibility](../planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
 
@@ -25,8 +25,8 @@ The product is a research tool. Its initial scope excludes trading, personalized
 
 - Company coverage starts with these four and is planned to expand toward approximately 20, subject to source checks, working demonstrations, and feedback.
 - Initial collection comprises 32 original 10-K/10-Q reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment: **41 documents**.
-- All four companies use domestic SEC forms. Complete collection and ingestion are pending.
-- SEC metadata and matching-duration USD financial inputs are verified for all 32 original reports. AMD/Intel body download paths and all eight earnings releases are verified; NVIDIA/Qualcomm body collection is verified for samples.
+- All four companies use domestic SEC forms. All 41 selected bodies and readable extractions are verified; RAG ingestion is unstarted.
+- SEC metadata and matching-duration USD financial inputs are verified for all 32 original reports. Source preparation includes risk/MD&A boundaries, table fidelity checks, and the distinct AMD amendment. [M2 preparation](../planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) defines inspection, refresh, and future-data CLI commands.
 - Initial metrics are consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
 - Within-company comparisons take priority. Cross-company comparisons must show fiscal dates and explain timing and business-mix limits.
 - Qualcomm gross profit requires revenue minus cost of revenue. Its FY2024 has 53 weeks versus 52 in FY2025.
@@ -88,4 +88,4 @@ For financial questions, Filings Research supplies management's explanation, Fin
 - RAG storage, embeddings, chunking, retrieval settings, observation/revision policy, Quant execution limits, Tavily integration, and frontend interaction details remain unresolved.
 - Formal evaluations are unstarted. The evaluation checkpoint follows working research and financial-analysis demonstrations.
 - Latency and cost targets require actual measurements; no runtime performance or cost results exist.
-- M2 requires an authorized scope and acceptance demonstration. The [project spec](../planning/PROJECT_SPEC.md) lists remaining decisions and submission requirements.
+- M2's source-preparation demonstration is runnable with uv; M2 is accepted. The [project spec](../planning/PROJECT_SPEC.md) lists remaining decisions and submission requirements.

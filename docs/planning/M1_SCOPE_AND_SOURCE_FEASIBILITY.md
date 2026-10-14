@@ -1,7 +1,7 @@
 # M1 — Scope and source feasibility
 
 - Owner: Rylan Wade.
-- Status: M1 scope/source investigation complete; application implementation remains unstarted.
+- Status: scope/source feasibility and [M2 collection/preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) are verified; M2 accepted. Application implementation is unstarted.
 - Verification date: 2026-10-13 America/Los_Angeles (2026-10-14 UTC).
 - Governing documents: [AGENTS.md](../../AGENTS.md), [assignment](../assignment/Assignment_2_Description.md), and [project spec](PROJECT_SPEC.md).
 - Scope decisions below apply to initial collection. Coverage can change after working demonstrations and feedback; this is not a fixed evaluation dataset.
@@ -14,7 +14,7 @@
 | Roughly two years of reports | Two completed fiscal years per company: NVIDIA FY2025–2026; AMD, Intel, Qualcomm FY2024–2025. | Actual dates appear below. NVIDIA's year label is offset from the other companies. These are historical coverage windows, not a claim of latest coverage as of October 2026. |
 | Filing families | Full original 10-K and Q1–Q3 10-Q documents; related amendments as separate versions. | 32 original reports discovered plus one in-window AMD 10-K/A. Q4 is represented by the 10-K and earnings release, not an invented fourth 10-Q. |
 | Relevant earnings releases | Initially include the eight Q4/full-year releases listed in §4. | Each downloaded from an original company site or its official document CDN. Q1–Q3 releases can be added when a demonstration needs them. |
-| Corpus size / retrieval structure | Initial collection target: **41 source documents** = 8 annual reports + 24 quarterly reports + 8 earnings releases + 1 amendment. | Documents span four companies, two years, business descriptions, MD&A, financial statements/notes, and risk disclosures. This is a collection target; no RAG ingestion or retrieval quality is claimed. |
+| Corpus size / retrieval structure | Verified corpus: **41 source documents** = 8 annual reports + 24 quarterly reports + 8 earnings releases + 1 amendment. | All bodies and readable extractions are verified, with no collection gaps. Documents span business descriptions, MD&A, financial statements/notes, and risk disclosures. RAG ingestion and retrieval are unstarted. |
 | Initial numerical scope | Consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. | All 32 original reports have matching-duration financial inputs in SEC Company Facts; Qualcomm gross profit must be derived from revenue minus cost of revenue. |
 | Supported investigations | Management explanations, within-company financial changes, qualified company comparisons, disclosure changes, and dated current developments relevant to those questions. | Original narrative reports, structured observations, and public company news are available. Tavily application integration remains unverified. |
 | Request / output boundary | Self-contained request; cited research brief, optional financial table/chart, relevant risk changes, explicit gaps. | Preserve the spec's single-turn boundary. No conversation-memory promise. |
@@ -54,7 +54,7 @@
 
 - “Aligned inputs” means revenue, gross-profit input, operating income/loss, and operating cash flow have a common start/end interval, USD unit, and the selected report's exact accession. This check found no missing required input in the 32 originals.
 - This is availability and basic period consistency evidence. It does not prove an extractor, revision policy, complete reconciliation, or application calculation workflow.
-- SEC automation must remain below its aggregate 10-request/second limit and identify its client. These probes were sequential with pauses. Configure a truthful identifying User-Agent/contact before automated collection; preserve failures and use bounded backoff rather than bypassing access controls. [SEC rate-control guidance](https://www.sec.gov/filergroup/announcements-old/new-rate-control-limits)
+- SEC automation must remain below its aggregate 10-request/second limit and identify its client. The collector uses truthful project identification, sequential requests at most once per second, and bounded transient retries; it preserves failures and does not bypass access restrictions. [SEC rate-control guidance](https://www.sec.gov/filergroup/announcements-old/new-rate-control-limits)
 - SEC requests belong on the backend: SEC documents that data.sec.gov does not support browser CORS. [SEC API documentation](https://www.sec.gov/search-filings/edgar-application-programming-interfaces)
 
 ### Original document bodies
@@ -64,18 +64,18 @@
 | Direct local SEC Archives requests for newest NVDA, AMD, and Intel 10-Ks | **HTTP 403** for all three. | Local API access does not guarantee filing-body access. Do not design collection around untested archive downloads. |
 | AMD official HTML filing mirrors | **HTTP 200 for all 8 originals and the amendment**. | A usable local original-document path exists for AMD. |
 | Intel official HTML filing mirrors | **HTTP 200 for all 8 originals**. | A usable local original-document path exists for Intel. |
-| NVIDIA FY2026 official annual PDF | **HTTP 200**, 15,850,437 bytes, valid PDF signature. | Official PDF download works locally; PDF extraction/section fidelity still needs collection checks. |
-| Qualcomm FY2025 Q3 official filing PDF | **HTTP 200**, 408,448 bytes, valid PDF signature; 52 pages and 213,352 extracted text characters. | Official quarterly filing download/text extraction works locally; risk and cash-flow markers found. Section-boundary fidelity remains untested. |
+| NVIDIA FY2026 official annual PDF | **HTTP 200**, 15,850,437 bytes, valid PDF signature. | Official PDF access is verified. M2 collects the official standalone 10-K PDF and verifies readable extraction and section/table samples. |
+| Qualcomm FY2025 Q3 official filing PDF | **HTTP 200**, 408,448 bytes, valid PDF signature; 52 pages and 213,352 extracted text characters in the source probe. | Official quarterly filing access is verified. M2 verifies page/section extraction and source identity. |
 | Browser research tool: NVIDIA FY2026 10-K and FY2026 Q3 10-Q; Qualcomm FY2024/FY2025 10-Ks | Original SEC document text opened and inspected. | Narrative availability is verified for these samples; this is not a successful local collector run for every NVDA/QCOM report. |
 | Qualcomm corporate FY2025 release URL | Local response was **HTTP 200**, but the body did not contain the expected financial text markers. | Status alone is insufficient. Use the verified official earnings PDF instead. |
 
-- AMD/Intel originals contained risk, MD&A, and cash-flow text markers. These presence checks are not section-boundary extraction tests.
-- AMD's amendment contains MD&A but no Risk Factors marker; it cannot replace the full original filing.
+- All 32 originals have verified risk and MD&A extraction in M2, plus financial statement markers. Standard Item headings and Intel's custom body headings have separate boundary handling.
+- AMD's amendment has verified MD&A but no replacement Risk Factors section; it cannot replace the full original filing.
 - Source entry points: [NVIDIA annual reports](https://investor.nvidia.com/financial-info/annual-reports-and-proxies/default.aspx), [NVIDIA financial reports](https://investor.nvidia.com/financial-info/financial-reports/default.aspx), [AMD financial results](https://ir.amd.com/financial-information/financial-results), [Intel financial results](https://www.intc.com/financial-info/financial-results), [Qualcomm historical results](https://investor.qualcomm.com/financial-info-sec-filings/historical-financial-results/default.aspx).
-- NVIDIA/Qualcomm financial-report pages depend on JavaScript to populate historical listings. A simple HTML fetch was not enough to enumerate those links. Qualcomm's guessed /financial-information/financial-results path returned 404; the historical-results link above is the verified entry point.
+- NVIDIA/Qualcomm financial-report pages populate historical listings through public Q4 feeds. The collection/discovery CLI resolves official PDF links from those feeds. Qualcomm's historical-results page above is the supported entry point.
 - Verified alternate downloads: [NVIDIA FY2026 annual PDF](https://s201.q4cdn.com/141608511/files/doc_financials/2026/ar/2026-Annual-Report-Web.pdf), [Qualcomm FY2025 Q3 PDF](https://s204.q4cdn.com/645488518/files/doc_financials/2025/q3/QCOM-06-29-25-10-Q-final.pdf).
 - Use SEC identity/accession as canonical provenance and retain the actual retrieval URL separately. A mirror and its SEC counterpart are one source document, not two corpus documents.
-- Full NVDA/QCOM body collection remains a collection-stage gap. The evidence supports company selection without claiming all 41 documents have been collected.
+- All selected NVIDIA/Qualcomm bodies are collected and verified. The [M2 source inventory](../../data/source_inventory.json) holds official download paths; [M2 results](../research/M2_COLLECTION_RESULTS.json) hold actual provenance and checksums for all 41 sources.
 
 ## 4. Verified earnings releases
 
@@ -155,9 +155,9 @@
 
 | Decision / gap | Current status | Resolve before |
 | --- | --- | --- |
-| Complete NVDA/QCOM local document-body paths | Metadata complete; sample bodies verified. Remaining downloads, original identity checks, and extraction fidelity pending. | Initial collection acceptance |
+| NVDA/QCOM local document-body paths | All 16 selected report PDFs are downloaded, identity checked, and prepared; no collection gaps. M2 demonstrates section/table fidelity. | Verified in M2 |
 | Financial definitions / fiscal alignment | Consolidated GAAP scope, observed tags, and date limits recorded. Exact observation selection, Q4 derivation, revision reconciliation, and missing-data implementation pending. | Structured data / Quant implementation |
-| Amendments / restatements | AMD amendment identified and its corrected passage understood. General revision policy still pending. | Source collection / structured-data implementation |
+| Amendments / restatements | Source versions and amendment/original relationships are preserved. AMD corrected MD&A is verified separately; general financial-observation revision selection remains pending. | Structured-data implementation |
 | Chunking, embeddings, filters/k, Chroma versus Pinecone | Deferred. No vector index or dependencies selected. | First RAG implementation |
 | NVIDIA confirmation; Nebius/NVIDIA models, budgets, routing thresholds | Deferred. No runtime-provider generation calls or pricing conclusions. | Final provider integration; reverify current access and pricing then |
 | Kessel/LangChain compatibility, endpoint profiles, Docker host access | Deferred; no Kessel run or model-client integration claimed. | First model-backed application/container checks |
@@ -167,7 +167,7 @@
 | Optional hosted LangSmith reporting | Deferred; no hosted experiment uploads. | Requested hosted integration |
 | Brief/chart design and source inspection | Brief boundary retained; UI interaction details deferred. | First frontend demonstration |
 | Conversation memory / durability | Initial requests remain self-contained; future memory decision deferred. | Any multi-turn or persistence promise |
-| Refresh policy / current-source freshness | Historical window explicit; refresh cadence and live-tool checks pending. | Freshness promises |
+| Refresh policy / current-source freshness | Explicit CLI source refresh and separate future inventories are implemented. No automatic refresh promise; financial/live-source policies remain undecided. | Freshness promises |
 | Cloud Run resources/concurrency/latency | Deferred; no deployment or performance measurements. | Final deployment acceptance |
 | Product name / broader coverage | Deferred; four-company initial scope only. | Feedback on working workflows |
 
@@ -178,12 +178,12 @@
 
 - Source evidence comprises public primary-source documentation, SEC JSON, original filings, official IR mirrors, and official company CDNs.
 - Recorded source checks: eight SEC JSON endpoints with HTTP 200; 32 originals and one amendment in metadata; aligned USD inputs for 32/32 original reports.
-- Recorded body checks: all 17 AMD/Intel reports, eight selected earnings releases, one NVIDIA annual PDF, and one Qualcomm quarterly PDF have successful local downloads. Browser inspection covers the additional narrative samples in §3.
-- Verification uses Python standard-library HTTP/JSON probes and existing pypdf tooling. The reproduction recipe returns eight originals and eight aligned-input successes for every company.
+- All 41 selected bodies and extractions are verified in M2. Source samples, annual financial rows, and annual/quarterly risk boundaries are inspected; AMD's original/amended MD&A remains distinguishable.
+- Verification uses uv-managed Python 3.13 with standard-library HTTP/JSON, Beautiful Soup, and pypdf. The independent financial-availability recipe returns eight originals and eight aligned-input successes for every company.
 - The filing inventory contains 33 rows. Markdown whitespace, encoding, and code-fence checks pass.
-- Source snapshots reside outside the repository as temporary inspection material. The repository contains source evidence and links; complete corpus collection and ingestion are pending.
+- Source bodies, SEC metadata snapshots, prepared text, and run manifests reside in ignored `data/corpus/`. The tracked inventory, CLI, lockfile, and compact evidence reports reproduce collection. RAG ingestion is unstarted.
 - Application agents, model integration, RAG, MCP tools, frontend, container, deployment, and formal evaluations are unimplemented or unstarted.
-- M1 scope/source feasibility is complete. M2 source collection is planned and unstarted; see the [milestone skeleton](PROJECT_SPEC.md#milestones) for the next increment.
+- M1 and M2 are implemented and verified; M2 is accepted. M3–M12 are planned and unstarted; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
 
 ### Inspection path
 
@@ -191,13 +191,13 @@
 2. Open SEC facts links in §3 and find an annual accession from §9; compare its USD inputs with §5.
 3. Read AMD's amendment explanatory note and Qualcomm's 53-week comparability warning.
 4. Open the earnings links in §4 and original report links in §9.
-5. Review §7 before defining the next increment; resolve collection failures in that increment rather than treating metadata as a downloaded corpus.
+5. Run the [M2 source demonstration](M2_SOURCE_COLLECTION_AND_PREPARATION.md#demonstration-and-reproduction); review §7 for decisions required by later milestones.
 
 ### Reproduce the financial availability check
 
-- Run the following in a local Python session with standard-library modules only.
+- Run the following in a uv-managed Python session with standard-library modules only (`uv run --locked python`).
 - It makes eight public SEC JSON requests and does not call generation providers or judges.
-- The recipe uses an identifying source-probe header. Configure proper project contact identification before sustained collection.
+- The recipe uses an identifying academic-source header. The supported collector uses the project identification and request bounds documented in M2.
 - Verified result: eight selected original filings and eight aligned-input successes for each company. Live endpoints can change; retain the new retrieval date and investigate differences.
 
 ~~~python
@@ -260,47 +260,47 @@ for ticker, (cik, first, last, revenue, gross_input) in scope.items():
 - “What does AMD's amended FY2025 explanation say, and how does it differ from the original?”
 - “What changed in Intel's annual risk disclosures, and which quarterly updates are relevant?”
 
-- These are demonstration ideas, not a benchmark set, scored evaluation, or M2 authorization.
+- These are research/analysis demonstration ideas, not a benchmark set or scored evaluation.
 
 ## 9. Verified filing inventory
 
 - All rows were discovered in SEC submissions metadata.
-- AMD/Intel links were each downloaded locally with HTTP 200.
-- NVIDIA/Qualcomm links identify canonical SEC originals. Only the samples stated in §3 were opened for body inspection; remaining local collection is pending.
+- AMD/Intel links have verified HTML bodies and extraction.
+- NVIDIA/Qualcomm links identify canonical SEC originals. Their verified local bodies use official PDFs; exact retrieval paths and checks are in the M2 inventory/results.
 - This inventory retains filing dates and accessions; fiscal-year windows and starts are in §2.
 
 | Company | Form | Period end | Filed | Accession / primary source | Body probe |
 | --- | --- | --- | --- | --- | --- |
-| NVDA | 10-Q | 2024-04-28 | 2024-05-29 | [0001045810-24-000124](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm) | Metadata; see sample checks above |
-| NVDA | 10-Q | 2024-07-28 | 2024-08-28 | [0001045810-24-000264](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm) | Metadata; see sample checks above |
-| NVDA | 10-Q | 2024-10-27 | 2024-11-20 | [0001045810-24-000316](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm) | Metadata; see sample checks above |
-| NVDA | 10-K | 2025-01-26 | 2025-02-26 | [0001045810-25-000023](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm) | Metadata; see sample checks above |
-| NVDA | 10-Q | 2025-04-27 | 2025-05-28 | [0001045810-25-000116](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm) | Metadata; see sample checks above |
-| NVDA | 10-Q | 2025-07-27 | 2025-08-27 | [0001045810-25-000209](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm) | Metadata; see sample checks above |
-| NVDA | 10-Q | 2025-10-26 | 2025-11-19 | [0001045810-25-000230](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm) | Metadata; see sample checks above |
-| NVDA | 10-K | 2026-01-25 | 2026-02-25 | [0001045810-26-000021](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm) | Metadata; see sample checks above |
-| AMD | 10-Q | 2024-03-30 | 2024-05-01 | [0000002488-24-000056](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000056/amd-20240330.htm) | Local HTML 200 |
-| AMD | 10-Q | 2024-06-29 | 2024-07-31 | [0000002488-24-000123](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000123/amd-20240629.htm) | Local HTML 200 |
-| AMD | 10-Q | 2024-09-28 | 2024-10-30 | [0000002488-24-000163](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000163/amd-20240928.htm) | Local HTML 200 |
-| AMD | 10-K | 2024-12-28 | 2025-02-05 | [0000002488-25-000012](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000012/amd-20241228.htm) | Local HTML 200 |
-| AMD | 10-Q | 2025-03-29 | 2025-05-07 | [0000002488-25-000047](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000047/amd-20250329.htm) | Local HTML 200 |
-| AMD | 10-Q | 2025-06-28 | 2025-08-06 | [0000002488-25-000108](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000108/amd-20250628.htm) | Local HTML 200 |
-| AMD | 10-Q | 2025-09-27 | 2025-11-05 | [0000002488-25-000166](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000166/amd-20250927.htm) | Local HTML 200 |
-| AMD | 10-K | 2025-12-27 | 2026-02-04 | [0000002488-26-000018](https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000018/amd-20251227.htm) | Local HTML 200 |
-| AMD | 10-K/A | 2025-12-27 | 2026-02-04 | [0000002488-26-000021](https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000021/amd-20251227.htm) | Local HTML 200 |
-| INTC | 10-Q | 2024-03-30 | 2024-04-26 | [0000050863-24-000076](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000076/intc-20240330.htm) | Local HTML 200 |
-| INTC | 10-Q | 2024-06-29 | 2024-08-02 | [0000050863-24-000124](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000124/intc-20240629.htm) | Local HTML 200 |
-| INTC | 10-Q | 2024-09-28 | 2024-11-01 | [0000050863-24-000149](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000149/intc-20240928.htm) | Local HTML 200 |
-| INTC | 10-K | 2024-12-28 | 2025-01-31 | [0000050863-25-000009](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000009/intc-20241228.htm) | Local HTML 200 |
-| INTC | 10-Q | 2025-03-29 | 2025-04-25 | [0000050863-25-000074](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000074/intc-20250329.htm) | Local HTML 200 |
-| INTC | 10-Q | 2025-06-28 | 2025-07-24 | [0000050863-25-000109](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000109/intc-20250628.htm) | Local HTML 200 |
-| INTC | 10-Q | 2025-09-27 | 2025-11-06 | [0000050863-25-000179](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000179/intc-20250927.htm) | Local HTML 200 |
-| INTC | 10-K | 2025-12-27 | 2026-01-23 | [0000050863-26-000011](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-26-000011/intc-20251227.htm) | Local HTML 200 |
-| QCOM | 10-Q | 2023-12-24 | 2024-01-31 | [0000804328-24-000017](https://www.sec.gov/Archives/edgar/data/804328/000080432824000017/qcom-20231224.htm) | Metadata; see sample checks above |
-| QCOM | 10-Q | 2024-03-24 | 2024-05-01 | [0000804328-24-000039](https://www.sec.gov/Archives/edgar/data/804328/000080432824000039/qcom-20240324.htm) | Metadata; see sample checks above |
-| QCOM | 10-Q | 2024-06-23 | 2024-07-31 | [0000804328-24-000056](https://www.sec.gov/Archives/edgar/data/804328/000080432824000056/qcom-20240623.htm) | Metadata; see sample checks above |
-| QCOM | 10-K | 2024-09-29 | 2024-11-06 | [0000804328-24-000075](https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm) | Metadata; see sample checks above |
-| QCOM | 10-Q | 2024-12-29 | 2025-02-05 | [0000804328-25-000011](https://www.sec.gov/Archives/edgar/data/804328/000080432825000011/qcom-20241229.htm) | Metadata; see sample checks above |
-| QCOM | 10-Q | 2025-03-30 | 2025-04-30 | [0000804328-25-000031](https://www.sec.gov/Archives/edgar/data/804328/000080432825000031/qcom-20250330.htm) | Metadata; see sample checks above |
-| QCOM | 10-Q | 2025-06-29 | 2025-07-30 | [0000804328-25-000045](https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm) | Metadata; see sample checks above |
-| QCOM | 10-K | 2025-09-28 | 2025-11-05 | [0000804328-25-000085](https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm) | Metadata; see sample checks above |
+| NVDA | 10-Q | 2024-04-28 | 2024-05-29 | [0001045810-24-000124](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-Q | 2024-07-28 | 2024-08-28 | [0001045810-24-000264](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-Q | 2024-10-27 | 2024-11-20 | [0001045810-24-000316](https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-K | 2025-01-26 | 2025-02-26 | [0001045810-25-000023](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-Q | 2025-04-27 | 2025-05-28 | [0001045810-25-000116](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-Q | 2025-07-27 | 2025-08-27 | [0001045810-25-000209](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-Q | 2025-10-26 | 2025-11-19 | [0001045810-25-000230](https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm) | Verified official PDF and extraction; M2 provenance |
+| NVDA | 10-K | 2026-01-25 | 2026-02-25 | [0001045810-26-000021](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm) | Verified official PDF and extraction; M2 provenance |
+| AMD | 10-Q | 2024-03-30 | 2024-05-01 | [0000002488-24-000056](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000056/amd-20240330.htm) | Verified HTML and extraction |
+| AMD | 10-Q | 2024-06-29 | 2024-07-31 | [0000002488-24-000123](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000123/amd-20240629.htm) | Verified HTML and extraction |
+| AMD | 10-Q | 2024-09-28 | 2024-10-30 | [0000002488-24-000163](https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000163/amd-20240928.htm) | Verified HTML and extraction |
+| AMD | 10-K | 2024-12-28 | 2025-02-05 | [0000002488-25-000012](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000012/amd-20241228.htm) | Verified HTML and extraction |
+| AMD | 10-Q | 2025-03-29 | 2025-05-07 | [0000002488-25-000047](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000047/amd-20250329.htm) | Verified HTML and extraction |
+| AMD | 10-Q | 2025-06-28 | 2025-08-06 | [0000002488-25-000108](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000108/amd-20250628.htm) | Verified HTML and extraction |
+| AMD | 10-Q | 2025-09-27 | 2025-11-05 | [0000002488-25-000166](https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000166/amd-20250927.htm) | Verified HTML and extraction |
+| AMD | 10-K | 2025-12-27 | 2026-02-04 | [0000002488-26-000018](https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000018/amd-20251227.htm) | Verified HTML and extraction |
+| AMD | 10-K/A | 2025-12-27 | 2026-02-04 | [0000002488-26-000021](https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000021/amd-20251227.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2024-03-30 | 2024-04-26 | [0000050863-24-000076](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000076/intc-20240330.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2024-06-29 | 2024-08-02 | [0000050863-24-000124](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000124/intc-20240629.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2024-09-28 | 2024-11-01 | [0000050863-24-000149](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000149/intc-20240928.htm) | Verified HTML and extraction |
+| INTC | 10-K | 2024-12-28 | 2025-01-31 | [0000050863-25-000009](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000009/intc-20241228.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2025-03-29 | 2025-04-25 | [0000050863-25-000074](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000074/intc-20250329.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2025-06-28 | 2025-07-24 | [0000050863-25-000109](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000109/intc-20250628.htm) | Verified HTML and extraction |
+| INTC | 10-Q | 2025-09-27 | 2025-11-06 | [0000050863-25-000179](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000179/intc-20250927.htm) | Verified HTML and extraction |
+| INTC | 10-K | 2025-12-27 | 2026-01-23 | [0000050863-26-000011](https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-26-000011/intc-20251227.htm) | Verified HTML and extraction |
+| QCOM | 10-Q | 2023-12-24 | 2024-01-31 | [0000804328-24-000017](https://www.sec.gov/Archives/edgar/data/804328/000080432824000017/qcom-20231224.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-Q | 2024-03-24 | 2024-05-01 | [0000804328-24-000039](https://www.sec.gov/Archives/edgar/data/804328/000080432824000039/qcom-20240324.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-Q | 2024-06-23 | 2024-07-31 | [0000804328-24-000056](https://www.sec.gov/Archives/edgar/data/804328/000080432824000056/qcom-20240623.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-K | 2024-09-29 | 2024-11-06 | [0000804328-24-000075](https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-Q | 2024-12-29 | 2025-02-05 | [0000804328-25-000011](https://www.sec.gov/Archives/edgar/data/804328/000080432825000011/qcom-20241229.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-Q | 2025-03-30 | 2025-04-30 | [0000804328-25-000031](https://www.sec.gov/Archives/edgar/data/804328/000080432825000031/qcom-20250330.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-Q | 2025-06-29 | 2025-07-30 | [0000804328-25-000045](https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm) | Verified official PDF and extraction; M2 provenance |
+| QCOM | 10-K | 2025-09-28 | 2025-11-05 | [0000804328-25-000085](https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm) | Verified official PDF and extraction; M2 provenance |

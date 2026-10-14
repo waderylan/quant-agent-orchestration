@@ -1,0 +1,1070 @@
+{
+  "schema_version": 1,
+  "scope": "M1 four-company historical window; 41 logical documents",
+  "documents": [
+    {
+      "document_id": "nvda-0001045810-24-000124",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-04-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-01-29",
+      "fiscal_end": "2025-01-26",
+      "source_date": "2024-05-29",
+      "accession": "0001045810-24-000124",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/q1/NVIDIA-10Q-20242905.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "First Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-24-000264",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-07-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-01-29",
+      "fiscal_end": "2025-01-26",
+      "source_date": "2024-08-28",
+      "accession": "0001045810-24-000264",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/q2/78501ce3-7816-4c4d-8688-53dd140df456.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Second Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-24-000316",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-10-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-01-29",
+      "fiscal_end": "2025-01-26",
+      "source_date": "2024-11-20",
+      "accession": "0001045810-24-000316",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/q3/ed2a395c-5e9b-4411-8b4a-a718d192155a.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Third Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000023",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2025-01-26",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-01-29",
+      "fiscal_end": "2025-01-26",
+      "source_date": "2025-02-26",
+      "accession": "0001045810-25-000023",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/q4/177440d5-3b32-4185-8cc8-95500a9dc783.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Fourth Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-0001045810-25-000116",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-04-27",
+      "fiscal_year": 2026,
+      "fiscal_start": "2025-01-27",
+      "fiscal_end": "2026-01-25",
+      "source_date": "2025-05-28",
+      "accession": "0001045810-25-000116",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/q1/b6df1c5c-5cb6-4a41-9d28-dd1bcd34cc26.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2026,
+          "discovery_report_type": "First Quarter"
+        }
+      ],
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000209",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-07-27",
+      "fiscal_year": 2026,
+      "fiscal_start": "2025-01-27",
+      "fiscal_end": "2026-01-25",
+      "source_date": "2025-08-27",
+      "accession": "0001045810-25-000209",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/q2/2e217538-c226-4d05-8f74-aaca89a21b33.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2026,
+          "discovery_report_type": "Second Quarter"
+        }
+      ],
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-25-000230",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-10-26",
+      "fiscal_year": 2026,
+      "fiscal_start": "2025-01-27",
+      "fiscal_end": "2026-01-25",
+      "source_date": "2025-11-19",
+      "accession": "0001045810-25-000230",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/q3/13e6981b-95ed-4aac-a602-ebc5865d0590.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2026,
+          "discovery_report_type": "Third Quarter"
+        }
+      ],
+      "prior_annual_document_id": "nvda-0001045810-25-000023",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "nvda-0001045810-26-000021",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2026-01-25",
+      "fiscal_year": 2026,
+      "fiscal_start": "2025-01-27",
+      "fiscal_end": "2026-01-25",
+      "source_date": "2026-02-25",
+      "accession": "0001045810-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2026/q4/10K-NVDA.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2026,
+          "discovery_report_type": "Fourth Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "amd-0000002488-24-000056",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-03-30",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-05-01",
+      "accession": "0000002488-24-000056",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000056/amd-20240330.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000056/amd-20240330.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-24-000123",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-06-29",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-07-31",
+      "accession": "0000002488-24-000123",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000123/amd-20240629.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000123/amd-20240629.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-24-000163",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-09-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-10-30",
+      "accession": "0000002488-24-000163",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000163/amd-20240928.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-24-000163/amd-20240928.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "amd-0000002488-25-000012",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2024-12-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2025-02-05",
+      "accession": "0000002488-25-000012",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000012/amd-20241228.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ]
+    },
+    {
+      "document_id": "amd-0000002488-25-000047",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-03-29",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-05-07",
+      "accession": "0000002488-25-000047",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000047/amd-20250329.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-25-000108",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-06-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-08-06",
+      "accession": "0000002488-25-000108",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000108/amd-20250628.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-25-000166",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-09-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-11-05",
+      "accession": "0000002488-25-000166",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-25-000166/amd-20250927.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "amd-0000002488-25-000012",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "amd-0000002488-26-000018",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2025-12-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2026-02-04",
+      "accession": "0000002488-26-000018",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000018/amd-20251227.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ]
+    },
+    {
+      "document_id": "amd-0000002488-26-000021",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "filing",
+      "form": "10-K/A",
+      "period_end": "2025-12-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2026-02-04",
+      "accession": "0000002488-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000021/amd-20251227.htm",
+      "version": "amendment",
+      "amends_document_id": "amd-0000002488-26-000018",
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000021/amd-20251227.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ]
+    },
+    {
+      "document_id": "intc-0000050863-24-000076",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-03-30",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-04-26",
+      "accession": "0000050863-24-000076",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000076/intc-20240330.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000076/intc-20240330.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-24-000124",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-06-29",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-08-02",
+      "accession": "0000050863-24-000124",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000124/intc-20240629.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000124/intc-20240629.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-24-000149",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-09-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2024-11-01",
+      "accession": "0000050863-24-000149",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000149/intc-20240928.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-24-000149/intc-20240928.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "intc-0000050863-25-000009",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2024-12-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2025-01-31",
+      "accession": "0000050863-25-000009",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000009/intc-20241228.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ]
+    },
+    {
+      "document_id": "intc-0000050863-25-000074",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-03-29",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-04-25",
+      "accession": "0000050863-25-000074",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000074/intc-20250329.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000074/intc-20250329.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-25-000109",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-06-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-07-24",
+      "accession": "0000050863-25-000109",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000109/intc-20250628.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000109/intc-20250628.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-25-000179",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-09-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2025-11-06",
+      "accession": "0000050863-25-000179",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000179/intc-20250927.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-25-000179/intc-20250927.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ],
+      "prior_annual_document_id": "intc-0000050863-25-000009",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "intc-0000050863-26-000011",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2025-12-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2026-01-23",
+      "accession": "0000050863-26-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/filings-reports/all-sec-filings/content/0000050863-26-000011/intc-20251227.htm",
+          "format": "html",
+          "discovered_from": "M1 section 9"
+        }
+      ]
+    },
+    {
+      "document_id": "qcom-0000804328-24-000017",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2023-12-24",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-09-25",
+      "fiscal_end": "2024-09-29",
+      "source_date": "2024-01-31",
+      "accession": "0000804328-24-000017",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000017/qcom-20231224.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q1/0000804328-24-000017.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "First Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000039",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-03-24",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-09-25",
+      "fiscal_end": "2024-09-29",
+      "source_date": "2024-05-01",
+      "accession": "0000804328-24-000039",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000039/qcom-20240324.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q2/0000804328-24-000039.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Second Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000056",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-06-23",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-09-25",
+      "fiscal_end": "2024-09-29",
+      "source_date": "2024-07-31",
+      "accession": "0000804328-24-000056",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000056/qcom-20240623.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q3/0000804328-24-000056.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Third Quarter"
+        }
+      ],
+      "prior_annual_document_id": null,
+      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+    },
+    {
+      "document_id": "qcom-0000804328-24-000075",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2024-09-29",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-09-25",
+      "fiscal_end": "2024-09-29",
+      "source_date": "2024-11-06",
+      "accession": "0000804328-24-000075",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q4/QCOM-09-29-24-FY2024-10-K.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Fourth Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "qcom-0000804328-25-000011",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2024-12-29",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-09-30",
+      "fiscal_end": "2025-09-28",
+      "source_date": "2025-02-05",
+      "accession": "0000804328-25-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000011/qcom-20241229.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q1/QCOM-12-29-24-Q1FY25-10-Q.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "First Quarter"
+        }
+      ],
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000031",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-03-30",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-09-30",
+      "fiscal_end": "2025-09-28",
+      "source_date": "2025-04-30",
+      "accession": "0000804328-25-000031",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000031/qcom-20250330.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q2/QCOM-03-30-25-Q2FY25-10-Q.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Second Quarter"
+        }
+      ],
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000045",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2025-06-29",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-09-30",
+      "fiscal_end": "2025-09-28",
+      "source_date": "2025-07-30",
+      "accession": "0000804328-25-000045",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q3/QCOM-06-29-25-10-Q-final.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Third Quarter"
+        }
+      ],
+      "prior_annual_document_id": "qcom-0000804328-24-000075",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
+    },
+    {
+      "document_id": "qcom-0000804328-25-000085",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2025-09-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-09-30",
+      "fiscal_end": "2025-09-28",
+      "source_date": "2025-11-05",
+      "accession": "0000804328-25-000085",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/QCOM-09-28-25-FY2025-10-K-Final.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.qualcomm.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2025,
+          "discovery_report_type": "Fourth Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-fy2025-earnings",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2025-01-26",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-01-29",
+      "fiscal_end": "2025-01-26",
+      "source_date": "2025-02-26",
+      "accession": null,
+      "canonical_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-fy2026-earnings",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2026-01-25",
+      "fiscal_year": 2026,
+      "fiscal_start": "2025-01-27",
+      "fiscal_end": "2026-01-25",
+      "source_date": "2026-02-25",
+      "accession": null,
+      "canonical_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "amd-fy2024-earnings",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2024-12-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2025-02-04",
+      "accession": null,
+      "canonical_url": "https://ir.amd.com/news-events/press-releases/detail/1236/amd-reports-fourth-quarter-and-full-year-2024-financial-results",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1236/amd-reports-fourth-quarter-and-full-year-2024-financial-results",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "amd-fy2025-earnings",
+      "company": "AMD",
+      "company_name": "Advanced Micro Devices",
+      "cik": "0000002488",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2025-12-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2026-02-03",
+      "accession": null,
+      "canonical_url": "https://ir.amd.com/news-events/press-releases/detail/1276/amd-reports-fourth-quarter-and-full-year-2025-financial-results",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1276/amd-reports-fourth-quarter-and-full-year-2025-financial-results",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "intc-fy2024-earnings",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2024-12-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-12-31",
+      "fiscal_end": "2024-12-28",
+      "source_date": "2025-01-30",
+      "accession": null,
+      "canonical_url": "https://www.intc.com/news-events/press-releases/detail/1726/intel-reports-fourth-quarter-and-full-year-2024-financial",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/news-events/press-releases/detail/1726/intel-reports-fourth-quarter-and-full-year-2024-financial",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "intc-fy2025-earnings",
+      "company": "INTC",
+      "company_name": "Intel Corporation",
+      "cik": "0000050863",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2025-12-27",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "source_date": "2026-01-22",
+      "accession": null,
+      "canonical_url": "https://www.intc.com/news-events/press-releases/detail/1759/intel-reports-fourth-quarter-and-full-year-2025-financial",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://www.intc.com/news-events/press-releases/detail/1759/intel-reports-fourth-quarter-and-full-year-2025-financial",
+          "format": "html",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "qcom-fy2024-earnings",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2024-09-29",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-09-25",
+      "fiscal_end": "2024-09-29",
+      "source_date": "2024-11-06",
+      "accession": null,
+      "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q4/FY2024-4th-Quarter-Earnings-Release.pdf",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q4/FY2024-4th-Quarter-Earnings-Release.pdf",
+          "format": "pdf",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "qcom-fy2025-earnings",
+      "company": "QCOM",
+      "company_name": "QUALCOMM Incorporated",
+      "cik": "0000804328",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2025-09-28",
+      "fiscal_year": 2025,
+      "fiscal_start": "2024-09-30",
+      "fiscal_end": "2025-09-28",
+      "source_date": "2025-11-05",
+      "accession": null,
+      "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/FY2025-4th-Quarter-Earnings-Release.pdf",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/FY2025-4th-Quarter-Earnings-Release.pdf",
+          "format": "pdf",
+          "discovered_from": "M1 section 4"
+        }
+      ]
+    }
+  ]
+}

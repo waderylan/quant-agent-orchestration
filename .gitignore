@@ -37,6 +37,7 @@ coverage.xml
 chroma_index/
 artifacts/
 reports/
+data/corpus/
 
 # Editor and operating-system files
 .idea/

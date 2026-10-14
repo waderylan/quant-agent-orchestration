@@ -1,9 +1,9 @@
 # Evaluation
 
 - Status: formal evaluations and application/runtime measurements are **unstarted**.
-- M1 establishes source feasibility for NVIDIA, AMD, Intel, and Qualcomm. The dated [source evidence](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) records eight successful SEC JSON requests, aligned financial inputs for 32/32 reports, document-access checks, and collection gaps.
+- Source feasibility and preparation are verified for NVIDIA, AMD, Intel, and Qualcomm. [M1 evidence](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) records aligned financial inputs; [M2 evidence](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) records 41/41 bodies/extractions, section/table checks, and no collection gaps.
 - Source availability checks are basic correctness evidence; they are not RAGAS scores, agent evaluations, provider comparisons, or deployed acceptance results.
-- The application, corpus ingestion, and research/financial-analysis workflows are unimplemented. The formal evaluation checkpoint follows working demonstrations and Rylan Wade's feedback.
+- Original-document collection and readable preparation are implemented. RAG ingestion, the application, and research/financial-analysis workflows are unimplemented. Formal evaluation follows working demonstrations and Rylan Wade's feedback.
 
 ## Evaluation scope
 
