@@ -102,11 +102,12 @@ For every qualifying event entry:
 - Preserve user-authored and unrelated changes.
 - Keep `CLAUDE.md` as the single-line import `@AGENTS.md`.
 - Keep documentation factual; never invent decisions, measurements, or personal reflections.
+- Keep project documentation synchronized with the current verified scope, decisions, implementation status, and gaps. State the active policy directly; omit superseded plans and chat-history explanations. Preserve dates and version relationships needed for source evidence.
 
 ## 6. Project Workflow
 
 - Chosen project: **Public-Company Research Assistant**. [Project spec](docs/planning/PROJECT_SPEC.md) defines scope, five application agents, providers, local integration, open decisions, and the final checklist. The assignment takes precedence over the spec.
-- Current stage: planning/scaffold. Project selection does not authorize implementation. Leave milestones blank until milestone planning is requested.
+- Current stage: M1 scope and source feasibility complete; application implementation and M2 are unstarted. Initial scope is NVIDIA, AMD, Intel, and Qualcomm with a 41-document collection target. Broader company coverage is planned after source checks, working demonstrations, and feedback. [M1 source evidence](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) records verified access and remaining collection gaps. Record completed milestones factually; leave future milestones undefined until planning is requested.
 - Implement only the authorized increment. Provide a runnable demonstration and correctness evidence; get Rylan Wade's feedback before starting the next milestone unless he authorizes another sequence.
 - Develop/test locally through Codex/Claude Code subscriptions. Test individual agents directly in Codex; Kessel supports full-application runs and compatible judges. Keep those results distinct.
 - Defer Nebius/NVIDIA generation and separate paid judge calls to final integration. Verify provider integration locally, then deploy to Cloud Run and retest. Keep Kessel outside the deployed image.

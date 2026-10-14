@@ -1,2 +1,2 @@
-# Scaffold only; no dependencies selected or installed.
+# Application dependency scaffold; no framework dependencies selected or pinned.
 # Add exact framework pins (package==version) when implementation begins.

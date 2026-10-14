@@ -1,5 +1,7 @@
 # Alternative: Google Cloud Storage + Cloud Storage FUSE
 
+- Role: instructor reference guidance. Example models, files, and interfaces are not verified HW2 implementation. Current project decisions are in the [project spec](planning/PROJECT_SPEC.md).
+
 The canonical reference implementation stores LangGraph checkpoints in Firestore. Assignment 2 also accepts durable persistence backed by **Google Cloud Storage (GCS)** mounted into Cloud Run through native **Cloud Storage FUSE/GCSFuse**.
 
 ## Architecture
@@ -16,7 +18,7 @@ GCS bucket
 
 ## Configuration surface
 
-`env.example` includes:
+A GCS-backed configuration requires placeholder variables such as:
 
 ```text
 GCS_STATE_BUCKET=your-state-bucket

@@ -1,8 +1,8 @@
 # Ski Road-Trip Planner for the United States and Canada
 
-Owner: Rylan Wade  
-Status: candidate idea; not selected for implementation.  
-Deadline planning assumption: October 29, 2026, as supplied by Rylan Wade.
+- Owner: Rylan Wade.
+- Status: unselected alternative; no implementation. The selected project is the [Public-Company Research Assistant](../planning/PROJECT_SPEC.md).
+- Deadline planning assumption: October 29, 2026; the assignment directs students to Brightspace for the governing due date.
 
 ## Product concept
 

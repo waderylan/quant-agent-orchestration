@@ -1,10 +1,11 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: chosen project; planning only. No implementation or evaluation results are claimed.
+- Status: M1 scope and source feasibility complete. Application implementation, M2, provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
-- Origin: [company research idea](../ideas/public-company-research-assistant.md). This spec governs the selected scope where it differs from that exploration.
+- Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
+- Product description: [Public-Company Research Assistant](../ideas/public-company-research-assistant.md). This spec governs the selected design and development constraints.
 
 ## Purpose
 
@@ -15,11 +16,23 @@
 
 ## Initial scope
 
-- Start with the semiconductor sector and 3–5 supported companies. Choose the exact list after checking document and financial-data coverage. Approximately 20 companies remains an expansion target, conditional on evidence that the smaller version works.
-- Begin with roughly two years of annual and quarterly reports, plus relevant earnings releases. Collect enough original material to support substantive retrieval across topics and periods. Transcripts and a third year can follow when they add useful coverage.
-- Initially target companies using domestic SEC reporting forms. Supporting foreign issuers and their reporting formats is a later coverage decision.
+- Initial company set: **NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM)**. All four use domestic SEC 10-K/10-Q reporting forms.
+- Coverage starts with these four companies and is planned to expand toward approximately 20, subject to verified source coverage, working demonstrations, and feedback. Foreign issuers require a separate reporting-format decision.
+- Initial collection target: **41 original documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. Full corpus collection and ingestion are pending.
+- Selected coverage is two completed fiscal years per company, with actual dates shown below. NVIDIA's year labels differ from the other companies. These are explicit historical windows, not a claim of latest-report coverage.
+
+| Company | Selected fiscal years | Fiscal start → end |
+| --- | --- | --- |
+| NVIDIA | FY2025; FY2026 | 2024-01-29 → 2025-01-26; 2025-01-27 → 2026-01-25 |
+| AMD | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
+| Intel | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
+| Qualcomm | FY2024; FY2025 | 2023-09-25 → 2024-09-29; 2024-09-30 → 2025-09-28 |
+
+- SEC metadata and matching-duration USD inputs are verified for all 32 original reports. Official AMD/Intel report bodies and all eight selected earnings releases have verified local download paths. Complete NVIDIA/Qualcomm body collection and section extraction remain pending.
+- Source access constraints: direct local SEC Archives probes returned 403; use verified official IR mirrors/CDNs and validate actual content. Qualcomm gross profit requires revenue minus cost of revenue; its FY2024 has 53 weeks versus 52 in FY2025. Preserve AMD's amendment and corrected MD&A alongside its original annual report.
+- Prefer within-company financial comparisons. Cross-company comparisons must display fiscal dates and timing/business-mix qualifications. Initial metrics use consolidated US GAAP figures; segment metrics, transcripts, additional years, and additional companies require separate coverage checks and feedback.
 - Support company explanations, financial comparisons, changes in disclosed risks, and current developments related to those questions.
-- Begin with revenue growth, gross margin, operating margin, and operating cash flow. Treat segment-level figures and additional metrics as later additions because their definitions and source coverage need separate checks.
+- Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. The [M1 financial evidence](M1_SCOPE_AND_SOURCE_FEASIBILITY.md#5-financial-feasibility-and-comparison-boundaries) records candidate tags, formulas, annual observations, and period constraints. Observation selection and revision reconciliation remain implementation decisions.
 - Produce a research brief: a direct conclusion, supporting evidence, a financial table or chart when useful, changed risks when relevant, and unresolved questions.
 - Defer market quotes, price-move explanations, valuation tools, trading, forecasts, watchlists, and background alerts. They are outside the initial scope.
 - Treat each initial request as self-contained. Conversation memory and persistence remain later decisions; do not promise memory across sessions or instance replacement.
@@ -158,7 +171,7 @@ flowchart TB
 - Both deployed generation providers must be exercised under normal supported workloads, with visible reasons. Provider choice depends on task difficulty and cost/capability needs rather than permanently assigning each worker one provider. Local experiments identify the actual Codex/Claude Code route; they must not be labeled as Nebius/NVIDIA runs.
 - The diagram shows the application execution path. Direct single-agent Codex tests are a separate development path that bypasses Kessel.
 
-## How an investigation works
+## Planned investigation workflow
 
 - Example question: "Revenue increased. Did profitability and cash flow improve too?"
 - The supervisor asks Filings Research for management's explanation and Financial Data for the matching figures.
@@ -213,23 +226,23 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Rylan Wade will implement the project with coding agents, one bounded milestone at a time. Milestones are deliberately unfilled below; this document authorizes planning, not implementation.
+- Development proceeds one authorized milestone at a time. M1 scope/source feasibility is complete. M2 and subsequent implementation milestones are undefined and unstarted.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
-- All development milestones run locally. Include local Docker startup, SSE, and resource checks; reserve cloud deployment and deployed retesting for the final milestone. The earlier discussion of an early Cloud Run deployment is superseded by this local-first workflow.
+- Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
 - Review the demonstration, observed failures, and Rylan Wade's feedback before defining or starting the next increment. Include scored evaluation failures once formal evaluations exist. Change scope based on observed value; do not build the entire proposed system before obtaining feedback.
 - Distinguish coding agents used to build/test the repository from the five application agents. Independent testing can provide useful feedback without adding another runtime agent.
-- Apply lessons from the [HW1 process log](../../../HW1/PROCESS_LOG.md): test ordinary real questions, inspect tools and returned evidence, turn observed failures into repeatable cases, and catch feature expansion early.
-- The HW1 [matching evaluation](../../../HW1/docs/research/MATCHING_VALUE_EVALUATION.md) shows why added complexity needs a measured benefit. The [deployment report](../../../HW1/docs/research/PERFORMANCE_VERIFICATION.md) shows why startup, memory, cold starts, and concurrent requests need actual deployment checks. Use these as lessons; HW2 keeps its own implementation and evidence.
+- Test ordinary real questions, inspect tool calls and evidence, turn observed failures into repeatable cases, and bound feature expansion. Additional complexity requires evidence of benefit.
+- Verify startup, memory, cold starts, and concurrent requests with actual application/deployment checks. Keep HW2 implementation, configuration, artifacts, and reflections independent of other assignments.
 
 ## Decisions to make later
 
 | Decision | Resolve before |
 | --- | --- |
-| Exact companies, filing families, date range, and coverage expansion | Initial collection; refine coverage using working demos and feedback before fixing the evaluation dataset. |
-| Metric/tag definitions, fiscal alignment, amendments/restatements, and missing-data behavior | Structured-data and financial-analysis implementation. |
+| Complete source-body collection, extraction fidelity, and coverage expansion | Initial collection acceptance; expand the selected four-company/two-year scope only after demonstrations and feedback. |
+| Observation selection, fiscal alignment, candidate-tag validation, amendments/restatements, and missing-data behavior | Structured-data and financial-analysis implementation; consolidated GAAP scope and known source constraints are fixed. |
 | Chunking, embeddings, retrieval filters/k, and Pinecone versus Chroma | First RAG implementation and retrieval experiment. |
-| NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | First live generation integration; verify current access, model capabilities, and pricing. |
+| NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
 | Kessel/LangChain compatibility, local endpoint profiles, and host access from Docker | First model-backed application tests and container checks. |
 | Formal evaluation checkpoint, supported task families, and RAGAS/AgentEvals compatibility | After working research and financial-analysis demos clarify what should be measured. |
 | Quant execution boundaries and permitted analysis libraries | Code execution. |
@@ -257,3 +270,8 @@ flowchart TB
 - [ ] **Final step — Rylan Wade:** after deployment and deployed retesting, complete [PROCESS_LOG.md](../../PROCESS_LOG.md) with a personal reflection of **200–300 words total** across AI tools used, development narrative, verification narrative, and what you learned. Include the completed log in the submission archive. Agents must request his actual reflection and must not invent it; submission readiness remains pending until this item is complete.
 
 ## Milestones
+
+| Milestone | Status | Verified outcome / boundary |
+| --- | --- | --- |
+| M1 — Scope and source feasibility | Complete | Four companies, two fiscal years each, 41-document target, 32/32 reports with aligned financial inputs, source-access evidence, and unresolved gaps in [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md). |
+| M2 | Unstarted; undefined | Requires an authorized scope and acceptance demonstration before implementation. |

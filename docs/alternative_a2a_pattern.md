@@ -1,5 +1,7 @@
 # Alternative: A2A Protocol Integration
 
+- Role: instructor reference guidance. Example models, files, and interfaces are not verified HW2 implementation. Current project decisions are in the [project spec](planning/PROJECT_SPEC.md).
+
 Assignment 2 criterion 6 accepts either A2A protocol integration or MCP tool sharing. The reference implementation demonstrates MCP sharing through Tavily; students may instead choose A2A.
 
 A qualifying A2A path should demonstrate at least:

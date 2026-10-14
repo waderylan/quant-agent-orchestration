@@ -1,131 +1,91 @@
 # Public-Company Research Assistant
 
-Product name: TBD  
-Owner: Rylan Wade  
-Status: selected project; original product exploration. Current scope and decisions are in the [project spec](../planning/PROJECT_SPEC.md); implementation is not yet authorized.  
-Deadline planning assumption: October 29, 2026, as supplied by Rylan Wade.
+- Owner: Rylan Wade.
+- Product name: TBD.
+- Status: selected project; M1 scope and source feasibility complete. Application implementation and M2 are unstarted.
+- Selected scope and development constraints: [project spec](../planning/PROJECT_SPEC.md).
+- Source availability and financial evidence: [M1 feasibility](../planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
 
-## Product concept
+## Product and audience
 
-A research assistant for understanding public companies through their disclosures, financial results, and current developments. Users ask questions in plain English and receive explanations, comparisons, and charts with inspectable evidence.
+The selected product helps users understand what changed in a public company, whether the numbers support management's explanation, and what remains uncertain. Its audience is finance students, junior analysts, and self-directed investors.
 
-The central question is: **what changed, does the financial evidence support the explanation, and where is the uncertainty?** The assistant connects what a company reported, what its numbers establish, and what has happened since. Specialized agents investigate those questions rather than merely summarizing documents independently.
+Company research requires navigating long disclosures, matching financial periods, checking metric definitions, and deciding whether current developments affect reported conditions. The intended research brief connects disclosures, financial observations, checked calculations, and dated current reporting.
 
-The product is a research tool. It does not execute trades, provide personalized buy/sell recommendations, or promise stock-price predictions. It can examine a user's investment hypothesis by identifying supporting evidence, contrary evidence, and assumptions that remain unproven.
+The product is a research tool. Its initial scope excludes trading, personalized buy/sell recommendations, forecasts, market quotes, price-move explanations, valuation, watchlists, and background alerts.
 
-## Problem and audience
+## Selected coverage
 
-Company research requires navigating long filings, locating relevant passages, aligning financial periods, and checking whether recent developments affect earlier statements. Comparing several companies adds inconsistent terminology, different fiscal calendars, and potentially different accounting measures.
+| Company | Fiscal years | Fiscal end dates |
+| --- | --- | --- |
+| NVIDIA (NVDA) | FY2025; FY2026 | 2025-01-26; 2026-01-25 |
+| AMD (AMD) | FY2024; FY2025 | 2024-12-28; 2025-12-27 |
+| Intel (INTC) | FY2024; FY2025 | 2024-12-28; 2025-12-27 |
+| Qualcomm (QCOM) | FY2024; FY2025 | 2024-09-29; 2025-09-28 |
 
-The target users are self-directed investors researching a company, existing shareholders tracking developments, and finance students or junior analysts preparing comparisons. They need an answer they can inspect and challenge, including an explanation of the calculations and evidence behind it.
+- Company coverage starts with these four and is planned to expand toward approximately 20, subject to source checks, working demonstrations, and feedback.
+- Initial collection comprises 32 original 10-K/10-Q reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment: **41 documents**.
+- All four companies use domestic SEC forms. Complete collection and ingestion are pending.
+- SEC metadata and matching-duration USD financial inputs are verified for all 32 original reports. AMD/Intel body download paths and all eight earnings releases are verified; NVIDIA/Qualcomm body collection is verified for samples.
+- Initial metrics are consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
+- Within-company comparisons take priority. Cross-company comparisons must show fiscal dates and explain timing and business-mix limits.
+- Qualcomm gross profit requires revenue minus cost of revenue. Its FY2024 has 53 weeks versus 52 in FY2025.
+- AMD's amendment corrects an MD&A explanation and remains separate from the original annual report.
+- Additional companies, years, Q1–Q3 releases, transcripts, foreign reporting forms, and segment metrics require separate source checks and useful demonstration feedback.
 
-Filings provide substantial disclosed information, but they are not a complete account of everything that matters to a business. The product must distinguish management's statements from independently established facts and its own analysis.
+## Intended user experience
 
-## Main experience
+1. Ask a self-contained question about one or more covered companies and identify the period where relevant.
+2. Inspect which agents, tools, and providers contribute evidence.
+3. Read a streamed brief with a direct conclusion, supporting passages, financial comparisons when useful, relevant risk changes, and unresolved questions.
+4. Open the exact passage or observation behind a claim. Inspect the source inputs, fiscal dates, units, and formula behind a calculation.
+5. Submit a revised self-contained request to compare another period, peer, or assumption.
 
-1. **Ask:** identify one or more supported companies, a question, and a reporting period where relevant.
-2. **Investigate:** the supervisor selects the needed agents. They retrieve documents, obtain financial figures, perform analysis, and request additional evidence when needed.
-3. **Receive:** get a streamed answer with a concise conclusion, a table or chart when useful, and material qualifications.
-4. **Inspect:** open the exact source passage or underlying financial observation, including its reporting period and filing. Inspect the inputs and method behind a calculated value.
-5. **Challenge:** ask whether another period, peer, risk disclosure, or current development changes the interpretation. The agents revisit the evidence and update the conclusion where warranted.
+The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer tokens, linked sources, visible provider routing, and inspectable traces. The interface is unimplemented. Initial requests carry no conversation-memory or cross-session persistence promise.
 
-The initial interface is a research conversation with linked sources, readable tables/charts, and an expandable record of agent activity and provider choices. It does not need brokerage integration or a full financial-terminal interface.
+## Application roles
 
-## Representative questions
+| Role | Selected responsibility | Intended tool access |
+| --- | --- | --- |
+| Filings Research | Interpret disclosures and investigate relevant current developments. | RAG retrieval, shared source inspection through MCP, Tavily Remote MCP search/extract. |
+| Financial Data | Select comparable observations with company, dates, units, definitions, and filing identity. | Structured financial-data and filing-metadata queries. |
+| Financial Analysis / Quant | Produce checked calculations and inspectable tables/charts. | Bounded analysis-code execution over supplied observations. Execution limits remain undecided. |
+| Risk Summary | Compare versions of risk disclosures and distinguish added, removed, changed, and relocated language. | Risk-section alignment/comparison and the same source-inspection MCP tool used by Filings Research. |
+| Supervisor | Coordinate tasks, direct bounded follow-up, handle failures, and synthesize cited evidence. | LangGraph delegation and task-state inspection. |
 
-- "What risks were added, removed, or materially changed between these two annual reports?"
-- "Compare gross margins for NVIDIA, AMD, and Intel over eight quarters, and explain any comparability limitations."
-- "Revenue increased, but did operating cash flow and margins improve as well?"
-- "Does management's explanation of this quarter's results match the reported segment data?"
-- "I think this company benefits from a particular trend. What supports that thesis, and what evidence challenges it?"
-- "What recent developments relate to risks the company previously disclosed?"
+- The selected design contains four specialized workers and one supervisor. Each worker requires distinct prompts and meaningful tool access.
+- Risk Summary requires document comparison; a repeated filings summary does not satisfy that role.
+- Generation routing is shared infrastructure. Evaluation runs outside the application and is not an additional agent.
+- All application roles and tools are unimplemented.
 
-These are examples of question types, not claims about current company results. Coverage must extend to unfamiliar reasonable questions within the supported company set rather than memorized answers to these prompts.
+## Intended investigations
 
-## Specialized agents and supervisor
+- “Did NVIDIA's revenue growth coincide with better operating margin and operating cash flow across the two covered years?”
+- “Why did Qualcomm's gross margin change, and what comparison limits follow from its fiscal calendar?”
+- “How does AMD's amended FY2025 explanation differ from the original disclosure?”
+- “What changed in Intel's risk disclosures, and which quarterly updates provide context?”
 
-| Role | Responsibility | Decisions it must make | Distinct capabilities |
-| --- | --- | --- | --- |
-| Filings Research | Interpret disclosures and investigate relevant current developments. | Identify the right company, document, period, and passage; distinguish management claims from supporting evidence; retrieve additional context; assess whether current news actually relates to the question. | Search indexed filings, inspect source sections, and use live retrieval for company announcements and relevant reporting. |
-| Financial Data | Establish the numerical evidence. | Select the correct metric, units, fiscal period, and filing version; identify missing values or reporting-definition changes; reject unsupported comparisons. | Query structured financial observations and filing metadata, with links to their original sources. A separate quote tool is optional once its provider is selected. |
-| Quant | Produce reproducible calculations and analysis artifacts. | Choose appropriate comparisons and formulas; test whether the inputs are comparable; identify assumptions; explain what a chart or calculation can establish. | Write and run bounded analysis code over supplied data, validate outputs, and produce tables/charts with their input lineage and method. |
-| Risk Summary | Investigate changes in disclosed risks and produce a risk-change brief. | Distinguish genuinely new or changed language from moved sections and boilerplate; preserve context; assess what the text supports and label judgments about significance. | Compare versioned risk sections, inspect aligned before/after passages, and construct a cited change brief. |
-| Supervisor | Coordinate the investigation. | Decide which agents are needed, direct bounded follow-up, handle failures, and identify outstanding evidence needs. | Delegate tasks and track completion and unresolved questions. |
+These are exploratory question examples, not a fixed benchmark or implemented answer set. The deployed application must handle unfamiliar reasonable questions within declared coverage.
 
-Four specialized workers are proposed; the supervisor does not count toward the assignment minimum. Their prompts and tool access must make their roles behaviorally distinct.
+For financial questions, Filings Research supplies management's explanation, Financial Data supplies compatible observations, and Quant checks calculations. Risk Summary contributes disclosure changes when relevant. Missing or conflicting evidence requires bounded follow-up or a qualified answer.
 
-Risk Summary earns its separate role through document-comparison tools and a defined change artifact. If it only repeats the Filings Research agent's summary, it should be folded into that role rather than presented as an additional capability. The remaining Research, Data, and Code roles still meet the three-worker floor if implemented substantively.
+## Evidence requirements
 
-## What reasoning should look like
+- Claims cite the exact supporting passage, financial observation, or dated current source.
+- Calculations retain inputs, units, fiscal dates, formulas, and revision basis.
+- Management statements, outside reporting, and assistant interpretations remain distinguishable.
+- Missing observations remain missing; incompatible periods and unresolved revisions cannot support an unqualified calculation.
+- Quarterly cash-flow amounts require compatible YTD differences. Margin calculations use corresponding numerators and revenue denominators.
+- Annual risks provide the comparison baseline; quarterly disclosures can supply updates or references rather than complete replacement inventories.
+- Original filings and amendments remain separately identifiable. Official mirrors preserve SEC accession identity and count as the same document.
+- Live-source publication and retrieval dates remain visible. Failed or stale retrieval cannot establish current conditions.
 
-For an earnings question, Filings Research might retrieve management's explanation that a segment drove growth. Financial Data then obtains the matching segment and consolidated figures. Quant checks the contribution, margins, and period alignment. If the evidence supports only part of management's explanation, the answer should say which part is established and what remains unexplained.
+## Development and remaining work
 
-For a risk-change question, Risk Summary compares the relevant versions. An apparently new heading might turn out to contain language moved from another section. A genuinely changed passage might qualify an existing risk rather than introduce a new one. The brief must cite both versions and explain the classification.
-
-The strongest demonstration shows a preliminary interpretation changing after another agent supplies contrary evidence. The activity trace should expose source-backed decision summaries, tool calls, and follow-up requests. It should not imply that a long sequence of agents is itself evidence of good reasoning.
-
-## Evidence contract
-
-- Verifiable factual claims link to the passage, financial observation, or current source that supports them.
-- Calculated results identify their source inputs, periods, units, formula, and relevant assumptions.
-- Management statements, externally reported developments, and the assistant's inferences remain distinguishable.
-- Conflicting sources are retained with their dates and context rather than silently reconciled into a false certainty.
-- Missing or incompatible data produces a qualified answer or an explicit gap.
-- A citation must support the claim; attaching a real document is insufficient by itself.
-
-Interpretations are reasoned conclusions grounded in evidence, not direct quotations. The assistant must make that distinction clear without presenting all analysis as independently established fact.
-
-## Document corpus and current sources
-
-The proposed starting sector is semiconductors, with approximately 20 supported companies and 2–3 years of filings. This is a coverage target, not a completed collection. The selected company list and filing types must be defined before implementation.
-
-The core corpus includes annual and quarterly reports, relevant current reports, earnings releases, and source documents supporting financial comparisons. Company-provided earnings materials and transcripts can be included where accessible and permitted; universal transcript coverage is not assumed.
-
-The [SEC's EDGAR APIs](https://www.sec.gov/search-filings/edgar-application-programming-interfaces) provide company submission history and XBRL financial-statement data without API keys. These feeds support document discovery and structured numerical evidence. They are not a live stock-quote service. Filings may be available as HTML, so the collection should not assume every source is a PDF.
-
-Some issuers use forms such as 20-F and 6-K rather than the domestic 10-K/10-Q reporting pattern. Either support the relevant filing families deliberately or state that the initial company set excludes them. Preserve company identity, accession/document identity, reporting period, filing date, section, and source location; keep amended or restated versions identifiable.
-
-Current research uses newly available filings, official investor-relations announcements, and relevant reporting through Tavily Remote MCP. Record publication and retrieval dates. Market quotes, historical prices, consensus estimates, and broad news feeds require separate provider/access decisions; they are not assumed to be free or included in SEC data.
-
-The product can demonstrate its central value before adding quotes. As one concrete source example, [Microsoft's investor-relations earnings page](https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast) provides earnings material and a transcript link. That illustrates company-hosted availability, not semiconductor-sector coverage already collected.
-
-## Numerical comparisons and price explanations
-
-Financial comparisons must align fiscal periods and metric definitions. Distinguish quarterly values from year-to-date or annual values, GAAP from non-GAAP measures, and reported figures from derived values. A company's fiscal quarter label alone does not establish that it covers the same dates as a peer's quarter.
-
-Quant should execute reproducible, bounded analyses and validate their results. Free-form model arithmetic is not a substitute for a checked calculation. A chart must retain the evidence and method behind its data points.
-
-Explaining a stock-price move is a secondary capability. It requires a verified price source and a dated event timeline. The assistant can report attributed explanations and plausible contributing factors, but timing alone does not establish causation. A previously disclosed risk does not prove that it caused today's move.
-
-## Positioning and scope
-
-Existing research products already combine financial data, company documents, news, and AI comparisons. For example, [Koyfin's Compare Matrix](https://www.koyfin.com/help/release-notes/compare-matrix-beta/) documents natural-language comparisons across company sources with citations. The candidate should not claim this combination is unique or that all general chatbots lack current sources.
-
-The proposed differentiator is the quality of the evidence trail: source passages, inspectable calculations, clear document-change comparisons, and conclusions that expose uncertainty. Whether users prefer that experience needs validation.
-
-The initial version prioritizes company questions, financial comparisons, risk-change briefs, and relevant current research within the supported sector. Trading, automated portfolio decisions, price forecasting, full-terminal coverage, continuous watchlist alerts, and unrestricted analysis-code execution are outside the initial scope.
-
-## Fit with Assignment 2
-
-This is a proposed route to meeting the [assignment specification](../assignment/Assignment_2_Description.md), not evidence of completed implementation.
-
-| Requirement | Proposed fit and evidence |
-| --- | --- |
-| At least three specialized agents and orchestration | Research, Data, Code, and Summary responsibilities map to Filings Research, Financial Data, Quant, and Risk Summary. Distinct prompts and tools are required. A proposed LangGraph supervisor makes task-driven decisions and handles worker failures. |
-| Substantive RAG | Ingest, chunk, embed, and store original company documents in Pinecone or Chroma. Use LangChain LCEL retrieval/augmentation/generation and cite original source chunks in answers. |
-| Live knowledge retrieval | Filings Research uses Tavily Remote MCP for current announcements and relevant reporting. A historical filing corpus or numerical SEC API alone is not treated as the required live-knowledge integration. |
-| Two different generation providers | Route simpler supported lookups and more demanding interpretation/analysis across at least two providers, with actual use and inspectable cost/capability reasons. Provider/model choices remain open. |
-| A2A or shared MCP tools | Expose shared filing/source lookup through MCP. For example, Filings Research retrieves a passage for interpretation while Risk Summary uses the same tool to investigate a proposed change. Demonstrate both agents invoking the same tool in distinct contexts. |
-| Streaming frontend | FastAPI serves a vanilla HTML/JS interface with SSE answer tokens, linked evidence, visible provider routing, and inspectable orchestration traces. Phase updates alone do not satisfy token streaming. |
-| Cloud Run | Deploy an application that responds to arbitrary reasonable questions within declared coverage, including cold starts and partial failures. Provide external persistence if durable multi-turn state is promised. |
-| Evaluation and deliverables | Report fixed-set RAGAS faithfulness, answer relevance, context precision, and context recall; retrieval/LLM/total latency and TTFT; cold/warm behavior; per-query costs; and provider comparisons. Supply the architecture/evaluation reports, README, exact dependency pins, placeholder configuration, source archive, and Rylan Wade's own process log. |
-
-## Success criteria and open decisions
-
-Use reference questions with independently checked source passages and calculations. Evaluate citation support, numeric correctness, period alignment, risk-change classification, appropriate handling of missing evidence, and whether additional evidence changes unsupported conclusions. Include unfamiliar questions and supported companies beyond the examples used in a demonstration.
-
-Sub-two-second warm time-to-first-token, approximately twenty-second completion, and a few cents per question are aspirational targets from the initial concept. They are not measured results or guarantees. Measure actual answer-token latency separately from progress messages and report simple lookups separately from multi-agent comparisons and code analyses.
-
-Before implementation, decide the company list and document depth, treatment of foreign issuers, financial metric definitions, access to current reporting, bounded Quant capabilities, provider pair, and whether quotes are necessary for the first release. Name selection remains open.
-
-The strongest first version gives a user a clear answer to what changed and what the evidence supports, with enough transparency to reproduce the numbers and challenge the interpretation.
+- Development and testing use local Codex/Claude Code subscriptions. Individual-role tests bypass Kessel; full model-backed application runs use the existing local Kessel gateway.
+- Nebius Token Factory is selected for deployment generation. NVIDIA-hosted NIM is tentative; exact models, access, pricing, budgets, and routing thresholds remain unverified.
+- Runtime-provider generation and separate paid judges belong to final integration. Cloud Run deployment follows local acceptance.
+- RAG storage, embeddings, chunking, retrieval settings, observation/revision policy, Quant execution limits, Tavily integration, and frontend interaction details remain unresolved.
+- Formal evaluations are unstarted. The evaluation checkpoint follows working research and financial-analysis demonstrations.
+- Latency and cost targets require actual measurements; no runtime performance or cost results exist.
+- M2 requires an authorized scope and acceptance demonstration. The [project spec](../planning/PROJECT_SPEC.md) lists remaining decisions and submission requirements.

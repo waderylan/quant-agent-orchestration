@@ -2,7 +2,7 @@
 
 Rylan Wade, CSCI 599 Assignment 2
 
-Template only. Rylan Wade should supply the final 200–300-word reflection.
+Status: personal-reflection template; Rylan Wade's 200–300-word reflection is pending. Complete the four sections after deployment and retesting; submission readiness requires the completed log.
 
 ## AI tools used
 

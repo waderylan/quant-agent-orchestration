@@ -1,10 +1,12 @@
 # Cost Analysis
 
+- Role: instructor reference guidance. Example models, files, and interfaces are not verified HW2 implementation. Current project decisions are in the [project spec](planning/PROJECT_SPEC.md).
+
 Commercial model prices, free tiers, and student quotas change frequently. This file therefore defines the **measurement method** instead of hard-coding an evergreen dollar total.
 
 ## Reference routing configuration
 
-| Role | Provider | Current reference model |
+| Role | Provider | Illustrative model ID; deployability unverified |
 |---|---|---|
 | Supervisor | OpenAI | `gpt-6-sol` |
 | Research | Anthropic | `claude-sonnet-5` |
@@ -13,7 +15,7 @@ Commercial model prices, free tiers, and student quotas change frequently. This 
 | RAGAS judge | OpenAI | `gpt-6-sol` |
 | Embedding | OpenAI | `text-embedding-3-small` |
 
-NVIDIA NIM may replace one or more roles while at least one other provider remains active. Current example: `nvidia/nemotron-3-ultra-550b-a55b`.
+NVIDIA NIM may replace one or more roles while at least one other provider remains active. Illustrative model ID: `nvidia/nemotron-3-ultra-550b-a55b`.
 
 ## What to record for a verification pass
 
@@ -23,13 +25,13 @@ For each query or evaluation batch, record:
 2. input/output tokens when the SDK exposes them;
 3. current provider price used for the estimate;
 4. embedding tokens/cost for corpus ingestion;
-5. Tavily usage under the currently available student/free plan;
+5. Tavily usage under the verified account plan and quota;
 6. Cloud Run compute estimate;
 7. persistence cost when material.
 
-## Why there is no NVIDIA-only "free path"
+## Two-provider requirement
 
-The old implementation allowed `LLM_BACKEND=nvidia` to route every role to a single provider. That no longer exists because Assignment 2 requires routing across at least two different providers.
+Assignment 2 requires generation routing across at least two different serving providers. A configuration routing every role only to NVIDIA does not meet that requirement.
 
 A low-cost configuration may pair NVIDIA with another provider, for example Research on NVIDIA and Summary on Gemini, provided both are genuinely exercised.
 

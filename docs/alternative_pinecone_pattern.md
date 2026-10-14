@@ -1,17 +1,19 @@
 # Alternative: Pinecone Vector Store
 
+- Role: instructor reference guidance. Example models, files, and interfaces are not verified HW2 implementation. Current project decisions are in the [project spec](planning/PROJECT_SPEC.md).
+
 Pinecone is the **named/default vector-store option in the syllabus**. The reference implementation uses embedded Chroma only as a convenient canonical implementation. Students using Pinecone are graded identically.
 
 ## Swap surface
 
-The orchestration, agents, streaming, and evaluation layers do not need to change. Replace the Chroma implementation in:
+Pinecone requires ingestion and retrieval integration through its current SDK and LangChain. Example module locations:
 
 - `src/rag/ingest.py`
 - `src/rag/retriever.py`
 
-with the current Pinecone SDK and LangChain `PineconeVectorStore` integration.
+Use the current Pinecone SDK and LangChain `PineconeVectorStore` integration in those components.
 
-Add current Pinecone dependencies to `requirements.txt` and variables to `env.example`, for example:
+Add current Pinecone dependencies to `requirements.txt` and variables to `.env.example`, for example:
 
 ```text
 PINECONE_API_KEY=...

@@ -1,7 +1,7 @@
 # Course-Grounded Law Study Tool
 
 Owner: Rylan Wade  
-Status: candidate idea; not selected for implementation.
+Status: unselected alternative; no implementation. The selected project is the [Public-Company Research Assistant](../planning/PROJECT_SPEC.md).
 
 ## Product concept
 
