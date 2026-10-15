@@ -81,5 +81,5 @@ uv run --locked python scripts/demo_browser.py
 - Collection gaps: **zero** within M2's 41 selected sources. Broader company/year coverage and current sources remain unavailable.
 - Complex PDF tables require original-page inspection. M3 supplies semantic passages, not reconciled observations or computed financial comparisons.
 - Registered citation IDs/exact text do not prove every claim. Retrieval can omit relevant passages; prompt instructions alone do not establish injection resistance.
-- M3 contains one specialist and a minimal supervisor. Three-specialist cooperation, live/shared MCP, two-provider routing, formal evaluation, Docker, and Cloud Run remain M4–M12 work.
-- M3 is accepted. M4 remains unstarted and requires authorization.
+- M3 contains one specialist and a minimal supervisor. Three-specialist cooperation, live/shared MCP, two-provider routing, formal evaluation, and Cloud Run remain pending. Local Docker acceptance is verified in [M4](M4_LOCAL_CONTAINER_ACCEPTANCE.md).
+- M3 is accepted. Local container acceptance is implemented and verified in [M4](M4_LOCAL_CONTAINER_ACCEPTANCE.md).

@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field
 
 from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
+from src.codex_transport import request_connections
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
 
@@ -36,6 +37,17 @@ class Question(BaseModel):
     question: str = Field(min_length=3, max_length=2000)
     companies: list[str] = Field(min_length=1, max_length=4)
     years: list[int] = Field(min_length=1, max_length=2)
+
+
+class ClosingStreamingResponse(StreamingResponse):
+    """ASGI 2.4 send errors must also close a generator suspended at yield."""
+
+    async def __call__(self, scope, receive, send):
+        try:
+            await super().__call__(scope, receive, send)
+        finally:
+            with anyio.CancelScope(shield=True):
+                await self.body_iterator.aclose()
 
 
 @app.get("/")
@@ -79,8 +91,13 @@ def original(document_id: str):
 async def chat(question: Question, request: Request):
     async def response():
         queue = asyncio.Queue(maxsize=128)
+        closers = []
 
         async def produce():
+            with request_connections(closers):
+                await produce_owned()
+
+        async def produce_owned():
             async with app.state.turns:
                 async with aclosing(
                     events(
@@ -96,7 +113,9 @@ async def chat(question: Question, request: Request):
 
         task = asyncio.create_task(produce())
         try:
-            while not await request.is_disconnected():
+            # StreamingResponse owns ASGI disconnect reception. Competing reads here
+            # can consume the notification before its cancellation listener sees it.
+            while True:
                 try:
                     event = await asyncio.wait_for(queue.get(), timeout=0.5)
                 except TimeoutError:
@@ -109,13 +128,16 @@ async def chat(question: Question, request: Request):
                     break
                 yield f"event: {event['type']}\ndata: {json.dumps(event['data'])}\n\n"
         finally:
+            # Close external work before awaiting graph unwinding/cancellation.
+            for close in list(closers):
+                close()
             # ASGI cancellation must not interrupt cancellation of graph-owned tasks.
             with anyio.CancelScope(shield=True):
                 task.cancel()
                 with suppress(asyncio.CancelledError):
                     await task
 
-    return StreamingResponse(
+    return ClosingStreamingResponse(
         response(),
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},

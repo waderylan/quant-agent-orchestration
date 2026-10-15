@@ -1,14 +1,14 @@
 # Public-Company Research Assistant
 
 - Owner: Rylan Wade.
-- Status: **M3 local filings-research demo implemented and verified; accepted**. M1/M2 are verified; M2 is accepted.
+- Status: **M1–M4 implemented and verified; local Docker acceptance passes**. M2 and M3 are accepted.
 - Initial company set: NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM).
 - Company coverage starts with these four and is planned to expand. Approximately 20 companies is the expansion target, subject to source coverage, working demonstrations, and feedback.
 - Selected years: NVIDIA FY2025–2026; AMD, Intel, and Qualcomm FY2024–2025. Fiscal dates differ and must remain visible in comparisons.
 - Verified corpus: **41/41 documents** — 32 annual/quarterly reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The local Chroma index contains 10,681 chunks.
 - Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
 
-Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, Quant, Risk Summary, live/shared MCP, multi-provider routing, containers, and deployment remain unimplemented.
+Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, Quant, Risk Summary, live/shared MCP, multi-provider routing and deployment remain unimplemented. Local Docker is verified.
 
 ## Run local research
 
@@ -74,7 +74,7 @@ uv run --locked pytest -q
 - Nebius Token Factory is selected for deployment generation; NVIDIA-hosted NIM is tentative. Exact model IDs, access, budgets, and routing thresholds are unverified.
 - Runtime-provider generation calls and separate paid judges are deferred to final integration. Cloud Run deployment follows local acceptance.
 - Formal evaluations are unstarted and follow working research/financial-analysis demonstrations.
-- Local startup and demonstrations are runnable below. Container/deployment commands remain pending under M4/M12.
+- Local startup and demonstrations are runnable below. Local Docker commands and evidence are in [M4 acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md); cloud deployment remains M12 work.
 
 ## Documentation
 

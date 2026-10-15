@@ -1,0 +1,12 @@
+**
+!requirements.txt
+!Dockerfile
+!main.py
+!src/
+!src/*.py
+!prompts/
+!prompts/*.md
+!web/
+!web/index.html
+!data/
+!data/source_inventory.json

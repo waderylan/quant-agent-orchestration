@@ -202,6 +202,34 @@ async def test_model_failure_has_terminal_failure_event(small_index):
 
 
 @pytest.mark.asyncio
+async def test_asgi_send_failure_closes_generator_suspended_at_yield():
+    from main import ClosingStreamingResponse
+    from starlette.requests import ClientDisconnect
+
+    closed = asyncio.Event()
+
+    async def body():
+        try:
+            yield "model event"
+            await asyncio.Event().wait()
+        finally:
+            closed.set()
+
+    async def disconnected_send(message):
+        if message["type"] == "http.response.body":
+            raise OSError("client disconnected after a streamed event")
+
+    async def receive():
+        await asyncio.Event().wait()
+
+    with pytest.raises(ClientDisconnect):
+        await ClosingStreamingResponse(body())(
+            {"type": "http", "asgi": {"spec_version": "2.4"}}, receive, disconnected_send,
+        )
+    assert closed.is_set()
+
+
+@pytest.mark.asyncio
 async def test_http_disconnect_closes_running_graph_worker(small_index, monkeypatch):
     """Use a real ASGI connection: fixture transports cannot reproduce this cancellation."""
     import httpx

@@ -46,3 +46,8 @@
 - Public Cloud Run deployment, cold-start behavior, SSE, routing, citations, shared MCP use, and partial-failure acceptance are pending.
 - Initial requests are self-contained. Instance-replacement persistence checks apply if a durable memory claim is introduced.
 - Submission readiness requires measured evaluation reporting and Rylan Wade's completed personal process log.
+
+## Local container correctness
+
+- M4 Docker startup, custom PORT, non-root identity, credential isolation, actual cited SSE, source inspection, Chromium interaction, unavailable-model transport, and disconnect cleanup pass. Real-socket authentication/child cleanup and HTTP error fixtures remain distinct checks.
+- [Container evidence](research/M4_CONTAINER_RESULTS.json) contains actual local startup, TTFT, completion, image, and resource observations; [browser evidence](research/M4_BROWSER_RESULTS.json) records Chromium checks. These are exploratory local acceptance evidence, not formal scores or cloud performance.

@@ -1,7 +1,7 @@
 # M1 — Scope and source feasibility
 
 - Owner: Rylan Wade.
-- Status: scope/source feasibility and [M2 collection/preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) are verified; M2 accepted. Application implementation is unstarted.
+- Status: scope/source feasibility and [M2 collection/preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) are verified; M2 accepted. Local research and Docker are implemented and verified; see the current [project spec](PROJECT_SPEC.md).
 - Verification date: 2026-10-13 America/Los_Angeles (2026-10-14 UTC).
 - Governing documents: [AGENTS.md](../../AGENTS.md), [assignment](../assignment/Assignment_2_Description.md), and [project spec](PROJECT_SPEC.md).
 - Scope decisions below apply to initial collection. Coverage can change after working demonstrations and feedback; this is not a fixed evaluation dataset.
@@ -14,7 +14,7 @@
 | Roughly two years of reports | Two completed fiscal years per company: NVIDIA FY2025–2026; AMD, Intel, Qualcomm FY2024–2025. | Actual dates appear below. NVIDIA's year label is offset from the other companies. These are historical coverage windows, not a claim of latest coverage as of October 2026. |
 | Filing families | Full original 10-K and Q1–Q3 10-Q documents; related amendments as separate versions. | 32 original reports discovered plus one in-window AMD 10-K/A. Q4 is represented by the 10-K and earnings release, not an invented fourth 10-Q. |
 | Relevant earnings releases | Initially include the eight Q4/full-year releases listed in §4. | Each downloaded from an original company site or its official document CDN. Q1–Q3 releases can be added when a demonstration needs them. |
-| Corpus size / retrieval structure | Verified corpus: **41 source documents** = 8 annual reports + 24 quarterly reports + 8 earnings releases + 1 amendment. | All bodies and readable extractions are verified, with no collection gaps. Documents span business descriptions, MD&A, financial statements/notes, and risk disclosures. RAG ingestion and retrieval are unstarted. |
+| Corpus size / retrieval structure | Verified corpus: **41 source documents** = 8 annual reports + 24 quarterly reports + 8 earnings releases + 1 amendment. | All bodies and readable extractions are verified, with no collection gaps. Documents span business descriptions, MD&A, financial statements/notes, and risk disclosures. Local MiniLM/Chroma ingestion and retrieval are implemented and verified. |
 | Initial numerical scope | Consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. | All 32 original reports have matching-duration financial inputs in SEC Company Facts; Qualcomm gross profit must be derived from revenue minus cost of revenue. |
 | Supported investigations | Management explanations, within-company financial changes, qualified company comparisons, disclosure changes, and dated current developments relevant to those questions. | Original narrative reports, structured observations, and public company news are available. Tavily application integration remains unverified. |
 | Request / output boundary | Self-contained request; cited research brief, optional financial table/chart, relevant risk changes, explicit gaps. | Preserve the spec's single-turn boundary. No conversation-memory promise. |
@@ -158,9 +158,9 @@
 | NVDA/QCOM local document-body paths | All 16 selected report PDFs are downloaded, identity checked, and prepared; no collection gaps. M2 demonstrates section/table fidelity. | Verified in M2 |
 | Financial definitions / fiscal alignment | Consolidated GAAP scope, observed tags, and date limits recorded. Exact observation selection, Q4 derivation, revision reconciliation, and missing-data implementation pending. | Structured data / Quant implementation |
 | Amendments / restatements | Source versions and amendment/original relationships are preserved. AMD corrected MD&A is verified separately; general financial-observation revision selection remains pending. | Structured-data implementation |
-| Chunking, embeddings, filters/k, Chroma versus Pinecone | Deferred. No vector index or dependencies selected. | First RAG implementation |
+| Chunking, embeddings, filters/k, Chroma versus Pinecone | CPU MiniLM, persistent cosine Chroma, 220-token chunks/40-token overlap, scoped retrieval. | Verified in M3 |
 | NVIDIA confirmation; Nebius/NVIDIA models, budgets, routing thresholds | Deferred. No runtime-provider generation calls or pricing conclusions. | Final provider integration; reverify current access and pricing then |
-| Kessel/LangChain compatibility, endpoint profiles, Docker host access | Deferred; no Kessel run or model-client integration claimed. | First model-backed application/container checks |
+| Local generation and Docker host access | Direct Codex app-server and authenticated host bridge; CLI credentials remain on the host. | Verified in M3/M4 |
 | Formal evaluation checkpoint, task families, RAGAS/AgentEvals compatibility | Deferred until research and analysis demonstrations inform behavior. | Agreed later evaluation checkpoint |
 | Judge model, dataset sizes/splits, calibration, integration budgets | Deferred; no paid judges, benchmark, scores, or thresholds. | First model-judged evaluations |
 | Quant execution limits / allowed libraries | Deferred; no application execution tool implemented. | Quant code execution |
@@ -181,9 +181,9 @@
 - All 41 selected bodies and extractions are verified in M2. Source samples, annual financial rows, and annual/quarterly risk boundaries are inspected; AMD's original/amended MD&A remains distinguishable.
 - Verification uses uv-managed Python 3.13 with standard-library HTTP/JSON, Beautiful Soup, and pypdf. The independent financial-availability recipe returns eight originals and eight aligned-input successes for every company.
 - The filing inventory contains 33 rows. Markdown whitespace, encoding, and code-fence checks pass.
-- Source bodies, SEC metadata snapshots, prepared text, and run manifests reside in ignored `data/corpus/`. The tracked inventory, CLI, lockfile, and compact evidence reports reproduce collection. RAG ingestion is unstarted.
-- Application agents, model integration, RAG, MCP tools, frontend, container, deployment, and formal evaluations are unimplemented or unstarted.
-- M1 and M2 are implemented and verified; M2 is accepted. M3–M12 are planned and unstarted; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
+- Source bodies, SEC metadata snapshots, prepared text, and run manifests reside in ignored `data/corpus/`. The tracked inventory, CLI, lockfile, and compact evidence reports reproduce collection. RAG ingestion indexes all 41 sources into 10,681 chunks.
+- Filings Research, a minimal supervisor, direct Codex generation, RAG, browser SSE, and local Docker are implemented and verified. Other specialists, live/shared MCP, multi-provider routing, deployment, and formal evaluations remain pending.
+- M1–M4 are implemented and verified; M2 and M3 are accepted. M5–M12 remain pending; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
 
 ### Inspection path
 

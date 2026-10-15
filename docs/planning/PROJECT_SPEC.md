@@ -1,7 +1,7 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: M1–M3 implemented and verified; M2 and M3 accepted. M4–M12, remaining workers, deployment-provider integration, formal evaluations, and deployment are unstarted.
+- Status: M1–M4 implemented and verified; M2 and M3 accepted. M5–M6 are authorized for sequential implementation and verification. M7–M12, remaining workers, deployment-provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
 - Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
@@ -223,7 +223,7 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Development proceeds one authorized milestone at a time. M1–M3 are implemented and verified; M2 and M3 are accepted. M4–M12 remain planned and unstarted.
+- Development proceeds through the authorized sequence. M1–M4 are implemented and verified; M2 and M3 are accepted. M5–M6 are authorized for sequential implementation and verification; M7–M12 remain planned and unstarted.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
 - Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
@@ -240,7 +240,7 @@ flowchart TB
 | Observation selection, fiscal alignment, candidate-tag validation, amendments/restatements, and missing-data behavior | Structured-data and financial-analysis implementation; consolidated GAAP scope and known source constraints are fixed. |
 | Retrieval refinement and corpus expansion | M3 uses 220-token chunks, 40-token overlap, CPU MiniLM, cosine Chroma, and explicit company/fiscal-year/form/section/version filters. Refine from observed evidence and feedback. |
 | NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
-| Local Codex executable/authentication access from Docker | M4 container checks; direct app-server tools and streaming are verified locally. |
+| Local Codex connectivity and authentication isolation | Verified host bridge, absent container CLI credentials, and child cancellation; [M4 evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md). |
 | Formal evaluation checkpoint, supported task families, and RAGAS/AgentEvals compatibility | After working research and financial-analysis demos clarify what should be measured. |
 | Quant execution boundaries and permitted analysis libraries | Code execution. |
 | Judge model, evaluation dataset size/splits, calibration rubric, and final integration budgets | First model-judged evaluations; use subscriptions during development and verify the final reporting path before submission. |
@@ -273,7 +273,7 @@ flowchart TB
 | M1 — Scope and source feasibility | Complete | Four companies, two fiscal years each, 41-document target, 32/32 reports with aligned financial inputs, source-access evidence, and unresolved gaps in [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md). |
 | M2 — Source collection and preparation | Implemented and verified; accepted | 41/41 bodies and extractions, versioned provenance, 32 risk/MD&A sections, AMD amendment, table checks, reusable uv CLI, and no collection gaps. [Evidence](M2_SOURCE_COLLECTION_AND_PREPARATION.md). |
 | M3 — First RAG research demo | Implemented and verified; accepted | 41 documents/10,681 chunks, four real cited application turns, direct worker/browser demonstrations, coverage gaps, and cancellation/failure checks. [Evidence](M3_FIRST_RAG_RESEARCH_DEMO.md). |
-| M4 — Local container acceptance | Planned; unstarted | The working research slice runs in Docker with local Codex connectivity and authentication isolation checked. |
+| M4 — Local container acceptance | Implemented and verified locally | Docker startup, cited SSE, Chromium, custom PORT, non-root identity, credential isolation, cancellation, and model failure pass. [Evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md). |
 | M5 — Financial Data agent | Planned; unstarted | Source-linked financial observations with correct units, dates, and revision basis. |
 | M6 — Financial Analysis / Quant agent | Planned; unstarted | Bounded code execution, checked calculations, and tables/charts. |
 | M7 — Risk Summary agent | Planned; unstarted | Cited comparisons of disclosure versions and relevant quarterly updates. |
@@ -310,6 +310,7 @@ flowchart TB
 - **Scope:** containerize the research slice using the assignment's build/runtime requirements. Verify startup, PORT handling, assets/index access, local Codex connectivity, SSE, and resource use. Verify the actual executable/connection and credential isolation; CLI credentials remain outside the application image.
 - **Demonstration/exit:** start the local container from documented commands and complete a cited streaming question. Inspect a fresh container start, client disconnect, and model-unavailable behavior; record observations without labeling them Cloud Run measurements.
 - **Boundary:** local Docker only. Cloud resources, deployment credentials, and cloud acceptance remain M12 work.
+- **Implemented/verified:** digest-pinned multi-stage image, authenticated host bridge with one owned Codex child per connection, isolated mounts, and local application/browser acceptance. [M4 evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md).
 
 ### M5 — Financial Data agent
 

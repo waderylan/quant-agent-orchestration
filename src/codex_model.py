@@ -5,27 +5,9 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-import shutil
-import tempfile
 from collections import deque
-from pathlib import Path
 
-
-def executable() -> str:
-    command = shutil.which("codex")
-    if command and Path(command).suffix.lower() in {".cmd", ".ps1"}:
-        binaries = list(
-            (Path(command).parent / "node_modules/@openai/codex").glob(
-                "node_modules/@openai/codex-*/vendor/*/bin/codex.exe"
-            )
-        )
-        if binaries:
-            return str(binaries[0])
-    if not command:
-        raise RuntimeError(
-            "Install Codex CLI and run codex login before asking questions."
-        )
-    return command
+from src.codex_transport import connection
 
 
 async def stream(
@@ -37,43 +19,17 @@ async def stream(
     timeout: int = 180,
 ):
     """Yield model text and inspected tool events; close the process on cancellation."""
-    process = await asyncio.create_subprocess_exec(
-        executable(),
-        "app-server",
-        "-c",
-        "project_doc_max_bytes=0",
-        "-c",
-        'web_search="disabled"',
-        "-c",
-        "features.shell_tool=false",
-        "-c",
-        "features.apply_patch_freeform=false",
-        "-c",
-        "features.multi_agent=false",
-        "-c",
-        "features.code_mode=false",
-        "-c",
-        "features.apps=false",
-        "-c",
-        "features.browser_use=false",
-        "-c",
-        "features.computer_use=false",
-        "-c",
-        "features.unified_exec=false",
-        stdin=asyncio.subprocess.PIPE,
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.DEVNULL,
-        limit=4 * 1024 * 1024,
-    )
+    transport = connection()
+    reader, writer = await transport.__aenter__()
     sequence = 0
     pending = deque()
 
     async def send(message):
-        process.stdin.write((json.dumps(message) + "\n").encode())
-        await process.stdin.drain()
+        writer.write((json.dumps(message) + "\n").encode())
+        await writer.drain()
 
     async def receive():
-        line = await process.stdout.readline()
+        line = await reader.readline()
         if not line:
             raise RuntimeError("Codex app-server closed before completing the answer.")
         return json.loads(line)
@@ -107,7 +63,6 @@ async def stream(
                     "approvalPolicy": "never",
                     "sandbox": "read-only",
                     "model": model or os.getenv("RESEARCH_MODEL", "gpt-6.1-sol"),
-                    "cwd": tempfile.gettempdir(),
                     "environments": [],
                     "dynamicTools": tools,
                     "baseInstructions": "You are a filings research assistant, not a coding assistant. Answer the supplied research question using only the provided evidence and tools.",
@@ -188,6 +143,4 @@ async def stream(
                         )
                     break
     finally:
-        if process.returncode is None:
-            process.kill()
-        await process.wait()
+        await transport.__aexit__(None, None, None)

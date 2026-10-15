@@ -1,7 +1,7 @@
 # Architecture
 
 - Owner: Rylan Wade.
-- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Remaining workers, formal evaluations, containers, and deployment are unimplemented.
+- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker acceptance passes; remaining workers, formal evaluations, and deployment are unimplemented.
 - Contract: [assignment](assignment/Assignment_2_Description.md), [project scope](planning/PROJECT_SPEC.md), and [M3 demonstration](planning/M3_FIRST_RAG_RESEARCH_DEMO.md).
 
 ## Local request path
@@ -73,4 +73,11 @@ flowchart LR
 - Focused tests cover scope isolation, Unicode offsets/boundaries, corrupt/stale sources, unsupported coverage, citation identifiers, and terminal failures. M2 tests remain applicable.
 - Actual results: 19 tests pass; four company retrieval/application questions pass; three unsupported/current requests return coverage gaps; one separate direct AMD worker run and one Chromium citation/trace demonstration pass. The HTTP checks verify an original-file hash, missing-source 404, and invalid-request 422. An unavailable Codex model fails explicitly; live request cancellation closes the owned process.
 - [Demonstration evidence](research/M3_DEMONSTRATION_RESULTS.json) records actual retrieval, application turns, tools, cited passages, and local timing. [Browser evidence](research/M3_BROWSER_RESULTS.json) records Chromium chat/source interaction.
-- Formal RAGAS/AgentEvals, financial calculations, risk alignment, shared/live MCP, additional generation providers, Docker, Cloud Run, and deployment measurements remain pending under M4–M12.
+- Formal RAGAS/AgentEvals, financial calculations, risk alignment, shared/live MCP, additional generation providers, Cloud Run, and deployment measurements remain pending. Local Docker acceptance is verified in [M4](planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md).
+
+## Local container runtime
+
+- Digest-pinned Python 3.13-slim multi-stage image, exact requirements, UID 10001, and injected `PORT`. The allowlisted build context excludes credentials, generated data, and development artifacts.
+- Read-only corpus/model mounts and an isolated writable Chroma copy preserve native index independence.
+- `CODEX_BRIDGE_URL` and `CODEX_BRIDGE_TOKEN_FILE` select an authenticated local bridge. The host retains CLI credentials and owns/kills a separate app-server process per connection. Native runs use the same transport interface with a local child.
+- [M4 acceptance](planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) records runnable commands, browser/model evidence, cancellation, measured resources, and development-only boundaries.
