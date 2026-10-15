@@ -189,14 +189,16 @@ async def main(args):
                 "passed": "not supported" in failed,
                 "error": failed,
             }
+            browser_script = "demo_quant.py" if args.analysis else "demo_browser.py"
             browser = subprocess.run(
                 [
                     sys.executable,
-                    str(ROOT / "scripts/demo_browser.py"),
+                    str(ROOT / "scripts" / browser_script),
                     "--url",
                     "http://127.0.0.1:8084",
                     "--output",
                     str(args.browser_output),
+                    *(["--application-only"] if args.analysis else []),
                 ],
                 check=True,
                 capture_output=True,
@@ -236,6 +238,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", default="hw2-research:m4")
     parser.add_argument("--skip-build", action="store_true")
+    parser.add_argument(
+        "--analysis",
+        action="store_true",
+        help="Verify Data-to-Quant API, artifacts, and browser in the container",
+    )
     parser.add_argument(
         "--output", type=Path, default=ROOT / "docs/research/M4_CONTAINER_RESULTS.json"
     )

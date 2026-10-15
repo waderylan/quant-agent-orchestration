@@ -2,7 +2,7 @@
 
 - Owner: Rylan Wade.
 - Product name: TBD.
-- Status: selected project; M1–M5 implemented and verified, with M2 and M3 accepted. Local filings research, exact source inspection, Docker, and Financial Data are available.
+- Status: selected project; M1–M6 implemented and verified, with M2 and M3 accepted. Local filings research, exact source inspection, Docker, Financial Data, and bounded Quant calculations/artifacts are available.
 - Selected scope and development constraints: [project spec](../planning/PROJECT_SPEC.md).
 - Source availability and financial evidence: [M1 feasibility](../planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
 
@@ -49,14 +49,14 @@ The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer t
 | --- | --- | --- |
 | Filings Research | Interpret disclosures and investigate relevant current developments. | RAG retrieval, shared source inspection through MCP, Tavily Remote MCP search/extract. |
 | Financial Data | Select comparable observations with company, dates, units, definitions, and filing identity. | Structured financial-data and filing-metadata queries. |
-| Financial Analysis / Quant | Produce checked calculations and inspectable tables/charts. | Bounded analysis-code execution over supplied observations. Execution limits remain undecided. |
+| Financial Analysis / Quant | Produce checked calculations and inspectable tables/charts. | Bounded analysis-code execution over supplied observations. A restricted arithmetic interpreter, isolated execution, independent financial/lineage checks, and hashed CSV/PNG/code/ledger exports are implemented. |
 | Risk Summary | Compare versions of risk disclosures and distinguish added, removed, changed, and relocated language. | Risk-section alignment/comparison and the same source-inspection MCP tool used by Filings Research. |
 | Supervisor | Coordinate tasks, direct bounded follow-up, handle failures, and synthesize cited evidence. | LangGraph delegation and task-state inspection. |
 
 - The selected design contains four specialized workers and one supervisor. Each worker requires distinct prompts and meaningful tool access.
 - Risk Summary requires document comparison; a repeated filings summary does not satisfy that role.
 - Generation routing is shared infrastructure. Evaluation runs outside the application and is not an additional agent.
-- Filings Research and a minimal scope/delegation supervisor are implemented. Financial Data is implemented with original-accession structured observations and direct/browser/Docker checks. Quant, Risk Summary, live retrieval, and shared MCP remain unimplemented.
+- Filings Research and a minimal scope/delegation supervisor are implemented. Financial Data is implemented with original-accession structured observations and direct/browser/Docker checks. Quant and Data-to-Quant cooperation are implemented. Risk Summary, full cooperation, live retrieval, and shared MCP remain unimplemented.
 
 ## Intended investigations
 
@@ -85,7 +85,7 @@ For financial questions, Filings Research supplies management's explanation, Fin
 - Development and testing use local Codex/Claude Code subscriptions. Individual-role and full model-backed application runs use Codex app-server directly. Direct worker runs bypass the supervisor and browser.
 - Nebius Token Factory is selected for deployment generation. NVIDIA-hosted NIM is tentative; exact models, access, pricing, budgets, and routing thresholds remain unverified.
 - Runtime-provider generation and separate paid judges belong to final integration. Cloud Run deployment follows local acceptance.
-- Research uses Chroma, CPU MiniLM, 220-token chunks with 40-token overlap, scoped semantic retrieval, and exact-passage inspection. Financial Data uses exact original-accession GAAP observations with explicit intervals and retained revisions. Quant execution limits, Tavily integration, and report/chart refinement remain pending.
+- Research uses Chroma, CPU MiniLM, 220-token chunks with 40-token overlap, scoped semantic retrieval, and exact-passage inspection. Financial Data uses exact original-accession GAAP observations with explicit intervals and retained revisions. Quant uses bounded generated programs and independently checked source-linked artifacts. Tavily integration and broader research-experience refinement remain pending.
 - Formal evaluations are unstarted. The evaluation checkpoint follows working research and financial-analysis demonstrations.
 - Latency and cost targets require actual measurements; local observations are exploratory and do not establish deployment performance or cost.
 - M2's source-preparation demonstration is runnable with uv; M2 is accepted. The [project spec](../planning/PROJECT_SPEC.md) lists remaining decisions and submission requirements.

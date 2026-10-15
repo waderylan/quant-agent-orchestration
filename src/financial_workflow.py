@@ -143,20 +143,27 @@ class FinancialTools:
 
 
 async def financial_turn(
-    store, state, writer, *, model_stream=codex_stream, emit_answer=True
+    store, state, writer, *, model_stream=codex_stream, emit_answer=True, prefetch=None
 ):
     tools = FinancialTools(store, state["companies"], state["years"])
     filters = request_filters(state["question"])
-    if filters["period"] == "Q4":
+    if filters["period"] == "Q4" and prefetch is None:
         return {
             "error": "Q4-only financial figures require compatible annual and nine-month inputs and Quant derivation.",
             "answer": "",
         }
-    initial = tools("query_financials", filters)
+    initial = {"sources": [], "gaps": []}
+    for selection in prefetch if prefetch is not None else [filters]:
+        result = tools("query_financials", selection)
+        initial["sources"].extend(result["sources"])
+        initial["gaps"].extend(result["gaps"])
     writer(
         {
             "type": "tool",
-            "data": {"name": "initial_financial_query", "arguments": filters},
+            "data": {
+                "name": "initial_financial_query",
+                "arguments": prefetch if prefetch is not None else filters,
+            },
         }
     )
     writer({"type": "evidence", "data": initial})
@@ -193,7 +200,7 @@ async def financial_turn(
             if event["type"] == "tool":
                 calls += 1
             writer(event)
-    cited = set(re.findall(r"\[(F\d+)\]", answer))
+    cited = set(re.findall(r"\[([A-Z]\d+)\]", answer))
     if (
         not calls
         or tools.successful_calls <= initial_calls

@@ -15,7 +15,7 @@ At the start of each session:
 2. Read `docs/planning/PROJECT_SPEC.md` before project decisions or changes.
 3. The top-level agent generates one session UUID for working context; no session-start entry.
 4. Complete the authorized work within the assignment contract.
-5. Immediately before responding, append one consolidated transcript event only if §3 qualifies, following §4.
+5. Append an event only if §3 qualifies, following §4. For a user-authorized milestone sequence, append one event after each completed and verified milestone. Record the milestone handoff verbatim; the last milestone entry records the final user-facing response verbatim immediately before sending it.
 
 Only the top-level agent writes transcripts. Sub-agents report qualifying work to their parent. Concurrent sessions/worktrees must use §4.2.
 
@@ -39,7 +39,7 @@ The shared transcript is `AI_TRANSCRIPT.md` beside this file in the repository r
 - If a major bug is discovered and fixed in the same turn, write one combined entry rather than separate discovery and fix entries.
 - When uncertain whether the threshold is met, do not log the turn.
 - Record the user prompt verbatim unless it contains secrets or sensitive personal information.
-- Record the final user-facing response verbatim. Draft it, append it, verify it, then send the same response.
+- Record the milestone handoff or final user-facing response verbatim. Draft it, append it, verify it, then send the same response. The last milestone entry in an authorized sequence records the final response.
 - Replace API keys, tokens, passwords, cookies, OAuth codes, private keys, `.env` values, and sensitive PII with `[REDACTED]`.
 - Do not copy binary data, large file contents, dependency output, or full command output into the transcript. Summarize actions and results.
 - Keep `AI_TRANSCRIPT.md` separate from `PROCESS_LOG.md`. The transcript is automatic evidence; the submitted process log must remain Rylan Wade's accurate, personal reflection.
@@ -108,7 +108,7 @@ For every qualifying event entry:
 ## 6. Project Workflow
 
 - Chosen project: **Public-Company Research Assistant**. [Project spec](docs/planning/PROJECT_SPEC.md) defines scope, five application agents, providers, local integration, open decisions, and the final checklist. The assignment takes precedence over the spec.
-- Current stage: M1–M5 are implemented and verified; M2 and M3 are accepted. The corpus contains all 41 selected NVIDIA, AMD, Intel, and Qualcomm documents and 10,681 indexed chunks. [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) records direct Codex generation; [M4 container acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) records Docker/browser checks and credential isolation. M5 adds source-linked financial observations and a distinct Financial Data worker. M6 is authorized for implementation and verification; M7–M12 remain unstarted.
+- Current stage: M1–M6 are implemented and verified; M2 and M3 are accepted. The corpus contains all 41 selected NVIDIA, AMD, Intel, and Qualcomm documents and 10,681 indexed chunks. [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) records direct Codex generation; [M4 container acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) records Docker/browser checks and credential isolation. [M5](docs/planning/M5_FINANCIAL_DATA_AGENT.md) implements source-linked observations and Financial Data; [M6](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) implements bounded Quant execution, checked calculations, artifacts, and the Data-to-Quant path. M7–M12 remain unstarted and require feedback and authorization.
 - Implement only the authorized increment. Provide a runnable demonstration and correctness evidence; get Rylan Wade's feedback before starting the next milestone unless he authorizes another sequence.
 - Develop/test locally through Codex/Claude Code subscriptions. M3 uses Codex app-server directly for individual-worker and full-application generation. Keep direct-role tests, fixture checks, browser/application runs, and deployment-provider results distinct.
 - Defer Nebius/NVIDIA generation and separate paid judge calls to final integration. Verify provider integration locally, then deploy to Cloud Run and retest. Keep local CLI authentication and subscription adapters outside the deployed runtime configuration.

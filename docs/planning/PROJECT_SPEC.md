@@ -1,7 +1,7 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: M1–M5 implemented and verified; M2 and M3 accepted. M6 is authorized for implementation and verification. M7–M12, remaining workers, deployment-provider integration, formal evaluations, and deployment are unstarted.
+- Status: M1–M6 implemented and verified; M2 and M3 accepted. M7–M12, Risk Summary/full cooperation, deployment-provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
 - Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
@@ -32,7 +32,7 @@
 - Source access constraints: direct local SEC Archives probes returned 403; use verified official IR mirrors/CDNs and validate actual content. Qualcomm gross profit requires revenue minus cost of revenue; its FY2024 has 53 weeks versus 52 in FY2025. Preserve AMD's amendment and corrected MD&A alongside its original annual report.
 - Prefer within-company financial comparisons. Cross-company comparisons must display fiscal dates and timing/business-mix qualifications. Initial metrics use consolidated US GAAP figures; segment metrics, transcripts, additional years, and additional companies require separate coverage checks and feedback.
 - Support company explanations, financial comparisons, changes in disclosed risks, and current developments related to those questions.
-- Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. The [M1 financial evidence](M1_SCOPE_AND_SOURCE_FEASIBILITY.md#5-financial-feasibility-and-comparison-boundaries) records candidate tags, formulas, annual observations, and period constraints. Observation selection uses exact original accessions and actual intervals, with later conflicting comparatives retained separately. [M5](M5_FINANCIAL_DATA_AGENT.md) implements the Data worker; numerical derivations remain M6 work.
+- Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. The [M1 financial evidence](M1_SCOPE_AND_SOURCE_FEASIBILITY.md#5-financial-feasibility-and-comparison-boundaries) records candidate tags, formulas, annual observations, and period constraints. Observation selection uses exact original accessions and actual intervals, with later conflicting comparatives retained separately. [M5](M5_FINANCIAL_DATA_AGENT.md) implements Data; [M6](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) implements bounded numerical analysis and independently verified derivations.
 - Produce a research brief: a direct conclusion, supporting evidence, a financial table or chart when useful, changed risks when relevant, and unresolved questions.
 - Defer market quotes, price-move explanations, valuation tools, trading, forecasts, watchlists, and background alerts. They are outside the initial scope.
 - Treat each initial request as self-contained. Conversation memory and persistence remain later decisions; do not promise memory across sessions or instance replacement.
@@ -96,7 +96,7 @@
 | Supervisor | Coordinate the investigation and assemble the final response. | LangGraph delegation and task-state inspection. Selects workers, requests bounded follow-up, handles incomplete results, and synthesizes the evidence. |
 
 - Four specialized workers exceed the three-worker minimum. The supervisor does not count toward that minimum.
-- Filings Research, Financial Data, and a minimal scope/task supervisor are implemented; Quant and Risk Summary remain planned. The four-worker design describes the final assignment scope.
+- Filings Research, Financial Data, Quant, and a minimal scope/task supervisor are implemented. The numerical path passes verified Data observations to Quant; Risk Summary and full cooperation remain planned. The four-worker design describes the final assignment scope.
 - Keep five agents. Evaluation runs outside the application workflow; it does not introduce a sixth verification agent.
 - Each worker needs a distinct prompt and meaningful tool access. Risk Summary must perform document comparison rather than repeat Filings Research.
 - Workers return findings through the supervisor. Shared state carries the question, selected companies/periods, task status, evidence references, calculations, gaps, routing decisions, and failures; the detailed schema comes later.
@@ -186,7 +186,7 @@ flowchart TB
 - Keep management statements, outside reporting, and the assistant's interpretation distinguishable. A citation must support the specific claim.
 - Show fiscal dates and distinguish quarter-only, year-to-date, annual, and point-in-time observations. Report comparison limits explicitly.
 - Record publication/retrieval dates for current evidence. Failed or stale retrieval must not produce a confident claim about current conditions.
-- Validate citations, calculation inputs, and output structure within the existing agents and ordinary code. Bound follow-up and code execution; define the execution restrictions before implementing Quant.
+- Validate citations, calculation inputs, and output structure within the existing agents and ordinary code. Bound follow-up and code execution. Quant uses an import/call/loop-free arithmetic interpreter, isolated execution, three-second deadlines, independent financial checks, and hashed artifacts.
 
 ## Exploration first, formal evaluation later
 
@@ -223,7 +223,7 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Development proceeds through the authorized sequence. M1–M5 are implemented and verified; M2 and M3 are accepted. M6 is authorized for implementation and verification; M7–M12 remain planned and unstarted.
+- Development proceeds through the authorized sequence. M1–M6 are implemented and verified; M2 and M3 are accepted. M7–M12 remain planned and unstarted. Further increments require feedback and authorization.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
 - Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
@@ -237,12 +237,12 @@ flowchart TB
 | Decision | Resolve before |
 | --- | --- |
 | Coverage expansion and additional reporting formats | Source collection is verified for all 41 selected documents. Future discovery/refresh CLI is implemented; expand application coverage only after source checks, demonstrations, and feedback. |
-| Observation selection and fiscal intervals | M5 implements original-accession GAAP USD observations, explicit quarter/YTD intervals, missing/conflicting statuses, and retained later revisions. Quant derivation checks remain M6. |
+| Observation selection and fiscal intervals | M5 implements original-accession GAAP USD observations, explicit quarter/YTD intervals, missing/conflicting statuses, and retained later revisions. M6 validates periods, units, denominators, revisions, arithmetic, and executed lineage before publishing calculations. |
 | Retrieval refinement and corpus expansion | M3 uses 220-token chunks, 40-token overlap, CPU MiniLM, cosine Chroma, and explicit company/fiscal-year/form/section/version filters. Refine from observed evidence and feedback. |
 | NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
 | Local Codex connectivity and authentication isolation | Verified host bridge, absent container CLI credentials, and child cancellation; [M4 evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md). |
 | Formal evaluation checkpoint, supported task families, and RAGAS/AgentEvals compatibility | After working research and financial-analysis demos clarify what should be measured. |
-| Quant execution boundaries and permitted analysis libraries | Code execution. |
+| Quant execution boundaries and permitted analysis libraries | M6 implements a restricted arithmetic Python subset, isolated three-second execution, Linux resource limits, Decimal arithmetic, and application-controlled Matplotlib 3.11.2 exports. |
 | Judge model, evaluation dataset size/splits, calibration rubric, and final integration budgets | First model-judged evaluations; use subscriptions during development and verify the final reporting path before submission. |
 | Optional LangSmith hosted comparison/reporting | Any requested hosted evaluation/reporting integration. |
 | Report/chart presentation and source-view refinements | M3 provides exact passages, citations, official source links, and collected originals. Refine through feedback. |
@@ -275,7 +275,7 @@ flowchart TB
 | M3 — First RAG research demo | Implemented and verified; accepted | 41 documents/10,681 chunks, four real cited application turns, direct worker/browser demonstrations, coverage gaps, and cancellation/failure checks. [Evidence](M3_FIRST_RAG_RESEARCH_DEMO.md). |
 | M4 — Local container acceptance | Implemented and verified locally | Docker startup, cited SSE, Chromium, custom PORT, non-root identity, credential isolation, cancellation, and model failure pass. [Evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md). |
 | M5 — Financial Data agent | Implemented and verified locally | Source-linked GAAP observations, original-report policy, structured Data worker, direct/browser/Docker checks. [Evidence](M5_FINANCIAL_DATA_AGENT.md). |
-| M6 — Financial Analysis / Quant agent | Planned; unstarted | Bounded code execution, checked calculations, and tables/charts. |
+| M6 — Financial Analysis / Quant agent | Implemented and verified locally | Generated bounded programs, independent financial/lineage checks, Data-to-Quant cooperation, source-linked tables/charts, and native/Docker evidence. [Details](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md). |
 | M7 — Risk Summary agent | Planned; unstarted | Cited comparisons of disclosure versions and relevant quarterly updates. |
 | M8 — Full supervisor cooperation | Planned; unstarted | All four workers cooperate through task-driven delegation, follow-up, and failure recovery. |
 | M9 — Live research and MCP sharing | Planned; unstarted | Tavily current research and inspectable use of the same MCP tool by different workers. |
@@ -325,7 +325,8 @@ flowchart TB
 - **Inputs/dependency:** working M5 observations and their provenance.
 - **Scope:** define execution limits and permitted libraries, then implement the Quant worker's bounded code generation/execution, growth/margin calculations, and table/chart artifacts. Validate periods, denominators, units, revisions, and calculation lineage; derive quarterly cash flow only from compatible cumulative inputs.
 - **Demonstration/exit:** answer a revenue/margin/cash-flow question through the existing app and independently check the calculations. Show invalid comparisons, zero denominators, missing inputs, and execution failure handling. Direct Codex tests exercise the role's actual analysis tools.
-- **Feedback decision:** review whether the research/numerical workflow is useful and select when formal evaluation should begin. Do not require a benchmark framework to complete this milestone.
+- **Implemented/verified:** distinct Quant role/tools, an isolated arithmetic interpreter, independent calculation/lineage checks, compatible quarter derivations, immutable source-backed CSV/PNG/code/ledger artifacts, direct four-company and Q2/Q3/Q4 demonstrations, native application/browser, and Linux Docker acceptance. [M6 evidence](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md).
+- **Feedback decision:** review the working research/numerical workflow and select when formal evaluation should begin. Formal evaluation is unstarted; this milestone uses correctness and actual exploratory demonstrations.
 
 ### M7 — Risk Summary agent
 

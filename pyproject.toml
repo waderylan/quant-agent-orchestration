@@ -1,7 +1,7 @@
 [project]
 name = "public-company-research-assistant"
 version = "0.1.0"
-description = "CSCI 599 HW2 public-company source preparation and local filings research"
+description = "CSCI 599 HW2 local company research, source-linked financial data, and bounded analysis"
 requires-python = ">=3.13,<3.14"
 dependencies = [
     "anyio==4.15.1",
@@ -11,6 +11,7 @@ dependencies = [
     "httpx==0.28.1",
     "langchain-core==1.6.10",
     "langgraph==1.2.15",
+    "matplotlib==3.11.2",
     "pydantic==2.14.1",
     "pypdf==6.19.0",
     "python-dotenv==1.2.4",

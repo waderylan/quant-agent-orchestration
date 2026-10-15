@@ -322,8 +322,10 @@ class FinancialStore:
     def inspect(self, observation_id):
         return self.observations[observation_id]
 
-    def snapshot(self, sha256):
-        if sha256 not in {r["snapshot_sha256"] for r in self.observations.values()}:
+    def snapshot(self, sha256, *, allowed=None):
+        if allowed is None:
+            allowed = {r["snapshot_sha256"] for r in self.observations.values()}
+        if sha256 not in allowed:
             raise KeyError("Snapshot is outside the prepared observations")
         path = safe_blob(self.path, {"path": f"raw/{sha256}.json"})
         if digest(path.read_bytes()) != sha256:

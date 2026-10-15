@@ -59,6 +59,8 @@ class State(TypedDict, total=False):
     answer: str
     worker: str
     financial_sources: dict
+    bundle_id: str
+    calculations: list[dict]
 
 
 class ResearchTools:
@@ -237,10 +239,22 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
 
 def select_worker(question):
     # Provisional, inspectable task routing; full cooperation belongs to M8.
-    if re.search(
-        r"\b(why|drove|drivers|explain|disclose|risk|amend)\b", question, re.I
-    ):
+    if re.search(r"\b(why|drove|drivers|disclose|risk|amend)\b", question, re.I):
         return "research"
+    if re.search(
+        r"\b(calculate|compute|compare|margins?|growth|percentage.points?|chart|plot)\b",
+        question,
+        re.I,
+    ):
+        return "analysis_data"
+    if re.search(
+        r"\bQ[2-4](?:\b|-).*cash flow|cash flow.*\bQ[2-4](?:\b|-)", question, re.I
+    ) and not re.search(
+        r"\b(ytd|year.to.date|cumulative)\b",
+        question,
+        re.I,
+    ):
+        return "analysis_data"
     if re.search(
         r"\b(what (?:was|were)|how much|figures|amounts|reported|show|list)\b",
         question,
@@ -261,7 +275,7 @@ def graph(index, *, model_stream=codex_stream, financials=None):
             state["question"], state["companies"], state["years"], index.coverage()
         )
         worker = select_worker(state["question"])
-        if worker == "data" and re.search(
+        if worker in ("data", "analysis_data") and re.search(
             r"\b(non-gaap|adjusted|ebitda|segment)\b", state["question"], re.I
         ):
             error = "Financial observations cover consolidated US GAAP revenue, gross profit, operating income, and operating cash flow. Adjusted and segment metrics are unsupported."
@@ -275,10 +289,12 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     if error
                     else "Financial Data"
                     if worker == "data"
+                    else "Financial Data → Financial Analysis / Quant"
+                    if worker == "analysis_data"
                     else "Filings Research",
                     "companies": state["companies"],
                     "years": state["years"],
-                    "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research",
+                    "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research",
                 },
             }
         )
@@ -299,6 +315,50 @@ def graph(index, *, model_stream=codex_stream, financials=None):
         return await financial_turn(
             financials, state, get_stream_writer(), model_stream=model_stream
         )
+
+    async def analysis_data(state):
+        from src.financial_workflow import financial_turn
+        from src.quant_workflow import prefetch_for_analysis
+
+        if financials is None:
+            raise ValueError(
+                "Financial data is unavailable. Run scripts/financials.py collect."
+            )
+        result = await financial_turn(
+            financials,
+            {
+                **state,
+                "question": "Select source inputs only; do not calculate. Requested analysis: "
+                + state["question"],
+            },
+            get_stream_writer(),
+            model_stream=model_stream,
+            emit_answer=False,
+            prefetch=prefetch_for_analysis(state["question"]),
+        )
+        if result.get("error"):
+            raise ValueError(
+                "Financial Data could not establish verified analysis inputs: "
+                + result["error"]
+            )
+        get_stream_writer()(
+            {
+                "type": "trace",
+                "data": {
+                    "agent": "Supervisor",
+                    "node": "handoff",
+                    "decision": "Financial Analysis / Quant",
+                    "observations": len(result["financial_sources"]),
+                    "reason": "Pass verified structured observations; keep input selection separate from calculation",
+                },
+            }
+        )
+        return {"financial_sources": result["financial_sources"]}
+
+    async def quant(state):
+        from src.quant_workflow import quant_turn
+
+        return await quant_turn(state, get_stream_writer(), model_stream=model_stream)
 
     def finish(state):
         writer = get_stream_writer()
@@ -324,6 +384,8 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     workflow.add_node("supervisor", supervisor)
     workflow.add_node("research", research)
     workflow.add_node("data", data)
+    workflow.add_node("analysis_data", analysis_data)
+    workflow.add_node("quant", quant)
     workflow.add_node("finish", finish)
     workflow.add_edge(START, "supervisor")
     workflow.add_conditional_edges(
@@ -331,6 +393,8 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     )
     workflow.add_edge("research", "finish")
     workflow.add_edge("data", "finish")
+    workflow.add_edge("analysis_data", "quant")
+    workflow.add_edge("quant", "finish")
     workflow.add_edge("finish", END)
     return workflow.compile()
 

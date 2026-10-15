@@ -1,7 +1,7 @@
 # Architecture
 
 - Owner: Rylan Wade.
-- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker acceptance and Financial Data pass; Quant, Risk Summary, formal evaluations, and deployment are unimplemented.
+- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker, Financial Data, and Quant pass. Risk Summary, full cooperation, formal evaluations, and deployment are unimplemented.
 - Contract: [assignment](assignment/Assignment_2_Description.md), [project scope](planning/PROJECT_SPEC.md), and [M3 demonstration](planning/M3_FIRST_RAG_RESEARCH_DEMO.md).
 
 ## Local request path
@@ -13,6 +13,11 @@ flowchart LR
     S --> R[Filings Research]
     S --> D[Financial Data]
     D --> F[Accession-scoped SEC observations]
+    D -->|Verified inputs on numerical requests| Q[Financial Analysis / Quant]
+    Q --> X[Isolated arithmetic interpreter]
+    X --> N[Independent financial and lineage checks]
+    N --> A[Hashed CSV/PNG/code/ledger artifacts]
+    Q <-->|Distinct analysis tools| CX
     D <-->|Distinct dynamic tools| CX
     R --> LC[LCEL retrieval + augmentation]
     LC --> V[Persistent Chroma + CPU MiniLM]
@@ -23,10 +28,10 @@ flowchart LR
 ```
 
 - `main.py` serves the vanilla HTML/JS document and SSE. `src/research_workflow.py` owns the graph, worker, scope validation, LCEL pipeline, and request-local evidence registry.
-- Graph: `START → supervisor → research|data → finish → END`; unsupported scope routes directly from supervisor to finish. The supervisor applies explicit coverage rules and delegates the task; structured figure requests select Financial Data through a provisional visible rule; learned routing and full multi-worker cooperation are unimplemented.
-- State contains question, companies, fiscal years, selected worker, answer, error, and registered financial sources. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
+- Graph paths after `supervisor`: `research → finish`, `data → finish`, or `analysis_data → quant → finish`; `START` enters the supervisor and `finish` reaches `END`. Unsupported scope routes directly to finish. Structured figures select Data, numerical requests select Data then Quant, and narrative disclosures select Research through a provisional visible rule. Full task-driven cooperation and provider routing are unimplemented.
+- State contains question, companies, fiscal years, selected worker, answer, error, and registered financial sources, calculation rows, and artifact identity. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
 - Filings Research uses its own [role prompt](../prompts/filings_research.md) and two actual tools: `search_sources` and `inspect_source`. The same worker runs independently through `scripts/research.py agent`.
-- Quant, Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented. Financial Data uses distinct structured-query/observation-inspection tools.
+- Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented. Financial Data uses distinct structured-query/observation-inspection tools.
 
 ## Corpus and ingestion
 
@@ -66,7 +71,7 @@ flowchart LR
 | `GET /api/sources/{chunk_id}` | Hash-checked exact passage/context, fiscal dates, version, source links. |
 | `GET /api/originals/{document_id}` | Hash-checked collected original as an attachment. |
 
-- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `error`, terminal `complete`. Status distinguishes completed, coverage gap, unverified, and failed.
+- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `artifacts`, `error`, terminal `complete`. Status distinguishes completed, coverage gap, unverified, and failed.
 - The fetch-based consumer decodes fragmented UTF-8/SSE frames, displays live answer tokens, links citations to highlighted exact passages, exposes routing/tools, and supports Stop through cancellation. A bounded 128-event queue and 0.5-second keep-alive frames keep delivery responsive during model waits. Cleanup shields graph-task cancellation from repeated ASGI cancellation; a real disconnect check leaves zero owned Codex children after two seconds.
 - Model/source text uses DOM text nodes. Prepared HTML originals download as attachments. Links provide SEC, official retrieval source, and collected original; SEC access can return 403.
 - Sources/index are ignored reproducible data. Source refresh requires explicit ingestion and an application restart; no automatic freshness service exists.
@@ -76,7 +81,7 @@ flowchart LR
 - Focused tests cover scope isolation, Unicode offsets/boundaries, corrupt/stale sources, unsupported coverage, citation identifiers, and terminal failures. M2 tests remain applicable.
 - Actual results: 19 tests pass; four company retrieval/application questions pass; three unsupported/current requests return coverage gaps; one separate direct AMD worker run and one Chromium citation/trace demonstration pass. The HTTP checks verify an original-file hash, missing-source 404, and invalid-request 422. An unavailable Codex model fails explicitly; live request cancellation closes the owned process.
 - [Demonstration evidence](research/M3_DEMONSTRATION_RESULTS.json) records actual retrieval, application turns, tools, cited passages, and local timing. [Browser evidence](research/M3_BROWSER_RESULTS.json) records Chromium chat/source interaction.
-- Formal RAGAS/AgentEvals, financial calculations, risk alignment, shared/live MCP, additional generation providers, Cloud Run, and deployment measurements remain pending. Local Docker acceptance is verified in [M4](planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md).
+- Formal RAGAS/AgentEvals, risk alignment, shared/live MCP, additional generation providers, Cloud Run, and deployment measurements remain pending. Financial calculations and source-linked artifacts are verified in M6. Local Docker acceptance is verified in [M4](planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md).
 
 ## Local container runtime
 
@@ -91,3 +96,12 @@ flowchart LR
 - Four content-addressed Company Facts snapshots supply exact original-accession GAAP USD observations, with explicit annual/quarter/YTD intervals, amendment separation, conflict/missing statuses, and retained later comparative revisions. Qualcomm gross profit retains both inputs and its formula; 53-week context remains visible.
 - `FinancialStore` verifies inventory/snapshot identity and reconstructs prepared observations before serving them. No chat-time financial download or automatic refresh occurs.
 - Source inspection routes expose observation metadata and hash-checked snapshots. Browser text-node rendering preserves safe display. [M5](planning/M5_FINANCIAL_DATA_AGENT.md) describes schemas, selection policy, CLI, API, and evidence.
+
+## Bounded Quant and immutable analysis artifacts
+
+- Quant has a distinct prompt and `run_analysis`/`inspect_calculation`. Data establishes scoped observations; the graph passes them to Quant and keeps the Data answer out of final tokens. Direct Quant runs bypass Data-model/supervisor/browser generation.
+- `quant_runner.py` interprets an assignment/arithmetic subset without eval/exec in an isolated, credential-free child. Size, AST, operation, depth, numeric, output, and three-second bounds apply; Linux also caps CPU/address-space/file output. Windows does not claim an OS memory sandbox. Active execution children participate in HTTP request cleanup.
+- `quant_analysis.py` independently recomputes results and checks executed versus declared lineage, company/units/accounting/revision basis, intervals, denominators, quarterly adjacency, and 53-week qualifications. Percent/point tolerance is 10^-8; USD arithmetic is exact.
+- Only verified calculations publish through `analysis_artifacts.py`: a hashed ledger, source observations, chart-series metadata, CSV, Matplotlib PNG, and generated code. Sources remain frozen per bundle; snapshot downloads verify hashes. These local files do not promise durable Cloud Run state.
+- HTTP inspection: `/api/analysis/{id}/calculations/{C}`, `/observations/{F}`, `/snapshots/{sha}`, and `/files/{name}` beneath the same bundle path. Only known bundle/file/source identities are served.
+- Browser SSE `artifacts` events render canonical result labels, values/units/dates, chart, and downloads. [M6](planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) records exact limits, policies, schema, commands, and actual native/Docker evidence.

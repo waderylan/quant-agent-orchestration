@@ -1,0 +1,1946 @@
+{
+  "checked_at": "2026-10-15T17:48:21.886529+00:00",
+  "kind": "M6 exploratory acceptance; no formal scores",
+  "direct_workers": [
+    {
+      "company": "NVDA",
+      "years": [
+        2025,
+        2026
+      ],
+      "question": "Calculate NVDA FY2025 versus FY2026 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+      "answer": "- NVDA FY2026 revenue grew 65.47% [C1] and operating cash flow grew 60.27% [C8] versus FY2025, while both margins declined.\n- Revenue: $130.497 billion in FY2025 [F1] → $215.938 billion in FY2026 [F5].\n- Gross margin: 74.99% in FY2025 [C2] → 71.07% in FY2026 [C3]; change: −3.92 percentage points [C6].\n- Operating margin: 62.42% in FY2025 [C4] → 60.38% in FY2026 [C5]; change: −2.04 percentage points [C7].\n- Operating cash flow: $64.089 billion in FY2025 [F4] → $102.718 billion in FY2026 [F8].\n- Actual fiscal intervals:\n  - FY2025: January 29, 2024–January 26, 2025 [F1].\n  - FY2026: January 27, 2025–January 25, 2026 [F5].\n- Comparison basis: consecutive, non-overlapping annual periods; USD, US GAAP consolidated, original-report figures from each year’s 10-K. No revision conflicts or comparison warnings were registered. Margin changes are percentage points, not percentage growth. No causal explanation is established by these observations.\n- Verified outputs: [CSV table](/api/analysis/cb21a867fc1905bb28ab783a45069c47eeb3d2d63c3d07a089fe8c56e1bc4dfb/files/table.csv) · [PNG chart](/api/analysis/cb21a867fc1905bb28ab783a45069c47eeb3d2d63c3d07a089fe8c56e1bc4dfb/files/chart.png). Full precision is preserved in the [calculation ledger](/api/analysis/cb21a867fc1905bb28ab783a45069c47eeb3d2d63c3d07a089fe8c56e1bc4dfb/files/bundle.json).",
+      "bundle_id": "cb21a867fc1905bb28ab783a45069c47eeb3d2d63c3d07a089fe8c56e1bc4dfb",
+      "code": "rg = (values['F5'] / values['F1'] - 1) * 100\ngm25 = values['F2'] / values['F1'] * 100\ngm26 = values['F6'] / values['F5'] * 100\nom25 = values['F3'] / values['F1'] * 100\nom26 = values['F7'] / values['F5'] * 100\ngmd = gm26 - gm25\nomd = om26 - om25\nocfg = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'Revenue growth FY2026 vs FY2025', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': rg},\n{'label': 'Gross margin FY2025', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm25},\n{'label': 'Gross margin FY2026', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm26},\n{'label': 'Operating margin FY2025', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om25},\n{'label': 'Operating margin FY2026', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om26},\n{'label': 'Gross margin change FY2026 vs FY2025', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gmd},\n{'label': 'Operating margin change FY2026 vs FY2025', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': omd},\n{'label': 'Operating cash-flow growth FY2026 vs FY2025', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocfg}\n]",
+      "calculations": [
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C1",
+          "label": "NVDA FY2026 revenue growth vs FY2025",
+          "requested_label": "Revenue growth FY2026 vs FY2025",
+          "inputs": [
+            "F5",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F5"
+          ],
+          "formula": "(F5 / F1 - 1) * 100",
+          "value": "65.47353579009479145114447080",
+          "display_value": "65.4735",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-02-26",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C2",
+          "label": "NVDA FY2025 gross margin",
+          "requested_label": "Gross margin FY2025",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "74.98869705816991961501030675",
+          "display_value": "74.9887",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C3",
+          "label": "NVDA FY2026 gross margin",
+          "requested_label": "Gross margin FY2026",
+          "inputs": [
+            "F6",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F6"
+          ],
+          "formula": "F6 / F5 * 100",
+          "value": "71.06808435754707369707971733",
+          "display_value": "71.0681",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-02-26",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C4",
+          "label": "NVDA FY2025 operating margin",
+          "requested_label": "Operating margin FY2025",
+          "inputs": [
+            "F3",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F3"
+          ],
+          "formula": "F3 / F1 * 100",
+          "value": "62.41752683969746430952435688",
+          "display_value": "62.4175",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C5",
+          "label": "NVDA FY2026 operating margin",
+          "requested_label": "Operating margin FY2026",
+          "inputs": [
+            "F7",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F7"
+          ],
+          "formula": "F7 / F5 * 100",
+          "value": "60.38168363141272031786901796",
+          "display_value": "60.3817",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "gross_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C6",
+          "label": "NVDA FY2026 gross margin change vs FY2025",
+          "requested_label": "Gross margin change FY2026 vs FY2025",
+          "inputs": [
+            "C3",
+            "C2"
+          ],
+          "source_ids": [
+            "F1",
+            "F2",
+            "F5",
+            "F6"
+          ],
+          "formula": "C3 - C2",
+          "value": "-3.92061270062284591793058942",
+          "display_value": "-3.9206",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "operating_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C7",
+          "label": "NVDA FY2026 operating margin change vs FY2025",
+          "requested_label": "Operating margin change FY2026 vs FY2025",
+          "inputs": [
+            "C5",
+            "C4"
+          ],
+          "source_ids": [
+            "F1",
+            "F3",
+            "F5",
+            "F7"
+          ],
+          "formula": "C5 - C4",
+          "value": "-2.03584320828474399165533892",
+          "display_value": "-2.0358",
+          "warnings": []
+        },
+        {
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "operating_cash_flow_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-25",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C8",
+          "label": "NVDA FY2026 operating cash flow growth vs FY2025",
+          "requested_label": "Operating cash-flow growth FY2026 vs FY2025",
+          "inputs": [
+            "F8",
+            "F4"
+          ],
+          "source_ids": [
+            "F4",
+            "F8"
+          ],
+          "formula": "(F8 / F4 - 1) * 100",
+          "value": "60.27399397712555976844700340",
+          "display_value": "60.2740",
+          "warnings": []
+        }
+      ],
+      "tool_calls": [
+        "run_analysis",
+        "inspect_calculation"
+      ],
+      "passed": true
+    },
+    {
+      "company": "AMD",
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Calculate AMD FY2024 versus FY2025 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+      "answer": "- AMD FY2025 revenue increased 34.34% [C1], from $25.785 billion [F1] to $34.639 billion [F5].\n- Gross margin rose from 49.35% in FY2024 [C2] to 49.52% in FY2025 [C3]: an increase of 0.17 percentage points [C6].\n- Operating margin rose from 7.37% in FY2024 [C4] to 10.66% in FY2025 [C5]: an increase of 3.30 percentage points [C7].\n- Operating cash flow increased 153.50% [C8], from $3.041 billion [F4] to $7.709 billion [F8].\n- Actual fiscal periods:\n  - FY2024: December 31, 2023–December 28, 2024 [F1].\n  - FY2025: December 29, 2024–December 27, 2025 [F5].\n- Comparison qualifications: US GAAP consolidated, annual USD observations from each year’s original-report 10-K; no revision mixing or period normalization. Registered observations report no comparison warnings. Margin changes are percentage points, not percentage growth.\n- Verified outputs: [CSV table](/api/analysis/52888fe90da4cc7bb01b82e445da26077fc0a2ce85c69829d8ccd33ab66bd94e/files/table.csv) · [PNG chart](/api/analysis/52888fe90da4cc7bb01b82e445da26077fc0a2ce85c69829d8ccd33ab66bd94e/files/chart.png). Display figures are rounded; the ledger retains full precision.",
+      "bundle_id": "52888fe90da4cc7bb01b82e445da26077fc0a2ce85c69829d8ccd33ab66bd94e",
+      "code": "revenue_growth = (values['F5'] / values['F1'] - 1) * 100\ngm24 = values['F2'] / values['F1'] * 100\ngm25 = values['F6'] / values['F5'] * 100\nom24 = values['F3'] / values['F1'] * 100\nom25 = values['F7'] / values['F5'] * 100\ngm_change = gm25 - gm24\nom_change = om25 - om24\nocf_growth = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'FY2025 revenue growth', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': revenue_growth},\n{'label': 'FY2024 gross margin', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm24},\n{'label': 'FY2025 gross margin', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm25},\n{'label': 'FY2024 operating margin', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om24},\n{'label': 'FY2025 operating margin', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om25},\n{'label': 'Gross margin change', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gm_change},\n{'label': 'Operating margin change', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': om_change},\n{'label': 'FY2025 operating cash-flow growth', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocf_growth}\n]",
+      "calculations": [
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C1",
+          "label": "AMD FY2025 revenue growth vs FY2024",
+          "requested_label": "FY2025 revenue growth",
+          "inputs": [
+            "F5",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F5"
+          ],
+          "formula": "(F5 / F1 - 1) * 100",
+          "value": "34.33779329067287182470428540",
+          "display_value": "34.3378",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-12-31",
+          "end": "2024-12-28",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-02-05",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C2",
+          "label": "AMD FY2024 gross margin",
+          "requested_label": "FY2024 gross margin",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "49.35039751793678495249175877",
+          "display_value": "49.3504",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C3",
+          "label": "AMD FY2025 gross margin",
+          "requested_label": "FY2025 gross margin",
+          "inputs": [
+            "F6",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F6"
+          ],
+          "formula": "F6 / F5 * 100",
+          "value": "49.51644100580270793036750484",
+          "display_value": "49.5164",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-12-31",
+          "end": "2024-12-28",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-02-05",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C4",
+          "label": "AMD FY2024 operating margin",
+          "requested_label": "FY2024 operating margin",
+          "inputs": [
+            "F3",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F3"
+          ],
+          "formula": "F3 / F1 * 100",
+          "value": "7.368625169672290091138258678",
+          "display_value": "7.3686",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C5",
+          "label": "AMD FY2025 operating margin",
+          "requested_label": "FY2025 operating margin",
+          "inputs": [
+            "F7",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F7"
+          ],
+          "formula": "F7 / F5 * 100",
+          "value": "10.66428014665550391177574410",
+          "display_value": "10.6643",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "gross_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C6",
+          "label": "AMD FY2025 gross margin change vs FY2024",
+          "requested_label": "Gross margin change",
+          "inputs": [
+            "C3",
+            "C2"
+          ],
+          "source_ids": [
+            "F1",
+            "F2",
+            "F5",
+            "F6"
+          ],
+          "formula": "C3 - C2",
+          "value": "0.16604348786592297787574607",
+          "display_value": "0.1660",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C7",
+          "label": "AMD FY2025 operating margin change vs FY2024",
+          "requested_label": "Operating margin change",
+          "inputs": [
+            "C5",
+            "C4"
+          ],
+          "source_ids": [
+            "F1",
+            "F3",
+            "F5",
+            "F7"
+          ],
+          "formula": "C5 - C4",
+          "value": "3.295654976983213820637485422",
+          "display_value": "3.2957",
+          "warnings": []
+        },
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C8",
+          "label": "AMD FY2025 operating cash flow growth vs FY2024",
+          "requested_label": "FY2025 operating cash-flow growth",
+          "inputs": [
+            "F8",
+            "F4"
+          ],
+          "source_ids": [
+            "F4",
+            "F8"
+          ],
+          "formula": "(F8 / F4 - 1) * 100",
+          "value": "153.5021374547846103255508057",
+          "display_value": "153.5021",
+          "warnings": []
+        }
+      ],
+      "tool_calls": [
+        "run_analysis",
+        "inspect_calculation"
+      ],
+      "passed": true
+    },
+    {
+      "company": "INTC",
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Calculate INTC FY2024 versus FY2025 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+      "answer": "- INTC revenue declined 0.47% in FY2025 [C1]. Gross and operating margins improved, but operating margin remained negative [C2–C7].\n- Revenue: $53.101 billion in FY2024 [F1] versus $52.853 billion in FY2025 [F5].\n- Gross margin: 32.66% in FY2024 [C2] versus 34.77% in FY2025 [C3]; increase of 2.10 percentage points [C6].\n- Operating margin: −21.99% in FY2024 [C4] versus −4.19% in FY2025 [C5]; improvement of 17.80 percentage points [C7].\n- Operating cash flow: $8.288 billion [F4] versus $9.697 billion [F8]; growth of 17.00% [C8].\n- Actual fiscal periods: FY2024 ran 2023-12-31 through 2024-12-28 [F1]; FY2025 ran 2024-12-29 through 2025-12-27 [F5].\n- Comparison qualifications: US GAAP consolidated, annual, original-report figures from each year’s 10-K—not subsequently revised comparatives. Registered evidence reports no comparison warnings. Margin changes are percentage points, not percentage growth.\n- Verified outputs: [CSV table](/api/analysis/7e6f658cc6dabe82a06f4968533f0c65435d09c2cf43bfb35a534f68d2dc5833/files/table.csv) · [PNG chart](/api/analysis/7e6f658cc6dabe82a06f4968533f0c65435d09c2cf43bfb35a534f68d2dc5833/files/chart.png).",
+      "bundle_id": "7e6f658cc6dabe82a06f4968533f0c65435d09c2cf43bfb35a534f68d2dc5833",
+      "code": "rev_growth = (values['F5'] / values['F1'] - 1) * 100\ngm24 = values['F2'] / values['F1'] * 100\ngm25 = values['F6'] / values['F5'] * 100\nom24 = values['F3'] / values['F1'] * 100\nom25 = values['F7'] / values['F5'] * 100\ngm_change = gm25 - gm24\nom_change = om25 - om24\nocf_growth = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'FY2025 revenue growth', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': rev_growth},\n{'label': 'FY2024 gross margin', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm24},\n{'label': 'FY2025 gross margin', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm25},\n{'label': 'FY2024 operating margin', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om24},\n{'label': 'FY2025 operating margin', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om25},\n{'label': 'Gross margin change', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gm_change},\n{'label': 'Operating margin change', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': om_change},\n{'label': 'FY2025 operating cash-flow growth', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocf_growth}\n]",
+      "calculations": [
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C1",
+          "label": "INTC FY2025 revenue growth vs FY2024",
+          "requested_label": "FY2025 revenue growth",
+          "inputs": [
+            "F5",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F5"
+          ],
+          "formula": "(F5 / F1 - 1) * 100",
+          "value": "-0.4670345191239336359013954500",
+          "display_value": "-0.4670",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-12-31",
+          "end": "2024-12-28",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-01-31",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C2",
+          "label": "INTC FY2024 gross margin",
+          "requested_label": "FY2024 gross margin",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "32.66416828308318110770041995",
+          "display_value": "32.6642",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C3",
+          "label": "INTC FY2025 gross margin",
+          "requested_label": "FY2025 gross margin",
+          "inputs": [
+            "F6",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F6"
+          ],
+          "formula": "F6 / F5 * 100",
+          "value": "34.76623843490435736855050801",
+          "display_value": "34.7662",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-12-31",
+          "end": "2024-12-28",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-01-31",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C4",
+          "label": "INTC FY2024 operating margin",
+          "requested_label": "FY2024 operating margin",
+          "inputs": [
+            "F3",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F3"
+          ],
+          "formula": "F3 / F1 * 100",
+          "value": "-21.99205288036006854861490367",
+          "display_value": "-21.9921",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C5",
+          "label": "INTC FY2025 operating margin",
+          "requested_label": "FY2025 operating margin",
+          "inputs": [
+            "F7",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F7"
+          ],
+          "formula": "F7 / F5 * 100",
+          "value": "-4.188976973870925018447391823",
+          "display_value": "-4.1890",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "gross_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C6",
+          "label": "INTC FY2025 gross margin change vs FY2024",
+          "requested_label": "Gross margin change",
+          "inputs": [
+            "C3",
+            "C2"
+          ],
+          "source_ids": [
+            "F1",
+            "F2",
+            "F5",
+            "F6"
+          ],
+          "formula": "C3 - C2",
+          "value": "2.10207015182117626085008806",
+          "display_value": "2.1021",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C7",
+          "label": "INTC FY2025 operating margin change vs FY2024",
+          "requested_label": "Operating margin change",
+          "inputs": [
+            "C5",
+            "C4"
+          ],
+          "source_ids": [
+            "F1",
+            "F3",
+            "F5",
+            "F7"
+          ],
+          "formula": "C5 - C4",
+          "value": "17.80307590648914353016751185",
+          "display_value": "17.8031",
+          "warnings": []
+        },
+        {
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-12-29",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-01-23",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C8",
+          "label": "INTC FY2025 operating cash flow growth vs FY2024",
+          "requested_label": "FY2025 operating cash-flow growth",
+          "inputs": [
+            "F8",
+            "F4"
+          ],
+          "source_ids": [
+            "F4",
+            "F8"
+          ],
+          "formula": "(F8 / F4 - 1) * 100",
+          "value": "17.00048262548262548262548260",
+          "display_value": "17.0005",
+          "warnings": []
+        }
+      ],
+      "tool_calls": [
+        "run_analysis",
+        "inspect_calculation"
+      ],
+      "passed": true
+    },
+    {
+      "company": "QCOM",
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Calculate QCOM FY2024 versus FY2025 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+      "answer": "- QCOM FY2025 revenue grew 13.66% [C1], and operating cash flow grew 14.83% [C8]. Gross margin declined, while operating margin improved.\n\n- Revenue: $38.962 billion in FY2024 [F1] → $44.284 billion in FY2025 [F5].\n- Gross margin: 56.21% in FY2024 [C2] → 55.43% in FY2025 [C3]; change: −0.79 percentage points [C6].\n- Operating margin: 25.85% in FY2024 [C4] → 27.90% in FY2025 [C5]; change: +2.05 percentage points [C7].\n- Operating cash flow: $12.202 billion in FY2024 [F4] → $14.012 billion in FY2025 [F8].\n\n- Periods and qualifications:\n  - FY2024: September 25, 2023–September 29, 2024; 53 weeks [F1].\n  - FY2025: September 30, 2024–September 28, 2025; 52 weeks [F5].\n  - Comparisons use reported annual totals, without week normalization. The unequal durations affect comparability.\n  - All inputs use US GAAP consolidated figures on each fiscal year's original-report basis—not later comparative revisions. Margins use the corresponding year's revenue.\n\n- Verified outputs: [CSV table](/api/analysis/ec88e743ba4933ce46e995ba5ae385c26bfce31737604466b86576b006e8aa73/files/table.csv) · [PNG chart](/api/analysis/ec88e743ba4933ce46e995ba5ae385c26bfce31737604466b86576b006e8aa73/files/chart.png). Full precision is retained in the calculation ledger.",
+      "bundle_id": "ec88e743ba4933ce46e995ba5ae385c26bfce31737604466b86576b006e8aa73",
+      "code": "rg = (values['F5'] / values['F1'] - 1) * 100\ngm24 = values['F2'] / values['F1'] * 100\ngm25 = values['F6'] / values['F5'] * 100\nom24 = values['F3'] / values['F1'] * 100\nom25 = values['F7'] / values['F5'] * 100\ngmd = gm25 - gm24\nomd = om25 - om24\nocfg = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'FY2025 revenue growth versus FY2024', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': rg},\n{'label': 'FY2024 gross margin', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm24},\n{'label': 'FY2025 gross margin', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm25},\n{'label': 'FY2024 operating margin', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om24},\n{'label': 'FY2025 operating margin', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om25},\n{'label': 'Gross margin change FY2025 versus FY2024', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gmd},\n{'label': 'Operating margin change FY2025 versus FY2024', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': omd},\n{'label': 'FY2025 operating cash-flow growth versus FY2024', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocfg}\n]",
+      "calculations": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C1",
+          "label": "QCOM FY2025 revenue growth vs FY2024",
+          "requested_label": "FY2025 revenue growth versus FY2024",
+          "inputs": [
+            "F5",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F5"
+          ],
+          "formula": "(F5 / F1 - 1) * 100",
+          "value": "13.65946306657769108361993740",
+          "display_value": "13.6595",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2024-11-06",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C2",
+          "label": "QCOM FY2024 gross margin",
+          "requested_label": "FY2024 gross margin",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "56.21374672758071967558133566",
+          "display_value": "56.2137",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "gross_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C3",
+          "label": "QCOM FY2025 gross margin",
+          "requested_label": "FY2025 gross margin",
+          "inputs": [
+            "F6",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F6"
+          ],
+          "formula": "F6 / F5 * 100",
+          "value": "55.42859723602203956282178665",
+          "display_value": "55.4286",
+          "warnings": []
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2024-11-06",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C4",
+          "label": "QCOM FY2024 operating margin",
+          "requested_label": "FY2024 operating margin",
+          "inputs": [
+            "F3",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F3"
+          ],
+          "formula": "F3 / F1 * 100",
+          "value": "25.84826240952723166161901340",
+          "display_value": "25.8483",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "operating_margin",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "margin",
+          "source_id": "C5",
+          "label": "QCOM FY2025 operating margin",
+          "requested_label": "FY2025 operating margin",
+          "inputs": [
+            "F7",
+            "F5"
+          ],
+          "source_ids": [
+            "F5",
+            "F7"
+          ],
+          "formula": "F7 / F5 * 100",
+          "value": "27.89946707614488302773010568",
+          "display_value": "27.8995",
+          "warnings": []
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "gross_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C6",
+          "label": "QCOM FY2025 gross margin change vs FY2024",
+          "requested_label": "Gross margin change FY2025 versus FY2024",
+          "inputs": [
+            "C3",
+            "C2"
+          ],
+          "source_ids": [
+            "F1",
+            "F2",
+            "F5",
+            "F6"
+          ],
+          "formula": "C3 - C2",
+          "value": "-0.78514949155868011275954901",
+          "display_value": "-0.7851",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "operating_margin_change",
+          "unit": "percentage_points",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C7",
+          "label": "QCOM FY2025 operating margin change vs FY2024",
+          "requested_label": "Operating margin change FY2025 versus FY2024",
+          "inputs": [
+            "C5",
+            "C4"
+          ],
+          "source_ids": [
+            "F1",
+            "F3",
+            "F5",
+            "F7"
+          ],
+          "formula": "C5 - C4",
+          "value": "2.05120466661765136611109228",
+          "display_value": "2.0512",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "operating_cash_flow_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C8",
+          "label": "QCOM FY2025 operating cash flow growth vs FY2024",
+          "requested_label": "FY2025 operating cash-flow growth versus FY2024",
+          "inputs": [
+            "F8",
+            "F4"
+          ],
+          "source_ids": [
+            "F4",
+            "F8"
+          ],
+          "formula": "(F8 / F4 - 1) * 100",
+          "value": "14.83363383051958695295853140",
+          "display_value": "14.8336",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        }
+      ],
+      "tool_calls": [
+        "run_analysis",
+        "inspect_calculation"
+      ],
+      "passed": true
+    }
+  ],
+  "quarter_workers": [
+    {
+      "quarter": 2,
+      "answer": "- AMD FY2025 Q2-only operating cash flow was $2.011 billion, covering March 30–June 28, 2025. [C1]\n- Calculation: $2.950 billion Q2 YTD (December 29, 2024–June 28, 2025) [F4] minus $939 million Q1 YTD (December 29, 2024–March 29, 2025) [F5].\n- Inputs are compatible: same fiscal-year start, USD, US GAAP consolidated, and original-report revision basis. Calculation and lineage were verified; no warnings were returned.\n- Available outputs: [CSV table](/api/analysis/0e55d1bdee3d271feb4a6e1fb1249ea9eca9fe0527d0edf526b58559a9469b48/files/table.csv) · [PNG chart](/api/analysis/0e55d1bdee3d271feb4a6e1fb1249ea9eca9fe0527d0edf526b58559a9469b48/files/chart.png).",
+      "bundle_id": "0e55d1bdee3d271feb4a6e1fb1249ea9eca9fe0527d0edf526b58559a9469b48",
+      "calculations": [
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "Q2",
+          "basis": "quarter",
+          "start": "2025-03-30",
+          "end": "2025-06-28",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-08-06",
+          "kind": "calculation",
+          "calculation_kind": "quarter",
+          "source_id": "C1",
+          "label": "AMD FY2025 Q2 operating cash flow",
+          "requested_label": "AMD FY2025 Q2-only operating cash flow",
+          "inputs": [
+            "F4",
+            "F5"
+          ],
+          "source_ids": [
+            "F4",
+            "F5"
+          ],
+          "formula": "F4 - F5",
+          "value": "2011000000",
+          "display_value": "2,011,000,000",
+          "warnings": []
+        }
+      ],
+      "code": "q2_ocf = values['F4'] - values['F5']\nresults = [{'label': 'AMD FY2025 Q2-only operating cash flow', 'kind': 'quarter', 'inputs': ['F4', 'F5'], 'value': q2_ocf}]",
+      "passed": true
+    },
+    {
+      "quarter": 3,
+      "answer": "- AMD FY2025 Q3-only operating cash flow was $2.159 billion for June 29–September 27, 2025. [C1]\n- Calculation: $5.109 billion Q3 YTD (December 29, 2024–September 27, 2025) [F4] minus $2.950 billion Q2 YTD (December 29, 2024–June 28, 2025). [F5]\n- Inputs are compatible: same fiscal-year start, USD, US GAAP consolidated, and original-report revision basis. Calculation and lineage verified; no warnings.\n- Available: [CSV table](/api/analysis/d7b43ce4c16ebad0d62018293e4adefab0b611bf4c3fa64eac36420ff13766a4/files/table.csv) · [PNG chart](/api/analysis/d7b43ce4c16ebad0d62018293e4adefab0b611bf4c3fa64eac36420ff13766a4/files/chart.png).",
+      "bundle_id": "d7b43ce4c16ebad0d62018293e4adefab0b611bf4c3fa64eac36420ff13766a4",
+      "calculations": [
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "Q3",
+          "basis": "quarter",
+          "start": "2025-06-29",
+          "end": "2025-09-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "quarter",
+          "source_id": "C1",
+          "label": "AMD FY2025 Q3 operating cash flow",
+          "requested_label": "AMD FY2025 Q3-only operating cash flow",
+          "inputs": [
+            "F4",
+            "F5"
+          ],
+          "source_ids": [
+            "F4",
+            "F5"
+          ],
+          "formula": "F4 - F5",
+          "value": "2159000000",
+          "display_value": "2,159,000,000",
+          "warnings": []
+        }
+      ],
+      "code": "q3_ocf = values['F4'] - values['F5']\nresults = [{'label': 'AMD FY2025 Q3-only operating cash flow', 'kind': 'quarter', 'inputs': ['F4', 'F5'], 'value': q3_ocf}]",
+      "passed": true
+    },
+    {
+      "quarter": 4,
+      "answer": "- AMD FY2025 Q4-only operating cash flow was $2.600 billion for September 28–December 27, 2025. [C1]\n- Calculation: FY2025 operating cash flow of $7.709 billion (December 29, 2024–December 27, 2025) [F4] minus Q3 YTD operating cash flow of $5.109 billion (December 29, 2024–September 27, 2025). [F8]\n- Inputs are compatible: same fiscal-year start, USD, US GAAP consolidated, and original-report revision basis. The result is derived, not separately reported; validation returned no warnings. [C1]\n- Verified outputs: [CSV table](/api/analysis/1959c0e7f112b6d671577385e34813f03817ce41e4b61219e07af9cb19e2b0f7/files/table.csv) · [PNG chart](/api/analysis/1959c0e7f112b6d671577385e34813f03817ce41e4b61219e07af9cb19e2b0f7/files/chart.png).",
+      "bundle_id": "1959c0e7f112b6d671577385e34813f03817ce41e4b61219e07af9cb19e2b0f7",
+      "calculations": [
+        {
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "Q4",
+          "basis": "quarter",
+          "start": "2025-09-28",
+          "end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2026-02-04",
+          "kind": "calculation",
+          "calculation_kind": "quarter",
+          "source_id": "C1",
+          "label": "AMD FY2025 Q4 operating cash flow",
+          "requested_label": "AMD FY2025 Q4-only operating cash flow",
+          "inputs": [
+            "F4",
+            "F8"
+          ],
+          "source_ids": [
+            "F4",
+            "F8"
+          ],
+          "formula": "F4 - F8",
+          "value": "2600000000",
+          "display_value": "2,600,000,000",
+          "warnings": []
+        }
+      ],
+      "code": "q4_ocf = values['F4'] - values['F8']\nresults = [\n    {'label': 'AMD FY2025 Q4-only operating cash flow', 'kind': 'quarter', 'inputs': ['F4', 'F8'], 'value': q4_ocf}\n]",
+      "passed": true
+    }
+  ],
+  "failures": [
+    {
+      "case": "cross-company comparison",
+      "evidence_kind": "actual source observations",
+      "error": "Cross-company arithmetic is not a within-company financial comparison",
+      "passed": true
+    },
+    {
+      "case": "zero denominator",
+      "evidence_kind": "explicit synthetic failure fixture; not company evidence",
+      "error": "Zero denominator in generated analysis",
+      "passed": true
+    },
+    {
+      "case": "missing input",
+      "evidence_kind": "unregistered identifier",
+      "error": "Missing financial input: F999",
+      "passed": true
+    },
+    {
+      "case": "prohibited execution",
+      "evidence_kind": "prohibited generated syntax",
+      "error": "Only simple variable assignments are allowed",
+      "passed": true
+    },
+    {
+      "case": "incorrect arithmetic",
+      "evidence_kind": "deliberately wrong formula",
+      "error": "Generated calculation differs from independent recomputation",
+      "passed": true
+    },
+    {
+      "case": "child deadline",
+      "error": "Analysis execution timed out; child terminated",
+      "passed": true
+    }
+  ],
+  "application": {
+    "question": "Calculate AMD FY2024 versus FY2025 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+    "answer": "- AMD FY2025 revenue grew 34.34%; operating cash flow grew 153.50%. Operating margin expanded more than gross margin. [C1] [C8] [C6] [C7]\n- Revenue: $25.785 billion in FY2024 → $34.639 billion in FY2025. [F1] [F5]\n- Gross margin: 49.35% → 49.52%; increase of 0.17 percentage points. [C2] [C3] [C6]\n- Operating margin: 7.37% → 10.66%; increase of 3.30 percentage points. [C4] [C5] [C7]\n- Operating cash flow: $3.041 billion → $7.709 billion. [F4] [F8]\n- Actual fiscal intervals:\n  - FY2024: 2023-12-31 through 2024-12-28. [F1]\n  - FY2025: 2024-12-29 through 2025-12-27. [F5]\n- Comparison qualifications: USD, US GAAP consolidated, annual original-report observations from each year's respective 10-K—not later revised comparatives. Intervals are comparable and non-overlapping; no comparison warnings were registered. Margin changes are percentage points, not percentage growth.\n- Verified arithmetic and inspected operating-margin-change lineage. Full precision is retained in the ledger; displayed results are rounded.\n- Available downloads: [CSV table](/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/files/table.csv) · [PNG chart](/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/files/chart.png).",
+    "sources": [
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "revenue_growth",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "growth",
+        "source_id": "C1",
+        "label": "AMD FY2025 revenue growth vs FY2024",
+        "requested_label": "Revenue growth FY2025 versus FY2024",
+        "inputs": [
+          "F5",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F5"
+        ],
+        "formula": "(F5 / F1 - 1) * 100",
+        "value": "34.33779329067287182470428540",
+        "display_value": "34.3378",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C1",
+        "text": "AMD FY2025 revenue growth vs FY2024: 34.33779329067287182470428540 percent; (F5 / F1 - 1) * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "gross_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2025-02-05",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C2",
+        "label": "AMD FY2024 gross margin",
+        "requested_label": "Gross margin FY2024",
+        "inputs": [
+          "F2",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F2"
+        ],
+        "formula": "F2 / F1 * 100",
+        "value": "49.35039751793678495249175877",
+        "display_value": "49.3504",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C2",
+        "text": "AMD FY2024 gross margin: 49.35039751793678495249175877 percent; F2 / F1 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "gross_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C3",
+        "label": "AMD FY2025 gross margin",
+        "requested_label": "Gross margin FY2025",
+        "inputs": [
+          "F6",
+          "F5"
+        ],
+        "source_ids": [
+          "F5",
+          "F6"
+        ],
+        "formula": "F6 / F5 * 100",
+        "value": "49.51644100580270793036750484",
+        "display_value": "49.5164",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C3",
+        "text": "AMD FY2025 gross margin: 49.51644100580270793036750484 percent; F6 / F5 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "operating_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2025-02-05",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C4",
+        "label": "AMD FY2024 operating margin",
+        "requested_label": "Operating margin FY2024",
+        "inputs": [
+          "F3",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F3"
+        ],
+        "formula": "F3 / F1 * 100",
+        "value": "7.368625169672290091138258678",
+        "display_value": "7.3686",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C4",
+        "text": "AMD FY2024 operating margin: 7.368625169672290091138258678 percent; F3 / F1 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C5",
+        "label": "AMD FY2025 operating margin",
+        "requested_label": "Operating margin FY2025",
+        "inputs": [
+          "F7",
+          "F5"
+        ],
+        "source_ids": [
+          "F5",
+          "F7"
+        ],
+        "formula": "F7 / F5 * 100",
+        "value": "10.66428014665550391177574410",
+        "display_value": "10.6643",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C5",
+        "text": "AMD FY2025 operating margin: 10.66428014665550391177574410 percent; F7 / F5 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "gross_margin_change",
+        "unit": "percentage_points",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "difference",
+        "source_id": "C6",
+        "label": "AMD FY2025 gross margin change vs FY2024",
+        "requested_label": "Gross margin change",
+        "inputs": [
+          "C3",
+          "C2"
+        ],
+        "source_ids": [
+          "F1",
+          "F2",
+          "F5",
+          "F6"
+        ],
+        "formula": "C3 - C2",
+        "value": "0.16604348786592297787574607",
+        "display_value": "0.1660",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C6",
+        "text": "AMD FY2025 gross margin change vs FY2024: 0.16604348786592297787574607 percentage_points; C3 - C2"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_margin_change",
+        "unit": "percentage_points",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "difference",
+        "source_id": "C7",
+        "label": "AMD FY2025 operating margin change vs FY2024",
+        "requested_label": "Operating margin change",
+        "inputs": [
+          "C5",
+          "C4"
+        ],
+        "source_ids": [
+          "F1",
+          "F3",
+          "F5",
+          "F7"
+        ],
+        "formula": "C5 - C4",
+        "value": "3.295654976983213820637485422",
+        "display_value": "3.2957",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C7",
+        "text": "AMD FY2025 operating margin change vs FY2024: 3.295654976983213820637485422 percentage_points; C5 - C4"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow_growth",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "growth",
+        "source_id": "C8",
+        "label": "AMD FY2025 operating cash flow growth vs FY2024",
+        "requested_label": "Operating cash flow growth FY2025 versus FY2024",
+        "inputs": [
+          "F8",
+          "F4"
+        ],
+        "source_ids": [
+          "F4",
+          "F8"
+        ],
+        "formula": "(F8 / F4 - 1) * 100",
+        "value": "153.5021374547846103255508057",
+        "display_value": "153.5021",
+        "warnings": [],
+        "bundle_id": "f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/calculations/C8",
+        "text": "AMD FY2025 operating cash flow growth vs FY2024: 153.5021374547846103255508057 percent; (F8 / F4 - 1) * 100"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "revenue",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-25-000012",
+        "accession": "0000002488-25-000012",
+        "form": "10-K",
+        "filed": "2025-02-05",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "value": 25785000000,
+        "conflicting_comparatives": [],
+        "observation_id": "4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+        "source_id": "F1",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/observations/F1",
+        "text": "AMD FY2024 FY annual: revenue = 25785000000 USD; 2023-12-31 through 2024-12-28; original accession 0000002488-25-000012.",
+        "original_url": "/api/originals/amd-0000002488-25-000012",
+        "snapshot_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-25-000012",
+        "accession": "0000002488-25-000012",
+        "form": "10-K",
+        "filed": "2025-02-05",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 3041000000,
+        "conflicting_comparatives": [],
+        "observation_id": "ad00e21cd7adc45bf4f2ed4467056251cf3756b1227ada51819bf6f5b5a7ceba",
+        "source_id": "F4",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/observations/F4",
+        "text": "AMD FY2024 FY annual: operating_cash_flow = 3041000000 USD; 2023-12-31 through 2024-12-28; original accession 0000002488-25-000012.",
+        "original_url": "/api/originals/amd-0000002488-25-000012",
+        "snapshot_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "revenue",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "value": 34639000000,
+        "conflicting_comparatives": [],
+        "observation_id": "4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+        "source_id": "F5",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/observations/F5",
+        "text": "AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+        "original_url": "/api/originals/amd-0000002488-26-000018",
+        "snapshot_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 7709000000,
+        "conflicting_comparatives": [],
+        "observation_id": "fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+        "source_id": "F8",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/observations/F8",
+        "text": "AMD FY2025 FY annual: operating_cash_flow = 7709000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+        "original_url": "/api/originals/amd-0000002488-26-000018",
+        "snapshot_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Financial Data → Financial Analysis / Quant",
+          "companies": [
+            "AMD"
+          ],
+          "years": [
+            2024,
+            2025
+          ],
+          "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_financial_query",
+          "arguments": [
+            {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue",
+                "gross_profit",
+                "operating_income",
+                "operating_cash_flow"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Data",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2024,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F5"
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "handoff",
+          "decision": "Financial Analysis / Quant",
+          "observations": 8,
+          "reason": "Pass verified structured observations; keep input selection separate from calculation"
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Analysis / Quant",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "run_analysis",
+          "arguments": {
+            "code": "revenue_growth = (values['F5'] / values['F1'] - 1) * 100\ngm24 = values['F2'] / values['F1'] * 100\ngm25 = values['F6'] / values['F5'] * 100\nom24 = values['F3'] / values['F1'] * 100\nom25 = values['F7'] / values['F5'] * 100\ngm_change = gm25 - gm24\nom_change = om25 - om24\nocf_growth = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'Revenue growth FY2025 versus FY2024', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': revenue_growth},\n{'label': 'Gross margin FY2024', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm24},\n{'label': 'Gross margin FY2025', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm25},\n{'label': 'Operating margin FY2024', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om24},\n{'label': 'Operating margin FY2025', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om25},\n{'label': 'Gross margin change', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gm_change},\n{'label': 'Operating margin change', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': om_change},\n{'label': 'Operating cash flow growth FY2025 versus FY2024', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocf_growth}\n]"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_calculation",
+          "arguments": {
+            "source_id": "C7"
+          }
+        }
+      }
+    ],
+    "seconds": 40.233,
+    "answer_token_ttft_seconds": 33.281,
+    "verified_against_independent_references": true,
+    "file_checks": [
+      {
+        "name": "table.csv",
+        "passed": true
+      },
+      {
+        "name": "chart.png",
+        "passed": true
+      },
+      {
+        "name": "analysis.py",
+        "passed": true
+      }
+    ],
+    "table_matches_ledger": true,
+    "input_inspection": {
+      "kind": "financial_observation",
+      "company": "AMD",
+      "fiscal_year": 2025,
+      "period": "FY",
+      "basis": "annual",
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "metric": "revenue",
+      "unit": "USD",
+      "accounting_basis": "US GAAP consolidated",
+      "revision_basis": "original_report",
+      "version": "original",
+      "document_id": "amd-0000002488-26-000018",
+      "accession": "0000002488-26-000018",
+      "form": "10-K",
+      "filed": "2026-02-04",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+      "warnings": [],
+      "inputs": [],
+      "formula": null,
+      "status": "available",
+      "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "value": 34639000000,
+      "conflicting_comparatives": [],
+      "observation_id": "4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+      "source_id": "F5",
+      "section": "financial_observation",
+      "inspection_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/observations/F5",
+      "text": "AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+      "original_url": "/api/originals/amd-0000002488-26-000018",
+      "snapshot_url": "/api/analysis/f03cdfbde6ccf878caf71c182f71182e3787fc8ca6eb85d93c7e7c8d57d10da2/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+    },
+    "frozen_snapshot_hash_matches": true,
+    "passed": true
+  },
+  "unknown_artifact_status": 404,
+  "browser": {
+    "status": "Complete · citations verified",
+    "table_rows": 8,
+    "chart_loaded": true,
+    "downloads": 4,
+    "input_inspection": "{\n  \"kind\": \"financial_observation\",\n  \"company\": \"AMD\",\n  \"fiscal_year\": 2025,\n  \"period\": \"FY\",\n  \"basis\": \"annual\",\n  \"start\": \"2024-12-29\",\n  \"end\": \"2025-12-27\",\n  \"fiscal_start\": \"2024-12-29\",\n  \"fiscal_end\": \"2025-12-27\",\n  \"metric\": \"revenue\",\n  \"unit\": \"USD\",\n  \"accounting_basis\": \"US GAAP consolidated\",\n  \"revision_basis\": \"original_report\",\n  \"version\": \"original\",\n  \"document_id\": \"amd-0000002488-26-000018\",\n  \"accession\": \"0000002488-26-000018\",\n  \"form\": \"10-K\",\n  \"filed\": \"2026-02-04\",\n  \"canonical_url\": \"https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm\",\n  \"facts_url\": \"https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json\",\n  \"snapshot_sha256\": \"21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\",\n  \"retrieved_at\": \"2026-10-15T17:13:59.996062+00:00\",\n  \"warnings\": [],\n  \"inputs\": [],\n  \"formula\": null,\n  \"status\": \"available\",\n  \"tag\": \"us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax\",\n  \"value\": 34639000000,\n  \"conflicting_comparatives\": [],\n  \"observation_id\": \"4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d\",\n  \"source_id\": \"F5\",\n  \"section\": \"financial_observation\",\n  \"inspection_url\": \"/api/analysis/2dd31e53a2141c7bab8accc0bf84da1889004c73ecaff1636b8cc2de36dbebab/observations/F5\",\n  \"text\": \"AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.\",\n  \"original_url\": \"/api/originals/amd-0000002488-26-000018\",\n  \"snapshot_url\": \"/api/analysis/2dd31e53a2141c7bab8accc0bf84da1889004c73ecaff1636b8cc2de36dbebab/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\"\n}",
+    "page_errors": [],
+    "passed": true
+  },
+  "passed": true
+}

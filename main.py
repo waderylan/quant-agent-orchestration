@@ -1,4 +1,4 @@
-"""Local M3 application. Run: uv run --locked uvicorn main:app --port 8080."""
+"""Local public-company research and financial analysis API with streamed answers."""
 
 import asyncio
 import json
@@ -15,6 +15,7 @@ from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
 from src.codex_transport import request_connections
 from src.financial_data import FinancialStore, FINANCIALS
+from src.analysis_artifacts import ArtifactStore
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
 
@@ -31,6 +32,7 @@ async def lifespan(app):
     app.state.financials = FinancialStore(
         (ROOT / os.getenv("FINANCIAL_DATA_DIR", str(FINANCIALS))).resolve()
     )
+    app.state.artifacts = ArtifactStore()
     yield
 
 
@@ -111,6 +113,57 @@ def financial_snapshot(sha256: str):
     try:
         return FileResponse(
             app.state.financials.snapshot(sha256),
+            media_type="application/json",
+            filename=f"sec-companyfacts-{sha256}.json",
+        )
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
+@app.get("/api/analysis/{identity}/calculations/{source_id}")
+def calculation(identity: str, source_id: str):
+    try:
+        return app.state.artifacts.calculation(identity, source_id)
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
+@app.get("/api/analysis/{identity}/files/{name}")
+def analysis_file(identity: str, name: str):
+    try:
+        path = app.state.artifacts.file(identity, name)
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+    media_type = {
+        "chart.png": "image/png",
+        "table.csv": "text/csv",
+        "analysis.py": "text/plain",
+        "bundle.json": "application/json",
+    }[name]
+    return FileResponse(
+        path, media_type=media_type, filename=None if name == "chart.png" else name
+    )
+
+
+@app.get("/api/analysis/{identity}/observations/{source_id}")
+def analysis_observation(identity: str, source_id: str):
+    try:
+        bundle = app.state.artifacts.load(identity)
+        return app.state.artifacts.observation_source(
+            identity, bundle["sources"][source_id]
+        )
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
+@app.get("/api/analysis/{identity}/snapshots/{sha256}")
+def analysis_snapshot(identity: str, sha256: str):
+    try:
+        bundle = app.state.artifacts.load(identity)
+        allowed = {s["snapshot_sha256"] for s in bundle["sources"].values()}
+        path = app.state.financials.snapshot(sha256, allowed=allowed)
+        return FileResponse(
+            path,
             media_type="application/json",
             filename=f"sec-companyfacts-{sha256}.json",
         )

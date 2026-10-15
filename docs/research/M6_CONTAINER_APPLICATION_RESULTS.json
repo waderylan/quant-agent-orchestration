@@ -1,0 +1,950 @@
+{
+  "checked_at": "2026-10-15T17:58:47.140507+00:00",
+  "kind": "M6 exploratory acceptance; no formal scores",
+  "direct_workers": [],
+  "quarter_workers": [],
+  "execution_scope": "application/browser only",
+  "failures": [
+    {
+      "case": "cross-company comparison",
+      "evidence_kind": "actual source observations",
+      "error": "Cross-company arithmetic is not a within-company financial comparison",
+      "passed": true
+    },
+    {
+      "case": "zero denominator",
+      "evidence_kind": "explicit synthetic failure fixture; not company evidence",
+      "error": "Zero denominator in generated analysis",
+      "passed": true
+    },
+    {
+      "case": "missing input",
+      "evidence_kind": "unregistered identifier",
+      "error": "Missing financial input: F999",
+      "passed": true
+    },
+    {
+      "case": "prohibited execution",
+      "evidence_kind": "prohibited generated syntax",
+      "error": "Only simple variable assignments are allowed",
+      "passed": true
+    },
+    {
+      "case": "incorrect arithmetic",
+      "evidence_kind": "deliberately wrong formula",
+      "error": "Generated calculation differs from independent recomputation",
+      "passed": true
+    },
+    {
+      "case": "child deadline",
+      "error": "Analysis execution timed out; child terminated",
+      "passed": true
+    }
+  ],
+  "application": {
+    "question": "Calculate AMD FY2024 versus FY2025 revenue growth, gross and operating margins for both years, each margin change in percentage points, and operating cash-flow growth. State actual dates and comparison qualifications; provide a table/chart.",
+    "answer": "- AMD revenue rose 34.34%, from $25.785 billion in FY2024 [F1] to $34.639 billion in FY2025 [F5]. [C1]\n- Gross margin increased from 49.35% [C2] to 49.52% [C3], a gain of 0.17 percentage points. [C6]\n- Operating margin increased from 7.37% [C4] to 10.66% [C5], a gain of 3.30 percentage points. [C7]\n- Operating cash flow grew 153.50%, from $3.041 billion [F4] to $7.709 billion. [F8] [C8]\n- Actual fiscal periods:\n  - FY2024: December 31, 2023–December 28, 2024. [F1]\n  - FY2025: December 29, 2024–December 27, 2025. [F5]\n- Comparison basis: USD, annual US GAAP consolidated figures, using each year’s original-report observations—not later revised comparatives. The fiscal intervals are comparable and non-overlapping; no comparison warnings were registered. Margin changes use unrounded calculations.\n- Verified outputs: [CSV table](/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/files/table.csv) · [PNG chart](/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/files/chart.png).",
+    "sources": [
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "revenue_growth",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "growth",
+        "source_id": "C1",
+        "label": "AMD FY2025 revenue growth vs FY2024",
+        "requested_label": "Revenue growth FY2025 versus FY2024",
+        "inputs": [
+          "F5",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F5"
+        ],
+        "formula": "(F5 / F1 - 1) * 100",
+        "value": "34.33779329067287182470428540",
+        "display_value": "34.3378",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C1",
+        "text": "AMD FY2025 revenue growth vs FY2024: 34.33779329067287182470428540 percent; (F5 / F1 - 1) * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "gross_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2025-02-05",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C2",
+        "label": "AMD FY2024 gross margin",
+        "requested_label": "FY2024 gross margin",
+        "inputs": [
+          "F2",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F2"
+        ],
+        "formula": "F2 / F1 * 100",
+        "value": "49.35039751793678495249175877",
+        "display_value": "49.3504",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C2",
+        "text": "AMD FY2024 gross margin: 49.35039751793678495249175877 percent; F2 / F1 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "gross_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C3",
+        "label": "AMD FY2025 gross margin",
+        "requested_label": "FY2025 gross margin",
+        "inputs": [
+          "F6",
+          "F5"
+        ],
+        "source_ids": [
+          "F5",
+          "F6"
+        ],
+        "formula": "F6 / F5 * 100",
+        "value": "49.51644100580270793036750484",
+        "display_value": "49.5164",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C3",
+        "text": "AMD FY2025 gross margin: 49.51644100580270793036750484 percent; F6 / F5 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "operating_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2025-02-05",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C4",
+        "label": "AMD FY2024 operating margin",
+        "requested_label": "FY2024 operating margin",
+        "inputs": [
+          "F3",
+          "F1"
+        ],
+        "source_ids": [
+          "F1",
+          "F3"
+        ],
+        "formula": "F3 / F1 * 100",
+        "value": "7.368625169672290091138258678",
+        "display_value": "7.3686",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C4",
+        "text": "AMD FY2024 operating margin: 7.368625169672290091138258678 percent; F3 / F1 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_margin",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "margin",
+        "source_id": "C5",
+        "label": "AMD FY2025 operating margin",
+        "requested_label": "FY2025 operating margin",
+        "inputs": [
+          "F7",
+          "F5"
+        ],
+        "source_ids": [
+          "F5",
+          "F7"
+        ],
+        "formula": "F7 / F5 * 100",
+        "value": "10.66428014665550391177574410",
+        "display_value": "10.6643",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C5",
+        "text": "AMD FY2025 operating margin: 10.66428014665550391177574410 percent; F7 / F5 * 100"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "gross_margin_change",
+        "unit": "percentage_points",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "difference",
+        "source_id": "C6",
+        "label": "AMD FY2025 gross margin change vs FY2024",
+        "requested_label": "Gross margin change",
+        "inputs": [
+          "C3",
+          "C2"
+        ],
+        "source_ids": [
+          "F1",
+          "F2",
+          "F5",
+          "F6"
+        ],
+        "formula": "C3 - C2",
+        "value": "0.16604348786592297787574607",
+        "display_value": "0.1660",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C6",
+        "text": "AMD FY2025 gross margin change vs FY2024: 0.16604348786592297787574607 percentage_points; C3 - C2"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_margin_change",
+        "unit": "percentage_points",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "difference",
+        "source_id": "C7",
+        "label": "AMD FY2025 operating margin change vs FY2024",
+        "requested_label": "Operating margin change",
+        "inputs": [
+          "C5",
+          "C4"
+        ],
+        "source_ids": [
+          "F1",
+          "F3",
+          "F5",
+          "F7"
+        ],
+        "formula": "C5 - C4",
+        "value": "3.295654976983213820637485422",
+        "display_value": "3.2957",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C7",
+        "text": "AMD FY2025 operating margin change vs FY2024: 3.295654976983213820637485422 percentage_points; C5 - C4"
+      },
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow_growth",
+        "unit": "percent",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "growth",
+        "source_id": "C8",
+        "label": "AMD FY2025 operating cash flow growth vs FY2024",
+        "requested_label": "Operating cash flow growth FY2025 versus FY2024",
+        "inputs": [
+          "F8",
+          "F4"
+        ],
+        "source_ids": [
+          "F4",
+          "F8"
+        ],
+        "formula": "(F8 / F4 - 1) * 100",
+        "value": "153.5021374547846103255508057",
+        "display_value": "153.5021",
+        "warnings": [],
+        "bundle_id": "e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/calculations/C8",
+        "text": "AMD FY2025 operating cash flow growth vs FY2024: 153.5021374547846103255508057 percent; (F8 / F4 - 1) * 100"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "revenue",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-25-000012",
+        "accession": "0000002488-25-000012",
+        "form": "10-K",
+        "filed": "2025-02-05",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "value": 25785000000,
+        "conflicting_comparatives": [],
+        "observation_id": "4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+        "source_id": "F1",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/observations/F1",
+        "text": "AMD FY2024 FY annual: revenue = 25785000000 USD; 2023-12-31 through 2024-12-28; original accession 0000002488-25-000012.",
+        "original_url": "/api/originals/amd-0000002488-25-000012",
+        "snapshot_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2023-12-31",
+        "end": "2024-12-28",
+        "fiscal_start": "2023-12-31",
+        "fiscal_end": "2024-12-28",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-25-000012",
+        "accession": "0000002488-25-000012",
+        "form": "10-K",
+        "filed": "2025-02-05",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 3041000000,
+        "conflicting_comparatives": [],
+        "observation_id": "ad00e21cd7adc45bf4f2ed4467056251cf3756b1227ada51819bf6f5b5a7ceba",
+        "source_id": "F4",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/observations/F4",
+        "text": "AMD FY2024 FY annual: operating_cash_flow = 3041000000 USD; 2023-12-31 through 2024-12-28; original accession 0000002488-25-000012.",
+        "original_url": "/api/originals/amd-0000002488-25-000012",
+        "snapshot_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "revenue",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "value": 34639000000,
+        "conflicting_comparatives": [],
+        "observation_id": "4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+        "source_id": "F5",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/observations/F5",
+        "text": "AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+        "original_url": "/api/originals/amd-0000002488-26-000018",
+        "snapshot_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 7709000000,
+        "conflicting_comparatives": [],
+        "observation_id": "fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+        "source_id": "F8",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/observations/F8",
+        "text": "AMD FY2025 FY annual: operating_cash_flow = 7709000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+        "original_url": "/api/originals/amd-0000002488-26-000018",
+        "snapshot_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Financial Data → Financial Analysis / Quant",
+          "companies": [
+            "AMD"
+          ],
+          "years": [
+            2024,
+            2025
+          ],
+          "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_financial_query",
+          "arguments": [
+            {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue",
+                "gross_profit",
+                "operating_income",
+                "operating_cash_flow"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Data",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2024,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F5"
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "handoff",
+          "decision": "Financial Analysis / Quant",
+          "observations": 8,
+          "reason": "Pass verified structured observations; keep input selection separate from calculation"
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Analysis / Quant",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "run_analysis",
+          "arguments": {
+            "code": "rev_growth = (values['F5'] / values['F1'] - 1) * 100\ngm24 = values['F2'] / values['F1'] * 100\ngm25 = values['F6'] / values['F5'] * 100\nom24 = values['F3'] / values['F1'] * 100\nom25 = values['F7'] / values['F5'] * 100\ngm_change = gm25 - gm24\nom_change = om25 - om24\nocf_growth = (values['F8'] / values['F4'] - 1) * 100\nresults = [\n{'label': 'Revenue growth FY2025 versus FY2024', 'kind': 'growth', 'inputs': ['F5', 'F1'], 'value': rev_growth},\n{'label': 'FY2024 gross margin', 'kind': 'margin', 'inputs': ['F2', 'F1'], 'value': gm24},\n{'label': 'FY2025 gross margin', 'kind': 'margin', 'inputs': ['F6', 'F5'], 'value': gm25},\n{'label': 'FY2024 operating margin', 'kind': 'margin', 'inputs': ['F3', 'F1'], 'value': om24},\n{'label': 'FY2025 operating margin', 'kind': 'margin', 'inputs': ['F7', 'F5'], 'value': om25},\n{'label': 'Gross margin change', 'kind': 'difference', 'inputs': ['C3', 'C2'], 'value': gm_change},\n{'label': 'Operating margin change', 'kind': 'difference', 'inputs': ['C5', 'C4'], 'value': om_change},\n{'label': 'Operating cash flow growth FY2025 versus FY2024', 'kind': 'growth', 'inputs': ['F8', 'F4'], 'value': ocf_growth}\n]"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_calculation",
+          "arguments": {
+            "source_id": "C7"
+          }
+        }
+      }
+    ],
+    "seconds": 42.418,
+    "answer_token_ttft_seconds": 36.027,
+    "verified_against_independent_references": true,
+    "file_checks": [
+      {
+        "name": "table.csv",
+        "passed": true
+      },
+      {
+        "name": "chart.png",
+        "passed": true
+      },
+      {
+        "name": "analysis.py",
+        "passed": true
+      }
+    ],
+    "table_matches_ledger": true,
+    "input_inspection": {
+      "kind": "financial_observation",
+      "company": "AMD",
+      "fiscal_year": 2025,
+      "period": "FY",
+      "basis": "annual",
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "fiscal_start": "2024-12-29",
+      "fiscal_end": "2025-12-27",
+      "metric": "revenue",
+      "unit": "USD",
+      "accounting_basis": "US GAAP consolidated",
+      "revision_basis": "original_report",
+      "version": "original",
+      "document_id": "amd-0000002488-26-000018",
+      "accession": "0000002488-26-000018",
+      "form": "10-K",
+      "filed": "2026-02-04",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+      "warnings": [],
+      "inputs": [],
+      "formula": null,
+      "status": "available",
+      "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+      "value": 34639000000,
+      "conflicting_comparatives": [],
+      "observation_id": "4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+      "source_id": "F5",
+      "section": "financial_observation",
+      "inspection_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/observations/F5",
+      "text": "AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+      "original_url": "/api/originals/amd-0000002488-26-000018",
+      "snapshot_url": "/api/analysis/e476b260d6e858314103f59e75a2c03578ed07af0d5efdcf3999dfeae68ed305/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+    },
+    "frozen_snapshot_hash_matches": true,
+    "passed": true
+  },
+  "quarter_application": {
+    "question": "Calculate AMD FY2025 Q4-only operating cash flow using compatible cumulative inputs, with exact USD, fiscal dates, and a table/chart.",
+    "answer": "- AMD FY2025 Q4-only operating cash flow was **USD 2,600,000,000**, covering **2025-09-28 through 2025-12-27**. [C1]\n- Calculation: FY2025 operating cash flow of USD 7,709,000,000 (2024-12-29–2025-12-27) [F4] minus Q3 YTD operating cash flow of USD 5,109,000,000 (2024-12-29–2025-09-27). [F8]\n- Inputs are compatible: same fiscal-year start, USD units, US GAAP consolidated accounting, and original-report revision basis. The result is derived, not separately reported; calculation inspection returned no warnings. [C1]\n- Available downloads: [CSV table](/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/files/table.csv) · [PNG chart](/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/files/chart.png).",
+    "sources": [
+      {
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "Q4",
+        "basis": "quarter",
+        "start": "2025-09-28",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "revision_basis": "original_report",
+        "accounting_basis": "US GAAP consolidated",
+        "filed": "2026-02-04",
+        "kind": "calculation",
+        "calculation_kind": "quarter",
+        "source_id": "C1",
+        "label": "AMD FY2025 Q4 operating cash flow",
+        "requested_label": "AMD FY2025 Q4-only operating cash flow",
+        "inputs": [
+          "F4",
+          "F8"
+        ],
+        "source_ids": [
+          "F4",
+          "F8"
+        ],
+        "formula": "F4 - F8",
+        "value": "2600000000",
+        "display_value": "2,600,000,000",
+        "warnings": [],
+        "bundle_id": "f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8",
+        "inspection_url": "/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/calculations/C1",
+        "text": "AMD FY2025 Q4 operating cash flow: 2600000000 USD; F4 - F8"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 7709000000,
+        "conflicting_comparatives": [],
+        "observation_id": "fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+        "source_id": "F4",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/observations/F4",
+        "text": "AMD FY2025 FY annual: operating_cash_flow = 7709000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.",
+        "original_url": "/api/originals/amd-0000002488-26-000018",
+        "snapshot_url": "/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "Q3",
+        "basis": "ytd",
+        "start": "2024-12-29",
+        "end": "2025-09-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-25-000166",
+        "accession": "0000002488-25-000166",
+        "form": "10-Q",
+        "filed": "2025-11-05",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 5109000000,
+        "conflicting_comparatives": [],
+        "observation_id": "e22038b1eef04fd9d46635f0f2cf867c85d952dc7abc10c7265593b3f5e6578b",
+        "source_id": "F8",
+        "section": "financial_observation",
+        "inspection_url": "/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/observations/F8",
+        "text": "AMD FY2025 Q3 ytd: operating_cash_flow = 5109000000 USD; 2024-12-29 through 2025-09-27; original accession 0000002488-25-000166.",
+        "original_url": "/api/originals/amd-0000002488-25-000166",
+        "snapshot_url": "/api/analysis/f7edff71eefa864dc5f03218d79f811ba64a80c5da05e571cf2edd724afd0fa8/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Financial Data → Financial Analysis / Quant",
+          "companies": [
+            "AMD"
+          ],
+          "years": [
+            2025
+          ],
+          "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_financial_query",
+          "arguments": [
+            {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue",
+                "gross_profit",
+                "operating_income",
+                "operating_cash_flow"
+              ]
+            },
+            {
+              "period": "Q3",
+              "basis": "ytd",
+              "metrics": [
+                "revenue",
+                "gross_profit",
+                "operating_income",
+                "operating_cash_flow"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Data",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "period": "Q3",
+            "basis": "ytd",
+            "metrics": [
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F4"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F8"
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "handoff",
+          "decision": "Financial Analysis / Quant",
+          "observations": 8,
+          "reason": "Pass verified structured observations; keep input selection separate from calculation"
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Analysis / Quant",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "run_analysis",
+          "arguments": {
+            "code": "q4_ocf = values['F4'] - values['F8']\nresults = [{'label': 'AMD FY2025 Q4-only operating cash flow', 'kind': 'quarter', 'inputs': ['F4', 'F8'], 'value': q4_ocf}]"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_calculation",
+          "arguments": {
+            "source_id": "C1"
+          }
+        }
+      }
+    ],
+    "seconds": 25.58,
+    "answer_token_ttft_seconds": 21.326,
+    "passed": true
+  },
+  "unknown_artifact_status": 404,
+  "browser": {
+    "status": "Complete · citations verified",
+    "table_rows": 8,
+    "chart_loaded": true,
+    "downloads": 4,
+    "input_inspection": "{\n  \"kind\": \"financial_observation\",\n  \"company\": \"AMD\",\n  \"fiscal_year\": 2025,\n  \"period\": \"FY\",\n  \"basis\": \"annual\",\n  \"start\": \"2024-12-29\",\n  \"end\": \"2025-12-27\",\n  \"fiscal_start\": \"2024-12-29\",\n  \"fiscal_end\": \"2025-12-27\",\n  \"metric\": \"revenue\",\n  \"unit\": \"USD\",\n  \"accounting_basis\": \"US GAAP consolidated\",\n  \"revision_basis\": \"original_report\",\n  \"version\": \"original\",\n  \"document_id\": \"amd-0000002488-26-000018\",\n  \"accession\": \"0000002488-26-000018\",\n  \"form\": \"10-K\",\n  \"filed\": \"2026-02-04\",\n  \"canonical_url\": \"https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm\",\n  \"facts_url\": \"https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json\",\n  \"snapshot_sha256\": \"21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\",\n  \"retrieved_at\": \"2026-10-15T17:13:59.996062+00:00\",\n  \"warnings\": [],\n  \"inputs\": [],\n  \"formula\": null,\n  \"status\": \"available\",\n  \"tag\": \"us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax\",\n  \"value\": 34639000000,\n  \"conflicting_comparatives\": [],\n  \"observation_id\": \"4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d\",\n  \"source_id\": \"F5\",\n  \"section\": \"financial_observation\",\n  \"inspection_url\": \"/api/analysis/d2c0fd6286e65351ee581bb731e064e362dc0c7b2b91ad9e13869f22a3767a57/observations/F5\",\n  \"text\": \"AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018.\",\n  \"original_url\": \"/api/originals/amd-0000002488-26-000018\",\n  \"snapshot_url\": \"/api/analysis/d2c0fd6286e65351ee581bb731e064e362dc0c7b2b91ad9e13869f22a3767a57/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\"\n}",
+    "page_errors": [],
+    "passed": true,
+    "screenshot": "artifacts\\m6_container_application_results.png"
+  },
+  "passed": true
+}

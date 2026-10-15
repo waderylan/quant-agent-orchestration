@@ -1,54 +1,15 @@
 {
-  "checked_at": "2026-10-15T17:23:36.615402+00:00",
+  "checked_at": "2026-10-15T17:56:13.954943+00:00",
   "missing_cash_flow": {
-    "question": "Show AMD FY2025 Q2-only operating cash flow",
-    "answer": "No compatible original-report observations for {\"period\": \"Q2\", \"basis\": \"quarter\", \"metrics\": [\"operating_cash_flow\"]}. Missing values are not zero; quarter-only cash flow requires Quant derivation.",
-    "sources": [],
-    "terminal": {
-      "type": "complete",
-      "data": {
-        "verified_citations": false,
-        "status": "coverage_gap"
-      }
-    },
-    "trace": [
-      {
-        "type": "trace",
-        "data": {
-          "agent": "Supervisor",
-          "node": "scope",
-          "decision": "Financial Data",
-          "companies": [
-            "AMD"
-          ],
-          "years": [
-            2025
-          ],
-          "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research"
-        }
-      },
-      {
-        "type": "tool",
-        "data": {
-          "name": "initial_financial_query",
-          "arguments": {
-            "period": "Q2",
-            "basis": "quarter",
-            "metrics": [
-              "operating_cash_flow"
-            ]
-          }
-        }
-      }
-    ],
-    "seconds": 0.701,
-    "answer_token_ttft_seconds": 0.699,
+    "error": "No compatible original-report observations for {\"period\": \"Q2\", \"basis\": \"quarter\", \"metrics\": [\"operating_cash_flow\"]}. Missing values are not zero; quarter-only cash flow requires Quant derivation.",
+    "answer": "",
+    "execution_scope": "direct Financial Data; the application uses Quant for this derivation",
     "passed": true
   },
   "concurrent_scopes": [
     {
       "question": "Show NVIDIA FY2026 Q2-only revenue in exact USD, with actual dates and sources.",
-      "answer": "- NVIDIA FY2026 Q2-only revenue: USD 46,743,000,000, consolidated US GAAP, for April 28–July 27, 2025; not year-to-date. [F1]\n- Fiscal year: January 27, 2025–January 25, 2026. [F1]\n- Source: original-report Form 10-Q, filed August 27, 2025; accession 0001045810-25-000209. https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm [F1]",
+      "answer": "- NVIDIA FY2026 Q2-only revenue: USD 46,743,000,000, consolidated US GAAP, for April 28–July 27, 2025—not year-to-date. [F1]\n- Fiscal year: January 27, 2025–January 25, 2026. Revision basis: original report. [F1]\n- Source: SEC Form 10-Q filed August 27, 2025; accession 0001045810-25-000209; tag us-gaap:Revenues. https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm [F1]",
       "sources": [
         {
           "kind": "financial_observation",
@@ -107,7 +68,7 @@
             "years": [
               2026
             ],
-            "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research"
+            "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research"
           }
         },
         {
@@ -157,13 +118,13 @@
           }
         }
       ],
-      "seconds": 9.779,
-      "answer_token_ttft_seconds": 7.337,
+      "seconds": 10.903,
+      "answer_token_ttft_seconds": 7.943,
       "passed": true
     },
     {
       "question": "Show AMD FY2025 Q2 year-to-date operating cash flow in exact USD, with actual dates and sources.",
-      "answer": "- AMD FY2025 Q2 year-to-date operating cash flow: USD 2,950,000,000, consolidated US GAAP, for December 29, 2024–June 28, 2025. This is year-to-date, not Q2 alone. [F1]\n- Original-report basis: Form 10-Q filed August 6, 2025; accession 0000002488-25-000108. Source: https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm [F1]",
+      "answer": "- AMD FY2025 Q2 year-to-date operating cash flow: USD 2,950,000,000, consolidated US GAAP, for December 29, 2024–June 28, 2025. This is cumulative YTD, not Q2 alone. [F1]\n- Fiscal year: December 29, 2024–December 27, 2025. Revision basis: original report. [F1]\n- Source: AMD Form 10-Q filed August 6, 2025, accession 0000002488-25-000108; cash-flow tag `us-gaap:NetCashProvidedByUsedInOperatingActivities`. https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm [F1]",
       "sources": [
         {
           "kind": "financial_observation",
@@ -222,7 +183,7 @@
             "years": [
               2025
             ],
-            "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research"
+            "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research"
           }
         },
         {
@@ -272,8 +233,8 @@
           }
         }
       ],
-      "seconds": 9.194,
-      "answer_token_ttft_seconds": 6.68,
+      "seconds": 11.256,
+      "answer_token_ttft_seconds": 7.938,
       "passed": true
     }
   ],

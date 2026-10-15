@@ -1,9 +1,9 @@
 # Evaluation
 
-- Status: formal evaluations are **unstarted**. M3 correctness and exploratory application/browser checks are separate evidence.
+- Status: formal evaluations are **unstarted**. M3–M6 correctness, direct-role, native application/browser, and local Docker checks are separate evidence.
 - Source feasibility and preparation are verified for NVIDIA, AMD, Intel, and Qualcomm. [M1 evidence](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) records aligned financial inputs; [M2 evidence](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) records 41/41 bodies/extractions, section/table checks, and no collection gaps.
 - Source availability checks are basic correctness evidence; they are not RAGAS scores, agent evaluations, provider comparisons, or deployed acceptance results.
-- Original-document collection and readable preparation are implemented. M3 implements RAG and a local filings-research workflow. Structured financial observations and Financial Data are implemented; numerical analysis is unimplemented. Formal evaluation follows working demonstrations and Rylan Wade's feedback.
+- Original-document collection and readable preparation are implemented. M3 implements RAG and a local filings-research workflow. Structured observations, Financial Data, and bounded independently checked Quant analysis are implemented. Formal evaluation follows working demonstrations and Rylan Wade's feedback.
 
 ## Evaluation scope
 
@@ -56,3 +56,10 @@
 
 - [M5 demonstration](research/M5_DEMONSTRATION_RESULTS.json) records 32 source/reference checks, four independent Data worker runs, actual application output, financial Chromium inspection, collected snapshot hashes, and unsupported adjusted metrics. [Edge evidence](research/M5_EDGE_RESULTS.json) records quarter/YTD/missing-data behavior and concurrent scope isolation.
 - [M5 Docker](research/M5_CONTAINER_RESULTS.json) verifies financial output with a read-only observation mount while preserving research streaming, credential isolation, model failure, and process-tree cleanup. These checks are exploratory acceptance evidence, not RAGAS scores, financial-analysis scores, or deployment-provider measurements.
+
+## Financial Analysis / Quant correctness
+
+- [M6 native evidence](research/M6_DEMONSTRATION_RESULTS.json) records four actual direct annual Quant runs checked against independent source references; AMD Q2/Q3/Q4 cash-flow derivations; actual Data-to-Quant application and Chromium behavior; table/ledger/file/snapshot checks; and explicitly labeled rejection/deadline probes.
+- [M6 Docker evidence](research/M6_CONTAINER_RESULTS.json) and [container application/browser evidence](research/M6_CONTAINER_APPLICATION_RESULTS.json) verify the Linux interpreter/plotting/export path, ordinary research/Data behavior, non-root/authentication isolation, model errors, cancellation, and resource observations.
+- The 61-case focused suite protects provenance, extraction, research, transport cleanup, Data selection, bounded generated execution, independent arithmetic/lineage, revision/period/unit errors, negative margins, quarterly derivations, artifact integrity, and handoff failures. These are correctness checks, not formal model-judged scores.
+- Final-answer claim-level correctness, held-out generalization, required RAGAS metrics, broader trajectory checks, judge calibration, comparative provider measurements, and Cloud Run retesting remain pending. Select the formal-evaluation checkpoint from Rylan Wade's feedback on the working research/numerical workflow.

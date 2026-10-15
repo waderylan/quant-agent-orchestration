@@ -10,21 +10,28 @@ import httpx
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.demo_support import capture_turn
+from src.financial_data import FinancialStore
+from src.financial_workflow import financial_turn
 from src.source_collection import ROOT, now, write_json
 
 
 async def main(args):
     async with httpx.AsyncClient(base_url=args.url, timeout=240) as client:
-        missing = await capture_turn(
-            client, "Show AMD FY2025 Q2-only operating cash flow", ["AMD"], [2025]
+        direct_events = []
+        missing = await financial_turn(
+            FinancialStore(),
+            {
+                "question": "Show AMD FY2025 Q2-only operating cash flow",
+                "companies": ["AMD"],
+                "years": [2025],
+            },
+            direct_events.append,
         )
-        missing["passed"] = (
-            missing["terminal"]["data"]["status"] == "coverage_gap"
-            and "not zero" in missing["answer"]
-            and not any(
-                e["type"] == "trace" and e["data"].get("provider")
-                for e in missing["trace"]
-            )
+        missing["execution_scope"] = (
+            "direct Financial Data; the application uses Quant for this derivation"
+        )
+        missing["passed"] = "not zero" in missing.get("error", "") and not any(
+            e["type"] == "trace" and e["data"].get("provider") for e in direct_events
         )
         # Run concurrent scopes; request-local F IDs must resolve to their own company.
         questions = [
