@@ -38,6 +38,7 @@ chroma_index/
 artifacts/
 reports/
 data/corpus/
+data/financials/
 
 # Editor and operating-system files
 .idea/

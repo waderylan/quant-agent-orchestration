@@ -1,14 +1,14 @@
 # Public-Company Research Assistant
 
 - Owner: Rylan Wade.
-- Status: **M1–M4 implemented and verified; local Docker acceptance passes**. M2 and M3 are accepted.
+- Status: **M1–M5 implemented and verified; local Docker acceptance passes**. M2 and M3 are accepted.
 - Initial company set: NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM).
 - Company coverage starts with these four and is planned to expand. Approximately 20 companies is the expansion target, subject to source coverage, working demonstrations, and feedback.
 - Selected years: NVIDIA FY2025–2026; AMD, Intel, and Qualcomm FY2024–2025. Fiscal dates differ and must remain visible in comparisons.
 - Verified corpus: **41/41 documents** — 32 annual/quarterly reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The local Chroma index contains 10,681 chunks.
-- Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
+- Available structured figures: consolidated US GAAP revenue, gross profit, operating income/loss, and operating cash flow, with exact fiscal intervals and original accession provenance. Growth/margins and Quant execution remain M6 work.
 
-Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, Quant, Risk Summary, live/shared MCP, multi-provider routing and deployment remain unimplemented. Local Docker is verified.
+Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data and local Docker are implemented and verified. Quant, Risk Summary, live/shared MCP, multi-provider routing, and deployment remain unimplemented.
 
 ## Run local research
 
@@ -23,7 +23,7 @@ uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 - Install Codex CLI and authenticate with `codex login`; local generation uses its subscription. Open `http://127.0.0.1:8080` and ask a question with explicit company/fiscal-year selection.
 - Inspect live answer tokens, routing/tool traces, and clickable citations. The source panel highlights exact passages and links to canonical filings, official mirrors, and collected originals.
 - Local embeddings use CPU ONNX MiniLM; first ingestion downloads its pinned model. Chroma and corpus data are gitignored reproducible artifacts. No paid generation APIs are called by this local profile.
-- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained; financial calculations, live research, and conversation memory are unavailable.
+- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained; financial calculations, live research, and conversation memory are unavailable. Structured figure requests route to Financial Data; explanatory questions route to Filings Research.
 
 ```powershell
 uv run --locked python scripts/research.py status
@@ -83,6 +83,8 @@ uv run --locked pytest -q
 | [Project spec](docs/planning/PROJECT_SPEC.md) | Selected scope, architecture direction, development constraints, and open decisions. |
 | [M1 feasibility](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) | Dated source evidence, financial inputs, access limitations, and filing inventory. |
 | [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) | Verified corpus, extraction decisions, inspection commands, future collection, and limits. |
+| [M4 container](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) | Verified local Docker, authenticated host generation, isolation, and cancellation. |
+| [M5 financial data](docs/planning/M5_FINANCIAL_DATA_AGENT.md) | Observation selection, original-report policy, Data worker, inspection, and evidence. |
 | [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) | Local RAG, direct Codex generation, browser/source inspection, and actual verification. |
 | [Architecture](docs/architecture.md) | Selected design and component implementation status. |
 | [Evaluation](docs/evaluation.md) | Evaluation status and required reporting areas; no runtime scores or performance results. |
@@ -93,3 +95,13 @@ uv run --locked pytest -q
 - Law and ski documents in docs/ideas/ are unselected alternatives.
 - docs/cost_analysis.md, docs/frontend_vibecode_prompt.md, and docs/alternative_*.md are instructor reference guidance. Their example models, routes, files, and configurations do not describe an implemented HW2 application.
 - CLAUDE.md imports the canonical AGENTS.md instructions.
+
+## Run financial data
+
+```powershell
+uv run --locked python scripts/financials.py collect
+uv run --locked python scripts/financials.py query --company AMD --year 2025 --period Q2 --basis quarter
+uv run --locked python scripts/financials.py agent "Show AMD FY2025 consolidated GAAP revenue and operating cash flow with exact USD figures and sources." --company AMD --year 2025
+```
+
+- Ask structured figure questions in the same browser. Financial citations open dates, units, accession/revision evidence, collected originals, and the hash-checked SEC snapshot. [M5 details](docs/planning/M5_FINANCIAL_DATA_AGENT.md) include demonstration and refresh commands.

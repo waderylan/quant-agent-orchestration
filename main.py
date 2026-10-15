@@ -14,6 +14,7 @@ from pydantic import BaseModel, Field
 from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
 from src.codex_transport import request_connections
+from src.financial_data import FinancialStore, FINANCIALS
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
 
@@ -27,6 +28,9 @@ async def lifespan(app):
         (ROOT / os.getenv("RESEARCH_INDEX_DIR", str(INDEX))).resolve(),
     )
     app.state.turns = asyncio.Semaphore(2)
+    app.state.financials = FinancialStore(
+        (ROOT / os.getenv("FINANCIAL_DATA_DIR", str(FINANCIALS))).resolve()
+    )
     yield
 
 
@@ -87,6 +91,33 @@ def original(document_id: str):
     )
 
 
+@app.get("/api/financial/observations/{observation_id}")
+def financial_observation(observation_id: str):
+    try:
+        row = app.state.financials.inspect(observation_id)
+        document = app.state.index.documents.get(row["document_id"], {})
+        return {
+            **row,
+            "original_url": f"/api/originals/{row['document_id']}",
+            "retrieval_url": document.get("body", {}).get("retrieval_url"),
+            "snapshot_url": f"/api/financial/snapshots/{row['snapshot_sha256']}",
+        }
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
+@app.get("/api/financial/snapshots/{sha256}")
+def financial_snapshot(sha256: str):
+    try:
+        return FileResponse(
+            app.state.financials.snapshot(sha256),
+            media_type="application/json",
+            filename=f"sec-companyfacts-{sha256}.json",
+        )
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
 @app.post("/api/chat")
 async def chat(question: Question, request: Request):
     async def response():
@@ -105,6 +136,11 @@ async def chat(question: Question, request: Request):
                         question.question.strip(),
                         list(dict.fromkeys(question.companies)),
                         list(dict.fromkeys(question.years)),
+                        **(
+                            {"financials": app.state.financials}
+                            if app.state.financials.path.exists()
+                            else {}
+                        ),
                     )
                 ) as stream:
                     async for event in stream:

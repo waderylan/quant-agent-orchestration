@@ -32,14 +32,15 @@ function years(){const companies=selected('company'),available=[...new Set(compa
 fetch('/api/coverage').then(r=>r.json()).then(data=>{coverage=data;years()}).catch(()=>{$('status').textContent='Coverage unavailable'});
 $('company').addEventListener('change',years);
 async function inspect(source){const r=await fetch(source.inspection_url);if(!r.ok){$('source-label').textContent='Passage unavailable; rebuild the index if sources changed.';return}
- const p=await r.json();$('source-label').replaceChildren(document.createTextNode(`${p.company} · FY${p.fiscal_year} · ${p.form} · ${p.period_end} · ${p.version} · ${p.section}${p.page?' · page '+p.page:''} `));
- for(const [label,url] of [['SEC filing',p.canonical_url],['Official retrieval source',p.retrieval_url],['Collected original',p.original_url]]){const link=document.createElement('a');link.href=url;link.textContent=label;link.target='_blank';link.rel='noopener noreferrer';$('source-label').append(link,document.createTextNode(' · '))}
+ const p=await r.json();$('source-label').replaceChildren(document.createTextNode(p.kind==='financial_observation'?`${p.company} · FY${p.fiscal_year} · ${p.metric} · ${p.start} → ${p.end} · ${p.basis} · USD `:`${p.company} · FY${p.fiscal_year} · ${p.form} · ${p.period_end} · ${p.version} · ${p.section}${p.page?' · page '+p.page:''} `));
+ for(const [label,url] of [['SEC filing',p.canonical_url],['Official retrieval source',p.retrieval_url],['Collected original',p.original_url],['Collected SEC facts',p.snapshot_url]]){if(!url)continue;const link=document.createElement('a');link.href=url;link.textContent=label;link.target='_blank';link.rel='noopener noreferrer';$('source-label').append(link,document.createTextNode(' · '))}
+ if(p.kind==='financial_observation'){const pre=document.createElement('pre');pre.textContent=JSON.stringify(p,null,2);$('passage').replaceChildren(pre);return}
  if(p.risk_context_note)$('source-label').append(document.createTextNode(p.risk_context_note));
  const pre=document.createElement('pre'),mark=document.createElement('mark'),start=p.start-p.context_start;mark.textContent=p.text;
  pre.append(document.createTextNode(p.context.slice(0,start)),mark,document.createTextNode(p.context.slice(start+p.text.length)));$('passage').replaceChildren(pre)}
 function displaySources(sources){$('sources').replaceChildren(...sources.map(s=>{const b=document.createElement('button');b.type='button';b.className='source';
- b.textContent=`[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.form} (${s.version}) · ${s.section}`;b.onclick=()=>inspect(s);return b}));
- const text=$('answer').textContent,parts=text.split(/(\[S\d+\])/);$('answer').replaceChildren(...parts.map(part=>{const source=sources.find(s=>'['+s.source_id+']'===part);if(!source)return document.createTextNode(part);const a=document.createElement('a');a.href=source.inspection_url;a.textContent=part;a.onclick=e=>{e.preventDefault();inspect(source)};return a}))}
+ b.textContent=s.kind==='financial_observation'?`[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.metric} · ${s.period} ${s.basis}`:`[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.form} (${s.version}) · ${s.section}`;b.onclick=()=>inspect(s);return b}));
+ const text=$('answer').textContent,parts=text.split(/(\[[A-Z]\d+\])/);$('answer').replaceChildren(...parts.map(part=>{const source=sources.find(s=>'['+s.source_id+']'===part);if(!source)return document.createTextNode(part);const a=document.createElement('a');a.href=source.inspection_url;a.textContent=part;a.onclick=e=>{e.preventDefault();inspect(source)};return a}))}
 function event(type,data){if(type==='token')$('answer').append(document.createTextNode(data));
  else if(type==='sources')displaySources(data);
  else if(type==='error'){$('status').textContent=data;$('status').className='error';$('trace').textContent+=JSON.stringify({event:type,data},null,2)+'\n'}

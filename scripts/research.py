@@ -79,10 +79,17 @@ def main():
         return
     else:
         from src.research_workflow import events
+        from src.financial_data import FinancialStore
 
         async def ask():
             failed = False
-            async for event in events(index, args.question, args.company, args.year):
+            async for event in events(
+                index,
+                args.question,
+                args.company,
+                args.year,
+                financials=FinancialStore(),
+            ):
                 print(json.dumps(event, ensure_ascii=True), flush=True)
                 failed |= (
                     event["type"] == "complete"

@@ -17,6 +17,8 @@ async def stream(
     *,
     model: str | None = None,
     timeout: int = 180,
+    agent: str = "Filings Research",
+    reason: str = "Historical filing research using local evidence",
 ):
     """Yield model text and inspected tool events; close the process on cancellation."""
     transport = connection()
@@ -65,17 +67,17 @@ async def stream(
                     "model": model or os.getenv("RESEARCH_MODEL", "gpt-6.1-sol"),
                     "environments": [],
                     "dynamicTools": tools,
-                    "baseInstructions": "You are a filings research assistant, not a coding assistant. Answer the supplied research question using only the provided evidence and tools.",
-                    "developerInstructions": "Use only the supplied research tools. Never access files, shell, web, or other tools. Do not address a named user. Stream the final research answer; put progress messages in commentary.",
+                    "baseInstructions": f"You are the {agent} specialist in a public-company research application. Follow the supplied role instructions using only the provided evidence and dynamic tools.",
+                    "developerInstructions": "Use only the supplied dynamic tools. Never access files, shell, web, or other tools. Do not address a named user. Stream the final answer; put progress messages in commentary.",
                 },
             )
             yield {
                 "type": "trace",
                 "data": {
-                    "agent": "Filings Research",
+                    "agent": agent,
                     "provider": "Codex subscription",
                     "model": started.get("model"),
-                    "reason": "Historical filing research using local evidence",
+                    "reason": reason,
                 },
             }
             await request(

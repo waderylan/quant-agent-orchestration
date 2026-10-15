@@ -1,7 +1,7 @@
 # Architecture
 
 - Owner: Rylan Wade.
-- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker acceptance passes; remaining workers, formal evaluations, and deployment are unimplemented.
+- Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker acceptance and Financial Data pass; Quant, Risk Summary, formal evaluations, and deployment are unimplemented.
 - Contract: [assignment](assignment/Assignment_2_Description.md), [project scope](planning/PROJECT_SPEC.md), and [M3 demonstration](planning/M3_FIRST_RAG_RESEARCH_DEMO.md).
 
 ## Local request path
@@ -11,6 +11,9 @@ flowchart LR
     UI[Vanilla browser chat] -->|POST + SSE| API[FastAPI]
     API --> S[LangGraph scope supervisor]
     S --> R[Filings Research]
+    S --> D[Financial Data]
+    D --> F[Accession-scoped SEC observations]
+    D <-->|Distinct dynamic tools| CX
     R --> LC[LCEL retrieval + augmentation]
     LC --> V[Persistent Chroma + CPU MiniLM]
     R <-->|Dynamic tools + answer deltas| CX[Direct Codex app-server]
@@ -20,10 +23,10 @@ flowchart LR
 ```
 
 - `main.py` serves the vanilla HTML/JS document and SSE. `src/research_workflow.py` owns the graph, worker, scope validation, LCEL pipeline, and request-local evidence registry.
-- Graph: `START → supervisor → research → finish → END`; unsupported scope routes directly from supervisor to finish. The supervisor applies explicit coverage rules and delegates the task; learned routing and multi-worker cooperation are unimplemented.
-- State contains question, companies, fiscal years, answer, and error. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
+- Graph: `START → supervisor → research|data → finish → END`; unsupported scope routes directly from supervisor to finish. The supervisor applies explicit coverage rules and delegates the task; structured figure requests select Financial Data through a provisional visible rule; learned routing and full multi-worker cooperation are unimplemented.
+- State contains question, companies, fiscal years, selected worker, answer, error, and registered financial sources. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
 - Filings Research uses its own [role prompt](../prompts/filings_research.md) and two actual tools: `search_sources` and `inspect_source`. The same worker runs independently through `scripts/research.py agent`.
-- Financial Data, Quant, Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented.
+- Quant, Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented. Financial Data uses distinct structured-query/observation-inspection tools.
 
 ## Corpus and ingestion
 
@@ -81,3 +84,10 @@ flowchart LR
 - Read-only corpus/model mounts and an isolated writable Chroma copy preserve native index independence.
 - `CODEX_BRIDGE_URL` and `CODEX_BRIDGE_TOKEN_FILE` select an authenticated local bridge. The host retains CLI credentials and owns/kills a separate app-server process per connection. Native runs use the same transport interface with a local child.
 - [M4 acceptance](planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) records runnable commands, browser/model evidence, cancellation, measured resources, and development-only boundaries.
+
+## Structured financial evidence
+
+- Financial Data has its own prompt, `query_financials` and `inspect_observation`, graph node, and direct CLI. Company/year filters are request scoped. Registered F citations use observation IDs, independently of semantic RAG S citations.
+- Four content-addressed Company Facts snapshots supply exact original-accession GAAP USD observations, with explicit annual/quarter/YTD intervals, amendment separation, conflict/missing statuses, and retained later comparative revisions. Qualcomm gross profit retains both inputs and its formula; 53-week context remains visible.
+- `FinancialStore` verifies inventory/snapshot identity and reconstructs prepared observations before serving them. No chat-time financial download or automatic refresh occurs.
+- Source inspection routes expose observation metadata and hash-checked snapshots. Browser text-node rendering preserves safe display. [M5](planning/M5_FINANCIAL_DATA_AGENT.md) describes schemas, selection policy, CLI, API, and evidence.

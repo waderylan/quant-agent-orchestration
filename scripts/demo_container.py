@@ -14,6 +14,7 @@ import httpx
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.demo_research import application_turn
+from scripts.demo_support import capture_turn
 from src.source_collection import ROOT, now, write_json
 from src.codex_transport import terminate_owned
 
@@ -32,8 +33,16 @@ async def main(args):
     token = staging / "bridge.token"
     log = (staging / "bridge.log").open("w", encoding="utf-8")
     bridge = subprocess.Popen(
-        [sys.executable, str(ROOT / "scripts/codex_bridge.py"), "--host", "0.0.0.0",
-         "--token-file", str(token)], stdout=log, stderr=log,
+        [
+            sys.executable,
+            str(ROOT / "scripts/codex_bridge.py"),
+            "--host",
+            "0.0.0.0",
+            "--token-file",
+            str(token),
+        ],
+        stdout=log,
+        stderr=log,
         creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
         start_new_session=os.name != "nt",
     )
@@ -45,23 +54,56 @@ async def main(args):
                 break
             await asyncio.sleep(0.1)
         if bridge.poll() is not None:
-            raise RuntimeError("Host bridge did not start; inspect artifacts/local-container/bridge.log")
+            raise RuntimeError(
+                "Host bridge did not start; inspect artifacts/local-container/bridge.log"
+            )
         if not args.skip_build:
             with (staging / "build.log").open("w") as output:
-                subprocess.run(["docker", "build", "-t", args.image, "."], cwd=ROOT,
-                               check=True, stdout=output, stderr=subprocess.STDOUT)
+                subprocess.run(
+                    ["docker", "build", "-t", args.image, "."],
+                    cwd=ROOT,
+                    check=True,
+                    stdout=output,
+                    stderr=subprocess.STDOUT,
+                )
         started = time.perf_counter()
+        financial_mount = (
+            [
+                "--mount",
+                f"type=bind,source={ROOT / 'data/financials'},target=/app/data/financials,readonly",
+            ]
+            if (ROOT / "data/financials/manifest.json").exists()
+            else []
+        )
         container = docker(
-            "run", "-d", "--memory", "2g", "--cpus", "2", "-p", "127.0.0.1:8084:9090",
-            "-e", "PORT=9090", "-e", "CODEX_BRIDGE_URL=tcp://host.docker.internal:8765",
-            "-e", "CODEX_BRIDGE_TOKEN_FILE=/run/secrets/codex-bridge",
-            "--mount", f"type=bind,source={ROOT / 'data/corpus'},target=/app/data/corpus,readonly",
-            "--mount", f"type=bind,source={index},target=/app/chroma_index",
-            "--mount", f"type=bind,source={cache},target=/home/appuser/.cache/chroma/onnx_models/all-MiniLM-L6-v2,readonly",
-            "--mount", f"type=bind,source={token},target=/run/secrets/codex-bridge,readonly",
+            "run",
+            "-d",
+            "--memory",
+            "2g",
+            "--cpus",
+            "2",
+            "-p",
+            "127.0.0.1:8084:9090",
+            "-e",
+            "PORT=9090",
+            "-e",
+            "CODEX_BRIDGE_URL=tcp://host.docker.internal:8765",
+            "-e",
+            "CODEX_BRIDGE_TOKEN_FILE=/run/secrets/codex-bridge",
+            "--mount",
+            f"type=bind,source={ROOT / 'data/corpus'},target=/app/data/corpus,readonly",
+            "--mount",
+            f"type=bind,source={index},target=/app/chroma_index",
+            "--mount",
+            f"type=bind,source={cache},target=/home/appuser/.cache/chroma/onnx_models/all-MiniLM-L6-v2,readonly",
+            "--mount",
+            f"type=bind,source={token},target=/run/secrets/codex-bridge,readonly",
+            *financial_mount,
             args.image,
         )
-        async with httpx.AsyncClient(base_url="http://127.0.0.1:8084", timeout=240) as client:
+        async with httpx.AsyncClient(
+            base_url="http://127.0.0.1:8084", timeout=240
+        ) as client:
             for _ in range(120):
                 try:
                     response = await client.get("/api/coverage")
@@ -71,24 +113,54 @@ async def main(args):
                     pass
                 await asyncio.sleep(0.5)
             else:
-                raise RuntimeError("Container startup failed: " + docker("logs", container))
+                raise RuntimeError(
+                    "Container startup failed: " + docker("logs", container)
+                )
             report["fresh_start_seconds"] = round(time.perf_counter() - started, 3)
             report["coverage"] = response.json()
             report["ui_status"] = (await client.get("/")).status_code
             report["identity"] = docker("exec", container, "id")
-            report["credential_isolation"] = json.loads(docker(
-                "exec", container, "python", "-c",
-                "import pathlib,shutil,json; print(json.dumps({'codex_installed':bool(shutil.which('codex')),'codex_home_exists':pathlib.Path('/home/appuser/.codex').exists(),'root_auth_exists':pathlib.Path('/app/.env').exists()}))",
-            ))
-            report["application"] = await application_turn(
-                client, "NVDA", 2026, "What drove NVIDIA's full-year revenue growth in FY2026?",
+            report["credential_isolation"] = json.loads(
+                docker(
+                    "exec",
+                    container,
+                    "python",
+                    "-c",
+                    "import pathlib,shutil,json; print(json.dumps({'codex_installed':bool(shutil.which('codex')),'codex_home_exists':pathlib.Path('/home/appuser/.codex').exists(),'root_auth_exists':pathlib.Path('/app/.env').exists()}))",
+                )
             )
-            report["resources"] = docker("stats", "--no-stream", "--format", "{{json .}}", container)
+            report["application"] = await application_turn(
+                client,
+                "NVDA",
+                2026,
+                "What drove NVIDIA's full-year revenue growth in FY2026?",
+            )
+            if financial_mount:
+                result = await capture_turn(
+                    client,
+                    "Show AMD FY2025 consolidated GAAP revenue in exact USD, with fiscal dates and original sources.",
+                    ["AMD"],
+                    [2025],
+                )
+                report["financial_application"] = {
+                    "answer": result["answer"],
+                    "terminal": result["terminal"],
+                    "passed": result["terminal"]["data"]["status"] == "completed"
+                    and any(s.get("value") == 34639000000 for s in result["sources"]),
+                }
+            report["resources"] = docker(
+                "stats", "--no-stream", "--format", "{{json .}}", container
+            )
             # Disconnect after an actual model starts, then inspect owned host PIDs.
-            async with client.stream("POST", "/api/chat", json={
-                "question": "Explain NVIDIA FY2026 revenue drivers in detail",
-                "companies": ["NVDA"], "years": [2026],
-            }) as response:
+            async with client.stream(
+                "POST",
+                "/api/chat",
+                json={
+                    "question": "Explain NVIDIA FY2026 revenue drivers in detail",
+                    "companies": ["NVDA"],
+                    "years": [2026],
+                },
+            ) as response:
                 async for line in response.aiter_lines():
                     if '"provider": "Codex subscription"' in line:
                         break
@@ -100,25 +172,52 @@ async def main(args):
                     report["disconnect_cleanup"] = True
                     break
                 await asyncio.sleep(0.1)
-            report["disconnect_cleanup_seconds"] = round(time.perf_counter() - disconnected, 3)
+            report["disconnect_cleanup_seconds"] = round(
+                time.perf_counter() - disconnected, 3
+            )
             if not report["disconnect_cleanup"]:
                 print(docker("logs", container), flush=True)
             # Exercise unavailable models inside the actual image/transport.
-            failed = docker("exec", container, "python", "-c",
-                "import asyncio; from src.codex_model import stream\nasync def test():\n try:\n  async for e in stream('Answer briefly',[],lambda *a:None,model='unavailable-hw2-model'): pass\n except RuntimeError as e: print(str(e))\n else: raise SystemExit('Unavailable model unexpectedly succeeded')\nasyncio.run(test())")
-            report["unavailable_model"] = {"passed": "not supported" in failed, "error": failed}
-            browser = subprocess.run([
-                sys.executable, str(ROOT / "scripts/demo_browser.py"), "--url", "http://127.0.0.1:8084",
-                "--output", str(ROOT / "docs/research/M4_BROWSER_RESULTS.json"),
-            ], check=True, capture_output=True, text=True)
+            failed = docker(
+                "exec",
+                container,
+                "python",
+                "-c",
+                "import asyncio; from src.codex_model import stream\nasync def test():\n try:\n  async for e in stream('Answer briefly',[],lambda *a:None,model='unavailable-hw2-model'): pass\n except RuntimeError as e: print(str(e))\n else: raise SystemExit('Unavailable model unexpectedly succeeded')\nasyncio.run(test())",
+            )
+            report["unavailable_model"] = {
+                "passed": "not supported" in failed,
+                "error": failed,
+            }
+            browser = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts/demo_browser.py"),
+                    "--url",
+                    "http://127.0.0.1:8084",
+                    "--output",
+                    str(args.browser_output),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
             report["browser"] = browser.stdout.strip()
-        report["image_id"] = docker("image", "inspect", "--format", "{{.Id}}", args.image)
-        report["image_bytes"] = int(docker("image", "inspect", "--format", "{{.Size}}", args.image))
+        report["image_id"] = docker(
+            "image", "inspect", "--format", "{{.Id}}", args.image
+        )
+        report["image_bytes"] = int(
+            docker("image", "inspect", "--format", "{{.Size}}", args.image)
+        )
         isolation = report["credential_isolation"]
-        report["passed"] = (report["application"]["passed"] and report["disconnect_cleanup"]
-                            and report["unavailable_model"]["passed"]
-                            and report["identity"].startswith("uid=10001")
-                            and not any(isolation.values()))
+        report["passed"] = (
+            report["application"]["passed"]
+            and report["disconnect_cleanup"]
+            and report["unavailable_model"]["passed"]
+            and report["identity"].startswith("uid=10001")
+            and not any(isolation.values())
+            and report.get("financial_application", {"passed": True})["passed"]
+        )
         # Keep evidence compact; the cited answer and inspections remain reviewable.
         report["application"].pop("events")
         write_json(args.output, report)
@@ -137,5 +236,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", default="hw2-research:m4")
     parser.add_argument("--skip-build", action="store_true")
-    parser.add_argument("--output", type=Path, default=ROOT / "docs/research/M4_CONTAINER_RESULTS.json")
+    parser.add_argument(
+        "--output", type=Path, default=ROOT / "docs/research/M4_CONTAINER_RESULTS.json"
+    )
+    parser.add_argument(
+        "--browser-output",
+        type=Path,
+        default=ROOT / "docs/research/M4_BROWSER_RESULTS.json",
+    )
     asyncio.run(main(parser.parse_args()))

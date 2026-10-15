@@ -1,0 +1,875 @@
+{
+  "checked_at": "2026-10-15T17:19:18.634455+00:00",
+  "kind": "M5 exploratory correctness; no formal scores",
+  "source_checks": [
+    {
+      "company": "NVDA",
+      "year": 2025,
+      "metric": "revenue",
+      "value": 130497000000,
+      "accession": "0001045810-25-000023",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 130497000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                       $            130,497         $             60,922                         Up 114%\nGross margin                          "
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2025,
+      "metric": "gross_profit",
+      "value": 97858000000,
+      "accession": "0001045810-25-000023",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 97858000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                                    97,858                     44,301                     15,356\n  Operating expenses\n         Research and de"
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2025,
+      "metric": "operating_income",
+      "value": 81453000000,
+      "accession": "0001045810-25-000023",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 81453000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                     $              81,453        $             32,972                         Up 147%\nNet income                             "
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2025,
+      "metric": "operating_cash_flow",
+      "value": 64089000000,
+      "accession": "0001045810-25-000023",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 64089000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                    $               64,089      $               28,090\nNet cash used in investing activities                                  "
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2026,
+      "metric": "revenue",
+      "value": 215938000000,
+      "accession": "0001045810-26-000021",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 215938000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                       $            215,938         $            130,497                           Up 65%\nGross margin                         "
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2026,
+      "metric": "gross_profit",
+      "value": 153463000000,
+      "accession": "0001045810-26-000021",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 153463000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                                    153,463                     97,858                     44,301\n  Operating expenses\n         Research and de"
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2026,
+      "metric": "operating_income",
+      "value": 130387000000,
+      "accession": "0001045810-26-000021",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 130387000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                       $            130,387         $              81,453                          Up 60%\nNet income                           "
+        }
+      ]
+    },
+    {
+      "company": "NVDA",
+      "year": 2026,
+      "metric": "operating_cash_flow",
+      "value": 102718000000,
+      "accession": "0001045810-26-000021",
+      "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 102718000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                      $             102,718       $              64,089\nNet cash used in investing activities                                  "
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2024,
+      "metric": "revenue",
+      "value": 25785000000,
+      "accession": "0000002488-25-000012",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 25785000000,
+          "found_in_collected_filing": true,
+          "passage": "4 | | | 4,651 |\nGaming | 2,595 | | | 6,212 |\nEmbedded | 3,557 | | | 5,321 |\nTotal net revenue | $ | 25,785 | | | $ | 22,680 |\nOperating income (loss): | | |\nData Center | $ | 3,482 | | | $ | 1,267 |\nClient "
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2024,
+      "metric": "gross_profit",
+      "value": 12725000000,
+      "accession": "0000002488-25-000012",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 12725000000,
+          "found_in_collected_filing": true,
+          "passage": "| | 11,278 | |\nAmortization of acquisition-related intangibles | 946 | | | | 942 | |\nGross profit | 12,725 | | | | 10,460 | |\nGross margin | 49 | % | | 46 | %\nResearch and development | 6,456 | | | | 5,872 "
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2024,
+      "metric": "operating_income",
+      "value": 1900000000,
+      "accession": "0000002488-25-000012",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 1900000000,
+          "found_in_collected_filing": true,
+          "passage": " As of December 28, 2024, we had approximately 7,500 patents in the United States and approximately 1,900 patent applications pending in the United States. In certain cases, we have filed corresponding app"
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2024,
+      "metric": "operating_cash_flow",
+      "value": 3041000000,
+      "accession": "0000002488-25-000012",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 3041000000,
+          "found_in_collected_filing": true,
+          "passage": " December 30, 2023\n| (In millions)\nNet cash provided by (used in): | | |\nOperating activities | $ | 3,041 | | | $ | 1,667 |\nInvesting activities | (1,101) | | | (1,423) |\nFinancing activities | (2,062) | |"
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2025,
+      "metric": "revenue",
+      "value": 34639000000,
+      "accession": "0000002488-26-000018",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 34639000000,
+          "found_in_collected_filing": true,
+          "passage": "tal Client and Gaming | 14,550 | | | 9,649 |\nEmbedded | 3,454 | | | 3,557 |\nTotal net revenue | $ | 34,639 | | | $ | 25,785 |\n| | |\nCost of sales and operating expenses: | | |\nData Center | $ | 13,032 | | |"
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2025,
+      "metric": "gross_profit",
+      "value": 17152000000,
+      "accession": "0000002488-26-000018",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 17152000000,
+          "found_in_collected_filing": true,
+          "passage": "| 12,114 | |\nAmortization of acquisition-related intangibles | 1,031 | | | | 946 | |\nGross profit | 17,152 | | | | 12,725 | |\nGross margin | 50 | % | | 49 | %\nResearch and development | 8,091 | | | | 6,456 "
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2025,
+      "metric": "operating_income",
+      "value": 3694000000,
+      "accession": "0000002488-26-000018",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 3694000000,
+          "found_in_collected_filing": true,
+          "passage": "7 |\nEmbedded | 1,243 | | | 1,421 |\nAll other | (4,007) | | | (4,190) |\nTotal operating income | $ | 3,694 | | | $ | 1,900 |\nData Center\nData Center net revenue of $16.6 billion in 2025 increased by 32%, co"
+        }
+      ]
+    },
+    {
+      "company": "AMD",
+      "year": 2025,
+      "metric": "operating_cash_flow",
+      "value": 7709000000,
+      "accession": "0000002488-26-000018",
+      "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 7709000000,
+          "found_in_collected_filing": true,
+          "passage": "rovided by operating activities of discontinued operations | 1,216 | | | — |\nOperating activities | 7,709 | | | 3,041 |\nNet cash (used in) provided by investing activities of continuing operations | (6,851"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2024,
+      "metric": "revenue",
+      "value": 53101000000,
+      "accession": "0000050863-25-000009",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 53101000000,
+          "found_in_collected_filing": true,
+          "passage": "| % of NetRevenue | | Amount | | % of NetRevenue | | Amount | | % of NetRevenue\nNet revenue | | $ | 53,101 | | | 100.0 | % | | $ | 54,228 | | | 100.0 | % | | $ | 63,054 | | | 100.0 | %\nCost of sales | | 35,"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2024,
+      "metric": "gross_profit",
+      "value": 17345000000,
+      "accession": "0000050863-25-000009",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 17345000000,
+          "found_in_collected_filing": true,
+          "passage": "ales | | 35,756 | | | 67.3 | % | | 32,517 | | | 60.0 | % | | 36,188 | | | 57.4 | %\nGross margin | | 17,345 | | | 32.7 | % | | 21,711 | | | 40.0 | % | | 26,866 | | | 42.6 | %\nResearch and development | | 16,"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2024,
+      "metric": "operating_income",
+      "value": -11678000000,
+      "accession": "0000050863-25-000009",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": -11678000000,
+          "found_in_collected_filing": true,
+          "passage": "es | | 6,970 | | | 13.1 | % | | (62) | | | (0.1) | % | | 2 | | | — | %\nOperating income (loss) | | (11,678) | | | (22.0) | % | | 93 | | | 0.2 | % | | 2,334 | | | 3.7 | %\nGains (losses) on equity investments"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2024,
+      "metric": "operating_cash_flow",
+      "value": 8288000000,
+      "accession": "0000050863-25-000009",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 8288000000,
+          "found_in_collected_filing": true,
+          "passage": "2024 | | Dec 30, 2023 | | Dec 31, 2022\nNet cash provided by (used for) operating activities | | $ | 8,288 | | | $ | 11,471 | | | $ | 15,433 |\nNet cash provided by (used for) investing activities | | (18,25"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2025,
+      "metric": "revenue",
+      "value": 52853000000,
+      "accession": "0000050863-26-000011",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 52853000000,
+          "found_in_collected_filing": true,
+          "passage": " of NetRevenue1 | | Amount | | % of NetRevenue1 | | Amount | | % of NetRevenue1\nNet revenue | | $ | 52,853 | | | 100.0 | % | | $ | 53,101 | | | 100.0 | % | | $ | 54,228 | | | 100.0 | %\nCost of sales | | 34,"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2025,
+      "metric": "gross_profit",
+      "value": 18375000000,
+      "accession": "0000050863-26-000011",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 18375000000,
+          "found_in_collected_filing": true,
+          "passage": "ales | | 34,478 | | | 65.2 | % | | 35,756 | | | 67.3 | % | | 32,517 | | | 60.0 | %\nGross profit | | 18,375 | | | 34.8 | % | | 17,345 | | | 32.7 | % | | 21,711 | | | 40.0 | %\nResearch and development | | 13,"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2025,
+      "metric": "operating_income",
+      "value": -2214000000,
+      "accession": "0000050863-26-000011",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": -2214000000,
+          "found_in_collected_filing": true,
+          "passage": " 2,191 | | | 4.1 | % | | 6,970 | | | 13.1 | % | | (62) | | | (0.1) | %\nOperating income (loss) | | (2,214) | | | (4.2) | % | | (11,678) | | | (22.0) | % | | 93 | | | 0.2 | %\nGains (losses) on equity invest"
+        }
+      ]
+    },
+    {
+      "company": "INTC",
+      "year": 2025,
+      "metric": "operating_cash_flow",
+      "value": 9697000000,
+      "accession": "0000050863-26-000011",
+      "snapshot_sha256": "70056711b8b04d3a27e4a42b6d86e26f85ddaa3d59e480039d66ccfb353eb0b8",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 9697000000,
+          "found_in_collected_filing": true,
+          "passage": "25 | | Dec 28, 2024 | | Dec 30, 2023\nNet cash provided by (used for) operating activities | | | $ | 9,697 | | | $ | 8,288 | | | $ | 11,471 |\nNet purchase of property, plant and equipment (net capital expen"
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2024,
+      "metric": "revenue",
+      "value": 38962000000,
+      "accession": "0000804328-24-000075",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 38962000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           38,962                                 $           35,820                                 $             3,"
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2024,
+      "metric": "gross_profit",
+      "value": 21902000000,
+      "accession": "0000804328-24-000075",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 38962000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           38,962                                 $           35,820                                 $             3,"
+        },
+        {
+          "value": 17060000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                           $        17,060                                    $        15,869                                    $            "
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2024,
+      "metric": "operating_income",
+      "value": 10071000000,
+      "accession": "0000804328-24-000075",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 10071000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                                    10,071                                                                  7,788                             "
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2024,
+      "metric": "operating_cash_flow",
+      "value": 12202000000,
+      "accession": "0000804328-24-000075",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 12202000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           12,202                                      $           11,299                                     $      "
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2025,
+      "metric": "revenue",
+      "value": 44284000000,
+      "accession": "0000804328-25-000085",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 44284000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           44,284                                 $           38,962                                 $             5,"
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2025,
+      "metric": "gross_profit",
+      "value": 24546000000,
+      "accession": "0000804328-25-000085",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 44284000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           44,284                                 $           38,962                                 $             5,"
+        },
+        {
+          "value": 19738000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                           $        19,738                                    $        17,060                                    $            "
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2025,
+      "metric": "operating_income",
+      "value": 12355000000,
+      "accession": "0000804328-25-000085",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 12355000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                                    12,355                                                              10,071                                "
+        }
+      ]
+    },
+    {
+      "company": "QCOM",
+      "year": 2025,
+      "metric": "operating_cash_flow",
+      "value": 14012000000,
+      "accession": "0000804328-25-000085",
+      "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+      "passed": true,
+      "source_samples": [
+        {
+          "value": 14012000000,
+          "found_in_collected_filing": true,
+          "passage": "                                                                                        $           14,012                                            $           12,202                                      "
+        }
+      ]
+    }
+  ],
+  "direct_workers": [
+    {
+      "company": "NVDA",
+      "year": 2026,
+      "answer": "- NVDA FY2026: January 27, 2025–January 25, 2026; consolidated US GAAP, exact whole USD. [F1]\n- Revenue: USD 215,938,000,000. [F1]\n- Gross profit: USD 153,463,000,000. [F2]\n- Operating income: USD 130,387,000,000. [F3]\n- Operating cash flow: USD 102,718,000,000. [F4]\n- Original-report basis: Form 10-K filed February 25, 2026, accession 0001045810-26-000021; no later comparative substitution. [F1][F2][F3][F4]",
+      "tool_calls": [
+        {
+          "name": "query_financials",
+          "arguments": {
+            "company": "NVDA",
+            "year": 2026,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        },
+        {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "company": "AMD",
+      "year": 2025,
+      "answer": "- AMD FY2025: December 29, 2024–December 27, 2025. Consolidated US GAAP; exact whole USD amounts. [F1]\n- Revenue: USD 34,639,000,000. [F1]\n- Gross profit: USD 17,152,000,000. [F2]\n- Operating income: USD 3,694,000,000. [F3]\n- Operating cash flow: USD 7,709,000,000. [F4]\n- Original-report basis: Form 10-K filed February 4, 2026, accession 0000002488-26-000018; no later comparative or amendment substituted. [F1–F4]\n- Original filing: https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm [F1–F4]",
+      "tool_calls": [
+        {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        },
+        {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "company": "INTC",
+      "year": 2025,
+      "answer": "- INTC FY2025: December 29, 2024–December 27, 2025; consolidated US GAAP, exact whole USD amounts. [F1]\n- Revenue: USD 52,853,000,000. [F1]\n- Gross profit: USD 18,375,000,000. [F2]\n- Operating income (loss): USD -2,214,000,000. [F3]\n- Operating cash flow: USD 9,697,000,000. [F4]\n- Original-report basis: Form 10-K filed January 23, 2026, accession 0000050863-26-000011; no later comparative substituted. [F1] [F2] [F3] [F4]",
+      "tool_calls": [
+        {
+          "name": "query_financials",
+          "arguments": {
+            "company": "INTC",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        },
+        {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "company": "QCOM",
+      "year": 2025,
+      "answer": "- QCOM FY2025 consolidated US GAAP; fiscal period: 2024-09-30 through 2025-09-28. Amounts below are exact whole USD integers. [F1]\n- Revenue: USD 44,284,000,000. [F1]\n- Gross profit: USD 24,546,000,000; derived from revenue less cost of revenue of USD 19,738,000,000, not a reported GrossProfit tag. Derivation inputs inspected. [F2]\n- Operating income: USD 12,355,000,000. [F3]\n- Operating cash flow: USD 14,012,000,000. [F4]\n- Original-report basis: Form 10-K filed 2025-11-05, accession 0000804328-25-000085; no later comparative substitution. [F1][F2][F3][F4]\n- Original filing: https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm [F1]",
+      "tool_calls": [
+        {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F2"
+          }
+        },
+        {
+          "name": "query_financials",
+          "arguments": {
+            "company": "QCOM",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "observation_slots": 280,
+  "available": 250,
+  "expected_quarter_cash_flow_gaps": 16,
+  "application": {
+    "question": "Show AMD FY2025 consolidated GAAP revenue, gross profit, operating income, and operating cash flow. Use exact whole USD integers, original filing sources, and actual fiscal dates.",
+    "answer": "- AMD FY2025 consolidated US GAAP; actual fiscal dates: 2024-12-29 through 2025-12-27. Amounts below are exact whole USD integers. [F1–F4]\n- Revenue: USD 34,639,000,000. [F1]\n- Gross profit: USD 17,152,000,000. [F2]\n- Operating income: USD 3,694,000,000. [F3]\n- Operating cash flow: USD 7,709,000,000. [F4]\n- Original-report basis: Form 10-K filed 2026-02-04, accession 0000002488-26-000018; no later comparative or MD&A amendment substituted. [F1–F4]\n- Original filing: https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm [F1–F4]",
+    "sources": [
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "revenue",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "value": 34639000000,
+        "conflicting_comparatives": [],
+        "observation_id": "4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+        "source_id": "F1",
+        "section": "financial_observation",
+        "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+        "text": "AMD FY2025 FY annual: revenue = 34639000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018."
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "gross_profit",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:GrossProfit",
+        "value": 17152000000,
+        "conflicting_comparatives": [],
+        "observation_id": "c00619884631ef3d7173f6f2f4c6fb914a731a619865156938a635f365b7c020",
+        "source_id": "F2",
+        "section": "financial_observation",
+        "inspection_url": "/api/financial/observations/c00619884631ef3d7173f6f2f4c6fb914a731a619865156938a635f365b7c020",
+        "text": "AMD FY2025 FY annual: gross_profit = 17152000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018."
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_income",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:OperatingIncomeLoss",
+        "value": 3694000000,
+        "conflicting_comparatives": [],
+        "observation_id": "5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+        "source_id": "F3",
+        "section": "financial_observation",
+        "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+        "text": "AMD FY2025 FY annual: operating_income = 3694000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018."
+      },
+      {
+        "kind": "financial_observation",
+        "company": "AMD",
+        "fiscal_year": 2025,
+        "period": "FY",
+        "basis": "annual",
+        "start": "2024-12-29",
+        "end": "2025-12-27",
+        "fiscal_start": "2024-12-29",
+        "fiscal_end": "2025-12-27",
+        "metric": "operating_cash_flow",
+        "unit": "USD",
+        "accounting_basis": "US GAAP consolidated",
+        "revision_basis": "original_report",
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "accession": "0000002488-26-000018",
+        "form": "10-K",
+        "filed": "2026-02-04",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+        "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+        "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+        "warnings": [],
+        "inputs": [],
+        "formula": null,
+        "status": "available",
+        "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+        "value": 7709000000,
+        "conflicting_comparatives": [],
+        "observation_id": "fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+        "source_id": "F4",
+        "section": "financial_observation",
+        "inspection_url": "/api/financial/observations/fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+        "text": "AMD FY2025 FY annual: operating_cash_flow = 7709000000 USD; 2024-12-29 through 2025-12-27; original accession 0000002488-26-000018."
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Financial Data",
+          "companies": [
+            "AMD"
+          ],
+          "years": [
+            2025
+          ],
+          "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research"
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Financial Data",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "query_financials",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "period": "FY",
+            "basis": "annual",
+            "metrics": [
+              "revenue",
+              "gross_profit",
+              "operating_income",
+              "operating_cash_flow"
+            ]
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_observation",
+          "arguments": {
+            "source_id": "F1"
+          }
+        }
+      }
+    ],
+    "seconds": 12.035,
+    "answer_token_ttft_seconds": 8.455,
+    "passed": true
+  },
+  "unsupported": {
+    "answer": "Financial observations cover consolidated US GAAP revenue, gross profit, operating income, and operating cash flow. Adjusted and segment metrics are unsupported.",
+    "passed": true
+  },
+  "snapshot_hash_matches": true,
+  "missing_observation_status": 404,
+  "browser": {
+    "status": "Complete · citations verified",
+    "inspection": "{\n  \"kind\": \"financial_observation\",\n  \"company\": \"AMD\",\n  \"fiscal_year\": 2025,\n  \"period\": \"FY\",\n  \"basis\": \"annual\",\n  \"start\": \"2024-12-29\",\n  \"end\": \"2025-12-27\",\n  \"fiscal_start\": \"2024-12-29\",\n  \"fiscal_end\": \"2025-12-27\",\n  \"metric\": \"revenue\",\n  \"unit\": \"USD\",\n  \"accounting_basis\": \"US GAAP consolidated\",\n  \"revision_basis\": \"original_report\",\n  \"version\": \"original\",\n  \"document_id\": \"amd-0000002488-26-000018\",\n  \"accession\": \"0000002488-26-000018\",\n  \"form\": \"10-K\",\n  \"filed\": \"2026-02-04\",\n  \"canonical_url\": \"https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm\",\n  \"facts_url\": \"https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json\",\n  \"snapshot_sha256\": \"21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\",\n  \"retrieved_at\": \"2026-10-15T17:13:59.996062+00:00\",\n  \"warnings\": [],\n  \"inputs\": [],\n  \"formula\": null,\n  \"status\": \"available\",\n  \"tag\": \"us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax\",\n  \"value\": 34639000000,\n  \"conflicting_comparatives\": [],\n  \"observation_id\": \"4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d\",\n  \"original_url\": \"/api/originals/amd-0000002488-26-000018\",\n  \"retrieval_url\": \"https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000018/amd-20251227.htm\",\n  \"snapshot_url\": \"/api/financial/snapshots/21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e\"\n}",
+    "page_errors": [],
+    "passed": true
+  },
+  "passed": true
+}

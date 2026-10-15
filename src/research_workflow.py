@@ -57,6 +57,8 @@ class State(TypedDict, total=False):
     years: list[int]
     error: str
     answer: str
+    worker: str
+    financial_sources: dict
 
 
 class ResearchTools:
@@ -233,30 +235,69 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
     return {"answer": answer}
 
 
-def graph(index, *, model_stream=codex_stream):
+def select_worker(question):
+    # Provisional, inspectable task routing; full cooperation belongs to M8.
+    if re.search(
+        r"\b(why|drove|drivers|explain|disclose|risk|amend)\b", question, re.I
+    ):
+        return "research"
+    if re.search(
+        r"\b(what (?:was|were)|how much|figures|amounts|reported|show|list)\b",
+        question,
+        re.I,
+    ) and re.search(
+        r"\b(revenues?|profit|income|cash flows?|gaap)\b",
+        question,
+        re.I,
+    ):
+        return "data"
+    return "research"
+
+
+def graph(index, *, model_stream=codex_stream, financials=None):
     def supervisor(state):
         writer = get_stream_writer()
         error = scope_error(
             state["question"], state["companies"], state["years"], index.coverage()
         )
+        worker = select_worker(state["question"])
+        if worker == "data" and re.search(
+            r"\b(non-gaap|adjusted|ebitda|segment)\b", state["question"], re.I
+        ):
+            error = "Financial observations cover consolidated US GAAP revenue, gross profit, operating income, and operating cash flow. Adjusted and segment metrics are unsupported."
         writer(
             {
                 "type": "trace",
                 "data": {
                     "agent": "Supervisor",
                     "node": "scope",
-                    "decision": "coverage_gap" if error else "Filings Research",
+                    "decision": "coverage_gap"
+                    if error
+                    else "Financial Data"
+                    if worker == "data"
+                    else "Filings Research",
                     "companies": state["companies"],
                     "years": state["years"],
-                    "reason": "Validate historical coverage before delegated filing research",
+                    "reason": "Validate historical coverage; structured figure requests use Financial Data, narrative questions use Filings Research",
                 },
             }
         )
-        return {"error": error}
+        return {"error": error, "worker": worker}
 
     async def research(state):
         return await research_turn(
             index, state, get_stream_writer(), model_stream=model_stream
+        )
+
+    async def data(state):
+        from src.financial_workflow import financial_turn
+
+        if financials is None:
+            raise ValueError(
+                "Financial data is unavailable. Run scripts/financials.py collect."
+            )
+        return await financial_turn(
+            financials, state, get_stream_writer(), model_stream=model_stream
         )
 
     def finish(state):
@@ -282,20 +323,24 @@ def graph(index, *, model_stream=codex_stream):
     workflow = StateGraph(State)
     workflow.add_node("supervisor", supervisor)
     workflow.add_node("research", research)
+    workflow.add_node("data", data)
     workflow.add_node("finish", finish)
     workflow.add_edge(START, "supervisor")
     workflow.add_conditional_edges(
-        "supervisor", lambda s: "finish" if s.get("error") else "research"
+        "supervisor", lambda s: "finish" if s.get("error") else s["worker"]
     )
     workflow.add_edge("research", "finish")
+    workflow.add_edge("data", "finish")
     workflow.add_edge("finish", END)
     return workflow.compile()
 
 
-async def events(index, question, companies, years, *, model_stream=codex_stream):
+async def events(
+    index, question, companies, years, *, model_stream=codex_stream, financials=None
+):
     try:
         async with aclosing(
-            graph(index, model_stream=model_stream).astream(
+            graph(index, model_stream=model_stream, financials=financials).astream(
                 {"question": question, "companies": companies, "years": years},
                 stream_mode="custom",
             )

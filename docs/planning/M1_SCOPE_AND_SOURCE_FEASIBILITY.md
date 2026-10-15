@@ -156,8 +156,8 @@
 | Decision / gap | Current status | Resolve before |
 | --- | --- | --- |
 | NVDA/QCOM local document-body paths | All 16 selected report PDFs are downloaded, identity checked, and prepared; no collection gaps. M2 demonstrates section/table fidelity. | Verified in M2 |
-| Financial definitions / fiscal alignment | Consolidated GAAP scope, observed tags, and date limits recorded. Exact observation selection, Q4 derivation, revision reconciliation, and missing-data implementation pending. | Structured data / Quant implementation |
-| Amendments / restatements | Source versions and amendment/original relationships are preserved. AMD corrected MD&A is verified separately; general financial-observation revision selection remains pending. | Structured-data implementation |
+| Financial definitions / fiscal alignment | M5 implements consolidated GAAP USD observations with exact accession/date/unit selection, explicit quarter/YTD basis, and missing/conflicting statuses. Q4 derivation remains Quant work. | M5 verified; M6 derivations pending |
+| Amendments / restatements | Original statements and AMD's narrative-only amendment remain separate. M5 selects original-report values and retains later conflicting comparatives without substitution. | M5 verified; latest-restatement selection is unsupported |
 | Chunking, embeddings, filters/k, Chroma versus Pinecone | CPU MiniLM, persistent cosine Chroma, 220-token chunks/40-token overlap, scoped retrieval. | Verified in M3 |
 | NVIDIA confirmation; Nebius/NVIDIA models, budgets, routing thresholds | Deferred. No runtime-provider generation calls or pricing conclusions. | Final provider integration; reverify current access and pricing then |
 | Local generation and Docker host access | Direct Codex app-server and authenticated host bridge; CLI credentials remain on the host. | Verified in M3/M4 |
@@ -183,7 +183,7 @@
 - The filing inventory contains 33 rows. Markdown whitespace, encoding, and code-fence checks pass.
 - Source bodies, SEC metadata snapshots, prepared text, and run manifests reside in ignored `data/corpus/`. The tracked inventory, CLI, lockfile, and compact evidence reports reproduce collection. RAG ingestion indexes all 41 sources into 10,681 chunks.
 - Filings Research, a minimal supervisor, direct Codex generation, RAG, browser SSE, and local Docker are implemented and verified. Other specialists, live/shared MCP, multi-provider routing, deployment, and formal evaluations remain pending.
-- M1–M4 are implemented and verified; M2 and M3 are accepted. M5–M12 remain pending; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
+- M1–M5 are implemented and verified; M2 and M3 are accepted. M6–M12 remain pending; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
 
 ### Inspection path
 

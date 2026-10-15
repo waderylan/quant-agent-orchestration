@@ -247,7 +247,7 @@ async def test_http_disconnect_closes_running_graph_worker(small_index, monkeypa
 
     monkeypatch.setattr(main, "ResearchIndex", lambda *args: small_index)
     monkeypatch.setattr(
-        main, "events", lambda *args: events(*args, model_stream=blocked_model)
+        main, "events", lambda *args, **kwargs: events(*args, model_stream=blocked_model)
     )
     with socket.socket() as listener:
         listener.bind(("127.0.0.1", 0))
