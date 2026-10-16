@@ -1,0 +1,20 @@
+# Market-data MCP options — 2026-10-15
+
+M8 selects [Twelve Data](https://github.com/twelvedata/mcp) for dated prices, [Alpha Vantage](https://github.com/alphavantage/alpha_vantage_mcp) for estimates/fundamentals, and Tavily MCP for current guidance or news. Rylan Wade reports Tavily student credits. A published plan or working demo endpoint does not prove the project's account entitlement.
+
+| Source | MCP and access finding | Main limit |
+| --- | --- | --- |
+| [Twelve Data](https://twelvedata.com/pricing) | Official MCP; free Basic advertises 8 credits/minute and 800/day; [students](https://twelvedata.com/students) get 20% off for 12 months; institutions may [apply](https://support.twelvedata.com/en/articles/11116616-non-profit-organisation-subscription) for free access. | Quote tier does not establish estimate access. |
+| [Alpha Vantage](https://www.alphavantage.co/support/) | Official MCP; standard free allowance is 25/day; verified education/open-source projects can request more. [API](https://www.alphavantage.co/documentation/) documents earnings estimates. | Real-time or 15-minute US prices need premium access; education approval and ticker entitlement need testing. |
+| [Finnhub](https://finnhub.io/pricing) | Community [MCP](https://github.com/SalZaki/finnhub-mcp); free 60/minute with quotes, basic metrics, and news. | Dedicated estimate feeds are paid. |
+| [Alpaca](https://docs.alpaca.markets/us/docs/trading-api-mcp) | Official MCP; free market data uses [IEX](https://docs.alpaca.markets/us/docs/market-data-faq). | IEX is one exchange; expose read-only data tools. |
+| [Massive](https://massive.com/pricing) | Official [MCP](https://massive.com/docs/ai-tools/quickstart); free Basic advertises five/minute, two-year end-of-day history. | Intraday quotes/fundamentals need higher entitlements; education discount is by request. |
+| [Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs/mcp-server) | Official MCP; [free plan](https://site.financialmodelingprep.com/developer/docs/pricing) advertises 250/day; [student discount](https://site.financialmodelingprep.com/faqs?code=data) is 30%. | Quote/estimate endpoint and symbol entitlement require a real-key check. |
+| [Business Quant](https://businessquant.com/docs/api/mcp) | Official read-only MCP; free tier advertises 30/day. | Free analyst-estimate calls return Apple sample data for every ticker. |
+| [SiftingIO](https://sifting.io/integrations/mcp) | Official MCP; free tier advertises 10,000/month and 60/minute; verified [students](https://sifting.io/resources/education) may request an upgrade. | [Price outputs](https://sifting.io/disclaimer) are synthetic reference values. |
+| [EODHD](https://eodhd.com/lp/eodhd-mcp-server) | Official MCP; free Starter advertises 20/day and limited one-year history. | Live/fundamental/estimate tools are plan-specific. |
+| [yfinance](https://github.com/ranaroussi/yfinance) | Community [MCP](https://github.com/benethos-hub/yahoo-finance-mcp); no key for prototype use. | Unofficial coverage, delay, blocking, and usage terms reduce reproducibility. |
+
+The [Alpha Vantage MCP code](https://github.com/alphavantage/alpha_vantage_mcp/blob/main/api/src/av_api/tools/fundamental_data.py) registers `earnings_estimates`. A direct public-demo IBM request returned 41 estimate rows on 2026-10-15; it did not establish free access for NVDA, AMD, INTC, or QCOM. [SimFin](https://www.simfin.com/en/prices/) also advertises student pricing, but this review did not establish an official MCP.
+
+Before implementation acceptance, inspect actual read-only tool schemas and call all four tickers under an authorized key. Check requested symbol, timestamp, timezone, currency, market session/feed, delay, quota, estimate period/definition, share count, split basis, cash/debt date, and public display rights. A price divided by FY2025 earnings is a fiscal-year multiple unless trailing inputs are refreshed and aligned. Market closure, stale data, unavailable estimates, loss denominators, and upstream errors need explicit outcomes.

@@ -176,6 +176,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output",
         type=Path,
-        default=ROOT / "docs/research/M3_DEMONSTRATION_RESULTS.json",
+        default=ROOT / "artifacts/checks/m3-demonstration.json",
     )
     asyncio.run(main(parser.parse_args()))

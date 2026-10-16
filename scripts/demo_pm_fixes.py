@@ -16,7 +16,7 @@ async def main(args):
     cases = {
         case["id"]: case
         for case in json.loads(
-            (ROOT / "docs/research/PM_EXPLORATION_2026-10-15_CASES.json").read_text(
+            (ROOT / "tests/fixtures/pm/questions.json").read_text(
                 encoding="utf-8"
             )
         )

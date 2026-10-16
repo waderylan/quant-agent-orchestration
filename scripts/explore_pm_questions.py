@@ -16,7 +16,7 @@ from pathlib import Path
 import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_CASES = ROOT / "docs/research/PM_EXPLORATION_2026-10-15_CASES.json"
+DEFAULT_CASES = ROOT / "tests/fixtures/pm/questions.json"
 
 
 async def capture(client, case, raw_path):

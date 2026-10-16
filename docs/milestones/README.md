@@ -1,0 +1,21 @@
+# Milestones
+
+This is the authoritative order and status. Each completed record links its own evidence. Future details and acceptance criteria are decided during implementation.
+
+| Milestone | Record | Status |
+| --- | --- | --- |
+| M1 | [Source feasibility](source-feasibility/README.md) | Verified |
+| M2 | [Source preparation](source-preparation/README.md) | Verified; accepted |
+| M3 | [Filings research](filings-research/README.md) | Verified; accepted |
+| M4 | [Local container](local-container/README.md) | Verified |
+| M5 | [Financial Data](financial-data/README.md) | Verified |
+| M6 | [Financial Analysis / Quant](quant/README.md) | Verified |
+| M7 | [Risk Summary](risk-summary/README.md) | Next |
+| M8 | [Buy-Side Analyst](buy-side-analyst/README.md) | Planned |
+| M9 | [Supervisor cooperation](supervisor/README.md) | Planned |
+| M10 | [Live research and shared MCP](live-research/README.md) | Planned |
+| M11 | [Provider routing](provider-routing/README.md) | Planned |
+| M12 | [Experience and evaluation](experience-evaluation/README.md) | Planned |
+| M13 | [Deployment and submission](deployment/README.md) | Planned |
+
+The implementation contract is in [architecture](../architecture.md). Formal scores and deployment results belong in [evaluation](../evaluation.md) when measured. Further milestones require Rylan Wade's feedback and authorization.

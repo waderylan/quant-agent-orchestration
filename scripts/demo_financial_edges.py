@@ -89,6 +89,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://127.0.0.1:8085")
     parser.add_argument(
-        "--output", type=Path, default=ROOT / "docs/research/M5_EDGE_RESULTS.json"
+        "--output", type=Path, default=ROOT / "artifacts/checks/m5-edges.json"
     )
     asyncio.run(main(parser.parse_args()))

@@ -4,7 +4,7 @@ CSCI 599 Assignment 2 — canonical shared instructions.
 
 ## 1. Assignment Ground Truth
 
-- `docs/assignment/Assignment_2_Description.md` governs requirements, grading, academic integrity, and deliverables. The PDF beside it governs visual formatting.
+- `docs/reference/assignment/Assignment_2_Description.md` governs requirements, grading, academic integrity, and deliverables. The PDF beside it governs visual formatting.
 - Consult the assignment directly rather than chat summaries. Identify conflicts before proceeding; user and platform instructions take precedence.
 
 ## 2. Required Agent Workflow
@@ -12,7 +12,7 @@ CSCI 599 Assignment 2 — canonical shared instructions.
 At the start of each session:
 
 1. Read this file and the assignment Markdown completely.
-2. Read `docs/planning/PROJECT_SPEC.md` before project decisions or changes.
+2. Read `docs/project.md` before project decisions or changes.
 3. The top-level agent generates one session UUID for working context; no session-start entry.
 4. Complete the authorized work within the assignment contract.
 5. Append an event only if §3 qualifies, following §4. For a user-authorized milestone sequence, append one event after each completed and verified milestone. Record the milestone handoff verbatim; the last milestone entry records the final user-facing response verbatim immediately before sending it.
@@ -107,21 +107,14 @@ For every qualifying event entry:
 
 ## 6. Project Workflow
 
-- Chosen project: **Public-Company Research Assistant**. [Project spec](docs/planning/PROJECT_SPEC.md) defines scope, six application agents, providers, local integration, open decisions, and the final checklist. The assignment takes precedence over the spec.
-- Current stage: M1–M6 are implemented and verified; M2 and M3 are accepted. The corpus contains 46 selected NVIDIA, AMD, Intel, and Qualcomm documents. All four companies cover FY2024/FY2025; NVIDIA also covers FY2026. [Aligned coverage](docs/planning/ALIGNED_FISCAL_COVERAGE.md) records source checks and the published index; fiscal labels do not align actual reporting dates. [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md), [M4 container acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md), [M5 Data](docs/planning/M5_FINANCIAL_DATA_AGENT.md), and [M6 Quant](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) define the implemented roles. [Capability routing](docs/planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) defines bounded filing-input follow-up, Qualcomm annual revenue shares, parent-earnings ranking, and explicit scope correction. M7–M13 remain unstarted and require feedback and authorization.
-- Implement only the authorized increment. Provide a runnable demonstration and correctness evidence; get Rylan Wade's feedback before starting the next milestone unless he authorizes another sequence.
-- Next increments: M7 Risk Summary, then [M8 Buy-Side Analyst](docs/planning/M8_BUY_SIDE_ANALYST.md) with Twelve Data, Alpha Vantage, and Tavily MCP. M9 generalizes five-worker cooperation; M10 expands live research/shared source MCP; M11–M13 cover routing, evaluation, and deployment. These capabilities remain planned and unimplemented.
-- [PM workflow contracts](docs/planning/PM_WORKFLOW_CORRECTNESS.md) define the implemented numerical/explanation handoff, QCT shares, cash conversion, explicit scenarios/FX, completion states, and exploratory regression evidence.
-- Develop/test locally through Codex/Claude Code subscriptions. M3 uses Codex app-server directly for individual-worker and full-application generation. Keep direct-role tests, fixture checks, browser/application runs, and deployment-provider results distinct.
-- Defer Nebius/NVIDIA generation and separate paid judge calls to final integration. Verify provider integration locally, then deploy to Cloud Run and retest. Keep local CLI authentication and subscription adapters outside the deployed runtime configuration.
-- Begin with exploratory demos and basic correctness checks. Select formal evaluations after working research/financial-analysis capabilities clarify expected behavior; complete required evaluation reporting before submission.
-- Use uv as the project standard: Python 3.13, `uv sync --locked`, and `uv run --locked`. Maintain exact direct dependency pins in `pyproject.toml`, commit `uv.lock`, and export the assignment's `requirements.txt` with `uv export --frozen --no-dev --no-hashes --no-emit-project --output-file requirements.txt`.
-- Resolve open decisions when needed. Verify current model IDs, pricing, access, and external-tool compatibility.
-- Instructor files (`docs/cost_analysis.md`, `docs/frontend_vibecode_prompt.md`, `docs/alternative_*.md`) are reference guidance, separate from student-authored deliverables.
-- Keep `PROCESS_LOG.md` a template until Rylan Wade supplies his actual reflection. After deployment/retesting, remind him to complete 200–300 words across its four sections as the final checklist step. Submission readiness remains pending until the completed log is included in the archive.
-- Do not copy HW1 implementation, credentials, deployment configuration, artifacts, or reflections.
+- Selected product: [Public-Company Research Assistant](docs/project.md). [Architecture](docs/architecture.md) describes current behavior; [milestones](docs/milestones/README.md) own order and status. The assignment takes precedence.
+- Implement only authorized increments. Demonstrate each with source checks, relevant tests, and a runnable local path; request Rylan Wade's feedback before an unauthorized next milestone.
+- Use Python 3.13 with `uv sync --locked` and `uv run --locked`. Pin direct dependencies in `pyproject.toml`, commit `uv.lock`, and export `requirements.txt` using `uv export --frozen --no-dev --no-hashes --no-emit-project --output-file requirements.txt`.
+- Use local Codex/Claude Code subscriptions for development and testing. Distinguish direct-worker, fixture, browser/application, Docker, and deployment-provider evidence. Keep local CLI authentication out of the deployed runtime.
+- Verify Nebius/NVIDIA access, model IDs, pricing, and routing in final integration; then deploy to Cloud Run and retest. Formal evaluation requirements are in [evaluation](docs/evaluation.md).
+- [Instructor references](docs/reference/instructor/README.md) are guidance, not implementation contracts. Do not copy HW1 implementation, credentials, deployment config, artifacts, or reflections.
+- Leave [PROCESS_LOG.md](PROCESS_LOG.md) as a template until Rylan Wade provides his own 200–300-word reflection across four sections. Include the completed log in the final archive.
 
-## 7. Idea Documents
+## 7. Product Ideas
 
-- `docs/ideas/` contains product exploration. The company idea is selected; law and ski remain alternatives. The planning spec governs selected scope.
-- Keep one document per idea. Idea revisions do not authorize implementation; all ideas remain subject to the assignment.
+- The company project is selected. [Law and ski concepts](docs/reference/alternatives/README.md) remain unselected; revisions to them do not authorize implementation.

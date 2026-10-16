@@ -56,7 +56,7 @@ def verify():
     corpus = json.loads((DEFAULT_OUTPUT / "manifest.json").read_text(encoding="utf-8"))
     documents = {d["document_id"]: d for d in corpus["documents"]}
     baseline = json.loads(
-        (ROOT / "docs/research/M2_COLLECTION_RESULTS.json").read_text(encoding="utf-8")
+        (ROOT / "tests/fixtures/sources/baseline.json").read_text(encoding="utf-8")
     )
     # Added years must preserve collected source bodies and prepared text. Context
     # relationships can change when a formerly absent prior annual enters scope.
@@ -167,7 +167,7 @@ def verify():
         "coverage": coverage,
         "corpus": corpus["summary"],
         "preserved_baseline": {
-            "source": "docs/research/M2_COLLECTION_RESULTS.json",
+            "source": "tests/fixtures/sources/baseline.json",
             "documents": preserved,
             "checks": "identity, original-body SHA256, prepared-text SHA256",
             "passed": True,
@@ -192,7 +192,7 @@ def verify():
         ),
         "passed": True,
     }
-    destination = ROOT / "docs/research/ALIGNED_FINANCIAL_COVERAGE_RESULTS.json"
+    destination = ROOT / "artifacts/checks/aligned-financial-coverage.json"
     write_json(destination, report)
     print(
         json.dumps(

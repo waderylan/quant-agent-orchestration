@@ -47,5 +47,5 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", default="hw2-research:m6")
-    parser.add_argument("--output", type=Path, default=ROOT / "docs/research/M6_LINUX_EXECUTION_RESULTS.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "artifacts/checks/m6-linux.json")
     main(parser.parse_args())

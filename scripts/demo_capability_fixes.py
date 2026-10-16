@@ -221,7 +221,7 @@ async def main():
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("docs/research/CAPABILITY_FIXES_RESULTS.json"),
+        default=Path("artifacts/checks/capability-fixes.json"),
     )
     args = parser.parse_args()
     report = {

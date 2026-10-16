@@ -71,6 +71,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url", default="http://127.0.0.1:8080")
     parser.add_argument(
-        "--output", type=Path, default=ROOT / "docs/research/M3_BROWSER_RESULTS.json"
+        "--output", type=Path, default=ROOT / "artifacts/checks/m3-browser.json"
     )
     asyncio.run(main(parser.parse_args()))

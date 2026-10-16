@@ -1,0 +1,537 @@
+{
+  "documents": [
+    {
+      "document_id": "nvda-0001045810-24-000124",
+      "accession": "0001045810-24-000124",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000124/nvda-20240428.htm",
+      "period_end": "2024-04-28",
+      "version": "original",
+      "body": {
+        "sha256": "4459a2a6dbbf8fc737aa869deffdceea95b5161ec7f261d1b444c00b927fee8b"
+      },
+      "extraction": {
+        "text_sha256": "7083217f3a1f07b622bbde71f08e6ae4961e6df6d7c32338f07af2e84f0009f5"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-24-000264",
+      "accession": "0001045810-24-000264",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm",
+      "period_end": "2024-07-28",
+      "version": "original",
+      "body": {
+        "sha256": "35d94221f0ed30f974b4fe6536fa54ff40945265d8b354b0ae17066c8856a861"
+      },
+      "extraction": {
+        "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-24-000316",
+      "accession": "0001045810-24-000316",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000316/nvda-20241027.htm",
+      "period_end": "2024-10-27",
+      "version": "original",
+      "body": {
+        "sha256": "3ba345556252aea4b02c48ccba47baa3b3dab5abfd6e20ea978d00999ae7167f"
+      },
+      "extraction": {
+        "text_sha256": "fc63395f1910be23b8708df5b11a471f576b443b53fe95295e74883f7522b982"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-25-000023",
+      "accession": "0001045810-25-000023",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+      "period_end": "2025-01-26",
+      "version": "original",
+      "body": {
+        "sha256": "b67bd67a64488a54886de001c788bc5059a965fc6ef5b4d8b71624951e13df8e"
+      },
+      "extraction": {
+        "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-25-000116",
+      "accession": "0001045810-25-000116",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000116/nvda-20250427.htm",
+      "period_end": "2025-04-27",
+      "version": "original",
+      "body": {
+        "sha256": "c86deba7a5cbd06f2dad1f276c24f7c648fc49c9769cf98cf589f68972b06737"
+      },
+      "extraction": {
+        "text_sha256": "4789187569fb6897b824769d0b6b0573dc7deec534f327d89c3378175ad39ed6"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-25-000209",
+      "accession": "0001045810-25-000209",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+      "period_end": "2025-07-27",
+      "version": "original",
+      "body": {
+        "sha256": "f592d1f79ed6d905b9b5a1576b69f6fa26d3c00074628d7015bb974fc6963df8"
+      },
+      "extraction": {
+        "text_sha256": "2268029ac8093126ee58b118c5b34961345266f934b4a413b9a4d6df748b81fc"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-25-000230",
+      "accession": "0001045810-25-000230",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000230/nvda-20251026.htm",
+      "period_end": "2025-10-26",
+      "version": "original",
+      "body": {
+        "sha256": "87be27da1442654cdab4b2e105eda90d6a82d58953b8360084cb3c2be7909ff0"
+      },
+      "extraction": {
+        "text_sha256": "c0a87638aa74fdaa87c75c814f231817a47a73547dd34ac7dc09bfd65cacf4ac"
+      }
+    },
+    {
+      "document_id": "nvda-0001045810-26-000021",
+      "accession": "0001045810-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "period_end": "2026-01-25",
+      "version": "original",
+      "body": {
+        "sha256": "a056b59e4170c0123217a8e861a39af4a4a48d2df0d27b641017a618a280a396"
+      },
+      "extraction": {
+        "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-24-000056",
+      "accession": "0000002488-24-000056",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000056/amd-20240330.htm",
+      "period_end": "2024-03-30",
+      "version": "original",
+      "body": {
+        "sha256": "466be0d6c019d4dea12ef09c2d5bc211cee60a5a7097455db4e2c7d17dc3c9ef"
+      },
+      "extraction": {
+        "text_sha256": "8b4de8cfe65efc028e605f9fd2acc2096d19939a62798484051d691986211526"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-24-000123",
+      "accession": "0000002488-24-000123",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000123/amd-20240629.htm",
+      "period_end": "2024-06-29",
+      "version": "original",
+      "body": {
+        "sha256": "b6c39ea5ff11aaa9adb2c2fabd995c181e831271eab19d2ba7df7bdf697fa99d"
+      },
+      "extraction": {
+        "text_sha256": "11ea328d37275061baf9b12c8573736aabebbc0e36802945a409e1d83d71cc7f"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-24-000163",
+      "accession": "0000002488-24-000163",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000163/amd-20240928.htm",
+      "period_end": "2024-09-28",
+      "version": "original",
+      "body": {
+        "sha256": "f7628d9c33095e38b85b14cce85824ee82cd0ef740521183d2e7661bb2fd8c2f"
+      },
+      "extraction": {
+        "text_sha256": "9de9162849edf72d4c24bdfd9b89fd5b3b3b2e66283ef420c54c7d90d09cbb76"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-25-000012",
+      "accession": "0000002488-25-000012",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+      "period_end": "2024-12-28",
+      "version": "original",
+      "body": {
+        "sha256": "4029715f554706c0b84357dee29649a694e7eab1c395e2793033ba7b762a1dda"
+      },
+      "extraction": {
+        "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-25-000047",
+      "accession": "0000002488-25-000047",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+      "period_end": "2025-03-29",
+      "version": "original",
+      "body": {
+        "sha256": "ad3ba13d209630d14843facf84cbf8ba8321c3cd42b1dd70b375468f78e6c694"
+      },
+      "extraction": {
+        "text_sha256": "80bdc02b7dbca846a5bc0bdd8ec4f0853a28d62d3c8ff063f6867213e01debce"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-25-000108",
+      "accession": "0000002488-25-000108",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+      "period_end": "2025-06-28",
+      "version": "original",
+      "body": {
+        "sha256": "266964951455043b2f141a503ffe487a4d1ce9e43e76a8450ad743b032cc1239"
+      },
+      "extraction": {
+        "text_sha256": "eabb2e298588b064db93098ca8d03931626c997ba48c8cb7aa100288b3ad4774"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-25-000166",
+      "accession": "0000002488-25-000166",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000166/amd-20250927.htm",
+      "period_end": "2025-09-27",
+      "version": "original",
+      "body": {
+        "sha256": "4524daaaf1285aff5b43681db7cc80ef3e898886565b41889df21bed748baf4f"
+      },
+      "extraction": {
+        "text_sha256": "2443d437630059e7513663b5b4162cf6c56e80ca361d6389a556c1af5aaac071"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-26-000018",
+      "accession": "0000002488-26-000018",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "period_end": "2025-12-27",
+      "version": "original",
+      "body": {
+        "sha256": "afefea55a2f7c013912403fa45547d4d7910e8f012d4bba6c1c63a37d0c2b050"
+      },
+      "extraction": {
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c"
+      }
+    },
+    {
+      "document_id": "amd-0000002488-26-000021",
+      "accession": "0000002488-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000021/amd-20251227.htm",
+      "period_end": "2025-12-27",
+      "version": "amendment",
+      "body": {
+        "sha256": "ac4a7d7a4ca0bb235f1a764718b4dcbeda6be248d843a33d966423891767e2cb"
+      },
+      "extraction": {
+        "text_sha256": "f0225112341cafc712f1f52d1e811e70393f816bffb56c9a528bcb820138dd53"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-24-000076",
+      "accession": "0000050863-24-000076",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000076/intc-20240330.htm",
+      "period_end": "2024-03-30",
+      "version": "original",
+      "body": {
+        "sha256": "b0dd847585fd467b2dd541172724f41d2fbcc598b77e3ce843e30909b69ba84f"
+      },
+      "extraction": {
+        "text_sha256": "31eee538a09ebee9ebecc57ddd06243d7513896e818f8fad947044259ddcb0b0"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-24-000124",
+      "accession": "0000050863-24-000124",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000124/intc-20240629.htm",
+      "period_end": "2024-06-29",
+      "version": "original",
+      "body": {
+        "sha256": "739e252f58c136aeebc6abe790c07eec9760d5a567c1609ee02b1181b2482a14"
+      },
+      "extraction": {
+        "text_sha256": "d273ab5e169c5a040e4ce78bde8e34420abcffc9c4d49403813ee95d0f27e78b"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-24-000149",
+      "accession": "0000050863-24-000149",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000149/intc-20240928.htm",
+      "period_end": "2024-09-28",
+      "version": "original",
+      "body": {
+        "sha256": "943f5ec79f9cf394e94d1363d5510b27abf62455a02643e1f2bb280984f23d86"
+      },
+      "extraction": {
+        "text_sha256": "eae1a6e60e34ca89c385aa27b9307b3358d0ef8b66da5ee63f32090dc6003bbb"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-25-000009",
+      "accession": "0000050863-25-000009",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+      "period_end": "2024-12-28",
+      "version": "original",
+      "body": {
+        "sha256": "60e9b3e88bb1cf3fabc0ea34c6bf6fcfd481979080a97755bb2d168788b6affc"
+      },
+      "extraction": {
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-25-000074",
+      "accession": "0000050863-25-000074",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000074/intc-20250329.htm",
+      "period_end": "2025-03-29",
+      "version": "original",
+      "body": {
+        "sha256": "906819a9f37065e96d305bf761903aa4d15cc373dfec4447dbdf1eef646c4121"
+      },
+      "extraction": {
+        "text_sha256": "c41cfd472423c95d904d2905007e3e6159641f8a4e05e68d4a463174ae6189cb"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-25-000109",
+      "accession": "0000050863-25-000109",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000109/intc-20250628.htm",
+      "period_end": "2025-06-28",
+      "version": "original",
+      "body": {
+        "sha256": "a4c7e99b7f6853d7a6dd6ad8dc541d6841739538777ad794a40cb192361ab455"
+      },
+      "extraction": {
+        "text_sha256": "03946854df7a65ebbf00e74fbedae80ead82c39400985764d5ccb1282b5ec1b0"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-25-000179",
+      "accession": "0000050863-25-000179",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000179/intc-20250927.htm",
+      "period_end": "2025-09-27",
+      "version": "original",
+      "body": {
+        "sha256": "8cf07d4e5f1078cfe44e771362d84f8096a764f48a9155b623680395dea46db4"
+      },
+      "extraction": {
+        "text_sha256": "dcf2ff7ddd02b2b99d621b1c97d6a5973051c1eddb078bab2caa4838d35f29d4"
+      }
+    },
+    {
+      "document_id": "intc-0000050863-26-000011",
+      "accession": "0000050863-26-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "period_end": "2025-12-27",
+      "version": "original",
+      "body": {
+        "sha256": "67af52d83cdc32a0c52d6007ba0b1031f25c50bc1cae5ee0d626721c9989e42d"
+      },
+      "extraction": {
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-24-000017",
+      "accession": "0000804328-24-000017",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000017/qcom-20231224.htm",
+      "period_end": "2023-12-24",
+      "version": "original",
+      "body": {
+        "sha256": "86b33d2cf136adb47429bc5f30768855c97fa447f38a8eb4e81054924693668d"
+      },
+      "extraction": {
+        "text_sha256": "d15830da10f229d85b59305761d226b53c5261d0be9546c3ab5e7ca0cdfb4e53"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-24-000039",
+      "accession": "0000804328-24-000039",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000039/qcom-20240324.htm",
+      "period_end": "2024-03-24",
+      "version": "original",
+      "body": {
+        "sha256": "d05942e5a21e3970557b2569e01d0c7ef7651b4ffb3f7069c97e27051838245e"
+      },
+      "extraction": {
+        "text_sha256": "28bb86cfa100c5693d24913b91fed4518237eaeddd302dfe7dfd9a32bee8bc22"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-24-000056",
+      "accession": "0000804328-24-000056",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000056/qcom-20240623.htm",
+      "period_end": "2024-06-23",
+      "version": "original",
+      "body": {
+        "sha256": "19060d5da325db738c9496453f19db8b25fa78e59c06f92ff86704a6f75d8246"
+      },
+      "extraction": {
+        "text_sha256": "2bf4173d48f4d33d926f63255ed8b68c513080e8f7aec2fba598632c2ea37150"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-24-000075",
+      "accession": "0000804328-24-000075",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+      "period_end": "2024-09-29",
+      "version": "original",
+      "body": {
+        "sha256": "a32e2ced720431cadad52814b337d1556beb1d3a2fc353022092c30d063be7c1"
+      },
+      "extraction": {
+        "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-25-000011",
+      "accession": "0000804328-25-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000011/qcom-20241229.htm",
+      "period_end": "2024-12-29",
+      "version": "original",
+      "body": {
+        "sha256": "b564654f5bf988d82be7f7018de244500b715d03538101bc37ee668e39a4596a"
+      },
+      "extraction": {
+        "text_sha256": "31be9259916ac5ad8836164123ae09d1bf1ada1394eeeb807de7229d9d324ca6"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-25-000031",
+      "accession": "0000804328-25-000031",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000031/qcom-20250330.htm",
+      "period_end": "2025-03-30",
+      "version": "original",
+      "body": {
+        "sha256": "5bb626f6e89a781105915be6456519c750744a18c5828ad4a76021b5fa32bdd8"
+      },
+      "extraction": {
+        "text_sha256": "c9fe3f0ef5b3287ce4e4c4297f9f68959c708e5eea54ac78f2a326b419b1c288"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-25-000045",
+      "accession": "0000804328-25-000045",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm",
+      "period_end": "2025-06-29",
+      "version": "original",
+      "body": {
+        "sha256": "1e9e658d21add9acfef8434e2b2924fa6ff2f5cf7c9bd040b95bcb4f4be3e5b8"
+      },
+      "extraction": {
+        "text_sha256": "64eebf456d6fa562fc028cd8aedd3ebb0dbcd265c7e2c5edf58bbfc6e114f5ea"
+      }
+    },
+    {
+      "document_id": "qcom-0000804328-25-000085",
+      "accession": "0000804328-25-000085",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+      "period_end": "2025-09-28",
+      "version": "original",
+      "body": {
+        "sha256": "90852abbb69e24e6c4a2a1ca8fc3ca9cd458f1a23fe3cf7765a4b0fad5ba14a5"
+      },
+      "extraction": {
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc"
+      }
+    },
+    {
+      "document_id": "nvda-fy2025-earnings",
+      "accession": null,
+      "canonical_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+      "period_end": "2025-01-26",
+      "version": "original",
+      "body": {
+        "sha256": "33ecf3786add564fba74f4d36f74c3158a0028d46f593a5b5b0aa4ca44ac98bc"
+      },
+      "extraction": {
+        "text_sha256": "f301d5318c41d8eb4d69ea776d6e0c86e3fa5a587b170c70ed1f98ec92af2583"
+      }
+    },
+    {
+      "document_id": "nvda-fy2026-earnings",
+      "accession": null,
+      "canonical_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "period_end": "2026-01-25",
+      "version": "original",
+      "body": {
+        "sha256": "cd59129c4171ae13af83e52f48ed4405bc665ab686a435f0d2ee9c87421213dd"
+      },
+      "extraction": {
+        "text_sha256": "89d81cb77fe6f4988bad184ec2c027f153e57992a8014713601969b4f37a18b8"
+      }
+    },
+    {
+      "document_id": "amd-fy2024-earnings",
+      "accession": null,
+      "canonical_url": "https://ir.amd.com/news-events/press-releases/detail/1236/amd-reports-fourth-quarter-and-full-year-2024-financial-results",
+      "period_end": "2024-12-28",
+      "version": "original",
+      "body": {
+        "sha256": "7e67ef99d47070f11dd2314b12f753f19765d98eec5646fd09b75c64b65d2f7a"
+      },
+      "extraction": {
+        "text_sha256": "80ba5df614959cde772d186de5e14d758a3fcdec6c296dc819e4e5e0dfd565bd"
+      }
+    },
+    {
+      "document_id": "amd-fy2025-earnings",
+      "accession": null,
+      "canonical_url": "https://ir.amd.com/news-events/press-releases/detail/1276/amd-reports-fourth-quarter-and-full-year-2025-financial-results",
+      "period_end": "2025-12-27",
+      "version": "original",
+      "body": {
+        "sha256": "bddde5d15780afb6b576642a7ca25964fa161bd987517c27d04b7f8866f98803"
+      },
+      "extraction": {
+        "text_sha256": "a4ab74c349ccddaf726e10526b4a6ed6656f2240d1b8dbbb22499e71cf7a70d8"
+      }
+    },
+    {
+      "document_id": "intc-fy2024-earnings",
+      "accession": null,
+      "canonical_url": "https://www.intc.com/news-events/press-releases/detail/1726/intel-reports-fourth-quarter-and-full-year-2024-financial",
+      "period_end": "2024-12-28",
+      "version": "original",
+      "body": {
+        "sha256": "2b082fd57deec7670238584bb2826db758f19744f4353989673f77fd2bef824c"
+      },
+      "extraction": {
+        "text_sha256": "cbaacc9fe29d781b6397b682aee68b88b515c26d653c8ee88c5e45a0f14899b7"
+      }
+    },
+    {
+      "document_id": "intc-fy2025-earnings",
+      "accession": null,
+      "canonical_url": "https://www.intc.com/news-events/press-releases/detail/1759/intel-reports-fourth-quarter-and-full-year-2025-financial",
+      "period_end": "2025-12-27",
+      "version": "original",
+      "body": {
+        "sha256": "c4c7aaf97e1eeb7877e11d16387c87737a46b2e183e413b5dcc42870c91a578f"
+      },
+      "extraction": {
+        "text_sha256": "404fb259c5c2dc618d9fc32c1c71625561ae26f050edb04331b9c2a9169c300e"
+      }
+    },
+    {
+      "document_id": "qcom-fy2024-earnings",
+      "accession": null,
+      "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q4/FY2024-4th-Quarter-Earnings-Release.pdf",
+      "period_end": "2024-09-29",
+      "version": "original",
+      "body": {
+        "sha256": "5e1993af2bf95c673949ffdb6352b0bad4080d600df1fb43b0a8674939965479"
+      },
+      "extraction": {
+        "text_sha256": "b984802af0e8463b5e3a5bce4b20f3b9b7afa2074d57c6410a81a5cdcc80c61d"
+      }
+    },
+    {
+      "document_id": "qcom-fy2025-earnings",
+      "accession": null,
+      "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/FY2025-4th-Quarter-Earnings-Release.pdf",
+      "period_end": "2025-09-28",
+      "version": "original",
+      "body": {
+        "sha256": "9948d90c6614fe934e533b31704ce07244851d3ad959e99272d0b8af2a8d12fd"
+      },
+      "extraction": {
+        "text_sha256": "c985a83463bd8ef17a4d32aaa9dc2fd04fab6a657b38ed294db07956f252592b"
+      }
+    }
+  ]
+}

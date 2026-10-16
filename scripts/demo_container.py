@@ -276,11 +276,11 @@ if __name__ == "__main__":
         help="Verify Data-to-Quant API, artifacts, and browser in the container",
     )
     parser.add_argument(
-        "--output", type=Path, default=ROOT / "docs/research/M4_CONTAINER_RESULTS.json"
+        "--output", type=Path, default=ROOT / "artifacts/checks/container.json"
     )
     parser.add_argument(
         "--browser-output",
         type=Path,
-        default=ROOT / "docs/research/M4_BROWSER_RESULTS.json",
+        default=ROOT / "artifacts/checks/container-browser.json",
     )
     asyncio.run(main(parser.parse_args()))

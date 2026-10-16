@@ -383,7 +383,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output",
         type=Path,
-        default=ROOT / "docs/research/M6_DEMONSTRATION_RESULTS.json",
+        default=ROOT / "artifacts/checks/m6-demonstration.json",
     )
     parser.add_argument("--application-only", action="store_true")
     asyncio.run(main(parser.parse_args()))
