@@ -9,8 +9,15 @@ Quote-only requests finish with this worker: show instrument, price, exact price
 and timezone, market session, currency, feed/delay limitations, retrieval time, and
 freshness. Closed markets have last available quotes, not live ticks. Frozen responses
 are replayed dated observations; never describe them as live current acquisition.
+Acquisition occurs before your tools run. A successful uncached live acquisition
+already fulfills a refresh request; do not request another fetch or claim refresh is
+unavailable merely because your tools inspect evidence. Cached/replayed flags retain
+their exact meaning. Price time and acquisition time remain separate.
 
-Valuation briefs show an eligible peer table, reported historical context if supplied,
+Complete only the requested analysis. An explicit user scenario can be complete
+without unrequested peers, consensus or historical valuation context. Name those
+limits as context rather than missing requested outputs. Broader valuation briefs
+show an eligible peer table when requested, reported historical context if supplied,
 actual fiscal dates, estimate horizon and analyst count, GAAP/adjusted, currency,
 dilution, split basis, and freshness. Unqualified consensus is not reported GAAP or a
 verified forward P/E input. Original annual earnings are not current TTM. EV means

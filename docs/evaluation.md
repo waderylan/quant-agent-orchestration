@@ -9,7 +9,7 @@ Formal RAGAS, agent trajectory, provider, and Cloud Run reports are pending. The
 | Local container | 22 focused tests; cited SSE, browser, auth isolation, cancellation, and model failure in [M4](milestones/local-container/README.md) |
 | Financial Data | 31 focused tests; 32 annual references, four direct workers, browser and Docker checks in [M5](milestones/financial-data/README.md) |
 | Quant and PM workflows | Latest 118 tests; 30 chats: 24 complete, four partial, one clarification, one coverage gap; 215 source checks, 85 calculations, 17 replayed bundles, eight browser checks, six Linux fixtures in [M6](milestones/quant/README.md) |
-| M7–M9 engineering review | 184 regression tests; [48 sealed independent cases](milestones/supervisor/evidence/review-round-1/README.md), 416 exact source inspections and 136 replayed calculations; 44 reviewer passes and four unverified setup/basis conditions |
+| M7–M9 engineering review | 192 regression tests; [first 48 sealed cases](milestones/supervisor/evidence/review-round-1/README.md): 416 source inspections, 136 replayed calculations, 44 passes and four unverified setup/basis conditions; [second 24 new cases](milestones/supervisor/evidence/review-round-2/README.md): 190 source inspections, 73 replayed calculations and 24 reviewer passes |
 
 The PM questions and original exploratory responses are in [research](research/pm-exploration/README.md). Their labels reflect reviewed outcomes on that set, not accuracy on unseen questions. Native subscription, direct-worker, fixture, browser, Docker, and future deployed-provider results are distinct.
 

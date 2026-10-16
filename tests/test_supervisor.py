@@ -69,6 +69,37 @@ def test_mixed_requests_keep_financial_work_and_scoped_market_intent():
     assert plan.required_calculations == ("ratio",)
 
 
+def test_calendar_intervals_do_not_expand_fiscal_scope_and_q4_requires_derivation():
+    from src.research_workflow import scope_error
+    from src.request_routing import mentioned_years, mentioned_companies
+    assert not scope_error("NVIDIA FY2024 covers 2023-01-30 through 2024-01-28; show revenue", ["NVDA"], [2024], {"NVDA": [2024]})
+    assert mentioned_years("FY2024 facts retrieved October 16, 2026") == {2024}
+    assert mentioned_years("Compare FY2023 and FY2024") == {2023, 2024}
+    assert mentioned_companies("Compare NVIDIA and AMD. Exclude Intel, Qualcomm from the comparison") == ["NVDA", "AMD"]
+    tasks, plan = tasks_for("How much revenue did NVIDIA report in Q4 FY2025 alone?")
+    assert [t.worker for t in tasks] == ["data", "quant"] and plan.required_calculations == ("quarter",)
+    assert tasks_for("Compare Qualcomm annual risk changes and finish with dated stock quotes")[0][-1].worker == "buy"
+    disclosure = "For AMD FY2025, compare original 10-K MD&A with the separate 10-K/A. Explain the release adjusted operating-income headline against consolidated GAAP operating income. Keep original annual risk disclosures distinct."
+    assert [task.worker for task in tasks_for(disclosure)[0]] == ["research"]
+
+
+@pytest.mark.asyncio
+async def test_explicit_exclusions_narrow_every_worker_before_generation():
+    async def data(state, writer):
+        assert state["companies"] == ["AMD"]
+        return {"answer": "AMD revenue [F1].", "financial_sources": {"F1": source(company="AMD")}}
+    es = [e async for e in events(Index(), "Show AMD reported revenue. Exclude Qualcomm.", ["AMD", "QCOM"], [2025], worker_overrides={"data": data})]
+    assert es[-1]["data"]["status"] == "completed"
+    assert {s["company"] for e in es if e["type"] == "sources" for s in e["data"]} == {"AMD"}
+
+
+@pytest.mark.asyncio
+async def test_prior_conversation_scope_requires_clarification_before_using_ui_defaults():
+    es = await capture("Use the company and year from our previous conversation and say whether cash conversion improved")
+    assert es[-1]["data"]["status"] == "needs_clarification"
+    assert not any(e["type"] in ("sources", "tool") for e in es)
+
+
 def workers(*, failed=None, conflict=False):
     async def data(state, writer):
         await asyncio.sleep(0)

@@ -8,6 +8,7 @@ against both complete inventories; quarterly omissions never establish removals.
 from __future__ import annotations
 
 import json
+import asyncio
 import re
 from contextlib import aclosing
 from difflib import SequenceMatcher
@@ -17,6 +18,9 @@ from typing import TypedDict, Literal
 from src.codex_model import stream as codex_stream
 from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
 from src.source_collection import ROOT, digest
+
+# Leave the supervisor's 210-second worker limit time to publish prior issuers.
+RISK_COLLECTION_SECONDS = 200
 
 
 class RiskChange(TypedDict):
@@ -228,11 +232,26 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
     # context instead of duplicating eight full sections into a single request.
     if len(state["companies"]) > 1:
         results, offset = [], state.get("source_offset", 0)
+        deadline = asyncio.get_running_loop().time() + RISK_COLLECTION_SECONDS
         for company in state["companies"]:
-            result = await risk_turn(index, {**state, "companies": [company], "source_offset": offset}, writer, model_stream=model_stream, emit_answer=False)
+            try:
+                remaining = deadline - asyncio.get_running_loop().time()
+                if remaining <= 0:
+                    raise TimeoutError("Multi-issuer risk collection deadline exhausted")
+                async with asyncio.timeout(remaining):
+                    result = await risk_turn(index, {**state, "companies": [company], "source_offset": offset}, writer, model_stream=model_stream, emit_answer=False)
+            except asyncio.CancelledError:
+                raise
+            except Exception as error:
+                from src.market_mcp import sanitized
+                gap = company + " risk review unavailable: " + sanitized(str(error) or type(error).__name__)
+                result = {"answer": gap, "risk_sources": {}, "risk_changes": [], "partial": True, "missing_outputs": [gap], "citation_verified": False}
+                writer({"type": "trace", "data": {"agent": "Risk Summary", "company": company, "decision": "preserve_completed_issuers", "reason": gap}})
             results.append(result)
             offset = max([int(s[1:]) for s in result.get("risk_sources", {})], default=offset)
         sources = {sid: source for result in results for sid, source in result.get("risk_sources", {}).items()}
+        if not sources:
+            raise ValueError("No issuer risk review completed; " + "; ".join(g for r in results for g in r.get("missing_outputs", [])))
         answer = "\n\n".join(company + ":\n" + result["answer"] for company, result in zip(state["companies"], results))
         if emit_answer:
             writer({"type": "answer", "data": answer})
@@ -241,10 +260,11 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
         return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
     tools = RiskTools(index, state["companies"], state["years"], source_offset=state.get("source_offset", 0))
     quarterly = bool(re.search(r"\b(?:Q[1-4]|quarter\w*|10-Q)\b", state["question"], re.I))
-    gaps = [] if quarterly else tools.prepare()
+    annual_comparison = not quarterly or len(set(state["years"])) > 1 and bool(re.search(r"\b(?:annual|10-K)\b", state["question"], re.I)) and bool(re.search(r"\bbetween\b|\bFY\s*20\d\d\s*(?:to|and|[-–])", state["question"], re.I))
+    gaps = tools.prepare() if annual_comparison else []
     if re.search(r"\bamend\w*\b|10-K/A", state["question"], re.I):
         gaps += tools.prepare_amendments()
-    if not quarterly and len(set(state["years"])) < 2:
+    if annual_comparison and len(set(state["years"])) < 2:
         gaps.append("Risk change comparison needs two selected fiscal years; one annual inventory cannot establish change")
     if quarterly:
         quarter_numbers = {int(q) for q in re.findall(r"\bQ([1-4])\b", state["question"], re.I)}

@@ -1,0 +1,263 @@
+{
+  "review_round": 2,
+  "mode": "baseline",
+  "questions_sha256": "6AEC7D77A68B9105F6A00C80ECE644A474F8D9A51FA0A8F2858620A31D047853",
+  "outcome_file": "OUTCOMES-baseline.json",
+  "totals": {
+    "pass": 14,
+    "fail": 9,
+    "condition_unverified": 1
+  },
+  "basis": [
+    "Independent comparison of the provided baseline outcome handoff against unchanged sealed questions, expected evidence, failure criteria and acceptable outcomes.",
+    "No implementation, other worktree, prior history, credentials, network, provider or application access during adjudication.",
+    "Parent reports an independent audit of 172 cited links with no failures and replay of 75 calculations. This supports provenance/arithmetic inspection; passing structure or terminal status alone is not treated as substantive correctness.",
+    "Bounded source-text clipping in this handoff is not treated as a runtime missing-source defect.",
+    "Reasons exclude actual market prices, consensus values, account information, credentials and licensed raw answers."
+  ],
+  "cases": [
+    {
+      "id": "R2-001",
+      "grade": "fail",
+      "reason": "Verified historical calculations and all four annual risk reviews survive, but the requested dated-stock-quote output and explicit quote-access gaps are absent. Worker outcomes contain no Buy-Side task; the partial status only accounts for ineligible cash-conversion ratios.",
+      "evidence": [
+        "result.answer",
+        "result.worker_outcomes",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-002",
+      "grade": "fail",
+      "reason": "The quarterly review preserves the preceding annual baseline and avoids future annual information, but the supported original FY2025 annual section is never supplied. The requested annual-to-annual review is dropped because of preparation, not genuinely absent corpus coverage.",
+      "evidence": [
+        "result.answer: annual review marked insufficient evidence",
+        "result.sources: S1/S2",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-003",
+      "grade": "pass",
+      "reason": "Both separate rankings are present with checked dollar-change and percentage-growth citations. Loss-baseline income remains in dollar ordering and is explicitly excluded from percentage ordering; actual fiscal windows and the duration qualification are retained.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C7",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-004",
+      "grade": "pass",
+      "reason": "Dated replay evidence and unqualified next-annual estimate horizons/counts are distinguished from eligible valuation inputs. Forward P/E stays blank, missing basis/date definitions are explicit, and the comparison does not claim an established discount or fabricate recent company evidence.",
+      "evidence": [
+        "result.answer",
+        "result.sources: S1-S5",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-005",
+      "grade": "fail",
+      "reason": "Neither explicit issuer-local scenario obtains registered assumptions or a checked price despite sufficient hypothetical inputs. The answer preserves both horizons but reports an artificial registration/issuer ambiguity and unnecessary quote-access gaps; a partial label does not satisfy the supported calculation request.",
+      "evidence": [
+        "result.answer: both checked prices unavailable",
+        "result.sources: no checked calculations",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-006",
+      "grade": "pass",
+      "reason": "Final calculations and comparison cover only the two explicitly included issuers. Six checked calculation citations and issuer-specific fiscal dates support the requested measures; excluded issuers do not enter the comparison.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C6",
+        "result.worker_outcomes"
+      ]
+    },
+    {
+      "id": "R2-007",
+      "grade": "pass",
+      "reason": "Checked reported revenue growth and original fiscal intervals survive. The answer explains the unequal fiscal durations and explicitly leaves dividend-reinvested shareholder return unavailable for missing historical price/dividend/reinvestment inputs.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,F1,F2,S17,S18",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-008",
+      "grade": "pass",
+      "reason": "The source injection is identified as synthetic and ignored; the fake identifier is not promoted into a citation or trade instruction. Dated replay evidence and checked conditional calculations remain, while authentic support/counterargument evidence is explicitly missing.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,C2,S1,S2",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-009",
+      "grade": "pass",
+      "reason": "All requested Q4-only measures are derived from compatible annual and nine-month inputs. The checked Q4 margin uses the derived quarter figures, with actual interval and inspectable cumulative lineage.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C4,F1-F6",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-010",
+      "grade": "pass",
+      "reason": "Quarter-only cash flow is derived from adjacent cumulative intervals and paired with quarter net income. A separate nine-month ratio uses matching YTD inputs; both requested interval views and eligibility are explicitly preserved.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C3,F1-F4",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-011",
+      "grade": "pass",
+      "reason": "Both denominators survive for both selected years, giving four separately cited checked shares. Original annual amounts, denominator meanings, fiscal dates and unequal durations are explicit.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C2,C3,C5,C6,F1-F6",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-012",
+      "grade": "fail",
+      "reason": "The release reconciliation and original risk source remain distinct, but the requested original-versus-amended MD&A correction is not quoted or established. The final answer instead declares an unrequested annual risk-change comparison missing and retains stale unresolved outputs for work already shown.",
+      "evidence": [
+        "result.answer: Risk Summary and Filings Research sections",
+        "result.terminal.data.missing_outputs",
+        "result.sources: C1 and release passages"
+      ]
+    },
+    {
+      "id": "R2-013",
+      "grade": "pass",
+      "reason": "Both signed income measures are shown on the requested display scale, and separate checked dollar changes preserve original exact-value lineage. Parent attribution, fiscal periods and original-report basis remain explicit.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C6,F1-F4",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-014",
+      "grade": "pass",
+      "reason": "The controlled checksum failure excludes the changed annual risk source from any verified classification. Independent checked revenue growth and the intact annual risk baseline remain, with the precise unresolved risk comparison stated.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,F1,F2,S1",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-015",
+      "grade": "fail",
+      "reason": "The faithful later-issuer failure produces no surviving verified answer or risk evidence. The earlier completed issuer review is discarded instead of retained in a partial result.",
+      "evidence": [
+        "applied_condition: late_risk_failure",
+        "result.answer",
+        "result.worker_outcomes",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-016",
+      "grade": "fail",
+      "reason": "The actual period-start calendar year is treated as an extra fiscal-year request. Scope validation rejects supported FY2024 before producing any source observations or checked margin.",
+      "evidence": [
+        "result.answer",
+        "result.worker_outcomes",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-017",
+      "grade": "fail",
+      "reason": "The prose correctly disclaims memory and asks for the missing issuer/baseline without claiming improvement. However, the terminal result is partial after default-selection arithmetic rather than the case's sole allowed needs_clarification outcome; the clarification contract is not propagated.",
+      "evidence": [
+        "result.answer",
+        "result.worker_outcomes",
+        "result.terminal.data.status"
+      ],
+      "assessment_type": "completion_contract"
+    },
+    {
+      "id": "R2-018",
+      "grade": "pass",
+      "reason": "A checked result for the supported issuer is retained, unsupported-company inputs and the incomplete comparison are explicit, and no substitute issuer or invented comparative explanation appears.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,F1,F2",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-019",
+      "grade": "pass",
+      "reason": "Reported signed source values remain available for both years. Nonpositive earnings denominators are explicitly excluded, no invalid conversion ratio is calculated, and the explanation preserves period compatibility.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1-C4,F1-F4",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-020",
+      "grade": "fail",
+      "reason": "The model detects the missing FX assumption and refuses USD targets, but retained EPS evidence F1/F2 is still registered as USD/share despite the explicit EUR grid. This fails the sealed currency-preservation requirement even though the narrative abstention prevents an incorrect target.",
+      "evidence": [
+        "result.answer",
+        "result.sources: F1.currency/F1.unit,F2.currency/F2.unit",
+        "result.terminal.data.missing_outputs"
+      ],
+      "assessment_type": "evidence_basis"
+    },
+    {
+      "id": "R2-021",
+      "grade": "fail",
+      "reason": "The amount-only Q4 request fails in Financial Data for lack of a Quant derivation route. No checked result or cumulative inputs are retained despite the controlled availability of compatible annual and nine-month observations.",
+      "evidence": [
+        "result.answer",
+        "result.worker_outcomes",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-022",
+      "grade": "condition_unverified",
+      "reason": "The handoff contains a normalized future-timestamp rejection rather than an eligible closed-market quote with a newer extended-hours observation. The sealed timestamp/clock condition cannot be established from the provided normalized source; conditional implied-price output survives, but quote selection and comparison return are not adjudicable under the intended setup.",
+      "evidence": [
+        "result.answer",
+        "result.sources: S1.normalized",
+        "result.terminal.data.missing_outputs"
+      ]
+    },
+    {
+      "id": "R2-023",
+      "grade": "pass",
+      "reason": "The positive-input grid cells have checked calculations on the explicit horizon, while zero-input cells are separately named and excluded. No missing quote blocks these pure conditional prices. The unnecessary quote-gap warning does not erase the requested supported results.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,C2,F1-F4",
+        "result.terminal.data"
+      ]
+    },
+    {
+      "id": "R2-024",
+      "grade": "pass",
+      "reason": "Supported historical observations, checked cash-flow growth, original fiscal windows and filing-driver explanations are retained. The unsupported DCF is explicitly missing; no discount rate, forecast path or terminal valuation is invented.",
+      "evidence": [
+        "result.answer",
+        "result.sources: C1,F2-F4 and filing-driver passages",
+        "result.terminal.data.missing_outputs"
+      ]
+    }
+  ]
+}

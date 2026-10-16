@@ -1,0 +1,28 @@
+{
+  "case_id": "R1-024",
+  "input_sha256": "45ECC908C660D972306F1B1E7D3951BDD8C68D07ED6E9415C256BF3ED86E3884",
+  "verdict": "pass",
+  "previous_observations_absent_claim_corrected": true,
+  "reason": "The Financial Data section preserves both disputed observations, scale metadata and provenance. The Quant section and unresolved-output list now explicitly acknowledge F2 and F3 as existing conflict evidence that is ineligible for arithmetic, instead of claiming the observations themselves are absent. No averaging, convenient source selection or growth from unresolved values occurs; the only calculation retains the verified baseline.",
+  "scope_note": "The Quant paragraph still says competing amounts were not supplied to its calculation task. That statement is now expressly about the worker's eligible calculation context; the combined answer displays the competing amounts above and does not claim the evidence is absent globally.",
+  "inspection_evidence": {
+    "supplied_source_checks": 4,
+    "failed_source_checks": 0,
+    "reviewer_performed_network_calls": false
+  },
+  "effective_totals_unchanged": {
+    "cases": 48,
+    "pass": 44,
+    "fail": 0,
+    "condition_unverified": 4,
+    "remaining_condition_unverified": ["R1-007", "R1-009", "R1-019", "R1-036"]
+  },
+  "final_independent_audit_reported_by_parent": {
+    "source_inspections": 416,
+    "source_inspection_failures": 0,
+    "calculations": 136,
+    "bundles": 25,
+    "provenance": "Parent handoff; these aggregate audits were not executed by this isolated reviewer."
+  },
+  "preservation": "Earlier adjudications and sealed questions remain unchanged. This check resolves the R1-024 composition concern recorded in the supplement; it does not change any other case or authenticate unresolved estimate/quarterly inputs."
+}

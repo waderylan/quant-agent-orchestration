@@ -1,0 +1,562 @@
+{
+  "checked_at": "2026-10-16T18:03:34.463824+00:00",
+  "kind": "Private local real MCP application acceptance and engineering-review integration; no public-display authorization",
+  "implementation_files": {
+    "main.py": "1437c97444a47c346990a9afb3bbfde451a04210cf531b9e353e1ce92378bf80",
+    "src/analysis_artifacts.py": "2e8d47e085053fd40c7bb71c397141618b931e770e491998f3193dc4ea0f608e",
+    "src/buy_side.py": "f515279258d876fceed0bbcc65978b9011d1ed6a4a52f2f6c098d9a3fdd11242",
+    "src/codex_model.py": "8a21c1155941c4bdd2023fdcdaf32e65b49dc5b7179695a1537fd20a4d0f947b",
+    "src/codex_transport.py": "36e0f3557a5e2e0ccad984b7a99813c34531085c0f2998190f9b107624d5d989",
+    "src/filing_financials.py": "2f752d8a332b74dc8c30e103185d7db8986769e4ea73c6845b4016caaaf3737c",
+    "src/financial_data.py": "916ed5f0fc6f5f99fa55f45cda18e75cc58eaf0a06a052da676f37ef23a6a8a8",
+    "src/financial_workflow.py": "57fc4388f451de919be68f84153b5221f04d38d696b376d089a0734570a76486",
+    "src/market_evidence.py": "a06a0a2142e6f1b622345da73ac7b1313a44def5a8020ddabf07768ceaa63a3d",
+    "src/market_mcp.py": "b8f032391b2023c2cff0b5fbd134704be4331ce307290c5c19573f79326c8212",
+    "src/quant_analysis.py": "a1b84bb79de9adf6007393eca204da6ae2153ea486fce22f0ff1b22c5f31a6f6",
+    "src/quant_runner.py": "b626d174dd2c22cc6b132ee6866b7b4ff088404dcabf5312ce6f096675f4d0ef",
+    "src/quant_valuation.py": "1cfd5498f1c7516231077a40fe001c8a4bad239ebffd4a32bf5841b5bbbd4c5c",
+    "src/quant_workflow.py": "0b25577c33b32214df12b186c8674d0e4d5b90cfd34095f904c8e69f089de12e",
+    "src/request_routing.py": "5e004180dd290156d76a8e4d1f88affc28e334f7682fdbc62483337bc8f0d66d",
+    "src/research_index.py": "d4dea099c47f0d6f6353a04c50e08f886eb31ab13d63ce5d23bc9e3e4799c5e1",
+    "src/research_workflow.py": "c9202d86d6463294ccadc673b1bba55d3914156e5a4596d79c2befda3662dc47",
+    "src/response_contract.py": "b387a35589a5492e3b19532fea4b393b93bb5d5797b33eb07c2b77cfef335931",
+    "src/risk_summary.py": "4708de35194555ad2159c441f52c4b3ae98081ba8ab96af3dc4d1218269e4b8c",
+    "src/source_collection.py": "3bbbb3d598e9e04399427e52d26ff03809442db084c538fda8a004902a3420a1",
+    "src/source_inventory.py": "7016cc3a1340d45b3fbfd810f5cbef94e90642aa5d44f5d1eebc28209618022e",
+    "src/supervisor.py": "87bcd7bd4d1d57317297f6e7eb847b690ef7ec47914673476868dbeec69e7785",
+    "prompts/buy_side.md": "23c17afd95dace2d6a81ca22102429fd087b23ca0c6bf3ca68af7acd1d47e329",
+    "prompts/filings_research.md": "e8a6711bae7f3c9e28fd9e3eed293a0c9d1e584c974378bbf147b1968a2870e1",
+    "prompts/filing_revenue_inputs.md": "61c86953a1d99250a3391a01a615e1225ac3010355c730e2e25a1d6980807cb9",
+    "prompts/financial_data.md": "f86ddeba4b2dc3097b4d3975fcf648cd560e857738d63487e61cf244b8f461f2",
+    "prompts/quant.md": "e4d3e60d5e76de5796f10f508591fc77a4e8994e393896d26afc1f5caf67eaff",
+    "prompts/risk_summary.md": "bf310a5b2bea9f9203f90caad90fd2f9b89899fadaf1b31cca07f0f71e37fcfd"
+  },
+  "quote_recovery_final_files": {
+    "src/buy_side.py": "0fabd90f2254a439537544c6911266db7d81c094342a4ab263ad8bcce6dea095",
+    "tests/test_buy_side.py": "973d144aec877c3c5276c41dcd1c303ccb0acfe9dc6ba80d87bdda7bf778fc82"
+  },
+  "source_artifacts": {
+    "final-live-paths.json": "d14c3f7276a17b893510ae0481c493fe3352657c4bc7a2f1083137baeb7469d1",
+    "final-live-verification.json": "a760348e6c006b0329aa8412d2be7ac367b44e28e7903cc7588833560acc39c7",
+    "final-live-quote-browser-rejected.json": "9e903ef69800b22382130d38a3844af80eed5e83e0c4c4e5b9afa0f3dc157741",
+    "final-live-quote-browser.json": "ea4d1044459bfc6ab028c857c8aa591f910909dd3a319b23b1d558c1b49f1934",
+    "final-docker-live-buy-browser.json": "a8e04e2b78df5aa504895f2b59c60e677cf33158ab406fb7c9a0a50e49e83ec3",
+    "final-review-docker-browser.json": "8303611dccc774748b1909aacf845c5cf0dd98432447565ddf5e6d13d0f1f3e3"
+  },
+  "application_cases": [
+    {
+      "id": "live-scenario-NVDA",
+      "question": "Refresh the dated NVDA quote. Assume hypothetical USD diluted EPS of $10 and P/E of 18x, not consensus. Show the conditional 12-month price and percentage difference. Give supporting evidence and the strongest counterargument; distinguish assumptions from forecasts.",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "source_count": 6,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "12 months"
+      ],
+      "calculation_bundles": [
+        "8e054a200135956a16728f930089d757c8180f87094c1dc03108b63d6cb70f61"
+      ]
+    },
+    {
+      "id": "live-scenario-AMD",
+      "question": "Refresh the dated AMD quote. Assume hypothetical USD diluted EPS of $10 and P/E of 18x, not consensus. Show the conditional 12-month price and percentage difference. Give supporting evidence and the strongest counterargument; distinguish assumptions from forecasts.",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "source_count": 6,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "12 months"
+      ],
+      "calculation_bundles": [
+        "e7a107fbc8e63cb2e8c26e15439475c7ca3e74b51cadac14ebb9f606f6bf94b9"
+      ]
+    },
+    {
+      "id": "live-scenario-INTC",
+      "question": "Refresh the dated INTC quote. Assume hypothetical USD diluted EPS of $10 and P/E of 18x, not consensus. Show the conditional 12-month price and percentage difference. Give supporting evidence and the strongest counterargument; distinguish assumptions from forecasts.",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "source_count": 6,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "12 months"
+      ],
+      "calculation_bundles": [
+        "ba90b15bf9c4e5652a3eb22b71b9ced4ae7b1a99f2979d0d89647b70183d2165"
+      ]
+    },
+    {
+      "id": "live-scenario-QCOM",
+      "question": "Refresh the dated QCOM quote. Assume hypothetical USD diluted EPS of $10 and P/E of 18x, not consensus. Show the conditional 12-month price and percentage difference. Give supporting evidence and the strongest counterargument; distinguish assumptions from forecasts.",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "source_count": 7,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "12 months"
+      ],
+      "calculation_bundles": [
+        "e86bcefc7e5e56d20fe27b8475b3849ffa135ef82077723e1249c5c57689ab6c"
+      ]
+    },
+    {
+      "id": "live-five-AMD-QCOM",
+      "question": "For AMD and Qualcomm, compare FY2025 versus FY2024 revenue and operating margins, explain management drivers and original annual risk changes, and refresh dated quotes. For Qualcomm only, assume hypothetical USD diluted EPS of $8 and P/E of 15x, not consensus. Show a conditional 24-month price and percentage difference, recent supporting evidence and the strongest counterargument. Keep AMD valuation missing where inputs are absent.",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "AMD valuation unavailable: no eligible earnings/valuation denominator or explicit multiple assumptions supplied. Requested to remain missing."
+        ]
+      },
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "risk": "completed",
+        "research": "completed",
+        "buy": "partial"
+      },
+      "source_count": 38,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "24 months"
+      ],
+      "calculation_bundles": [
+        "8a9f35fc0614974a3fb93ee87772ff069f95ed9b5266bc63734501f2ca3b25b2",
+        "ec0b11829199ab414bb61d15c930830a5363e3c1d112e447c8f40298226f5489"
+      ]
+    },
+    {
+      "id": "live-five-NVDA-INTC",
+      "question": "For NVIDIA and Intel, compare FY2024 versus FY2025 annual revenue and operating margins, explain management drivers and original risk changes, and refresh dated stock quotes. For Intel only, assume hypothetical USD diluted EPS of $4 and P/E of 20x, not consensus, for a 12-month conditional price and percentage difference. Give recent supporting evidence and the strongest counterargument. Keep unsupported NVIDIA valuation inputs explicit.",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "risk": "completed",
+        "research": "completed",
+        "buy": "completed"
+      },
+      "source_count": 41,
+      "inspection_passed": true,
+      "calculation_horizons": [
+        "12 months"
+      ],
+      "calculation_bundles": [
+        "5fa14a91a91eb11162a438d19ed74e195da055e93d48011415d252b867403f57",
+        "f70d1eb41b72805520d79526d7c7dc361f2cafb154da65c17785aa79f8606925"
+      ]
+    }
+  ],
+  "direct_workers": {
+    "buy": {
+      "partial": false,
+      "bundles": [
+        "6a74ded1cc393f8b901acb741b4702fc6e895c6aed6c8e676c36a092cf06981c"
+      ],
+      "replay": [
+        {
+          "verified": true,
+          "calculations": 2
+        }
+      ]
+    },
+    "risk": {
+      "partial": false,
+      "classifications": 10,
+      "sources": 339
+    }
+  },
+  "additional_inspections": 104,
+  "independent_bundle_replays": {
+    "8e054a200135956a16728f930089d757c8180f87094c1dc03108b63d6cb70f61": {
+      "verified": true,
+      "calculations": 2
+    },
+    "e7a107fbc8e63cb2e8c26e15439475c7ca3e74b51cadac14ebb9f606f6bf94b9": {
+      "verified": true,
+      "calculations": 2
+    },
+    "ba90b15bf9c4e5652a3eb22b71b9ced4ae7b1a99f2979d0d89647b70183d2165": {
+      "verified": true,
+      "calculations": 2
+    },
+    "e86bcefc7e5e56d20fe27b8475b3849ffa135ef82077723e1249c5c57689ab6c": {
+      "verified": true,
+      "calculations": 2
+    },
+    "ec0b11829199ab414bb61d15c930830a5363e3c1d112e447c8f40298226f5489": {
+      "verified": true,
+      "calculations": 8
+    },
+    "8a9f35fc0614974a3fb93ee87772ff069f95ed9b5266bc63734501f2ca3b25b2": {
+      "verified": true,
+      "calculations": 2
+    },
+    "5fa14a91a91eb11162a438d19ed74e195da055e93d48011415d252b867403f57": {
+      "verified": true,
+      "calculations": 8
+    },
+    "f70d1eb41b72805520d79526d7c7dc361f2cafb154da65c17785aa79f8606925": {
+      "verified": true,
+      "calculations": 2
+    },
+    "6a74ded1cc393f8b901acb741b4702fc6e895c6aed6c8e676c36a092cf06981c": {
+      "verified": true,
+      "calculations": 2
+    }
+  },
+  "native_quote_browser": {
+    "passed": true,
+    "status": "Complete · source references checked",
+    "viewer_characters": 2155,
+    "page_errors": [],
+    "inspections": [
+      {
+        "status": 200,
+        "href": "/api/market/3a69a6e98405faee8cf62113a1f95cf200023d96361a902e8131c0dc55a1fbc5"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/2cb454e6525b11eba4fd562d2b3545be0578748d5f6e01d026d9e998298779f4"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/8f86e3d82807a93bed651076994c57647a7bab6e29964088960bb36e0011073b"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/36d54ff124acb251a148110f12819fda743fb2fe559d6f7eafe1d7ab2d5c7f6e"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/3a69a6e98405faee8cf62113a1f95cf200023d96361a902e8131c0dc55a1fbc5"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/2cb454e6525b11eba4fd562d2b3545be0578748d5f6e01d026d9e998298779f4"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/8f86e3d82807a93bed651076994c57647a7bab6e29964088960bb36e0011073b"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/36d54ff124acb251a148110f12819fda743fb2fe559d6f7eafe1d7ab2d5c7f6e"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/3a69a6e98405faee8cf62113a1f95cf200023d96361a902e8131c0dc55a1fbc5"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/2cb454e6525b11eba4fd562d2b3545be0578748d5f6e01d026d9e998298779f4"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/8f86e3d82807a93bed651076994c57647a7bab6e29964088960bb36e0011073b"
+      },
+      {
+        "status": 200,
+        "href": "/api/market/36d54ff124acb251a148110f12819fda743fb2fe559d6f7eafe1d7ab2d5c7f6e"
+      }
+    ]
+  },
+  "docker_live_scenario_browser": {
+    "passed": true,
+    "status": "Complete · source references checked",
+    "citations": 7,
+    "inspection_characters": 2147,
+    "chart": true,
+    "artifact_downloads": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "page_errors": []
+  },
+  "docker_live_fresh_calls": [
+    {
+      "id": "f59ca00c-87e3-49f9-936f-22c7f72186ea",
+      "at": "2026-10-16T17:59:01.064959+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    }
+  ],
+  "docker_five_worker_browser": {
+    "passed": true,
+    "status": "Partial answer · evidence gap",
+    "five_workers": true,
+    "cancelled_controls_reset": true,
+    "page_errors": [],
+    "inspections": [
+      {
+        "kind": "S",
+        "status": 200,
+        "viewer_characters": 143445
+      },
+      {
+        "kind": "F",
+        "status": 200,
+        "viewer_characters": 1459
+      },
+      {
+        "kind": "C",
+        "status": 200,
+        "viewer_characters": 4671
+      }
+    ]
+  },
+  "docker_image": {
+    "image": "sha256:feb62d98334aa5c8895eed8e7e140daa9896b0142002f59e688b9bb1af363ba1",
+    "user": "appuser",
+    "credential_env_names": [],
+    "verified_uid": 10001
+  },
+  "official_mcp_observations": {
+    "twelve:get_quote": {
+      "provider": "twelve",
+      "tool": "get_quote",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "Twelve Data",
+        "version": "1.30.0"
+      },
+      "discovered_tool": "get_quote",
+      "tool_count": 27,
+      "snapshot_id": "3a69a6e98405faee8cf62113a1f95cf200023d96361a902e8131c0dc55a1fbc5",
+      "retrieved_at": "2026-10-16T17:58:31.873515+00:00",
+      "outcome": "returned"
+    },
+    "alpha:EARNINGS_ESTIMATES": {
+      "provider": "alpha",
+      "tool": "EARNINGS_ESTIMATES",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "EARNINGS_ESTIMATES",
+      "tool_count": 133,
+      "snapshot_id": "c8a8d6af2f8c62da6def3d24ebb04b063ed981d3dd335db530ee6b1250753703",
+      "retrieved_at": "2026-10-16T07:40:03.631502+00:00",
+      "outcome": "returned"
+    },
+    "twelve:get_api_usage": {
+      "provider": "twelve",
+      "tool": "get_api_usage",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "Twelve Data",
+        "version": "1.30.0"
+      },
+      "discovered_tool": "get_api_usage",
+      "tool_count": 27,
+      "snapshot_id": "5a3c7f5df6819ed45854a1a836cc53e42ca40131b17683a393c501cce93a0c73",
+      "retrieved_at": "2026-10-16T07:31:40.324720+00:00",
+      "outcome": "returned"
+    },
+    "twelve:get_statistics": {
+      "provider": "twelve",
+      "tool": "get_statistics",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "Twelve Data",
+        "version": "1.30.0"
+      },
+      "discovered_tool": "get_statistics",
+      "tool_count": 27,
+      "snapshot_id": "552e291b8de4329756c290f346887a41485558652eb0481930f56c93bbe16258",
+      "retrieved_at": "2026-10-16T07:31:43.508846+00:00",
+      "outcome": "provider_error"
+    },
+    "alpha:CASH_FLOW": {
+      "provider": "alpha",
+      "tool": "CASH_FLOW",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "CASH_FLOW",
+      "tool_count": 133,
+      "snapshot_id": "5d0c3c3dab7891822694dacd6ec8bc40f593452ca1328b87b7098e0b14423b5d",
+      "retrieved_at": "2026-10-16T07:36:27.068603+00:00",
+      "outcome": "returned"
+    },
+    "twelve:get_splits": {
+      "provider": "twelve",
+      "tool": "get_splits",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "Twelve Data",
+        "version": "1.30.0"
+      },
+      "discovered_tool": "get_splits",
+      "tool_count": 27,
+      "snapshot_id": "eb666b5411da34d98d4891f0ab4a46b1edf9df0e38605708e66ae46e32f659ae",
+      "retrieved_at": "2026-10-16T07:31:46.476858+00:00",
+      "outcome": "provider_error"
+    },
+    "tavily:tavily_search": {
+      "provider": "tavily",
+      "tool": "tavily_search",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "tavily-mcp",
+        "version": "4.1.0"
+      },
+      "discovered_tool": "tavily_search",
+      "tool_count": 5,
+      "snapshot_id": "b2d04a5f538c914fc4b075b73444c1add29f8ec5c9ffd427479fa1874808d996",
+      "retrieved_at": "2026-10-16T17:22:53.633307+00:00",
+      "outcome": "returned"
+    },
+    "alpha:COMPANY_OVERVIEW": {
+      "provider": "alpha",
+      "tool": "COMPANY_OVERVIEW",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "COMPANY_OVERVIEW",
+      "tool_count": 133,
+      "snapshot_id": "695bff861da17227331daabfead907a9ce2789ed1f22b3bdcf36d6c90375cf9d",
+      "retrieved_at": "2026-10-16T07:28:27.264462+00:00",
+      "outcome": "provider_error"
+    },
+    "alpha:BALANCE_SHEET": {
+      "provider": "alpha",
+      "tool": "BALANCE_SHEET",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "BALANCE_SHEET",
+      "tool_count": 133,
+      "snapshot_id": "81d1c41c2f02125012db483fbfa19501f1e7696e16a561bc4bc6926208a88e6e",
+      "retrieved_at": "2026-10-16T07:32:38.704179+00:00",
+      "outcome": "returned"
+    },
+    "twelve:get_earnings": {
+      "provider": "twelve",
+      "tool": "get_earnings",
+      "protocol": "2025-11-25",
+      "server": {
+        "name": "Twelve Data",
+        "version": "1.30.0"
+      },
+      "discovered_tool": "get_earnings",
+      "tool_count": 27,
+      "snapshot_id": "c46fa75e9a89887835288f0125f80b853d876d55256e6dc90e5647cc1a1d2363",
+      "retrieved_at": "2026-10-16T07:31:44.962870+00:00",
+      "outcome": "provider_error"
+    },
+    "alpha:EARNINGS": {
+      "provider": "alpha",
+      "tool": "EARNINGS",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "EARNINGS",
+      "tool_count": 133,
+      "snapshot_id": "dbc0b9cd29a2b4033a9fb2111c79311c6b0f6e14f076a8b8e90bcc6e1c6d4658",
+      "retrieved_at": "2026-10-16T07:34:46.048311+00:00",
+      "outcome": "returned"
+    },
+    "alpha:INCOME_STATEMENT": {
+      "provider": "alpha",
+      "tool": "INCOME_STATEMENT",
+      "protocol": "2024-11-05",
+      "server": {
+        "name": "alphavantage-mcp-server",
+        "version": "1.0.0"
+      },
+      "discovered_tool": "INCOME_STATEMENT",
+      "tool_count": 133,
+      "snapshot_id": "f80b8a252d2148b37da239251d32ef647d510692800aca0acaac8a561c3c3098",
+      "retrieved_at": "2026-10-16T07:36:23.384752+00:00",
+      "outcome": "returned"
+    }
+  },
+  "usage_totals": {
+    "twelve": {
+      "calls": 55,
+      "reserved_work_credits": 55,
+      "accounts": {
+        "yahoo": 50,
+        "gmail": 5
+      },
+      "outcomes": {
+        "returned": 49,
+        "provider_error": 6
+      }
+    },
+    "alpha": {
+      "calls": 10,
+      "reserved_work_credits": 10,
+      "accounts": {
+        "primary": 10
+      },
+      "outcomes": {
+        "returned": 9,
+        "provider_error": 1
+      }
+    },
+    "tavily": {
+      "calls": 7,
+      "reserved_work_credits": 14,
+      "accounts": {
+        "primary": 7
+      },
+      "outcomes": {
+        "provider_error": 1,
+        "returned": 6
+      }
+    }
+  },
+  "usage_ledger": "PROVIDER_USAGE_LEDGER.json",
+  "judgments_and_limits": [
+    "Raw licensed market values, source answers and full traces stay in ignored artifacts.",
+    "Actual Alpha four-symbol estimate responses remain unqualified for verified forward P/E; current replayed acquisition is less than 24 hours old. No additional Alpha call exceeds the daily cap.",
+    "All four real quote plus explicit-EPS scenario requests complete. The AMD/QCOM mixed request is partial because AMD valuation assumptions are explicitly absent; NVDA/INTC mixed request completes its assigned Intel scenario.",
+    "Additional live testing exposed synthesis incorrectly treating an already completed refresh and unsolicited peer inputs as missing; corrected acquisition metadata and requested-output scoping pass affected real paths.",
+    "A final four-quote browser run rejected generated citation validation. The frozen real-generation diagnostic passed, confirming intermittent generation behavior. Quote-only recovery now discards invalid prose and renders validated fields; explicit empty/unknown-citation fixtures and fresh native/container paths verify it without weakening valuation validation.",
+    "Only original supported corpus filings establish fiscal disclosure; Tavily evidence remains separately dated and bounded.",
+    "Public market-data redistribution rights remain unverified. No provider plan was purchased.",
+    "Formal M12 scoring, live provider-quota fallback, qualified consensus valuation, and M11/M13 deployed serving behavior remain unverified."
+  ]
+}

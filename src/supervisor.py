@@ -13,7 +13,7 @@ from langgraph.config import get_stream_writer
 from langgraph.graph import START, END, StateGraph
 from pydantic import BaseModel, ConfigDict, Field
 
-from src.request_routing import plan_request, requested_metrics
+from src.request_routing import plan_request, requested_metrics, risk_comparison_request
 from src.source_collection import digest
 
 Worker = Literal["data", "filing_inputs", "quant", "risk", "research", "buy"]
@@ -95,14 +95,7 @@ def tasks_for(question):
     from src.buy_side import market_request
 
     base = plan_request(question)
-    risk = base.worker == "risk" or bool(
-        re.search(r"\brisk(?:s| factors)?\b", question, re.I)
-        and re.search(
-            r"\b(chang\w*|compar\w*|add\w*|remov\w*|relocat\w*|mov\w*|reword\w*)\b",
-            question,
-            re.I,
-        )
-    )
+    risk = base.worker == "risk" or risk_comparison_request(question)
     market = market_request(question)
     unsupported_market = bool(re.search(r"\b(discounted.cash.flow|DCF|total return)\b|reinvested dividends", question, re.I))
     supported_market = bool(re.search(r"\b(quotes?|stock price|share price|EPS|multiples?|forward earnings)\b|P\s*/\s*E|EV\s*/", question, re.I))
@@ -131,6 +124,8 @@ def tasks_for(question):
             re.I,
         )
     )
+    if numeric and base.worker == "research":
+        numeric = any(requested_metrics(clause) and re.search(r"\b(compar\w*|calculat\w*|grow\w*|grew|chang\w*|margins?|ratio|conversion|percentage|share|chart|plot)\b", clause, re.I) for clause in re.split(r"[.!?;](?:\s|$)", question))
     if (
         numeric
         and re.search(r"\bcompare\b[^.;:]*\brisk", question, re.I)
@@ -321,9 +316,15 @@ def cooperative_graph(
 
     def plan(state):
         writer = get_stream_writer()
+        from src.request_routing import excluded_companies, mentioned_companies, mentioned_years
+        companies = [company for company in state["companies"] if company not in excluded_companies(state["question"])]
+        memory_reference = bool(re.search(r"\b(?:from (?:our |the )?(?:previous|prior|last) (?:conversation|chat)|same assumptions as before|as we discussed)\b", state["question"], re.I))
+        clarification = memory_reference and (not mentioned_companies(state["question"]) or not mentioned_years(state["question"]) or bool(re.search(r"same assumptions as before", state["question"], re.I)))
         error = scope_error(
-            state["question"], state["companies"], state["years"], index.coverage()
+            state["question"], companies, state["years"], index.coverage()
         )
+        if clarification:
+            error = "Each request is self-contained. Specify the company, fiscal comparison years and any assumptions from the previous conversation; UI defaults cannot recover that context."
         tasks, base = tasks_for(state["question"])
         # Preserve the supported annual component boundary.
         period_gap = None
@@ -369,11 +370,12 @@ def cooperative_graph(
                 "data": {
                     "agent": "Supervisor",
                     "node": "task_selection",
-                    "decision": "coverage_gap"
+                    "decision": "needs_clarification" if clarification else "coverage_gap"
                     if error
                     else " → ".join(NAMES[t.worker] for t in tasks),
                     "reason": base.reason,
-                    "companies": state["companies"],
+                    "companies": companies,
+                    "selected_companies": state["companies"],
                     "years": state["years"],
                     "task": task.model_dump(),
                     "limits": {
@@ -402,6 +404,8 @@ def cooperative_graph(
                 )
         return {
             **asdict(base),
+            "companies": companies,
+            "clarification": clarification,
             "error": error,
             "task": task.model_dump(),
             "evidence": {},
@@ -493,7 +497,7 @@ def cooperative_graph(
                 and len(task.plan) > 1
             ):
                 clauses = re.split(r"(?<=[.!?;])\s+", state["question"])
-                narrative = " ".join(c for c in clauses if re.search(r"\b(explain|explanations?|reasons?|why|drivers?|management|relate|implications?)\b", c, re.I)) or state["question"]
+                narrative = " ".join(c for c in clauses if re.search(r"\b(explain|explanations?|reasons?|why|drivers?|management|relate|implications?|amend\w*)\b|MD&A|10-K/A", c, re.I)) or state["question"]
                 local["question"] = (
                     "Provide only the requested filing interpretation: " + narrative
                     + "\nAssigned scope: "
@@ -711,7 +715,7 @@ def cooperative_graph(
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
         if state.get("error"):
-            answer, status = state["error"], "coverage_gap"
+            answer, status = state["error"], "needs_clarification" if state.get("clarification") else "coverage_gap"
         elif not answers:
             answer = "No verified answer is available. " + "; ".join(
                 task.missing_inputs

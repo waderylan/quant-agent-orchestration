@@ -25,22 +25,29 @@ METRIC_PATTERNS = {
 }
 
 
+def excluded_companies(question):
+    company = "(?:" + "|".join(pattern for _, pattern in COMPANY_ALIASES.values()) + ")"
+    coordinated = company + r"(?:(?:\s*,\s*(?:and\s+)?|\s+(?:and|or)\s+|\s*&\s*)" + company + ")*"
+    exclusions = re.findall(r"\b(?:do\s+not\s+include|don't\s+include|exclude|excluding|without|but\s+not)\b\s*(" + coordinated + ")", question, re.I)
+    # Alias patterns have capture groups; the outer group is the full list.
+    targets = " ".join(match[0] for match in exclusions)
+    return {company for company, (_, pattern) in COMPANY_ALIASES.items() if re.search(pattern, targets, re.I)}
+
+
 def mentioned_companies(question):
-    # Exclusions apply to their clause, including coordinated company lists.
-    positive = re.sub(
-        r"\b(?:do\s+not\s+include|don't\s+include|exclude|excluding|without|but\s+not)\b[^,.;!?\n]*",
-        "",
-        question,
-        flags=re.I,
-    )
+    excluded = excluded_companies(question)
     return [
         c
         for c, (_, pattern) in COMPANY_ALIASES.items()
-        if re.search(pattern, positive, re.I)
+        if c not in excluded and re.search(pattern, question, re.I)
     ]
 
 
 def mentioned_years(question):
+    # Calendar intervals and price/publication dates are not FY selections.
+    question = re.sub(r"\b20\d{2}[-/]\d{2}[-/]\d{2}(?:T[\d:.+Z-]+)?\b", "", question)
+    month = r"(?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)"
+    question = re.sub(r"\b" + month + r"\s+\d{1,2},?\s+20\d{2}\b|\b\d{1,2}\s+" + month + r"\s+20\d{2}\b", "", question, flags=re.I)
     years = {int(y) for y in re.findall(r"\b(?:FY\s*)?(20\d{2})\b", question, re.I)}
     years.update(2000 + int(y) for y in re.findall(r"\bFY\s*(2\d)\b", question, re.I))
     for start, end in re.findall(r"\bfrom\s+(2\d)\s+to\s+(2\d)\b", question, re.I):
@@ -188,11 +195,16 @@ def has_unstructured_revenue_scope(question):
     return False
 
 
+def risk_comparison_request(question):
+    clauses = re.split(r"[.!?;](?:\s|$)", question)
+    return any(re.search(r"\brisks?\b|risk factors", clause, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", clause, re.I) for clause in clauses)
+
+
 def plan_request(question, *, financial_only=False):
     from src.buy_side import market_request
     if not financial_only and market_request(question):
         return RequestPlan("buy", "Buy-Side Analyst acquires dated market evidence and delegates arithmetic to Quant")
-    if not financial_only and re.search(r"\brisks?\b|risk factors", question, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", question, re.I):
+    if not financial_only and risk_comparison_request(question):
         return RequestPlan("risk", "Risk Summary compares complete original risk sections, not search-hit omissions")
     metrics = requested_metrics(question)
     components = [
@@ -284,12 +296,17 @@ def plan_request(question, *, financial_only=False):
         and bool(re.search(r"\b(divided by|ratio|conversion)\b", question, re.I))
     )
     if cash_conversion:
+        if re.search(r"\bQ4\b|\bfourth quarter\b", question, re.I):
+            return RequestPlan("analysis_data", "Derive Q4-only inputs before calculating cash conversion", synthesize=explanation, required_calculations=("quarter", "ratio"))
         return RequestPlan(
             "analysis_data",
             "Compute checked same-period operating-cash-flow/net-income ratios",
             synthesize=explanation,
             required_calculations=("ratio", "margin") if re.search(r"\bmargin", question, re.I) else ("ratio",),
         )
+    if metrics and not components and re.search(r"\bQ4\b|\bfourth quarter\b", question, re.I) and not re.search(r"\b(adjusted|non.GAAP|EPS|EBITDA)\b", question, re.I):
+        required = ("quarter",) + (("margin",) if re.search(r"\bmargin", question, re.I) else ())
+        return RequestPlan("analysis_data", "Derive the requested Q4-only amount from compatible annual and nine-month inputs", synthesize=explanation, required_calculations=required)
     # Explanations add a filing-evidence step; they do not replace supported inputs.
     if (
         metrics

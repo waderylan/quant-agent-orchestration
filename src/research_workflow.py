@@ -258,6 +258,15 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
                 for year in request["years"]:
                     for query, form, section in queries:
                         passages.extend(index.search(query, [company], [year], form=form, section=section, k=2))
+        if re.search(r"\bamend\w*\b|10-K/A", request["question"], re.I):
+            for company in request["companies"]:
+                for year in request["years"]:
+                    for query, form, version, section in (
+                        ("Client processors unit shipments average selling price", "10-K", "original", "mda"),
+                        ("Client processors unit shipments average selling price", "10-K/A", "amendment", "mda"),
+                        ("explanatory note amendment purpose correction", "10-K/A", "amendment", None),
+                    ):
+                        passages.extend(index.search(query, [company], [year], form=form, version=version, section=section, k=2))
         return sources.register(passages)
 
     def augment(passages):

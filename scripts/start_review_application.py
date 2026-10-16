@@ -18,6 +18,7 @@ from src.source_collection import ROOT, digest, write_json
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8086)
+    parser.add_argument("--market-cache", type=Path, default=ROOT / "artifacts/market/cache")
     args = parser.parse_args()
     paths = [ROOT / "main.py", ROOT / "web/index.html", ROOT / "data/source_inventory.json", ROOT / "scripts/review_application.py", ROOT / "scripts/review_filing_conditions.py"]
     paths += sorted((ROOT / "src").glob("*.py")) + sorted((ROOT / "prompts").glob("*.md"))
@@ -36,7 +37,7 @@ def main():
     env = dict(os.environ)
     for key in ("ALPHA_VANTAGE_API_KEY", "TWELVE_DATA_API_KEY", "TWELVE_DATA_GMAIL_API_KEY", "TAVILY_API_KEY"):
         env.pop(key, None)
-    env.update(PYTHON_DOTENV_DISABLED="1", MARKET_MODE="frozen", SOURCE_CORPUS=str(ROOT / "data/corpus"), RESEARCH_INDEX_DIR=str(ROOT / "chroma_index"), FINANCIAL_DATA_DIR=str(ROOT / "data/financials"), QUANT_ARTIFACT_DIR=str(ROOT / "artifacts/quant"), MARKET_CACHE=str(ROOT / "artifacts/market/cache"), MARKET_LEDGER=str(ROOT / "artifacts/market/usage.sqlite3"))
+    env.update(PYTHON_DOTENV_DISABLED="1", MARKET_MODE="frozen", SOURCE_CORPUS=str(ROOT / "data/corpus"), RESEARCH_INDEX_DIR=str(ROOT / "chroma_index"), FINANCIAL_DATA_DIR=str(ROOT / "data/financials"), QUANT_ARTIFACT_DIR=str(ROOT / "artifacts/quant"), MARKET_CACHE=str(args.market_cache.resolve()), MARKET_LEDGER=str(ROOT / "artifacts/market/usage.sqlite3"))
     output = ROOT / "artifacts" / ("review-app-" + identity[:16])
     with output.with_suffix(".log").open("w", encoding="utf-8") as stdout, output.with_suffix(".err").open("w", encoding="utf-8") as stderr:
         process = subprocess.Popen([sys.executable, "-m", "uvicorn", "scripts.review_application:app", "--host", "127.0.0.1", "--port", str(args.port)], cwd=snapshot, env=env, stdout=stdout, stderr=stderr, creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)

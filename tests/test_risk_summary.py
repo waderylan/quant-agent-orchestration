@@ -174,7 +174,7 @@ async def test_quarter_year_selection_does_not_compare_unrequested_baseline_quar
 
 
 @pytest.mark.asyncio
-async def test_multi_issuer_context_keeps_sections_complete_and_ids_distinct():
+async def test_multi_issuer_context_keeps_sections_complete_and_ids_distinct(monkeypatch):
     index = RiskIndex()
     for year in (2024, 2025):
         key = f"intel-{year}"
@@ -194,3 +194,44 @@ async def test_multi_issuer_context_keeps_sections_complete_and_ids_distinct():
     result = await risk_turn(index, dict(companies=["AMD", "INTC"], years=[2024, 2025], question="Compare annual risk changes"), lambda e: None, model_stream=model)
     assert companies == [["AMD"], ["INTC"]] and not result["partial"]
     assert len(result["risk_changes"]) == 2 and {s["company"] for s in result["risk_sources"].values()} == {"AMD", "INTC"}
+    async def later_failure(prompt, schemas, handler, **kwargs):
+        if handler.companies == ["INTC"]:
+            raise TimeoutError("Synthetic later issuer failure")
+        async for event in model(prompt, schemas, handler, **kwargs):
+            yield event
+    retained = await risk_turn(index, dict(companies=["AMD", "INTC"], years=[2024, 2025], question="Compare annual risk changes"), lambda e: None, model_stream=later_failure)
+    assert retained["partial"] and len(retained["risk_changes"]) == 1
+    assert {s["company"] for s in retained["risk_sources"].values()} == {"AMD"}
+    assert any("INTC" in gap and "later issuer" in gap for gap in retained["missing_outputs"])
+    import asyncio
+    import src.risk_summary as risk_module
+    monkeypatch.setattr(risk_module, "RISK_COLLECTION_SECONDS", .05)
+    stopped = asyncio.Event()
+    async def stalled_later(prompt, schemas, handler, **kwargs):
+        if handler.companies == ["INTC"]:
+            try:
+                await asyncio.sleep(60)
+            finally:
+                stopped.set()
+        async for event in model(prompt, schemas, handler, **kwargs):
+            yield event
+    retained = await risk_turn(index, dict(companies=["AMD", "INTC"], years=[2024, 2025], question="Compare annual risk changes"), lambda e: None, model_stream=stalled_later)
+    assert stopped.is_set() and retained["partial"] and len(retained["risk_changes"]) == 1
+    assert {s["company"] for s in retained["risk_sources"].values()} == {"AMD"}
+
+
+@pytest.mark.asyncio
+async def test_mixed_annual_and_quarter_requests_prepare_both_inventories():
+    index = RiskIndex()
+    doc = copy.deepcopy(index.documents["2025"])
+    doc.update(document_id="q3", form="10-Q", period_end="2025-09-30", prior_annual_document_id="2024")
+    index.documents["q3"], index.texts["q3"] = doc, index.texts["2025"]
+    async def model(prompt, schemas, handler, **kwargs):
+        assert {s["document_id"] for s in handler.sources.values()} == {"2024", "2025", "q3"}
+        comparison = next(iter(handler.comparisons.values()))
+        pair = next(p for p in comparison["pairs"] if p["alignment"] == "exact")
+        handler("record_risk_change", dict(classification="relocated", before=pair["before"], after=pair["after"], rationale="Exact annual warning moves within the original complete sections."))
+        handler("report_outcome", {"status": "complete", "missing": []})
+        yield {"type": "token", "data": f"Annual comparison [{pair['before']}][{pair['after']}]."}
+    result = await risk_turn(index, dict(companies=["AMD"], years=[2024, 2025], question="Review annual changes between FY2024 and FY2025 and FY2025 Q3 updates"), lambda e: None, model_stream=model)
+    assert not result["partial"] and result["risk_changes"]

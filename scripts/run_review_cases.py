@@ -69,6 +69,8 @@ ROUND_ONE_CONDITIONS = {
     "R1-043": "q2_missing", "R1-047": "all_sources_missing",
 }
 
+ROUND_TWO_CONDITIONS = {"R2-001": "quote_entitlement", "R2-005": "market_disabled", "R2-007": "market_disabled", "R2-008": "source_prompt_injection_single", "R2-014": "hash_corruption", "R2-015": "late_risk_failure", "R2-020": "market_disabled", "R2-022": "closed_quote", "R2-023": "market_disabled"}
+
 
 async def cancelled_turn(client, case, condition):
     observed = []
@@ -111,7 +113,7 @@ async def main(args):
         report["review_service_guards"] = guards.json() if guards.status_code == 200 else {"note": "Initial diagnostic service predates explicit guards; MarketGateway frozen mode"}
         async def run(case):
             async with gate:
-                condition = ROUND_ONE_CONDITIONS.get(case["id"], "normal") if case["id"].startswith("R1-") else condition_name(case.get("condition", "normal"))
+                condition = ROUND_ONE_CONDITIONS.get(case["id"], "normal") if case["id"].startswith("R1-") else ROUND_TWO_CONDITIONS.get(case["id"], "normal") if case["id"].startswith("R2-") else condition_name(case.get("condition", "normal"))
                 try:
                     if "cancel" in str(case.get("condition", "")).lower():
                         result = await cancelled_turn(client, case, condition)
@@ -160,7 +162,7 @@ async def main(args):
     report["no_live_provider_calls"] = guards.get("reservation_guard") and guards.get("mcp_connection_guard") and guards.get("denied_live_attempts") == 0
     assert report["no_live_provider_calls"], "Frozen review attempted live provider work"
     write_json(args.output, report)
-    print("Finished", len(cases), "cases; frozen provider calls unchanged")
+    print("Finished", len(cases), "cases; no live attempts from review service; shared ledger unchanged:", report["shared_ledger_unchanged"])
 
 
 if __name__ == "__main__":

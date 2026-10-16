@@ -360,6 +360,26 @@ async def test_distinct_buy_worker_explicit_scenario_and_untrusted_sources(tmp_p
     )
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize('generated', ['Fabricated quote 999 [S999].', ''])
+async def test_quote_recovery_discards_unverified_prose_without_new_acquisition(generated):
+    calls=[]
+    class Gateway:
+        async def fetch(self, provider, tool, args):
+            calls.append((provider,tool))
+            return snapshot(quote_body(),provider=provider,tool=tool)
+    async def model(prompt,schemas,handler,**kwargs):
+        handler('report_outcome',{'status':'complete','missing':[]})
+        yield {'type':'token','data':generated}
+    events=[]
+    result=await buy_turn({'question':'Give the dated QCOM stock quote.','companies':['QCOM'],'years':[2025]},events.append,gateway=Gateway(),model_stream=model)
+    assert result['citation_verified'] and not result['partial']
+    assert '150.25 USD' in result['answer'] and '[S1]' in result['answer']
+    assert '999' not in result['answer'] and 'UTC' in result['answer'] and 'market closed' in result['answer']
+    assert calls==[('twelve','get_quote')]
+    assert any(e.get('data',{}).get('node')=='quote_recovery' for e in events if isinstance(e.get('data'),dict))
+
+
 def test_provider_source_text_and_grouped_citations():
     from src.response_contract import checked_answer
     assert not provider_error({"content": [{"text": json.dumps({"results": [{"content": "Earnings exceeded estimates; rate limits are mentioned in this source."}]})}], "isError": False})
@@ -470,3 +490,30 @@ def test_scenario_assumptions_bind_issuer_and_do_not_convert_eur():
     assert not tools.inputs and any("numeric notation" in gap for gap in tools.missing)
     tools = BuyTools({**state, "companies": ["AMD"], "question": "Assume EPS of $8. Use a -20-times multiple for a conditional value."}, [])
     assert {s["value"] for s in tools.inputs.values()} == {"8", "-20"}
+
+
+@pytest.mark.asyncio
+async def test_separate_issuer_scenarios_preserve_horizons_without_provider_calls(tmp_path):
+    from src.buy_side import BuyTools, collect_market
+    class NoProviders:
+        async def fetch(self, *args, **kwargs):
+            pytest.fail("Explicit scenarios without quotes or consensus must not fetch providers")
+    state = {"companies": ["NVDA", "AMD"], "years": [2025], "question": "Use hypothetical assumptions without consensus or stock quotes: NVIDIA EPS of USD 4.50 at P/E 24 for an 18-month scenario; AMD EPS of USD 3.25 at P/E 19 for a 6-month scenario."}
+    evidence, gaps = await collect_market(NoProviders(), state, lambda e: None)
+    tools = BuyTools(state, evidence)
+    assert not gaps and not tools.missing
+    specs = []
+    for company, horizon in (("NVDA", "18 months"), ("AMD", "6 months")):
+        inputs_by_metric = {s["metric"]: sid for sid, s in tools.inputs.items() if s["company"] == company}
+        assert {s["horizon"] for s in tools.inputs.values() if s["company"] == company} == {horizon}
+        specs.append({"kind": "implied_price", "label": company, "inputs": [inputs_by_metric["eps"], inputs_by_metric["multiple"]]})
+    result = calculate(specs, tools.inputs, artifacts=ArtifactStore(tmp_path))
+    assert [r["value"] for r in result["calculations"]] == ["108.00", "61.75"]
+    assert [r["horizon"] for r in result["calculations"]] == ["18 months", "6 months"]
+    assert replay(ArtifactStore(tmp_path).load(result["bundle_id"]))["verified"]
+
+
+def test_eur_grid_never_enters_usd_valuation_inputs():
+    from src.buy_side import BuyTools
+    tools = BuyTools({"companies": ["QCOM"], "years": [2025], "question": "Hypothetical EPS grid: 2.50, 3.00 in EUR per share. P/E grid: 14, 18. Show USD prices over 9 months."}, [])
+    assert not tools.inputs and any("EUR" in gap for gap in tools.missing)

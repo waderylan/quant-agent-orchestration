@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-16T08:10:47.940875+00:00",
+  "checked_at": "2026-10-16T18:03:32.302019+00:00",
   "limits": {
     "alpha_daily": 10,
     "alpha_total": 40,
@@ -10,9 +10,12 @@
   "settings": {
     "twelve_active": "yahoo",
     "twelve_audit": "completed; production restored to yahoo",
-    "tavily_month_usage": "28",
-    "tavily_baseline_reserved": "4",
-    "tavily_usage_checked_at": "2026-10-16T07:40:47.026369+00:00"
+    "tavily_work_start_observed_usage": "28",
+    "tavily_work_start_month": "2026-10",
+    "tavily_observed_usage": "33",
+    "tavily_baseline_reserved": "14",
+    "tavily_usage_checked_at": "2026-10-16T18:03:32.283925+00:00",
+    "tavily_month_usage": "42"
   },
   "calls": [
     {
@@ -324,6 +327,472 @@
       "symbol": "QCOM",
       "credits": 1,
       "outcome": "returned"
+    },
+    {
+      "id": "39e78cb0-77d3-4f9a-89e6-2e5ccc5b9ba8",
+      "at": "2026-10-16T08:19:53.555565+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "7b4d1fa4-5ae5-45c6-9454-394295c2db10",
+      "at": "2026-10-16T08:19:55.420478+00:00",
+      "provider": "tavily",
+      "account": "primary",
+      "tool": "tavily_search",
+      "symbol": "",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "4a8079c6-ef1b-4365-b4d8-8b2cf6e5cd1f",
+      "at": "2026-10-16T08:20:32.690137+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "79d107da-1495-4180-bdf0-cb72d1fd62fa",
+      "at": "2026-10-16T08:20:34.295831+00:00",
+      "provider": "tavily",
+      "account": "primary",
+      "tool": "tavily_search",
+      "symbol": "",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "046e34cc-df39-43ec-a322-1339290169f0",
+      "at": "2026-10-16T08:21:11.894755+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "a388a39d-4ca9-4a47-8e95-8e16ccbf3029",
+      "at": "2026-10-16T08:21:15.433829+00:00",
+      "provider": "tavily",
+      "account": "primary",
+      "tool": "tavily_search",
+      "symbol": "",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "53d00236-dc59-4af3-ac03-7c2bb488c6a0",
+      "at": "2026-10-16T08:35:30.532434+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "b5d0531b-2038-4dea-b53b-328ff07e0d3f",
+      "at": "2026-10-16T08:35:32.419972+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "04fa5be8-51ad-4acb-9c15-cc234f2ef746",
+      "at": "2026-10-16T08:35:34.147125+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "396c713f-3353-444c-9ce2-e5999361be68",
+      "at": "2026-10-16T08:35:36.460390+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "dfc7421b-f7ab-47f8-9638-34b8c9b10c6a",
+      "at": "2026-10-16T17:16:49.762683+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "1948f0b6-ce5e-410d-ac99-b585328e4eb1",
+      "at": "2026-10-16T17:16:51.482374+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "7ee7c84b-2ea3-45f6-8015-8c20b94588ff",
+      "at": "2026-10-16T17:16:53.030387+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "22e65c27-6add-4091-91f1-38374d6a5cf1",
+      "at": "2026-10-16T17:16:54.516860+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "6eee2820-bd8d-4d9d-8723-d8f885058817",
+      "at": "2026-10-16T17:17:12.631562+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "d7ae42b6-2413-4ffa-bee8-0d8044c3cf25",
+      "at": "2026-10-16T17:17:46.218180+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "2a76274b-5c50-481b-82ee-5056844062c4",
+      "at": "2026-10-16T17:18:15.623478+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "bb6abcad-7829-4bfc-b96c-7d5f12be06ab",
+      "at": "2026-10-16T17:18:43.543981+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "61cad4ea-7761-40dc-8f9d-e9538c128b61",
+      "at": "2026-10-16T17:22:27.121121+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "fabdf918-6587-48db-9bdb-31682a8eef49",
+      "at": "2026-10-16T17:22:29.852463+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "fcb92c2c-c497-44f9-8ffd-a6c8a0b576bc",
+      "at": "2026-10-16T17:22:51.168226+00:00",
+      "provider": "tavily",
+      "account": "primary",
+      "tool": "tavily_search",
+      "symbol": "",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "6a35bb6b-42f3-4eb6-b897-e524a92b6f40",
+      "at": "2026-10-16T17:44:46.802902+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "a041b69e-5bf4-4a26-89a3-3b359f1cc406",
+      "at": "2026-10-16T17:45:14.953184+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "fc034dd2-37ff-49d5-b151-937fd4d82e24",
+      "at": "2026-10-16T17:45:43.699071+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "97fb6cb4-1e65-48c3-8d95-a2698baecc17",
+      "at": "2026-10-16T17:46:08.663315+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "a41797bd-2ea0-43de-833e-9a61cdc10f5e",
+      "at": "2026-10-16T17:49:23.350097+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "1a3d05c0-9e43-482e-87cc-ac6ec283324e",
+      "at": "2026-10-16T17:49:25.236551+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "4a6868bf-0dee-41e6-b4ee-86800416ba69",
+      "at": "2026-10-16T17:52:54.150111+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "8f85f7cf-46f5-4e6a-8b4d-e1fae952efd5",
+      "at": "2026-10-16T17:52:55.736494+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "58a9ccd8-103e-40b5-b923-67b551c70565",
+      "at": "2026-10-16T17:52:59.266628+00:00",
+      "provider": "tavily",
+      "account": "primary",
+      "tool": "tavily_search",
+      "symbol": "",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "722959e7-2fb9-41d7-a7f1-adac299f2954",
+      "at": "2026-10-16T17:53:40.468758+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "b75984cf-712c-40f5-a075-85da5e6efb73",
+      "at": "2026-10-16T17:55:05.109855+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "60abbef4-b732-4452-acd2-e6fdd356ad8b",
+      "at": "2026-10-16T17:55:06.878550+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "ca98356a-62be-47b9-ac0e-150ec2eb9e86",
+      "at": "2026-10-16T17:55:08.598823+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "9494c71d-4d29-448c-87cb-0d2bb134a279",
+      "at": "2026-10-16T17:55:10.403921+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "e642e96f-3329-478f-b417-3cd7d144764c",
+      "at": "2026-10-16T17:56:30.054819+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "c5841bfc-05ff-421d-a153-65bc6d8f4d37",
+      "at": "2026-10-16T17:58:29.971787+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "NVDA",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "770d1413-9bee-4bfa-a23a-9e63ad5ed2cd",
+      "at": "2026-10-16T17:58:31.877749+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "AMD",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "8e21684f-3938-4a90-93cf-a105d2b8825a",
+      "at": "2026-10-16T17:58:33.547253+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "INTC",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "4e1db689-cd1c-4d05-8394-abf89dbb1574",
+      "at": "2026-10-16T17:58:35.179721+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "f59ca00c-87e3-49f9-936f-22c7f72186ea",
+      "at": "2026-10-16T17:59:01.064959+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
     }
+  ],
+  "totals": {
+    "twelve": {
+      "calls": 55,
+      "reserved_work_credits": 55,
+      "accounts": {
+        "yahoo": 50,
+        "gmail": 5
+      },
+      "outcomes": {
+        "returned": 49,
+        "provider_error": 6
+      }
+    },
+    "alpha": {
+      "calls": 10,
+      "reserved_work_credits": 10,
+      "accounts": {
+        "primary": 10
+      },
+      "outcomes": {
+        "returned": 9,
+        "provider_error": 1
+      }
+    },
+    "tavily": {
+      "calls": 7,
+      "reserved_work_credits": 14,
+      "accounts": {
+        "primary": 7
+      },
+      "outcomes": {
+        "provider_error": 1,
+        "returned": 6
+      }
+    }
+  },
+  "tavily_final_usage_check": {
+    "verified": true,
+    "account": {
+      "current_plan": "Researcher",
+      "plan_usage": 33,
+      "plan_limit": 1000,
+      "paygo_usage": 0,
+      "paygo_limit": null
+    },
+    "key": {
+      "usage": 6,
+      "limit": 1000
+    }
+  },
+  "budget_basis": "Data-tool calls including failed calls; MCP initialize/discovery messages and read-only usage HTTP checks do not count as market data calls or search credits. One shared ledger spans both accounts, all milestones, reviews and browser/container tests.",
+  "scope_limits": [
+    "Alpha daily work budget exhausted: no additional live calls today.",
+    "Twelve entitlement audit restores Yahoo; no live daily-exhaustion fallback was triggered.",
+    "Tavily reserves two credits per basic call because responses omit credit charges; monthly projection never decreases on lagging observations."
   ]
 }

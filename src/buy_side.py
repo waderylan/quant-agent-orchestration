@@ -34,7 +34,7 @@ def valuation_request(question):
 
 
 def market_request(question):
-    price_context = bool(re.search(r"\b(stock price|share price|trading|market snapshot|(?:dated|current|latest|live|price) quotes?)\b", question, re.I))
+    price_context = bool(re.search(r"\b(stock price|share price|(?:stock|share|market) quotes?|trading|market snapshot|(?:dated|current|latest|live|price) quotes?)\b", question, re.I))
     filing_quote = bool(re.search(r"\b(filing|wording|passage|original|annual risk|commentary)\b", question, re.I)) and not price_context
     return valuation_request(question) or price_context or bool(
         re.search(
@@ -71,7 +71,8 @@ async def collect_market(gateway, state, writer):
     evidence, gaps = [], []
     valuation = valuation_request(state["question"])
     question = state["question"]
-    hypothetical_only = explicit_eps(question) and not re.search(r"\b(quotes?|upside|downside|returns?|difference|stock|share price|supporting evidence|counterargument)\b", question, re.I)
+    positive = re.sub(r"\b(?:no|without|do not|don't)\b[^.;:\n]*(?:quotes?|returns?|stock prices?)[^.;:\n]*", "", question, flags=re.I)
+    hypothetical_only = explicit_eps(question) and not re.search(r"\b(quotes?|upside|downside|returns?|difference|stock|share price|supporting evidence|counterargument)\b", positive, re.I)
     for company in state["companies"]:
         for provider, name in [
             *([] if hypothetical_only else [("twelve", "get_quote")]),
@@ -172,6 +173,7 @@ class BuyTools:
             **state.get("risk_sources", {}),
         }
         self.inputs, self.bundles, self.missing = {}, [], []
+        self.clarification_needed = False
         self.artifacts = artifacts
         self.state = state
         self.evidence = evidence
@@ -247,6 +249,25 @@ class BuyTools:
 
     def _user_assumptions(self):
         question = self.state["question"]
+        companies = self.state["companies"]
+        if len(companies) == 1:
+            self._user_assumption_group(question, companies[0])
+            return
+        from src.request_routing import mentioned_companies
+        markers = list(re.finditer(r"\bEPS\s*(?:of|=|is|at|grid\s*:)", question, re.I))
+        groups = []
+        for marker in markers:
+            clause = re.split(r"[;!?]|\.(?!\d)", question[:marker.start()])[-1]
+            assigned = mentioned_companies(clause)
+            if len(assigned) != 1 or assigned[0] not in companies:
+                self.missing.append("Scenario assumptions need an unambiguous issuer; no cross-company assumptions were inferred")
+                continue
+            groups.append((marker.start() - len(clause), assigned[0]))
+        for position, (start, company) in enumerate(groups):
+            end = groups[position + 1][0] if position + 1 < len(groups) else len(question)
+            self._user_assumption_group(question[start:end], company)
+
+    def _user_assumption_group(self, question, company):
         # Explicit values only: never infer an EPS value or a fair multiple.
         eps = re.search(
             r"\bEPS\s*(?:of|=|is|at)\s*(?:(USD|EUR)\s*)?([$€])?(-?\d+(?:\.\d+)?)(?!\w|[.,]\d)",
@@ -268,22 +289,15 @@ class BuyTools:
             if explicit_eps(question):
                 self.missing.append("Conditional price scenarios require explicit plain-decimal EPS and P/E assumptions; incomplete or unsupported numeric notation is not truncated")
             return
-        if eps and ((eps[1] or "").upper() == "EUR" or eps[2] == "€"):
-            self.missing.append("The explicit EPS is EUR; a compatible exchange rate and split basis are needed before a USD comparison")
+        eps_region = question[:(pe_grid or multiple).start()]
+        if eps and ((eps[1] or "").upper() == "EUR" or eps[2] == "€") or eps_grid and re.search(r"\bEUR\b|€", eps_region, re.I):
+            self.missing.append("The explicit EPS or EPS grid is EUR; a compatible exchange rate and split basis are needed before USD targets or a USD comparison")
+            self.clarification_needed = True
             return
-        from src.request_routing import mentioned_companies
-        companies = self.state["companies"]
-        if len(companies) > 1:
-            # Multi-issuer assumptions require an explicit, local issuer binding.
-            prefix = question[:(eps or eps_grid).start()]
-            clauses = re.split(r"[.;!?]", prefix)
-            assigned = mentioned_companies(clauses[-1])
-            if len(assigned) != 1 or assigned[0] not in companies:
-                self.missing.append("Scenario assumptions need an unambiguous issuer; no cross-company assumptions were inferred")
-                return
-            company = assigned[0]
-        else:
-            company = companies[0]
+        if eps_grid and re.search(r"\b(?:GBP|CAD|AUD|JPY|CHF|CNY|HKD|INR|KRW|TWD)\b|[£¥]|\b(?!USD\b)[A-Z]{3}\s+per share\b", eps_region, re.I):
+            self.missing.append("The EPS grid has a non-USD currency; no implicit currency conversion is supported. Specify compatible USD assumptions or a separately supported conversion.")
+            self.clarification_needed = True
+            return
         for metric, match, grid in (
             ("eps", eps, eps_grid),
             ("multiple", multiple, pe_grid),
@@ -442,6 +456,7 @@ async def buy_turn(
                 },
                 "sources": tools.sources,
                 "valuation_inputs": tools.inputs,
+                "acquisition": [{"company": item["company"], "kind": item["kind"], "cache": item["snapshot"].get("cache", False), "replayed": item["snapshot"].get("replayed", False), "retrieved_at": item["snapshot"].get("retrieved_at"), "outcome": item["snapshot"].get("outcome"), "status": item["normalized"].get("status")} for item in evidence],
                 "missing": gaps,
                 "checked_financial_context": state.get("analysis_answer"),
                 "risk_context": state.get("risk_answer"),
@@ -498,6 +513,22 @@ async def buy_turn(
     answer, cited = checked_answer(
         answer, tools.sources, writer if emit_answer else lambda e: None
     )
+    invalid = cited - tools.sources.keys()
+    if (invalid or not answer.strip() or not cited) and evidence and all(e['kind'] == 'quote' for e in evidence) and not valuation_request(state['question']):
+        # Rebuild simple quote output from validated fields. Never repair invented
+        # references by keeping their claims or guessing a replacement citation.
+        rows = []
+        for item in evidence:
+            quote, sid = item['normalized'], item['source_id']
+            if quote['status'] in ('available', 'stale'):
+                rows.append(f"- {item['company']}: {quote['value']} {quote['currency']}; price time {quote['price_time']} ({quote['timestamp_timezone']}); {quote['market_session']}; freshness {quote['status']}. Feed: {quote['feed']}; delay {quote['delay']}. Retrieved {quote['retrieved_at']}; {'frozen replay' if item['snapshot'].get('replayed') else 'cached acquisition' if item['snapshot'].get('cache') else 'uncached acquisition'}. [{sid}]")
+            else:
+                rows.append(f"- {item['company']}: quote unavailable — {quote.get('reason', 'missing evidence')}. [{sid}]")
+        answer = '\n'.join(rows)
+        writer({'type': 'trace', 'data': {'agent': 'Buy-Side Analyst', 'node': 'quote_recovery', 'decision': 'render_validated_quote_fields', 'reason': 'Generated quote answer lacks valid source references; discard its prose', 'invalid_source_ids': sorted(invalid)}})
+        if emit_answer:
+            writer({'type': 'answer', 'data': answer})
+        answer, cited = checked_answer(answer, tools.sources, lambda e: None)
     if cited - tools.sources.keys() or not answer.strip():
         raise ValueError("Buy-Side citation validation failed")
     if not cited and not gaps and not outcome.missing:
@@ -522,6 +553,6 @@ async def buy_turn(
         "valuation_bundles": [b["bundle_id"] for b in tools.bundles],
         "missing_outputs": missing,
         "partial": bool(missing),
-        "clarification": outcome.status == "clarification",
+        "clarification": outcome.status == "clarification" or tools.clarification_needed,
         "citation_verified": bool(cited),
     }

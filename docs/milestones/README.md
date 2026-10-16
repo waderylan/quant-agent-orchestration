@@ -12,7 +12,7 @@ This is the authoritative order and status. Completed records describe verified 
 | M6 | [Financial Analysis / Quant](quant/README.md) | Verified |
 | M7 | [Risk Summary](risk-summary/README.md) | Verified |
 | M8 | [Buy-Side Analyst](buy-side-analyst/README.md) | Verified locally; valuation-basis/display limits |
-| M9 | [Supervisor cooperation](supervisor/README.md) | Verified locally; independent reviews authorized |
+| M9 | [Supervisor cooperation](supervisor/README.md) | Verified locally; two independent reviews completed |
 | M10 | [Live research and shared MCP](live-research/README.md) | Planned |
 | M11 | [Provider routing](provider-routing/README.md) | Planned |
 | M12 | [Experience and evaluation](experience-evaluation/README.md) | Planned |

@@ -1,0 +1,5 @@
+# Sealed reviewer inputs and judgments retain their recorded byte hashes.
+docs/milestones/supervisor/evidence/review-round-*/questions.json -text
+docs/milestones/supervisor/evidence/review-round-*/reviewer-notes.md -text
+docs/milestones/supervisor/evidence/review-round-*/REVIEW_FINDINGS.md -text
+docs/milestones/supervisor/evidence/review-round-*/adjudication*.json -text

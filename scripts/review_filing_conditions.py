@@ -6,11 +6,14 @@ Original corpus files, index records and financial snapshots are never changed.
 
 import copy
 import json
+from types import SimpleNamespace
 from datetime import date
 
 from src.financial_data import FinancialStore
 from src.risk_summary import inspect_span
 from src.source_collection import digest
+from src.source_collection import ROOT
+from src.research_index import ResearchIndex
 
 OBSERVATIONS = {}
 RISK_INDEXES = {}
@@ -72,7 +75,18 @@ class ReviewIndex:
         self.original, self.condition = original, condition
         self.documents = copy.deepcopy(original.documents)
         self.replacements = {}
+        self.corrupted = {}
         for old_id, doc in list(self.documents.items()):
+            if condition == "hash_corruption" and doc.get("company") == "QCOM" and doc.get("fiscal_year") == 2025 and doc.get("form") == "10-K" and doc.get("version") == "original":
+                text = original.text(original.documents[old_id])
+                offset = doc["extraction"]["sections"]["risk_factors"]["start"] + 10
+                altered = text[:offset] + ("X" if text[offset] != "X" else "Y") + text[offset + 1:]
+                disposable = ROOT / "artifacts/review-corruption" / old_id
+                target = disposable / doc["extraction"]["text_path"]
+                assert target.resolve().is_relative_to(disposable.resolve())
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(altered.encode())
+                self.corrupted[old_id] = disposable
             if condition == "quarterly_risk_omission" and doc.get("company") == "QCOM" and doc.get("fiscal_year") == 2025 and doc.get("form") == "10-Q":
                 elapsed = (date.fromisoformat(doc["period_end"]) - date.fromisoformat(doc["fiscal_start"])).days
                 bounds = doc["extraction"].get("sections", {}).get("risk_factors")
@@ -124,6 +138,8 @@ class ReviewIndex:
         return getattr(self.original, name)
 
     def text(self, doc):
+        if doc["document_id"] in self.corrupted:
+            return ResearchIndex.text(SimpleNamespace(corpus=self.corrupted[doc["document_id"]]), doc)
         if self.condition == "all_sources_missing":
             raise ValueError("Synthetic unavailable original filing; no cached evidence permitted")
         if self.condition == "quarterly_category_missing" and doc.get("form") != "10-K":
