@@ -5,11 +5,17 @@ The application is a FastAPI browser chat backed by a LangGraph supervisor and f
 ```mermaid
 flowchart LR
   UI[Browser] --> API[FastAPI and SSE]
-  API --> S[Scope supervisor]
+  API --> S[Task and scope supervisor]
   S --> R[Filings Research]
   S --> D[Financial Data]
   S --> RS[Risk Summary]
   S --> B[Buy-Side Analyst]
+  S --> Q[Quant]
+  R --> S
+  D --> S
+  Q --> S
+  RS --> S
+  B --> S
   B --> MCP[Official market and Tavily MCP]
   B --> Q
   RS --> V
@@ -28,8 +34,9 @@ flowchart LR
 ## Request and evidence
 
 - Scope validates selected companies and fiscal years before generation. Explicit exclusions and historical year-end demand keep their intended scope. Unsupported companies/years or genuinely live requests return a coverage gap. The browser offers a clickable company correction that retains compatible years.
-- Routing uses Research for filings, Data for source figures, Data → Quant for calculations, and Data → Research → Quant for supported annual filing components. A numerical explanation adds Research after Quant with frozen checked evidence. Full five-worker planning and recovery are future work.
-- Each request carries its question, scope, route, answer/status, source IDs, calculations, and artifact identity. There is no cross-turn memory. Workers use distinct prompts and tools. `report_outcome` distinguishes complete, partial, and clarification; missing intermediate inputs can prompt a bounded follow-up.
+- The supervisor derives requested outputs and a dependency plan: Research for filing explanations, Data for source figures, Data → Quant for arithmetic, a supported annual filing-input handoff for components, Risk Summary for complete-section comparisons, and Buy-Side for dated market output. A mixed request can invoke all five specialists; quote and risk-only requests avoid unrelated workers.
+- `TaskState` carries requested/complete outputs, required workers, ordered `Task` reasons/dependencies, worker outcomes, registered `EvidenceRef` records, missing inputs, counts and terminal status. Evidence preserves owner, exact value/unit/basis, fiscal dates, source/calculation IDs, lineage, provenance digest, inspection URL and bundle identity. Every handoff validates transactionally; conflicting IDs or changed figures are rejected. Worker copies prevent mutation of earlier evidence; bounded narrative excerpts retain exact inspection links.
+- Workers return to the supervisor after each task. Limits are seven steps, one supported evidence follow-up, 64 executed model tool calls, and a 210-second worker deadline. A later failure preserves earlier verified findings; unsupported inputs stay missing. SSE traces expose selection, handoff evidence, actual outcome, follow-up and termination. Requests remain self-contained with no cross-turn memory. [M9](milestones/supervisor/README.md) owns cooperation evidence and limits.
 - `S` citations are registered passage IDs, `F` citations are financial observations, and `C` citations are verified calculations. IDs and source hashes are checked. This proves provenance and arithmetic validity, not every narrative claim's semantic faithfulness.
 - Completion states are completed, partial, needs clarification, coverage gap, unverified, and failed. Partial answers retain available evidence and list missing outputs; ambiguous requests ask for clarification.
 

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-16T07:43:48.115368+00:00",
+  "checked_at": "2026-10-16T08:10:47.940875+00:00",
   "limits": {
     "alpha_daily": 10,
     "alpha_total": 40,
@@ -311,6 +311,16 @@
       "provider": "alpha",
       "account": "primary",
       "tool": "EARNINGS_ESTIMATES",
+      "symbol": "QCOM",
+      "credits": 1,
+      "outcome": "returned"
+    },
+    {
+      "id": "fecf0e17-85c2-4ce7-baf1-1382df632189",
+      "at": "2026-10-16T07:56:15.874971+00:00",
+      "provider": "twelve",
+      "account": "yahoo",
+      "tool": "get_quote",
       "symbol": "QCOM",
       "credits": 1,
       "outcome": "returned"

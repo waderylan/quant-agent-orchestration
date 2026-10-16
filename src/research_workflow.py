@@ -9,8 +9,6 @@ from contextlib import aclosing
 from typing import TypedDict
 
 from langchain_core.runnables import RunnableLambda
-from langgraph.config import get_stream_writer
-from langgraph.graph import END, START, StateGraph
 
 from src.codex_model import stream as codex_stream
 from src.source_collection import ROOT
@@ -94,8 +92,9 @@ class State(TypedDict, total=False):
 
 
 class ResearchTools:
-    def __init__(self, index, companies, years):
+    def __init__(self, index, companies, years, *, source_offset=0):
         self.index, self.companies, self.years = index, companies, years
+        self.source_offset = source_offset
         self.sources = {}
         self.identifiers = {}
         # Each scope cell can need a search and contextual inspections; keep a hard cap.
@@ -106,7 +105,7 @@ class ResearchTools:
         for passage in passages:
             cid = passage["chunk_id"]
             if cid not in self.identifiers:
-                sid = f"S{len(self.sources) + 1}"
+                sid = f"S{self.source_offset + len(self.sources) + 1}"
                 self.identifiers[cid] = sid
                 self.sources[sid] = {
                     "source_id": sid,
@@ -219,6 +218,7 @@ def scope_error(question, companies, years, coverage):
     )
     current = bool(re.search(r"\bcurrent\b", temporal_request, re.I))
     from src.buy_side import market_request
+
     if (live or (current and not historical)) and not market_request(question):
         return "This historical corpus does not provide current/live coverage. Ask about a selected fiscal year."
     return ""
@@ -226,7 +226,12 @@ def scope_error(question, companies, years, coverage):
 
 async def research_turn(index, state, writer, *, model_stream=codex_stream):
     """Run the worker directly or as a graph node with the same prompts and tools."""
-    sources = ResearchTools(index, state["companies"], state["years"])
+    sources = ResearchTools(
+        index,
+        state["companies"],
+        state["years"],
+        source_offset=state.get("source_offset", 0),
+    )
     outcome = OutcomeTools(sources)
     analysis_sources = state.get("analysis_sources", {})
 
@@ -250,6 +255,11 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             )
             + "\nQuestion: "
             + state["question"]
+            + (
+                "\nSupervisor role boundary: " + state["handoff_role_note"]
+                if state.get("handoff_role_note")
+                else ""
+            )
             + (
                 "\nChecked financial context (use assigned F/C citations; do not recalculate or invent derived figures):\n"
                 + json.dumps(
@@ -334,6 +344,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
         "missing_outputs": [*state.get("missing_outputs", []), *outcome.missing],
         "clarification": outcome.status == "clarification",
         "citation_verified": bool(cited),
+        "research_sources": registered,
     }
 
 
@@ -341,253 +352,45 @@ def select_worker(question):
     return plan_request(question).worker
 
 
-def graph(index, *, model_stream=codex_stream, financials=None):
-    def supervisor(state):
-        writer = get_stream_writer()
-        error = scope_error(
-            state["question"], state["companies"], state["years"], index.coverage()
-        )
-        plan = plan_request(state["question"])
-        worker = plan.worker
-        period_gap = None
-        if plan.revenue_component and re.search(
-            r"\bQ[1-4]\b|\b(quarter|ytd)\b", state["question"], re.I
-        ):
-            worker = "research"
-            period_gap = {
-                "kind": "unsupported_component_period",
-                "message": "Independent revenue-component calculations support annual tables only. Retrieve the requested disclosure and state that a checked quarterly share is unavailable.",
-            }
-        requested = mentioned_companies(state["question"])
-        if error and set(requested) - set(state["companies"]):
-            writer(
-                {
-                    "type": "scope",
-                    "data": {
-                        "message": error,
-                        "suggested_companies": requested,
-                        "years": state["years"],
-                    },
-                }
-            )
-        writer(
-            {
-                "type": "trace",
-                "data": {
-                    "agent": "Supervisor",
-                    "node": "scope",
-                    "decision": "coverage_gap"
-                    if error
-                    else "Financial Data → Filings Research → Financial Analysis / Quant"
-                    if plan.revenue_component and worker == "data"
-                    else "Financial Data"
-                    if worker == "data"
-                    else "Financial Data → Financial Analysis / Quant"
-                    if worker == "analysis_data"
-                    else "Risk Summary"
-                    if worker == "risk"
-                    else "Buy-Side Analyst"
-                    if worker == "buy"
-                    else "Filings Research",
-                    "companies": state["companies"],
-                    "years": state["years"],
-                    "reason": plan.reason
-                    + (
-                        ". Earnings means GAAP net income attributable to parent; rank dollar changes including losses."
-                        if plan.earnings_ranking and plan.earnings_order == "dollars"
-                        else ". Earnings means GAAP net income attributable to parent; compare only positive-baseline percentage growth, with loss baselines identified separately."
-                        if plan.earnings_ranking
-                        else ""
-                    ),
-                },
-            }
-        )
-        return {
-            "error": error,
-            "worker": worker,
-            "revenue_component": plan.revenue_component,
-            "revenue_share": plan.revenue_share,
-            "earnings_ranking": plan.earnings_ranking,
-            "earnings_order": plan.earnings_order,
-            "revenue_components": list(plan.revenue_components),
-            "revenue_denominator": plan.revenue_denominator,
-            "synthesize": plan.synthesize,
-            "scenario": plan.scenario,
-            "required_calculations": list(plan.required_calculations),
-            "needs_evidence": period_gap,
-            "partial": bool(period_gap),
-        }
+def graph(
+    index,
+    *,
+    model_stream=codex_stream,
+    financials=None,
+    gateway=None,
+    worker_overrides=None,
+):
+    from src.supervisor import cooperative_graph
 
-    async def research(state):
-        return await research_turn(
-            index, state, get_stream_writer(), model_stream=model_stream
-        )
-
-    async def risk(state):
-        from src.risk_summary import risk_turn
-        return await risk_turn(index, state, get_stream_writer(), model_stream=model_stream)
-
-    async def buy(state):
-        from src.buy_side import buy_turn
-        return await buy_turn(state, get_stream_writer(), model_stream=model_stream)
-
-    async def data(state):
-        from src.financial_workflow import financial_turn
-
-        if financials is None:
-            raise ValueError(
-                "Financial data is unavailable. Run scripts/financials.py collect."
-            )
-        return await financial_turn(
-            financials, state, get_stream_writer(), model_stream=model_stream
-        )
-
-    async def analysis_data(state):
-        from src.financial_workflow import financial_turn
-        from src.quant_workflow import prefetch_for_analysis
-
-        if financials is None:
-            raise ValueError(
-                "Financial data is unavailable. Run scripts/financials.py collect."
-            )
-        result = await financial_turn(
-            financials,
-            state,
-            get_stream_writer(),
-            model_stream=model_stream,
-            emit_answer=False,
-            prefetch=prefetch_for_analysis(state["question"]),
-        )
-        if result.get("needs_evidence"):
-            return result
-        if result.get("error"):
-            raise ValueError(
-                "Financial Data could not establish verified analysis inputs: "
-                + result["error"]
-            )
-        get_stream_writer()(
-            {
-                "type": "trace",
-                "data": {
-                    "agent": "Supervisor",
-                    "node": "handoff",
-                    "decision": "Financial Analysis / Quant",
-                    "observations": len(result["financial_sources"]),
-                    "reason": "Pass verified structured observations; keep input selection separate from calculation",
-                },
-            }
-        )
-        return {
-            "financial_sources": result["financial_sources"],
-            "worker_notes": result.get("missing_outputs", []),
-        }
-
-    async def revenue_inputs(state):
-        from src.filing_financials import filing_revenue_turn
-
-        return await filing_revenue_turn(
-            index, financials, state, get_stream_writer(), model_stream=model_stream
-        )
-
-    def data_destination(state):
-        gap = state.get("needs_evidence")
-        if gap:
-            destination = (
-                "revenue_inputs" if gap["kind"] == "revenue_component" else "research"
-            )
-            get_stream_writer()(
-                {
-                    "type": "trace",
-                    "data": {
-                        "agent": "Supervisor",
-                        "node": "evidence_followup",
-                        "decision": "Filings Research",
-                        "reason": gap["message"],
-                    },
-                }
-            )
-            return destination
-        return "quant" if state["worker"] == "analysis_data" else "finish"
-
-    async def quant(state):
-        from src.quant_workflow import quant_turn
-
-        return await quant_turn(
-            state,
-            get_stream_writer(),
-            model_stream=model_stream,
-            emit_answer=not state.get("synthesize"),
-        )
-
-    def finish(state):
-        writer = get_stream_writer()
-        if state.get("error") and not state.get("answer"):
-            writer({"type": "token", "data": state["error"]})
-        writer(
-            {
-                "type": "complete",
-                "data": {
-                    **(
-                        {"missing_outputs": state["missing_outputs"]}
-                        if state.get("missing_outputs")
-                        else {}
-                    ),
-                    "verified_citations": state.get(
-                        "citation_verified", bool(state.get("answer"))
-                    )
-                    and not state.get("error"),
-                    "status": "coverage_gap"
-                    if state.get("error") and not state.get("answer")
-                    else "unverified"
-                    if state.get("error")
-                    else "needs_clarification"
-                    if state.get("clarification")
-                    else "partial"
-                    if state.get("partial")
-                    else "completed",
-                },
-            }
-        )
-        return {}
-
-    workflow = StateGraph(State)
-    workflow.add_node("supervisor", supervisor)
-    workflow.add_node("research", research)
-    workflow.add_node("risk", risk)
-    workflow.add_node("buy", buy)
-    workflow.add_node("data", data)
-    workflow.add_node("analysis_data", analysis_data)
-    workflow.add_node("quant", quant)
-    workflow.add_node("revenue_inputs", revenue_inputs)
-    workflow.add_node("finish", finish)
-    workflow.add_edge(START, "supervisor")
-    workflow.add_conditional_edges(
-        "supervisor", lambda s: "finish" if s.get("error") else s["worker"]
+    return cooperative_graph(
+        index,
+        model_stream=model_stream,
+        financials=financials,
+        gateway=gateway,
+        worker_overrides=worker_overrides,
     )
-    workflow.add_edge("research", "finish")
-    workflow.add_edge("risk", "finish")
-    workflow.add_edge("buy", "finish")
-    workflow.add_conditional_edges("data", data_destination)
-    workflow.add_conditional_edges("analysis_data", data_destination)
-    workflow.add_conditional_edges(
-        "revenue_inputs", lambda s: "research" if s.get("needs_evidence") else "quant"
-    )
-    workflow.add_conditional_edges(
-        "quant",
-        lambda s: (
-            "research" if s.get("synthesize") and not s.get("error") else "finish"
-        ),
-    )
-    workflow.add_edge("finish", END)
-    return workflow.compile()
 
 
 async def events(
-    index, question, companies, years, *, model_stream=codex_stream, financials=None
+    index,
+    question,
+    companies,
+    years,
+    *,
+    model_stream=codex_stream,
+    financials=None,
+    gateway=None,
+    worker_overrides=None,
 ):
     try:
         async with aclosing(
-            graph(index, model_stream=model_stream, financials=financials).astream(
+            graph(
+                index,
+                model_stream=model_stream,
+                financials=financials,
+                gateway=gateway,
+                worker_overrides=worker_overrides,
+            ).astream(
                 {"question": question, "companies": companies, "years": years},
                 stream_mode="custom",
             )

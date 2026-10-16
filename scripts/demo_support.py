@@ -2,6 +2,19 @@
 
 import json
 import time
+import asyncio
+
+
+async def wait_ready(client):
+    import httpx
+    for _ in range(60):
+        try:
+            if (await client.get("/api/coverage")).status_code == 200:
+                return
+        except httpx.HTTPError:
+            pass
+        await asyncio.sleep(.5)
+    raise RuntimeError("Application readiness deadline exceeded")
 
 
 async def capture_turn(client, question, companies, years):

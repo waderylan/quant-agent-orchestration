@@ -7,9 +7,10 @@ from contextlib import aclosing, asynccontextmanager, suppress
 
 import anyio
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
+from dataclasses import dataclass
 
 from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
@@ -18,6 +19,7 @@ from src.financial_data import FinancialStore, FINANCIALS
 from src.analysis_artifacts import ArtifactStore
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
+from src.market_mcp import MarketGateway
 
 load_dotenv()
 
@@ -43,6 +45,18 @@ class Question(BaseModel):
     question: str = Field(min_length=3, max_length=2000)
     companies: list[str] = Field(min_length=1, max_length=4)
     years: list[int] = Field(min_length=1, max_length=2)
+
+
+@dataclass(frozen=True)
+class TurnServices:
+    """Request-local service injection for controlled application acceptance."""
+
+    gateway: MarketGateway | None = None
+    worker_overrides: dict | None = None
+
+
+def turn_services(request: Request):
+    return TurnServices()
 
 
 class ClosingStreamingResponse(StreamingResponse):
@@ -96,6 +110,7 @@ def original(document_id: str):
 @app.get("/api/risks/{document_id}")
 def risk_source(document_id: str, start: int, end: int):
     from src.risk_summary import inspect_span
+
     try:
         return inspect_span(app.state.index, document_id, start, end)
     except (KeyError, ValueError, FileNotFoundError) as error:
@@ -105,6 +120,7 @@ def risk_source(document_id: str, start: int, end: int):
 @app.get("/api/market/{identity}")
 def market_source(identity: str):
     from src.market_mcp import MarketGateway
+
     try:
         return {"kind": "market_evidence", **MarketGateway().inspect(identity)}
     except (KeyError, ValueError, FileNotFoundError) as error:
@@ -194,7 +210,11 @@ def analysis_snapshot(identity: str, sha256: str):
 
 
 @app.post("/api/chat")
-async def chat(question: Question, request: Request):
+async def chat(
+    question: Question,
+    request: Request,
+    services: TurnServices = Depends(turn_services),
+):
     async def response():
         queue = asyncio.Queue(maxsize=128)
         closers = []
@@ -211,6 +231,8 @@ async def chat(question: Question, request: Request):
                         question.question.strip(),
                         list(dict.fromkeys(question.companies)),
                         list(dict.fromkeys(question.years)),
+                        gateway=services.gateway,
+                        worker_overrides=services.worker_overrides,
                         **(
                             {"financials": app.state.financials}
                             if app.state.financials.path.exists()

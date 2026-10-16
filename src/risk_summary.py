@@ -238,7 +238,8 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
                 characters += len(s["text"])
             else:
                 gaps.append(f"{s['company']} FY{s['fiscal_year']} {s['form']}: complete text exceeds bounded context; inspect separately")
-    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": state["question"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts})
+    role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers and valuation. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
+    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": state["question"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts})
     outcome, answer = OutcomeTools(tools), ""
     async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare complete original filing risk inventories; preserve exact before/after evidence")) as stream:
         async for event in stream:

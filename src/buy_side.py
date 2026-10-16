@@ -79,7 +79,9 @@ async def collect_market(gateway, state, writer):
             )
             try:
                 if re.search(r"\brefresh\b", state["question"], re.I):
-                    snapshot = await gateway.fetch(provider, name, {"symbol": company}, refresh=True)
+                    snapshot = await gateway.fetch(
+                        provider, name, {"symbol": company}, refresh=True
+                    )
                 else:
                     snapshot = await gateway.fetch(provider, name, {"symbol": company})
             except ValueError as error:
@@ -385,6 +387,13 @@ async def buy_turn(
         gaps += tools.missing
     prompt = (
         (ROOT / "prompts/buy_side.md").read_text(encoding="utf-8")
+        + (
+            "\nAssigned supervisor output: "
+            + state["worker_output"]
+            + ". Report completeness for this market/valuation output only. Other specialists already own financial calculations, risk changes and filing explanations; preserve their supplied evidence without declaring those outputs missing."
+            if state.get("worker_output")
+            else ""
+        )
         + "\n"
         + json.dumps(
             {
