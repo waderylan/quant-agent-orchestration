@@ -71,6 +71,8 @@ def financial_store(tmp_path):
                     ("CostOfRevenue", 17060000000),
                     ("OperatingIncomeLoss", -100),
                     ("NetCashProvidedByUsedInOperatingActivities", 0),
+                    ("NetIncomeLoss", -150),
+                    ("ProfitLoss", -140),
                 ]
             }
         },
@@ -111,6 +113,36 @@ def test_derived_gross_profit_preserves_inputs_losses_zero_and_53_week_context(
     assert next(r["value"] for r in rows if r["metric"] == "operating_cash_flow") == 0
     missing = financial_store.query(["QCOM"], [2025])
     assert not missing["observations"] and len(missing["gaps"]) == 4
+
+
+def test_net_income_preserves_parent_loss_and_does_not_substitute_profit_loss(
+    financial_store,
+):
+    result = financial_store.query(["QCOM"], [2024], metrics=["net_income"])
+    row = result["observations"][0]
+    assert row["value"] == -150
+    assert row["tag"] == "us-gaap:NetIncomeLoss"
+    assert row["accession"] == filing()["accession"] and not result["gaps"]
+    missing = financial_store.query(["QCOM"], [2025], metrics=["net_income"])
+    assert not missing["observations"] and missing["gaps"][0]["metric"] == "net_income"
+    doc = filing()
+    snapshots = {
+        "QCOM": {
+            "facts": {
+                "facts": {
+                    "us-gaap": {"ProfitLoss": {"units": {"USD": [fact(doc, 50)]}}}
+                }
+            },
+            "record": {
+                "requested_url": "https://data.sec.gov",
+                "sha256": "source",
+                "retrieved_at": "date",
+            },
+        }
+    }
+    prepared = prepare_observations([doc], snapshots)
+    row = next(r for r in prepared if r["metric"] == "net_income")
+    assert row["status"] == "missing" and "value" not in row
 
 
 @pytest.mark.parametrize("damage", ["raw", "prepared", "inventory"])
@@ -238,4 +270,11 @@ async def test_missing_quarter_cash_flow_abstains_before_generation(financial_st
         lambda e: None,
         model_stream=forbidden,
     )
-    assert "Missing values are not zero" in result["error"]
+    assert (
+        result["partial"] and result["needs_evidence"]["kind"] == "structured_missing"
+    )
+    assert result["answer"] == ""
+    assert (
+        "no structured calculation is established"
+        in result["needs_evidence"]["message"]
+    )

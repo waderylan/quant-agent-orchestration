@@ -18,20 +18,20 @@ The product is a research tool. Its initial scope excludes trading, personalized
 
 | Company | Fiscal years | Fiscal end dates |
 | --- | --- | --- |
-| NVIDIA (NVDA) | FY2025; FY2026 | 2025-01-26; 2026-01-25 |
+| NVIDIA (NVDA) | FY2024; FY2025; FY2026 | 2024-01-28; 2025-01-26; 2026-01-25 |
 | AMD (AMD) | FY2024; FY2025 | 2024-12-28; 2025-12-27 |
 | Intel (INTC) | FY2024; FY2025 | 2024-12-28; 2025-12-27 |
 | Qualcomm (QCOM) | FY2024; FY2025 | 2024-09-29; 2025-09-28 |
 
 - Company coverage starts with these four and is planned to expand toward approximately 20, subject to source checks, working demonstrations, and feedback.
-- Initial collection comprises 32 original 10-K/10-Q reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment: **41 documents**.
-- All four companies use domestic SEC forms. All 41 selected bodies and readable extractions are verified; RAG ingestion uses local MiniLM embeddings and persistent Chroma.
-- SEC metadata and matching-duration USD financial inputs are verified for all 32 original reports. Source preparation includes risk/MD&A boundaries, table fidelity checks, and the distinct AMD amendment. [M2 preparation](../planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) defines inspection, refresh, and future-data CLI commands.
-- Initial metrics are consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow.
+- Collection comprises 36 original 10-K/10-Q reports, nine Q4/full-year earnings releases, and AMD's FY2025 amendment: **46 documents**.
+- All four companies use domestic SEC forms. All 46 selected bodies and readable extractions are verified; RAG ingestion uses local MiniLM embeddings and persistent Chroma.
+- SEC metadata and matching-duration USD financial inputs are verified for all 36 original reports. [Aligned coverage](../planning/ALIGNED_FISCAL_COVERAGE.md) records current checks; [M2 preparation](../planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) defines source inspection and refresh.
+- Metrics include consolidated US GAAP revenue growth, gross/operating margins, operating cash flow, and parent-attributable net income/loss. Qualcomm annual automotive/handsets/IoT revenue shares use independently checked filing tables.
 - Within-company comparisons take priority. Cross-company comparisons must show fiscal dates and explain timing and business-mix limits.
 - Qualcomm gross profit requires revenue minus cost of revenue. Its FY2024 has 53 weeks versus 52 in FY2025.
 - AMD's amendment corrects an MD&A explanation and remains separate from the original annual report.
-- Additional companies, years, Q1–Q3 releases, transcripts, foreign reporting forms, and segment metrics require separate source checks and useful demonstration feedback.
+- Additional companies, years, Q1–Q3 releases, transcripts, foreign reporting forms, and other segment metrics require separate source checks and useful demonstration feedback.
 
 ## Intended user experience
 

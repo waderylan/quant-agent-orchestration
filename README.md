@@ -4,9 +4,9 @@
 - Status: **M1–M6 implemented and verified; local Docker acceptance passes**. M2 and M3 are accepted.
 - Initial company set: NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM).
 - Company coverage starts with these four and is planned to expand. Approximately 20 companies is the expansion target, subject to source coverage, working demonstrations, and feedback.
-- Selected years: NVIDIA FY2025–2026; AMD, Intel, and Qualcomm FY2024–2025. Fiscal dates differ and must remain visible in comparisons.
-- Verified corpus: **41/41 documents** — 32 annual/quarterly reports, eight Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The local Chroma index contains 10,681 chunks.
-- Available structured figures: consolidated US GAAP revenue, gross profit, operating income/loss, and operating cash flow, with exact fiscal intervals and original accession provenance. Quant computes checked growth/margins, percentage-point changes, and compatible quarter-only amounts, with CSV/PNG/code/ledger exports.
+- Selected years: every company covers FY2024–FY2025; NVIDIA also covers FY2026. Fiscal dates differ and must remain visible in comparisons. [Aligned coverage](docs/planning/ALIGNED_FISCAL_COVERAGE.md) records the exact windows.
+- Verified corpus: **46/46 documents** — 36 annual/quarterly reports, nine Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The CPU MiniLM/Chroma index contains **11,764 chunks**; its active manifest records the verified count and fingerprint.
+- Available structured figures: consolidated US GAAP revenue, gross profit, operating income/loss, net income/loss attributable to parent, and operating cash flow, with exact fiscal intervals and original accession provenance. Quant computes checked growth/margins, revenue shares, percentage-point changes, and compatible quarter-only amounts, with CSV/PNG/code/ledger exports. Revenue-component arithmetic currently supports Qualcomm's annual automotive/handsets/IoT tables.
 
 Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, bounded Quant execution, Data-to-Quant cooperation, and local Docker are implemented and verified. Risk Summary, full task-driven cooperation, live/shared MCP, multi-provider routing, and deployment remain unimplemented.
 
@@ -22,8 +22,9 @@ uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 
 - Install Codex CLI and authenticate with `codex login`; local generation uses its subscription. Open `http://127.0.0.1:8080` and ask a question with explicit company/fiscal-year selection.
 - Inspect live answer tokens, routing/tool traces, and clickable citations. The source panel highlights exact passages and links to canonical filings, official mirrors, and collected originals.
+- Explicitly select the companies and both fiscal years for comparisons. The page displays the active scope; a company mismatch offers a correction that preserves compatible selected years.
 - Local embeddings use CPU ONNX MiniLM; first ingestion downloads its pinned model. Chroma and corpus data are gitignored reproducible artifacts. No paid generation APIs are called by this local profile.
-- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained. Structured figure requests use Financial Data; numerical requests use Data then Quant; disclosure explanations use Filings Research. Live research and conversation memory are unavailable.
+- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained. Supported consolidated figures use Data; numerical requests use Data then Quant; filing-only figures use Research. Supported annual component requests pass Data → Research → Quant. Missing structured inputs trigger one bounded Research follow-up and remain partial if numerical evidence cannot be verified. Live research and conversation memory are unavailable.
 
 ```powershell
 uv run --locked python scripts/research.py status
@@ -42,12 +43,12 @@ uv run --locked pytest -q
 
 ## Verified source feasibility
 
-- SEC submissions and Company Facts return the expected companies and aligned USD inputs for all 32 original reports.
+- SEC submissions and Company Facts return the expected companies and aligned USD inputs for all 36 original reports.
 - All selected bodies and readable extractions are verified. Provenance retains SEC identities, official retrieval URLs/times, body hashes, fiscal dates, and separate amendment records.
 - Direct local SEC Archives probes returned HTTP 403. Official IR mirrors/CDNs provide alternate source paths.
 - Qualcomm gross profit requires revenue minus cost of revenue. Its FY2024 contains 53 weeks versus 52 in FY2025.
 - AMD's FY2025 amendment corrects an MD&A explanation; retain it alongside the original annual report.
-- [Source inventory](data/source_inventory.json) identifies all 41 targets. [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) documents the CLI and evidence; [M1 feasibility](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) documents source selection and financial definitions.
+- [Source inventory](data/source_inventory.json) identifies all 46 targets. [Aligned coverage](docs/planning/ALIGNED_FISCAL_COVERAGE.md) records current source checks; [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) documents the CLI; [M1 feasibility](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) documents financial definitions and dated source evidence.
 
 ## Source preparation
 
@@ -85,6 +86,8 @@ uv run --locked pytest -q
 | [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) | Verified corpus, extraction decisions, inspection commands, future collection, and limits. |
 | [M4 container](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) | Verified local Docker, authenticated host generation, isolation, and cancellation. |
 | [M6 Quant](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) | Bounded generated programs, independent numerical validation, tables/charts, source lineage, and evidence. |
+| [Capability routing](docs/planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) | Revenue-component source extraction, checked shares, earnings ranking, scope corrections, and regression evidence. |
+| [Aligned fiscal coverage](docs/planning/ALIGNED_FISCAL_COVERAGE.md) | FY2024/FY2025 for all four companies, retained NVIDIA FY2026, and original-source parent earnings. |
 | [M5 financial data](docs/planning/M5_FINANCIAL_DATA_AGENT.md) | Observation selection, original-report policy, Data worker, inspection, and evidence. |
 | [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) | Local RAG, direct Codex generation, browser/source inspection, and actual verification. |
 | [Architecture](docs/architecture.md) | Selected design and component implementation status. |
@@ -115,5 +118,6 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 ```
 
 - The browser displays independently checked tables/charts and calculation citations. Inspect formulas, source inputs, original filings, and archived SEC snapshots; download CSV, PNG, generated code, and the exact ledger.
+- Try Qualcomm/FY2025: “How much of Qualcomm's revenue in FY2025 was from automotive?” For company earnings, select all four companies/FY2024/FY2025 and ask: “Which company had the largest earnings growth from 24 to 25? What is the number?” Earnings means parent-attributable GAAP net income; percentage rankings exclude zero/loss baselines and retain actual fiscal dates.
 - Programs use an import/call/loop-free arithmetic subset with a three-second execution deadline. Figures remain original-report GAAP observations; known revision conflicts and incompatible comparisons fail explicitly. [M6 details](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) provide the full contract and native/Docker verification commands.
 - M7–M12 and formal evaluation remain pending. The next implementation milestone is Risk Summary; further work requires feedback and authorization.

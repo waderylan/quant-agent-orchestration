@@ -77,7 +77,7 @@ class ArtifactStore:
             path or os.getenv("QUANT_ARTIFACT_DIR", ROOT / "artifacts/quant")
         ).resolve()
 
-    def publish(self, code, calculations, sources):
+    def publish(self, code, calculations, sources, *, assessment=None):
         series = chart_data(calculations)
         table = io.StringIO(newline="")
         fields = [
@@ -120,6 +120,8 @@ class ArtifactStore:
             "chart_series": series,
             "files": {name: digest(body) for name, body in files.items()},
         }
+        if assessment is not None:
+            bundle["assessment"] = assessment
         identity = digest(json.dumps(bundle, sort_keys=True).encode())
         folder = self.path / identity
         folder.mkdir(parents=True, exist_ok=True)
@@ -181,7 +183,13 @@ class ArtifactStore:
             **source,
             "inspection_url": f"/api/analysis/{identity}/observations/{source['source_id']}",
             "original_url": f"/api/originals/{source['document_id']}",
-            "snapshot_url": f"/api/analysis/{identity}/snapshots/{source['snapshot_sha256']}",
+            **(
+                {
+                    "snapshot_url": f"/api/analysis/{identity}/snapshots/{source['snapshot_sha256']}"
+                }
+                if source.get("snapshot_sha256")
+                else {}
+            ),
         }
 
     @staticmethod

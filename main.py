@@ -160,7 +160,11 @@ def analysis_observation(identity: str, source_id: str):
 def analysis_snapshot(identity: str, sha256: str):
     try:
         bundle = app.state.artifacts.load(identity)
-        allowed = {s["snapshot_sha256"] for s in bundle["sources"].values()}
+        allowed = {
+            s["snapshot_sha256"]
+            for s in bundle["sources"].values()
+            if s.get("snapshot_sha256")
+        }
         path = app.state.financials.snapshot(sha256, allowed=allowed)
         return FileResponse(
             path,

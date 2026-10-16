@@ -1,0 +1,92 @@
+{
+  "checked_at": "2026-10-16T00:20:25.175209+00:00",
+  "kind": "local Docker acceptance; not Cloud Run",
+  "fresh_start_seconds": 8.332,
+  "coverage": {
+    "AMD": [
+      2024,
+      2025
+    ],
+    "INTC": [
+      2024,
+      2025
+    ],
+    "NVDA": [
+      2024,
+      2025,
+      2026
+    ],
+    "QCOM": [
+      2024,
+      2025
+    ]
+  },
+  "ui_status": 200,
+  "identity": "uid=10001(appuser) gid=10001(appuser) groups=10001(appuser)",
+  "credential_isolation": {
+    "codex_installed": false,
+    "codex_home_exists": false,
+    "root_auth_exists": false
+  },
+  "application": {
+    "question": "What drove NVIDIA's full-year revenue growth in FY2026?",
+    "company": "NVDA",
+    "fiscal_year": 2026,
+    "passed": true,
+    "seconds": 25.928,
+    "answer_token_ttft_seconds": 22.43,
+    "answer": "- NVIDIA’s FY2026 revenue rose 65% to $215.9 billion for the year ended January 25, 2026, primarily driven by Data Center compute and networking demand for accelerated computing and AI. Blackwell architectures represented the majority of Data Center revenue. [S12] [S11]\n- Data Center revenue increased 68%. Within it, compute revenue grew 59%, driven by Blackwell demand; networking revenue grew 142%, driven by the NVLink compute fabric ramp for GB200 and GB300 systems and growth in Ethernet and InfiniBand platforms. [S12] [S8] [S7]\n- Other businesses also contributed: Gaming revenue grew 41% on strong Blackwell demand; Professional Visualization grew 70% on Blackwell demand and the DGX Spark launch; Automotive grew 39% through continued adoption of NVIDIA’s self-driving platforms. [S12]",
+    "inspections": [
+      {
+        "source_id": "S7",
+        "document_id": "nvda-0001045810-26-000021",
+        "chunk_id": "4ec8d4f6ecc91a5d41ea8632d27cc141c31b5c74dd8d814dd9ff0b999e58782b",
+        "exact_passage": true,
+        "correct_scope": true
+      },
+      {
+        "source_id": "S8",
+        "document_id": "nvda-0001045810-26-000021",
+        "chunk_id": "e65d67a7504cb335896ae0b8a20f68746cb9713a31018430b4c9052911cda8b1",
+        "exact_passage": true,
+        "correct_scope": true
+      },
+      {
+        "source_id": "S11",
+        "document_id": "nvda-0001045810-26-000021",
+        "chunk_id": "00a8d3c1196bd0bc3882dbb4cbad62f3ac06eaad6ebc8498c9e3ea3f81f2823d",
+        "exact_passage": true,
+        "correct_scope": true
+      },
+      {
+        "source_id": "S12",
+        "document_id": "nvda-0001045810-26-000021",
+        "chunk_id": "a4f042a01067dbbbf8f61bf5e674a74762b8a7143cdd8a8db1147c2465fb0a9b",
+        "exact_passage": true,
+        "correct_scope": true
+      }
+    ]
+  },
+  "financial_application": {
+    "answer": "- AMD FY2025 consolidated US GAAP revenue: USD 34,639,000,000, exact USD. [F1]\n- Fiscal period: December 29, 2024–December 27, 2025. [F1]\n- Original-report basis: Form 10-K filed February 4, 2026; accession 0000002488-26-000018. No later comparative or amendment substituted. [F1]\n- Original source: https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm [F1]",
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "passed": true
+  },
+  "resources": "{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"0.23%\",\"Container\":\"3aa67f83975b440b6315ae544b2aa73c4b1b8f32fa81feec8e26e4a4eac0c191\",\"ID\":\"3aa67f83975b\",\"MemPerc\":\"16.86%\",\"MemUsage\":\"345.4MiB / 2GiB\",\"Name\":\"condescending_kirch\",\"NetIO\":\"221kB / 173kB\",\"PIDs\":\"26\"}",
+  "disconnect_cleanup": true,
+  "disconnect_cleanup_seconds": 0.541,
+  "unavailable_model": {
+    "passed": true,
+    "error": "Codex turn failed: {'message': '{\"type\":\"error\",\"status\":400,\"error\":{\"type\":\"invalid_request_error\",\"message\":\"The \\'unavailable-hw2-model\\' model is not supported when using Codex with a ChatGPT account.\"}}', 'codexErrorInfo': 'other', 'additionalDetails': None, 'misalignment': None}"
+  },
+  "browser": "{\"status\": \"passed\", \"output\": \"docs\\\\research\\\\CAPABILITY_CONTAINER_BROWSER_RESULTS.json\"}",
+  "image_id": "sha256:a0a7d47614579ce0d67d4d94aabbde0249562167443136b3b958e5df4bb46f1d",
+  "image_bytes": 216034428,
+  "passed": true
+}

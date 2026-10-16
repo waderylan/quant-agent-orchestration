@@ -2,7 +2,6 @@
 
 import argparse
 import asyncio
-import json
 import re
 import sys
 from decimal import Decimal
@@ -163,7 +162,14 @@ async def main(args):
         )
         report["unsupported"] = {
             "answer": unsupported["answer"],
-            "passed": unsupported["terminal"]["data"]["status"] == "coverage_gap",
+            "passed": any(
+                e["type"] == "trace" and e["data"].get("decision") == "Filings Research"
+                for e in unsupported["trace"]
+            )
+            and not any(
+                e["type"] == "tool" and e["data"].get("name") == "run_analysis"
+                for e in unsupported["trace"]
+            ),
         }
         row = turn["sources"][0]
         snapshot = await client.get(
@@ -203,7 +209,7 @@ async def main(args):
             "page_errors": errors,
         }
         report["browser"]["passed"] = (
-            report["browser"]["status"] == "Complete · citations verified"
+            report["browser"]["status"] == "Complete · source references checked"
             and not errors
         )
         await page.screenshot(

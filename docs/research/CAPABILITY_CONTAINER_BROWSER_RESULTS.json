@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-10-16T00:21:20.193603+00:00",
+  "url": "http://127.0.0.1:8084",
+  "phase": "browser",
+  "provider": "Local Codex subscription; not deployment-provider or formal evaluation evidence",
+  "browser": {
+    "common_year_selection": true,
+    "company_correction_preserves_years": true,
+    "automotive_share": true,
+    "chart_loaded": true,
+    "frozen_filing_input_inspected": true,
+    "status": "Complete · source references checked",
+    "all_company_earnings_ranking": true
+  },
+  "status": "passed"
+}

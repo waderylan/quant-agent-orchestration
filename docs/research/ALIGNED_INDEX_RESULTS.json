@@ -1,0 +1,168 @@
+{
+  "verified_at": "2026-10-15T23:55:14.904375+00:00",
+  "kind": "persistent Chroma ingestion, actual vector retrieval and exact passage inspection; no generation",
+  "active": {
+    "fingerprint": "ff72787c66808cdb032fefaa66667777a53e20364340f0016068b95094064c3b",
+    "collection": "filings-ff72787c66808cdb032fefaa",
+    "documents": 46,
+    "chunks": 11764,
+    "config": {
+      "schema": 1,
+      "model": "all-MiniLM-L6-v2",
+      "dimensions": 384,
+      "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+      "tokens": 220,
+      "overlap": 40,
+      "distance": "cosine"
+    }
+  },
+  "collection_count": 11764,
+  "coverage": {
+    "AMD": [
+      2024,
+      2025
+    ],
+    "INTC": [
+      2024,
+      2025
+    ],
+    "NVDA": [
+      2024,
+      2025,
+      2026
+    ],
+    "QCOM": [
+      2024,
+      2025
+    ]
+  },
+  "new_document_chunks": {
+    "nvda-0001045810-23-000093": 184,
+    "nvda-0001045810-23-000175": 204,
+    "nvda-0001045810-23-000227": 209,
+    "nvda-0001045810-24-000029": 437,
+    "nvda-fy2024-earnings": 49
+  },
+  "retrieval_query": "NVIDIA FY2024 revenue net income growth and data center demand",
+  "retrieval_scope": {
+    "companies": [
+      "NVDA"
+    ],
+    "years": [
+      2024
+    ],
+    "form": "10-K"
+  },
+  "retrieval_hits": [
+    {
+      "chunk_id": "298cc4acb9d1cd0dcfbdb81751fc410299571eb148408fbf3e5c1c775c191dc6",
+      "text": "Gaming, Professional Visualization, and Automotive.\n\nRevenue for fiscal year 2024 was $60.9 billion, up 126% from a year ago.\n\nData Center revenue for fiscal year 2024 was up 217%. Strong demand was driven by enterprise software and consumer internet applications, and multiple\nindustry verticals including automotive, financial services, and healthcare. Customers across industry verticals access NVIDIA AI infrastructure both through the\ncloud and on-premises. Data Center compute revenue was up 244% in the fiscal year. Networking revenue was up 133% in the fiscal year.\n\nGaming revenue for fiscal year 2024 was up 15%. The increase reflects higher sell-in to partners following the normalization of channel inventory levels and\ngrowing demand.\n\nProfessional Visualization revenue for fiscal year 2024 was up 1%.\n\nAutomotive revenue for the fiscal year 2024 was up 21%. The increase primarily reflected growth in self-driving platforms.\n\nGross margin increased in fiscal year 2024, primarily driven by Data Center revenue growth and lower net inventory provisions as a percentage of revenue.\n\nOperating expenses increased for fiscal year 2024,",
+      "kind": "filing",
+      "page": 36,
+      "fiscal_year": 2024,
+      "section": "other",
+      "period_end": "2024-01-28",
+      "version": "original",
+      "end": 204150,
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "document_id": "nvda-0001045810-24-000029",
+      "start": 203004,
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "form": "10-K",
+      "company": "NVDA",
+      "distance": 0.3119699954986572
+    },
+    {
+      "chunk_id": "80a7bbb91d1fb2992522138912d0212c3e2481a9700333c8a24da66801a08c28",
+      "text": ",972      $                 4,224       $           28,748                        681  %\n\nCompute & Networking revenue – The year-on-year increase was due to higher Data Center revenue. Compute grew 266% due to higher shipments of the\nNVIDIA Hopper GPU computing platform for the training and inference of LLMs, recommendation engines and generative AI applications. Networking was up\n133% due to higher shipments of InfiniBand.\nGraphics revenue – The year-on-year increase was led by growth in Gaming of 15% driven by higher sell-in to partners following the normalization of channel\ninventory levels.\n\nReportable segment operating income – The year-on-year increase in Compute & Networking and Graphics operating income was driven by higher revenue.\n\n\n\n                                                                                                 39",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "version": "original",
+      "section": "other",
+      "page": 39,
+      "company": "NVDA",
+      "form": "10-K",
+      "period_end": "2024-01-28",
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "kind": "filing",
+      "start": 222334,
+      "end": 223188,
+      "fiscal_year": 2024,
+      "document_id": "nvda-0001045810-24-000029",
+      "distance": 0.3471546173095703
+    },
+    {
+      "chunk_id": "5f4b9c0c9fdc0e03e659a6743785545b19c6467bdd28c939e4dc9ae54ef99921",
+      "text": "6.6                             (0.7)\nNet income                                                                                                                                                 48.9   %                          16.2  %\n\n\nReportable Segments\nRevenue by Reportable Segments\n                                                                                                                                        Year Ended\n                                                                                              Jan 28, 2024                 Jan 29, 2023                   Change$                   Change%\n\n                                                                                                                                       ($ in millions)\nCompute & Networking                                                                     $                47,405      $                15,068       $           32,337                        215  %\nGraphics                                                                                                  13,517                       11,906                     1,611                        14  %\nTotal                                                                                    $                60,922      $                26,974       $           33,948                        126  %\n\n\nOperating Income by Reportable Segments\n\n                                                                                                                                        Year Ended\n                                                                                              Jan 28, 2024                 Jan 29, 2023                   Change$                   Change%\n\n                                                                                                                                       ($ in millions)\nCompute & Networking                                                                     $                32,016      $                 5,083       $           26,933                        530  %\nGraphics                                                                                                   5,846                        4,552                     1,294                        28  %\nAll Other                                                                                                 (4,890)                       (5,411)                     521                       (10)%\nTotal                                                                                    $                32,972      $                 4,224       $           28,748                        681  %\n\nCompute & Networking revenue – The year-on-year increase was due to higher Data Center revenue. Compute grew 266% due",
+      "fiscal_year": 2024,
+      "page": 39,
+      "version": "original",
+      "end": 222541,
+      "form": "10-K",
+      "document_id": "nvda-0001045810-24-000029",
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "kind": "filing",
+      "period_end": "2024-01-28",
+      "company": "NVDA",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "section": "other",
+      "start": 219740,
+      "distance": 0.34850263595581055
+    },
+    {
+      "chunk_id": "c55bac0141c842080a26d0f2d5c72b3fb28a2a13a56108cf7e313395bf8ca7e3",
+      "text": "the United States for fiscal year 2024 was primarily due to higher U.S.-based Compute & Networking segment demand.\n\nSales to one customer represented 13% of total revenue for fiscal year      2024, which was attributable to the Compute & Networking segment. No customer\nrepresented 10% or more of total revenue for fiscal years 2023 and 2022.\n\nThe following table summarizes information pertaining to our revenue by each of the specialized markets we serve:\n\n                                                                                                                                             Year Ended\n                                                                                                               Jan 28, 2024                  Jan 29, 2023                 Jan 30, 2022\nRevenue:                                                                                                                                      (In millions)\n   Data Center                                                                                           $                 47,525      $                 15,005     $                  10,613\n   Gaming                                                                                                                  10,447                         9,067                        12,462\n   Professional Visualization                                                                                                1,553                        1,544                          2,111\n   Automotive                                                                                                                1,091                           903                          566\n   OEM and Other                                                                                                               306                           455                        1,162\nTotal revenue                                                                                            $                 60,922      $                 26,974     $                  26,914\n\n\n\n\n                                                                                               79",
+      "fiscal_year": 2024,
+      "version": "original",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "end": 440073,
+      "period_end": "2024-01-28",
+      "page": 79,
+      "form": "10-K",
+      "kind": "filing",
+      "document_id": "nvda-0001045810-24-000029",
+      "start": 437881,
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "company": "NVDA",
+      "section": "other",
+      "distance": 0.37781018018722534
+    },
+    {
+      "chunk_id": "a813d42037782e98ab5dc350c6dc64c2f02d7923a8dc19d5e0d72886dfbfa3e2",
+      "text": "[PDF page 36]\nTable of Contents\n\n\n\n\nFiscal Year 2024 Summary\n\n                                                                                                                                              Year Ended\n                                                                                                                 Jan 28, 2024                Jan 29, 2023                    Change\n                                                                                                                                ($ in millions, except per share data)\nRevenue                                                                                                     $             60,922        $             26,974                        Up 126%\nGross margin                                                                                                                 72.7  %                     56.9  %                  Up 15.8 pts\nOperating expenses                                                                                          $             11,329        $              11,132                          Up 2%\nOperating income                                                                                            $             32,972        $               4,224                       Up 681%\nNet income                                                                                                  $             29,760        $               4,368                       Up 581%\nNet income per diluted share                                                                                $               11.93       $                1.74                       Up 586%\n\nWe  specialize  in  markets  where  our  computing  platforms  can  provide  tremendous  acceleration  for  applications.  These  platforms  incorporate  processors,\ninterconnects, software, algorithms, systems, and services to deliver unique value. Our platforms address four large markets where our expertise is critical: Data\nCenter, Gaming, Professional Visualization, and Automotive.\n\nRevenue for fiscal year 2024 was $60.9 billion, up 126% from a year ago.\n\nData Center revenue for fiscal year 2024 was up",
+      "company": "NVDA",
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "form": "10-K",
+      "period_end": "2024-01-28",
+      "section": "other",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "kind": "filing",
+      "start": 200973,
+      "fiscal_year": 2024,
+      "end": 203178,
+      "document_id": "nvda-0001045810-24-000029",
+      "page": 36,
+      "version": "original",
+      "distance": 0.40140074491500854
+    },
+    {
+      "chunk_id": "133985d1d31ba0910689ba32ebe135acab890da93524d2fb2aedcf31d313e780",
+      "text": "[PDF page 50]\nTable of Contents\n\n\n\n                                                                          NVIDIA Corporation and Subsidiaries\n                                                                           Consolidated Statements of Income\n                                                                            (In millions, except per share data)\n                                                                                                                                                    Year Ended\n                                                                                                                         Jan 28, 2024               Jan 29, 2023               Jan 30, 2022\n  Revenue                                                                                                            $              60,922      $              26,974      $              26,914\n         Cost of revenue                                                                                                            16,621                     11,618                       9,439\n  Gross profit                                                                                                                      44,301                     15,356                     17,475\n  Operating expenses\n         Research and development                                                                                                    8,675                      7,339                       5,268\n         Sales, general and administrative                                                                                           2,654                      2,440                       2,166\n         Acquisition termination cost                                                                                                    —                      1,353                           —\n             Total operating expenses                                                                                               11,329                     11,132                       7,434\n  Operating income                                                                                                                  32,972                      4,224                     10,041\n         Interest income                                                                                                                866                        267                          29\n         Interest expense                                                                                                             (257)                       (262)                      (236)\n         Other, net                                                                                                                     237                        (48)                       107\n             Other income (expense), net                                                                                                846                        (43)                      (100)\n  Income before income tax                                                                                                          33,818                      4,181                       9,941\n  Income tax expense (benefit)                                                                                                       4,058                        (187)                       189",
+      "company": "NVDA",
+      "page": 50,
+      "section": "other",
+      "form": "10-K",
+      "kind": "filing",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "end": 271304,
+      "version": "original",
+      "fiscal_year": 2024,
+      "start": 267854,
+      "document_id": "nvda-0001045810-24-000029",
+      "period_end": "2024-01-28",
+      "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+      "distance": 0.4057467579841614
+    }
+  ],
+  "exact_passage_inspection_passed": true,
+  "passed": true
+}

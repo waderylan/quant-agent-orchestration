@@ -344,3 +344,75 @@ async def test_graph_hands_data_to_quant_without_streaming_intermediate_answer(
     assert roles == ["Financial Data"]
     assert failed[-1]["data"]["status"] == "failed"
     assert not any(e["type"] == "artifacts" for e in failed)
+
+
+def component_sources():
+    total = observation(1000)
+    component = observation(
+        80,
+        "revenue_component",
+        component="automotive",
+        provenance="filing_revenue_table",
+        parent_metric="revenue",
+        parent_scope="consolidated",
+    )
+    return {"F1": {**total, "source_id": "F1"}, "F2": {**component, "source_id": "F2"}}
+
+
+SHARE = "results=[{'label':'share','kind':'share','inputs':['F2','F1'],'value':values['F2']/values['F1']*100}]"
+
+
+def test_share_recomputes_verified_component_and_preserves_executed_lineage():
+    inputs = component_sources()
+    row = validate_results(run_isolated(SHARE, inputs), inputs)[0]
+    assert row["value"] == "8.00" and row["metric"] == "automotive_revenue_share"
+    assert row["source_ids"] == ["F1", "F2"]
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"accession": "different-filing"},
+        {"provenance": "model_claim"},
+        {"parent_scope": "QCT"},
+        {"metric": "operating_income"},
+        {"value": -1},
+        {"value": 1001},
+        {"start": "2025-01-01"},
+        {"revision_basis": "latest_restatement"},
+        {"company": "QCOM"},
+    ],
+)
+def test_share_rejects_unverified_scope_period_revision_or_invalid_part(changes):
+    inputs = component_sources()
+    inputs["F2"].update(changes)
+    with pytest.raises(ValueError):
+        validate_results(run_isolated(SHARE, inputs), inputs)
+
+
+def test_ranking_checks_every_eligible_company_and_excludes_loss_baseline():
+    from src.quant_workflow import earnings_assessment
+
+    inputs = {
+        "F1": observation(100, "net_income", 2024),
+        "F2": observation(260, "net_income"),
+        "F3": observation(100, "net_income", 2024, company="NVDA"),
+        "F4": observation(240, "net_income", company="NVDA"),
+        "F5": observation(-100, "net_income", 2024, company="INTC"),
+        "F6": observation(-2, "net_income", company="INTC"),
+    }
+    inputs = {sid: {**source, "source_id": sid} for sid, source in inputs.items()}
+    code = """results=[
+{'label':'AMD','kind':'growth','inputs':['F2','F1'],'value':(values['F2']/values['F1']-1)*100},
+{'label':'NVDA','kind':'growth','inputs':['F4','F3'],'value':(values['F4']/values['F3']-1)*100},
+{'label':'Intel previous','kind':'value','inputs':['F5'],'value':values['F5']},
+{'label':'Intel current','kind':'value','inputs':['F6'],'value':values['F6']}]
+"""
+    rows = validate_results(run_isolated(code, inputs), inputs)
+    assessment = earnings_assessment(rows, inputs)
+    assert assessment["winners"][0]["company"] == "AMD"
+    assert assessment["excluded"][0]["company"] == "INTC"
+    with pytest.raises(ValueError, match="every positive-baseline"):
+        earnings_assessment(rows[1:], inputs)
+    with pytest.raises(ValueError, match="both reported"):
+        earnings_assessment(rows[:-1], inputs)

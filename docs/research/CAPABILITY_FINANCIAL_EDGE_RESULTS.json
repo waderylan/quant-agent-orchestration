@@ -1,0 +1,246 @@
+{
+  "checked_at": "2026-10-16T00:23:56.291846+00:00",
+  "missing_cash_flow": {
+    "needs_evidence": {
+      "kind": "structured_missing",
+      "message": "No compatible original-report observations for {\"period\": \"Q2\", \"basis\": \"quarter\", \"metrics\": [\"operating_cash_flow\"]}. Search filing evidence; no structured calculation is established."
+    },
+    "answer": "",
+    "partial": true,
+    "execution_scope": "direct Financial Data; the application uses Quant for this derivation",
+    "passed": true
+  },
+  "concurrent_scopes": [
+    {
+      "question": "Show NVIDIA FY2026 Q2-only revenue in exact USD, with actual dates and sources.",
+      "answer": "- NVIDIA FY2026 Q2-only revenue: USD 46,743,000,000, consolidated US GAAP, for April 28–July 27, 2025; not year-to-date. [F1]\n- Fiscal year: January 27, 2025–January 25, 2026. [F1]\n- Source: original-report Form 10-Q, filed August 27, 2025, accession 0001045810-25-000209; no later comparative substituted. [F1]\n- SEC filing: https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm [F1]",
+      "sources": [
+        {
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "period": "Q2",
+          "basis": "quarter",
+          "start": "2025-04-28",
+          "end": "2025-07-27",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "nvda-0001045810-25-000209",
+          "accession": "0001045810-25-000209",
+          "form": "10-Q",
+          "filed": "2025-08-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000209/nvda-20250727.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "snapshot_sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff",
+          "retrieved_at": "2026-10-15T17:13:59.080696+00:00",
+          "warnings": [],
+          "inputs": [],
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 46743000000,
+          "conflicting_comparatives": [],
+          "observation_id": "1ba9a940e9c9c914512150e7f56795542ee8df0d5f05fd51aae02a1cee8b7449",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/1ba9a940e9c9c914512150e7f56795542ee8df0d5f05fd51aae02a1cee8b7449",
+          "text": "NVDA FY2026 Q2 quarter: revenue = 46743000000 USD; 2025-04-28 through 2025-07-27; original accession 0001045810-25-000209."
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data",
+            "companies": [
+              "NVDA"
+            ],
+            "years": [
+              2026
+            ],
+            "reason": "Requested consolidated metrics are supported by the structured financial store"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "Q2",
+              "basis": "quarter",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Data",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "query_financials",
+            "arguments": {
+              "company": "NVDA",
+              "year": 2026,
+              "period": "Q2",
+              "basis": "quarter",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_observation",
+            "arguments": {
+              "source_id": "F1"
+            }
+          }
+        }
+      ],
+      "seconds": 11.272,
+      "answer_token_ttft_seconds": 7.782,
+      "passed": true
+    },
+    {
+      "question": "Show AMD FY2025 Q2 year-to-date operating cash flow in exact USD, with actual dates and sources.",
+      "answer": "- AMD FY2025 Q2 year-to-date operating cash flow: USD 2,950,000,000, consolidated US GAAP, for 2024-12-29 through 2025-06-28—not quarter-only. [F1]\n- Fiscal year: 2024-12-29 through 2025-12-27. Revision basis: original report. [F1]\n- Source: SEC Form 10-Q, filed 2025-08-06; accession 0000002488-25-000108. https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm [F1]",
+      "sources": [
+        {
+          "kind": "financial_observation",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "period": "Q2",
+          "basis": "ytd",
+          "start": "2024-12-29",
+          "end": "2025-06-28",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "metric": "operating_cash_flow",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "amd-0000002488-25-000108",
+          "accession": "0000002488-25-000108",
+          "form": "10-Q",
+          "filed": "2025-08-06",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json",
+          "snapshot_sha256": "21a29c75076d90fced568785d855fc427a15c7458bc0bb153a9dedd88ad3349e",
+          "retrieved_at": "2026-10-15T17:13:59.996062+00:00",
+          "warnings": [],
+          "inputs": [],
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities",
+          "value": 2950000000,
+          "conflicting_comparatives": [],
+          "observation_id": "84d1921288ff5625a71aaee931406b8084804781a0042429e753b489284931b3",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/84d1921288ff5625a71aaee931406b8084804781a0042429e753b489284931b3",
+          "text": "AMD FY2025 Q2 ytd: operating_cash_flow = 2950000000 USD; 2024-12-29 through 2025-06-28; original accession 0000002488-25-000108."
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data",
+            "companies": [
+              "AMD"
+            ],
+            "years": [
+              2025
+            ],
+            "reason": "Requested consolidated metrics are supported by the structured financial store"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "Q2",
+              "basis": "ytd",
+              "metrics": [
+                "operating_cash_flow"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Data",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Select source-linked financial observations with exact fiscal intervals and original accessions"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "query_financials",
+            "arguments": {
+              "company": "AMD",
+              "year": 2025,
+              "period": "Q2",
+              "basis": "ytd",
+              "metrics": [
+                "operating_cash_flow"
+              ]
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_observation",
+            "arguments": {
+              "source_id": "F1"
+            }
+          }
+        }
+      ],
+      "seconds": 11.138,
+      "answer_token_ttft_seconds": 7.481,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

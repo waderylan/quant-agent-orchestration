@@ -2,8 +2,8 @@
 
 - Owner: Rylan Wade.
 - Status: implemented and verified; accepted.
-- Verification date: 2026-10-13 America/Los_Angeles (2026-10-14 UTC); exact source retrieval/check times are in the evidence files.
-- Scope: NVIDIA FY2025–2026; AMD, Intel, and Qualcomm FY2024–2025, with the exact fiscal dates in [M1 coverage](M1_SCOPE_AND_SOURCE_FEASIBILITY.md#2-company-and-period-coverage).
+- Verification date: 2026-10-15 America/Los_Angeles; exact source retrieval/check times and dated reference samples are retained in the evidence files.
+- Scope: every company covers FY2024–FY2025; NVIDIA retains FY2026. [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) records exact fiscal dates, the five NVIDIA FY2024 sources, original parent-earnings checks, and full current corpus verification.
 - Governing requirements: [assignment](../assignment/Assignment_2_Description.md) and [M2 project scope](PROJECT_SPEC.md#m2--source-collection-and-preparation).
 - Environment: uv 0.10.3, Python 3.13.12, Beautiful Soup 4.15.0, pypdf 6.19.0. `pyproject.toml` and `uv.lock` govern local dependencies; `requirements.txt` is their exact-pinned assignment export.
 
@@ -11,21 +11,21 @@
 
 | Company | Annual reports | Quarterly reports | Q4/full-year releases | Amendments | Verified / targets |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NVIDIA | 2 | 6 | 2 | 0 | 10 / 10 |
+| NVIDIA | 3 | 9 | 3 | 0 | 15 / 15 |
 | AMD | 2 | 6 | 2 | 1 | 11 / 11 |
 | Intel | 2 | 6 | 2 | 0 | 10 / 10 |
 | Qualcomm | 2 | 6 | 2 | 0 | 10 / 10 |
-| Total | 8 | 24 | 8 | 1 | **41 / 41** |
+| Total | 9 | 27 | 9 | 1 | **46 / 46** |
 
-- All 41 original bodies are downloaded and have verified readable extraction. No selected document is missing or excluded. Collection gaps: **0**.
-- SEC submissions snapshots validate accession, CIK, form, filing date, period end, and primary document for all 33 filing identities.
+- All 46 original bodies are downloaded and have verified readable extraction. No selected document is missing or excluded. Collection gaps: **0**.
+- SEC submissions snapshots validate accession, CIK, form, filing date, period end, and primary document for all 37 filing identities.
 - NVIDIA and Qualcomm filings use official PDF links from their public investor-relations Q4 feeds. AMD and Intel use official HTML filing mirrors. Earnings releases use original company HTML and official Qualcomm PDFs.
 - Exact URLs, source dates, retrieval times, hashes, validation outcomes, and prepared-file paths are in [collection results](../research/M2_COLLECTION_RESULTS.json). [Demonstration results](../research/M2_DEMONSTRATION_RESULTS.json) contain source samples, financial rows, risk boundaries, and AMD passages.
 - [Offline verification results](../research/M2_VERIFICATION_RESULTS.json) record the full corpus check against fresh extraction and SEC snapshots.
 
 ## Implemented decisions
 
-- [Source inventory](../../data/source_inventory.json) holds 41 logical documents. Canonical SEC identities and actual retrieval URLs are separate. Mirrors are candidates for one identity; they do not increase corpus size.
+- [Source inventory](../../data/source_inventory.json) holds 46 logical documents. Canonical SEC identities and actual retrieval URLs are separate. Mirrors are candidates for one identity; they do not increase corpus size.
 - AMD's original annual report and amendment remain separate. The original Client passage reports **31% unit-shipment growth and 15% ASP growth**; the amended MD&A reports **15% and 31%**, respectively. Its explanatory note identifies the transposition and limits the change. The amendment has no replacement risk section.
 - Quarterly risks are update disclosures. Their annual context is recorded, including cases whose prior annual report is outside the selected corpus. The first selected year's prior annual reports are not added to coverage. NVIDIA FY2026 Q3 retains references to the annual and earlier quarterly reports.
 - Original bytes and SEC metadata snapshots use content-addressed SHA-256 files. Prepared text uses document identity, extractor version, and source hash. Each run saves a manifest; refresh preserves original bodies and run history, including failed refreshes.
@@ -39,7 +39,7 @@
 - News extraction retains article titles, publication dates, body text, financial tables, and GAAP/non-GAAP labels.
 - PDF extraction retains page offsets and fixed-width text. Pages omitted by layout extraction use ordinary text fallback. Empty-password public PDFs are readable; password-required PDFs fail explicitly. No OCR or structured PDF cell resolver is implemented.
 - Standard filings use headed Item spans, excluding short table-of-contents entries. Intel's custom report order uses body title boundaries, with its SEC cross-reference index retained in the full extraction.
-- All **32 original reports** have extracted annual/quarterly risk and MD&A sections. AMD's amendment also has MD&A. Risk boundaries end at the following appropriate source heading rather than at a table-of-contents reference or EOF.
+- All **36 original reports** have extracted annual/quarterly risk and MD&A sections. AMD's amendment also has MD&A. Risk boundaries end at the following appropriate source heading rather than at a table-of-contents reference or EOF.
 - Eight annual revenue and operating-cash-flow rows match the independent original-accession M1 observations in USD millions. This validates source readability; it does not implement structured financial observation selection or financial calculations.
 - Original NVIDIA FY2026 PDF page 37 and Qualcomm FY2025 PDF page 59 are visually inspected against extracted tables. NVIDIA retains the 215,938 / 130,497 revenue columns and units; Qualcomm retains 44,284 / 38,962 / 35,820 and the fiscal-date headers.
 - Offline verification checks raw/text hashes, fresh extraction equality, page/section/table details, validation results, and original SEC metadata. Targeted tests protect wrong-company/period rejection, hidden-data contamination, section boundaries, news dates, mirror/amendment identity, bounded retries, refresh history, and tamper detection.

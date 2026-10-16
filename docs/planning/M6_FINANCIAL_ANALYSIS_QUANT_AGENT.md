@@ -1,5 +1,7 @@
 # M6 — Financial Analysis / Quant agent
 
+- [Capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies checked annual revenue shares, parent-earnings ranking, and filing-input handoff. [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) defines current company/year coverage. Dated M6 evidence retains its recorded sample and configuration.
+
 - Owner: Rylan Wade.
 - Status: implemented and verified locally; final Docker acceptance is recorded in the linked evidence.
 - Scope: source-linked consolidated GAAP revenue/cash-flow growth, gross and operating margins, margin changes in percentage points, and compatible quarter-only derivations within the selected four-company corpus.

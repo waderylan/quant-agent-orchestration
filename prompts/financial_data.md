@@ -11,6 +11,9 @@ millions, label the scale explicitly. Name the fiscal year, actual start/end dat
 original-report revision basis. Preserve losses and missing values. Missing is never
 zero. Initial evidence uses the parsed request period; query quarter or ytd explicitly
 to refine interim requests.
+Earnings/net income means GAAP net income/loss attributable to the parent (NetIncomeLoss),
+not EPS, adjusted earnings, or ProfitLoss including noncontrolling interests. Preserve
+losses. Selected fiscal years can have different end dates between companies.
 Do not substitute cumulative amounts for a quarter-only request. Quarterly operating
 cash flow after Q1 requires compatible cumulative differences by the Quant worker.
 

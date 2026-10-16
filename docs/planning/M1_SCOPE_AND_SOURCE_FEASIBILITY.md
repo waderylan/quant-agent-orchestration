@@ -11,7 +11,7 @@
 | Scope area | Current decision | Evidence / boundary |
 | --- | --- | --- |
 | Semiconductor sector; 3–5 domestic reporters | NVIDIA (NVDA), AMD (AMD), Intel (INTC), Qualcomm (QCOM). | SEC identities and 10-K/10-Q histories verified for all four; financial-input audit passed for each. |
-| Roughly two years of reports | Two completed fiscal years per company: NVIDIA FY2025–2026; AMD, Intel, Qualcomm FY2024–2025. | Actual dates appear below. NVIDIA's year label is offset from the other companies. These are historical coverage windows, not a claim of latest coverage as of October 2026. |
+| Completed annual/quarterly coverage | All companies cover FY2024/FY2025; NVIDIA retains FY2026. | Actual dates appear below. NVIDIA's year label is offset from the other companies. These are historical coverage windows, not a claim of latest coverage as of October 2026. |
 | Filing families | Full original 10-K and Q1–Q3 10-Q documents; related amendments as separate versions. | 32 original reports discovered plus one in-window AMD 10-K/A. Q4 is represented by the 10-K and earnings release, not an invented fourth 10-Q. |
 | Relevant earnings releases | Initially include the eight Q4/full-year releases listed in §4. | Each downloaded from an original company site or its official document CDN. Q1–Q3 releases can be added when a demonstration needs them. |
 | Corpus size / retrieval structure | Verified corpus: **41 source documents** = 8 annual reports + 24 quarterly reports + 8 earnings releases + 1 amendment. | All bodies and readable extractions are verified, with no collection gaps. Documents span business descriptions, MD&A, financial statements/notes, and risk disclosures. Local MiniLM/Chroma ingestion and retrieval are implemented and verified. |
@@ -25,13 +25,13 @@
 
 | Company | SEC CIK | Selected fiscal years | Fiscal start → end |
 | --- | --- | --- | --- |
-| NVIDIA | 0001045810 | FY2025; FY2026 | 2024-01-29 → 2025-01-26; 2025-01-27 → 2026-01-25 |
+| NVIDIA | 0001045810 | FY2024; FY2025; FY2026 | 2023-01-30 → 2024-01-28; 2024-01-29 → 2025-01-26; 2025-01-27 → 2026-01-25 |
 | AMD | 0000002488 | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
 | Intel | 0000050863 | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
 | Qualcomm | 0000804328 | FY2024; FY2025 | 2023-09-25 → 2024-09-29; 2024-09-30 → 2025-09-28 |
 
 - Company names/CIKs were checked in SEC submissions and Company Facts JSON. Filing and report dates were read from submissions; fiscal starts were checked against annual financial observations.
-- The combined source-period envelope is 2023-09-25 through 2026-01-25. It does not mean each company has coverage throughout that entire envelope.
+- The combined source-period envelope is 2023-01-30 through 2026-01-25. It does not mean each company has coverage throughout that entire envelope. [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) records the verified current inventory and the original-source NVIDIA FY2024 inputs.
 - Use explicit company fiscal dates in answers and charts. NVIDIA's January-end year, Qualcomm's September-end year, and AMD/Intel's December-end years are different reporting windows.
 - Qualcomm FY2024 contains **53 weeks**; FY2025 contains 52. Its annual filing explicitly warns that these periods are not exactly comparable. Report ordinary growth with that qualification; do not silently normalize or claim matched calendar exposure. [Qualcomm FY2025 10-K](https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm)
 - Prefer within-company comparisons initially. A cross-company fiscal comparison must show dates and explain timing and business-mix limits; do not label it a synchronized calendar-year comparison.

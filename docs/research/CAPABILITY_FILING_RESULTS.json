@@ -1,0 +1,1282 @@
+{
+  "recorded_at": "2026-10-16T00:20:23.061588+00:00",
+  "url": "http://127.0.0.1:8086",
+  "phase": "filings",
+  "provider": "Local Codex subscription; not deployment-provider or formal evaluation evidence",
+  "filing_cases": [
+    {
+      "question": "How much of qualcomm's revenue in fy2025 was from automotive?",
+      "answer": "- Qualcomm’s FY2025 automotive revenue was **$3.957 billion**, or **8.94% of consolidated revenue**. [C1] [C2]\n- Total consolidated revenue was $44.284 billion. The fiscal year ran September 30, 2024–September 28, 2025; figures use the original FY2025 filing. [F1] [F2]\n- Verified table and PNG chart are available.",
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 automotive revenue",
+          "requested_label": "FY2025 automotive revenue",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "3957000000",
+          "display_value": "3,957,000,000",
+          "warnings": [],
+          "bundle_id": "ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81",
+          "inspection_url": "/api/analysis/ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81/calculations/C1",
+          "text": "QCOM FY2025 automotive revenue: 3957000000 USD; F2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "automotive_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2025 automotive revenue share",
+          "requested_label": "FY2025 automotive share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "8.935507180923132508355162135",
+          "display_value": "8.9355",
+          "warnings": [],
+          "bundle_id": "ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81",
+          "inspection_url": "/api/analysis/ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81/calculations/C2",
+          "text": "QCOM FY2025 automotive revenue share: 8.935507180923132508355162135 percent; F2 / F1 * 100"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "filed": "2025-11-05",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "warnings": [],
+          "inputs": [],
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 44284000000,
+          "conflicting_comparatives": [],
+          "observation_id": "489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81/observations/F1",
+          "text": "QCOM FY2025 FY annual: revenue = 44284000000 USD; 2024-09-30 through 2025-09-28; original accession 0000804328-25-000085.",
+          "original_url": "/api/originals/qcom-0000804328-25-000085",
+          "snapshot_url": "/api/analysis/ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81/snapshots/bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "filed": "2025-11-05",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "version": "original",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "warnings": [],
+          "kind": "financial_observation",
+          "metric": "revenue_component",
+          "component": "automotive",
+          "parent_metric": "revenue",
+          "parent_scope": "consolidated",
+          "status": "available",
+          "value": 3957000000,
+          "provenance": "filing_revenue_table",
+          "inputs": [],
+          "conflicting_comparatives": [],
+          "filing_evidence": {
+            "value": 3957000000,
+            "start": 831917,
+            "end": 832370,
+            "quote": "                 QCT revenue streams were as follows (in mi                                                                                                                                    llions):\n\n                                                                                                                                                                                                                                                                                                                                    2025                                                           2024                                                           2023\n  Handsets (1)                                                                                                                                                                                                                                                                                                    $           27,793                                             $           24,863                                             $           22,570\n  Automotive (2)                                                                                                                                                                                                                                                                                                                 3,957                                                          2,910                                                          1,872\n",
+            "column_years": [
+              2025,
+              2024,
+              2023
+            ],
+            "row_values_millions": [
+              "3,957",
+              "2,910",
+              "1,872"
+            ],
+            "row_label": "Automotive",
+            "scale": 1000000,
+            "table": "QCT revenue streams",
+            "chunk_id": "d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+            "page": 71,
+            "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+            "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a"
+          },
+          "observation_id": "48cebf1545b35dee17f0a3e2c61cdd4a226e61084c5bccffb558723bbbf1c4cf",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81/observations/F2",
+          "text": "QCOM FY2025 FY annual: revenue_component = 3957000000 USD; 2024-09-30 through 2025-09-28; original accession 0000804328-25-000085.",
+          "original_url": "/api/originals/qcom-0000804328-25-000085"
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data → Filings Research → Financial Analysis / Quant",
+            "companies": [
+              "QCOM"
+            ],
+            "years": [
+              2025
+            ],
+            "reason": "Revenue component requires filing evidence; Data supplies the compatible total before Research and Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "evidence_followup",
+            "decision": "Filings Research",
+            "reason": "The consolidated store does not contain this revenue component; request verified filing evidence."
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_revenue_filing_retrieval",
+            "arguments": {
+              "companies": [
+                "QCOM"
+              ],
+              "years": [
+                2025
+              ],
+              "component": "automotive",
+              "form": "10-K",
+              "section": "other"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Filings Research",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Establish filing-only revenue inputs with independent table extraction before Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "extract_revenue_component",
+            "arguments": {
+              "source_id": "S2"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Analysis / Quant",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "run_analysis",
+            "arguments": {
+              "code": "automotive = values['F2']\nshare = values['F2'] / values['F1'] * 100\nresults = [{'label': 'FY2025 automotive revenue', 'kind': 'value', 'inputs': ['F2'], 'value': automotive}, {'label': 'FY2025 automotive share of consolidated revenue', 'kind': 'share', 'inputs': ['F2', 'F1'], 'value': share}]"
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_calculation",
+            "arguments": {
+              "source_id": "C2"
+            }
+          }
+        }
+      ],
+      "seconds": 22.123,
+      "answer_token_ttft_seconds": 20.026,
+      "bundle_id": "ba7816fc2d6bbe3d118c45519bbf7819f5586a63d994c75582e8f4f09b596e81",
+      "calculations": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 automotive revenue",
+          "requested_label": "FY2025 automotive revenue",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "3957000000",
+          "display_value": "3,957,000,000",
+          "warnings": []
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "automotive_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2025 automotive revenue share",
+          "requested_label": "FY2025 automotive share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "8.935507180923132508355162135",
+          "display_value": "8.9355",
+          "warnings": []
+        }
+      ],
+      "assessment": null
+    },
+    {
+      "question": "What percentage of Qualcomm FY2024 revenue came from automotive?",
+      "answer": "- Automotive accounted for 7.47% of Qualcomm FY2024 consolidated revenue. [C2]\n- Automotive revenue was $2.910 billion [F2], divided by consolidated revenue of $38.962 billion [F1].\n- Both figures use the original FY2024 filing, covering September 25, 2023–September 29, 2024, a 53-week fiscal year; no normalization was applied. [F1][F2]\n- Verified calculation table and PNG chart are available.",
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "automotive_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2024-11-06",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2024 automotive revenue share",
+          "requested_label": "Qualcomm FY2024 automotive share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "7.468815769211026128022175453",
+          "display_value": "7.4688",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ],
+          "bundle_id": "fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa",
+          "inspection_url": "/api/analysis/fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa/calculations/C2",
+          "text": "QCOM FY2024 automotive revenue share: 7.468815769211026128022175453 percent; F2 / F1 * 100"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-24-000075",
+          "accession": "0000804328-24-000075",
+          "form": "10-K",
+          "filed": "2024-11-06",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ],
+          "inputs": [],
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 38962000000,
+          "conflicting_comparatives": [],
+          "observation_id": "c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa/observations/F1",
+          "text": "QCOM FY2024 FY annual: revenue = 38962000000 USD; 2023-09-25 through 2024-09-29; original accession 0000804328-24-000075.",
+          "original_url": "/api/originals/qcom-0000804328-24-000075",
+          "snapshot_url": "/api/analysis/fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa/snapshots/bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "filed": "2024-11-06",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "document_id": "qcom-0000804328-24-000075",
+          "accession": "0000804328-24-000075",
+          "form": "10-K",
+          "version": "original",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ],
+          "kind": "financial_observation",
+          "metric": "revenue_component",
+          "component": "automotive",
+          "parent_metric": "revenue",
+          "parent_scope": "consolidated",
+          "status": "available",
+          "value": 2910000000,
+          "provenance": "filing_revenue_table",
+          "inputs": [],
+          "conflicting_comparatives": [],
+          "filing_evidence": {
+            "value": 2910000000,
+            "start": 860728,
+            "end": 861189,
+            "quote": "recognized over time                                                                and are principally from royalties generated through our licensees’ sales of mobile handsets.                                                                                                                                                                                                                                                                                     QCT\nrevenue streams were as follows (in mi                                                                                                                     llions):\n\n                                                                                                                                                                                                                                                                                                                                           2024                                                            2023                                                            2022\n  Handsets (1)                                                                                                                                                                                                                                                                                                          $           24,863                                              $           22,570                                              $           28,815\n  Automotive (2)                                                                                                                                                                                                                                                                                                                       2,910                                                           1,872                                                           1,509\n",
+            "column_years": [
+              2024,
+              2023,
+              2022
+            ],
+            "row_values_millions": [
+              "2,910",
+              "1,872",
+              "1,509"
+            ],
+            "row_label": "Automotive",
+            "scale": 1000000,
+            "table": "QCT revenue streams",
+            "chunk_id": "1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+            "page": 73,
+            "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01",
+            "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518"
+          },
+          "observation_id": "34475469128618d255cc968800758974c07bf426d9a2d2be7c2dfaa5e401ac7b",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa/observations/F2",
+          "text": "QCOM FY2024 FY annual: revenue_component = 2910000000 USD; 2023-09-25 through 2024-09-29; original accession 0000804328-24-000075.",
+          "original_url": "/api/originals/qcom-0000804328-24-000075"
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data → Filings Research → Financial Analysis / Quant",
+            "companies": [
+              "QCOM"
+            ],
+            "years": [
+              2024
+            ],
+            "reason": "Revenue component requires filing evidence; Data supplies the compatible total before Research and Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "evidence_followup",
+            "decision": "Filings Research",
+            "reason": "The consolidated store does not contain this revenue component; request verified filing evidence."
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_revenue_filing_retrieval",
+            "arguments": {
+              "companies": [
+                "QCOM"
+              ],
+              "years": [
+                2024
+              ],
+              "component": "automotive",
+              "form": "10-K",
+              "section": "other"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Filings Research",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Establish filing-only revenue inputs with independent table extraction before Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "extract_revenue_component",
+            "arguments": {
+              "source_id": "S2"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Analysis / Quant",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "run_analysis",
+            "arguments": {
+              "code": "results = [\n {'label': 'Qualcomm FY2024 automotive revenue', 'kind': 'value', 'inputs': ['F2'], 'value': values['F2']},\n {'label': 'Qualcomm FY2024 automotive share of consolidated revenue', 'kind': 'share', 'inputs': ['F2', 'F1'], 'value': values['F2'] / values['F1'] * 100}\n]"
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_calculation",
+            "arguments": {
+              "source_id": "C2"
+            }
+          }
+        }
+      ],
+      "seconds": 17.647,
+      "answer_token_ttft_seconds": 15.698,
+      "bundle_id": "fc4622babbaf846050b7b62b5febccf62697f73c8547d019b7fd13f91f9c22aa",
+      "calculations": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2024-11-06",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2024 automotive revenue",
+          "requested_label": "Qualcomm FY2024 automotive revenue",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "2910000000",
+          "display_value": "2,910,000,000",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "automotive_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2024-11-06",
+          "component": "automotive",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2024 automotive revenue share",
+          "requested_label": "Qualcomm FY2024 automotive share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "7.468815769211026128022175453",
+          "display_value": "7.4688",
+          "warnings": [
+            "FY2024 contains 53 weeks; FY2025 contains 52. Do not silently normalize."
+          ]
+        }
+      ],
+      "assessment": null
+    },
+    {
+      "question": "What share of Qualcomm FY2025 total revenue was IoT?",
+      "answer": "- IoT accounted for 14.94% of Qualcomm FY2025 total consolidated revenue. [C2]\n- IoT revenue was $6.617 billion [F2][C1], divided by consolidated revenue of $44.284 billion—not total QCT revenue. [F1]\n- Period: September 30, 2024–September 28, 2025 (52 weeks), using the original FY2025 report.\n- Verified table and PNG chart are available.",
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "iot",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 iot revenue",
+          "requested_label": "Qualcomm FY2025 IoT revenue",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "6617000000",
+          "display_value": "6,617,000,000",
+          "warnings": [],
+          "bundle_id": "75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45",
+          "inspection_url": "/api/analysis/75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45/calculations/C1",
+          "text": "QCOM FY2025 iot revenue: 6617000000 USD; F2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "iot_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "iot",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2025 iot revenue share",
+          "requested_label": "Qualcomm FY2025 IoT share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "14.94219131063137927919790444",
+          "display_value": "14.9422",
+          "warnings": [],
+          "bundle_id": "75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45",
+          "inspection_url": "/api/analysis/75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45/calculations/C2",
+          "text": "QCOM FY2025 iot revenue share: 14.94219131063137927919790444 percent; F2 / F1 * 100"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "filed": "2025-11-05",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "warnings": [],
+          "inputs": [],
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 44284000000,
+          "conflicting_comparatives": [],
+          "observation_id": "489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45/observations/F1",
+          "text": "QCOM FY2025 FY annual: revenue = 44284000000 USD; 2024-09-30 through 2025-09-28; original accession 0000804328-25-000085.",
+          "original_url": "/api/originals/qcom-0000804328-25-000085",
+          "snapshot_url": "/api/analysis/75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45/snapshots/bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "filed": "2025-11-05",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "version": "original",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "warnings": [],
+          "kind": "financial_observation",
+          "metric": "revenue_component",
+          "component": "iot",
+          "parent_metric": "revenue",
+          "parent_scope": "consolidated",
+          "status": "available",
+          "value": 6617000000,
+          "provenance": "filing_revenue_table",
+          "inputs": [],
+          "conflicting_comparatives": [],
+          "filing_evidence": {
+            "value": 6617000000,
+            "start": 832370,
+            "end": 832823,
+            "quote": "                 QCT revenue streams were as follows (in mi                                                                                                                                    llions):\n\n                                                                                                                                                                                                                                                                                                                                    2025                                                           2024                                                           2023\n  Handsets (1)                                                                                                                                                                                                                                                                                                    $           27,793                                             $           24,863                                             $           22,570\n  Automotive (2)                                                                                                                                                                                                                                                                                                                 3,957                                                          2,910                                                          1,872\n  IoT (internet of things) (3)                                                                                                                                                                                                                                                                                                   6,617                                                          5,423                                                          5,940\n",
+            "column_years": [
+              2025,
+              2024,
+              2023
+            ],
+            "row_values_millions": [
+              "6,617",
+              "5,423",
+              "5,940"
+            ],
+            "row_label": "IoT (internet of things)",
+            "scale": 1000000,
+            "table": "QCT revenue streams",
+            "chunk_id": "d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+            "page": 71,
+            "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+            "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a"
+          },
+          "observation_id": "eaa775a39dafd824a4bd8de14b850251663414bc1d10a9071aefc116c9ad60db",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45/observations/F2",
+          "text": "QCOM FY2025 FY annual: revenue_component = 6617000000 USD; 2024-09-30 through 2025-09-28; original accession 0000804328-25-000085.",
+          "original_url": "/api/originals/qcom-0000804328-25-000085"
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data → Filings Research → Financial Analysis / Quant",
+            "companies": [
+              "QCOM"
+            ],
+            "years": [
+              2025
+            ],
+            "reason": "Revenue component requires filing evidence; Data supplies the compatible total before Research and Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "evidence_followup",
+            "decision": "Filings Research",
+            "reason": "The consolidated store does not contain this revenue component; request verified filing evidence."
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_revenue_filing_retrieval",
+            "arguments": {
+              "companies": [
+                "QCOM"
+              ],
+              "years": [
+                2025
+              ],
+              "component": "iot",
+              "form": "10-K",
+              "section": "other"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Filings Research",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Establish filing-only revenue inputs with independent table extraction before Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "extract_revenue_component",
+            "arguments": {
+              "source_id": "S1"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Analysis / Quant",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "run_analysis",
+            "arguments": {
+              "code": "iot = values['F2']\nshare = values['F2'] / values['F1'] * 100\nresults = [\n {'label': 'Qualcomm FY2025 IoT revenue', 'kind': 'value', 'inputs': ['F2'], 'value': iot},\n {'label': 'Qualcomm FY2025 IoT share of consolidated revenue', 'kind': 'share', 'inputs': ['F2', 'F1'], 'value': share}\n]"
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_calculation",
+            "arguments": {
+              "source_id": "C2"
+            }
+          }
+        }
+      ],
+      "seconds": 19.361,
+      "answer_token_ttft_seconds": 17.269,
+      "bundle_id": "75bfe411af36362de78ae7e089dfdce56b252392a690746425fb8072cc3a3a45",
+      "calculations": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "iot",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 iot revenue",
+          "requested_label": "Qualcomm FY2025 IoT revenue",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "6617000000",
+          "display_value": "6,617,000,000",
+          "warnings": []
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "iot_revenue_share",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "iot",
+          "kind": "calculation",
+          "calculation_kind": "share",
+          "source_id": "C2",
+          "label": "QCOM FY2025 iot revenue share",
+          "requested_label": "Qualcomm FY2025 IoT share of consolidated revenue",
+          "inputs": [
+            "F2",
+            "F1"
+          ],
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 / F1 * 100",
+          "value": "14.94219131063137927919790444",
+          "display_value": "14.9422",
+          "warnings": []
+        }
+      ],
+      "assessment": null
+    },
+    {
+      "question": "Show Qualcomm FY2025 handsets revenue with its source",
+      "answer": "- Qualcomm FY2025 handsets revenue was $27.793 billion. [C1]\n- Source: original [FY2025 Form 10-K, page 71](https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm), “QCT revenue streams” table, Handsets row: $27,793 million. Fiscal period: September 30, 2024–September 28, 2025 (52 weeks). [F2]\n- Verified [table]( /api/analysis/33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf/files/table.csv) and [chart](/api/analysis/33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf/files/chart.png) are available.",
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "handsets",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 handsets revenue",
+          "requested_label": "Qualcomm FY2025 handsets revenue (USD)",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "27793000000",
+          "display_value": "27,793,000,000",
+          "warnings": [],
+          "bundle_id": "33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf",
+          "inspection_url": "/api/analysis/33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf/calculations/C1",
+          "text": "QCOM FY2025 handsets revenue: 27793000000 USD; F2"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "filed": "2025-11-05",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "version": "original",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "warnings": [],
+          "kind": "financial_observation",
+          "metric": "revenue_component",
+          "component": "handsets",
+          "parent_metric": "revenue",
+          "parent_scope": "consolidated",
+          "status": "available",
+          "value": 27793000000,
+          "provenance": "filing_revenue_table",
+          "inputs": [],
+          "conflicting_comparatives": [],
+          "filing_evidence": {
+            "value": 27793000000,
+            "start": 831466,
+            "end": 831917,
+            "quote": "                 QCT revenue streams were as follows (in mi                                                                                                                                    llions):\n\n                                                                                                                                                                                                                                                                                                                                    2025                                                           2024                                                           2023\n  Handsets (1)                                                                                                                                                                                                                                                                                                    $           27,793                                             $           24,863                                             $           22,570\n",
+            "column_years": [
+              2025,
+              2024,
+              2023
+            ],
+            "row_values_millions": [
+              "27,793",
+              "24,863",
+              "22,570"
+            ],
+            "row_label": "Handsets",
+            "scale": 1000000,
+            "table": "QCT revenue streams",
+            "chunk_id": "d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+            "page": 71,
+            "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+            "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a"
+          },
+          "observation_id": "987fe16dfa956d2c5c30abdb28194645913ffe487e692cbfb9d72b25cebf7768",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/analysis/33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf/observations/F2",
+          "text": "QCOM FY2025 FY annual: revenue_component = 27793000000 USD; 2024-09-30 through 2025-09-28; original accession 0000804328-25-000085.",
+          "original_url": "/api/originals/qcom-0000804328-25-000085"
+        }
+      ],
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "verified_citations": true,
+          "status": "completed"
+        }
+      },
+      "trace": [
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "scope",
+            "decision": "Financial Data → Filings Research → Financial Analysis / Quant",
+            "companies": [
+              "QCOM"
+            ],
+            "years": [
+              2025
+            ],
+            "reason": "Revenue component requires filing evidence; Data supplies the compatible total before Research and Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_financial_query",
+            "arguments": {
+              "period": "FY",
+              "basis": "annual",
+              "metrics": [
+                "revenue"
+              ]
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Supervisor",
+            "node": "evidence_followup",
+            "decision": "Filings Research",
+            "reason": "The consolidated store does not contain this revenue component; request verified filing evidence."
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "initial_revenue_filing_retrieval",
+            "arguments": {
+              "companies": [
+                "QCOM"
+              ],
+              "years": [
+                2025
+              ],
+              "component": "handsets",
+              "form": "10-K",
+              "section": "other"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Filings Research",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Establish filing-only revenue inputs with independent table extraction before Quant"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "extract_revenue_component",
+            "arguments": {
+              "source_id": "S1"
+            }
+          }
+        },
+        {
+          "type": "trace",
+          "data": {
+            "agent": "Financial Analysis / Quant",
+            "provider": "Codex subscription",
+            "model": "gpt-6.1-sol",
+            "reason": "Generate bounded analysis code; independently check financial calculations and source lineage"
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "run_analysis",
+            "arguments": {
+              "code": "results = [\n {'label': 'Qualcomm FY2025 handsets revenue (USD)', 'kind': 'value', 'inputs': ['F2'], 'value': values['F2']}\n]"
+            }
+          }
+        },
+        {
+          "type": "tool",
+          "data": {
+            "name": "inspect_calculation",
+            "arguments": {
+              "source_id": "C1"
+            }
+          }
+        }
+      ],
+      "seconds": 20.487,
+      "answer_token_ttft_seconds": 16.778,
+      "bundle_id": "33cc58086c1446a5b6f8965bc4bc3604405867439b50cf67923af4d22b4887bf",
+      "calculations": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_component",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "component": "handsets",
+          "kind": "calculation",
+          "calculation_kind": "value",
+          "source_id": "C1",
+          "label": "QCOM FY2025 handsets revenue",
+          "requested_label": "Qualcomm FY2025 handsets revenue (USD)",
+          "inputs": [
+            "F2"
+          ],
+          "source_ids": [
+            "F2"
+          ],
+          "formula": "F2",
+          "value": "27793000000",
+          "display_value": "27,793,000,000",
+          "warnings": []
+        }
+      ],
+      "assessment": null
+    }
+  ],
+  "status": "passed"
+}

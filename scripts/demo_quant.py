@@ -75,7 +75,7 @@ def annual_question(company, years):
 
 def failure_checks(store, artifacts):
     state = {
-        "question": "Calculate AMD revenue growth",
+        "question": "Calculate AMD revenue, gross profit, operating income and operating cash flow growth",
         "companies": ["AMD"],
         "years": [2024, 2025],
     }

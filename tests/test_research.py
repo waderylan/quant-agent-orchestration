@@ -186,9 +186,16 @@ async def test_streamed_answer_exposes_evidence_and_rejects_fabricated_citations
 
 
 @pytest.mark.asyncio
-async def test_model_failure_has_terminal_failure_event(small_index):
+@pytest.mark.parametrize(
+    "failure,message",
+    [
+        (RuntimeError("Codex unavailable"), "Codex unavailable"),
+        (TimeoutError(), "A worker timed out before completing. Please retry."),
+    ],
+)
+async def test_model_failure_has_terminal_failure_event(small_index, failure, message):
     async def failed(*args):
-        raise RuntimeError("Codex unavailable")
+        raise failure
         yield
 
     result = [
@@ -197,7 +204,7 @@ async def test_model_failure_has_terminal_failure_event(small_index):
             small_index, "Revenue", ["AMD"], [2025], model_stream=failed
         )
     ]
-    assert result[-2] == {"type": "error", "data": "Codex unavailable"}
+    assert result[-2] == {"type": "error", "data": message}
     assert result[-1]["data"] == {"status": "failed", "verified_citations": False}
 
 
@@ -224,7 +231,9 @@ async def test_asgi_send_failure_closes_generator_suspended_at_yield():
 
     with pytest.raises(ClientDisconnect):
         await ClosingStreamingResponse(body())(
-            {"type": "http", "asgi": {"spec_version": "2.4"}}, receive, disconnected_send,
+            {"type": "http", "asgi": {"spec_version": "2.4"}},
+            receive,
+            disconnected_send,
         )
     assert closed.is_set()
 
@@ -247,7 +256,9 @@ async def test_http_disconnect_closes_running_graph_worker(small_index, monkeypa
 
     monkeypatch.setattr(main, "ResearchIndex", lambda *args: small_index)
     monkeypatch.setattr(
-        main, "events", lambda *args, **kwargs: events(*args, model_stream=blocked_model)
+        main,
+        "events",
+        lambda *args, **kwargs: events(*args, model_stream=blocked_model),
     )
     with socket.socket() as listener:
         listener.bind(("127.0.0.1", 0))

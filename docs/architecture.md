@@ -14,6 +14,8 @@ flowchart LR
     S --> D[Financial Data]
     D --> F[Accession-scoped SEC observations]
     D -->|Verified inputs on numerical requests| Q[Financial Analysis / Quant]
+    D -->|Missing structured inputs| R
+    R -->|Independently extracted annual revenue inputs| Q
     Q --> X[Isolated arithmetic interpreter]
     X --> N[Independent financial and lineage checks]
     N --> A[Hashed CSV/PNG/code/ledger artifacts]
@@ -28,16 +30,17 @@ flowchart LR
 ```
 
 - `main.py` serves the vanilla HTML/JS document and SSE. `src/research_workflow.py` owns the graph, worker, scope validation, LCEL pipeline, and request-local evidence registry.
-- Graph paths after `supervisor`: `research → finish`, `data → finish`, or `analysis_data → quant → finish`; `START` enters the supervisor and `finish` reaches `END`. Unsupported scope routes directly to finish. Structured figures select Data, numerical requests select Data then Quant, and narrative disclosures select Research through a provisional visible rule. Full task-driven cooperation and provider routing are unimplemented.
+- Graph paths after `supervisor`: `research → finish`, `data → finish`, `analysis_data → quant → finish`, or `data → revenue_inputs → quant → finish`. Missing structured inputs can make one bounded Research follow-up; unverified revenue inputs fall back to a partial Research answer. `START` enters the supervisor; `finish` reaches `END`. Unsupported scope routes directly to finish. Explicit capability rules select supported structured metrics or filing research. Full task-driven cooperation and provider routing are unimplemented.
 - State contains question, companies, fiscal years, selected worker, answer, error, and registered financial sources, calculation rows, and artifact identity. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
+- Request state also carries an optional revenue component/share requirement, earnings-ranking flag, structured `needs_evidence`, and partial-result status. `src/filing_financials.py` establishes supported annual revenue inputs from immutable original table evidence; `src/quant_workflow.py` checks requested calculation coverage and records a verified earnings assessment in the content-addressed bundle. [Capability contracts](planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) define limits and reproduction.
 - Filings Research uses its own [role prompt](../prompts/filings_research.md) and two actual tools: `search_sources` and `inspect_source`. The same worker runs independently through `scripts/research.py agent`.
 - Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented. Financial Data uses distinct structured-query/observation-inspection tools.
 
 ## Corpus and ingestion
 
-- All 41 M2 originals/extractions are verified: 32 original filings, eight full-year/Q4 earnings releases, and AMD's FY2025 amendment. NVIDIA covers FY2025–2026; AMD/Intel/Qualcomm cover FY2024–2025. Fiscal dates and access evidence are in [M1](planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) and [M2](planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md).
+- All 46 selected originals/extractions are verified: 36 original filings, nine full-year/Q4 earnings releases, and AMD's FY2025 amendment. All four companies cover FY2024–FY2025; NVIDIA retains FY2026. [Aligned coverage](planning/ALIGNED_FISCAL_COVERAGE.md) records source checks and actual fiscal dates.
 - `src/research_index.py` loads the verified M2 manifest and checks prepared UTF-8 text hashes before ingestion. It preserves SEC filing identity, separate amendments, and original source bytes.
-- Persistent Chroma stores **10,681 chunks** in ignored `chroma_index/`. A fingerprint covers embedding/chunk settings and source/provenance/extraction metadata. Complete ingestion publishes `active.json`; queries reject a fingerprint mismatch. Ingestion resumes existing chunk IDs and verifies the final count before publication.
+- Persistent Chroma stores **11,764 scoped chunks** in ignored `chroma_index/`; the published `active.json` records the verified count and fingerprint. A fingerprint covers embedding/chunk settings and source/provenance/extraction metadata. Complete ingestion publishes `active.json`; queries reject a fingerprint mismatch. Ingestion resumes existing chunk IDs and verifies the final count before publication.
 - MiniLM `all-MiniLM-L6-v2` generates normalized 384-dimensional embeddings through CPU ONNX inference. Chroma 1.5.9 pins the implementation; the 79.3 MiB archive has SHA-256 `913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3`. First ingestion downloads it to the Chroma user cache. CPU sessions use four intra-op threads and one inter-op thread.
 - Chunking uses the model WordPiece tokenizer with **220 tokens and 40-token overlap**. Chunking disables tokenizer truncation/padding; embedding retains its 256-token limit. Chunks never cross a prepared PDF page or selected risk/MD&A section boundary. Offsets refer to original prepared text, including Unicode and PDF layout spacing.
 - Chunks retain document ID, company, fiscal year, source kind/form, period end, version, canonical URL, section, page, character range, and text hash. IDs derive from document identity, text hash, and offsets.
@@ -71,7 +74,7 @@ flowchart LR
 | `GET /api/sources/{chunk_id}` | Hash-checked exact passage/context, fiscal dates, version, source links. |
 | `GET /api/originals/{document_id}` | Hash-checked collected original as an attachment. |
 
-- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `artifacts`, `error`, terminal `complete`. Status distinguishes completed, coverage gap, unverified, and failed.
+- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `artifacts`, `scope`, `error`, terminal `complete`. Status distinguishes completed, partial, coverage gap, unverified, and failed. `scope` carries an explicit suggested company selection; the browser changes selection only when the user clicks its correction button and retains compatible selected years.
 - The fetch-based consumer decodes fragmented UTF-8/SSE frames, displays live answer tokens, links citations to highlighted exact passages, exposes routing/tools, and supports Stop through cancellation. A bounded 128-event queue and 0.5-second keep-alive frames keep delivery responsive during model waits. Cleanup shields graph-task cancellation from repeated ASGI cancellation; a real disconnect check leaves zero owned Codex children after two seconds.
 - Model/source text uses DOM text nodes. Prepared HTML originals download as attachments. Links provide SEC, official retrieval source, and collected original; SEC access can return 403.
 - Sources/index are ignored reproducible data. Source refresh requires explicit ingestion and an application restart; no automatic freshness service exists.

@@ -9,7 +9,7 @@
 
 - Supported task families, independently checked reference cases, dataset size/splits, calibration rubric, and formal thresholds remain undecided.
 - Exploratory questions in the M1 document are demonstration ideas, not a fixed benchmark.
-- Initial company/year scope is NVIDIA FY2025–2026 and AMD/Intel/Qualcomm FY2024–2025. Financial cases must retain actual fiscal dates, units, accession/version, GAAP definitions, and required derivations.
+- Current company/year scope is FY2024–FY2025 for all four companies and retained NVIDIA FY2026. Financial cases must retain actual fiscal dates, units, accession/version, GAAP definitions, and required derivations. [Aligned coverage](planning/ALIGNED_FISCAL_COVERAGE.md) records current source checks.
 - Qualcomm's 53-week FY2024 and derived gross profit, AMD's amended explanation, YTD cash-flow differences, and unavailable evidence are relevant correctness cases.
 
 ## Required RAGAS report
@@ -63,3 +63,9 @@
 - [M6 Docker evidence](research/M6_CONTAINER_RESULTS.json) and [container application/browser evidence](research/M6_CONTAINER_APPLICATION_RESULTS.json) verify the Linux interpreter/plotting/export path, ordinary research/Data behavior, non-root/authentication isolation, model errors, cancellation, and resource observations.
 - The 61-case focused suite protects provenance, extraction, research, transport cleanup, Data selection, bounded generated execution, independent arithmetic/lineage, revision/period/unit errors, negative margins, quarterly derivations, artifact integrity, and handoff failures. These are correctness checks, not formal model-judged scores.
 - Final-answer claim-level correctness, held-out generalization, required RAGAS metrics, broader trajectory checks, judge calibration, comparative provider measurements, and Cloud Run retesting remain pending. Select the formal-evaluation checkpoint from Rylan Wade's feedback on the working research/numerical workflow.
+
+## Ordinary-query regression checks
+
+- [Capability routing](planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies the reported automotive question, company-scope mismatch, two-year consolidated comparison, and cross-company earnings ranking. Actual worker/application/browser evidence is separate from deterministic contract fixtures and formal evaluation.
+- The numerical reference for Qualcomm FY2025 automotive revenue is USD 3.957 billion divided by USD 44.284 billion consolidated revenue, approximately 8.9355%. FY2024 automotive is USD 2.910 billion; annual table year columns, units, and original accessions must agree with each source.
+- Parent-earnings ranking includes every selected company/year, independently checked positive-baseline growth, loss-baseline exclusions, actual fiscal dates, and the 53/52-week qualification. A source-reference status is not a claim-level model-quality score.

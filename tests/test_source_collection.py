@@ -137,9 +137,15 @@ class ProvenanceTests(unittest.TestCase):
 
     def test_mirrors_and_amendments_have_distinct_correct_identities(self):
         docs = load_inventory(DEFAULT_INVENTORY)
-        self.assertEqual(len(docs), 41)
-        self.assertEqual(sum(d["form"] == "10-K" for d in docs), 8)
-        self.assertEqual(sum(d["form"] == "10-Q" for d in docs), 24)
+        windows = {(d["company"], d["fiscal_year"]) for d in docs}
+        self.assertTrue({(company, year) for company in ("NVDA", "AMD", "INTC", "QCOM")
+                         for year in (2024, 2025)} <= windows)
+        self.assertIn(("NVDA", 2026), windows)
+        for company, year in windows:
+            selected = [d for d in docs if (d["company"], d["fiscal_year"]) == (company, year)]
+            self.assertEqual(sum(d["form"] == "10-K" for d in selected), 1)
+            self.assertEqual(sum(d["form"] == "10-Q" for d in selected), 3)
+            self.assertEqual(sum(d["kind"] == "earnings_release" for d in selected), 1)
         amendment = next(d for d in docs if d["version"] == "amendment")
         self.assertNotEqual(amendment["document_id"], amendment["amends_document_id"])
         with tempfile.TemporaryDirectory() as tmp:

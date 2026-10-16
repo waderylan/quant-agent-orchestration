@@ -55,7 +55,7 @@ async def main(args):
             "screenshot": "artifacts/m3-browser.png",
         }
         result["passed"] = (
-            status == "Complete · citations verified"
+            status == "Complete · source references checked"
             and bool(exact_passage)
             and not errors
             and result["routing_and_tools_visible"]

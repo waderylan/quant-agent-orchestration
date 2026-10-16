@@ -184,11 +184,13 @@
             </select>
           </div>
           <div>
-            <label for="year">Fiscal years</label
+            <label for="year">Fiscal years (up to two)</label
             ><select id="year" multiple size="3"></select
             ><small id="coverage"></small>
           </div>
         </div>
+        <p id="selection" aria-live="polite"></p>
+        <div id="scope-help" role="alert"></div>
         <label for="question">Research question</label
         ><textarea id="question" required minlength="3" maxlength="2000">
 What drove NVIDIA's revenue growth in FY2026?</textarea
@@ -223,26 +225,42 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
         controller;
       const selected = (id) =>
         Array.from($(id).selectedOptions, (o) => o.value);
-      function years() {
+      function years(preferred = selected("year")) {
         const companies = selected("company"),
-          available = [
-            ...new Set(companies.flatMap((c) => coverage[c] || [])),
-          ].sort();
+          available = [...new Set(companies.flatMap((c) => coverage[c] || []))]
+            .filter((y) =>
+              companies.every((c) => (coverage[c] || []).includes(y)),
+            )
+            .sort();
         $("year").replaceChildren(
           ...available.map((y) => {
             const o = document.createElement("option");
             o.value = y;
             o.textContent = "FY" + y;
-            o.selected = y === available.at(-1);
+            o.selected = preferred.includes(String(y));
             return o;
           }),
         );
+        if (!selected("year").length && $("year").options.length)
+          $("year").options[$("year").options.length - 1].selected = true;
         $("coverage").textContent = companies
           .map(
             (c) =>
               c + ": " + (coverage[c] || []).map((y) => "FY" + y).join(", "),
           )
           .join(" · ");
+        showSelection();
+      }
+      function showSelection() {
+        $("selection").textContent =
+          "Selected: " +
+          Array.from($("company").selectedOptions, (o) => o.textContent).join(
+            ", ",
+          ) +
+          " · " +
+          selected("year")
+            .map((y) => "FY" + y)
+            .join(", ");
       }
       fetch("/api/coverage")
         .then((r) => r.json())
@@ -253,7 +271,8 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
         .catch(() => {
           $("status").textContent = "Coverage unavailable";
         });
-      $("company").addEventListener("change", years);
+      $("company").addEventListener("change", () => years());
+      $("year").addEventListener("change", showSelection);
       async function inspect(source) {
         const r = await fetch(source.inspection_url);
         if (!r.ok) {
@@ -289,6 +308,7 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
           ["Official retrieval source", p.retrieval_url],
           ["Collected original", p.original_url],
           ["Collected SEC facts", p.snapshot_url],
+          ["Filing table passage", p.filing_evidence?.inspection_url],
         ]) {
           if (!url) continue;
           const link = document.createElement("a");
@@ -357,7 +377,33 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
       function event(type, data) {
         if (type === "token") $("answer").append(document.createTextNode(data));
         else if (type === "sources") displaySources(data);
-        else if (type === "artifacts") displayArtifacts(data);
+        else if (type === "scope") {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent =
+            "Select " +
+            data.suggested_companies
+              .map(
+                (c) =>
+                  Array.from($("company").options).find((o) => o.value === c)
+                    ?.textContent || c,
+              )
+              .join(", ");
+          button.onclick = () => {
+            const retainedYears = selected("year");
+            for (const option of $("company").options)
+              option.selected = data.suggested_companies.includes(option.value);
+            years(retainedYears);
+            $("scope-help").textContent =
+              "Selection updated. Submit your question again.";
+          };
+          $("scope-help").replaceChildren(
+            document.createTextNode(data.message + " "),
+            button,
+          );
+          $("trace").textContent +=
+            JSON.stringify({ event: type, data }, null, 2) + "\n";
+        } else if (type === "artifacts") displayArtifacts(data);
         else if (type === "error") {
           $("status").textContent = data;
           $("status").className = "error";
@@ -367,10 +413,12 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
           if (data.status !== "failed")
             $("status").textContent =
               data.status === "completed"
-                ? "Complete · citations verified"
+                ? "Complete · source references checked"
                 : data.status === "coverage_gap"
                   ? "Coverage gap"
-                  : "Response unverified";
+                  : data.status === "partial"
+                    ? "Partial answer · evidence gap"
+                    : "Response unverified";
           $("status").className = data.status === "completed" ? "" : "error";
         } else
           $("trace").textContent +=
@@ -384,6 +432,7 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
         $("sources").replaceChildren();
         $("artifacts").replaceChildren();
         $("trace").textContent = "";
+        $("scope-help").replaceChildren();
         $("ask").disabled = true;
         $("stop").disabled = false;
         $("status").className = "";

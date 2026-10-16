@@ -1,5 +1,7 @@
 # M5 — Financial Data agent
 
+- Current extended coverage and parent-earnings observations are specified in [aligned coverage](ALIGNED_FISCAL_COVERAGE.md). [Capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) defines filing-only inputs and bounded missing-input follow-up. Dated M5 evidence retains its recorded sample and configuration.
+
 - Owner: Rylan Wade.
 - Status: implemented and verified locally. Financial Data is a distinct specialist with its own prompt, structured-query tools, direct Codex entry point, and graph node.
 - Scope: the 32 original reports for NVIDIA FY2025–2026 and AMD/Intel/Qualcomm FY2024–2025. Earnings releases and AMD's MD&A amendment do not supply replacement financial statements.

@@ -19,7 +19,7 @@ from src.codex_transport import register_close
 class ResultRow(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     label: str = Field(min_length=1, max_length=160)
-    kind: Literal["value", "growth", "margin", "difference", "quarter"]
+    kind: Literal["value", "growth", "margin", "share", "difference", "quarter"]
     inputs: list[str] = Field(min_length=1, max_length=2)
     value: str
     used_inputs: list[str] = Field(max_length=64)
@@ -114,6 +114,10 @@ def comparable(left, right, sources, *, same_interval=False, cumulative=False):
         (left["basis"] != right["basis"] and not cumulative)
         or left["metric"] != right["metric"]
         or left["unit"] != right["unit"]
+        or (
+            left["metric"] == "revenue_component"
+            and left.get("component") != right.get("component")
+        )
     ):
         raise ValueError(
             "Comparison requires matching metrics, units, and period bases"
@@ -157,9 +161,36 @@ def validate_results(rows, sources):
             )
         }
         warnings = sorted({w for s in inputs for w in s.get("warnings", [])})
+        if current.get("component"):
+            metadata["component"] = current["component"]
         values = [Decimal(str(s["value"])) for s in inputs]
         if row.kind == "value":
             expected, formula = values[0], row.inputs[0]
+        elif row.kind == "share":
+            numerator, denominator = inputs
+            comparable(numerator, denominator, sources, same_interval=True)
+            if (
+                numerator["metric"] != "revenue_component"
+                or numerator.get("provenance") != "filing_revenue_table"
+                or numerator.get("parent_metric") != "revenue"
+                or numerator.get("parent_scope") != "consolidated"
+                or denominator["metric"] != "revenue"
+                or numerator["unit"] != "USD"
+                or denominator["unit"] != "USD"
+                or numerator.get("accession") != denominator.get("accession")
+            ):
+                raise ValueError(
+                    "Revenue share requires an established component and same-filing consolidated revenue"
+                )
+            if values[1] <= 0 or not Decimal(0) <= values[0] <= values[1]:
+                raise ValueError(
+                    "Revenue share requires a positive total and a nonnegative component no larger than total"
+                )
+            expected = values[0] / values[1] * 100
+            metadata.update(
+                unit="percent", metric=numerator["component"] + "_revenue_share"
+            )
+            formula = f"{row.inputs[0]} / {row.inputs[1]} * 100"
         elif row.kind == "margin":
             numerator, denominator = inputs
             comparable(numerator, denominator, sources, same_interval=True)
@@ -263,7 +294,12 @@ def validate_results(rows, sources):
             )
         sid = f"C{number}"
         period_label = "" if metadata["period"] == "FY" else " " + metadata["period"]
-        label = f"{metadata['company']} FY{metadata['fiscal_year']}{period_label} {metadata['metric'].replace('_', ' ')}"
+        metric_label = (
+            (current["component"] + " revenue")
+            if metadata["metric"] == "revenue_component"
+            else metadata["metric"].replace("_", " ")
+        )
+        label = f"{metadata['company']} FY{metadata['fiscal_year']}{period_label} {metric_label}"
         if row.kind in ("growth", "difference"):
             prior_period = (
                 "" if inputs[1]["period"] == "FY" else " " + inputs[1]["period"]

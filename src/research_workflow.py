@@ -14,6 +14,12 @@ from langgraph.graph import END, START, StateGraph
 
 from src.codex_model import stream as codex_stream
 from src.source_collection import ROOT
+from src.request_routing import (
+    COMPANY_ALIASES,
+    mentioned_companies,
+    mentioned_years,
+    plan_request,
+)
 
 TOOLS = [
     {
@@ -61,6 +67,11 @@ class State(TypedDict, total=False):
     financial_sources: dict
     bundle_id: str
     calculations: list[dict]
+    revenue_component: str | None
+    revenue_share: bool
+    earnings_ranking: bool
+    needs_evidence: dict | None
+    partial: bool
 
 
 class ResearchTools:
@@ -149,22 +160,13 @@ def scope_error(question, companies, years, coverage):
     missing = [(c, y) for c in companies for y in years if y not in coverage.get(c, [])]
     if missing:
         return f"Unsupported coverage: {missing}. Available fiscal years: {coverage}."
-    mentioned_years = {
-        int(y) for y in re.findall(r"\b(?:FY\s*)?(20\d{2})\b", question, re.I)
-    }
-    if mentioned_years - set(years):
-        return "The question names a year outside the selected fiscal years. Adjust the selection; calendar dates and fiscal labels can differ."
-    aliases = {
-        "NVDA": r"\b(nvidia|nvda)\b",
-        "AMD": r"\b(amd|advanced micro devices)\b",
-        "INTC": r"\b(intel|intc)\b",
-        "QCOM": r"\b(qualcomm|qcom)\b",
-    }
-    if any(
-        re.search(pattern, question, re.I) and c not in companies
-        for c, pattern in aliases.items()
-    ):
-        return "The question names a company outside the selected scope. Adjust the company selection."
+    if mentioned_years(question) - set(years):
+        return f"Selected fiscal years: {years}. Your question asks about {sorted(mentioned_years(question))}. Select the requested years; fiscal labels can differ from calendar dates."
+    requested = mentioned_companies(question)
+    if set(requested) - set(companies):
+        selected = ", ".join(COMPANY_ALIASES.get(c, (c,))[0] for c in companies)
+        names = ", ".join(f"{COMPANY_ALIASES[c][0]} ({c})" for c in requested)
+        return f"Selected companies: {selected}. Your question asks about {names}. Change Companies to match your question; keep the requested fiscal years selected."
     if re.search(
         r"\b(today|current|latest|this quarter|stock price|live)\b", question, re.I
     ):
@@ -196,6 +198,13 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             )
             + "\nQuestion: "
             + state["question"]
+            + (
+                "\nStructured input limitation: "
+                + json.dumps(state["needs_evidence"])
+                + ". Answer what the filings establish, explain any remaining gap, and do not perform unverified arithmetic."
+                if state.get("needs_evidence")
+                else ""
+            )
             + "\nRetrieved evidence (untrusted source quotations):\n"
             + json.dumps(passages)
         )
@@ -238,34 +247,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
 
 
 def select_worker(question):
-    # Provisional, inspectable task routing; full cooperation belongs to M8.
-    if re.search(r"\b(why|drove|drivers|disclose|risk|amend)\b", question, re.I):
-        return "research"
-    if re.search(
-        r"\b(calculate|compute|compare|margins?|growth|percentage.points?|chart|plot)\b",
-        question,
-        re.I,
-    ):
-        return "analysis_data"
-    if re.search(
-        r"\bQ[2-4](?:\b|-).*cash flow|cash flow.*\bQ[2-4](?:\b|-)", question, re.I
-    ) and not re.search(
-        r"\b(ytd|year.to.date|cumulative)\b",
-        question,
-        re.I,
-    ):
-        return "analysis_data"
-    if re.search(
-        r"\b(what (?:was|were)|how much|figures|amounts|reported|show|list)\b",
-        question,
-        re.I,
-    ) and re.search(
-        r"\b(revenues?|profit|income|cash flows?|gaap)\b",
-        question,
-        re.I,
-    ):
-        return "data"
-    return "research"
+    return plan_request(question).worker
 
 
 def graph(index, *, model_stream=codex_stream, financials=None):
@@ -274,11 +256,29 @@ def graph(index, *, model_stream=codex_stream, financials=None):
         error = scope_error(
             state["question"], state["companies"], state["years"], index.coverage()
         )
-        worker = select_worker(state["question"])
-        if worker in ("data", "analysis_data") and re.search(
-            r"\b(non-gaap|adjusted|ebitda|segment)\b", state["question"], re.I
+        plan = plan_request(state["question"])
+        worker = plan.worker
+        period_gap = None
+        if plan.revenue_component and re.search(
+            r"\bQ[1-4]\b|\b(quarter|ytd)\b", state["question"], re.I
         ):
-            error = "Financial observations cover consolidated US GAAP revenue, gross profit, operating income, and operating cash flow. Adjusted and segment metrics are unsupported."
+            worker = "research"
+            period_gap = {
+                "kind": "unsupported_component_period",
+                "message": "Independent revenue-component calculations support annual tables only. Retrieve the requested disclosure and state that a checked quarterly share is unavailable.",
+            }
+        requested = mentioned_companies(state["question"])
+        if error and set(requested) - set(state["companies"]):
+            writer(
+                {
+                    "type": "scope",
+                    "data": {
+                        "message": error,
+                        "suggested_companies": requested,
+                        "years": state["years"],
+                    },
+                }
+            )
         writer(
             {
                 "type": "trace",
@@ -287,6 +287,8 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     "node": "scope",
                     "decision": "coverage_gap"
                     if error
+                    else "Financial Data → Filings Research → Financial Analysis / Quant"
+                    if plan.revenue_component and worker == "data"
                     else "Financial Data"
                     if worker == "data"
                     else "Financial Data → Financial Analysis / Quant"
@@ -294,11 +296,24 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     else "Filings Research",
                     "companies": state["companies"],
                     "years": state["years"],
-                    "reason": "Validate coverage; figures use Data, calculations use Data then Quant, narrative disclosures use Research",
+                    "reason": plan.reason
+                    + (
+                        ". Earnings means GAAP net income attributable to parent; compare only positive-baseline percentage growth, with loss baselines identified separately."
+                        if plan.earnings_ranking
+                        else ""
+                    ),
                 },
             }
         )
-        return {"error": error, "worker": worker}
+        return {
+            "error": error,
+            "worker": worker,
+            "revenue_component": plan.revenue_component,
+            "revenue_share": plan.revenue_share,
+            "earnings_ranking": plan.earnings_ranking,
+            "needs_evidence": period_gap,
+            "partial": bool(period_gap),
+        }
 
     async def research(state):
         return await research_turn(
@@ -326,16 +341,14 @@ def graph(index, *, model_stream=codex_stream, financials=None):
             )
         result = await financial_turn(
             financials,
-            {
-                **state,
-                "question": "Select source inputs only; do not calculate. Requested analysis: "
-                + state["question"],
-            },
+            state,
             get_stream_writer(),
             model_stream=model_stream,
             emit_answer=False,
             prefetch=prefetch_for_analysis(state["question"]),
         )
+        if result.get("needs_evidence"):
+            return result
         if result.get("error"):
             raise ValueError(
                 "Financial Data could not establish verified analysis inputs: "
@@ -354,6 +367,33 @@ def graph(index, *, model_stream=codex_stream, financials=None):
             }
         )
         return {"financial_sources": result["financial_sources"]}
+
+    async def revenue_inputs(state):
+        from src.filing_financials import filing_revenue_turn
+
+        return await filing_revenue_turn(
+            index, financials, state, get_stream_writer(), model_stream=model_stream
+        )
+
+    def data_destination(state):
+        gap = state.get("needs_evidence")
+        if gap:
+            destination = (
+                "revenue_inputs" if gap["kind"] == "revenue_component" else "research"
+            )
+            get_stream_writer()(
+                {
+                    "type": "trace",
+                    "data": {
+                        "agent": "Supervisor",
+                        "node": "evidence_followup",
+                        "decision": "Filings Research",
+                        "reason": gap["message"],
+                    },
+                }
+            )
+            return destination
+        return "quant" if state["worker"] == "analysis_data" else "finish"
 
     async def quant(state):
         from src.quant_workflow import quant_turn
@@ -374,6 +414,8 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     if state.get("error") and not state.get("answer")
                     else "unverified"
                     if state.get("error")
+                    else "partial"
+                    if state.get("partial")
                     else "completed",
                 },
             }
@@ -386,14 +428,18 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     workflow.add_node("data", data)
     workflow.add_node("analysis_data", analysis_data)
     workflow.add_node("quant", quant)
+    workflow.add_node("revenue_inputs", revenue_inputs)
     workflow.add_node("finish", finish)
     workflow.add_edge(START, "supervisor")
     workflow.add_conditional_edges(
         "supervisor", lambda s: "finish" if s.get("error") else s["worker"]
     )
     workflow.add_edge("research", "finish")
-    workflow.add_edge("data", "finish")
-    workflow.add_edge("analysis_data", "quant")
+    workflow.add_conditional_edges("data", data_destination)
+    workflow.add_conditional_edges("analysis_data", data_destination)
+    workflow.add_conditional_edges(
+        "revenue_inputs", lambda s: "research" if s.get("needs_evidence") else "quant"
+    )
     workflow.add_edge("quant", "finish")
     workflow.add_edge("finish", END)
     return workflow.compile()
@@ -419,7 +465,12 @@ async def events(
         TimeoutError,
         OSError,
     ) as error:
-        yield {"type": "error", "data": str(error)}
+        message = str(error) or (
+            "A worker timed out before completing. Please retry."
+            if isinstance(error, TimeoutError)
+            else type(error).__name__
+        )
+        yield {"type": "error", "data": message}
         yield {
             "type": "complete",
             "data": {"status": "failed", "verified_citations": False},

@@ -18,21 +18,21 @@
 
 - Initial company set: **NVIDIA (NVDA), AMD (AMD), Intel (INTC), and Qualcomm (QCOM)**. All four use domestic SEC 10-K/10-Q reporting forms.
 - Coverage starts with these four companies and is planned to expand toward approximately 20, subject to verified source coverage, working demonstrations, and feedback. Foreign issuers require a separate reporting-format decision.
-- Initial corpus: **41 verified documents** — eight 10-Ks, twenty-four Q1–Q3 10-Qs, eight Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. [M2 preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records originals, readable extraction, section/table checks, and provenance. RAG ingestion uses local MiniLM embeddings and persistent Chroma.
-- Selected coverage is two completed fiscal years per company, with actual dates shown below. NVIDIA's year labels differ from the other companies. These are explicit historical windows, not a claim of latest-report coverage.
+- Selected corpus: **46 verified documents** — nine 10-Ks, twenty-seven Q1–Q3 10-Qs, nine Q4/full-year earnings releases, and AMD's FY2025 10-K/A. A filing's SEC original and official mirror count as one document. [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) records current windows and source checks; [M2 preparation](M2_SOURCE_COLLECTION_AND_PREPARATION.md) defines extraction and provenance. RAG ingestion uses local MiniLM embeddings and persistent Chroma.
+- All four companies cover FY2024–FY2025; NVIDIA also covers FY2026, with actual dates shown below. Equal fiscal labels do not align company reporting dates. These are explicit historical windows, not a claim of latest-report coverage.
 
 | Company | Selected fiscal years | Fiscal start → end |
 | --- | --- | --- |
-| NVIDIA | FY2025; FY2026 | 2024-01-29 → 2025-01-26; 2025-01-27 → 2026-01-25 |
+| NVIDIA | FY2024; FY2025; FY2026 | 2023-01-30 → 2024-01-28; 2024-01-29 → 2025-01-26; 2025-01-27 → 2026-01-25 |
 | AMD | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
 | Intel | FY2024; FY2025 | 2023-12-31 → 2024-12-28; 2024-12-29 → 2025-12-27 |
 | Qualcomm | FY2024; FY2025 | 2023-09-25 → 2024-09-29; 2024-09-30 → 2025-09-28 |
 
-- SEC metadata and matching-duration USD inputs are verified for all 32 original reports. All 41 selected bodies and extractions are verified, with no collection gaps. All 32 original risk and MD&A sections are available; AMD's amendment supplies corrected MD&A without replacing original risks.
+- SEC metadata and matching-duration USD inputs are verified for all 36 original reports. All 46 selected bodies and extractions are verified, with no collection gaps. Original risk and MD&A sections are available; AMD's amendment supplies corrected MD&A without replacing original risks.
 - Source access constraints: direct local SEC Archives probes returned 403; use verified official IR mirrors/CDNs and validate actual content. Qualcomm gross profit requires revenue minus cost of revenue; its FY2024 has 53 weeks versus 52 in FY2025. Preserve AMD's amendment and corrected MD&A alongside its original annual report.
-- Prefer within-company financial comparisons. Cross-company comparisons must display fiscal dates and timing/business-mix qualifications. Initial metrics use consolidated US GAAP figures; segment metrics, transcripts, additional years, and additional companies require separate coverage checks and feedback.
+- Prefer within-company financial comparisons. Cross-company comparisons must display fiscal dates and timing/business-mix qualifications. Metrics use consolidated US GAAP figures, with separately verified Qualcomm annual automotive/handsets/IoT revenue components. Other segment metrics, transcripts, additional years, and additional companies require separate coverage checks and feedback.
 - Support company explanations, financial comparisons, changes in disclosed risks, and current developments related to those questions.
-- Initial metrics: consolidated US GAAP revenue growth, gross margin, operating margin, and operating cash flow in USD. The [M1 financial evidence](M1_SCOPE_AND_SOURCE_FEASIBILITY.md#5-financial-feasibility-and-comparison-boundaries) records candidate tags, formulas, annual observations, and period constraints. Observation selection uses exact original accessions and actual intervals, with later conflicting comparatives retained separately. [M5](M5_FINANCIAL_DATA_AGENT.md) implements Data; [M6](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) implements bounded numerical analysis and independently verified derivations.
+- Metrics: consolidated US GAAP revenue, gross/operating margins, operating cash flow, and parent-attributable net income/loss in USD, plus supported annual revenue shares. Original-accession observations retain actual intervals and later conflicting comparatives. [M5](M5_FINANCIAL_DATA_AGENT.md) defines Data; [M6](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) defines bounded execution; [capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies filing inputs, scope correction, and checked earnings ranking.
 - Produce a research brief: a direct conclusion, supporting evidence, a financial table or chart when useful, changed risks when relevant, and unresolved questions.
 - Defer market quotes, price-move explanations, valuation tools, trading, forecasts, watchlists, and background alerts. They are outside the initial scope.
 - Treat each initial request as self-contained. Conversation memory and persistence remain later decisions; do not promise memory across sessions or instance replacement.
@@ -96,7 +96,7 @@
 | Supervisor | Coordinate the investigation and assemble the final response. | LangGraph delegation and task-state inspection. Selects workers, requests bounded follow-up, handles incomplete results, and synthesizes the evidence. |
 
 - Four specialized workers exceed the three-worker minimum. The supervisor does not count toward that minimum.
-- Filings Research, Financial Data, Quant, and a minimal scope/task supervisor are implemented. The numerical path passes verified Data observations to Quant; Risk Summary and full cooperation remain planned. The four-worker design describes the final assignment scope.
+- Filings Research, Financial Data, Quant, and a minimal scope/task supervisor are implemented. Numerical paths pass verified Data or supported annual filing observations to Quant, with one bounded missing-input follow-up. Risk Summary and full cooperation remain planned. The four-worker design describes the final assignment scope.
 - Keep five agents. Evaluation runs outside the application workflow; it does not introduce a sixth verification agent.
 - Each worker needs a distinct prompt and meaningful tool access. Risk Summary must perform document comparison rather than repeat Filings Research.
 - Workers return findings through the supervisor. Shared state carries the question, selected companies/periods, task status, evidence references, calculations, gaps, routing decisions, and failures; the detailed schema comes later.
@@ -236,7 +236,7 @@ flowchart TB
 
 | Decision | Resolve before |
 | --- | --- |
-| Coverage expansion and additional reporting formats | Source collection is verified for all 41 selected documents. Future discovery/refresh CLI is implemented; expand application coverage only after source checks, demonstrations, and feedback. |
+| Coverage expansion and additional reporting formats | Source collection is verified for all 46 selected documents, including aligned FY2024/FY2025 labels and retained NVIDIA FY2026. Expand application coverage only after source checks, demonstrations, and feedback. |
 | Observation selection and fiscal intervals | M5 implements original-accession GAAP USD observations, explicit quarter/YTD intervals, missing/conflicting statuses, and retained later revisions. M6 validates periods, units, denominators, revisions, arithmetic, and executed lineage before publishing calculations. |
 | Retrieval refinement and corpus expansion | M3 uses 220-token chunks, 40-token overlap, CPU MiniLM, cosine Chroma, and explicit company/fiscal-year/form/section/version filters. Refine from observed evidence and feedback. |
 | NVIDIA confirmation, exact Nebius/NVIDIA model IDs, routing thresholds, and budgets | Final runtime-provider integration; verify current access, capabilities, and pricing before local provider acceptance and deployment. |
@@ -270,9 +270,9 @@ flowchart TB
 
 | Milestone | Status | Outcome |
 | --- | --- | --- |
-| M1 — Scope and source feasibility | Complete | Four companies, two fiscal years each, 41-document target, 32/32 reports with aligned financial inputs, source-access evidence, and unresolved gaps in [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md). |
-| M2 — Source collection and preparation | Implemented and verified; accepted | 41/41 bodies and extractions, versioned provenance, 32 risk/MD&A sections, AMD amendment, table checks, reusable uv CLI, and no collection gaps. [Evidence](M2_SOURCE_COLLECTION_AND_PREPARATION.md). |
-| M3 — First RAG research demo | Implemented and verified; accepted | 41 documents/10,681 chunks, four real cited application turns, direct worker/browser demonstrations, coverage gaps, and cancellation/failure checks. [Evidence](M3_FIRST_RAG_RESEARCH_DEMO.md). |
+| M1 — Scope and source feasibility | Complete | Four companies with verified fiscal windows, matching financial inputs, original-source access evidence, and explicit boundaries. [M1](M1_SCOPE_AND_SOURCE_FEASIBILITY.md); [aligned coverage](ALIGNED_FISCAL_COVERAGE.md). |
+| M2 — Source collection and preparation | Implemented and verified; accepted | 46/46 bodies/extractions, versioned provenance, 36 original risk/MD&A sections, AMD amendment, table checks, reusable uv CLI, and no collection gaps. [Evidence](M2_SOURCE_COLLECTION_AND_PREPARATION.md). |
+| M3 — First RAG research demo | Implemented and verified; accepted | RAG over the selected corpus, real cited application turns, direct worker/browser demonstrations, coverage gaps, and cancellation/failure checks. [Evidence](M3_FIRST_RAG_RESEARCH_DEMO.md). |
 | M4 — Local container acceptance | Implemented and verified locally | Docker startup, cited SSE, Chromium, custom PORT, non-root identity, credential isolation, cancellation, and model failure pass. [Evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md). |
 | M5 — Financial Data agent | Implemented and verified locally | Source-linked GAAP observations, original-report policy, structured Data worker, direct/browser/Docker checks. [Evidence](M5_FINANCIAL_DATA_AGENT.md). |
 | M6 — Financial Analysis / Quant agent | Implemented and verified locally | Generated bounded programs, independent financial/lineage checks, Data-to-Quant cooperation, source-linked tables/charts, and native/Docker evidence. [Details](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md). |
@@ -291,8 +291,8 @@ flowchart TB
 ### M2 — Source collection and preparation
 
 - **Inputs/dependency:** completed M1, especially its access evidence, earnings releases, amendment notes, and filing inventory (§§3–5, 9).
-- **Scope:** collect the 41-document target using verified original/official mirror paths; resolve remaining NVIDIA/Qualcomm downloads. Save original bodies, readable extracted text, canonical identities, retrieval URLs/dates, versions, and collection status. Validate HTML/PDF content and section/table fidelity; a successful HTTP response is insufficient. Deduplicate mirrors without merging amendments into originals.
-- **Demonstration/exit:** inspect one source and its extraction for each company, AMD's original/amended MD&A, and annual/quarterly risk sections. Account for all 41 targets with verified bodies or explicit failures; unresolved material gaps require a coverage decision before acceptance. Provide repeatable collection commands with bounded retries and source-identifying requests.
+- **Scope:** collect the 46-document target using verified original/official mirror paths. Save original bodies, readable extracted text, canonical identities, retrieval URLs/dates, versions, and collection status. Validate HTML/PDF content and section/table fidelity; a successful HTTP response is insufficient. Deduplicate mirrors without merging amendments into originals.
+- **Demonstration/exit:** inspect one source and its extraction for each company, AMD's original/amended MD&A, and annual/quarterly risk sections. Account for all selected targets with verified bodies or explicit failures; unresolved material gaps require a coverage decision before acceptance. Provide repeatable collection commands with bounded retries and source-identifying requests.
 - **Boundary:** no vector index, application workers, frontend, or formal evaluation harness. Preserve the four-company historical coverage unless feedback authorizes a change.
 - **Implemented:** `data/source_inventory.json`, collection/discovery CLI, ignored content-addressed originals and prepared files, explicit refresh/run history, and offline inspection/verification. `uv` is the project standard. [M2 report](M2_SOURCE_COLLECTION_AND_PREPARATION.md) records current decisions, demonstration, evidence, and limits; M2 is accepted.
 

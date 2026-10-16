@@ -30,7 +30,9 @@ async def main(args):
         missing["execution_scope"] = (
             "direct Financial Data; the application uses Quant for this derivation"
         )
-        missing["passed"] = "not zero" in missing.get("error", "") and not any(
+        missing["passed"] = missing.get("needs_evidence", {}).get(
+            "kind"
+        ) == "structured_missing" and not any(
             e["type"] == "trace" and e["data"].get("provider") for e in direct_events
         )
         # Run concurrent scopes; request-local F IDs must resolve to their own company.

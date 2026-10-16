@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "M1 four-company historical window; 41 logical documents",
+  "scope": "Four-company aligned FY2024/FY2025 coverage; NVIDIA FY2026 retained; 46 logical documents",
   "documents": [
     {
       "document_id": "nvda-0001045810-24-000124",
@@ -27,8 +27,8 @@
           "discovery_report_type": "First Quarter"
         }
       ],
-      "prior_annual_document_id": null,
-      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+      "prior_annual_document_id": "nvda-0001045810-24-000029",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
     },
     {
       "document_id": "nvda-0001045810-24-000264",
@@ -55,8 +55,8 @@
           "discovery_report_type": "Second Quarter"
         }
       ],
-      "prior_annual_document_id": null,
-      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+      "prior_annual_document_id": "nvda-0001045810-24-000029",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
     },
     {
       "document_id": "nvda-0001045810-24-000316",
@@ -83,8 +83,8 @@
           "discovery_report_type": "Third Quarter"
         }
       ],
-      "prior_annual_document_id": null,
-      "risk_context_note": "Quarterly update; inspect references to prior annual/quarterly reports. Prior annual outside selected corpus."
+      "prior_annual_document_id": "nvda-0001045810-24-000029",
+      "risk_context_note": "Quarterly update; retain prior annual and earlier quarterly references."
     },
     {
       "document_id": "nvda-0001045810-25-000023",
@@ -1063,6 +1063,142 @@
           "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/FY2025-4th-Quarter-Earnings-Release.pdf",
           "format": "pdf",
           "discovered_from": "M1 section 4"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-0001045810-23-000093",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2023-04-30",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-01-30",
+      "fiscal_end": "2024-01-28",
+      "source_date": "2023-05-26",
+      "accession": "0001045810-23-000093",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000093/nvda-20230430.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "prior_annual_document_id": "nvda-0001045810-23-000017",
+      "risk_context_note": "Quarterly updates are not full annual risk inventories; prior annual may be outside this inventory.",
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2024/q1/ecefb2b2-efcb-45f3-b72b-212d90fcd873.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "First Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-0001045810-23-000175",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2023-07-30",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-01-30",
+      "fiscal_end": "2024-01-28",
+      "source_date": "2023-08-28",
+      "accession": "0001045810-23-000175",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000175/nvda-20230730.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "prior_annual_document_id": "nvda-0001045810-23-000017",
+      "risk_context_note": "Quarterly updates are not full annual risk inventories; prior annual may be outside this inventory.",
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2024/q2/19771e6b-cc29-4027-899e-51a0c386111e.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Second Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-0001045810-23-000227",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-Q",
+      "period_end": "2023-10-29",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-01-30",
+      "fiscal_end": "2024-01-28",
+      "source_date": "2023-11-21",
+      "accession": "0001045810-23-000227",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581023000227/nvda-20231029.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "prior_annual_document_id": "nvda-0001045810-23-000017",
+      "risk_context_note": "Quarterly updates are not full annual risk inventories; prior annual may be outside this inventory.",
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2024/q3/NVIDIA-10Q.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Third Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-0001045810-24-000029",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "filing",
+      "form": "10-K",
+      "period_end": "2024-01-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-01-30",
+      "fiscal_end": "2024-01-28",
+      "source_date": "2024-02-21",
+      "accession": "0001045810-24-000029",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "version": "original",
+      "amends_document_id": null,
+      "prior_annual_document_id": null,
+      "risk_context_note": null,
+      "candidates": [
+        {
+          "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2024/q4/1cbe8fe7-e08a-46e3-8dcc-b429fc06c1a4.pdf",
+          "format": "pdf",
+          "discovered_from": "https://investor.nvidia.com/Services/FinancialReportService.svc/GetFinancialReportList",
+          "discovery_fiscal_year": 2024,
+          "discovery_report_type": "Fourth Quarter"
+        }
+      ]
+    },
+    {
+      "document_id": "nvda-fy2024-earnings",
+      "company": "NVDA",
+      "company_name": "NVIDIA Corporation",
+      "cik": "0001045810",
+      "kind": "earnings_release",
+      "form": null,
+      "period_end": "2024-01-28",
+      "fiscal_year": 2024,
+      "fiscal_start": "2023-01-30",
+      "fiscal_end": "2024-01-28",
+      "source_date": "2024-02-21",
+      "accession": null,
+      "canonical_url": "https://investor.nvidia.com/news/press-release-details/2024/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2024/",
+      "version": "original",
+      "amends_document_id": null,
+      "candidates": [
+        {
+          "url": "https://investor.nvidia.com/news/press-release-details/2024/NVIDIA-Announces-Financial-Results-for-Fourth-Quarter-and-Fiscal-2024/",
+          "format": "html",
+          "discovered_from": "Explicit CLI source URL"
         }
       ]
     }

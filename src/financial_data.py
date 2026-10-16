@@ -29,6 +29,9 @@ TAGS = {
     "gross_profit": "GrossProfit",
     "operating_income": "OperatingIncomeLoss",
     "operating_cash_flow": "NetCashProvidedByUsedInOperatingActivities",
+    # NetIncomeLoss is attributable to the parent, excluding noncontrolling interests.
+    # ProfitLoss can include those interests and must not silently replace this metric.
+    "net_income": "NetIncomeLoss",
     "cost_of_revenue": {
         "NVDA": "CostOfRevenue",
         "QCOM": "CostOfRevenue",
@@ -117,7 +120,7 @@ def prepare_observations(documents, snapshots):
                     )
                     intervals.append(("quarter", start))
                 for basis, start in intervals:
-                    for metric in (*METRICS, "cost_of_revenue"):
+                    for metric in (*METRICS, "net_income", "cost_of_revenue"):
                         tag = TAGS[metric]
                         if isinstance(tag, dict):
                             tag = tag[company]

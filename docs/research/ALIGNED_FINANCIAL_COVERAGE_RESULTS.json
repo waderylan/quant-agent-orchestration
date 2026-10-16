@@ -1,0 +1,307 @@
+{
+  "verified_at": "2026-10-15T23:37:47.959350+00:00",
+  "kind": "offline original-filing/reference checks; no model generation",
+  "coverage": {
+    "AMD": [
+      2024,
+      2025
+    ],
+    "INTC": [
+      2024,
+      2025
+    ],
+    "NVDA": [
+      2024,
+      2025,
+      2026
+    ],
+    "QCOM": [
+      2024,
+      2025
+    ]
+  },
+  "corpus": {
+    "targets": 46,
+    "verified": 46,
+    "gaps": 0
+  },
+  "preserved_baseline": {
+    "source": "docs/research/M2_COLLECTION_RESULTS.json",
+    "documents": [
+      "nvda-0001045810-24-000124",
+      "nvda-0001045810-24-000264",
+      "nvda-0001045810-24-000316",
+      "nvda-0001045810-25-000023",
+      "nvda-0001045810-25-000116",
+      "nvda-0001045810-25-000209",
+      "nvda-0001045810-25-000230",
+      "nvda-0001045810-26-000021",
+      "amd-0000002488-24-000056",
+      "amd-0000002488-24-000123",
+      "amd-0000002488-24-000163",
+      "amd-0000002488-25-000012",
+      "amd-0000002488-25-000047",
+      "amd-0000002488-25-000108",
+      "amd-0000002488-25-000166",
+      "amd-0000002488-26-000018",
+      "amd-0000002488-26-000021",
+      "intc-0000050863-24-000076",
+      "intc-0000050863-24-000124",
+      "intc-0000050863-24-000149",
+      "intc-0000050863-25-000009",
+      "intc-0000050863-25-000074",
+      "intc-0000050863-25-000109",
+      "intc-0000050863-25-000179",
+      "intc-0000050863-26-000011",
+      "qcom-0000804328-24-000017",
+      "qcom-0000804328-24-000039",
+      "qcom-0000804328-24-000056",
+      "qcom-0000804328-24-000075",
+      "qcom-0000804328-25-000011",
+      "qcom-0000804328-25-000031",
+      "qcom-0000804328-25-000045",
+      "qcom-0000804328-25-000085",
+      "nvda-fy2025-earnings",
+      "nvda-fy2026-earnings",
+      "amd-fy2024-earnings",
+      "amd-fy2025-earnings",
+      "intc-fy2024-earnings",
+      "intc-fy2025-earnings",
+      "qcom-fy2024-earnings",
+      "qcom-fy2025-earnings"
+    ],
+    "checks": "identity, original-body SHA256, prepared-text SHA256",
+    "passed": true
+  },
+  "observations": 378,
+  "available": 346,
+  "counts_by_metric": {
+    "cost_of_revenue": {
+      "slots": 63,
+      "available": 49
+    },
+    "gross_profit": {
+      "slots": 63,
+      "available": 63
+    },
+    "net_income": {
+      "slots": 63,
+      "available": 63
+    },
+    "operating_cash_flow": {
+      "slots": 63,
+      "available": 45
+    },
+    "operating_income": {
+      "slots": 63,
+      "available": 63
+    },
+    "revenue": {
+      "slots": 63,
+      "available": 63
+    }
+  },
+  "earnings_checks": [
+    {
+      "company": "NVDA",
+      "fiscal_year": 2024,
+      "value_usd": 29760000000,
+      "start": "2023-01-30",
+      "end": "2024-01-28",
+      "accession": "0001045810-24-000029",
+      "document_id": "nvda-0001045810-24-000029",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+      "original_sha256": "536f66d7f1c3413abbf643e0a02bd0aab65639116fe630225f3f93529244658b",
+      "statement_row": "Net income $ 29,760 $ 4,368 Up 581%",
+      "row_character_start": 202290,
+      "page": 36,
+      "passed": true
+    },
+    {
+      "company": "NVDA",
+      "fiscal_year": 2025,
+      "value_usd": 72880000000,
+      "start": "2024-01-29",
+      "end": "2025-01-26",
+      "accession": "0001045810-25-000023",
+      "document_id": "nvda-0001045810-25-000023",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+      "original_sha256": "b67bd67a64488a54886de001c788bc5059a965fc6ef5b4d8b71624951e13df8e",
+      "statement_row": "Net income $ 72,880 $ 29,760 Up 145%",
+      "row_character_start": 213016,
+      "page": 38,
+      "passed": true
+    },
+    {
+      "company": "NVDA",
+      "fiscal_year": 2026,
+      "value_usd": 120067000000,
+      "start": "2025-01-27",
+      "end": "2026-01-25",
+      "accession": "0001045810-26-000021",
+      "document_id": "nvda-0001045810-26-000021",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+      "original_sha256": "a056b59e4170c0123217a8e861a39af4a4a48d2df0d27b641017a618a280a396",
+      "statement_row": "Net income $ 120,067 $ 72,880 Up 65%",
+      "row_character_start": 205295,
+      "page": 37,
+      "passed": true
+    },
+    {
+      "company": "AMD",
+      "fiscal_year": 2024,
+      "value_usd": 1641000000,
+      "start": "2023-12-31",
+      "end": "2024-12-28",
+      "accession": "0000002488-25-000012",
+      "document_id": "amd-0000002488-25-000012",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+      "original_sha256": "4029715f554706c0b84357dee29649a694e7eab1c395e2793033ba7b762a1dda",
+      "statement_row": "Net income | $ | 1,641 | | | $ | 854 | | | $ | 1,320 |",
+      "row_character_start": 238039,
+      "page": null,
+      "passed": true
+    },
+    {
+      "company": "AMD",
+      "fiscal_year": 2025,
+      "value_usd": 4335000000,
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "accession": "0000002488-26-000018",
+      "document_id": "amd-0000002488-26-000018",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+      "original_sha256": "afefea55a2f7c013912403fa45547d4d7910e8f012d4bba6c1c63a37d0c2b050",
+      "statement_row": "Net income | $ | 4,335 | | | $ | 1,641 | | | $ | 854 |",
+      "row_character_start": 251704,
+      "page": null,
+      "passed": true
+    },
+    {
+      "company": "INTC",
+      "fiscal_year": 2024,
+      "value_usd": -18756000000,
+      "start": "2023-12-31",
+      "end": "2024-12-28",
+      "accession": "0000050863-25-000009",
+      "document_id": "intc-0000050863-25-000009",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+      "original_sha256": "60e9b3e88bb1cf3fabc0ea34c6bf6fcfd481979080a97755bb2d168788b6affc",
+      "statement_row": "Net income (loss) attributable to Intel | | $ | (18,756) | | | (35.3) | % | | $ | 1,689 | | | 3.1 | % | | $ | 8,014 | | | 12.7 | %",
+      "row_character_start": 112583,
+      "page": null,
+      "passed": true
+    },
+    {
+      "company": "INTC",
+      "fiscal_year": 2025,
+      "value_usd": -267000000,
+      "start": "2024-12-29",
+      "end": "2025-12-27",
+      "accession": "0000050863-26-000011",
+      "document_id": "intc-0000050863-26-000011",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+      "original_sha256": "67af52d83cdc32a0c52d6007ba0b1031f25c50bc1cae5ee0d626721c9989e42d",
+      "statement_row": "Net income (loss) attributable to Intel | | $ | (267) | | | (0.5) | % | | $ | (18,756) | | | (35.3) | % | | $ | 1,689 | | | 3.1 | %",
+      "row_character_start": 131022,
+      "page": null,
+      "passed": true
+    },
+    {
+      "company": "QCOM",
+      "fiscal_year": 2024,
+      "value_usd": 10142000000,
+      "start": "2023-09-25",
+      "end": "2024-09-29",
+      "accession": "0000804328-24-000075",
+      "document_id": "qcom-0000804328-24-000075",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+      "original_sha256": "a32e2ced720431cadad52814b337d1556beb1d3a2fc353022092c30d063be7c1",
+      "statement_row": "Net income $ 10,142 $ 7,232 $ 12,936",
+      "row_character_start": 715220,
+      "page": 61,
+      "passed": true
+    },
+    {
+      "company": "QCOM",
+      "fiscal_year": 2025,
+      "value_usd": 5541000000,
+      "start": "2024-09-30",
+      "end": "2025-09-28",
+      "accession": "0000804328-25-000085",
+      "document_id": "qcom-0000804328-25-000085",
+      "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+      "original_sha256": "90852abbb69e24e6c4a2a1ca8fc3ca9cd458f1a23fe3cf7765a4b0fad5ba14a5",
+      "statement_row": "Net income $ 5,541 $ 10,142 $ 7,232",
+      "row_character_start": 691833,
+      "page": 59,
+      "passed": true
+    }
+  ],
+  "nvidia_fy2024_additional_checks": [
+    {
+      "metric": "revenue",
+      "value_usd": 60922000000,
+      "statement_row": "Revenue $ 60,922 $ 26,974 Up 126%",
+      "row_character_start": 201535,
+      "passed": true
+    },
+    {
+      "metric": "gross_profit",
+      "value_usd": 44301000000,
+      "statement_row": "Gross profit 44,301 15,356 17,475",
+      "row_character_start": 268955,
+      "passed": true
+    },
+    {
+      "metric": "operating_income",
+      "value_usd": 32972000000,
+      "statement_row": "Operating income $ 32,972 $ 4,224 Up 681%",
+      "row_character_start": 202102,
+      "passed": true
+    },
+    {
+      "metric": "operating_cash_flow",
+      "value_usd": 28090000000,
+      "statement_row": "Net cash provided by operating activities $ 28,090 $ 5,641",
+      "row_character_start": 234877,
+      "passed": true
+    }
+  ],
+  "independent_earnings_comparison": [
+    {
+      "company": "AMD",
+      "fy2024_usd": 1641000000,
+      "fy2025_usd": 4335000000,
+      "change_usd": 2694000000,
+      "growth_percent": "164.1681901279707495429616088",
+      "growth_limit": null
+    },
+    {
+      "company": "INTC",
+      "fy2024_usd": -18756000000,
+      "fy2025_usd": -267000000,
+      "change_usd": 18489000000,
+      "growth_percent": null,
+      "growth_limit": "Negative prior earnings; percentage growth is not meaningful."
+    },
+    {
+      "company": "NVDA",
+      "fy2024_usd": 29760000000,
+      "fy2025_usd": 72880000000,
+      "change_usd": 43120000000,
+      "growth_percent": "144.8924731182795698924731183",
+      "growth_limit": null
+    },
+    {
+      "company": "QCOM",
+      "fy2024_usd": 10142000000,
+      "fy2025_usd": 5541000000,
+      "change_usd": -4601000000,
+      "growth_percent": "-45.36580556103332676000788799",
+      "growth_limit": null
+    }
+  ],
+  "financial_manifest_sha256": "3c814b74854849f562783f5fbcffb9c622b83d85d54dfaf90f9e557a9ce5c380",
+  "passed": true
+}

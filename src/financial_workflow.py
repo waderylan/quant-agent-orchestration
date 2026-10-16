@@ -9,6 +9,7 @@ from contextlib import aclosing
 from src.codex_model import stream as codex_stream
 from src.financial_data import METRICS, TAGS
 from src.source_collection import ROOT
+from src.request_routing import requested_metrics
 
 TOOLS = [
     {
@@ -60,15 +61,7 @@ def request_filters(question):
         )
         else "quarter"
     )
-    patterns = {
-        "revenue": r"\brevenues?\b",
-        "gross_profit": r"\bgross profit\b",
-        "operating_income": r"\boperating income\b",
-        "operating_cash_flow": r"\b(?:operating )?cash flows?\b",
-    }
-    metrics = [
-        m for m, pattern in patterns.items() if re.search(pattern, question, re.I)
-    ]
+    metrics = requested_metrics(question)
     return {"period": period, "basis": basis, "metrics": metrics or list(METRICS)}
 
 
@@ -147,6 +140,8 @@ async def financial_turn(
 ):
     tools = FinancialTools(store, state["companies"], state["years"])
     filters = request_filters(state["question"])
+    if state.get("revenue_component"):
+        filters = {"period": "FY", "basis": "annual", "metrics": ["revenue"]}
     if filters["period"] == "Q4" and prefetch is None:
         return {
             "error": "Q4-only financial figures require compatible annual and nine-month inputs and Quant derivation.",
@@ -170,10 +165,23 @@ async def financial_turn(
     initial_calls = tools.successful_calls
     if not initial["sources"]:
         return {
-            "error": "No compatible original-report observations for "
-            + json.dumps(filters)
-            + ". Missing values are not zero; quarter-only cash flow requires Quant derivation.",
+            "needs_evidence": {
+                "kind": "structured_missing",
+                "message": "No compatible original-report observations for "
+                + json.dumps(filters)
+                + ". Search filing evidence; no structured calculation is established.",
+            },
             "answer": "",
+            "partial": True,
+        }
+    if state.get("revenue_component"):
+        return {
+            "financial_sources": tools.sources,
+            "needs_evidence": {
+                "kind": "revenue_component",
+                "component": state["revenue_component"],
+                "message": "The consolidated store does not contain this revenue component; request verified filing evidence.",
+            },
         }
     prompt = (
         (ROOT / "prompts/financial_data.md").read_text(encoding="utf-8")

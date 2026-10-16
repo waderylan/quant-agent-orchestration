@@ -26,7 +26,8 @@ def docker(*arguments):
 async def main(args):
     staging = ROOT / "artifacts/local-container"
     staging.mkdir(parents=True, exist_ok=True)
-    index = staging / "index"
+    active = json.loads((ROOT / "chroma_index/active.json").read_text(encoding="utf-8"))
+    index = staging / ("index-" + active["fingerprint"][:16])
     if not index.exists():
         shutil.copytree(ROOT / "chroma_index", index)
     cache = Path.home() / ".cache/chroma/onnx_models/all-MiniLM-L6-v2"
@@ -189,7 +190,13 @@ async def main(args):
                 "passed": "not supported" in failed,
                 "error": failed,
             }
-            browser_script = "demo_quant.py" if args.analysis else "demo_browser.py"
+            browser_script = (
+                "demo_capability_fixes.py"
+                if args.capabilities
+                else "demo_quant.py"
+                if args.analysis
+                else "demo_browser.py"
+            )
             browser = subprocess.run(
                 [
                     sys.executable,
@@ -198,7 +205,13 @@ async def main(args):
                     "http://127.0.0.1:8084",
                     "--output",
                     str(args.browser_output),
-                    *(["--application-only"] if args.analysis else []),
+                    *(
+                        ["--phase", "browser"]
+                        if args.capabilities
+                        else ["--application-only"]
+                        if args.analysis
+                        else []
+                    ),
                 ],
                 check=True,
                 capture_output=True,
@@ -238,6 +251,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", default="hw2-research:m4")
     parser.add_argument("--skip-build", action="store_true")
+    parser.add_argument(
+        "--capabilities",
+        action="store_true",
+        help="Verify scope correction, filing revenue shares, and earnings ranking in Chromium",
+    )
     parser.add_argument(
         "--analysis",
         action="store_true",
