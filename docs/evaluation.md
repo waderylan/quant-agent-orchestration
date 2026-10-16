@@ -8,6 +8,7 @@
 ## Evaluation scope
 
 - Supported task families, independently checked reference cases, dataset size/splits, calibration rubric, and formal thresholds remain undecided.
+- Planned M8 correctness acceptance covers real Twelve Data/Alpha Vantage/Tavily MCP calls, four-company snapshots, independently checked multiples and scenario grids, source freshness, definitions, quotas, and partial results. [M8 plan](planning/M8_BUY_SIDE_ANALYST.md) separates direct-role, application/browser, Docker, and fixture evidence; no valuation acceptance measurements exist yet. Formal consolidation is M12 and deployment acceptance is M13.
 - Exploratory questions in the M1 document are demonstration ideas, not a fixed benchmark.
 - Current company/year scope is FY2024–FY2025 for all four companies and retained NVIDIA FY2026. Financial cases must retain actual fiscal dates, units, accession/version, GAAP definitions, and required derivations. [Aligned coverage](planning/ALIGNED_FISCAL_COVERAGE.md) records current source checks.
 - Qualcomm's 53-week FY2024 and derived gross profit, AMD's amended explanation, YTD cash-flow differences, and unavailable evidence are relevant correctness cases.

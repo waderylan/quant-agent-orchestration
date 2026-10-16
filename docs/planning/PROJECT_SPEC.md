@@ -1,7 +1,7 @@
 # Public-Company Research Assistant — Project Spec
 
 - Owner: Rylan Wade.
-- Status: M1–M6 implemented and verified; M2 and M3 accepted. M7–M12, Risk Summary/full cooperation, deployment-provider integration, formal evaluations, and deployment are unstarted.
+- Status: M1–M6 implemented and verified; M2 and M3 accepted. M7–M13, Risk Summary/full cooperation, deployment-provider integration, formal evaluations, and deployment are unstarted.
 - Product name: TBD.
 - Assignment contract: [Assignment 2](../assignment/Assignment_2_Description.md).
 - Scope/source evidence: [M1 feasibility](M1_SCOPE_AND_SOURCE_FEASIBILITY.md).
@@ -34,7 +34,7 @@
 - Support company explanations, financial comparisons, changes in disclosed risks, and current developments related to those questions.
 - Metrics: consolidated US GAAP revenue, gross/operating margins, operating cash flow, and parent-attributable net income/loss in USD, plus supported annual revenue shares. Original-accession observations retain actual intervals and later conflicting comparatives. [M5](M5_FINANCIAL_DATA_AGENT.md) defines Data; [M6](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) defines bounded execution; [capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies filing inputs, scope correction, and checked earnings ranking. [PM workflow contracts](PM_WORKFLOW_CORRECTNESS.md) define checked cash conversion, QCT denominators, explicit user scenarios/FX, numerical/explanation handoffs, and partial/clarification states.
 - Produce a research brief: a direct conclusion, supporting evidence, a financial table or chart when useful, changed risks when relevant, and unresolved questions.
-- Defer market quotes, price-move explanations, valuation tools, trading, forecasts, watchlists, and background alerts. They are outside the initial scope.
+- Market prices, forward estimates, relative valuation, and explicit valuation scenarios are planned for [M8 Buy-Side Analyst](M8_BUY_SIDE_ANALYST.md), using Twelve Data, Alpha Vantage, and Tavily MCP. Trading, personalized portfolio recommendations, autonomous forecasts, watchlists, and background alerts remain outside scope.
 - Treat each initial request as self-contained. Conversation memory and persistence remain later decisions; do not promise memory across sessions or instance replacement.
 
 ## Development environment and provider direction
@@ -85,7 +85,7 @@
 - Change the company, period, or assumption and request a revised analysis. Retain the self-contained request boundary until conversation context is deliberately implemented.
 - Receive a clear coverage limitation or missing-data explanation when the system cannot support a conclusion.
 
-## Five agents
+## Six agents
 
 | Agent | Job | Distinct tools and output |
 | --- | --- | --- |
@@ -93,11 +93,12 @@
 | Financial Data | Obtain the right financial figures and establish whether they are comparable. | Structured financial-data and filing-metadata queries. Returns observations with company, dates, units, metric definition, and filing identity. |
 | Financial Analysis / Quant | Use the figures to answer numerical questions. | Generate and run bounded analysis code over supplied data; validate calculations and create tables/charts. Returns results with source inputs, formulas, and assumptions. Maps to the assignment's Code role. |
 | Risk Summary | Identify what changed between versions of risk disclosures. | Align and compare risk sections; inspect before/after passages. Returns a cited brief distinguishing added, removed, changed, and relocated language. |
+| Buy-Side Analyst | Assess relative valuation, market expectations, and conditional upside/downside. | Distinct market/estimate snapshot and valuation-premise tools using Twelve Data, Alpha Vantage, and Tavily MCP; requests checked Quant calculations and returns a sourced investment brief. Planned for M8. |
 | Supervisor | Coordinate the investigation and assemble the final response. | LangGraph delegation and task-state inspection. Selects workers, requests bounded follow-up, handles incomplete results, and synthesizes the evidence. |
 
-- Four specialized workers exceed the three-worker minimum. The supervisor does not count toward that minimum.
-- Filings Research, Financial Data, Quant, and a minimal scope/task supervisor are implemented. Numerical paths pass verified Data or supported annual filing observations to Quant, with one bounded missing-input follow-up. Risk Summary and full cooperation remain planned. The four-worker design describes the final assignment scope.
-- Keep five agents. Evaluation runs outside the application workflow; it does not introduce a sixth verification agent.
+- Five specialized workers exceed the three-worker minimum. The supervisor does not count toward that minimum.
+- Filings Research, Financial Data, Quant, and a minimal scope/task supervisor are implemented. Numerical paths pass verified Data or supported annual filing observations to Quant, with one bounded missing-input follow-up. Risk Summary, Buy-Side Analyst, and full cooperation remain planned. Five workers plus the supervisor describe the selected final scope.
+- Keep six application agents. Evaluation runs outside the application workflow and is not an additional verification agent.
 - Each worker needs a distinct prompt and meaningful tool access. Risk Summary must perform document comparison rather than repeat Filings Research.
 - Workers return findings through the supervisor. Shared state carries the question, selected companies/periods, task status, evidence references, calculations, gaps, routing decisions, and failures; the detailed schema comes later.
 
@@ -114,17 +115,19 @@ flowchart TB
     S -->|Final answer tokens and activity events| API
     API -->|SSE| UI
 
-    subgraph Workers["Four specialized workers"]
+    subgraph Workers["Five specialized workers"]
         R["Filings Research"]
         D["Financial Data"]
         Q["Financial Analysis / Quant"]
         K["Risk Summary"]
+        BS["Buy-Side Analyst"]
     end
 
     S <-->|Task, findings, follow-up| R
     S <-->|Task, figures, gaps| D
     S <-->|Task, calculations, artifacts| Q
     S <-->|Task, cited changes| K
+    S <-->|Task, valuation brief, assumptions| BS
 
     SRC["Original filings and earnings releases"]
     ING["Ingest, chunk, embed"]
@@ -132,6 +135,8 @@ flowchart TB
     MCP["Shared source-lookup MCP tool"]
     FD["Structured financial observations"]
     LIVE["Tavily Remote MCP: current sources"]
+    PRICE["Twelve Data MCP: dated market prices"]
+    EST["Alpha Vantage MCP: estimates and fundamentals"]
     RUN["Bounded code execution"]
     DIFF["Risk-section alignment and comparison"]
 
@@ -140,6 +145,9 @@ flowchart TB
     R <-->|Retrieve and inspect| MCP
     K <-->|Inspect comparison evidence| MCP
     R <-->|Search and extract| LIVE
+    BS <-->|Search and extract| LIVE
+    BS <-->|Market snapshots| PRICE
+    BS <-->|Estimate and financial snapshots| EST
     D <-->|Query figures and metadata| FD
     Q <-->|Run analysis| RUN
     K <-->|Compare versions| DIFF
@@ -153,6 +161,7 @@ flowchart TB
     D -.-> ROUTE
     Q -.-> ROUTE
     K -.-> ROUTE
+    BS -.-> ROUTE
     ROUTE -->|Local research profile| CX
     ROUTE -->|Deployment profile| A
     ROUTE -->|Deployment profile| B
@@ -164,7 +173,7 @@ flowchart TB
 
 - Solid arrows show request, delegation, and tool/data paths. Dotted arrows show generation routing and evaluation capture. Tool arrows represent access, not a requirement to invoke every tool on every request.
 - Financial Data passes observations to Financial Analysis through supervisor-managed state. Document collection and structured-data preparation happen separately from normal chat requests.
-- Routing is a service used by the five agents. Evals are development infrastructure. Neither is an extra specialist.
+- Routing is a service used by the six agents. Evals are development infrastructure. Neither is an extra specialist.
 - Both deployed generation providers must be exercised under normal supported workloads, with visible reasons. Provider choice depends on task difficulty and cost/capability needs rather than permanently assigning each worker one provider. Local experiments identify the actual Codex/Claude Code route; they must not be labeled as Nebius/NVIDIA runs.
 - The diagram describes the selected full-system design; the current M3 execution path is in [architecture](../architecture.md). Direct single-worker Codex runs bypass the supervisor and browser.
 
@@ -223,12 +232,12 @@ flowchart TB
 
 ## Incremental development and feedback
 
-- Development proceeds through the authorized sequence. M1–M6 are implemented and verified; M2 and M3 are accepted. M7–M12 remain planned and unstarted. Further increments require feedback and authorization.
+- Development proceeds through the authorized sequence. M1–M6 are implemented and verified; M2 and M3 are accepted. M7–M13 remain planned and unstarted. Further increments require feedback and authorization.
 - Each future milestone should define a user-visible outcome, a runnable demonstration, relevant correctness checks, exit criteria, and a feedback checkpoint before work starts. Formal evaluation cases become part of milestone acceptance after the evaluation checkpoint is selected.
 - Development and application acceptance run locally, including Docker startup, SSE, and resource checks. Cloud deployment and deployed retesting belong to the final milestone.
 - Complete the scoped increment, inspect its actual evidence/tool behavior, run its checks, and provide the exact way Rylan Wade can try it. Report working behavior and remaining limitations separately.
 - Review the demonstration, observed failures, and Rylan Wade's feedback before defining or starting the next increment. Include scored evaluation failures once formal evaluations exist. Change scope based on observed value; do not build the entire proposed system before obtaining feedback.
-- Distinguish coding agents used to build/test the repository from the five application agents. Independent testing can provide useful feedback without adding another runtime agent.
+- Distinguish coding agents used to build/test the repository from the six application agents. Independent testing can provide useful feedback without adding another runtime agent.
 - Test ordinary real questions, inspect tool calls and evidence, turn observed failures into repeatable cases, and bound feature expansion. Additional complexity requires evidence of benefit.
 - Verify startup, memory, cold starts, and concurrent requests with actual application/deployment checks. Keep HW2 implementation, configuration, artifacts, and reflections independent of other assignments.
 
@@ -248,12 +257,13 @@ flowchart TB
 | Report/chart presentation and source-view refinements | M3 provides exact passages, citations, official source links, and collected originals. Refine through feedback. |
 | Conversation context and whether memory must survive instance replacement | Any multi-turn promise; external durable state is required if that survival is claimed. |
 | Refresh policy for financial observations and current sources | Documents support explicit CLI refresh and future inventories; no scheduler or automatic freshness promise. Decide observation/live-source policies before freshness claims. |
+| M8 market/estimate access, freshness, and valuation definitions | Verify Twelve Data and Alpha Vantage real-key coverage, current financial/TTM inputs, accounting definitions, MCP transport, display rights, and quota before valuation acceptance. Verify Tavily access using Rylan Wade's reported student credits without assuming a numeric allowance. |
 | Cloud Run resource/concurrency limits and acceptable latency | Deployment acceptance, based on measurements. |
 | Product name and optional coverage/features | Feedback showing the initial workflow is useful. |
 
 ## Assignment completion boundary
 
-- Finish with working LangGraph orchestration, four distinct specialists, substantive RAG, Tavily Remote MCP, inspectable routing across at least two generation providers, shared MCP use, and FastAPI-served vanilla HTML/JS with answer-token SSE, sources, and traces.
+- Finish with working LangGraph orchestration, five distinct specialists, substantive RAG, Twelve Data/Alpha Vantage/Tavily MCP, inspectable routing across at least two generation providers, shared MCP use, and FastAPI-served vanilla HTML/JS with answer-token SSE, sources, and traces.
 - Demonstrate a public Cloud Run deployment handling unfamiliar reasonable questions within declared coverage, cold starts, and partial failures. Meet external-persistence requirements if durable memory is later promised.
 - Deliver the required architecture report, measured evaluation report, setup/deploy README, exactly pinned dependencies, placeholder configuration, source archive, and Rylan Wade's own process log.
 - This planning diagram does not replace the final architecture documentation. Update that document to reflect implemented and verified behavior.
@@ -277,16 +287,17 @@ flowchart TB
 | M5 — Financial Data agent | Implemented and verified locally | Source-linked GAAP observations, original-report policy, structured Data worker, direct/browser/Docker checks. [Evidence](M5_FINANCIAL_DATA_AGENT.md). |
 | M6 — Financial Analysis / Quant agent | Implemented and verified locally | Generated bounded programs, independent financial/lineage checks, Data-to-Quant cooperation, source-linked tables/charts, and native/Docker evidence. [Details](M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md). |
 | M7 — Risk Summary agent | Planned; unstarted | Cited comparisons of disclosure versions and relevant quarterly updates. |
-| M8 — Full supervisor cooperation | Planned; unstarted | All four workers cooperate through task-driven delegation, follow-up, and failure recovery. |
-| M9 — Live research and MCP sharing | Planned; unstarted | Tavily current research and inspectable use of the same MCP tool by different workers. |
-| M10 — Inspectable provider routing | Planned; unstarted | Routing policy exercised through local subscription routes; deployment profiles prepared. |
-| M11 — Research experience and formal evaluation | Planned; unstarted | Usable reports/traces, meaningful evaluation datasets and results, and local release acceptance. |
-| M12 — Provider acceptance, deployment, and submission | Planned; unstarted | Actual deployment providers verified, Cloud Run retested, deliverables completed, then Rylan Wade's process log. |
+| M8 — Buy-Side Analyst | Planned; unstarted | Twelve Data/Alpha Vantage/Tavily MCP, checked valuation multiples, peer comparisons, and explicit upside/downside scenarios. [Plan](M8_BUY_SIDE_ANALYST.md). |
+| M9 — Full supervisor cooperation | Planned; unstarted | All five workers cooperate through task-driven delegation, follow-up, and failure recovery. |
+| M10 — Live research and MCP sharing | Planned; unstarted | Broader Tavily current research and shared source-lookup MCP use by Filings Research and Risk Summary. |
+| M11 — Inspectable provider routing | Planned; unstarted | Routing policy exercised through local subscription routes; deployment profiles prepared. |
+| M12 — Research experience and formal evaluation | Planned; unstarted | Usable reports/traces, meaningful evaluation datasets and results, and local release acceptance. |
+| M13 — Provider acceptance, deployment, and submission | Planned; unstarted | Actual deployment providers verified, Cloud Run retested, deliverables completed, then Rylan Wade's process log. |
 
 - This skeleton defines the sequence and boundaries; it does not authorize implementation of future milestones. Before each increment, resolve its necessary open decisions and confirm its concrete acceptance demonstration within the authorized scope.
 - Each handoff records changed files, commands to reproduce the demonstration/checks, verified results, gaps, and the next feedback decision. Update milestone status from actual evidence and obtain Rylan Wade's feedback before proceeding.
-- Individual-agent testing uses direct Codex. Full model-backed application runs use direct Codex app-server; basic code/contract checks use local fixtures where appropriate. No Cloud Run deployment or Nebius/NVIDIA generation calls before M12.
-- Formal evaluation starts at a feedback-approved checkpoint after the research and numerical workflows are useful. It may begin after M6; M11 is the required local evaluation and consolidation gate. Early milestones need demonstrations and correctness checks, not benchmark scores.
+- Individual-agent testing uses direct Codex. Full model-backed application runs use direct Codex app-server; basic code/contract checks use local fixtures where appropriate. No Cloud Run deployment or Nebius/NVIDIA generation calls before M13.
+- Formal evaluation starts at a feedback-approved checkpoint after the research and numerical workflows are useful. It may begin after M6; M12 is the required local evaluation and consolidation gate. Early milestones need demonstrations and correctness checks, not benchmark scores.
 
 ### M2 — Source collection and preparation
 
@@ -301,7 +312,7 @@ flowchart TB
 - **Inputs/dependency:** accepted M2 collection and extraction/provenance records.
 - **Scope:** choose and pin local embeddings, vector store, chunking, and retrieval filters; implement ingest → retrieve → augment → generate. Build source lookup/inspection tools, the Filings Research worker, a minimal LangGraph supervisor, and a simple FastAPI-served vanilla browser chat with answer-token SSE. Verify direct Codex app-server/tool-call compatibility; expose research tools for direct Codex testing.
 - **Demonstration/exit:** ordinary questions retrieve the correct company/period and return supporting citations that open the original passage. Inspect tool calls and show missing-source/unsupported-coverage behavior, plus a full local model-backed application turn. Record retrieval and prompt settings in the architecture document.
-- **Boundary:** this is the first usable slice, not the full four-worker supervisor. Choose source-view interactions through feedback; defer visual polish, live research, and formal scoring.
+- **Boundary:** this is the first usable slice, not the full five-worker supervisor. Choose source-view interactions through feedback; defer visual polish, live research, and formal scoring.
 - **Implemented/verified:** CPU MiniLM and cosine Chroma with scoped retrieval, exact passage inspection, LCEL augmentation, Filings Research, a minimal LangGraph supervisor, and direct Codex answer-token SSE. Four-company application turns, the independent AMD worker, Chromium citations/traces, missing coverage, unavailable model, and disconnect cleanup pass. [M3 evidence](M3_FIRST_RAG_RESEARCH_DEMO.md) records actual outputs/settings/limits; M3 is accepted.
 
 ### M4 — Local container acceptance
@@ -309,7 +320,7 @@ flowchart TB
 - **Inputs/dependency:** working M3 application.
 - **Scope:** containerize the research slice using the assignment's build/runtime requirements. Verify startup, PORT handling, assets/index access, local Codex connectivity, SSE, and resource use. Verify the actual executable/connection and credential isolation; CLI credentials remain outside the application image.
 - **Demonstration/exit:** start the local container from documented commands and complete a cited streaming question. Inspect a fresh container start, client disconnect, and model-unavailable behavior; record observations without labeling them Cloud Run measurements.
-- **Boundary:** local Docker only. Cloud resources, deployment credentials, and cloud acceptance remain M12 work.
+- **Boundary:** local Docker only. Cloud resources, deployment credentials, and cloud acceptance remain M13 work.
 - **Implemented/verified:** digest-pinned multi-stage image, authenticated host bridge with one owned Codex child per connection, isolated mounts, and local application/browser acceptance. [M4 evidence](M4_LOCAL_CONTAINER_ACCEPTANCE.md).
 
 ### M5 — Financial Data agent
@@ -335,37 +346,44 @@ flowchart TB
 - **Demonstration/exit:** direct Codex and application demonstrations explain a real disclosure change with both passages. Show moved boilerplate, incomplete quarterly risk inventories, and amendments that are not replacement risk sections. Source availability alone is not a successful comparison.
 - **Boundary:** keep significance judgments qualified and source-backed; do not claim that a disclosed risk caused a stock-price move.
 
-### M8 — Full supervisor cooperation
+### M8 — Buy-Side Analyst
 
-- **Inputs/dependency:** all four workers from M3, M5, M6, and M7.
+- **Inputs/dependency:** M5 source-linked financial observations, M6 checked calculations, M7 risk evidence, and the existing supervisor path. General cooperation and broader live research are later increments.
+- **Scope:** implement a distinct Buy-Side Analyst with Twelve Data MCP for prices/history, Alpha Vantage MCP for estimates/fundamentals, and Tavily Remote MCP for recent guidance/developments. Rylan Wade reports existing Tavily student credits; verify actual access/limits. Establish bounded valuation-specific handoffs, independent Quant validation, source dates/definitions, multiples, peer comparisons, and explicit scenarios.
+- **Demonstration/exit:** real calls to all three MCP sources; four-company snapshots; independently checked eligible trailing/forward multiples; a replayable scenario grid; sourced interpretation; separate direct-role, application/browser, and local Docker checks. Verify missing estimates, stale data, splits, incompatible periods, loss denominators, and quota failures. [Detailed plan](M8_BUY_SIDE_ANALYST.md) defines scope, access gates, and evidence.
+- **Boundary:** source selection is confirmed; account entitlements remain unverified. Preserve useful partial outputs and do not claim unsupported forward valuations. Trading, personalized portfolio recommendations, and general DCF are outside this increment. M9 generalizes cooperation; M10 expands live research and shared source MCP.
+
+### M9 — Full supervisor cooperation
+
+- **Inputs/dependency:** all five workers from M3, M5, M6, M7, and M8.
 - **Scope:** expand the minimal supervisor into task-driven delegation using documented shared state and structured worker results. Add dependency-aware handoffs, bounded follow-up, failure/partial-result handling, and final synthesis. Keep each worker's prompts and tools distinct.
 - **Demonstration/exit:** contrast a simple request invoking only needed workers with a question requiring cooperation. Show additional evidence changing or qualifying an interpretation, and a failed worker producing a useful partial result. Inspect the actual assignments, inputs, results, and follow-up in the trace.
-- **Boundary:** LangGraph coordinates the workers; keep the five-agent design. Add scored trajectory evaluation only once the formal evaluation checkpoint is active.
+- **Boundary:** LangGraph coordinates five specialized workers and one supervisor. Add scored trajectory evaluation only once the formal evaluation checkpoint is active.
 
-### M9 — Live research and MCP sharing
+### M10 — Live research and MCP sharing
 
-- **Inputs/dependency:** working supervisor, research tools, and Risk Summary worker.
-- **Scope:** integrate authenticated Tavily Remote MCP via the assignment's Streamable HTTP connection. Add dated current-source research and live-search failure handling. Expose shared source lookup through MCP and exercise the same tool from Research and Risk Summary in distinct contexts.
+- **Inputs/dependency:** working five-worker supervisor, research tools, Risk Summary, and the M8 Tavily integration.
+- **Scope:** extend authenticated Tavily Remote MCP to broader Filings Research questions using the assignment's Streamable HTTP connection. Generalize dated current-source research and live-search failure handling. Expose shared source lookup through MCP and exercise the same tool from Research and Risk Summary in distinct contexts.
 - **Demonstration/exit:** answer a current question beyond the historical corpus, retaining publication/retrieval dates and citations. Inspect real MCP discovery/calls, both workers' shared-tool invocations, and stale/unavailable-source behavior.
 - **Boundary:** current retrieval supplements the historical corpus; it does not silently update coverage or establish a refresh service. Record transport/account gaps separately from successful public webpage access.
 
-### M10 — Inspectable provider routing
+### M11 — Inspectable provider routing
 
 - **Inputs/dependency:** working local multi-agent application and explicit endpoint profiles.
 - **Scope:** implement task-sensitive generation routing with visible provider/model selection and reasons. Exercise distinct subscription-backed generation routes through verified local adapters; prepare separate Nebius/second-provider configuration and trace fields. Document provisional routing dimensions and fallback behavior.
 - **Demonstration/exit:** simple and demanding supported tasks exercise both local routes with honest labels. Verify routing inputs, selection reasons, failures, and configuration isolation. Do not report local subscription measurements as Nebius/NVIDIA price, latency, or quality evidence.
-- **Boundary:** confirm deployment models, the second provider, and actual performance-based policy adjustments in M12. No deployment-provider generation calls here.
+- **Boundary:** confirm deployment models, the second provider, and actual performance-based policy adjustments in M13. No deployment-provider generation calls here.
 
-### M11 — Research experience and formal evaluation
+### M12 — Research experience and formal evaluation
 
 - **Inputs/dependency:** useful local workflows, feedback, and any evaluation work started at the agreed checkpoint after M6.
 - **Scope:** refine briefs, tables/charts, source inspection, routing visibility, and readable traces. Use observed successes/failures to define reference cases, held-out questions, judge calibration, and a reproducible local evaluation harness. Complete required RAGAS metrics, numerical/citation checks, and suitable AgentEvals trajectory checks through verified local integrations.
 - **Demonstration/exit:** unfamiliar questions work through the browser; evaluation reports contain actual outputs, sample sizes, failures, and recorded configurations. Compare against a simple baseline, inspect judge disagreements, and run local failure/concurrency/container checks. Resolve material local integration/evaluation gaps before deployment acceptance.
-- **Boundary:** formal evaluation reflects capabilities demonstrated in earlier increments. Hosted reporting is optional; production-provider comparisons and cloud measurements remain M12.
+- **Boundary:** formal evaluation reflects capabilities demonstrated in earlier increments. Hosted reporting is optional; production-provider comparisons and cloud measurements remain M13.
 
-### M12 — Provider acceptance, deployment, and submission
+### M13 — Provider acceptance, deployment, and submission
 
-- **Inputs/dependency:** accepted M11 local release and evaluation evidence.
+- **Inputs/dependency:** accepted M12 local release and evaluation evidence.
 - **Scope:** verify current Nebius/second-provider access, model capabilities, pricing, and budgets; wire and exercise both real providers locally. Re-run supported questions/evaluations, measure routing quality/latency/cost, and adjust the policy from those results. Deploy to Cloud Run, then retest public access, SSE/citations/traces, arbitrary reasonable queries, cold/warm behavior, concurrency, and partial failures.
 - **Demonstration/exit:** provide the working URL and actual deployment evidence; finish factual architecture/evaluation reports, setup/deploy/provider documentation, dependency pins, placeholder configuration, and the secret-free submission archive. Verify external persistence only if durable memory was added and promised.
 - **Final step — Rylan Wade:** after deployment and deployed retesting, supply the personal 200–300-word `PROCESS_LOG.md` across its four required sections, then include it in the archive. Follow the final completion checklist; agents do not invent his reflection or mark submission complete while it is missing.

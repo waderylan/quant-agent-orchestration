@@ -1,7 +1,7 @@
 # M4 — Local container acceptance
 
 - Owner: Rylan Wade.
-- Status: implemented and verified locally. Cloud Run acceptance is pending under M12.
+- Status: implemented and verified locally. Cloud Run acceptance is pending under M13.
 - Evidence: [container checks](../research/M4_CONTAINER_RESULTS.json) and [Chromium checks](../research/M4_BROWSER_RESULTS.json). These are local Docker observations, not cloud measurements or formal evaluations.
 
 ## Runtime and authentication

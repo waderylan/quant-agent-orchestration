@@ -3,6 +3,7 @@
 - Owner: Rylan Wade.
 - Status: M3 local filings research is implemented and verified; accepted. M1/M2 are verified and M2 is accepted. Local Docker, Financial Data, and Quant pass. Risk Summary, full cooperation, formal evaluations, and deployment are unimplemented.
 - Contract: [assignment](assignment/Assignment_2_Description.md), [project scope](planning/PROJECT_SPEC.md), and [M3 demonstration](planning/M3_FIRST_RAG_RESEARCH_DEMO.md).
+- Planned sequence: M7 Risk Summary, then [M8 Buy-Side Analyst](planning/M8_BUY_SIDE_ANALYST.md) with Twelve Data/Alpha Vantage/Tavily MCP and bounded valuation handoffs; M9 generalizes cooperation across five workers; M10 expands current research and shared source MCP. These planned integrations are absent from the implemented graph below.
 
 ## Local request path
 

@@ -5,7 +5,7 @@
 - Owner: Rylan Wade.
 - Implemented scope: capability-constrained request planning, a bounded Data → Research → Quant handoff for supported annual revenue components, explicit missing-input follow-up, selected-company correction, and source-checked earnings ranking.
 - [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) defines the company/fiscal windows and verified original-source net-income values. Fiscal labels identify company years; they do not align reporting dates across companies.
-- This workflow does not implement M7 Risk Summary or M8's general task planner, arbitrary multi-worker investigation, or recovery loop. Live research, shared MCP, deployment-provider routing, formal evaluation, and cloud deployment remain pending.
+- This workflow does not implement M7 Risk Summary or M9's general task planner, arbitrary multi-worker investigation, or recovery loop. Live research, shared MCP, deployment-provider routing, formal evaluation, and cloud deployment remain pending.
 
 ## Request routing and evidence gaps
 

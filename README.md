@@ -8,7 +8,7 @@
 - Verified corpus: **46/46 documents** — 36 annual/quarterly reports, nine Q4/full-year earnings releases, and AMD's FY2025 amendment. No collection gaps. The CPU MiniLM/Chroma index contains **11,764 chunks**; its active manifest records the verified count and fingerprint.
 - Available structured figures: consolidated US GAAP revenue, gross profit, operating income/loss, net income/loss attributable to parent, and operating cash flow, with exact fiscal intervals and original accession provenance. Quant computes checked growth/margins, revenue shares, percentage-point changes, and compatible quarter-only amounts, with CSV/PNG/code/ledger exports. Revenue-component arithmetic currently supports Qualcomm's annual automotive/handsets/IoT tables.
 
-Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, bounded Quant execution, Data-to-Quant cooperation, and local Docker are implemented and verified. Risk Summary, full task-driven cooperation, live/shared MCP, multi-provider routing, and deployment remain unimplemented.
+Company research requires matching financial periods, checking metric definitions, and inspecting the passages behind management's explanations. The selected design uses a LangGraph supervisor with five specialists: Filings Research, Financial Data, Financial Analysis / Quant, Risk Summary, and Buy-Side Analyst. M3 implements Filings Research, a minimal supervisor, local semantic RAG, exact source inspection, and browser answer-token streaming. Financial Data, bounded Quant execution, Data-to-Quant cooperation, and local Docker are implemented and verified. Risk Summary, Buy-Side Analyst, full task-driven cooperation, live/shared MCP, multi-provider routing, and deployment remain unimplemented.
 
 ## Run local research
 
@@ -76,13 +76,14 @@ uv run --locked pytest -q
 - Nebius Token Factory is selected for deployment generation; NVIDIA-hosted NIM is tentative. Exact model IDs, access, budgets, and routing thresholds are unverified.
 - Runtime-provider generation calls and separate paid judges are deferred to final integration. Cloud Run deployment follows local acceptance.
 - Formal evaluations are unstarted and follow working research/financial-analysis demonstrations.
-- Local startup and demonstrations are runnable below. Local Docker commands and evidence are in [M4 acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md); cloud deployment remains M12 work.
+- Local startup and demonstrations are runnable below. Local Docker commands and evidence are in [M4 acceptance](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md); cloud deployment remains M13 work.
 
 ## Documentation
 
 | Document | Current role |
 | --- | --- |
 | [Project spec](docs/planning/PROJECT_SPEC.md) | Selected scope, architecture direction, development constraints, and open decisions. |
+| [M8 Buy-Side Analyst plan](docs/planning/M8_BUY_SIDE_ANALYST.md) | Planned valuation workflow with Twelve Data, Alpha Vantage, and Tavily MCP; access gates, checked calculations, and acceptance criteria. |
 | [M1 feasibility](docs/planning/M1_SCOPE_AND_SOURCE_FEASIBILITY.md) | Dated source evidence, financial inputs, access limitations, and filing inventory. |
 | [M2 preparation](docs/planning/M2_SOURCE_COLLECTION_AND_PREPARATION.md) | Verified corpus, extraction decisions, inspection commands, future collection, and limits. |
 | [M4 container](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) | Verified local Docker, authenticated host generation, isolation, and cancellation. |
@@ -123,4 +124,4 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 - Checked arithmetic includes same-period operating cash flow/net income, Qualcomm shares with consolidated or QCT denominators, a component-doubling scenario with other revenue unchanged, and USD-to-EUR conversion at an explicit user rate. Assumptions remain visible in the ledger. [PM workflow contracts](docs/planning/PM_WORKFLOW_CORRECTNESS.md) specify forms and limits.
 - Try Qualcomm/FY2025: “How much of Qualcomm's revenue in FY2025 was from automotive?” For company earnings, select all four companies/FY2024/FY2025 and ask: “Which company had the largest earnings growth from 24 to 25? What is the number?” Earnings means parent-attributable GAAP net income; percentage rankings exclude zero/loss baselines and retain actual fiscal dates.
 - Programs use an import/call/loop-free arithmetic subset with a three-second execution deadline. Figures remain original-report GAAP observations; known revision conflicts and incompatible comparisons fail explicitly. [M6 details](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) provide the full contract and native/Docker verification commands.
-- M7–M12 and formal evaluation remain pending. The next implementation milestone is Risk Summary; further work requires feedback and authorization.
+- M7–M13 and formal evaluation remain pending. Next: M7 Risk Summary, then M8 Buy-Side Analyst with Twelve Data, Alpha Vantage, and Tavily MCP. The detailed M8 plan requires verified data access and checked multiples/scenarios. Further implementation requires feedback and authorization.

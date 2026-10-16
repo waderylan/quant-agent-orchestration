@@ -24,7 +24,7 @@
 
 - `prompts/financial_data.md` supplies the role. `query_financials` returns scoped figures and gaps; `inspect_observation` exposes registered evidence. Company/year filters cannot exceed the request scope. The worker cannot call research or execution tools.
 - Initial query filters identify explicitly named Q1–Q4 and quarter/YTD intent; the model can refine supported filters. Entirely missing scoped results return a coverage gap before generation. Q4-only figures need Quant derivation.
-- The minimal supervisor uses a visible provisional routing rule: structured figure requests select Financial Data; explanatory/disclosure questions select Filings Research. Full task-driven multi-worker cooperation remains M8 work.
+- The minimal supervisor uses a visible provisional routing rule: structured figure requests select Financial Data; explanatory/disclosure questions select Filings Research. Full task-driven multi-worker cooperation remains M9 work.
 - Codex generation traces identify Financial Data separately. A completed generated answer requires actual tool use and registered `[F1]` citations. These checks establish evidence identity, not comprehensive claim-level faithfulness.
 - The browser links financial citations to observation metadata, exact USD figures, dates, tags, original accessions, revision evidence, derivation inputs, collected originals, and the hash-checked collected SEC snapshot. No financial tables are scraped or generated during a chat request.
 - HTTP: `/api/financial/observations/{id}` and `/api/financial/snapshots/{sha256}`. Unknown identifiers return 404. Snapshot delivery rechecks its content hash.

@@ -1,7 +1,7 @@
 # Multi-company filing research
 
 - Owner: Rylan Wade.
-- Scope: the existing Filings Research worker, scoped retrieval, and local subscription transport. M7–M12 remain unstarted.
+- Scope: the existing Filings Research worker, scoped retrieval, and local subscription transport. M7–M13 remain unstarted.
 
 ## Retrieval and answer contract
 

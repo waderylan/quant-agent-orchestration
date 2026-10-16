@@ -165,9 +165,9 @@
 | Judge model, dataset sizes/splits, calibration, integration budgets | Deferred; no paid judges, benchmark, scores, or thresholds. | First model-judged evaluations |
 | Quant execution limits / allowed libraries | Restricted arithmetic interpreter, isolated process, three-second deadline, Linux resource bounds, independent financial/lineage checks, and application-controlled Matplotlib. | M6 verified |
 | Optional hosted LangSmith reporting | Deferred; no hosted experiment uploads. | Requested hosted integration |
-| Brief/chart design and source inspection | Research passages, financial observations, formulas, source lineage, CSV tables, and PNG charts are implemented. Broader presentation refinement remains M11 work. | M3–M6 verified; M11 refinement pending |
+| Brief/chart design and source inspection | Research passages, financial observations, formulas, source lineage, CSV tables, and PNG charts are implemented. Broader presentation refinement remains M12 work. | M3–M6 verified; M12 refinement pending |
 | Conversation memory / durability | Initial requests remain self-contained; future memory decision deferred. | Any multi-turn or persistence promise |
-| Refresh policy / current-source freshness | Explicit source and financial-snapshot CLI refresh are implemented. Saved analysis inputs remain frozen. No automatic refresh promise; live-source freshness policy remains M9 work. | Live-source freshness promises |
+| Refresh policy / current-source freshness | Explicit source and financial-snapshot CLI refresh are implemented. Saved analysis inputs remain frozen. M8 defines market/estimate/current-evidence freshness for Buy-Side Analyst; M10 generalizes current-source research. No automatic refresh promise. | Live-source freshness promises |
 | Cloud Run resources/concurrency/latency | Deferred; no deployment or performance measurements. | Final deployment acceptance |
 | Product name / broader coverage | Deferred; four-company initial scope only. | Feedback on working workflows |
 
@@ -183,7 +183,7 @@
 - The filing inventory contains 33 rows. Markdown whitespace, encoding, and code-fence checks pass.
 - Source bodies, SEC metadata snapshots, prepared text, and run manifests reside in ignored `data/corpus/`. The tracked inventory, CLI, lockfile, and compact evidence reports reproduce collection. RAG ingestion indexes all 41 sources into 10,681 chunks.
 - Filings Research, a minimal supervisor, direct Codex generation, RAG, browser SSE, and local Docker are implemented and verified. Financial Data and Quant are implemented and verified. Risk Summary, live/shared MCP, multi-provider routing, deployment, and formal evaluations remain pending.
-- M1–M6 are implemented and verified; M2 and M3 are accepted. M7–M12 remain pending; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
+- M1–M6 are implemented and verified; M2 and M3 are accepted. M7–M13 remain pending; see the [milestone skeleton](PROJECT_SPEC.md#milestones).
 
 ### Inspection path
 

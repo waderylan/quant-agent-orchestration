@@ -16,7 +16,7 @@
 - Financial Data uses its own prompt and query/inspection tools to establish source inputs. The graph passes registered observations to Quant and suppresses the intermediate Data answer from final-answer tokens. Actual assignments, tools, evidence, and the handoff remain inspectable.
 - Quant has a distinct prompt, `run_analysis`, `inspect_calculation`, and shared `report_outcome`. It generates an arithmetic Python program, executes it through the bounded interpreter, inspects results, and streams a cited answer or passes checked context to Research when an explanation is requested.
 - A direct Quant CLI run supplies source-checked observations without invoking the supervisor/Data model/browser. Direct-role evidence is separate from actual graph/application/browser evidence.
-- The graph has three implemented specialists: Filings Research, Financial Data, and Quant. Risk Summary and the full task-driven cooperation/follow-up/recovery design remain M7/M8 work. This increment supplies a focused Data-to-Quant dependency path.
+- The graph has three implemented specialists: Filings Research, Financial Data, and Quant. Risk Summary and the full task-driven cooperation/follow-up/recovery design remain M7/M9 work. This increment supplies a focused Data-to-Quant dependency path.
 
 ## Execution contract
 

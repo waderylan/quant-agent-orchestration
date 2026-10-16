@@ -12,7 +12,7 @@ The selected product helps users understand what changed in a public company, wh
 
 Company research requires navigating long disclosures, matching financial periods, checking metric definitions, and deciding whether current developments affect reported conditions. The intended research brief connects disclosures, financial observations, checked calculations, and dated current reporting.
 
-The product is a research tool. Its initial scope excludes trading, personalized buy/sell recommendations, forecasts, market quotes, price-move explanations, valuation, watchlists, and background alerts.
+The product is a research tool. [M8 Buy-Side Analyst](../planning/M8_BUY_SIDE_ANALYST.md) plans dated market prices, analyst estimates, relative valuation, and explicit scenarios through Twelve Data, Alpha Vantage, and Tavily MCP. Trading, personalized portfolio recommendations, autonomous forecasts, watchlists, and background alerts remain outside scope.
 
 ## Selected coverage
 
@@ -51,12 +51,13 @@ The selected frontend design is FastAPI-served vanilla HTML/JS with SSE answer t
 | Financial Data | Select comparable observations with company, dates, units, definitions, and filing identity. | Structured financial-data and filing-metadata queries. |
 | Financial Analysis / Quant | Produce checked calculations and inspectable tables/charts. | Bounded analysis-code execution over supplied observations. A restricted arithmetic interpreter, isolated execution, independent financial/lineage checks, and hashed CSV/PNG/code/ledger exports are implemented. |
 | Risk Summary | Compare versions of risk disclosures and distinguish added, removed, changed, and relocated language. | Risk-section alignment/comparison and the same source-inspection MCP tool used by Filings Research. |
+| Buy-Side Analyst | Assess relative valuation, peer premiums/discounts, and conditional upside/downside. Planned for M8. | Market/estimate snapshot and valuation-premise tools using Twelve Data, Alpha Vantage, and Tavily MCP; checked arithmetic from Quant. |
 | Supervisor | Coordinate tasks, direct bounded follow-up, handle failures, and synthesize cited evidence. | LangGraph delegation and task-state inspection. |
 
-- The selected design contains four specialized workers and one supervisor. Each worker requires distinct prompts and meaningful tool access.
+- The selected design contains five specialized workers and one supervisor. Each worker requires distinct prompts and meaningful tool access.
 - Risk Summary requires document comparison; a repeated filings summary does not satisfy that role.
 - Generation routing is shared infrastructure. Evaluation runs outside the application and is not an additional agent.
-- Filings Research and a minimal scope/delegation supervisor are implemented. Financial Data is implemented with original-accession structured observations and direct/browser/Docker checks. Quant and Data-to-Quant cooperation are implemented. Risk Summary, full cooperation, live retrieval, and shared MCP remain unimplemented.
+- Filings Research and a minimal scope/delegation supervisor are implemented. Financial Data is implemented with original-accession structured observations and direct/browser/Docker checks. Quant and Data-to-Quant cooperation are implemented. Risk Summary, Buy-Side Analyst, full cooperation, live retrieval, and shared MCP remain unimplemented.
 
 ## Intended investigations
 
