@@ -185,6 +185,8 @@ def has_unstructured_revenue_scope(question):
 
 
 def plan_request(question):
+    if re.search(r"\brisks?\b|risk factors", question, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", question, re.I):
+        return RequestPlan("risk", "Risk Summary compares complete original risk sections, not search-hit omissions")
     metrics = requested_metrics(question)
     components = [
         name

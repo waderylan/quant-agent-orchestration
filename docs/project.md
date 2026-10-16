@@ -18,7 +18,7 @@ The selected companies are NVIDIA (NVDA), AMD, Intel (INTC), and Qualcomm (QCOM)
 
 Fiscal labels do not imply matching calendar periods. Comparisons display the actual dates. Qualcomm's reported gross profit is derived from revenue minus cost of revenue. AMD's amendment corrects FY2025 MD&A language and stays separate from the original filing.
 
-The application currently has a LangGraph supervisor and three specialists: Filings Research, Financial Data, and Financial Analysis / Quant. The selected full design adds Risk Summary and Buy-Side Analyst. [Milestones](milestones/README.md) give the authoritative implementation state. Additional companies and reporting formats require source checks and feedback.
+The application has a LangGraph supervisor and four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. The selected full design adds Buy-Side Analyst. [Milestones](milestones/README.md) give the authoritative implementation state. Additional companies and reporting formats require source checks and feedback.
 
 The assistant handles self-contained requests. It does not retain a conversation across turns, trade, recommend a personal portfolio, or claim a live price. Market snapshots, forward estimates, and valuation are planned for Buy-Side Analyst. Current developments and shared source MCP are planned separately. All claims of freshness need dated source evidence.
 

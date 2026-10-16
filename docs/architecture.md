@@ -1,6 +1,6 @@
 # Architecture
 
-The application is a FastAPI browser chat backed by a LangGraph supervisor, Filings Research, Financial Data, and Financial Analysis / Quant. Each request has explicit company/year scope and an isolated evidence registry. [Project](project.md) defines coverage; [milestones](milestones/README.md) define status.
+The application is a FastAPI browser chat backed by a LangGraph supervisor, Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. Each request has explicit company/year scope and an isolated evidence registry. [Project](project.md) defines coverage; [milestones](milestones/README.md) define status.
 
 ```mermaid
 flowchart LR
@@ -8,6 +8,8 @@ flowchart LR
   API --> S[Scope supervisor]
   S --> R[Filings Research]
   S --> D[Financial Data]
+  S --> RS[Risk Summary]
+  RS --> V
   D --> Q[Quant]
   D -->|annual filing inputs| R
   R -->|checked extraction| Q
@@ -33,6 +35,7 @@ flowchart LR
 - `data/source_inventory.json` selects 46 original company documents. The collector verifies identities, retrieval URLs, body/extraction hashes, and versions. AMD's amendment stays separate; quarterly risks retain annual context. Explicit refresh requires reingestion and application restart.
 - The persistent Chroma index has 11,764 chunks, 220 WordPiece tokens with 40 overlap. CPU ONNX MiniLM generates normalized 384-dimensional embeddings; search uses cosine distance. The active manifest fingerprints settings and source metadata, so stale or corrupt indexes fail before retrieval. Chunks preserve exact prepared-text character offsets.
 - Retrieval requires company/year filters; form, section, and version can narrow it. Search defaults to six passages, bounded to 1–12. Initial augmentation gets four passages per selected pair. Comparison search retrieves four per pair, single-pair search six, and reports empty pairs. Inspection returns exact text plus bounded context.
+- Risk-change questions select Risk Summary, whose distinct tools inspect complete original sections, page subject alignment, and register added/removed/changed/relocated/unchanged wording. Both full inventories enter bounded context; candidate similarity never establishes absence. Annual absence needs a complete original 10-K; quarterly context uses the preceding annual. Exact span citations recheck hashes through `/api/risks/{document_id}`. State carries `risk_sources`, `risk_changes`, and `risk_answer`. [M7](milestones/risk-summary/README.md) owns limits and classification rules.
 - Research generation runs through local Codex app-server with a fresh request thread. Verified local CLI: 0.162.1; configured default model: gpt-6.1-sol. It gets 180 seconds and `min(24, max(8, 3 × pairs))` tool calls; other phases get eight. At most two denied extra calls allow final synthesis before hard failure. Two turns can run per process. CLI authentication stays on the host.
 
 ## Financial observations and analysis

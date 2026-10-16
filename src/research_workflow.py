@@ -59,6 +59,9 @@ TOOLS = [
 
 
 class State(TypedDict, total=False):
+    risk_sources: dict
+    risk_changes: list[dict]
+    risk_answer: str
     question: str
     companies: list[str]
     years: list[int]
@@ -377,6 +380,8 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     if worker == "data"
                     else "Financial Data → Financial Analysis / Quant"
                     if worker == "analysis_data"
+                    else "Risk Summary"
+                    if worker == "risk"
                     else "Filings Research",
                     "companies": state["companies"],
                     "years": state["years"],
@@ -411,6 +416,10 @@ def graph(index, *, model_stream=codex_stream, financials=None):
         return await research_turn(
             index, state, get_stream_writer(), model_stream=model_stream
         )
+
+    async def risk(state):
+        from src.risk_summary import risk_turn
+        return await risk_turn(index, state, get_stream_writer(), model_stream=model_stream)
 
     async def data(state):
         from src.financial_workflow import financial_turn
@@ -534,6 +543,7 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     workflow = StateGraph(State)
     workflow.add_node("supervisor", supervisor)
     workflow.add_node("research", research)
+    workflow.add_node("risk", risk)
     workflow.add_node("data", data)
     workflow.add_node("analysis_data", analysis_data)
     workflow.add_node("quant", quant)
@@ -544,6 +554,7 @@ def graph(index, *, model_stream=codex_stream, financials=None):
         "supervisor", lambda s: "finish" if s.get("error") else s["worker"]
     )
     workflow.add_edge("research", "finish")
+    workflow.add_edge("risk", "finish")
     workflow.add_conditional_edges("data", data_destination)
     workflow.add_conditional_edges("analysis_data", data_destination)
     workflow.add_conditional_edges(

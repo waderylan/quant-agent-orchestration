@@ -93,6 +93,15 @@ def original(document_id: str):
     )
 
 
+@app.get("/api/risks/{document_id}")
+def risk_source(document_id: str, start: int, end: int):
+    from src.risk_summary import inspect_span
+    try:
+        return inspect_span(app.state.index, document_id, start, end)
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
 @app.get("/api/financial/observations/{observation_id}")
 def financial_observation(observation_id: str):
     try:

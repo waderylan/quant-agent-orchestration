@@ -10,7 +10,7 @@ This is the authoritative order and status. Completed records describe verified 
 | M4 | [Local container](local-container/README.md) | Verified |
 | M5 | [Financial Data](financial-data/README.md) | Verified |
 | M6 | [Financial Analysis / Quant](quant/README.md) | Verified |
-| M7 | [Risk Summary](risk-summary/README.md) | Next |
+| M7 | [Risk Summary](risk-summary/README.md) | Verified |
 | M8 | [Buy-Side Analyst](buy-side-analyst/README.md) | Planned |
 | M9 | [Supervisor cooperation](supervisor/README.md) | Planned |
 | M10 | [Live research and shared MCP](live-research/README.md) | Planned |

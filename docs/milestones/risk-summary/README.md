@@ -1,25 +1,20 @@
-# M7 — Risk Summary
+﻿# M7 — Risk Summary
 
-Owner: Rylan Wade. This milestone adds a distinct Risk Summary specialist that answers how a company's disclosed risks changed, with both filing passages openable from the answer. The [milestone index](../README.md) owns status and order.
+Owner: Rylan Wade. The [milestone index](../README.md) owns status.
 
-## Scope and dependencies
+Risk Summary has a distinct prompt and three tools: exact risk inspection, paged alignment candidates, and classification registration. It reads hash-checked complete original risk sections independently of top-k retrieval. Complete inventories enter generation context, capped at 600,000 characters; larger requests retain an explicit gap. Generation allows 16 tool calls and the existing deadline and cancellation contract.
 
-- Use the verified [filing corpus](../../project.md), exact passage inspection, request scope, citations, and SSE trace. Start with annual FY2024/FY2025 comparisons for NVDA, AMD, INTC, and QCOM; NVIDIA FY2026 is also available. Display actual fiscal dates.
-- Compare original risk sections with the corresponding original sections. AMD's FY2025 10-K/A corrects MD&A and does not replace its original risks. A 10-Q risk section may contain only updates, so an omitted annual paragraph in a quarter is not proof of removal.
-- Add a separate role prompt, bounded tools, and a graph route for risk questions. M9 owns general five-worker planning; M10 owns live sources and shared MCP. This worker initially uses verified local filings.
+Original 10-K comparisons support NVDA FY2024–FY2026 and AMD, INTC, QCOM FY2024–FY2025. Citations retain accession, form/version, actual fiscal dates, complete-section bounds, text hash, exact offsets, and original download. AMD's FY2025 amendment does not replace original risks. Quarterly requests inspect the requested 10-Q and preceding annual inventory; missing prior context stays missing. Quarterly omission never proves annual removal.
 
-## Work to implement
+Alignment matches whitespace/page-furniture-normalized exact wording globally. Remaining blocks receive subject-overlap candidates ranked by token sequence similarity; 0.55 admits a navigation candidate, not a risk classification. Exact wording can be unchanged or relocated according to inspected subject context. Rephrasing is changed. Added/removed wording needs a complete original annual opposite-side citation and absence rationale; existing exact language is rejected. A missing phrase does not prove new economic exposure. Semantic classification and materiality remain model judgments.
 
-- Retrieve and inspect the complete relevant risk sections, retaining company, fiscal window, filing form, accession, version, section, and exact text offsets. A search hit alone cannot establish that a risk disappeared.
-- Align passages by subject before comparing wording. Classify a supported change as **added, removed, changed, relocated, or unchanged**. For each material classification, link the before/after passages or state precisely which complete section was checked for an absence. Explain why a moved or rephrased paragraph is not a new risk.
-- Produce a short risk-change brief: material changes first, stable risks where relevant, management's stated context if present, and unresolved cases. Distinguish disclosure language from the assistant's interpretation. Say “insufficient evidence” when a section or filing is unavailable.
-- Keep source IDs request-local and hash-checked. Reuse the existing completion and partial-result contract, bounded generation, cancellation, and browser citation viewer.
+The brief prioritizes material changes, stable disclosures, management context, and unresolved cases. Classification records preserve both source IDs. `/api/risks/{document_id}?start=...&end=...` rechecks hashes and bounds and returns exact text with context. The existing browser citation viewer opens it. Missing sections, stale/corrupt data, unsupported windows, incomplete generation, and worker failure remain explicit.
 
-## Acceptance evidence
+```powershell
+uv run --locked pytest -q
+uv run --locked python scripts/demo_risk.py --direct
+uv run --locked python scripts/start_local_container.py
+uv run --locked python scripts/demo_risk.py --url http://127.0.0.1:8084 --output artifacts/m7-docker.json
+```
 
-1. A direct Risk Summary worker run and a full graph/API/browser run show distinct prompt/tool use, route trace, cited before/after passages, and inspectable originals. Local Docker runs the same path.
-2. Reviewed cases cover at least two companies and an annual year-over-year comparison, a relocated/reworded paragraph, AMD's amendment, and a quarterly update. Record expected passages and why each label is justified.
-3. Missing sections, unsupported years, corrupted/stale index data, model/tool failure, and document prompt injection yield an explicit partial, gap, or failure without fabricated change claims. Existing Research/Data/Quant routes still pass.
-4. Update [architecture](../../architecture.md) with the worker, tools, state handoff, and limitations; put dated run evidence under this milestone's `evidence/`.
-
-Useful questions: “What changed in AMD's risk factors from FY2024 to FY2025?” and “Did Qualcomm add a customer concentration risk, or move existing language?” Define exact comparison rules and any similarity thresholds from inspected filings before treating a diff score as evidence. Formal risk-label scoring belongs to M12.
+[Acceptance evidence](evidence/M7_ACCEPTANCE_2026-10-16.json) separates direct subscription generation, real filing API/graph turns, native Chromium, local Docker/Chromium, and synthetic failures. The AMD review distinguishes expanded export controls, infrastructure-support commitments, rephrased competition, and acquisition-stage changes. Qualcomm customer concentration persists across both complete annual sections. The quarterly AMD case rejects removal from omission. An actual generation run ignores an injected document recommendation. Fixture checks cover exact relocation, missing sections, corrupt data, annual/quarter absence rules, deadline failure, and existing route selection. Formal risk-label scoring remains M12.
