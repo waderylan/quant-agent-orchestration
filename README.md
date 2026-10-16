@@ -25,7 +25,7 @@ uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 - Research comparisons search each selected company/year separately within a single tool request. A scope-dependent 8–24 call limit, remaining-call notices, and cited partial findings bound the investigation. [Comparison research](docs/planning/RESEARCH_COMPARISONS.md) records policy, demonstrations, and limits.
 - Explicitly select the companies and both fiscal years for comparisons. The page displays the active scope; a company mismatch offers a correction that preserves compatible selected years.
 - Local embeddings use CPU ONNX MiniLM; first ingestion downloads its pinned model. Chroma and corpus data are gitignored reproducible artifacts. No paid generation APIs are called by this local profile.
-- Unsupported companies/years and explicit current requests receive coverage explanations. Each question is self-contained. Supported consolidated figures use Data; numerical requests use Data then Quant; filing-only figures use Research. Supported annual component requests pass Data → Research → Quant. Missing structured inputs trigger one bounded Research follow-up and remain partial if numerical evidence cannot be verified. Live research and conversation memory are unavailable.
+- Unsupported companies/years and genuine live requests receive coverage explanations; explicit historical demand questions remain supported. Each question is self-contained. Supported numerical requests use Data then Quant, followed by Research when an explanation is requested. Supported annual component requests pass Data → Research → Quant. Partial answers retain useful sources and list missing outputs; ambiguous questions request clarification. Live research and conversation memory are unavailable.
 
 ```powershell
 uv run --locked python scripts/research.py status
@@ -88,6 +88,7 @@ uv run --locked pytest -q
 | [M4 container](docs/planning/M4_LOCAL_CONTAINER_ACCEPTANCE.md) | Verified local Docker, authenticated host generation, isolation, and cancellation. |
 | [M6 Quant](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) | Bounded generated programs, independent numerical validation, tables/charts, source lineage, and evidence. |
 | [Capability routing](docs/planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) | Revenue-component source extraction, checked shares, earnings ranking, scope corrections, and regression evidence. |
+| [PM workflow correctness](docs/planning/PM_WORKFLOW_CORRECTNESS.md) | Mixed numerical/explanation handoffs, QCT shares, cash conversion, explicit scenarios/FX, completion contracts, and 30-chat evidence. |
 | [Aligned fiscal coverage](docs/planning/ALIGNED_FISCAL_COVERAGE.md) | FY2024/FY2025 for all four companies, retained NVIDIA FY2026, and original-source parent earnings. |
 | [M5 financial data](docs/planning/M5_FINANCIAL_DATA_AGENT.md) | Observation selection, original-report policy, Data worker, inspection, and evidence. |
 | [M3 research](docs/planning/M3_FIRST_RAG_RESEARCH_DEMO.md) | Local RAG, direct Codex generation, browser/source inspection, and actual verification. |
@@ -119,6 +120,7 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 ```
 
 - The browser displays independently checked tables/charts and calculation citations. Inspect formulas, source inputs, original filings, and archived SEC snapshots; download CSV, PNG, generated code, and the exact ledger.
+- Checked arithmetic includes same-period operating cash flow/net income, Qualcomm shares with consolidated or QCT denominators, a component-doubling scenario with other revenue unchanged, and USD-to-EUR conversion at an explicit user rate. Assumptions remain visible in the ledger. [PM workflow contracts](docs/planning/PM_WORKFLOW_CORRECTNESS.md) specify forms and limits.
 - Try Qualcomm/FY2025: “How much of Qualcomm's revenue in FY2025 was from automotive?” For company earnings, select all four companies/FY2024/FY2025 and ask: “Which company had the largest earnings growth from 24 to 25? What is the number?” Earnings means parent-attributable GAAP net income; percentage rankings exclude zero/loss baselines and retain actual fiscal dates.
 - Programs use an import/call/loop-free arithmetic subset with a three-second execution deadline. Figures remain original-report GAAP observations; known revision conflicts and incompatible comparisons fail explicitly. [M6 details](docs/planning/M6_FINANCIAL_ANALYSIS_QUANT_AGENT.md) provide the full contract and native/Docker verification commands.
 - M7–M12 and formal evaluation remain pending. The next implementation milestone is Risk Summary; further work requires feedback and authorization.

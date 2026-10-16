@@ -1,0 +1,92 @@
+{
+  "kind": "Generated programs replayed against frozen inputs and user assumptions; independent validator; no model generation",
+  "checks": [
+    {
+      "bundle_id": "df89fbdfd7a3ae85ee9daa63f9fcbe9b55fe9161884e2fa0758931f4384911c5",
+      "calculations": 2,
+      "passed": true
+    },
+    {
+      "bundle_id": "a3060092ba64afe03660edee140e3af33336dd12ea5bd2133c1e1631f6b592e8",
+      "calculations": 5,
+      "passed": true
+    },
+    {
+      "bundle_id": "84c18372a6e16c099d767b0608be3db1feaaa5ea044419a0c34a03dce3fabf24",
+      "calculations": 22,
+      "passed": true
+    },
+    {
+      "bundle_id": "17c91230c5f07d247f1b19c1839493d165fd09a03048af4683b64cd51a67df55",
+      "calculations": 5,
+      "passed": true
+    },
+    {
+      "bundle_id": "c0c02ecbfe89ea4536d018dad0dba52374496b4715878030286037c8b08aab80",
+      "calculations": 16,
+      "passed": true
+    },
+    {
+      "bundle_id": "677ee0f58e8f89ba3fdaf0986beb28c053b0e4da0fd0076af11d4551f198481b",
+      "calculations": 5,
+      "passed": true
+    },
+    {
+      "bundle_id": "30083236c93c1c357dc1cdd6691ed7af7a49702c4d239894cc8b914243302b8a",
+      "calculations": 6,
+      "passed": true
+    },
+    {
+      "bundle_id": "67a0a670f2163008e649f6e2f98d4abdeba9f7c968035df96c78b7267dc93f47",
+      "calculations": 3,
+      "passed": true
+    },
+    {
+      "bundle_id": "fd7cfa73ef84bf1320bbf9c866873210b993800bcfce6d5e67ccc616e8bfbacf",
+      "calculations": 1,
+      "passed": true
+    },
+    {
+      "bundle_id": "67eb7442aee26e8b43db683569189f7d1be73182a07d9674fc1a7de4853ab4cc",
+      "calculations": 2,
+      "passed": true
+    },
+    {
+      "bundle_id": "5553b5cd32d626534dfa1e8aa98919f93c4b667e661936359a93ba9adc401426",
+      "calculations": 2,
+      "passed": true
+    },
+    {
+      "bundle_id": "00594d22939654f690e2af7364b72e1a214d4a67046b751cdcdb2d3af3a60113",
+      "calculations": 4,
+      "passed": true
+    },
+    {
+      "bundle_id": "50ca1bae0f109e49a2cca2717b630dc8b1cc1b3e3d69a622b2930d630fce7211",
+      "calculations": 2,
+      "passed": true
+    },
+    {
+      "bundle_id": "504ce2c6586f636691db17bc3adc30d4366dbf6230b9869b19bd8377aa93d3fd",
+      "calculations": 1,
+      "passed": true
+    },
+    {
+      "bundle_id": "17a50245cf6fdc4bea94a243a97868859eff709c377db063dc779f7ebe03058a",
+      "calculations": 5,
+      "passed": true
+    },
+    {
+      "bundle_id": "4c2909443e3a1ecbdbbb5351e6c7958bc3eaad755448fc76a0df67e589ab3f76",
+      "calculations": 3,
+      "passed": true
+    },
+    {
+      "bundle_id": "19eecef965ca495b4014a808fe573c43c5c3aff96baed62f39b85b72276800b7",
+      "calculations": 1,
+      "passed": true
+    }
+  ],
+  "runtime_hashes_match": true,
+  "passed": true
+}

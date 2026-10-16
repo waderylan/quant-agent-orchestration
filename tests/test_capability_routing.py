@@ -20,12 +20,16 @@ Total QCT revenues 38,367 33,196 30,382
 @pytest.mark.parametrize(
     "question",
     [
-        "What share of QCT revenue was automotive in FY2025?",
         "Show Qualcomm adjusted automotive revenue",
     ],
 )
 def test_component_routing_never_silently_changes_requested_definition(question):
     assert plan_request(question).worker == "research"
+
+
+def test_supported_qct_denominator_is_preserved_in_the_request_plan():
+    plan = plan_request("What share of QCT revenue was automotive in FY2025?")
+    assert plan.worker == "data" and plan.revenue_denominator == "qct"
 
 
 def test_single_year_earnings_level_is_not_two_year_growth_ranking():
@@ -188,6 +192,45 @@ class FilingIndex:
         }
 
 
+def test_qct_extraction_and_calculation_enforce_requested_denominator(tmp_path):
+    from src.filing_financials import FilingRevenueTools
+    from src.quant_workflow import QuantTools
+
+    state = {
+        "companies": ["QCOM"],
+        "years": [2025],
+        "revenue_component": "automotive",
+        "revenue_components": ["automotive"],
+        "revenue_denominator": "qct",
+        "revenue_share": True,
+        "financial_sources": {"F1": total_observation()},
+    }
+    tools = FilingRevenueTools(FilingIndex(), None, state)
+    tools.research.register([tools.index.inspect("row")])
+    result = tools("extract_revenue_component", {"source_id": "S1"})
+    assert {row["metric"]: row["value"] for row in result["sources"]} == {
+        "revenue_component": 3_957_000_000,
+        "qct_revenue": 38_367_000_000,
+    }
+    with pytest.raises(ValueError, match="requested financial scope"):
+        tools("extract_revenue_component", {"source_id": "S1", "component": "handsets"})
+    quant = QuantTools(tools.financial.sources, ArtifactStore(tmp_path), request=state)
+    with pytest.raises(ValueError, match="denominator"):
+        quant(
+            "run_analysis",
+            {
+                "code": "results=[{'label':'wrong total','kind':'share','inputs':['F2','F1'],'value':values['F2']/values['F1']*100}]"
+            },
+        )
+    result = quant(
+        "run_analysis",
+        {
+            "code": "results=[{'label':'QCT share','kind':'share','inputs':['F2','F3'],'value':values['F2']/values['F3']*100}]"
+        },
+    )
+    assert result["calculations"][0]["metric"] == "automotive_qct_revenue_share"
+
+
 @pytest.mark.asyncio
 async def test_real_tool_graph_hands_missing_component_to_research_then_checked_quant(
     tmp_path, monkeypatch
@@ -214,6 +257,7 @@ async def test_real_tool_graph_hands_missing_component_to_research_then_checked_
             )
             yield {"type": "token", "data": "Hidden intermediate response"}
         else:
+            handler("report_outcome", {"status": "complete", "missing": []})
             handler(
                 "run_analysis",
                 {

@@ -164,6 +164,7 @@ async def test_research_keeps_cited_findings_and_marks_budget_limited_answer_par
     small_index,
 ):
     async def limited(prompt, tools, handler):
+        handler("report_outcome", {"status": "complete", "missing": []})
         yield {"type": "trace", "data": {"decision": "synthesize_existing_evidence"}}
         yield {"type": "token", "data": "Revenue evidence [S1]."}
 
@@ -283,6 +284,33 @@ async def test_asgi_send_failure_closes_generator_suspended_at_yield():
             disconnected_send,
         )
     assert closed.is_set()
+
+
+@pytest.mark.asyncio
+async def test_pure_clarification_does_not_require_filing_citations(small_index):
+    async def clarification(prompt, schema, handler):
+        handler(
+            "report_outcome",
+            {"status": "clarification", "missing": ["Which company and metric?"]},
+        )
+        yield {"type": "token", "data": "Which company and metric do you mean?"}
+
+    result = [
+        e
+        async for e in events(
+            small_index,
+            "What about the other one?",
+            ["AMD"],
+            [2025],
+            model_stream=clarification,
+        )
+    ]
+    assert result[-1]["data"] == {
+        "status": "needs_clarification",
+        "verified_citations": False,
+        "missing_outputs": ["Which company and metric?"],
+    }
+    assert not any(e["type"] == "error" for e in result)
 
 
 @pytest.mark.asyncio

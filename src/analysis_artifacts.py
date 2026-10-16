@@ -19,7 +19,7 @@ _plot_lock = threading.Lock()
 def chart_data(calculations):
     groups = {}
     for row in calculations:
-        scale = Decimal(1000000) if row["unit"] == "USD" else Decimal(1)
+        scale = Decimal(1000000) if row["unit"] in ("USD", "EUR") else Decimal(1)
         groups.setdefault((row["metric"], row["unit"]), []).append(
             {
                 "source_id": row["source_id"],
@@ -61,8 +61,8 @@ def render_chart(series):
             axis.invert_yaxis()
             axis.set_title(group["metric"].replace("_", " ").title())
             axis.set_xlabel(
-                "USD millions"
-                if group["unit"] == "USD"
+                group["unit"] + " millions"
+                if group["unit"] in ("USD", "EUR")
                 else group["unit"].replace("_", " ")
             )
         output = io.BytesIO()

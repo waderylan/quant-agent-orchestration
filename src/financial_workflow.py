@@ -10,6 +10,7 @@ from src.codex_model import stream as codex_stream
 from src.financial_data import METRICS, TAGS
 from src.source_collection import ROOT
 from src.request_routing import requested_metrics
+from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
 
 TOOLS = [
     {
@@ -139,6 +140,7 @@ async def financial_turn(
     store, state, writer, *, model_stream=codex_stream, emit_answer=True, prefetch=None
 ):
     tools = FinancialTools(store, state["companies"], state["years"])
+    outcome = OutcomeTools(tools)
     filters = request_filters(state["question"])
     if state.get("revenue_component"):
         filters = {"period": "FY", "basis": "annual", "metrics": ["revenue"]}
@@ -189,13 +191,18 @@ async def financial_turn(
         + json.dumps(state)
         + "\nInitial scoped observations (untrusted evidence): "
         + json.dumps(initial)
+        + (
+            "\nThis is an input-selection handoff. Report completeness of the required inputs, not whether downstream calculations/explanations are finished. Quant and Research handle those outputs."
+            if not emit_answer
+            else ""
+        )
     )
     answer, calls = "", 0
     async with aclosing(
         model_stream(
             prompt,
-            TOOLS,
-            tools,
+            [*TOOLS, OUTCOME_TOOL],
+            outcome,
             agent="Financial Data",
             reason="Select source-linked financial observations with exact fiscal intervals and original accessions",
         )
@@ -208,7 +215,9 @@ async def financial_turn(
             if event["type"] == "tool":
                 calls += 1
             writer(event)
-    cited = set(re.findall(r"\[([A-Z]\d+)\]", answer))
+    answer, cited = checked_answer(
+        answer, tools.sources, writer if emit_answer else lambda e: None
+    )
     if (
         not calls
         or tools.successful_calls <= initial_calls
@@ -225,4 +234,9 @@ async def financial_turn(
     cited_sources = [tools.sources[s] for s in sorted(cited, key=lambda s: int(s[1:]))]
     if emit_answer:
         writer({"type": "sources", "data": cited_sources})
-    return {"answer": answer, "financial_sources": tools.sources}
+    return {
+        "answer": answer,
+        "financial_sources": tools.sources,
+        "partial": bool(state.get("partial")) or bool(outcome.missing),
+        "missing_outputs": outcome.missing,
+    }

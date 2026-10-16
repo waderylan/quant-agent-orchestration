@@ -18,6 +18,7 @@ QCT_ROWS = {
     "automotive": "Automotive",
     "handsets": "Handsets",
     "iot": "IoT (internet of things)",
+    "qct_total": "Total QCT revenues",
 }
 
 
@@ -101,10 +102,44 @@ class FilingRevenueTools:
         self.financial = FinancialTools(store, state["companies"], state["years"])
         self.financial.register(list(state.get("financial_sources", {}).values()))
         self.extracted = set()
+        self.components = list(
+            state.get("revenue_components") or [state["revenue_component"]]
+        )
+        if (
+            state.get("revenue_denominator") == "qct" or len(self.components) > 1
+        ) and "qct_total" not in self.components:
+            self.components.append("qct_total")
+        self.max_tool_calls = self.research.max_tool_calls
 
     def __call__(self, name, arguments):
         if name != "extract_revenue_component":
             return self.research(name, arguments)
+        if (
+            not isinstance(arguments, dict)
+            or set(arguments) - {"source_id", "component"}
+            or "source_id" not in arguments
+        ):
+            raise ValueError(
+                "Extraction requires source_id and an optional requested component"
+            )
+        components = (
+            [arguments["component"]] if arguments.get("component") else self.components
+        )
+        if any(component not in self.components for component in components):
+            raise ValueError("Component exceeds the requested financial scope")
+        rows, gaps = [], []
+        for component in components:
+            try:
+                rows.append(
+                    self._extract({"source_id": arguments["source_id"]}, component)
+                )
+            except ValueError as error:
+                gaps.append({"component": component, "error": str(error)})
+        if not rows:
+            raise ValueError(json.dumps(gaps))
+        return {**rows[0], "sources": rows, "missing_components": gaps}
+
+    def _extract(self, arguments, component):
         if (
             not isinstance(arguments, dict)
             or set(arguments) != {"source_id"}
@@ -122,7 +157,6 @@ class FilingRevenueTools:
             raise ValueError(
                 "Verified revenue-component extraction currently supports original Qualcomm annual QCT tables only"
             )
-        component = self.state["revenue_component"]
         parsed = qct_revenue_row(
             self.index.text(document), document["fiscal_year"], component
         )
@@ -168,7 +202,7 @@ class FilingRevenueTools:
         }
         row.update(
             kind="financial_observation",
-            metric="revenue_component",
+            metric="qct_revenue" if component == "qct_total" else "revenue_component",
             component=component,
             parent_metric="revenue",
             parent_scope="consolidated",
@@ -189,7 +223,7 @@ class FilingRevenueTools:
         registered = self.financial.register([row])[0]
         # Before a bundle exists, inspection opens the actual retrieved passage.
         registered["inspection_url"] = f"/api/sources/{passage['chunk_id']}"
-        self.extracted.add((row["company"], row["fiscal_year"]))
+        self.extracted.add((row["company"], row["fiscal_year"], component))
         return registered
 
 
@@ -235,7 +269,10 @@ async def filing_revenue_turn(
             "description": "Independently extract the requested revenue component from a retrieved original annual table. The application verifies the row, year columns, scale, passage and matching consolidated filing; never supply a number.",
             "inputSchema": {
                 "type": "object",
-                "properties": {"source_id": {"type": "string"}},
+                "properties": {
+                    "source_id": {"type": "string"},
+                    "component": {"type": "string", "enum": list(QCT_ROWS)},
+                },
                 "required": ["source_id"],
                 "additionalProperties": False,
             },
@@ -248,7 +285,12 @@ async def filing_revenue_turn(
         + "\nRetrieved passages: "
         + json.dumps(tools.research.sources)
     )
-    expected = {(c, y) for c in state["companies"] for y in state["years"]}
+    expected = {
+        (c, y, component)
+        for c in state["companies"]
+        for y in state["years"]
+        for component in tools.components
+    }
     async with aclosing(
         model_stream(
             prompt,

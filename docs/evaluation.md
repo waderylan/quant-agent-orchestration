@@ -66,6 +66,8 @@
 
 ## Ordinary-query regression checks
 
+- [PM workflow correctness](planning/PM_WORKFLOW_CORRECTNESS.md) links 26 exploratory PM questions, four matched wording controls, the application retest, independent source/arithmetic/artifact audit, browser/container checks, and Linux execution fixtures. These are development regressions with actual outputs; no held-out model-quality score or judge-based evaluation is claimed.
+
 - [Capability routing](planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies the reported automotive question, company-scope mismatch, two-year consolidated comparison, and cross-company earnings ranking. Actual worker/application/browser evidence is separate from deterministic contract fixtures and formal evaluation.
 - The numerical reference for Qualcomm FY2025 automotive revenue is USD 3.957 billion divided by USD 44.284 billion consolidated revenue, approximately 8.9355%. FY2024 automotive is USD 2.910 billion; annual table year columns, units, and original accessions must agree with each source.
 - Parent-earnings ranking includes every selected company/year, independently checked positive-baseline growth, loss-baseline exclusions, actual fiscal dates, and the 53/52-week qualification. A source-reference status is not a claim-level model-quality score.

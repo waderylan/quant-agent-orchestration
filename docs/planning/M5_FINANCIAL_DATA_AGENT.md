@@ -1,5 +1,7 @@
 # M5 — Financial Data agent
 
+- [PM workflow contracts](PM_WORKFLOW_CORRECTNESS.md) define input-stage completion, numerical/explanation handoffs, expanded component rows, and visible missing outputs. Data assesses its requested inputs; final analysis completion belongs to the final worker.
+
 - Current extended coverage and parent-earnings observations are specified in [aligned coverage](ALIGNED_FISCAL_COVERAGE.md). [Capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) defines filing-only inputs and bounded missing-input follow-up. Dated M5 evidence retains its recorded sample and configuration.
 
 - Owner: Rylan Wade.

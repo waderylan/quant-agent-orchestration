@@ -376,6 +376,7 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
       }
       function event(type, data) {
         if (type === "token") $("answer").append(document.createTextNode(data));
+        else if (type === "answer") $("answer").replaceChildren(document.createTextNode(data));
         else if (type === "sources") displaySources(data);
         else if (type === "scope") {
           const button = document.createElement("button");
@@ -410,12 +411,19 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
           $("trace").textContent +=
             JSON.stringify({ event: type, data }, null, 2) + "\n";
         } else if (type === "complete") {
+          if (data.missing_outputs?.length) {
+            const missing = document.createElement("p");
+            missing.textContent = "Still needed: " + [...new Set(data.missing_outputs)].join("; ");
+            $("scope-help").append(missing);
+          }
           if (data.status !== "failed")
             $("status").textContent =
               data.status === "completed"
                 ? "Complete · source references checked"
                 : data.status === "coverage_gap"
                   ? "Coverage gap"
+                  : data.status === "needs_clarification"
+                    ? "Clarification needed"
                   : data.status === "partial"
                     ? "Partial answer · evidence gap"
                     : "Response unverified";

@@ -14,6 +14,7 @@ from langgraph.graph import END, START, StateGraph
 
 from src.codex_model import stream as codex_stream
 from src.source_collection import ROOT
+from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
 from src.request_routing import (
     COMPANY_ALIASES,
     mentioned_companies,
@@ -72,6 +73,18 @@ class State(TypedDict, total=False):
     earnings_ranking: bool
     needs_evidence: dict | None
     partial: bool
+    synthesize: bool
+    analysis_sources: dict
+    analysis_answer: str
+    missing_outputs: list[str]
+    revenue_components: list[str]
+    revenue_denominator: str
+    earnings_order: str
+    scenario: dict | None
+    required_calculations: list[str]
+    worker_notes: list[str]
+    clarification: bool
+    citation_verified: bool
 
 
 class ResearchTools:
@@ -180,9 +193,26 @@ def scope_error(question, companies, years, coverage):
         selected = ", ".join(COMPANY_ALIASES.get(c, (c,))[0] for c in companies)
         names = ", ".join(f"{COMPANY_ALIASES[c][0]} ({c})" for c in requested)
         return f"Selected companies: {selected}. Your question asks about {names}. Change Companies to match your question; keep the requested fiscal years selected."
-    if re.search(
-        r"\b(today|current|latest|this quarter|stock price|live)\b", question, re.I
-    ):
+    historical = bool(
+        re.search(
+            r"\b(historical|at that fiscal year.end|as of (?:FY)?20\d{2}|using only.*filing)\b",
+            question,
+            re.I,
+        )
+    )
+    temporal_request = re.sub(
+        r"\b(?:do not|don't)\s+(?:use|include|search|retrieve)\s+(?:any\s+)?(?:live|current|latest)(?:\s+(?:news|data|quotes|prices|information))?",
+        "",
+        question,
+        flags=re.I,
+    )
+    live = bool(
+        re.search(
+            r"\b(today|latest|this quarter|stock price|live)\b", temporal_request, re.I
+        )
+    )
+    current = bool(re.search(r"\bcurrent\b", temporal_request, re.I))
+    if live or (current and not historical):
         return "This historical corpus does not provide current/live coverage. Ask about a selected fiscal year."
     return ""
 
@@ -190,6 +220,8 @@ def scope_error(question, companies, years, coverage):
 async def research_turn(index, state, writer, *, model_stream=codex_stream):
     """Run the worker directly or as a graph node with the same prompts and tools."""
     sources = ResearchTools(index, state["companies"], state["years"])
+    outcome = OutcomeTools(sources)
+    analysis_sources = state.get("analysis_sources", {})
 
     # Retrieve separately for each company/year so one filing cannot monopolize comparisons.
     def retrieve(request):
@@ -212,6 +244,18 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             + "\nQuestion: "
             + state["question"]
             + (
+                "\nChecked financial context (use assigned F/C citations; do not recalculate or invent derived figures):\n"
+                + json.dumps(
+                    {
+                        "answer": state.get("analysis_answer"),
+                        "sources": analysis_sources,
+                        "unresolved_worker_notes": state.get("worker_notes", []),
+                    }
+                )
+                if analysis_sources
+                else ""
+            )
+            + (
                 "\nStructured input limitation: "
                 + json.dumps(state["needs_evidence"])
                 + ". Answer what the filings establish, explain any remaining gap, and do not perform unverified arithmetic."
@@ -228,7 +272,9 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
     writer({"type": "evidence", "data": {"sources": list(sources.sources.values())}})
     answer = ""
     exhausted = False
-    async with aclosing(model_stream(prompt, TOOLS, sources)) as model_events:
+    async with aclosing(
+        model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome)
+    ) as model_events:
         async for event in model_events:
             if event["type"] == "token":
                 answer += event["data"]
@@ -238,8 +284,16 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             ):
                 exhausted = True
             writer(event)
-    cited = set(re.findall(r"\[(S\d+)\]", answer))
-    invalid = cited - sources.sources.keys()
+    registered = {**sources.sources, **analysis_sources}
+    answer, cited = checked_answer(answer, registered, writer)
+    invalid = cited - registered.keys()
+    if outcome.status == "clarification" and not cited and answer.strip():
+        return {
+            "answer": answer,
+            "clarification": True,
+            "citation_verified": False,
+            "missing_outputs": outcome.missing,
+        }
     if invalid or not cited or not answer.strip():
         writer(
             {
@@ -248,7 +302,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             }
         )
         return {"answer": answer, "error": "Citation validation failed"}
-    for sid in cited:
+    for sid in cited & sources.sources.keys():
         inspected = await asyncio.to_thread(
             index.inspect, sources.sources[sid]["chunk_id"]
         )
@@ -258,7 +312,8 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
         {
             "type": "sources",
             "data": [
-                sources.sources[sid] for sid in sorted(cited, key=lambda s: int(s[1:]))
+                registered[sid]
+                for sid in sorted(cited, key=lambda s: (s[0], int(s[1:])))
             ],
         }
     )
@@ -266,7 +321,13 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
         limitation = "\n\n- Research reached its retrieval limit. These findings use the evidence collected; the requested comparison may be incomplete."
         answer += limitation
         writer({"type": "token", "data": limitation})
-    return {"answer": answer, "partial": bool(state.get("partial")) or exhausted}
+    return {
+        "answer": answer,
+        "partial": bool(state.get("partial")) or exhausted or bool(outcome.missing),
+        "missing_outputs": [*state.get("missing_outputs", []), *outcome.missing],
+        "clarification": outcome.status == "clarification",
+        "citation_verified": bool(cited),
+    }
 
 
 def select_worker(question):
@@ -321,7 +382,9 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                     "years": state["years"],
                     "reason": plan.reason
                     + (
-                        ". Earnings means GAAP net income attributable to parent; compare only positive-baseline percentage growth, with loss baselines identified separately."
+                        ". Earnings means GAAP net income attributable to parent; rank dollar changes including losses."
+                        if plan.earnings_ranking and plan.earnings_order == "dollars"
+                        else ". Earnings means GAAP net income attributable to parent; compare only positive-baseline percentage growth, with loss baselines identified separately."
                         if plan.earnings_ranking
                         else ""
                     ),
@@ -334,6 +397,12 @@ def graph(index, *, model_stream=codex_stream, financials=None):
             "revenue_component": plan.revenue_component,
             "revenue_share": plan.revenue_share,
             "earnings_ranking": plan.earnings_ranking,
+            "earnings_order": plan.earnings_order,
+            "revenue_components": list(plan.revenue_components),
+            "revenue_denominator": plan.revenue_denominator,
+            "synthesize": plan.synthesize,
+            "scenario": plan.scenario,
+            "required_calculations": list(plan.required_calculations),
             "needs_evidence": period_gap,
             "partial": bool(period_gap),
         }
@@ -389,7 +458,10 @@ def graph(index, *, model_stream=codex_stream, financials=None):
                 },
             }
         )
-        return {"financial_sources": result["financial_sources"]}
+        return {
+            "financial_sources": result["financial_sources"],
+            "worker_notes": result.get("missing_outputs", []),
+        }
 
     async def revenue_inputs(state):
         from src.filing_financials import filing_revenue_turn
@@ -421,7 +493,12 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     async def quant(state):
         from src.quant_workflow import quant_turn
 
-        return await quant_turn(state, get_stream_writer(), model_stream=model_stream)
+        return await quant_turn(
+            state,
+            get_stream_writer(),
+            model_stream=model_stream,
+            emit_answer=not state.get("synthesize"),
+        )
 
     def finish(state):
         writer = get_stream_writer()
@@ -431,12 +508,21 @@ def graph(index, *, model_stream=codex_stream, financials=None):
             {
                 "type": "complete",
                 "data": {
-                    "verified_citations": bool(state.get("answer"))
+                    **(
+                        {"missing_outputs": state["missing_outputs"]}
+                        if state.get("missing_outputs")
+                        else {}
+                    ),
+                    "verified_citations": state.get(
+                        "citation_verified", bool(state.get("answer"))
+                    )
                     and not state.get("error"),
                     "status": "coverage_gap"
                     if state.get("error") and not state.get("answer")
                     else "unverified"
                     if state.get("error")
+                    else "needs_clarification"
+                    if state.get("clarification")
                     else "partial"
                     if state.get("partial")
                     else "completed",
@@ -463,7 +549,12 @@ def graph(index, *, model_stream=codex_stream, financials=None):
     workflow.add_conditional_edges(
         "revenue_inputs", lambda s: "research" if s.get("needs_evidence") else "quant"
     )
-    workflow.add_edge("quant", "finish")
+    workflow.add_conditional_edges(
+        "quant",
+        lambda s: (
+            "research" if s.get("synthesize") and not s.get("error") else "finish"
+        ),
+    )
     workflow.add_edge("finish", END)
     return workflow.compile()
 

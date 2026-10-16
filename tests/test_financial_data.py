@@ -229,6 +229,7 @@ async def test_financial_worker_uses_distinct_tools_and_rejects_unregistered_cit
         assert {t["name"] for t in tool_schema} == {
             "query_financials",
             "inspect_observation",
+            "report_outcome",
         }
         result = handler("query_financials", {"metrics": ["revenue"]})
         yield {"type": "tool", "data": {"name": "query_financials"}}

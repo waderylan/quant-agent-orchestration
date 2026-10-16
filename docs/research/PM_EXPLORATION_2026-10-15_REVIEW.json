@@ -1,0 +1,53 @@
+{
+  "review_type": "Exploratory manual usefulness review, not a formal benchmark or model-judge score",
+  "runtime_revision": "ec0a44e9a9da9f923cbd5e749707d720c1f33993",
+  "definitions": {
+    "useful": "Addresses the important requested outcome with materially correct reviewed evidence; caveats are recorded separately.",
+    "boundary_handled": "Correctly identifies an unavailable or ambiguous request without inventing the missing information.",
+    "incomplete": "Provides useful inputs or limitations but fails to produce the requested numerical result.",
+    "workflow_failure": "Rejects a valid scope or gives a correct answer an erroneous verification outcome."
+  },
+  "cases": [
+    {"id":"P01","outcome":"useful","finding":"Correctly identifies NVIDIA operating-income growth and Intel loss-base limitation; shows company figures and accounting/segment qualifications. Research supplies numerical comparisons without a Quant ledger."},
+    {"id":"P02","outcome":"useful","finding":"Correctly separates Qualcomm's 5.7B deferred-tax valuation allowance from cash generation and customer demand; cites cash-flow and segment disclosures."},
+    {"id":"P03","outcome":"useful","finding":"Two-sided Intel analysis distinguishes DCAI demand from expense reductions, lower charges, asset gains, and wafer constraints."},
+    {"id":"P04","outcome":"useful","finding":"Uses AMD amendment, correctly reports shipments +15% and ASP +31%, and avoids interpreting mix as proven like-for-like pricing power."},
+    {"id":"P05","outcome":"useful","finding":"Distinguishes NVIDIA direct and indirect customer concentration, overlapping exposures, and total revenue shares from incremental growth contribution."},
+    {"id":"P06","outcome":"useful","finding":"Correct Qualcomm component amounts, approximate mix calculations, and handset/licensing concentration explanation. The derived shares and differences are not Quant-validated."},
+    {"id":"P07","outcome":"useful","finding":"Specific cross-company demand, concentration, supply, and geographic overlaps; interpretation is labeled and no measured correlation is invented."},
+    {"id":"P08","outcome":"useful","finding":"Specific bear cases: cancellable NVIDIA demand, AMD export restrictions, Intel foundry customer commitments, Qualcomm customer insourcing."},
+    {"id":"P09","outcome":"useful","finding":"AMD wins positive-baseline parent-net-income percentage growth at 164.1682%; Intel loss base retained but excluded from percentage ranking. Checked calculations and fiscal intervals supplied."},
+    {"id":"P10","outcome":"useful","finding":"Correct dollar-change ranking: NVIDIA +43.120B, Intel +18.489B, AMD +2.694B, Qualcomm -4.601B. The answer explicitly overrides a conflicting automatic percentage-based assessment; stored assessment still names AMD as percentage winner."},
+    {"id":"P11","outcome":"incomplete","finding":"General cash-conversion ratios are rejected. Correct inputs are shown but requested ratios are absent. A value-only bundle exists in raw evidence; final citation ranges do not satisfy the required individual C citation, so the answer is unverified with no final source cards. Independent ratios are 1.85313833 and 1.77831603."},
+    {"id":"P12","outcome":"useful","finding":"Data refines initially prefetched inputs and Quant correctly derives AMD Q4 net income: 4.335B annual minus 2.824B nine-month = 1.511B, with matching intervals."},
+    {"id":"P13","outcome":"incomplete","finding":"Why routes the entire request to Research. It retrieves rounded continuing-operations cash flow and fails to return available exact consolidated Q2/YTD amounts. Returns completed despite explicitly missing requested results. C01 obtains 2.011B quarter and 2.950B YTD after removing only the why clause."},
+    {"id":"P14","outcome":"useful","finding":"Uses the correct QCT denominator: 3,957M / 38,367M = approximately 10.3%. Calculation is performed by Research without checked Quant lineage."},
+    {"id":"P15","outcome":"useful","finding":"Rejects the all-company growth/AI premise, identifies Intel consolidated decline, and separates subset AI demand from other growth drivers."},
+    {"id":"P16","outcome":"useful","finding":"Does not authenticate the fabricated management quote; checked figures contradict it at 8.94% automotive share. Explains that the worker lacks a quote-verification search in this route. Does not prove absence from the entire filing."},
+    {"id":"P17","outcome":"workflow_failure","finding":"Correctly refuses fabricated doubling claim, but repeats [S999] while rejecting it. Citation scanner treats this as a claimed citation and labels the useful answer unverified. C04 preserves verified status by asking the model not to repeat the fake ID."},
+    {"id":"P18","outcome":"boundary_handled","finding":"Provides AMD revenue, explicitly states Broadcom and prior-year evidence are absent, and does not invent a growth winner. Whole-comparison completion remains overstated by completed status."},
+    {"id":"P19","outcome":"workflow_failure","finding":"Treats explicitly excluded NVIDIA/Qualcomm names as requested scope; rejects correct AMD/Intel selection and suggests adding the excluded companies. C02 succeeds without the exclusion sentence."},
+    {"id":"P20","outcome":"workflow_failure","finding":"Historical question about current demand at FY2025 year-end is blocked by the current keyword. C03 succeeds when only that word is removed."},
+    {"id":"P21","outcome":"boundary_handled","finding":"Correctly refuses exact calendar-year substitution, explains differing fiscal windows, and labels FY values as reference rather than calendar totals."},
+    {"id":"P22","outcome":"boundary_handled","finding":"Acknowledges absent referent, offers a clearly conditional growth interpretation, and asks which company/measure the user means. Does not claim conversation memory."},
+    {"id":"P23","outcome":"boundary_handled","finding":"Rejects unsupported live share prices and forward valuation rather than inventing P/E values."},
+    {"id":"P24","outcome":"incomplete","finding":"Safely rejects unsupported hypothetical arithmetic and shows only checked historical baseline. Does not supply requested scenario total/share, yet status is completed. Independent scenario total 48.241B, automotive 7.914B, share 16.40513256%."},
+    {"id":"P25","outcome":"useful","finding":"Correctly computes scenario EUR 31.49B and labels assumed FX versus reported USD. Research bypasses the checked calculation path and emits no source citation for the conversion itself."},
+    {"id":"P26","outcome":"useful","finding":"Understands PM shorthand, reconciles EPS decline with tax accounting and stronger operating results, and supplies specific management follow-up questions."}
+  ],
+  "controls": [
+    {"id":"C01","outcome":"useful","finding":"Removing only the why explanation restores Data-to-Quant and exact quarter/YTD figures."},
+    {"id":"C02","outcome":"useful","finding":"Removing only excluded-company names restores valid selected-scope comparison."},
+    {"id":"C03","outcome":"useful","finding":"Removing only current restores historical filing research."},
+    {"id":"C04","outcome":"useful","finding":"Adding an instruction not to repeat the fake source ID restores verified status for the correct refusal."}
+  ],
+  "primary_summary": {"useful":16,"boundary_handled":4,"incomplete":3,"workflow_failure":3},
+  "priority_findings": [
+    {"priority":"P0","finding":"Intent and scope parsing: negation, historical temporal context, and mixed numerical/explanation tasks must not be decided by isolated keyword matches."},
+    {"priority":"P0","finding":"Completion means requested outputs are established, not merely valid source references. Missing calculations or company comparisons should remain partial."},
+    {"priority":"P1","finding":"Align Research numerical output with checked computation: correct QCT-share, diversification, and FX answers currently bypass execution/lineage validation."},
+    {"priority":"P1","finding":"Citation validation must distinguish asserted support from quoted/refuted identifiers and handle citation ranges without discarding useful sourced output."},
+    {"priority":"P1","finding":"Add bounded general ratios and explicitly typed scenarios/assumptions when authorized. Arithmetic validation works; unsupported intent currently cannot be fulfilled."},
+    {"priority":"P2","finding":"Structured ranking assessment must match requested dollar versus percentage ordering rather than relying on final generation to override it."}
+  ]
+}

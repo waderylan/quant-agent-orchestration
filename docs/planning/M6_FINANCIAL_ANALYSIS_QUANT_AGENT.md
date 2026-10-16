@@ -1,5 +1,7 @@
 # M6 — Financial Analysis / Quant agent
 
+- [PM workflow contracts](PM_WORKFLOW_CORRECTNESS.md) define checked cash-conversion ratios, QCT denominators, explicit user scenarios/FX, requested ranking order, mixed explanation handoffs, and current completion states. Assumptions are retained per calculation and reused by `quant.py replay`.
+
 - [Capability routing](CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) specifies checked annual revenue shares, parent-earnings ranking, and filing-input handoff. [Aligned coverage](ALIGNED_FISCAL_COVERAGE.md) defines current company/year coverage. Dated M6 evidence retains its recorded sample and configuration.
 
 - Owner: Rylan Wade.
@@ -12,7 +14,7 @@
 
 - The visible supervisor selects Research for narrative/disclosure investigations, Data for structured figures, and Data → Quant for numerical requests. Quarter-only Q2–Q4 cash-flow requests select the numerical path; explicit YTD requests retain the Data path.
 - Financial Data uses its own prompt and query/inspection tools to establish source inputs. The graph passes registered observations to Quant and suppresses the intermediate Data answer from final-answer tokens. Actual assignments, tools, evidence, and the handoff remain inspectable.
-- Quant has a distinct prompt and two tools: `run_analysis` and `inspect_calculation`. It generates an arithmetic Python program, executes it through the bounded interpreter, inspects its results, and streams a cited answer.
+- Quant has a distinct prompt, `run_analysis`, `inspect_calculation`, and shared `report_outcome`. It generates an arithmetic Python program, executes it through the bounded interpreter, inspects results, and streams a cited answer or passes checked context to Research when an explanation is requested.
 - A direct Quant CLI run supplies source-checked observations without invoking the supervisor/Data model/browser. Direct-role evidence is separate from actual graph/application/browser evidence.
 - The graph has three implemented specialists: Filings Research, Financial Data, and Quant. Risk Summary and the full task-driven cooperation/follow-up/recovery design remain M7/M8 work. This increment supplies a focused Data-to-Quant dependency path.
 
@@ -37,7 +39,7 @@
 
 - The application recomputes each declared result independently from its registered inputs. Declared lineage must equal executed lineage; a coincidentally correct value from different inputs is rejected.
 - `value` preserves an input; `growth` uses new/old − 1; `margin` uses gross profit or operating income divided by matching revenue; `difference` preserves compatible units; `quarter` subtracts adjacent cumulative amounts.
-- Monetary results require exact agreement. Percent/percentage-point results use absolute tolerance 10^-8. Full Decimal values remain in the ledger/CSV; display formatting is separate.
+- Reported USD results require exact agreement. Percent, percentage-point, ratio-multiple, and EUR-conversion results use absolute tolerance 10^-8. Full Decimal values remain in the ledger/CSV; display formatting is separate.
 - Calculations require matching company, accounting/revision basis, metrics/units where appropriate, and correct interval ordering. Margins require identical numerator/denominator intervals and positive revenue. Growth requires a positive baseline and comparable non-overlapping durations.
 - Known conflicting comparative revisions through the calculation's latest input filing date prevent calculation. The selected policy remains original-report values, not automatic latest-restatement substitution.
 - Margin changes are percentage points. Negative operating margins remain valid. Missing values remain missing; no zero fill, denominator replacement, period relabeling, or silent annualization occurs.

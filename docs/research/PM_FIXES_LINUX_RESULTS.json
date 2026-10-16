@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-16T01:46:24.236217+00:00",
+  "image": "hw2-research:pm-fixes",
+  "evidence_kind": "Linux interpreter-only synthetic fixtures; no provider generation or company observations",
+  "checks": [
+    {
+      "case": "valid arithmetic",
+      "exit_code": 0,
+      "output": {
+        "results": [
+          {
+            "label": "fixture growth",
+            "kind": "growth",
+            "inputs": [
+              "F2",
+              "F1"
+            ],
+            "value": "50.0",
+            "used_inputs": [
+              "F1",
+              "F2"
+            ]
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "imports",
+      "exit_code": 1,
+      "output": {
+        "error": "Only simple variable assignments are allowed"
+      },
+      "passed": true
+    },
+    {
+      "case": "loops",
+      "exit_code": 1,
+      "output": {
+        "error": "Only simple variable assignments are allowed"
+      },
+      "passed": true
+    },
+    {
+      "case": "zero denominator",
+      "exit_code": 1,
+      "output": {
+        "error": "Zero denominator in generated analysis"
+      },
+      "passed": true
+    },
+    {
+      "case": "missing identifier",
+      "exit_code": 1,
+      "output": {
+        "error": "Missing financial input: F1"
+      },
+      "passed": true
+    },
+    {
+      "case": "numeric magnitude",
+      "exit_code": 1,
+      "output": {
+        "error": "Numeric literal exceeds analysis bounds"
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}

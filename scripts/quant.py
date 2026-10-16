@@ -5,12 +5,14 @@ import asyncio
 import json
 import sys
 from pathlib import Path
+from dataclasses import asdict
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.analysis_artifacts import ArtifactStore
 from src.financial_data import FINANCIALS, FinancialStore
 from src.quant_analysis import run_isolated, validate_results
 from src.quant_workflow import direct_inputs, quant_turn
+from src.request_routing import plan_request
 
 
 def main():
@@ -33,6 +35,7 @@ def main():
             "companies": args.company,
             "years": args.year,
         }
+        state.update(asdict(plan_request(args.question)))
         state["financial_sources"] = direct_inputs(
             FinancialStore(args.data.resolve()), state
         )
@@ -47,7 +50,16 @@ def main():
         bundle = artifacts.load(args.bundle_id)
         if args.command == "replay":
             actual = validate_results(
-                run_isolated(bundle["code"], bundle["sources"]), bundle["sources"]
+                run_isolated(bundle["code"], bundle["sources"]),
+                bundle["sources"],
+                scenario=next(
+                    (
+                        row["scenario"]
+                        for row in bundle["calculations"]
+                        if row.get("scenario")
+                    ),
+                    None,
+                ),
             )
             if actual != bundle["calculations"]:
                 raise SystemExit(

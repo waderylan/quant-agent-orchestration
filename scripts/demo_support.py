@@ -24,9 +24,15 @@ async def capture_turn(client, question, companies, years):
                 if kind == "token" and first_token is None:
                     first_token = time.perf_counter() - started
                 events.append({"type": kind, "data": data})
+    answer = ""
+    for event in events:
+        if event["type"] == "token":
+            answer += event["data"]
+        elif event["type"] == "answer":
+            answer = event["data"]
     return {
         "question": question,
-        "answer": "".join(e["data"] for e in events if e["type"] == "token"),
+        "answer": answer,
         "sources": next((e["data"] for e in events if e["type"] == "sources"), []),
         "terminal": events[-1] if events else None,
         "trace": [e for e in events if e["type"] in ("trace", "tool", "error")],

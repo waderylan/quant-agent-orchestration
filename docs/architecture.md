@@ -17,6 +17,7 @@ flowchart LR
     D -->|Missing structured inputs| R
     R -->|Independently extracted annual revenue inputs| Q
     Q --> X[Isolated arithmetic interpreter]
+    Q -->|Checked figures plus requested explanation| R
     X --> N[Independent financial and lineage checks]
     N --> A[Hashed CSV/PNG/code/ledger artifacts]
     Q <-->|Distinct analysis tools| CX
@@ -30,10 +31,10 @@ flowchart LR
 ```
 
 - `main.py` serves the vanilla HTML/JS document and SSE. `src/research_workflow.py` owns the graph, worker, scope validation, LCEL pipeline, and request-local evidence registry.
-- Graph paths after `supervisor`: `research → finish`, `data → finish`, `analysis_data → quant → finish`, or `data → revenue_inputs → quant → finish`. Missing structured inputs can make one bounded Research follow-up; unverified revenue inputs fall back to a partial Research answer. `START` enters the supervisor; `finish` reaches `END`. Unsupported scope routes directly to finish. Explicit capability rules select supported structured metrics or filing research. Full task-driven cooperation and provider routing are unimplemented.
+- Graph paths after `supervisor`: `research → finish`, `data → finish`, `analysis_data → quant → finish`, or `data → revenue_inputs → quant → finish`. A numerical question requesting an explanation adds Research after Quant with frozen checked evidence. Missing structured inputs can make one bounded Research follow-up; unverified revenue inputs fall back to a partial Research answer. `START` enters the supervisor; `finish` reaches `END`. Unsupported scope routes directly to finish. Explicit capability rules select supported structured metrics or filing research. Full task-driven cooperation and provider routing are unimplemented.
 - State contains question, companies, fiscal years, selected worker, answer, error, and registered financial sources, calculation rows, and artifact identity. Each request owns a separate evidence registry and ephemeral Codex thread. No cross-turn memory or durable conversation state exists.
 - Request state also carries an optional revenue component/share requirement, earnings-ranking flag, structured `needs_evidence`, and partial-result status. `src/filing_financials.py` establishes supported annual revenue inputs from immutable original table evidence; `src/quant_workflow.py` checks requested calculation coverage and records a verified earnings assessment in the content-addressed bundle. [Capability contracts](planning/CAPABILITY_ROUTING_AND_REVENUE_SHARES.md) define limits and reproduction.
-- Filings Research uses its own [role prompt](../prompts/filings_research.md) and two actual tools: `search_sources` and `inspect_source`. The same worker runs independently through `scripts/research.py agent`.
+- Filings Research uses its own [role prompt](../prompts/filings_research.md), `search_sources`, `inspect_source`, and the shared `report_outcome` contract. The same worker runs independently through `scripts/research.py agent`.
 - Risk Summary, full cooperation, Tavily live retrieval, shared source MCP, and two-provider routing remain unimplemented. Financial Data uses distinct structured-query/observation-inspection tools.
 
 ## Corpus and ingestion
@@ -53,7 +54,7 @@ flowchart LR
 - LCEL composes `RunnableLambda(retrieve) | RunnableLambda(augment)`. Augmentation contains the actual worker prompt, question, explicit scope, and source passages assigned request-local `[S1]` identifiers. Source quotations are marked untrusted evidence.
 - `search_sources(query, company?, year?, form?, section?, version?)` cannot broaden the selected company/year scope. Searches retrieve four passages per requested company/year pair when multiple pairs remain, or six for a single pair, and report empty pairs explicitly. One comparison search can cover the entire selection. `inspect_source(source_id)` accepts an already registered passage and returns exact text plus up to 500 surrounding characters on each side.
 - Complete answers require registered citation IDs and hash-checked exact source text for cited passages. Unknown IDs, absent citations, or empty answers produce an unverified result. Identifier/provenance checks do not establish claim-level faithfulness; formal evaluation and claim review remain pending.
-- Unsupported company/year selections, question/selection mismatches, and explicit current/live requests produce coverage explanations before generation. Missing retrieval, corrupt text, stale index, unavailable models, and timeouts produce explicit failure events.
+- Unsupported company/year selections, question/selection mismatches, and genuine current/live requests produce coverage explanations before generation. Explicit historical year-end demand language and company exclusions retain their scoped meaning. Missing retrieval, corrupt text, stale index, unavailable models, and timeouts produce explicit failure events.
 - Scope parsing is conservative. Fiscal labels and calendar dates can require clarification; unrecognized company names rely on worker abstention and remain a limitation.
 
 ## Direct Codex generation
@@ -74,7 +75,7 @@ flowchart LR
 | `GET /api/sources/{chunk_id}` | Hash-checked exact passage/context, fiscal dates, version, source links. |
 | `GET /api/originals/{document_id}` | Hash-checked collected original as an attachment. |
 
-- SSE types: `trace`, `tool`, `evidence`, `token`, `sources`, `artifacts`, `scope`, `error`, terminal `complete`. Status distinguishes completed, partial, coverage gap, unverified, and failed. `scope` carries an explicit suggested company selection; the browser changes selection only when the user clicks its correction button and retains compatible selected years.
+- SSE types: `trace`, `tool`, `evidence`, `token`, `answer`, `sources`, `artifacts`, `scope`, `error`, terminal `complete`. `answer` replaces streamed text after citation normalization. Status distinguishes completed, partial, needs clarification, coverage gap, unverified, and failed; missing outputs remain visible independently of citation checks. `scope` carries an explicit suggested company selection; the browser changes selection only when the user clicks its correction button and retains compatible selected years.
 - The fetch-based consumer decodes fragmented UTF-8/SSE frames, displays live answer tokens, links citations to highlighted exact passages, exposes routing/tools, and supports Stop through cancellation. A bounded 128-event queue and 0.5-second keep-alive frames keep delivery responsive during model waits. Cleanup shields graph-task cancellation from repeated ASGI cancellation; a real disconnect check leaves zero owned Codex children after two seconds.
 - Model/source text uses DOM text nodes. Prepared HTML originals download as attachments. Links provide SEC, official retrieval source, and collected original; SEC access can return 403.
 - Sources/index are ignored reproducible data. Source refresh requires explicit ingestion and an application restart; no automatic freshness service exists.
@@ -102,7 +103,7 @@ flowchart LR
 
 ## Bounded Quant and immutable analysis artifacts
 
-- Quant has a distinct prompt and `run_analysis`/`inspect_calculation`. Data establishes scoped observations; the graph passes them to Quant and keeps the Data answer out of final tokens. Direct Quant runs bypass Data-model/supervisor/browser generation.
+- Quant has a distinct prompt and `run_analysis`/`inspect_calculation`, plus shared `report_outcome`. Data establishes scoped observations; the graph passes them to Quant and keeps the Data answer out of final tokens. Explanation requests pass checked Quant evidence to Research for final synthesis. Direct Quant runs bypass Data-model/supervisor/browser generation. [PM workflow contracts](planning/PM_WORKFLOW_CORRECTNESS.md) specify ratios, QCT shares, scenarios/FX, completion ownership, and verification evidence.
 - `quant_runner.py` interprets an assignment/arithmetic subset without eval/exec in an isolated, credential-free child. Size, AST, operation, depth, numeric, output, and three-second bounds apply; Linux also caps CPU/address-space/file output. Windows does not claim an OS memory sandbox. Active execution children participate in HTTP request cleanup.
 - `quant_analysis.py` independently recomputes results and checks executed versus declared lineage, company/units/accounting/revision basis, intervals, denominators, quarterly adjacency, and 53-week qualifications. Percent/point tolerance is 10^-8; USD arithmetic is exact.
 - Only verified calculations publish through `analysis_artifacts.py`: a hashed ledger, source observations, chart-series metadata, CSV, Matplotlib PNG, and generated code. Sources remain frozen per bundle; snapshot downloads verify hashes. These local files do not promise durable Cloud Run state.

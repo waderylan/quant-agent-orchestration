@@ -19,7 +19,19 @@ from src.codex_transport import register_close
 class ResultRow(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     label: str = Field(min_length=1, max_length=160)
-    kind: Literal["value", "growth", "margin", "share", "difference", "quarter"]
+    kind: Literal[
+        "value",
+        "growth",
+        "margin",
+        "share",
+        "difference",
+        "quarter",
+        "ratio",
+        "currency",
+        "scenario_scale",
+        "scenario_total",
+        "scenario_share",
+    ]
     inputs: list[str] = Field(min_length=1, max_length=2)
     value: str
     used_inputs: list[str] = Field(max_length=64)
@@ -124,7 +136,7 @@ def comparable(left, right, sources, *, same_interval=False, cumulative=False):
         )
 
 
-def validate_results(rows, sources):
+def validate_results(rows, sources, *, scenario=None):
     """Recompute each result separately; declared lineage must match executed lineage."""
     known = {}
     for sid, source in sources.items():
@@ -139,7 +151,9 @@ def validate_results(rows, sources):
         if any(sid not in known for sid in row.inputs):
             raise ValueError("Calculation references a missing or forward input")
         inputs = [known[sid] for sid in row.inputs]
-        if len(inputs) != (1 if row.kind == "value" else 2):
+        if len(inputs) != (
+            1 if row.kind in ("value", "currency", "scenario_scale") else 2
+        ):
             raise ValueError("Incorrect number of calculation inputs")
         current = inputs[0]
         metadata = {
@@ -163,9 +177,115 @@ def validate_results(rows, sources):
         warnings = sorted({w for s in inputs for w in s.get("warnings", [])})
         if current.get("component"):
             metadata["component"] = current["component"]
+        if current.get("scenario"):
+            metadata["scenario"] = current["scenario"]
         values = [Decimal(str(s["value"])) for s in inputs]
         if row.kind == "value":
             expected, formula = values[0], row.inputs[0]
+        elif row.kind == "ratio":
+            numerator, denominator = inputs
+            comparable(numerator, denominator, sources, same_interval=True)
+            if (
+                numerator["metric"] != "operating_cash_flow"
+                or denominator["metric"] != "net_income"
+                or numerator["unit"] != "USD"
+                or denominator["unit"] != "USD"
+                or values[1] <= 0
+            ):
+                raise ValueError(
+                    "Cash conversion requires matching operating cash flow and positive parent net income"
+                )
+            expected = values[0] / values[1]
+            formula = f"{row.inputs[0]} / {row.inputs[1]}"
+            metadata.update(metric="cash_conversion", unit="multiple")
+        elif row.kind in (
+            "currency",
+            "scenario_scale",
+            "scenario_total",
+            "scenario_share",
+        ):
+            if not scenario or scenario.get("origin") != "user":
+                raise ValueError(
+                    "Scenario calculations require an explicit approved user assumption"
+                )
+            if row.kind == "currency":
+                rate = Decimal(scenario.get("usd_per_eur", "0"))
+                if (
+                    scenario.get("kind") != "currency"
+                    or not 0 < rate <= 1000000
+                    or current["unit"] != "USD"
+                ):
+                    raise ValueError(
+                        "Currency conversion requires an approved positive USD-per-EUR rate and reported USD input"
+                    )
+                expected = values[0] / rate
+                formula = f"{row.inputs[0]} / {rate} USD per EUR (user assumption)"
+                metadata.update(unit="EUR", metric=current["metric"] + "_scenario_eur")
+            else:
+                factor = Decimal(scenario.get("factor", "0"))
+                component = scenario.get("component")
+                if scenario.get("kind") != "component" or not 0 < factor <= 100:
+                    raise ValueError(
+                        "Component scenario requires an approved bounded multiplier"
+                    )
+                if row.kind == "scenario_scale":
+                    if (
+                        current.get("component") != component
+                        or current.get("provenance") != "filing_revenue_table"
+                        or current["metric"] != "revenue_component"
+                    ):
+                        raise ValueError(
+                            "Scenario numerator requires the verified requested component"
+                        )
+                    expected, formula = (
+                        values[0] * factor,
+                        f"{row.inputs[0]} * {factor} (user assumption)",
+                    )
+                    metadata.update(metric="scenario_" + component + "_revenue")
+                elif row.kind == "scenario_total":
+                    total, part = inputs
+                    comparable(total, part, sources, same_interval=True)
+                    if (
+                        total["metric"] != "revenue"
+                        or part.get("component") != component
+                        or part.get("provenance") != "filing_revenue_table"
+                        or part["metric"] != "revenue_component"
+                        or total.get("accession") != part.get("accession")
+                    ):
+                        raise ValueError(
+                            "Scenario total requires same-filing consolidated revenue and verified component"
+                        )
+                    expected = values[0] + (factor - 1) * values[1]
+                    formula = f"{row.inputs[0]} + ({factor} - 1) * {row.inputs[1]} (user assumption)"
+                    metadata.update(metric="scenario_total_revenue")
+                else:
+                    numerator, denominator = inputs
+                    comparable(numerator, denominator, sources, same_interval=True)
+                    if (
+                        numerator.get("scenario") != scenario
+                        or denominator.get("scenario") != scenario
+                        or numerator["metric"] != "scenario_" + component + "_revenue"
+                        or denominator["metric"] != "scenario_total_revenue"
+                        or values[1] <= 0
+                        or not 0 <= values[0] <= values[1]
+                    ):
+                        raise ValueError(
+                            "Scenario share requires matching verified hypothetical numerator and total"
+                        )
+                    expected = values[0] / values[1] * 100
+                    formula = f"{row.inputs[0]} / {row.inputs[1]} * 100 (hypothetical)"
+                    metadata.update(
+                        metric="scenario_" + component + "_share", unit="percent"
+                    )
+            metadata["scenario"] = scenario
+            warnings = sorted(
+                set(
+                    warnings
+                    + [
+                        "Hypothetical user assumption; not a reported result or forecast"
+                    ]
+                )
+            )
         elif row.kind == "share":
             numerator, denominator = inputs
             comparable(numerator, denominator, sources, same_interval=True)
@@ -174,10 +294,14 @@ def validate_results(rows, sources):
                 or numerator.get("provenance") != "filing_revenue_table"
                 or numerator.get("parent_metric") != "revenue"
                 or numerator.get("parent_scope") != "consolidated"
-                or denominator["metric"] != "revenue"
+                or denominator["metric"] not in ("revenue", "qct_revenue")
                 or numerator["unit"] != "USD"
                 or denominator["unit"] != "USD"
                 or numerator.get("accession") != denominator.get("accession")
+                or (
+                    denominator["metric"] == "qct_revenue"
+                    and denominator.get("provenance") != "filing_revenue_table"
+                )
             ):
                 raise ValueError(
                     "Revenue share requires an established component and same-filing consolidated revenue"
@@ -188,7 +312,13 @@ def validate_results(rows, sources):
                 )
             expected = values[0] / values[1] * 100
             metadata.update(
-                unit="percent", metric=numerator["component"] + "_revenue_share"
+                unit="percent",
+                metric=numerator["component"]
+                + (
+                    "_qct_revenue_share"
+                    if denominator["metric"] == "qct_revenue"
+                    else "_revenue_share"
+                ),
             )
             formula = f"{row.inputs[0]} / {row.inputs[1]} * 100"
         elif row.kind == "margin":
@@ -285,7 +415,7 @@ def validate_results(rows, sources):
             raise ValueError("Calculation value must be a decimal number") from error
         tolerance = (
             Decimal("1e-8")
-            if metadata["unit"] in ("percent", "percentage_points")
+            if metadata["unit"] in ("percent", "percentage_points", "multiple", "EUR")
             else Decimal(0)
         )
         if not actual.is_finite() or abs(actual - expected) > tolerance:
@@ -299,6 +429,14 @@ def validate_results(rows, sources):
             if metadata["metric"] == "revenue_component"
             else metadata["metric"].replace("_", " ")
         )
+        if current.get("component") and metadata["metric"].startswith(
+            "revenue_component_"
+        ):
+            metric_label = (
+                metadata["metric"]
+                .replace("revenue_component", current["component"] + "_revenue")
+                .replace("_", " ")
+            )
         label = f"{metadata['company']} FY{metadata['fiscal_year']}{period_label} {metric_label}"
         if row.kind in ("growth", "difference"):
             prior_period = (

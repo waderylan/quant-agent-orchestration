@@ -191,7 +191,9 @@ async def main(args):
                 "error": failed,
             }
             browser_script = (
-                "demo_capability_fixes.py"
+                "demo_pm_fixes.py"
+                if args.pm
+                else "demo_capability_fixes.py"
                 if args.capabilities
                 else "demo_quant.py"
                 if args.analysis
@@ -213,10 +215,17 @@ async def main(args):
                         else []
                     ),
                 ],
-                check=True,
+                check=False,
                 capture_output=True,
                 text=True,
             )
+            if browser.returncode:
+                (staging / "browser-error.log").write_text(
+                    browser.stdout + "\n" + browser.stderr, encoding="utf-8"
+                )
+                raise RuntimeError(
+                    "Container browser check failed: " + browser.stderr[-1500:]
+                )
             report["browser"] = browser.stdout.strip()
         report["image_id"] = docker(
             "image", "inspect", "--format", "{{.Id}}", args.image
@@ -251,6 +260,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--image", default="hw2-research:m4")
     parser.add_argument("--skip-build", action="store_true")
+    parser.add_argument(
+        "--pm",
+        action="store_true",
+        help="Verify corrected PM workflows and partial results in Chromium",
+    )
     parser.add_argument(
         "--capabilities",
         action="store_true",

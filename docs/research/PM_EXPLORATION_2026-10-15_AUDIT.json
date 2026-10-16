@@ -1,0 +1,519 @@
+{
+  "method": "Independent Decimal arithmetic over frozen inputs, without executing generated code; exact download SHA-256 checks. Does not establish semantic completeness or claim-level faithfulness.",
+  "cases": [
+    {
+      "id": "P01",
+      "source_checks": 11,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P02",
+      "source_checks": 7,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P03",
+      "source_checks": 13,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P04",
+      "source_checks": 1,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P05",
+      "source_checks": 4,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P06",
+      "source_checks": 7,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P07",
+      "source_checks": 20,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P08",
+      "source_checks": 9,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P09",
+      "source_checks": 11,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "05c4e16b79e5f6d8b31acd5ac45d719356324054f68360cee999bca18ddc0b29",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "growth",
+              "expected": "164.1681901279707495429616088",
+              "actual": "164.1681901279707495429616088",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "growth",
+              "expected": "144.8924731182795698924731183",
+              "actual": "144.8924731182795698924731183",
+              "matches": true
+            },
+            {
+              "source_id": "C3",
+              "kind": "growth",
+              "expected": "-45.36580556103332676000788799",
+              "actual": "-45.36580556103332676000788799",
+              "matches": true
+            },
+            {
+              "source_id": "C4",
+              "kind": "value",
+              "expected": "-18756000000",
+              "actual": "-18756000000",
+              "matches": true
+            },
+            {
+              "source_id": "C5",
+              "kind": "value",
+              "expected": "-267000000",
+              "actual": "-267000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "source_checks": 12,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "f91f06a9fdd1dd5499e41a5c2cb1ca429582c8dfeacd37392872cac18d0c78a9",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "difference",
+              "expected": "2694000000",
+              "actual": "2694000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "difference",
+              "expected": "18489000000",
+              "actual": "18489000000",
+              "matches": true
+            },
+            {
+              "source_id": "C3",
+              "kind": "difference",
+              "expected": "43120000000",
+              "actual": "43120000000",
+              "matches": true
+            },
+            {
+              "source_id": "C4",
+              "kind": "difference",
+              "expected": "-4601000000",
+              "actual": "-4601000000",
+              "matches": true
+            },
+            {
+              "source_id": "C5",
+              "kind": "growth",
+              "expected": "164.1681901279707495429616088",
+              "actual": "164.1681901279707495429616088",
+              "matches": true
+            },
+            {
+              "source_id": "C6",
+              "kind": "growth",
+              "expected": "144.8924731182795698924731183",
+              "actual": "144.8924731182795698924731183",
+              "matches": true
+            },
+            {
+              "source_id": "C7",
+              "kind": "growth",
+              "expected": "-45.36580556103332676000788799",
+              "actual": "-45.36580556103332676000788799",
+              "matches": true
+            },
+            {
+              "source_id": "C8",
+              "kind": "value",
+              "expected": "-18756000000",
+              "actual": "-18756000000",
+              "matches": true
+            },
+            {
+              "source_id": "C9",
+              "kind": "value",
+              "expected": "-267000000",
+              "actual": "-267000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P11",
+      "source_checks": 0,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "ff390c5e986a2eaff893ae51d9fe0171b2093805043fecc90986dd560b710f31",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "value",
+              "expected": "3041000000",
+              "actual": "3041000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "value",
+              "expected": "1641000000",
+              "actual": "1641000000",
+              "matches": true
+            },
+            {
+              "source_id": "C3",
+              "kind": "value",
+              "expected": "7709000000",
+              "actual": "7709000000",
+              "matches": true
+            },
+            {
+              "source_id": "C4",
+              "kind": "value",
+              "expected": "4335000000",
+              "actual": "4335000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": false
+        }
+      ]
+    },
+    {
+      "id": "P12",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "795dfe0f3a17a5d56c7f0196516ebcb94100fd063e9e9cdd84c5b13b1642863c",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "quarter",
+              "expected": "1511000000",
+              "actual": "1511000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P13",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P14",
+      "source_checks": 1,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P15",
+      "source_checks": 7,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P16",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "4daaf425b1fcbeb95c8de7b6002db22e5ef54ed06b7dea5ee9da554e0fb447d4",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "value",
+              "expected": "3957000000",
+              "actual": "3957000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "share",
+              "expected": "8.935507180923132508355162135",
+              "actual": "8.935507180923132508355162135",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P17",
+      "source_checks": 0,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P18",
+      "source_checks": 2,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "94b48b6cc500057b728d3ebfb9d5103233d5988158d9a307712eaa9b1927afc3",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "value",
+              "expected": "34639000000",
+              "actual": "34639000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P19",
+      "source_checks": 0,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P20",
+      "source_checks": 0,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P21",
+      "source_checks": 4,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P22",
+      "source_checks": 2,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P23",
+      "source_checks": 0,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P24",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "8f10ae1c5af75a686960989eb9465d08c3d0e84b16e715f40042bb8251f7e9e7",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "value",
+              "expected": "3957000000",
+              "actual": "3957000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "share",
+              "expected": "8.935507180923132508355162135",
+              "actual": "8.935507180923132508355162135",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "P25",
+      "source_checks": 1,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "P26",
+      "source_checks": 9,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "C01",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "9dc56ee97bec75cb3c68d41db1a3d1c126890440bb97a59010a8125601adf069",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "quarter",
+              "expected": "2011000000",
+              "actual": "2011000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "value",
+              "expected": "2950000000",
+              "actual": "2950000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "source_checks": 7,
+      "source_check_failures": [],
+      "bundles": [
+        {
+          "bundle_id": "5327097faf28c4499ed14dbb1db93760a98a2f531f843efe981b4aa80e4b0edf",
+          "calculations": [
+            {
+              "source_id": "C1",
+              "kind": "difference",
+              "expected": "1794000000",
+              "actual": "1794000000",
+              "matches": true
+            },
+            {
+              "source_id": "C2",
+              "kind": "growth",
+              "expected": "94.42105263157894736842105260",
+              "actual": "94.42105263157894736842105260",
+              "matches": true
+            },
+            {
+              "source_id": "C3",
+              "kind": "value",
+              "expected": "-11678000000",
+              "actual": "-11678000000",
+              "matches": true
+            },
+            {
+              "source_id": "C4",
+              "kind": "value",
+              "expected": "-2214000000",
+              "actual": "-2214000000",
+              "matches": true
+            },
+            {
+              "source_id": "C5",
+              "kind": "difference",
+              "expected": "9464000000",
+              "actual": "9464000000",
+              "matches": true
+            }
+          ],
+          "download_hashes_match": {
+            "table.csv": true,
+            "chart.png": true,
+            "analysis.py": true
+          },
+          "exposed_in_final_sources": true
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "source_checks": 1,
+      "source_check_failures": [],
+      "bundles": []
+    },
+    {
+      "id": "C04",
+      "source_checks": 3,
+      "source_check_failures": [],
+      "bundles": []
+    }
+  ],
+  "summary": {
+    "chats": 30,
+    "source_inspections": 147,
+    "source_check_failures": 0,
+    "bundles": 9,
+    "calculations": 31,
+    "calculation_failures": 0,
+    "download_hash_failures": 0
+  }
+}

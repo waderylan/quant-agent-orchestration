@@ -297,6 +297,7 @@ async def test_graph_hands_data_to_quant_without_streaming_intermediate_answer(
     async def model(prompt, schema, handler, **kwargs):
         role = kwargs["agent"]
         roles.append(role)
+        handler("report_outcome", {"status": "complete", "missing": []})
         if role == "Financial Data":
             handler("query_financials", {"metrics": ["revenue"]})
             yield {"type": "tool", "data": {"name": "query_financials"}}
