@@ -1,6 +1,6 @@
 # Milestones
 
-This is the authoritative order and status. Each completed record links its own evidence. Future details and acceptance criteria are decided during implementation.
+This is the authoritative order and status. Completed records describe verified behavior and link evidence. Future records are engineering briefs: required behavior and acceptance checks are targets until verified.
 
 | Milestone | Record | Status |
 | --- | --- | --- |

@@ -11,4 +11,4 @@ Read only the pages needed for the task:
 | Review exploratory questions or data-source options | [Research](research/README.md) |
 | Check assignment rules or supplied guidance | [Reference](reference/README.md) |
 
-Repository instructions are in [AGENTS.md](../AGENTS.md). Setup and runnable commands are in the [root README](../README.md). The [source inventory](../data/source_inventory.json) defines collected documents. [AI_TRANSCRIPT.md](../AI_TRANSCRIPT.md) is append-only evidence; [PROCESS_LOG.md](../PROCESS_LOG.md) awaits Rylan Wade's own reflection.
+Repository instructions are in [AGENTS.md](../AGENTS.md). Setup and runnable commands are in the [root README](../README.md). The [source inventory](../data/source_inventory.json) defines collected documents. `AI_TRANSCRIPT.md` is local append-only evidence; [PROCESS_LOG.md](../PROCESS_LOG.md) awaits Rylan Wade's own reflection.
