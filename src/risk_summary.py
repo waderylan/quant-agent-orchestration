@@ -43,6 +43,7 @@ def section(index, document_id: str) -> dict:
     return {
         **{k: doc.get(k) for k in ("document_id", "company", "fiscal_year", "fiscal_start", "fiscal_end", "period_end", "form", "accession", "version", "canonical_url")},
         "section": "risk_factors", "start": start, "end": end,
+        "filed": doc.get("source_date"),
         "text_sha256": doc["extraction"]["text_sha256"],
         "text": text[start:end], "original_url": f"/api/originals/{document_id}",
         "retrieval_url": doc["body"]["retrieval_url"],
@@ -59,7 +60,8 @@ def inspect_span(index, document_id: str, start: int, end: int) -> dict:
     return {**full, "start": start, "end": end, "text": text[start:end],
             "context_start": max(full["start"], start - 300),
             "context": text[max(full["start"], start - 300):min(full["end"], end + 300)],
-            "complete_section": start == full["start"] and end == full["end"]}
+            "complete_section": start == full["start"] and end == full["end"],
+            "omission_proves_removal": full["omission_proves_removal"] and start == full["start"] and end == full["end"]}
 
 
 def paragraphs(full: dict) -> list[dict]:
@@ -115,6 +117,8 @@ class RiskTools:
 
     def register(self, full, span=None):
         row = {**full, **(span or {})}
+        row["complete_section"] = row["start"] == full["start"] and row["end"] == full["end"]
+        row["omission_proves_removal"] = full["omission_proves_removal"] and row["complete_section"]
         existing = next((sid for sid, s in self.sources.items() if (s["document_id"], s["start"], s["end"]) == (row["document_id"], row["start"], row["end"])), None)
         sid = existing or f"S{self.offset + len(self.sources) + 1}"
         self.sources[sid] = {**row, "source_id": sid, "inspection_url": f"/api/risks/{row['document_id']}?start={row['start']}&end={row['end']}", "chunk_id": digest(f"risk:{row['document_id']}:{row['text_sha256']}:{row['start']}:{row['end']}".encode())}
@@ -146,9 +150,36 @@ class RiskTools:
                 self.comparisons[f"{company}:{a}:{b}"] = {"company": company, "before_section": bsid, "after_section": asid, "pairs": pairs}
         return gaps
 
+    def prepare_amendments(self):
+        """Inspect declared amendment scope without substituting it for annual risks."""
+        gaps, found = [], False
+        for company in self.companies:
+            for year in self.years:
+                docs = [d for d in self.index.documents.values() if d.get("company") == company and d.get("fiscal_year") == year and d.get("form") == "10-K/A"]
+                for doc in docs:
+                    found = True
+                    passages = []
+                    for query in ("explanatory note purpose corrected disclosures management discussion original filing", "except as described amendment does not amend update change other original disclosures"):
+                        passages.extend(self.index.search(query, [company], [year], form="10-K/A", version="amendment", k=2))
+                    passages = {p["chunk_id"]: p for p in passages if p["document_id"] == doc["document_id"]}
+                    if not passages:
+                        gaps.append(f"{company} FY{year}: requested amendment scope could not be inspected")
+                    for passage in passages.values():
+                        inspected = self.index.inspect(passage["chunk_id"])
+                        if inspected["text"] != passage["text"]:
+                            raise ValueError("Amendment passage changed during inspection")
+                        sid = f"S{self.offset + len(self.sources) + 1}"
+                        self.sources[sid] = {**passage, **{k: doc.get(k) for k in ("accession", "fiscal_start", "fiscal_end", "form", "version")}, "source_id": sid, "kind": "filing_passage", "section": "amendment_scope", "complete_section": False, "omission_proves_removal": False, "inspection_url": f"/api/sources/{passage['chunk_id']}", "original_url": f"/api/originals/{doc['document_id']}"}
+                        self.sources[sid]["filed"] = doc.get("source_date")
+        if not found:
+            gaps.append("Requested amendment scope is outside collected coverage; absence from this corpus does not prove no amendment exists")
+        return gaps
+
     def __call__(self, name, args):
         if name == "inspect_risk":
             s = self.sources[args["source_id"]]
+            if s["section"] == "amendment_scope":
+                return {"source_id": s["source_id"], **self.index.inspect(s["chunk_id"]), "use": "Amendment scope context only; not an original annual risk section"}
             return {"source_id": s["source_id"], **inspect_span(self.index, s["document_id"], s["start"], s["end"])}
         if name == "risk_pairs":
             pairs = self.comparisons[args["comparison"]]["pairs"]
@@ -161,6 +192,8 @@ class RiskTools:
             if set(args) != {"classification", "before", "after", "rationale"} or args["classification"] not in ("added", "removed", "changed", "relocated", "unchanged"):
                 raise ValueError("Invalid risk classification")
             old, new = (self.sources.get(args[k]) for k in ("before", "after"))
+            if old and new and (old["section"] != "risk_factors" or new["section"] != "risk_factors"):
+                raise ValueError("Risk classifications require risk sections; amendment scope is context only")
             if not old or not new or old["company"] != new["company"] or old["fiscal_year"] >= new["fiscal_year"]:
                 raise ValueError("Classification needs ordered same-company before and after evidence; use complete section for an absence")
             kind = args["classification"]
@@ -191,21 +224,44 @@ TOOLS = [
 
 
 async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_answer=True):
+    # Keep every original section intact. Compare one issuer per bounded model
+    # context instead of duplicating eight full sections into a single request.
+    if len(state["companies"]) > 1:
+        results, offset = [], state.get("source_offset", 0)
+        for company in state["companies"]:
+            result = await risk_turn(index, {**state, "companies": [company], "source_offset": offset}, writer, model_stream=model_stream, emit_answer=False)
+            results.append(result)
+            offset = max([int(s[1:]) for s in result.get("risk_sources", {})], default=offset)
+        sources = {sid: source for result in results for sid, source in result.get("risk_sources", {}).items()}
+        answer = "\n\n".join(company + ":\n" + result["answer"] for company, result in zip(state["companies"], results))
+        if emit_answer:
+            writer({"type": "answer", "data": answer})
+            cited = set(re.findall(r"\[(S\d+)\]", answer))
+            writer({"type": "sources", "data": [sources[sid] for sid in sorted(cited, key=lambda s: int(s[1:]))]})
+        return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
     tools = RiskTools(index, state["companies"], state["years"], source_offset=state.get("source_offset", 0))
     quarterly = bool(re.search(r"\b(?:Q[1-4]|quarter\w*|10-Q)\b", state["question"], re.I))
     gaps = [] if quarterly else tools.prepare()
+    if re.search(r"\bamend\w*\b|10-K/A", state["question"], re.I):
+        gaps += tools.prepare_amendments()
     if not quarterly and len(set(state["years"])) < 2:
         gaps.append("Risk change comparison needs two selected fiscal years; one annual inventory cannot establish change")
     if quarterly:
-        quarter = re.search(r"\bQ([1-4])\b", state["question"], re.I)
-        requested_period = f"Q{quarter[1]}" if quarter else None
+        quarter_numbers = {int(q) for q in re.findall(r"\bQ([1-4])\b", state["question"], re.I)}
+        for first, last in re.findall(r"\bQ([1-4])\s*(?:through|to|[-–])\s*Q([1-4])\b", state["question"], re.I):
+            quarter_numbers.update(range(int(first), int(last) + 1))
+        from src.request_routing import mentioned_years
+        quarter_years = set(map(int, re.findall(r"\bFY\s*(20\d\d)\s+Q[1-4]\b", state["question"], re.I)))
+        quarter_years.update(map(int, re.findall(r"\bQ[1-4]\s+(?:of\s+)?FY\s*(20\d\d)\b", state["question"], re.I)))
+        if not quarter_years:
+            quarter_years = mentioned_years(state["question"]) or set(state["years"])
         for doc in index.documents.values():
-            if doc.get("company") in state["companies"] and doc.get("fiscal_year") in state["years"] and doc.get("form") == "10-Q":
+            if doc.get("company") in state["companies"] and doc.get("fiscal_year") in set(state["years"]) & quarter_years and doc.get("form") == "10-Q":
                 # Inventory period_end determines temporal ordering. Never use the
                 # later full-year filing as information available in an earlier quarter.
-                if requested_period:
+                if quarter_numbers:
                     elapsed = (date.fromisoformat(doc["period_end"]) - date.fromisoformat(doc["fiscal_start"])).days + 1
-                    if abs(elapsed - int(quarter[1]) * 91) > 20 or int(quarter[1]) == 4:
+                    if not any(number != 4 and abs(elapsed - number * 91) <= 20 for number in quarter_numbers):
                         continue
                 try:
                     full = section(index, doc["document_id"])
@@ -239,7 +295,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
             else:
                 gaps.append(f"{s['company']} FY{s['fiscal_year']} {s['form']}: complete text exceeds bounded context; inspect separately")
     role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers and valuation. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
-    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": state["question"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts})
+    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": state["question"], "assigned_companies_only": state["companies"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts, "amendment_scope_context_only": [s for s in tools.sources.values() if s["section"] == "amendment_scope"]}, ensure_ascii=False)
     outcome, answer = OutcomeTools(tools), ""
     async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare complete original filing risk inventories; preserve exact before/after evidence")) as stream:
         async for event in stream:
@@ -248,11 +304,13 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
             if emit_answer or event["type"] != "token":
                 writer(event)
     answer, cited = checked_answer(answer, tools.sources, writer if emit_answer else lambda e: None)
-    if not cited or cited - tools.sources.keys():
-        raise ValueError("Risk Summary citation validation failed")
+    if not cited:
+        raise ValueError("Risk Summary returned no registered citations")
+    if cited - tools.sources.keys():
+        raise ValueError("Risk Summary generated unregistered citations; no risk answer is verified")
     for sid in cited:
         s = tools.sources[sid]
-        if inspect_span(index, s["document_id"], s["start"], s["end"])["text"] != s["text"]:
+        if tools("inspect_risk", {"source_id": sid})["text"] != s["text"]:
             raise ValueError("Risk citation changed during generation")
     gaps += outcome.missing
     if tools.comparisons and not tools.changes:

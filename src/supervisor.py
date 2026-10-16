@@ -6,7 +6,7 @@ import asyncio
 import copy
 import json
 import re
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from typing import Literal
 
 from langgraph.config import get_stream_writer
@@ -26,6 +26,7 @@ NAMES = {
     "buy": "Buy-Side Analyst",
 }
 MAX_STEPS, MAX_TOOL_CALLS, MAX_FOLLOWUPS = 7, 64, 1
+WORKER_TIMEOUT_SECONDS = 210
 
 
 class Task(BaseModel):
@@ -50,6 +51,16 @@ class EvidenceRef(BaseModel):
     value: str | None = None
     unit: str | None = None
     accounting_basis: str | None = None
+    period: str | None = None
+    basis: str | None = None
+    metric: str | None = None
+    status: str | None = None
+    freshness: str | None = None
+    currency: str | None = None
+    dilution: str | None = None
+    split_basis: str | None = None
+    as_of: str | None = None
+    horizon: str | None = None
     inspection_url: str | None = None
     source_ids: list[str] = Field(default_factory=list)
     bundle_id: str | None = None
@@ -93,16 +104,29 @@ def tasks_for(question):
         )
     )
     market = market_request(question)
+    unsupported_market = bool(re.search(r"\b(discounted.cash.flow|DCF|total return)\b|reinvested dividends", question, re.I))
+    supported_market = bool(re.search(r"\b(quotes?|stock price|share price|EPS|multiples?|forward earnings)\b|P\s*/\s*E|EV\s*/", question, re.I))
+    if unsupported_market and not supported_market:
+        market = False
     financial = bool(requested_metrics(question)) and bool(
         re.search(
-            r"\b(revenues?|gross (?:profit|margin)|operating (?:income|margin|cash)|net income|net loss|cash (?:flow|generation|conversion))\b",
+            r"\b(revenues?|sales|gross (?:profit|margin)|operating (?:income|margin|cash|performance)|net (?:income|loss|margin)|cash (?:flow|generation|conversion)|earnings)\b",
             question,
             re.I,
         )
     )
+    if re.search(r"\b(hypothetical|suppose)\b", question, re.I) and not re.search(r"\bFY\s*20\d\d\b", question, re.I):
+        financial = False
+    if requested_metrics(question) == ["net_income"] and re.search(r"\b(forward|consensus|EPS)\b", question, re.I) and not re.search(r"\bnet (?:income|loss)\b", question, re.I):
+        financial = False
+    consolidated = not re.search(r"\b(adjusted|non.GAAP|EBITDA)\b", question, re.I) or bool(re.search(r"\b(?:consolidated GAAP|GAAP (?:margins?|result|operating|parent))\b", question, re.I))
+    if financial and consolidated:
+        financial_plan = plan_request(question, financial_only=True)
+        # Primary routing must retain the financial requirements of mixed tasks.
+        base = replace(base, **{field: getattr(financial_plan, field) for field in ("revenue_component", "revenue_share", "revenue_components", "revenue_denominator", "required_calculations", "earnings_ranking", "earnings_order", "scenario")})
     numeric = financial and bool(
         re.search(
-            r"\b(compar\w*|calculat\w*|growth|grew|margins?|ratio|conversion|percentage|share|chart|plot)\b",
+            r"\b(compar\w*|calculat\w*|grow\w*|grew|chang\w*|margins?|ratio|conversion|percentage|share|chart|plot)\b",
             question,
             re.I,
         )
@@ -119,7 +143,7 @@ def tasks_for(question):
         numeric = False
     research = base.synthesize or bool(
         re.search(
-            r"\b(explain|drivers?|management|filing explanation|business mix|why|drove)\b",
+            r"\b(explain|explanations?|reasons?|drivers?|management|filing explanation|business mix|why|drove)\b",
             question,
             re.I,
         )
@@ -137,7 +161,7 @@ def tasks_for(question):
                 )
             )
 
-    if base.worker in ("data", "analysis_data") or financial and (risk or market):
+    if base.worker in ("data", "analysis_data") or financial and consolidated and (numeric or risk or market or re.search(r"\b(show|reported|tell me|what was)\b", question, re.I)):
         add(
             "data",
             "financial_inputs",
@@ -175,9 +199,11 @@ def tasks_for(question):
                 )
             )
         )
+        or financial and not risk and re.search(r"\brisks?\b", question, re.I)
         or base.worker == "research"
         and not risk
         and not market
+        and not plan
     ):
         add(
             "research",
@@ -223,6 +249,13 @@ def evidence_ref(sid, source, owner):
             "value",
             "unit",
             "metric",
+            "status",
+            "freshness",
+            "period",
+            "basis",
+            "currency",
+            "horizon",
+            "source_kind",
             "formula",
             "source_ids",
             "accounting_basis",
@@ -245,6 +278,16 @@ def evidence_ref(sid, source, owner):
         value=str(source["value"]) if source.get("value") is not None else None,
         unit=source.get("unit", source.get("currency")),
         accounting_basis=source.get("accounting_basis"),
+        period=source.get("period"),
+        basis=source.get("basis"),
+        metric=source.get("metric"),
+        status=source.get("status"),
+        freshness=source.get("freshness"),
+        currency=source.get("currency"),
+        dilution=source.get("dilution"),
+        split_basis=source.get("split_basis"),
+        as_of=source.get("as_of"),
+        horizon=source.get("horizon"),
         inspection_url=source.get("inspection_url"),
         source_ids=source.get("source_ids", []),
         bundle_id=source.get("bundle_id"),
@@ -284,10 +327,18 @@ def cooperative_graph(
         tasks, base = tasks_for(state["question"])
         # Preserve the supported annual component boundary.
         period_gap = None
+        capability_gaps = []
+        for pattern, message in (
+            (r"\b(?:ten.year|10.year|discounted.cash.flow|discount rate|terminal value)\b", "A full DCF requires an unsupported forecast model, discount rate and terminal assumptions; historical cash-flow evidence remains available."),
+            (r"\btotal return\b|reinvested dividends", "Historical total return is unavailable: adjusted price history, dividends and reinvestment inputs are not supplied."),
+            (r"\b(?:retirement portfolio|place the trades|place trades|my portfolio)\b", "Personal portfolio allocations and trade execution are unsupported; the answer provides company research only."),
+        ):
+            if re.search(pattern, state["question"], re.I):
+                capability_gaps.append(message)
         if base.revenue_component and re.search(
             r"\bQ[1-4]\b|\b(quarter|ytd)\b", state["question"], re.I
         ):
-            tasks = [
+            quarterly_tasks = [
                 Task(
                     worker="research",
                     output="filing_explanation",
@@ -296,13 +347,21 @@ def cooperative_graph(
             ]
             period_gap = {
                 "kind": "unsupported_component_period",
-                "message": tasks[0].reason,
+                "message": quarterly_tasks[0].reason,
             }
+            if re.search(r"\bannual\b", state["question"], re.I):
+                # Preserve explicitly requested supported annual calculations.
+                # Research owns the unsupported quarterly disclosure component.
+                if not any(t.worker == "research" for t in tasks):
+                    quarterly_tasks[0].depends_on = ["quant"]
+                    tasks.extend(quarterly_tasks)
+            else:
+                tasks = quarterly_tasks
         task = TaskState(
             plan=tasks,
             requested_outputs=[t.output for t in tasks],
             required_workers=[t.worker for t in tasks],
-            missing_inputs=[period_gap["message"]] if period_gap else [],
+            missing_inputs=([period_gap["message"]] if period_gap else []) + capability_gaps,
         )
         writer(
             {
@@ -321,6 +380,7 @@ def cooperative_graph(
                         "steps": MAX_STEPS,
                         "followups": MAX_FOLLOWUPS,
                         "model_tool_calls": MAX_TOOL_CALLS,
+                        "worker_seconds": WORKER_TIMEOUT_SECONDS,
                     },
                 },
             }
@@ -348,7 +408,7 @@ def cooperative_graph(
             "worker_answers": {},
             "current": 0,
             "needs_evidence": period_gap,
-            "partial": bool(period_gap),
+            "partial": bool(period_gap or capability_gaps),
         }
 
     async def execute(state):
@@ -414,10 +474,6 @@ def cooperative_graph(
         try:
             if task.steps > MAX_STEPS or task.tool_calls >= MAX_TOOL_CALLS:
                 raise ValueError("Supervisor work budget exhausted")
-            if step.worker == "quant" and not state.get("financial_sources"):
-                raise ValueError(
-                    "No trusted financial inputs for Quant; unsupported inputs remain missing"
-                )
             local = {
                 **state,
                 "analysis_sources": handoff_sources(evidence),
@@ -428,26 +484,33 @@ def cooperative_graph(
                 ),
             }
             local = copy.deepcopy(local)
+            if step.worker == "quant":
+                local["excluded_financial_inputs"] = [{k: source.get(k) for k in ("source_id", "company", "fiscal_year", "metric", "status")} for source in local.get("financial_sources", {}).values() if source.get("status") != "available"]
+                local["financial_sources"] = {sid: source for sid, source in local.get("financial_sources", {}).items() if source.get("status") == "available"}
             local["worker_output"] = step.output
             if (
                 step.worker == "research"
                 and len(task.plan) > 1
-                and any(t.worker == "quant" for t in task.plan)
             ):
+                clauses = re.split(r"(?<=[.!?;])\s+", state["question"])
+                narrative = " ".join(c for c in clauses if re.search(r"\b(explain|explanations?|reasons?|why|drivers?|management|relate|implications?)\b", c, re.I)) or state["question"]
                 local["question"] = (
-                    "Explain management's filing-disclosed drivers and business mix for "
-                    + ", ".join(requested_metrics(state["question"]))
-                    + " for "
+                    "Provide only the requested filing interpretation: " + narrative
+                    + "\nAssigned scope: "
                     + ", ".join(state["companies"])
                     + " in fiscal years "
                     + ", ".join(map(str, state["years"]))
-                    + ". Interpret the supplied checked figures with original filing citations and actual fiscal dates. Provide this filing explanation only; do not calculate new figures."
+                    + ". Preserve supplied verified figures and calculations with original filing citations and actual fiscal dates. Do not calculate new figures. Assess only the requested explanation; do not demand unrequested metrics, a full causal bridge or a full reconciliation when a qualified explanation of important differences answers the question. Risk-change and market outputs belong to their assigned specialists."
+                + (" Include the requested original annual risk context and its relationship to the business mix; do not infer reduced risk from a calculated mix alone." if not any(t.worker == "risk" for t in task.plan) and re.search(r"\brisks?\b", state["question"], re.I) else "")
+                + (" Explain the release headline versus consolidated GAAP measures with the release's reconciliation and definitions; do not substitute adjusted earnings for GAAP operating income." if re.search(r"\b(release|headline|adjusted|non.GAAP)\b", state["question"], re.I) else "")
                 )
             local["handoff_role_note"] = (
                 "Provide only the requested filing drivers and interpretation of supplied checked figures. Preserve F/C values and bases. Risk Summary and Buy-Side outputs are composed separately; do not duplicate their briefs or recalculate their figures."
             )
-            async with asyncio.timeout(210):
-                if worker_overrides and step.worker in worker_overrides:
+            async with asyncio.timeout(WORKER_TIMEOUT_SECONDS):
+                if step.worker == "quant" and not local.get("financial_sources"):
+                    result = {"answer": "", "partial": True, "coverage_gap": True, "missing_outputs": ["No trusted financial inputs for Quant; unsupported calculations remain missing"], "analysis_sources": {}}
+                elif worker_overrides and step.worker in worker_overrides:
                     result = await worker_overrides[step.worker](local, emit)
                 elif step.worker == "data":
                     if financials is None:
@@ -460,7 +523,7 @@ def cooperative_graph(
                         emit,
                         model_stream=bounded_model,
                         emit_answer=last,
-                        prefetch=prefetch_for_analysis(state["question"])
+                        prefetch=([{"period": "FY", "basis": "annual", "metrics": ["revenue"]}] if state.get("revenue_component") else prefetch_for_analysis(state["question"]))
                         if any(t.worker == "quant" for t in task.plan)
                         else None,
                     )
@@ -523,7 +586,9 @@ def cooperative_graph(
                 if previous:
                     ref.owner = previous.owner
                 pending_refs[sid] = ref
-                pending_sources[sid] = copy.deepcopy(source)
+                # Narrative handoffs contain excerpts. Echoing an existing ID
+                # cannot replace its complete authoritative registry object.
+                pending_sources[sid] = copy.deepcopy(evidence[sid] if previous else source)
             task.registered_evidence.update(pending_refs)
             evidence.update(pending_sources)
             status = (
@@ -661,7 +726,8 @@ def cooperative_graph(
         else:
             # A synthesis can explain calculations, but cannot erase a requested risk
             # or valuation output. Preserve specialist evidence when the task is mixed.
-            mixed = "risk" in answers or "buy" in answers
+            has_conflicts = any(source.get("status") == "conflicting" for source in state.get("evidence", {}).values())
+            mixed = "risk" in answers or "buy" in answers or has_conflicts
             include = [
                 t.worker
                 for t in task.plan
@@ -669,7 +735,7 @@ def cooperative_graph(
                 and (mixed or t.worker == next(reversed(answers)))
             ]
             include = list(dict.fromkeys(include))
-            if "quant" in include and "data" in include:
+            if "quant" in include and "data" in include and not has_conflicts:
                 include.remove("data")
             answer = "\n\n".join(
                 (NAMES[w] + ":\n" if len(include) > 1 else "") + answers[w]
@@ -684,7 +750,11 @@ def cooperative_graph(
                 or any(v != "completed" for v in task.worker_outcomes.values())
                 else "completed"
             )
+        if not task.registered_evidence and status == "partial":
+            status = "failed" if "failed" in task.worker_outcomes.values() else "coverage_gap"
         task.terminal = status
+        if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
+            answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
         writer({"type": "answer", "data": answer})
         evidence = state.get("evidence", {})
         cited = set(re.findall(r"\[([SFC]\d+)\]", answer))

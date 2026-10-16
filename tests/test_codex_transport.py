@@ -11,6 +11,16 @@ from scripts.codex_bridge import Bridge
 from src.codex_transport import connection, terminate_owned
 
 
+def test_generation_environment_excludes_market_auth_and_keeps_cli_configuration(monkeypatch):
+    from src.codex_transport import generation_environment
+    monkeypatch.setenv("TAVILY_API_KEY", "synthetic-provider-credential")
+    monkeypatch.setenv("TWELVE_DATA_GMAIL_API_KEY", "synthetic-other-credential")
+    monkeypatch.setenv("RESEARCH_MODEL", "fixture-model")
+    environment = generation_environment()
+    assert "TAVILY_API_KEY" not in environment and "TWELVE_DATA_GMAIL_API_KEY" not in environment
+    assert environment["RESEARCH_MODEL"] == "fixture-model"
+
+
 @pytest.mark.asyncio
 async def test_owned_cli_descendant_cannot_hold_stdout_open_after_disconnect():
     # Real CLI plugins can inherit stdio: killing only the parent leaks the tree.

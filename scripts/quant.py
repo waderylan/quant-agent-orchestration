@@ -48,7 +48,7 @@ def main():
             raise SystemExit(result["error"])
     else:
         bundle = artifacts.load(args.bundle_id)
-        if args.command == "replay" and bundle.get("assessment", {}).get("validator") == "valuation-v1":
+        if args.command == "replay" and bundle.get("assessment", {}).get("validator") in ("valuation-v1", "valuation-v2"):
             from src.quant_valuation import replay
             result = {"bundle_id": args.bundle_id, **replay(bundle)}
             print(json.dumps(result, indent=2))

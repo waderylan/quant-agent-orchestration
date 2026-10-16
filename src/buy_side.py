@@ -23,9 +23,10 @@ from src.source_collection import ROOT, now
 
 
 def valuation_request(question):
+    question = re.sub(r"\bguaranteed upside\b", "promotional claim", question, flags=re.I)
     return bool(
         re.search(
-            r"\b(valu\w*|multiples?|peers?|premium|discount|upside|downside|implied|sensitivity|price target)\b|P\s*/\s*E|EV\s*/",
+            r"\b(valu\w*|multiples?|peers?|premium|discount|cheaper|forward earnings|consensus.EPS|upside|downside|implied|sensitivity|price target|total return)\b|P\s*/\s*E|EV\s*/",
             question,
             re.I,
         )
@@ -33,12 +34,15 @@ def valuation_request(question):
 
 
 def market_request(question):
-    return valuation_request(question) or bool(
+    price_context = bool(re.search(r"\b(stock price|share price|trading|market snapshot|(?:dated|current|latest|live|price) quotes?)\b", question, re.I))
+    filing_quote = bool(re.search(r"\b(filing|wording|passage|original|annual risk|commentary)\b", question, re.I)) and not price_context
+    return valuation_request(question) or price_context or bool(
         re.search(
-            r"\b(quote|stock price|share price|trading at|market snapshot|analyst estimates?)\b",
+            r"\b(quotes?|analyst estimates?)\b",
             question,
             re.I,
         )
+        and not filing_quote
     )
 
 
@@ -53,14 +57,25 @@ def search_arguments(companies):
     }
 
 
+def explicit_eps(question):
+    return bool(re.search(r"\bEPS\s+(?:of|is|at|=|grid\s*:)", question, re.I)) and bool(re.search(r"\b(hypothetical|assum\w*|scenario|grid)\b", question, re.I))
+
+
+def needs_consensus(question):
+    positive = re.sub(r"\b(?:not|no|without|do not (?:use|fetch|request)|don't (?:use|fetch|request))\s+(?:any\s+)?(?:consensus(?:\s+estimates?)?|estimates?)\b", "", question, flags=re.I)
+    return valuation_request(question) and (not explicit_eps(question) or bool(re.search(r"\b(consensus|forward earnings|forward P/E|estimates?)\b", positive, re.I)))
+
+
 async def collect_market(gateway, state, writer):
     """A fixed bounded acquisition plan, not a model-controlled provider loop."""
     evidence, gaps = [], []
     valuation = valuation_request(state["question"])
+    question = state["question"]
+    hypothetical_only = explicit_eps(question) and not re.search(r"\b(quotes?|upside|downside|returns?|difference|stock|share price|supporting evidence|counterargument)\b", question, re.I)
     for company in state["companies"]:
         for provider, name in [
-            ("twelve", "get_quote"),
-            *([("alpha", "EARNINGS_ESTIMATES")] if valuation else []),
+            *([] if hypothetical_only else [("twelve", "get_quote")]),
+            *([("alpha", "EARNINGS_ESTIMATES")] if needs_consensus(question) else []),
         ]:
             writer(
                 {
@@ -108,7 +123,8 @@ async def collect_market(gateway, state, writer):
                 gaps.append(
                     f"{company} {name}: {normalized.get('reason', normalized['status'])}"
                 )
-    if valuation:
+    recent_requested = not explicit_eps(question) or bool(re.search(r"\b(recent|news|web|Tavily|supporting evidence|counterargument|opposing)\b", question, re.I))
+    if valuation and not hypothetical_only and recent_requested:
         writer(
             {
                 "type": "trace",
@@ -179,7 +195,7 @@ class BuyTools:
                 "provider": snapshot.get("provider"),
                 "retrieved_at": snapshot.get("retrieved_at"),
                 "snapshot_id": snapshot.get("snapshot_id"),
-                "evidence_kind": "frozen MCP replay"
+                "evidence_kind": "synthetic frozen fixture" if snapshot.get("fixture_condition") else "frozen MCP replay"
                 if snapshot.get("replayed")
                 else snapshot.get("evidence_kind", "unavailable"),
                 "text": json.dumps(norm),
@@ -197,6 +213,7 @@ class BuyTools:
                     company=e["company"],
                     metric="price",
                     value=norm["value"],
+                    currency=norm["currency"],
                     accounting_basis="unspecified",
                     dilution="not applicable",
                     split_basis="current_quote",
@@ -211,47 +228,67 @@ class BuyTools:
                     "text": json.dumps(value.model_dump()),
                     "inspection_url": row["inspection_url"],
                     "evidence_source": sid,
+                    "evidence_kind": row["evidence_kind"],
                 }
                 self.sources[fid] = self.inputs[fid]
-            if e["kind"] == "consensus":
+            if e["kind"] == "consensus" and needs_consensus(self.state["question"]):
                 # Availability does not establish GAAP/adjusted, currency, dilution,
                 # split reconciliation or actual fiscal dates. Never upgrade by inference.
                 self.missing.append(
                     f"{e['company']}: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified"
                 )
-        if valuation_request(self.state["question"]):
-            self.missing += [
-                "Trailing P/E requires compatible current four-quarter diluted GAAP EPS; selected original annual earnings are not current TTM",
-                "EV/revenue, EV/EBITDA and FCF yield require matching share count, cash/debt dates, defined cash-flow/EBITDA basis, and split reconciliation",
-            ]
+        question = self.state["question"]
+        if valuation_request(question) and not explicit_eps(question):
+            if re.search(r"\b(trailing|TTM|valuation brief)\b", question, re.I):
+                self.missing.append("Trailing P/E requires compatible current four-quarter diluted GAAP EPS; selected original annual earnings are not current TTM")
+            if re.search(r"EV\s*/|\b(EBITDA|FCF|free cash flow yield|valuation brief)\b", question, re.I):
+                self.missing.append("EV/revenue, EV/EBITDA and FCF yield require matching share count, cash/debt dates, defined cash-flow/EBITDA basis, and split reconciliation")
         self._user_assumptions()
 
     def _user_assumptions(self):
         question = self.state["question"]
-        if len(self.state["companies"]) != 1:
-            return
         # Explicit values only: never infer an EPS value or a fair multiple.
         eps = re.search(
-            r"\b(?:assum\w*\s+)?(?:diluted\s+)?EPS\s*(?:of|=|is|at)\s*\$?(\d+(?:\.\d+)?)",
+            r"\bEPS\s*(?:of|=|is|at)\s*(?:(USD|EUR)\s*)?([$€])?(-?\d+(?:\.\d+)?)(?!\w|[.,]\d)",
             question,
             re.I,
         )
         multiple = re.search(
-            r"\b(?:P/E|multiple)\s*(?:of|=|is|at|to)?\s*(\d+(?:\.\d+)?)\s*(?:x|×)?",
+            r"\b(?:P/E|multiple)\s*(?:of|=|is|at|to)?\s*(-?\d+(?:\.\d+)?)\s*(?:x|×)?(?!\w|[.,]\d)",
             question,
             re.I,
         )
-        eps_grid = re.search(r"\bEPS\s+grid\s*:\s*([\d.,\s$]+)", question, re.I)
-        pe_grid = re.search(r"\bP/E\s+grid\s*:\s*([\d.,\s$]+)", question, re.I)
+        if not multiple:
+            multiple = re.search(r"(?<![\w.,])(-?\d+(?:\.\d+)?)\s*[- ]?(?:times|x)[- ]?\s*(?:earnings\s+)?(?:multiple|valuation)", question, re.I)
+        eps_grid = re.search(r"\bEPS\s+grid\s*:\s*([-\d.,\s$]+)", question, re.I)
+        pe_grid = re.search(r"\bP/E\s+grid\s*:\s*([-\d.,\s$]+)", question, re.I)
         horizon = re.search(r"\b(\d{1,2})[- ]month", question, re.I)
         months = horizon[1] if horizon else "12"
         if not (eps or eps_grid) or not (multiple or pe_grid):
+            if explicit_eps(question):
+                self.missing.append("Conditional price scenarios require explicit plain-decimal EPS and P/E assumptions; incomplete or unsupported numeric notation is not truncated")
             return
+        if eps and ((eps[1] or "").upper() == "EUR" or eps[2] == "€"):
+            self.missing.append("The explicit EPS is EUR; a compatible exchange rate and split basis are needed before a USD comparison")
+            return
+        from src.request_routing import mentioned_companies
+        companies = self.state["companies"]
+        if len(companies) > 1:
+            # Multi-issuer assumptions require an explicit, local issuer binding.
+            prefix = question[:(eps or eps_grid).start()]
+            clauses = re.split(r"[.;!?]", prefix)
+            assigned = mentioned_companies(clauses[-1])
+            if len(assigned) != 1 or assigned[0] not in companies:
+                self.missing.append("Scenario assumptions need an unambiguous issuer; no cross-company assumptions were inferred")
+                return
+            company = assigned[0]
+        else:
+            company = companies[0]
         for metric, match, grid in (
             ("eps", eps, eps_grid),
             ("multiple", multiple, pe_grid),
         ):
-            values = re.findall(r"\d+(?:\.\d+)?", grid[1]) if grid else [match[1]]
+            values = re.findall(r"-?\d+(?:\.\d+)?", grid[1]) if grid else [match[3] if metric == "eps" else match[1]]
             if not 1 <= len(values) <= 3:
                 self.missing.append(
                     "Sensitivity grids support at most three explicit EPS and P/E values each"
@@ -261,9 +298,10 @@ class BuyTools:
                 sid = self.next_id("F")
                 value = ValuationInput(
                     source_id=sid,
-                    company=self.state["companies"][0],
+                    company=company,
                     metric=metric,
                     value=str(number(explicit)),
+                    currency="USD",
                     accounting_basis="assumption",
                     dilution="diluted assumed by scenario",
                     split_basis="current_quote",
@@ -462,7 +500,7 @@ async def buy_turn(
     )
     if cited - tools.sources.keys() or not answer.strip():
         raise ValueError("Buy-Side citation validation failed")
-    if not cited and not gaps:
+    if not cited and not gaps and not outcome.missing:
         raise ValueError("Buy-Side answer has no verified source references")
     if emit_answer:
         writer(
@@ -475,7 +513,7 @@ async def buy_turn(
             }
         )
     missing = list(
-        dict.fromkeys([*state.get("missing_outputs", []), *gaps, *outcome.missing])
+        dict.fromkeys([*gaps, *outcome.missing])
     )
     return {
         "answer": answer,

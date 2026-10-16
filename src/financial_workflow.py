@@ -130,8 +130,9 @@ class FinancialTools:
             basis=arguments.get("basis", "annual"),
         )
         self.successful_calls += 1
+        conflicts = [row for row in result["gaps"] if row.get("status") == "conflicting" and "observation_id" in row and "value" in row]
         return {
-            "sources": self.register(result["observations"]),
+            "sources": self.register([*result["observations"], *conflicts]),
             "gaps": result["gaps"],
         }
 
@@ -234,9 +235,11 @@ async def financial_turn(
     cited_sources = [tools.sources[s] for s in sorted(cited, key=lambda s: int(s[1:]))]
     if emit_answer:
         writer({"type": "sources", "data": cited_sources})
+    conflicts = [source for source in tools.sources.values() if source.get("status") == "conflicting"]
+    conflict_gaps = ["Unresolved conflicting financial observation: " + source["company"] + " FY" + str(source["fiscal_year"]) + " " + source["metric"] for source in conflicts]
     return {
         "answer": answer,
         "financial_sources": tools.sources,
-        "partial": bool(state.get("partial")) or bool(outcome.missing),
-        "missing_outputs": outcome.missing,
+        "partial": bool(state.get("partial")) or bool(outcome.missing) or bool(conflicts),
+        "missing_outputs": list(dict.fromkeys([*outcome.missing, *conflict_gaps])),
     }

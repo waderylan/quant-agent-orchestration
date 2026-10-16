@@ -44,6 +44,30 @@ def observation(value, metric="revenue", year=2025, **overrides):
     }
 
 
+@pytest.mark.asyncio
+async def test_quant_can_cite_excluded_conflicts_without_calculating_them(tmp_path):
+    from src.quant_workflow import quant_turn
+    eligible = {"F1": observation(100, year=2024)}
+    disputed = {**observation(150), "source_id": "F2", "status": "conflicting"}
+    async def model(prompt, schema, handler, **kwargs):
+        handler("report_outcome", {"status": "partial", "missing": ["FY2025 conflict requires resolution"]})
+        yield {"type": "token", "data": "FY2025 observation exists but is conflicting [F2]; growth is excluded."}
+    result = await quant_turn({"question": "Calculate AMD revenue growth", "companies": ["AMD"], "years": [2024, 2025], "financial_sources": eligible, "analysis_sources": {"F2": disputed}, "excluded_financial_inputs": [{"source_id": "F2", "status": "conflicting"}]}, lambda event: None, model_stream=model, artifacts=ArtifactStore(tmp_path))
+    assert result["partial"] and not result.get("error") and not result["calculations"]
+    assert result["analysis_sources"]["F2"]["status"] == "conflicting"
+
+
+def test_parent_net_margin_preserves_signed_income_and_positive_revenue():
+    sources = {"F1": observation(-20, "net_income"), "F2": observation(100)}
+    code = "results = [{'label': 'Parent net margin', 'kind': 'margin', 'inputs': ['F1', 'F2'], 'value': values['F1'] / values['F2'] * 100}]"
+    result = validate_results(run_isolated(code, sources), sources)
+    assert result[0]["value"] == "-20.0" and result[0]["metric"] == "net_margin"
+    assert result[0]["source_ids"] == ["F1", "F2"]
+    sources["F2"]["value"] = 0
+    with pytest.raises(ValueError, match="positive"):
+        validate_results(run_isolated("results = [{'label': 'Invalid', 'kind': 'margin', 'inputs': ['F1', 'F2'], 'value': 0 * values['F1'] + values['F2']}]", sources), sources)
+
+
 @pytest.fixture
 def sources():
     rows = {
@@ -368,6 +392,18 @@ def test_share_recomputes_verified_component_and_preserves_executed_lineage():
     row = validate_results(run_isolated(SHARE, inputs), inputs)[0]
     assert row["value"] == "8.00" and row["metric"] == "automotive_revenue_share"
     assert row["source_ids"] == ["F1", "F2"]
+
+
+def test_verified_qct_total_share_uses_consolidated_denominator():
+    inputs = component_sources()
+    for source in inputs.values():
+        source["company"] = "QCOM"
+    inputs["F2"].update(metric="qct_revenue", component="qct_total")
+    row = validate_results(run_isolated(SHARE, inputs), inputs)[0]
+    assert row["value"] == "8.00" and row["metric"] == "qct_consolidated_revenue_share"
+    inputs["F1"].update(metric="qct_revenue", provenance="filing_revenue_table")
+    with pytest.raises(ValueError):
+        validate_results(run_isolated(SHARE, inputs), inputs)
 
 
 @pytest.mark.parametrize(

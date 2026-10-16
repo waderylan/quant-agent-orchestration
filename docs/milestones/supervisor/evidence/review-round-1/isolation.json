@@ -1,0 +1,35 @@
+{
+  "worktree": ".codex-tmp/review-blind-1",
+  "blind_commit": "d131dc500eabbe4d03a9486c07427d5219189305",
+  "parent_implementation_commit": "a56ae27444a127d107afcdecf6753869e18cd658",
+  "files": [
+    "PRODUCT_BRIEF.md",
+    "AGENTS.md"
+  ],
+  "history": "orphan commit with no implementation parent",
+  "instruction_boundary": "No OS sandbox claim; task restricts access to this brief-only checkout and forbids network/provider calls",
+  "agent": "/root/blind_review_one",
+  "fork_turns": "none",
+  "question_count": 48,
+  "personas": {
+    "portfolio_manager": 16,
+    "equity_researcher": 16,
+    "self_directed_investor": 16
+  },
+  "questions_sha256": "cf478815a8b6af08232d3c22e91df2620ba0a67b613c775112672bc01f3cb570",
+  "reviewer_notes_sha256": "4fa68f9593d780d99a83388bbf70d2022612ec0d343efaea22406e12daddd620",
+  "initial_adjudication_after_sealing": true,
+  "credentials_supplied": false,
+  "live_provider_authority_delegated": false,
+  "actual_generation_handoff": "You are the explicitly authorized first independent question designer. Work ONLY in C:\\Users\\Rylan Wade\\Desktop\\CS599-AAI\\hw2\\.codex-tmp\\review-blind-1. Set every shell tool's workdir to this path and use absolute paths for writes. Read that worktree's AGENTS.md and PRODUCT_BRIEF.md only. The checkout is a blind orphan snapshot containing no implementation, prior tests/answers, or credentials. Do not inspect parent directories, other worktrees, Git refs/history, environment files or process/account state. No network, web, MCP, provider calls, installs or product execution. No live-provider authority is delegated. Design at least 48 held-out questions with expected evidence and failure criteria as specified in AGENTS.md: 16 each from portfolio manager, equity researcher, and self-directed investor perspectives. Include realistic difficult mixed questions and adversarial/failure conditions. Do not invent factual financial answers. Write questions.json (and optional review_notes.md) in this worktree only; no transcript edits. Seal questions before parent execution; report case count, file SHA256 and assumptions. All three implementation commits are complete before this task starts.",
+  "input_hashes": {
+    "AGENTS.md": "744175ccae6de781c1c34890169f519dcaa0b416a97bd8ca6944428af86707a1",
+    "PRODUCT_BRIEF.md": "d69dca7d256e4ebcf866854aa6d0cb583c88249459c27adf582bd7b9c3236897"
+  },
+  "adjudication_input_hashes": {
+    "OUTCOMES.json": "7ea5d653fada4ccb27b9f0126e94a54b7ea0d4d064ee3f35f85fb3824a1a06ce",
+    "OUTCOMES-final.json": "0982a53e58a85e10a8f2ce9aead807a8a448aca168786fd65d4dad15f1f097d1",
+    "R1-013-supplement.json": "39abb78906f6c610e505a59851247ab751eb428a58a86281fa57a64693f943a1",
+    "AFFECTED-final.json": "85756ba4e77ec406e0f6c8bfacb3b2032be3c12a95d154062d7e076a1e16d676"
+  }
+}

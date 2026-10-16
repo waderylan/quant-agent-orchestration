@@ -12,6 +12,15 @@ from tests.test_supervisor import FULL, Index, workers
 
 
 @pytest.mark.asyncio
+async def test_sse_capture_uses_final_combined_source_registry():
+    from scripts.demo_support import capture_turn
+    frames = "event: sources\ndata: [{\"source_id\":\"S1\"}]\n\nevent: answer\ndata: \"Combined [F1][S1]\"\n\nevent: sources\ndata: [{\"source_id\":\"F1\"},{\"source_id\":\"S1\"}]\n\nevent: complete\ndata: {\"status\":\"completed\"}\n\n"
+    async with httpx.AsyncClient(transport=httpx.MockTransport(lambda request: httpx.Response(200, text=frames)), base_url="http://fixture") as client:
+        captured = await capture_turn(client, "Mixed request", ["QCOM"], [2025])
+    assert {s["source_id"] for s in captured["sources"]} == {"F1", "S1"}
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("fault", ["timeout", "conflict", "unsupported"])
 async def test_api_preserves_safe_terminal_contract(monkeypatch, tmp_path, fault):
     monkeypatch.setattr(app.state, "index", Index(), raising=False)

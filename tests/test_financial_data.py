@@ -101,6 +101,19 @@ def financial_store(tmp_path):
     return FinancialStore(path, inventory)
 
 
+def test_conflicting_provenances_register_for_inspection_without_becoming_available(financial_store):
+    original = financial_store.query(["QCOM"], [2024], metrics=["revenue"])["observations"][0]
+    variants = [{**original, "observation_id": "conflict-" + name, "status": "conflicting", "value": original["value"] * scale, "provenance": name} for name, scale in (("structured", 1000), ("statement", 1))]
+    class ConflictStore:
+        def query(self, *args, **kwargs):
+            return {"observations": [], "gaps": variants}
+    tools = FinancialTools(ConflictStore(), ["QCOM"], [2024])
+    result = tools("query_financials", {"metrics": ["revenue"]})
+    assert len(result["sources"]) == 2 and all(s["status"] == "conflicting" for s in result["sources"])
+    assert tools("inspect_observation", {"source_id": "F1"})["provenance"] == "structured"
+    assert tools("inspect_observation", {"source_id": "F2"})["value"] == original["value"]
+
+
 def test_derived_gross_profit_preserves_inputs_losses_zero_and_53_week_context(
     financial_store,
 ):

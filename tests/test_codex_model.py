@@ -37,8 +37,8 @@ async def rpc(monkeypatch):
                             "id": 100 + number,
                             "method": "item/tool/call",
                             "params": {
-                                "tool": "search_sources",
-                                "arguments": {"query": str(number)},
+                                "tool": getattr(self, "tool_names", ["search_sources"] * self.calls)[number],
+                                "arguments": {"status": "complete", "missing": []} if getattr(self, "tool_names", ["search_sources"] * self.calls)[number] == "report_outcome" else {"query": str(number)},
                             },
                         }
                     )
@@ -124,3 +124,17 @@ async def test_repeated_calls_after_budget_remain_bounded_and_close_transport(rp
     with pytest.raises(RuntimeError, match="ignored the tool limit"):
         _ = [event async for event in codex_model.stream("question", [], handler)]
     assert len(executed) == 8 and closed == [True]
+
+
+@pytest.mark.asyncio
+async def test_final_tool_slot_remains_available_for_explicit_completion(rpc):
+    from src.response_contract import OutcomeTools, OUTCOME_TOOL
+    writer, handler, sent, executed, closed = rpc
+    handler.max_tool_calls = 2
+    outcome = OutcomeTools(handler)
+    writer.calls = 3
+    writer.tool_names = ["search_sources", "search_sources", "report_outcome"]
+    events = [event async for event in codex_model.stream("question", [OUTCOME_TOOL], outcome)]
+    assert len(executed) == 1 and outcome.status == "complete"
+    assert [e["data"]["name"] for e in events if e["type"] == "tool"] == ["search_sources", "report_outcome"]
+    assert closed == [True]

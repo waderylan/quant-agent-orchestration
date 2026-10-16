@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from datetime import datetime
 
 from src.analysis_artifacts import ArtifactStore
 from src.market_evidence import ValuationInput, number
@@ -30,6 +31,8 @@ def compatible(inputs, *, flow=False):
         for i in fundamentals
     ):
         raise ValueError("Missing accounting, dilution, split, period, or as-of basis")
+    if any(i.start and i.end and i.start > i.end for i in fundamentals):
+        raise ValueError("Financial period dates start after the end")
     if len({i.accounting_basis for i in fundamentals}) > 1:
         raise ValueError("Incompatible GAAP/adjusted accounting bases")
     if (
@@ -62,6 +65,8 @@ def formula(kind, inputs):
             inputs[1].source_kind != "consensus" or not inputs[1].horizon
         ):
             raise ValueError("Forward P/E requires an explicit consensus horizon")
+        if kind == "forward_pe" and datetime.fromisoformat(inputs[1].end).date() <= datetime.fromisoformat(inputs[1].as_of.replace("Z", "+00:00")).date():
+            raise ValueError("Forward P/E requires a future fiscal period relative to consensus as-of")
         return vals[0] / vals[1], "multiple", "price / positive diluted EPS"
     if kind in ("ev_revenue", "ev_ebitda"):
         denominator = "revenue" if kind == "ev_revenue" else "ebitda"
@@ -123,6 +128,21 @@ def formula(kind, inputs):
     raise ValueError("Unsupported valuation formula")
 
 
+def calculation_metadata(spec, selected):
+    """The denominator owns the fiscal period; quotes own a separate price time."""
+    kind = spec["kind"]
+    primary = selected[1] if kind in ("pe", "forward_pe") else selected[-1] if kind in ("ev_revenue", "ev_ebitda") else selected[0]
+    scenario = kind in ("implied_price", "scenario_return")
+    horizons = {s.horizon for s in selected if s.source_kind == "user_assumption" and s.horizon}
+    if scenario and len(horizons) > 1:
+        raise ValueError("Scenario assumption horizons differ")
+    horizon = next(iter(horizons), "12 months") if scenario else primary.horizon
+    if spec.get("horizon", horizon) != horizon:
+        raise ValueError("Calculation horizon differs from source or explicit user inputs")
+    quote = next((s for s in selected if s.source_kind == "quote"), None)
+    return {"company": primary.company, "fiscal_year": int(primary.end[:4]) if primary.end else None, "period": horizon, "basis": "conditional scenario" if scenario else "source-defined valuation", "start": primary.start, "end": primary.end, "horizon": horizon, "currency": primary.currency, "accounting_basis": primary.accounting_basis, "dilution": primary.dilution, "split_basis": primary.split_basis, "as_of": quote.as_of if quote else primary.as_of}
+
+
 def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
     if not 1 <= len(specs) <= 24:
         raise ValueError("Valuation calculation count must be 1–24")
@@ -148,7 +168,10 @@ def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
         ):
             raise ValueError("Valuation requires one to five distinct input IDs")
         selected = [parsed[sid] for sid in ids]
+        metadata = calculation_metadata(spec, selected)
         target, unit, definition = formula(spec["kind"], selected)
+        if any(sources[sid].get("unit", parsed[sid].unit) != parsed[sid].unit for sid in ids):
+            raise ValueError("Valuation input unit disagrees with its metric and currency")
         value_expr = [f"values[{sid!r}]" for sid in ids]
         if spec["kind"] in ("pe", "forward_pe"):
             expression = f"{value_expr[0]} / {value_expr[1]}"
@@ -172,20 +195,12 @@ def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
             + "}"
         )
         expected.append(target)
-        primary = selected[0]
         results.append(
             {
                 "kind": "calculation",
                 "source_id": f"C{calculation_offset + n + 1}",
                 "label": spec["label"],
-                "company": primary.company,
-                "fiscal_year": int((primary.end or "0000")[:4]),
-                "period": primary.horizon or "12-month scenario",
-                "basis": "conditional scenario"
-                if spec["kind"] in ("implied_price", "scenario_return")
-                else "source-defined valuation",
-                "start": primary.start,
-                "end": primary.end,
+                **metadata,
                 "metric": spec["kind"],
                 "calculation_kind": spec["kind"],
                 "value": str(target),
@@ -193,7 +208,6 @@ def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
                 "formula": definition,
                 "inputs": ids,
                 "source_ids": ids,
-                "horizon": spec.get("horizon", "12 months"),
                 "assumptions": [
                     s.model_dump()
                     for s in selected
@@ -216,7 +230,7 @@ def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
         results,
         sources,
         assessment={
-            "validator": "valuation-v1",
+            "validator": "valuation-v2",
             "definitions": "EV=equity value + total debt - cash equivalents; FCF=operating cash flow - capex; EBITDA must be source-defined",
             "specs": specs,
         },
@@ -240,7 +254,8 @@ def calculate(specs, sources, *, artifacts=None, calculation_offset=0):
 
 
 def replay(bundle):
-    if bundle.get("assessment", {}).get("validator") != "valuation-v1":
+    version = bundle.get("assessment", {}).get("validator")
+    if version not in ("valuation-v1", "valuation-v2"):
         raise ValueError("Not a valuation bundle")
     specs, sources = bundle["assessment"]["specs"], bundle["sources"]
     executed = run_isolated(bundle["code"], sources)
@@ -257,7 +272,11 @@ def replay(bundle):
             )
             for sid in spec["inputs"]
         ]
-        value, _, _ = formula(spec["kind"], selected)
+        value, unit, definition = formula(spec["kind"], selected)
+        if version == "valuation-v2":
+            expected = {**calculation_metadata(spec, selected), "unit": unit, "formula": definition, "metric": spec["kind"], "inputs": spec["inputs"], "source_ids": spec["inputs"]}
+            if any(stored.get(key) != expected_value for key, expected_value in expected.items()):
+                raise ValueError("Valuation replay period, basis, horizon or lineage metadata differs")
         if (
             abs(number(row["value"]) - value) > Decimal("1e-8")
             or abs(number(stored["value"]) - value) > Decimal("1e-8")

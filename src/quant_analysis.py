@@ -289,8 +289,9 @@ def validate_results(rows, sources, *, scenario=None):
         elif row.kind == "share":
             numerator, denominator = inputs
             comparable(numerator, denominator, sources, same_interval=True)
+            qct_total = numerator["metric"] == "qct_revenue" and numerator.get("component") == "qct_total" and numerator["company"] == "QCOM" and denominator["metric"] == "revenue" and numerator["period"] == "FY" and numerator["basis"] == "annual"
             if (
-                numerator["metric"] != "revenue_component"
+                (numerator["metric"] != "revenue_component" and not qct_total)
                 or numerator.get("provenance") != "filing_revenue_table"
                 or numerator.get("parent_metric") != "revenue"
                 or numerator.get("parent_scope") != "consolidated"
@@ -313,7 +314,7 @@ def validate_results(rows, sources, *, scenario=None):
             expected = values[0] / values[1] * 100
             metadata.update(
                 unit="percent",
-                metric=numerator["component"]
+                metric="qct_consolidated_revenue_share" if qct_total else numerator["component"]
                 + (
                     "_qct_revenue_share"
                     if denominator["metric"] == "qct_revenue"
@@ -328,10 +329,10 @@ def validate_results(rows, sources, *, scenario=None):
                 numerator["unit"] != "USD"
                 or denominator["unit"] != "USD"
                 or denominator["metric"] != "revenue"
-                or numerator["metric"] not in ("gross_profit", "operating_income")
+                or numerator["metric"] not in ("gross_profit", "operating_income", "net_income")
             ):
                 raise ValueError(
-                    "Margin requires gross profit/operating income and matching revenue"
+                    "Margin requires gross profit, operating income or parent-attributable net income and matching revenue"
                 )
             if values[1] <= 0:
                 raise ValueError("Margin revenue denominator must be positive")
@@ -340,7 +341,7 @@ def validate_results(rows, sources, *, scenario=None):
                 unit="percent",
                 metric="gross_margin"
                 if numerator["metric"] == "gross_profit"
-                else "operating_margin",
+                else "net_margin" if numerator["metric"] == "net_income" else "operating_margin",
             )
             formula = f"{row.inputs[0]} / {row.inputs[1]} * 100"
         elif row.kind == "quarter":
@@ -399,7 +400,7 @@ def validate_results(rows, sources, *, scenario=None):
             else:
                 expected = values[0] - values[1]
                 if current["unit"] == "percent":
-                    if current["metric"] not in ("gross_margin", "operating_margin"):
+                    if current["metric"] not in ("gross_margin", "operating_margin", "net_margin"):
                         raise ValueError(
                             "Percentage-point differences require matching margin metrics"
                         )
@@ -438,6 +439,8 @@ def validate_results(rows, sources, *, scenario=None):
                 .replace("_", " ")
             )
         label = f"{metadata['company']} FY{metadata['fiscal_year']}{period_label} {metric_label}"
+        if any(s.get("evidence_kind", "").startswith("synthetic") for s in inputs):
+            label += " (synthetic fixture)"
         if row.kind in ("growth", "difference"):
             prior_period = (
                 "" if inputs[1]["period"] == "FY" else " " + inputs[1]["period"]

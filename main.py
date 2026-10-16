@@ -11,6 +11,7 @@ from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel, Field
 from dataclasses import dataclass
+from collections.abc import Callable, AsyncIterator
 
 from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
@@ -53,6 +54,9 @@ class TurnServices:
 
     gateway: MarketGateway | None = None
     worker_overrides: dict | None = None
+    index: ResearchIndex | None = None
+    financials: FinancialStore | None = None
+    model_stream: Callable[..., AsyncIterator[dict]] | None = None
 
 
 def turn_services(request: Request):
@@ -227,15 +231,16 @@ async def chat(
             async with app.state.turns:
                 async with aclosing(
                     events(
-                        app.state.index,
+                        services.index or app.state.index,
                         question.question.strip(),
                         list(dict.fromkeys(question.companies)),
                         list(dict.fromkeys(question.years)),
                         gateway=services.gateway,
                         worker_overrides=services.worker_overrides,
+                        **({"model_stream": services.model_stream} if services.model_stream is not None else {}),
                         **(
-                            {"financials": app.state.financials}
-                            if app.state.financials.path.exists()
+                            {"financials": services.financials or app.state.financials}
+                            if services.financials is not None or app.state.financials.path.exists()
                             else {}
                         ),
                     )

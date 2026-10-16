@@ -21,6 +21,7 @@ def source(sid="F1", value=100, company="QCOM"):
     return {
         "source_id": sid,
         "kind": "financial_observation",
+        "status": "available",
         "company": company,
         "fiscal_year": 2025,
         "start": "2024-09-30",
@@ -47,6 +48,25 @@ def test_selects_only_requested_workers_and_dependency_order():
     for question, expected in cases:
         tasks, _ = tasks_for(question)
         assert [t.worker for t in tasks] == expected
+
+
+def test_mixed_requests_keep_financial_work_and_scoped_market_intent():
+    cases = [
+        ("Did AMD sales grow in FY2025 compared with FY2024?", ["data", "quant"]),
+        ("Compare NVIDIA earnings and cash conversion, then tell me how the stock is trading right now", ["data", "quant", "buy"]),
+        ("Build AMD and NVIDIA consolidated GAAP operating margins; explain why adjusted earnings differ", ["data", "quant", "research"]),
+        ("Compare AMD operating performance and calculate a consensus-EPS valuation scenario", ["data", "quant", "buy"]),
+        ("Is AMD cheaper than Qualcomm based on forward earnings?", ["buy"]),
+        ("Commentary claims guaranteed upside; compare Intel annual risk language", ["risk"]),
+        ("Build a full ten-year discounted-cash-flow valuation for NVIDIA. Also tell me its FY2025 operating cash flow", ["data"]),
+        ("What was Qualcomm total return with reinvested dividends? Also show annual revenue", ["data"]),
+        ("Compare Qualcomm risk changes and quote original filing wording", ["risk"]),
+        ("Compute Qualcomm annual automotive and handsets revenue shares of QCT and give a dated quote", ["data", "filing_inputs", "quant", "buy"]),
+    ]
+    for question, expected in cases:
+        assert [t.worker for t in tasks_for(question)[0]] == expected
+    _, plan = tasks_for("Compare Qualcomm cash conversion and risk changes, then show a dated quote")
+    assert plan.required_calculations == ("ratio",)
 
 
 def workers(*, failed=None, conflict=False):
@@ -302,3 +322,69 @@ async def test_mutating_worker_cannot_poison_prior_evidence():
     es = await capture("Calculate Qualcomm revenue growth", overrides=overrides)
     final_sources = [e["data"] for e in es if e["type"] == "sources"][-1]
     assert final_sources[0]["value"] == 100 and es[-1]["data"]["status"] == "partial"
+
+
+@pytest.mark.asyncio
+async def test_excerpt_echo_cannot_shorten_authoritative_citation():
+    original = {"source_id": "S1", "kind": "filing_passage", "company": "QCOM", "document_id": "original", "chunk_id": "long-original", "start": 0, "end": 2400, "text": "Original filing text " * 120, "inspection_url": "/api/sources/long-original"}
+    async def risk(state, writer):
+        return {"answer": "Original risk wording [S1].", "risk_sources": {"S1": original}}
+    async def buy(state, writer):
+        assert len(state["analysis_sources"]["S1"]["text"]) == 1600
+        return {"answer": "Preserved risk context [S1].", "buy_sources": state["analysis_sources"]}
+    es = await capture("Compare Qualcomm risk changes and give a stock price quote", overrides={"risk": risk, "buy": buy})
+    sources = [e["data"] for e in es if e["type"] == "sources"][-1]
+    assert sources[0]["text"] == original["text"] and sources[0]["end"] == 2400
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("field,value", [("period", "Q3"), ("basis", "quarter"), ("currency", "EUR"), ("horizon", "24 months"), ("status", "conflicting"), ("freshness", "stale")])
+async def test_period_and_valuation_metadata_changes_fail_handoff(field, value):
+    overrides = workers()
+    async def mutate_metadata(state, writer):
+        changed = copy.deepcopy(state["financial_sources"]["F1"])
+        changed[field] = value
+        return {"answer": "Changed basis [F1].", "analysis_sources": {"F1": changed}}
+    overrides["quant"] = mutate_metadata
+    es = await capture("Calculate Qualcomm revenue growth", overrides=overrides)
+    assert es[-1]["data"]["status"] == "partial"
+    assert any(e["type"] == "trace" and "changed value/basis" in e["data"].get("reason", "") for e in es)
+
+
+@pytest.mark.asyncio
+async def test_real_deadline_cancels_owned_worker_and_retains_prior_findings(monkeypatch):
+    import src.supervisor as supervisor
+    monkeypatch.setattr(supervisor, "WORKER_TIMEOUT_SECONDS", .01)
+    stopped = asyncio.Event()
+    async def stalled(state, writer):
+        try:
+            await asyncio.sleep(60)
+        finally:
+            stopped.set()
+    overrides = workers()
+    overrides["risk"] = stalled
+    es = await capture("Compare Qualcomm revenue and annual risk changes", overrides=overrides)
+    assert stopped.is_set() and es[-1]["data"]["status"] == "partial"
+    assert any("F1" in {s["source_id"] for s in e["data"]} for e in es if e["type"] == "sources")
+
+
+@pytest.mark.asyncio
+async def test_absent_inputs_skip_quant_without_claiming_worker_failure():
+    async def absent(state, writer):
+        return {"answer": "Reported inputs unavailable.", "financial_sources": {}, "partial": True, "missing_outputs": ["Original statements unavailable"]}
+    es = await capture("Calculate Qualcomm revenue growth", overrides={"data": absent})
+    assert es[-1]["data"]["status"] == "coverage_gap"
+    assert not any(e["type"] == "trace" and e["data"].get("node") == "worker_failure" for e in es)
+
+
+@pytest.mark.asyncio
+async def test_conflicts_remain_inspectable_but_never_enter_quant_inputs():
+    async def conflicting(state, writer):
+        row = source()
+        row["status"] = "conflicting"
+        return {"answer": "Conflicting reported figure [F1].", "financial_sources": {"F1": row}, "partial": True}
+    async def forbidden(state, writer):
+        pytest.fail("Quant must not receive an unresolved conflicting observation")
+    es = await capture("Calculate Qualcomm revenue growth", overrides={"data": conflicting, "quant": forbidden})
+    assert es[-1]["data"]["status"] == "partial"
+    assert [e["data"] for e in es if e["type"] == "sources"][-1][0]["status"] == "conflicting"

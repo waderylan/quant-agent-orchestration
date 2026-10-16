@@ -321,6 +321,7 @@ async def test_mixed_graph_preserves_checked_context_and_explicit_completeness(
             yield {"type": "tool", "data": {"name": "query_financials"}}
             yield {"type": "token", "data": "Intermediate inputs [F1][F2]."}
         elif role == "Financial Analysis / Quant":
+            assert "checked_calculations only" in prompt
             handler(
                 "run_analysis",
                 {
@@ -330,14 +331,14 @@ async def test_mixed_graph_preserves_checked_context_and_explicit_completeness(
             handler(
                 "report_outcome",
                 {
-                    "status": "partial",
-                    "missing": ["Filing explanation requires Research"],
+                    "status": "complete",
+                    "missing": [],
                 },
             )
             yield {"type": "token", "data": "Intermediate Quant result [C1]."}
         else:
             assert "cash_conversion" in prompt and "Checked financial context" in prompt
-            assert "Filing explanation requires Research" in prompt
+            assert '"value": "' in prompt and '"source_id": "C1"' in prompt
             handler("inspect_source", {"source_id": "S1"})
             handler(
                 "report_outcome",
@@ -374,3 +375,26 @@ async def test_mixed_graph_preserves_checked_context_and_explicit_completeness(
         assert result[-1]["data"]["missing_outputs"] == [
             "Management bridge is unavailable"
         ]
+
+
+def test_invalid_ratio_year_preserves_other_checked_calculations(tmp_path):
+    from src.analysis_artifacts import ArtifactStore
+    inputs = {"F1": source(100, "operating_cash_flow"), "F2": source(20, "net_income"), "F3": source(-100, "net_income", 2024)}
+    tools = QuantTools(inputs, ArtifactStore(tmp_path), request={"companies": ["AMD"], "years": [2024, 2025], "required_calculations": ["ratio"]})
+    result = tools("run_analysis", {"code": "results=[{'label':'valid conversion','kind':'ratio','inputs':['F1','F2'],'value':values['F1']/values['F2']},{'label':'signed dollar change','kind':'difference','inputs':['F2','F3'],'value':values['F2']-values['F3']}]"})
+    assert len(result["calculations"]) == 2 and tools.bundle_id
+    assert tools.ratio_eligible == {("AMD", 2025)} and "FY2024" in tools.ratio_gaps[0]
+
+
+@pytest.mark.asyncio
+async def test_intermediate_quant_cannot_hide_missing_calculation(tmp_path):
+    from src.analysis_artifacts import ArtifactStore
+    from src.quant_workflow import quant_turn
+    inputs = {"F1": source(100, "operating_cash_flow"), "F2": source(20, "net_income")}
+    inputs = {sid: {**row, "source_id": sid} for sid, row in inputs.items()}
+    async def model(prompt, schema, handler, **kwargs):
+        handler("run_analysis", {"code": "results=[{'label':'conversion','kind':'ratio','inputs':['F1','F2'],'value':values['F1']/values['F2']}]"})
+        handler("report_outcome", {"status": "partial", "missing": ["Requested year-over-year calculation remains unsupported"]})
+        yield {"type": "token", "data": "Verified single-period ratio [C1]."}
+    result = await quant_turn({"financial_sources": inputs, "companies": ["AMD"], "years": [2025], "question": "Calculate cash conversion", "worker_output": "checked_calculations"}, lambda e: None, model_stream=model, artifacts=ArtifactStore(tmp_path), emit_answer=False)
+    assert result["partial"] and result["bundle_id"] and result["missing_outputs"] == ["Requested year-over-year calculation remains unsupported"]

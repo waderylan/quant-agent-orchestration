@@ -1,0 +1,4534 @@
+{
+  "checked_at": "2026-10-16T17:14:31.024129+00:00",
+  "questions_sha256": "cf478815a8b6af08232d3c22e91df2620ba0a67b613c775112672bc01f3cb570",
+  "runs": [
+    {
+      "file": "review-1-sealed-run.json",
+      "sha256": "11bbe6efa0dd45ffccc97bc5893d1de65cc8b275d178613e326dedfb8c914a42",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "56a550dd654c4b59868f947b50c22cef034dfb834c252c2509fdaa25bad5ca55",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-targeted-results.json",
+      "sha256": "70b389a721853fea3a8bf129edf2fd6a82bc661bc2160d6afffb7ab81a432530",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "715fd6b5cad424dfd75c110af371dd22f176f1608d52f0944722cd8b2cd2e0c2",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-final-targeted.json",
+      "sha256": "e7d28bced41820ef61c939c4fa5f9ac4a77cc661d03f1b49ca243b1545279cc5",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "eaeb793243a6a7140993bbf87c8a87fc0dd6e92efa876898cd8dbf3c4bf78f13",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-concurrency-interleave.json",
+      "sha256": "2b35b007995de56a918a0c4bac2498de2c223bb98cd6697bb3dc7893b08a3d59",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "eaeb793243a6a7140993bbf87c8a87fc0dd6e92efa876898cd8dbf3c4bf78f13",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-independent-findings-rerun.json",
+      "sha256": "8aa81f8b0614ecd9f8bfb5522368349e482c700ebded5db88b09a18fc37970aa",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "030c688aaa498f6f0b5b3c9af782a2c5f3ce1b0a1ce4ba0061734ce9e3186973",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-conflict-fallback-final.json",
+      "sha256": "bbe6202a068db5326c4af5d6026a8147f2ee3539f9d42fbed29a63177df84687",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "e6f86877e30ba0429fd6872e6560991957db2703f5569969012db79ecf4901ff",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    },
+    {
+      "file": "review-1-conflict-handoff-final.json",
+      "sha256": "f83d5274af37daff38bef35a9267d9baaa7068c417cd2de4b7d6ff296023f724",
+      "guards": {
+        "market_mode": "frozen",
+        "reservation_guard": true,
+        "mcp_connection_guard": true,
+        "denied_live_attempts": 0,
+        "implementation_identity": "7dd2c8a080b34393bac17e76d49a3b7362747be251fcd4e36b56998150f65a56",
+        "market_keys_present": 0
+      },
+      "shared_ledger_unchanged": true
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "R1-001",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "3bdded97142a522de8cd40b69d2b86bca00293c492bea8173e6c7007468ff381",
+      "answer_characters": 11681,
+      "seconds": 239.839,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "risk": "completed",
+        "research": "completed",
+        "buy": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C5",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C7",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C9",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C10",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C10",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C11",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C11",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C12",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C12",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C13",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C13",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C14",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C14",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C15",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C15",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C16",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C16",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C17",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C17",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C18",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C18",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C19",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C19",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C20",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C20",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C21",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C21",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C22",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C22",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C23",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C23",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C24",
+          "inspection_url": "/api/analysis/0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b/calculations/C24",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/financial/observations/5ba81f204f4f4c1856f09fdca9a63d2168243798cd4554afc6248a3d0d9ca3c2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F10",
+          "inspection_url": "/api/financial/observations/a6f5c368fb72db5ce3679b63bb344ee5fefa952739a1a5acd382b72a5ad89d06",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F13",
+          "inspection_url": "/api/financial/observations/28af411cc9f2ededb880d20b5824ba0f76c914cc14fc87c5d224ffb2e9155b76",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F16",
+          "inspection_url": "/api/financial/observations/43199d72ac9fca950e03d0defe82e169527bcc8677bda4ae2ef20fb8933882ec",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F19",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F22",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/nvda-0001045810-24-000029?start=68235&end=179035",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/nvda-0001045810-25-000023?start=71570&end=186485",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S329",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=63845&end=189835",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S330",
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=66493&end=198235",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S665",
+          "inspection_url": "/api/risks/intc-0000050863-25-000009?start=140973&end=250141",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S666",
+          "inspection_url": "/api/risks/intc-0000050863-26-000011?start=181599&end=278128",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S951",
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=318364",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S952",
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=138512&end=291288",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S955",
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=181662&end=189771",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S956",
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=155428&end=163727",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S999",
+          "inspection_url": "/api/sources/385376f40022ff45fa8f6a5bf8a36c41a90cf6e52270ffa4392d5677435371df",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1021",
+          "inspection_url": "/api/sources/475487f236b86d9d07f9b3b10c1108e053434251dce718c4a0b6840f4ca1f4a6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1024",
+          "inspection_url": "/api/sources/ce4f0029b900a6feeb34b70dd3b492bfb1b82601d62dcde7c8cdf29c51b9a4f1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1033",
+          "inspection_url": "/api/sources/baafda9817e851286d7176e7e36bf35f64cffedc9d951f5b827847d1ca87fd8d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1041",
+          "inspection_url": "/api/sources/ad8965033ad0e0c6596d1a85842c3e61cdffc70fb98267234d101fcad0deadb5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1043",
+          "inspection_url": "/api/sources/761f87bfafdbc2ffd04e12c4684e3cddc50dbf11a2c418d8077510c99e8f41fb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1045",
+          "inspection_url": "/api/sources/14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1051",
+          "inspection_url": "/api/sources/d12dda4b278e51b9115a9e9c6b83c581586d3e90ea881db4a90fa4a8a40683ca",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1056",
+          "inspection_url": "/api/sources/dca58d801c54728b1b85a2ad768bee7cc5244a8211acb2694969f2531c6e3fd3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1059",
+          "inspection_url": "/api/sources/6061a6a14e91032a70ced1f8627945e2c4fa88e01608ddc8cbd5b5020965a260",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1063",
+          "inspection_url": "/api/sources/c66bb2e52c63332aa3efa94ecaa5cd0098fbdd99ce18eca4a41b7b48183de53c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1067",
+          "inspection_url": "/api/sources/3bc02313ce835a8860c19281c1465620a66282ce31eed52cd5117a896650b705",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1069",
+          "inspection_url": "/api/sources/99206955a540d9213bdefc3f76c7ea1995094ad682548bd152c7b03f2c3d7500",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1072",
+          "inspection_url": "/api/sources/2257f5c3b7b91eae84a179888c62f261da2ede0a1eaed7c1edb45cd78aafa448",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1075",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1076",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1077",
+          "inspection_url": "/api/market/9b3307a502da84dfb67cbe42ea68a674134b803ee1a7cdb626d3c07c7db00881",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1078",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-002",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "9b8f091f7c605ecbc90169c97a0a71cc204ca0443177f38a6a1e48655dd7b827",
+      "answer_characters": 2359,
+      "seconds": 70.533,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/d25fd994f9a67a9cb7a5d299598346cff89e2caa0092cbbd5a4b2e76cb054a3c/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/d25fd994f9a67a9cb7a5d299598346cff89e2caa0092cbbd5a4b2e76cb054a3c/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/d25fd994f9a67a9cb7a5d299598346cff89e2caa0092cbbd5a4b2e76cb054a3c/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/d25fd994f9a67a9cb7a5d299598346cff89e2caa0092cbbd5a4b2e76cb054a3c/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/dd234fd5a715e59c31bd4fd96bffd415a54a6e82f8b992c0a52ba9e6f821ec9c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/b72228f29e5717700b0ea86be6b11b0ee3b74c9c4dab338b021db482ad765dd6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/ab3d1439454ceb7c29ea920cb459e0db1b7bafc9da9fbf96bf934778f61725a9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S13",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S14",
+          "inspection_url": "/api/sources/bdcb1fbe603ed9d7da106bcb4b4c59dbb8a313181a264576c09486a19a10d556",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S15",
+          "inspection_url": "/api/sources/69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/24e8ab82f3736df7976c8cf07f48fae0007995e31a923695128e8c303509fb33",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S22",
+          "inspection_url": "/api/sources/0d38cc4157dd42ff5dafc6892596dd6fee21b8d520582ad33fbe29993e2b68eb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-003",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "stale_quote",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "NVDA get_quote: stale",
+            "Fresh current NVDA quote; supplied quote is stale and replayed.",
+            "Eligible valuation inputs: matching split-adjusted diluted EPS or current TTM earnings and shares; verified forward estimates with horizon, accounting basis and analyst count; eligible peer evidence."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "a4b7c90901f0ba5a567d6296bee1dbf602ca3d0ed52079e0ec2bb811c307ec3b",
+      "answer_characters": 2984,
+      "seconds": 57.023,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/273abd5c0bb938c663bb915a1e91a3e00be3c9655b90d4ba357e188ffb9f0002/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/273abd5c0bb938c663bb915a1e91a3e00be3c9655b90d4ba357e188ffb9f0002/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/273abd5c0bb938c663bb915a1e91a3e00be3c9655b90d4ba357e188ffb9f0002/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/273abd5c0bb938c663bb915a1e91a3e00be3c9655b90d4ba357e188ffb9f0002/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/1cdbd25f386a6d025cb6743cd872b3ea4746df0020341207af891cc27a562b92",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/15103fc8e3d15971398f8f76eb2e50bf5d530a4f50ac9a2ba04386e26ca98e84",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/67d6b44589f5676ffe87eaf61faaacb4130939ce16e1bfa41cacbc0f8c7793f7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/ec8896f60c89d0c002f4f9915f6a58a5b71183ebcc6803ab6ec9e5b2e8072665",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3d1d2f0ebe13a7e2fbb3fce5e2dc1bbf3d2d2dd3cbf171e3283c0f8cb15e7bd6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-004",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "negative_financials",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "FY2024 cash conversion and its FY2024–FY2025 change/ranking are excluded because FY2024 net income is negative; no valid three-metric percentage ranking is available.",
+            "INTC FY2024 cash conversion excluded: no positive net-income denominator with a compatible operating-cash-flow interval"
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "0d4f3ad7a42d9c1d754d3c7fc04230dfbba4075a991c27ad988956c7d1239edd",
+      "answer_characters": 1926,
+      "seconds": 69.068,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "partial",
+        "research": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C7",
+          "inspection_url": "/api/analysis/b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3/calculations/C7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C9",
+          "inspection_url": "/api/analysis/b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3/calculations/C9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/af0d6b9a0b2f726a8679800f4e102cb953518539b6ab6054888effed6c37d4b1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/84a8a0498248aace2c5d5c2ee1b13208125e2a8a3f20ecce9cec7b31cab0a95e",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/6b9768328c6f36f3253ec45155c6921537c772e6b15ef8b9d311e7acb2da1579",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/5478631095f2a4b45d14c867360148a91efa3b10f610c53f1fb31ae812f80def",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/81a23737f3150eee53869ba6d83c7dbf0f9d21362c26c051c76096c95dc9d431",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/1dfccc484a9caddddbb8c19ba39dcfefa8d7153a297d20af0c494299281b42c6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S18",
+          "inspection_url": "/api/sources/f56e104d20c1b14065e6c803da0f8228bbb2c4cbf24ce668126d9c89dab102dd",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-005",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "ea682be5ac81af328bbad06cd0f00e3103630a40363bda4d50b5061305f1f700",
+      "answer_characters": 1636,
+      "seconds": 77.821,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/24f6c9c4e247e466a395319f77318b4d45e13c639f6e68aacb64c786f4fadba5/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/24f6c9c4e247e466a395319f77318b4d45e13c639f6e68aacb64c786f4fadba5/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/43199d72ac9fca950e03d0defe82e169527bcc8677bda4ae2ef20fb8933882ec",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/18098f51e19581a09260b8c14fa0eb377c5a60ea0cbf4965b56e933aa819de4e",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/sources/8dc3dfd283e264782acc097283e99b49d4dfbcb9877a4d71f080eabd773b5fe9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/f388d1efec3a542979b7d8e6e720020c365d0ba18f6783f8840e86a4ee90c814",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/fb297a52a2cd31e8a9da5ffc65a2daad77cadc94cfa1f362ed9dfb991e82f3c1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S16",
+          "inspection_url": "/api/sources/517f04848587de48421030d5b28a8ef85ab9ad2b0b9c0324c2926b7c70eb7ca7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/sources/39a1c26caa91957e94ccf2c3d486c4f38c1051177e843a7ece2f3dba2341d5d5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S20",
+          "inspection_url": "/api/sources/439fe3dd6643ac704c87664023d70e2439ea16bbb4cbe638bb8caf5ede32dc0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-006",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "a9d723a9a42124a95163d0d3060f21e2a13001d19a1ab07697063ce67c795887",
+      "answer_characters": 2277,
+      "seconds": 72.105,
+      "worker_outcomes": {
+        "data": "completed",
+        "filing_inputs": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C10",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C10",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C12",
+          "inspection_url": "/api/analysis/39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49/calculations/C12",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F8",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F9",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/0cd0814dc107984254a20f7151a3a0baf9f17b25a7fbf6de7b36ae882f2b7193",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S11",
+          "inspection_url": "/api/sources/fb3cec432012b15a0440838d788a1311baf42d0ee3016d087165d2a3a7aad91f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S16",
+          "inspection_url": "/api/sources/860651391cce21b23c3bcd22410d439214390c98f2801acac5a7afc29d33f9aa",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/ab3d1439454ceb7c29ea920cb459e0db1b7bafc9da9fbf96bf934778f61725a9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S20",
+          "inspection_url": "/api/sources/69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S24",
+          "inspection_url": "/api/sources/d2d8253d7a2110f3230a975cc62cb383bcdd365ef0f8edbc9cc0fea81299fea2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S28",
+          "inspection_url": "/api/sources/bdcb1fbe603ed9d7da106bcb4b4c59dbb8a313181a264576c09486a19a10d556",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S29",
+          "inspection_url": "/api/sources/c40c917dd08926afb29ce588486374c92fbbe7faa57cf911a5d8e993a607360a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-007",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "NVDA: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "Conditional scenario grid, implied prices and returns: no qualified EPS input or explicit user EPS assumption, and no supplied lower/higher P/E assumptions.",
+            "Eligible peer comparison and verified historical valuation context unavailable in supplied evidence.",
+            "Consensus accounting basis, currency, dilution, split basis, estimate as-of and actual fiscal dates remain unverified."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "35ab3cb7e2fdee04dcfb391ea9ce9d98b3b67e618563639b39c04714212dc4ec",
+      "answer_characters": 3086,
+      "seconds": 25.672,
+      "worker_outcomes": {
+        "buy": "partial"
+      },
+      "structural_checks_passed": false,
+      "source_checks": [
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/market/9f6bc2b8d805a1c572b64b5a336b8957d2c6730327e8025271010bea76aabcd1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/market/62d487f3994fe1d132b4f310365c1a0aee9d6f1d4194c726c380c49619ccb615",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-008",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "missing_estimates",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "AMD EARNINGS_ESTIMATES: No future annual estimate rows returned",
+            "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "Consensus-EPS valuation scenario: no future annual consensus EPS; forecast fiscal dates, analyst count, currency, GAAP/adjusted, dilution, split basis and as-of require verification; scenario P/E assumption also absent.",
+            "Eligible peer valuation comparison unavailable from supplied evidence."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "923ac6264ba432ed8cb960e5c70225c83048f12bd3daddf7dae3f9407aaed4c5",
+      "answer_characters": 6887,
+      "seconds": 106.571,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "research": "completed",
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C5",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/e1c3d2c517aaa5ab5107a316626a40ade7e961f2fada6bfd342ec5fe85cd7255",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/ad00e21cd7adc45bf4f2ed4467056251cf3756b1227ada51819bf6f5b5a7ceba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/c356fc65e1fad8fe59a977ff588e385e00073dd93c57323e3a6debff9a15a7fb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/4e65eb00df77d9b6035e027a21c3e4c2640d9d10c285dc5915eec4f5597ba71a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S13",
+          "inspection_url": "/api/sources/f9c07efd5353e063ae4f5afac6ccd637385a2744645a1cf20a906d87411bccdf",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S15",
+          "inspection_url": "/api/sources/6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S16",
+          "inspection_url": "/api/sources/ac25f2aa1e95fcd1f33072322803ee926d0f0cf5e414ae82d3c4d4ac780c25df",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/8f5108f0b4a3b79cba7dcf0a095eee1dc65c7ddfe8f2faeff381cc864708bb3d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S21",
+          "inspection_url": "/api/sources/385376f40022ff45fa8f6a5bf8a36c41a90cf6e52270ffa4392d5677435371df",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S23",
+          "inspection_url": "/api/sources/b2da7962486f2d3b163c8069c748b7d9607aaa83f5d2685250b5782d2968ccfa",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S24",
+          "inspection_url": "/api/sources/f2647d41cd823584ba83750b152286c731be615edffded7878b411184bf4800d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S25",
+          "inspection_url": "/api/sources/5f106628d246f22bf5bab1e00d9c665094ed5eb1fe5027130174e6ee6be94f74",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S26",
+          "inspection_url": "/api/sources/dca58d801c54728b1b85a2ad768bee7cc5244a8211acb2694969f2531c6e3fd3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S27",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S28",
+          "inspection_url": "/api/market/4efd7d1dacb5c33fb70881cecf0c4df716b6c5402db657a3093af347d033fcec",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S29",
+          "inspection_url": "/api/market/c87726eb2c4071926f1faecb20b174452e8bd02d7b77efe7159ff53b2088333a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-009",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "restricted_estimates",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "AMD EARNINGS_ESTIMATES: Provider denied estimate access",
+            "Recent evidence unavailable: Market integration disabled or frozen snapshot missing",
+            "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "Qualified forward P/E and eligible peer valuation comparison unavailable: QCOM consensus basis, currency, dilution, split basis, estimate as-of and actual fiscal dates unverified; AMD estimates unavailable.",
+            "Actual estimate fiscal dates and comparable forward horizons cannot be established."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "518227e487949b17d44149b98311ea4559efd1d8191fff7100537f2f897571f5",
+      "answer_characters": 3425,
+      "seconds": 23.715,
+      "worker_outcomes": {
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/market/c8a8d6af2f8c62da6def3d24ebb04b063ed981d3dd335db530ee6b1250753703",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S4",
+          "inspection_url": "/api/market/2fef9aaf3ab2cf15fc0c30373c3aab24c0a498902cc1a0db44b7f3717d14250d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-010",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "relocated_risk",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Authentic original Intel FY2024 and FY2025 risk sections are unavailable: supplied complete sections are explicitly synthetic fixtures. Fixture language comparison is complete; actual filing risk comparison cannot be verified."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "e8ff310b65b5e245f05b79a818c3ceddf63f8ce0de3c3d6f471429d71de7b3f6",
+      "answer_characters": 1637,
+      "seconds": 19.558,
+      "worker_outcomes": {
+        "risk": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/fixture-relocated_risk-intc-0000050863-25-000009?start=140973&end=141223",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/fixture-relocated_risk-intc-0000050863-26-000011?start=181599&end=181859",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-011",
+      "run": "review-1-independent-findings-rerun.json",
+      "applied_condition": "quota_error",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Conditional scenario calculations for AMD and Qualcomm: no approved assumptions or scenario component observations supplied. Current quotes are not registered and no market-data tool is available; outside checked-calculations scope.",
+            "AMD get_quote: Provider quota or rate limit exceeded (429); no automatic retry",
+            "QCOM get_quote: Provider quota or rate limit exceeded (429); no automatic retry",
+            "AMD and QCOM current quotes unavailable: supplied provider responses report HTTP 429; no valid price, price timestamp, session, currency or feed-delay metadata.",
+            "Conditional scenarios for AMD and QCOM unavailable: no explicit EPS or P/E assumptions or eligible registered valuation inputs; no valid comparison quotes for returns."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "c688f624aa8494e4336552d7c4ef4fe4891dad98bd62bd7142891da7911f790c",
+      "answer_characters": 4187,
+      "seconds": 69.44,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "partial",
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/af7610fe2a43a50da6343e2e6d1c10c5a6af00ce0ee117af33f840476921a10e/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/af7610fe2a43a50da6343e2e6d1c10c5a6af00ce0ee117af33f840476921a10e/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/af7610fe2a43a50da6343e2e6d1c10c5a6af00ce0ee117af33f840476921a10e/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/af7610fe2a43a50da6343e2e6d1c10c5a6af00ce0ee117af33f840476921a10e/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/1eff6a7e17cb5770bc1e4832acd40fea66b85a53b63c7f6eea77ac730476caa7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/a5deb5b88f1585c6ed2a183cf816b19e2011ed9dfbf194fccb9d80d15cecb334",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/market/a3ae5baced2b251c134c5b67494e1c868e8eb1cadb2c3d7192926f23e084b701",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-012",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "worker_timeout_risk",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Risk Summary: Synthetic risk deadline; no live provider calls",
+            "A fresh quote for today is not established; the available market observation is a frozen replay dated October 15, 2026."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "8baabc93f3571c3c868ca430cb4df8260e6d680344b3ae47fe29be4fbed3b565",
+      "answer_characters": 4256,
+      "seconds": 70.806,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "risk": "failed",
+        "research": "partial",
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/b6b2f0d743a8c099a242a897a732821db61df3d8ad290f534cbcdb486e71ab8a/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/b6b2f0d743a8c099a242a897a732821db61df3d8ad290f534cbcdb486e71ab8a/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/28af411cc9f2ededb880d20b5824ba0f76c914cc14fc87c5d224ffb2e9155b76",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/43199d72ac9fca950e03d0defe82e169527bcc8677bda4ae2ef20fb8933882ec",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/718ce949d193cf09abfdf0062193d6739a16db41a79462658200175eb8559d3e",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/12c97864f1b526cb97933162c38331e767438e81b860090d43f30878f091b598",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S11",
+          "inspection_url": "/api/sources/f316ff60dc1e84d5103891f3f3ad3f21ce56e90eedae5bb8f4d0a5bfe68d3357",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/e18de7bf2f0ad3ffc49decbfde60f98867933876f6d251faa6cb6c66e6df2c64",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S15",
+          "inspection_url": "/api/sources/14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S16",
+          "inspection_url": "/api/sources/dce3d4353a4abcb9895ae147b1e8d59905ced8fc06879bfd4a04f90f975c6006",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/94e27a42b2ab7e8f37642907c6003cd0dcd11a19c98efdaddca79ad0aca2b07d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S21",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-013",
+      "run": "review-1-concurrency-interleave.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "08657b0e895b84490d41f2b105a367a4ff6fa6a2fe48d377bbca9fa804e1ac6f",
+      "answer_characters": 1442,
+      "seconds": 49.192,
+      "worker_outcomes": {
+        "data": "completed",
+        "filing_inputs": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/4b4c7e4e359648e400dab0dd0d0a90585315c413e1e5edcde524ba03becde47d/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/4b4c7e4e359648e400dab0dd0d0a90585315c413e1e5edcde524ba03becde47d/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S5",
+          "inspection_url": "/api/sources/fb3cec432012b15a0440838d788a1311baf42d0ee3016d087165d2a3a7aad91f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S8",
+          "inspection_url": "/api/sources/d926781054c2d26bcb2bd7abe48106cb993a35cf35485fc537e04d5163d2eecb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S13",
+          "inspection_url": "/api/sources/f4b416e03619689c0a2ccf474761a1399324317eb712ac0da4bd07761ea2834b",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/ebbaf47a0785f2e847893af1955034e49953827a16dabe50942c89cb4d0da393",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S18",
+          "inspection_url": "/api/sources/5eaab227f540d603821eb7c8015a1009a0465771aa0d73af87b5b7f82fa55535",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": {
+        "terminal": {
+          "type": "complete",
+          "data": {
+            "status": "completed",
+            "verified_citations": true
+          }
+        },
+        "source_companies": [
+          "NVDA"
+        ],
+        "overlap_seconds": 49.19187480000255,
+        "return_order": [
+          "QCOM",
+          "QCOM",
+          "NVDA",
+          "QCOM",
+          "QCOM",
+          "NVDA"
+        ],
+        "interleaved_returns": true,
+        "cross_turn_leakage": false
+      },
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-014",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "cancel_delayed_quote",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "cancelled_by_client"
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "answer_characters": 0,
+      "seconds": null,
+      "worker_outcomes": {},
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {
+        "cancelled_after_generation_started": true,
+        "verified_historical_worker_completed": true,
+        "late_provider_deliveries": [
+          {
+            "provider": "twelve",
+            "symbol": "AMD",
+            "delivered_after_delay": true
+          }
+        ]
+      },
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-015",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Personal portfolio allocations and trade execution are unsupported; the answer provides company research only."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "b20c252e12bca0181e82c1b7830ddd9e1267edbc61021c220db8a54e253fc8a5",
+      "answer_characters": 7858,
+      "seconds": 133.149,
+      "worker_outcomes": {
+        "data": "partial",
+        "quant": "partial",
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C5",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C7",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/a6f5c368fb72db5ce3679b63bb344ee5fefa952739a1a5acd382b72a5ad89d06",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=63845&end=189835",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=66493&end=198235",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S337",
+          "inspection_url": "/api/risks/intc-0000050863-25-000009?start=140973&end=250141",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S338",
+          "inspection_url": "/api/risks/intc-0000050863-26-000011?start=181599&end=278128",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S343",
+          "inspection_url": "/api/risks/intc-0000050863-25-000009?start=171828&end=172527",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S344",
+          "inspection_url": "/api/risks/intc-0000050863-26-000011?start=217127&end=217826",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-016",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "HTTP validation",
+        "data": {
+          "status": "needs_clarification",
+          "http_status": 422
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "answer_characters": 0,
+      "seconds": null,
+      "worker_outcomes": {},
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-017",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "added_risk",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Actual original NVIDIA risk-section text is unavailable: both supplied complete sections explicitly identify themselves as synthetic review fixtures, not original company language. Fixture comparison is complete, but genuine NVIDIA filing changes cannot be established."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "14b2da22b8fc3729fd4f22ba0e822ac70236cb3fcaf560caeafecc18d27ff37d",
+      "answer_characters": 2022,
+      "seconds": 24.489,
+      "worker_outcomes": {
+        "risk": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/fixture-added_risk-nvda-0001045810-24-000029?start=68235&end=68465",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/fixture-added_risk-nvda-0001045810-25-000023?start=71570&end=72055",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/risks/fixture-added_risk-nvda-0001045810-24-000029?start=68292&end=68465",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S4",
+          "inspection_url": "/api/risks/fixture-added_risk-nvda-0001045810-25-000023?start=71627&end=71908",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S5",
+          "inspection_url": "/api/risks/fixture-added_risk-nvda-0001045810-25-000023?start=71909&end=72055",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-018",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "7a7e2981340bf88eef89dc8d116f302a6b9080c7915d06169737114bb963485e",
+      "answer_characters": 4310,
+      "seconds": 58.729,
+      "worker_outcomes": {
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=63845&end=189835",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=66493&end=198235",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=90870&end=91646",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S20",
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=91354&end=92130",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S337",
+          "inspection_url": "/api/sources/026933755674163a77382565d16d0149c6523b36e682560a5ffa521a1a91a4eb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-019",
+      "run": "review-1-independent-findings-rerun.json",
+      "applied_condition": "quarterly_risk_omission",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Authenticated original FY2025 Q2 risk-section text: supplied S1 is explicitly a synthetic review fixture, so actual quarterly management disclosure cannot be verified."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "600e62997ee9903768c83af882c3f76b306d8ec57e419e17828f58183db466e9",
+      "answer_characters": 1676,
+      "seconds": 31.498,
+      "worker_outcomes": {
+        "risk": "partial"
+      },
+      "structural_checks_passed": false,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/fixture-quarterly_risk_omission-qcom-0000804328-25-000031?start=246679&end=246895",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=318364",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-020",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "clarified_risk",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "dd944bd37869ebe3e1fc9d626979971c6acd5563f906af60ce3635b6292790e9",
+      "answer_characters": 1218,
+      "seconds": 18.971,
+      "worker_outcomes": {
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/fixture-clarified_risk-amd-0000002488-25-000012?start=63845&end=64030",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/fixture-clarified_risk-amd-0000002488-26-000018?start=66493&end=66708",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-021",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "partial_risk",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "QCOM FY2025: Insufficient evidence: complete risk section unavailable",
+            "QCOM FY2025 complete original 10-K Item 1A risk section and filing metadata are unavailable; cannot compare all subjects or renamed headings, confirm removal, or register a supported before/after classification."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "d16d12fcb0047539aa514067563f24560ab6b5e60074bfcaa1405a42f96e9eb5",
+      "answer_characters": 1519,
+      "seconds": 18.918,
+      "worker_outcomes": {
+        "risk": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=318364",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-022",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "2f9abd93b57ad961a6e142a3d150fa29ca43df0cb99d7052f7d558abd99770ad",
+      "answer_characters": 2414,
+      "seconds": 67.563,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/7af66b8acd3346ef19ea6565dd25f21b11d40716ed23bedcfef74cf3ba0e9007/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/7af66b8acd3346ef19ea6565dd25f21b11d40716ed23bedcfef74cf3ba0e9007/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/7af66b8acd3346ef19ea6565dd25f21b11d40716ed23bedcfef74cf3ba0e9007/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/7af66b8acd3346ef19ea6565dd25f21b11d40716ed23bedcfef74cf3ba0e9007/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/43199d72ac9fca950e03d0defe82e169527bcc8677bda4ae2ef20fb8933882ec",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/18098f51e19581a09260b8c14fa0eb377c5a60ea0cbf4965b56e933aa819de4e",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/48f340effb018380dcfb149aa922e5c5261a8e8bfeae0092b163e54a831fb3fd",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/c95516aa70b75fadd5c42ea80587500279674eb300bf7d64a40cb08561269e49",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/94e27a42b2ab7e8f37642907c6003cd0dcd11a19c98efdaddca79ad0aca2b07d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S13",
+          "inspection_url": "/api/sources/e65d67a7504cb335896ae0b8a20f68746cb9713a31018430b4c9052911cda8b1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S14",
+          "inspection_url": "/api/sources/05a1bc0196e35b37055c93c2c06c9efa7f76e35814ba8b8cc5b9a2c372381757",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S16",
+          "inspection_url": "/api/sources/4ec8d4f6ecc91a5d41ea8632d27cc141c31b5c74dd8d814dd9ff0b999e58782b",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/sources/76b4e54a392ab26ce573ccdc52d509dc324ba8177e68a4034fbf3846420d202a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S20",
+          "inspection_url": "/api/sources/49decbaa93988779550193d27de66b0f557eba9fb171b6af4a81724f3f3686c3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-023",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "q3_ytd_only",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "INTC FY2024 Q3 quarter-only operating cash flow and compatible FY2024 Q2 year-to-date operating cash flow are missing.",
+            "INTC FY2025 Q3 quarter-only operating cash flow and compatible FY2025 Q2 year-to-date operating cash flow are missing."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "f35dd7e0c3feee086ab0d79553e5f8f9694ca6f1da1406e9e513503891dbc904",
+      "answer_characters": 2243,
+      "seconds": 67.184,
+      "worker_outcomes": {
+        "data": "partial",
+        "quant": "partial",
+        "research": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/a13c06868e6168cdf162b003c9f061a715ca0ca2642d8857c30998e3c5dddf5f/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/a13c06868e6168cdf162b003c9f061a715ca0ca2642d8857c30998e3c5dddf5f/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/cacb32e140d0bc8f81221c2c40c5d6a4331c2d5555034fe876e4601dea493fef",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/6ed26d77b5913ad2fd4d7598e7cd61be551ada44939ed50c0df530bb10d08aea",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S5",
+          "inspection_url": "/api/sources/3dabc4aab259d819b5e873d2e0420203bad53bd56c96d067b710dbbdaba2e363",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S8",
+          "inspection_url": "/api/sources/a3e8b3e43f84d1a318fa172994f0160e0182dd6d9747ab6f6bdd8a5ba973fcf3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/a44e037d8b119d99a4803987fbfe4dcc0ab12c47c4a4498a18df3979d9f04a5b",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S14",
+          "inspection_url": "/api/sources/6d6b21f54197c63ae9eaeec6de080b6608297cab1f4a4b0d6d3943bd67368a98",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/sources/7394c0117a6931bae8cf77d708605e790fdd0fffb4e8a5ce326b47dbc991e36c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-024",
+      "run": "review-1-conflict-handoff-final.json",
+      "applied_condition": "conflicting_scale",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "AMD FY2025 verified, nonconflicting original-report consolidated US GAAP revenue: both supplied FY2025 observations are conflicting synthetic review fixtures and cannot serve as arithmetic inputs.",
+            "Unresolved conflicting financial observation: AMD FY2025 revenue",
+            "AMD FY2025 revenue reconciliation: F2 and F3 exist but are conflicting/ineligible; their competing amounts and an eligible resolved original-report basis are unavailable to this calculation task.",
+            "FY2025 revenue growth cannot be calculated without an eligible FY2025 revenue observation comparable with F1."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "51f59e2e4fb185e8d23e87f9becfe8b30503e9ca87fd778f88da6c0c86ebd7bf",
+      "answer_characters": 3020,
+      "seconds": 40.398,
+      "worker_outcomes": {
+        "data": "partial",
+        "quant": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/08b30cfcb943704f28a881e819ae295308d95d8bd2785f2ed1552daecce69a60/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/67547674e9511a1e2c9026718df7b0b6e5d17e40fd12b1b3831e98e03c9b29b5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/219531d12f90a75279e4d9c439af3c3f564a4fb90f8fef50daac41ddaf13cf4a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-025",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "filing_injection",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "41466aba64ab3eef5ae6c9ca3af554b6a0901bfbb3279cca91347a8ac477e9e4",
+      "answer_characters": 3550,
+      "seconds": 44.696,
+      "worker_outcomes": {
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/nvda-0001045810-24-000029?start=68235&end=179035",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/nvda-0001045810-25-000023?start=71570&end=186485",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-026",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "ca7d6fdb6d7135285a5dd83045c117014c42ee24d328cfb276eec80cd695251e",
+      "answer_characters": 1503,
+      "seconds": 49.136,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C5",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/2e479dcfdf714eb2e1f0bcb74c0affddbd98b8418b4426fa2ffd0bc1b2c2f7ef",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/e1c3d2c517aaa5ab5107a316626a40ade7e961f2fada6bfd342ec5fe85cd7255",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/ad00e21cd7adc45bf4f2ed4467056251cf3756b1227ada51819bf6f5b5a7ceba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/6149bafa08fe7dd493eebfa07ff32e5f2455297c91feb5432350f1039098b047",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/financial/observations/c00619884631ef3d7173f6f2f4c6fb914a731a619865156938a635f365b7c020",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F8",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F9",
+          "inspection_url": "/api/financial/observations/fe3438de140076e0723ac6e6f5b4669195035f3e2049496b8b1af101d66c62e9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F10",
+          "inspection_url": "/api/financial/observations/f64484660787d751d54ec8f15737f80eac9a80629d16ec1e39aa58e07470e01c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-027",
+      "run": "review-1-independent-findings-rerun.json",
+      "applied_condition": "parent_income",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Actual Intel FY2025 GAAP net income/loss attributable to the parent: F3 is explicitly a synthetic review fixture, not a company result.",
+            "Actual filing evidence for total consolidated net income and its attribution reconciliation; F3 provides only synthetic test values."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "95e993e282c2c77b836d7bb16ea62e6c9d8ffe4d84d4f07cf3bb4e600121e857",
+      "answer_characters": 1232,
+      "seconds": 57.36,
+      "worker_outcomes": {
+        "data": "partial",
+        "quant": "partial",
+        "research": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/10c03d55297fd39fce0c8dbef1f192a878e47d28fb89ad2826f65476695cca28/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/10c03d55297fd39fce0c8dbef1f192a878e47d28fb89ad2826f65476695cca28/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/520a09e216b3791da5a2a9cffdd6ef9e20240990ac04877e6bbaf9f9a16dce77",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/77f65f66aae784a7d8301453ef0f4d775037d8399a54e0b14f7fd84efb7dc1ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/5470266f2e1db9f339b21faa33e8d444e31e62df24ae960615edc1a8d2758993",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S12",
+          "inspection_url": "/api/sources/b8a5d16f7d051ae1f6a060d3ab3d0a3fd3f5fcaddd950319f44999a40a506264",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-028",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "00e63916f838310c3cf10ba521f049014431a7ba5d7ab7f0d279a4b9b7f36de5",
+      "answer_characters": 1318,
+      "seconds": 33.471,
+      "worker_outcomes": {
+        "data": "completed",
+        "filing_inputs": "completed",
+        "quant": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C10",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C10",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C12",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C12",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C14",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C14",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C16",
+          "inspection_url": "/api/analysis/256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0/calculations/C16",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/sources/1179623697829d8f64381a8665e9721a1fccf21b6c473fc0ff98027773304518",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F8",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F9",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F10",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-029",
+      "run": "review-1-conflict-fallback-final.json",
+      "applied_condition": "quarterly_category_missing",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Component calculations support annual tables only; inspect the requested quarterly disclosure",
+            "FY2025 Q1, Q2, Q3 and Q4 automotive, handsets and IoT amounts and shares of consolidated revenue: no registered quarterly or cumulative observations.",
+            "Quarterly-versus-annual share comparisons, including Q4 derivation: quarterly inputs and Q3 year-to-date component and consolidated revenue inputs are absent.",
+            "Exact FY2025 Q1, Q2, Q3 and Q4 automotive, handset and IoT shares of consolidated revenue: no supplied checked quarterly calculations or registered quarterly inputs.",
+            "Quarterly-versus-annual share comparisons, including Q4: no checked comparisons; Q3 year-to-date inputs needed for a Q4 derivation are absent from checked context."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "1bf4191d475c27416063000ac6619f22fe747c7e5a466a418bff4cfa383faa8d",
+      "answer_characters": 2037,
+      "seconds": 56.9,
+      "worker_outcomes": {
+        "data": "completed",
+        "filing_inputs": "completed",
+        "quant": "partial",
+        "research": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/dfe4644b7f22c8e0420606b7e1e16f335db12cb13ecf9fba9e4b305556ede169/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/dfe4644b7f22c8e0420606b7e1e16f335db12cb13ecf9fba9e4b305556ede169/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/dfe4644b7f22c8e0420606b7e1e16f335db12cb13ecf9fba9e4b305556ede169/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/sources/d03f67b54d1dcf3f76e274e450fd49de33f0f9e7487ece53a4f56ec32ca77b0a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S4",
+          "inspection_url": "/api/sources/bdcb1fbe603ed9d7da106bcb4b4c59dbb8a313181a264576c09486a19a10d556",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-030",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "mixed_units",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "f03226c992de671a84b7f1ddae0e29bc7d3a7c27f724255bda8768b56644c40a",
+      "answer_characters": 1867,
+      "seconds": 49.758,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/cace59172bcf106737b2145e4898cd99b4288e020a9fe8fc2a3312dafea9d61a/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/cace59172bcf106737b2145e4898cd99b4288e020a9fe8fc2a3312dafea9d61a/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/cace59172bcf106737b2145e4898cd99b4288e020a9fe8fc2a3312dafea9d61a/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/cace59172bcf106737b2145e4898cd99b4288e020a9fe8fc2a3312dafea9d61a/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/2412b5165932de22f9970468021bc70aa0fbca9bcd29a091bd58afd89bff8433",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/d151ed70e44305665503dd5e8c9a2e9d008ff683deebe9dbcab0f44c5d82eacf",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/117b24dffb9447a99e71a4fc47fd4699744e1cc7146a207fb95b96a05269b162",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/5c68137003a6cec686e6ec1396b2f6898ac9cc7b7c99487ac357c85ebefe6b2b",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-031",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "HTTP validation",
+        "data": {
+          "status": "needs_clarification",
+          "http_status": 422
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "answer_characters": 0,
+      "seconds": null,
+      "worker_outcomes": {},
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-032",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "coverage_gap",
+          "verified_citations": false
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "5c78ee10924d2f4dcecf4c54571c564cc510918fad6cbded1095e80c900d052b",
+      "answer_characters": 157,
+      "seconds": 0.777,
+      "worker_outcomes": {},
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-033",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "b4019dc4addcfbf715e799ccc1298a0147ee7b5e5809a186b855813b63366805",
+      "answer_characters": 441,
+      "seconds": 29.562,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/ad752e8d454f665dd4f5be00cffece94762f6b40b8c1877c229db4653f404848/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-034",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "37135ed56dcc1075ee9b018b6d8229fe8520866be36982474835363ff9b92914",
+      "answer_characters": 1939,
+      "seconds": 32.505,
+      "worker_outcomes": {
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/nvda-0001045810-24-000029?start=68235&end=179035",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/nvda-0001045810-25-000023?start=71570&end=186485",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-035",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "closed_quote",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "33520a824970e6ee74179c4f48f108adcf8de8d3059a9518b354f65b021accc5",
+      "answer_characters": 537,
+      "seconds": 10.937,
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/market/4c51d40d823733640c9aea78ad6cf68e5f1ec598e0c9807c47a400ecd9296982",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/4c51d40d823733640c9aea78ad6cf68e5f1ec598e0c9807c47a400ecd9296982",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-036",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Recent evidence unavailable: Market integration disabled or frozen snapshot missing",
+            "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "AMD versus QCOM forward P/E comparison: no eligible verified EPS inputs; consensus currency, GAAP/adjusted basis, dilution, split basis, as-of date and actual fiscal dates remain unverified.",
+            "Comparable estimate horizons and supplied FY2025 historical valuation context are unavailable.",
+            "Recent supporting business evidence is unavailable."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "7533be82b61cfb7ae940526495dc928a686ab7ecddd8408766621c162b3e8c57",
+      "answer_characters": 3199,
+      "seconds": 21.741,
+      "worker_outcomes": {
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/market/648e4f76089070c52a351559b44ef75a9ec4ca2b1013d60f21aa35b37e666edd",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S4",
+          "inspection_url": "/api/market/c8a8d6af2f8c62da6def3d24ebb04b063ed981d3dd335db530ee6b1250753703",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-037",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "c53940db48bbb1a9f6c408618c4ecaf02ab0b528ae8f982db90ceae78d6c82d4",
+      "answer_characters": 928,
+      "seconds": 18.59,
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-038",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "b20ffb5da9048bedbc18099a781d2599f5f84d2a5e8a7de8fb044510e253d700",
+      "answer_characters": 761,
+      "seconds": 14.332,
+      "worker_outcomes": {
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S6",
+          "inspection_url": "/api/sources/ca2fd466fef3255d0ff763ab88dd78f6b3f7751f815b8baf9339bfa6e7c863cb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-039",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "aa4ed256a3521abb5fb58a9813bc7cd10465095b7ad20f3828d411cadc2b63aa",
+      "answer_characters": 1116,
+      "seconds": 28.6,
+      "worker_outcomes": {
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S8",
+          "inspection_url": "/api/sources/e1736938d1d2e622053b4e575031223929a95de50392ccf067ab78e6e74cb100",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S10",
+          "inspection_url": "/api/sources/86c136998de4f11cad76b7af0718474b4f6aaabb808531125601801c3eaaff74",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S11",
+          "inspection_url": "/api/sources/475487f236b86d9d07f9b3b10c1108e053434251dce718c4a0b6840f4ca1f4a6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S13",
+          "inspection_url": "/api/sources/cc8db03ca985899aa6264030a95a1ef993d6f61d5a6604f7303eb957d9588e2a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S17",
+          "inspection_url": "/api/sources/c900cc0b8cc2ad6b193e4074fb3baa107d911020ed876ff7df84155891d96ff1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/sources/56b580c4d74bc7dd664b49c17b969b22798deecd292f5b717a721176335d8f48",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S22",
+          "inspection_url": "/api/sources/14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-040",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "filing_injection",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "988bbcf13c4fd26667b66cd3a43524ed31abbb435dacdfdc1c4e5a93298e3d7c",
+      "answer_characters": 3019,
+      "seconds": 39.865,
+      "worker_outcomes": {
+        "risk": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/intc-0000050863-25-000009?start=140973&end=250141",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/intc-0000050863-26-000011?start=181599&end=278128",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S7",
+          "inspection_url": "/api/risks/intc-0000050863-25-000009?start=171828&end=172527",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S8",
+          "inspection_url": "/api/risks/intc-0000050863-26-000011?start=217127&end=217826",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-041",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "c80273b2f6e97498d1cd16254d0b6c62dd728721c01f76339ada96ca59d9bcf2",
+      "answer_characters": 1054,
+      "seconds": 24.654,
+      "worker_outcomes": {
+        "buy": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/analysis/5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c/observations/F1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/analysis/5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c/observations/F2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/analysis/5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c/observations/F3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-042",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Historical total return is unavailable: adjusted price history, dividends and reinvestment inputs are not supplied.",
+            "Historical total-return source inputs: adjusted price history, dividends, and reinvestment inputs are not supplied. QCOM FY2024 and FY2025 annual revenue inputs are complete.",
+            "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+            "Exact FY2024-start to FY2025-end dividend-reinvested total return: missing historical execution prices, dividend/corporate-action history and reinvestment prices or a verified total-return series, plus endpoint execution conventions."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "9cbe91cc837eb95e044414e72ade665c9190684b98bfd5db6f3756c83dc6911a",
+      "answer_characters": 2410,
+      "seconds": 31.332,
+      "worker_outcomes": {
+        "data": "partial",
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-043",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "q2_missing",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "AMD FY2025 Q2 quarter-only consolidated US GAAP revenue is missing.",
+            "AMD FY2025 Q2 revenue observation is absent; the complete Q1–Q3 revenue trend and adjacent-quarter growth cannot be established.",
+            "AMD 2025-06-28: Synthetic Q2 filing unavailable; no cached evidence permitted",
+            "AMD FY2025 Q2 ended June 28, 2025 risk update unavailable; cannot establish whether that quarter changed the annual risk picture or date Q3-versus-annual changes to Q3 rather than Q2."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "827188ba9bdf691856207c8f1d39ab300dbf4e0a5f6077e682bf56f7785d4087",
+      "answer_characters": 3339,
+      "seconds": 71.612,
+      "worker_outcomes": {
+        "data": "partial",
+        "quant": "partial",
+        "risk": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/3b17cfc385dc25afd2472d39960a6719b8769ec88b7027befca4ad66f1e89817/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/3b17cfc385dc25afd2472d39960a6719b8769ec88b7027befca4ad66f1e89817/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/ed60a53f404581570e38af86841768f22b6d23b74ced84456d15490c45774ba2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/41cef6bb84992b3a6d51a722beadd6604691f86c2a1d750fae3f7ffc8ad8af67",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/amd-0000002488-25-000047?start=73340&end=204803",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=63845&end=189835",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S3",
+          "inspection_url": "/api/risks/amd-0000002488-25-000166?start=97941&end=226861",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-044",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "6c9ed7d8b28103fe73dad54066e7a05e0e008819e39d45d2cfa0dc2402cd2a3d",
+      "answer_characters": 2317,
+      "seconds": 60.65,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "research": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/c48598addf461c294e005ebe13b76e326aeda2470b98cb5fe19ee3cdb1f1f44c/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/f64484660787d751d54ec8f15737f80eac9a80629d16ec1e39aa58e07470e01c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S5",
+          "inspection_url": "/api/sources/f388d1efec3a542979b7d8e6e720020c365d0ba18f6783f8840e86a4ee90c814",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S6",
+          "inspection_url": "/api/sources/8dc3dfd283e264782acc097283e99b49d4dfbcb9877a4d71f080eabd773b5fe9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S7",
+          "inspection_url": "/api/sources/d12dda4b278e51b9115a9e9c6b83c581586d3e90ea881db4a90fa4a8a40683ca",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S8",
+          "inspection_url": "/api/sources/ac25f2aa1e95fcd1f33072322803ee926d0f0cf5e414ae82d3c4d4ac780c25df",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S9",
+          "inspection_url": "/api/sources/f9c07efd5353e063ae4f5afac6ccd637385a2744645a1cf20a906d87411bccdf",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S11",
+          "inspection_url": "/api/sources/6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S19",
+          "inspection_url": "/api/sources/ace147b66592b38df2ab6ff7909be64dde3f2ae193234549b1e81756b81e824a",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S22",
+          "inspection_url": "/api/sources/3fa0e2c3dac551af31717d387d4556ab30024a5f952eed31e9f65d6fba537739",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S24",
+          "inspection_url": "/api/sources/bbc85e0a25c56ead96d00d7a04e55bcc8524ccd03a21565b12151d8f72d4f939",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S27",
+          "inspection_url": "/api/sources/0f1871d0a5ff33b419c9c8239bccf788996a0151a4773ac672612632f00d8610",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S28",
+          "inspection_url": "/api/sources/dca58d801c54728b1b85a2ad768bee7cc5244a8211acb2694969f2531c6e3fd3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S29",
+          "inspection_url": "/api/sources/dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-045",
+      "run": "review-1-targeted-results.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "A full DCF requires an unsupported forecast model, discount rate and terminal assumptions; historical cash-flow evidence remains available.",
+            "Required DCF inputs are absent: ten-year free-cash-flow forecast drivers, defensible discount-rate inputs, terminal assumptions, and an enterprise-to-equity bridge. Both requested historical operating-cash-flow inputs are present."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "26cd84edc50ae081fe9d1f5f1ca35ac2e82b2c092914514db5d75b9f3b584c19",
+      "answer_characters": 1288,
+      "seconds": 17.768,
+      "worker_outcomes": {
+        "data": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/1cdbd25f386a6d025cb6743cd872b3ea4746df0020341207af891cc27a562b92",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/67d6b44589f5676ffe87eaf61faaacb4130939ce16e1bfa41cacbc0f8c7793f7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-046",
+      "run": "review-1-sealed-run.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "The explicit EPS is EUR; a compatible exchange rate and split basis are needed before a USD comparison",
+            "Checked implied-price scenario: explicit EUR EPS and multiple are not available as registered F inputs.",
+            "USD scenario comparison and return: missing EUR/USD exchange rate and EPS split basis matching the quote."
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "6a6506b83c3c2d60dda307633d2f5fc3102fa6358a1b1761367f5c9a4ca221cd",
+      "answer_characters": 1851,
+      "seconds": 25.554,
+      "worker_outcomes": {
+        "buy": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/market/3b45e02d413bb67c1732b465d7dccf7f067c22391b91f0e0b90e33f0c459d93d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/market/62d487f3994fe1d132b4f310365c1a0aee9d6f1d4194c726c380c49619ccb615",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-047",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "all_sources_missing",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "coverage_gap",
+          "verified_citations": false,
+          "missing_outputs": [
+            "Original filing retrieval returned no passages; no reported values or risk conclusions are verified.",
+            "No trusted financial inputs for Quant; unsupported calculations remain missing",
+            "INTC FY2024: Synthetic unavailable original filing; no cached evidence permitted",
+            "INTC FY2025: Synthetic unavailable original filing; no cached evidence permitted"
+          ]
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "0636a54a37ec3ad441242d9f0df8fa00b8626523dc801da904ec820c740f1653",
+      "answer_characters": 749,
+      "seconds": 0.352,
+      "worker_outcomes": {
+        "data": "partial",
+        "research": "partial",
+        "quant": "partial",
+        "risk": "partial"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    },
+    {
+      "case_id": "R1-048",
+      "run": "review-1-final-targeted.json",
+      "applied_condition": "normal",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "error_type": null,
+      "answer_sha256": "6e9414a232e4e64556f85a9e062ecd94602a1d587360bc570abe1e11c9061efb",
+      "answer_characters": 9595,
+      "seconds": 150.861,
+      "worker_outcomes": {
+        "data": "completed",
+        "quant": "completed",
+        "risk": "completed",
+        "research": "completed",
+        "buy": "completed"
+      },
+      "structural_checks_passed": true,
+      "source_checks": [
+        {
+          "source_id": "C1",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C1",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C2",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C2",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C3",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C3",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C4",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C4",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C5",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C6",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C7",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C8",
+          "inspection_url": "/api/analysis/96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b/calculations/C8",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C9",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/calculations/C9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "C10",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/calculations/C10",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F1",
+          "inspection_url": "/api/financial/observations/4d15dd40bec213e378189bb62fc4c4491180379a89e55a85516198c2c0dc3407",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F2",
+          "inspection_url": "/api/financial/observations/4e14be23082835cbd76e6ff53e1ec7bb64cd96415e5eeaff8c20ab4fd7fa407d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F3",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F4",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F5",
+          "inspection_url": "/api/financial/observations/e1c3d2c517aaa5ab5107a316626a40ade7e961f2fada6bfd342ec5fe85cd7255",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F6",
+          "inspection_url": "/api/financial/observations/5e37e311a3b462b5d278400253a6e8ab9333efe0134a4895a85dda8cef20472f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F7",
+          "inspection_url": "/api/financial/observations/6d1dac25b0c79a179b31396906db9dc26eccd9222756f739f707eaf76a0094c5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F8",
+          "inspection_url": "/api/financial/observations/1eff6a7e17cb5770bc1e4832acd40fea66b85a53b63c7f6eea77ac730476caa7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F9",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/observations/F9",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F10",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/observations/F10",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F11",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/observations/F11",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "F12",
+          "inspection_url": "/api/analysis/319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0/observations/F12",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S1",
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=63845&end=189835",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S2",
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=66493&end=198235",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S341",
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=181662&end=189771",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S342",
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=155428&end=163727",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S372",
+          "inspection_url": "/api/sources/3fa0e2c3dac551af31717d387d4556ab30024a5f952eed31e9f65d6fba537739",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S373",
+          "inspection_url": "/api/sources/e74ba41164c1499f9a4a07415c0c62d04301bfe32e6ab03aa60fedb81b26fd6b",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S374",
+          "inspection_url": "/api/sources/dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S378",
+          "inspection_url": "/api/sources/51fd0151292c648021c6d7fa1c1ff3e6008d5b4ec1ced9d20d8e76c94c649b1f",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S379",
+          "inspection_url": "/api/sources/761f87bfafdbc2ffd04e12c4684e3cddc50dbf11a2c418d8077510c99e8f41fb",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S380",
+          "inspection_url": "/api/sources/ad8965033ad0e0c6596d1a85842c3e61cdffc70fb98267234d101fcad0deadb5",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S382",
+          "inspection_url": "/api/sources/b883a8a189aa2202fb6ab3e0ff56fac3e9f4f09f994e823071d0e45e0480be7c",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S387",
+          "inspection_url": "/api/market/95591a674057fe35a8b33fdf765e2833e279d2232ce9bfcd80fc304cb177c0ba",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        },
+        {
+          "source_id": "S388",
+          "inspection_url": "/api/market/3af9feed00d035466c2b86e0e82991e9ecb63e3aed3b49afa53a9b70f7d6653d",
+          "http_status": 200,
+          "mismatched_fields": [],
+          "passed": true
+        }
+      ],
+      "concurrent_companion": null,
+      "cancellation": {},
+      "manual_semantic_review_required": true
+    }
+  ],
+  "source_inspections": 416,
+  "source_failures": 0,
+  "bundles": {
+    "0968a5a8379f4fec6cae0729cfeafd38538df26a51339449da23a27019a6850b": {
+      "passed": true,
+      "calculations": 24,
+      "validator": "financial"
+    },
+    "d25fd994f9a67a9cb7a5d299598346cff89e2caa0092cbbd5a4b2e76cb054a3c": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "273abd5c0bb938c663bb915a1e91a3e00be3c9655b90d4ba357e188ffb9f0002": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "b979dd60219b7168eaf9011bbf694df9bd53e4fd6333de158c3700f5a58411c3": {
+      "passed": true,
+      "calculations": 9,
+      "validator": "financial"
+    },
+    "24f6c9c4e247e466a395319f77318b4d45e13c639f6e68aacb64c786f4fadba5": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "financial"
+    },
+    "39902f1322512d5b26919244448d3a2d746a61983d65d0e2d5038dcf95c3cc49": {
+      "passed": true,
+      "calculations": 12,
+      "validator": "financial"
+    },
+    "89043c0b7650b0ca624f40e0f80472a21007c11aef9cfd88c69b03ddee91bc37": {
+      "passed": true,
+      "calculations": 6,
+      "validator": "financial"
+    },
+    "af7610fe2a43a50da6343e2e6d1c10c5a6af00ce0ee117af33f840476921a10e": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "b6b2f0d743a8c099a242a897a732821db61df3d8ad290f534cbcdb486e71ab8a": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "financial"
+    },
+    "4b4c7e4e359648e400dab0dd0d0a90585315c413e1e5edcde524ba03becde47d": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "737e75062ef31f3c000bd9c01e91d75290db3ad6a65266dd4c8204d2ab482030": {
+      "passed": true,
+      "calculations": 8,
+      "validator": "financial"
+    },
+    "7af66b8acd3346ef19ea6565dd25f21b11d40716ed23bedcfef74cf3ba0e9007": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "a13c06868e6168cdf162b003c9f061a715ca0ca2642d8857c30998e3c5dddf5f": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "financial"
+    },
+    "08b30cfcb943704f28a881e819ae295308d95d8bd2785f2ed1552daecce69a60": {
+      "passed": true,
+      "calculations": 1,
+      "validator": "financial"
+    },
+    "242cc7f4ac5dd516d2b7dbf5ad87f7792696bdea0e049a3f990fb68f3d1cb9a9": {
+      "passed": true,
+      "calculations": 6,
+      "validator": "financial"
+    },
+    "10c03d55297fd39fce0c8dbef1f192a878e47d28fb89ad2826f65476695cca28": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "financial"
+    },
+    "256a6912628869a54e20bc7fadde7535a797fed7324abb7236cee41a374a42f0": {
+      "passed": true,
+      "calculations": 16,
+      "validator": "financial"
+    },
+    "dfe4644b7f22c8e0420606b7e1e16f335db12cb13ecf9fba9e4b305556ede169": {
+      "passed": true,
+      "calculations": 6,
+      "validator": "financial"
+    },
+    "cace59172bcf106737b2145e4898cd99b4288e020a9fe8fc2a3312dafea9d61a": {
+      "passed": true,
+      "calculations": 4,
+      "validator": "financial"
+    },
+    "ad752e8d454f665dd4f5be00cffece94762f6b40b8c1877c229db4653f404848": {
+      "passed": true,
+      "calculations": 1,
+      "validator": "financial"
+    },
+    "5208145e697e4f51b3fba33f3110e4ff9d86a5cab0fbebc6ddaf115cf58baf5c": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "valuation-v2"
+    },
+    "3b17cfc385dc25afd2472d39960a6719b8769ec88b7027befca4ad66f1e89817": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "financial"
+    },
+    "c48598addf461c294e005ebe13b76e326aeda2470b98cb5fe19ee3cdb1f1f44c": {
+      "passed": true,
+      "calculations": 1,
+      "validator": "financial"
+    },
+    "96d4059c013d4edf50c908e4a3c99c25946554c4baca1ee53d3546ddc3226b9b": {
+      "passed": true,
+      "calculations": 8,
+      "validator": "financial"
+    },
+    "319ec761c582b2b65d5344110d599cb7868bee86f206ddf36a687fe9af9770b0": {
+      "passed": true,
+      "calculations": 2,
+      "validator": "valuation-v2"
+    }
+  },
+  "replayed_calculations": 136,
+  "terminal_counts": {
+    "completed": 22,
+    "partial": 21,
+    "cancelled_by_client": 1,
+    "needs_clarification": 2,
+    "coverage_gap": 2
+  },
+  "semantic_accuracy_claim": false
+}

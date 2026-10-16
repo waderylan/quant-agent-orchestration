@@ -71,7 +71,7 @@ async def stream(
                     "environments": [],
                     "dynamicTools": tools,
                     "baseInstructions": f"You are the {agent} specialist in a public-company research application. Follow the supplied role instructions using only the provided evidence and dynamic tools.",
-                    "developerInstructions": "Use only the supplied dynamic tools. Never access files, shell, web, or other tools. Do not address a named user. Stream the final answer; put progress messages in commentary.",
+                    "developerInstructions": "Use only the supplied dynamic tools. Never access files, shell, web, or other tools. Do not issue personalized portfolio allocations or trade instructions. Do not address a named user. Stream the final answer; put progress messages in commentary.",
                 },
             )
             yield {
@@ -99,6 +99,8 @@ async def stream(
                 },
             )
             calls = 0
+            denied_calls = 0
+            reports_outcome = any(tool.get("name") == "report_outcome" for tool in tools)
             phases = {}
             while True:
                 message = pending.popleft() if pending else await receive()
@@ -111,9 +113,17 @@ async def stream(
                 elif method == "item/tool/call":
                     calls += 1
                     name, arguments = params["tool"], params["arguments"]
-                    if calls > max_calls:
+                    if reports_outcome and calls == max_calls and name != "report_outcome" and getattr(handler, "status", None) is None:
+                        denied_calls += 1
+                        if denied_calls > 2:
+                            raise RuntimeError(f"{agent} ignored the required completion report")
+                        calls -= 1
+                        result, success = {"error": "completion_report_required", "instruction": "The last tool slot is reserved for report_outcome. Call it next; report partial with explicit gaps if requested evidence remains missing. Then answer using existing evidence."}, False
+                        yield {"type": "trace", "data": {"agent": agent, "decision": "report_completion", "reason": "Reserve the final bounded tool slot for an explicit outcome"}}
+                    elif calls > max_calls:
                         # Allow bounded final synthesis without executing any extra work.
-                        if calls > max_calls + 2:
+                        denied_calls += 1
+                        if denied_calls > 2:
                             raise RuntimeError(
                                 f"{agent} ignored the tool limit after two synthesis requests."
                             )

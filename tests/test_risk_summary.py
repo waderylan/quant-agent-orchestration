@@ -61,6 +61,19 @@ def test_absence_requires_complete_annual_not_quarter_or_exact_phrase():
         tools("record_risk_change", dict(classification="added", before=c["before_section"], after=added["after"], rationale="Quarterly omission cannot prove a removed exposure."))
 
 
+def test_paragraph_cannot_establish_absence_or_duplicate_complete_context():
+    tools = RiskTools(RiskIndex(), ["AMD"], [2024, 2025])
+    tools.prepare()
+    complete = [s for s in tools.sources.values() if s["complete_section"]]
+    assert len(complete) == 2
+    assert all(not s["omission_proves_removal"] for s in tools.sources.values() if not s["complete_section"])
+    comparison = tools.comparisons["AMD:2024:2025"]
+    paragraph = next(p for p in comparison["pairs"] if p["alignment"] == "exact")
+    added = next(p for p in comparison["pairs"] if p["before"] is None)
+    with pytest.raises(ValueError, match="complete original annual"):
+        tools("record_risk_change", dict(classification="added", before=paragraph["before"], after=added["after"], rationale="A retrieved paragraph cannot establish absence from the annual section."))
+
+
 def test_missing_corrupt_and_unsupported_sections_are_gaps():
     index = RiskIndex()
     index.texts["2024"] = "corrupted"
@@ -69,6 +82,22 @@ def test_missing_corrupt_and_unsupported_sections_are_gaps():
     assert len(tools.prepare()) == 3 and not tools.sources
     with pytest.raises(ValueError):
         inspect_span(RiskIndex(), "2024", -1, 9)
+
+
+def test_amendment_scope_is_inspectable_context_not_an_annual_risk_inventory():
+    index = RiskIndex()
+    scope = "Synthetic fixture: this amendment corrects management discussion only; it does not update other disclosures."
+    passage = {"document_id": "amendment", "chunk_id": "amendment-note", "company": "AMD", "fiscal_year": 2025, "start": 0, "end": len(scope), "text": scope}
+    index.search = lambda *args, **kwargs: [passage]
+    index.inspect = lambda identity: passage
+    tools = RiskTools(index, ["AMD"], [2024, 2025])
+    tools.prepare()
+    assert not tools.prepare_amendments()
+    amendment = next(s for s in tools.sources.values() if s["section"] == "amendment_scope")
+    assert tools("inspect_risk", {"source_id": amendment["source_id"]})["text"] == scope
+    assert not amendment["complete_section"] and not amendment["omission_proves_removal"]
+    with pytest.raises(ValueError, match="context only"):
+        tools("record_risk_change", dict(classification="changed", before=tools.comparisons["AMD:2024:2025"]["before_section"], after=amendment["source_id"], rationale="Amendment scope is not comparable risk language from an original annual section."))
 
 
 @pytest.mark.asyncio
@@ -119,3 +148,49 @@ async def test_quarter_uses_preceding_annual_and_worker_failure_is_explicit():
 
     captured = [e async for e in events(index, "What changed in AMD risk factors?", ["AMD"], [2024, 2025], model_stream=failed)]
     assert captured[-1]["data"]["status"] == "failed" and any(e["type"] == "error" for e in captured)
+
+
+@pytest.mark.asyncio
+async def test_quarter_year_selection_does_not_compare_unrequested_baseline_quarters():
+    index = RiskIndex()
+    for year in (2024, 2025):
+        for number, end in ((1, "03-31"), (2, "06-30"), (3, "09-30")):
+            key = f"{year}-q{number}"
+            doc = copy.deepcopy(index.documents[str(year)])
+            doc.update(document_id=key, form="10-Q", period_end=f"{year}-{end}", prior_annual_document_id="2024" if year == 2025 else "unavailable-2023")
+            index.documents[key] = doc
+            index.texts[key] = index.texts[str(year)]
+    expected = {"2025-q2", "2024"}
+    async def model(prompt, schemas, handler, **kwargs):
+        assert {s["document_id"] for s in handler.sources.values()} == expected
+        handler("report_outcome", {"status": "complete", "missing": []})
+        yield {"type": "token", "data": "Quarterly wording and preceding annual context [S1][S2]."}
+    state = dict(companies=["AMD"], years=[2024, 2025], question="Does AMD FY2025 Q2 omit annual risk language?")
+    result = await risk_turn(index, state, lambda e: None, model_stream=model)
+    assert not result["partial"]
+    expected = {"2025-q1", "2025-q2", "2025-q3", "2024"}
+    result = await risk_turn(index, {**state, "question": "Compare AMD FY2025 Q1 through Q3 risk changes"}, lambda e: None, model_stream=model)
+    assert not result["partial"]
+
+
+@pytest.mark.asyncio
+async def test_multi_issuer_context_keeps_sections_complete_and_ids_distinct():
+    index = RiskIndex()
+    for year in (2024, 2025):
+        key = f"intel-{year}"
+        doc = copy.deepcopy(index.documents[str(year)])
+        doc.update(company="INTC", document_id=key)
+        index.documents[key], index.texts[key] = doc, index.texts[str(year)]
+    companies = []
+    async def model(prompt, schemas, handler, **kwargs):
+        companies.append(handler.companies)
+        assert len(handler.companies) == 1
+        assert sum(s["complete_section"] for s in handler.sources.values()) == 2
+        comparison = next(iter(handler.comparisons.values()))
+        pair = next(p for p in comparison["pairs"] if p["alignment"] == "exact")
+        handler("record_risk_change", dict(classification="relocated", before=pair["before"], after=pair["after"], rationale="Exact warning moves to another location in the complete annual section."))
+        handler("report_outcome", {"status": "complete", "missing": []})
+        yield {"type": "token", "data": f"Warning relocates [{pair['before']}][{pair['after']}]."}
+    result = await risk_turn(index, dict(companies=["AMD", "INTC"], years=[2024, 2025], question="Compare annual risk changes"), lambda e: None, model_stream=model)
+    assert companies == [["AMD"], ["INTC"]] and not result["partial"]
+    assert len(result["risk_changes"]) == 2 and {s["company"] for s in result["risk_sources"].values()} == {"AMD", "INTC"}

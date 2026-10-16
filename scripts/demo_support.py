@@ -17,8 +17,9 @@ async def wait_ready(client):
     raise RuntimeError("Application readiness deadline exceeded")
 
 
-async def capture_turn(client, question, companies, years):
+async def capture_turn(client, question, companies, years, *, headers=None):
     started, first_token, events, kind = time.perf_counter(), None, [], None
+    worker_returns = []
     async with client.stream(
         "POST",
         "/api/chat",
@@ -27,8 +28,11 @@ async def capture_turn(client, question, companies, years):
             "companies": companies,
             "years": years,
         },
+        headers=headers,
     ) as response:
-        response.raise_for_status()
+        if response.is_error:
+            await response.aread()
+            response.raise_for_status()
         async for line in response.aiter_lines():
             if line.startswith("event: "):
                 kind = line[7:]
@@ -37,6 +41,8 @@ async def capture_turn(client, question, companies, years):
                 if kind == "token" and first_token is None:
                     first_token = time.perf_counter() - started
                 events.append({"type": kind, "data": data})
+                if kind == "trace" and data.get("node") == "worker_outcome":
+                    worker_returns.append({"worker": data.get("worker"), "monotonic": time.perf_counter()})
     answer = ""
     for event in events:
         if event["type"] == "token":
@@ -46,10 +52,13 @@ async def capture_turn(client, question, companies, years):
     return {
         "question": question,
         "answer": answer,
-        "sources": next((e["data"] for e in events if e["type"] == "sources"), []),
+        "sources": next((e["data"] for e in reversed(events) if e["type"] == "sources"), []),
         "terminal": events[-1] if events else None,
         "trace": [e for e in events if e["type"] in ("trace", "tool", "error")],
         "seconds": round(time.perf_counter() - started, 3),
+        "request_started_monotonic": started,
+        "request_finished_monotonic": time.perf_counter(),
+        "worker_return_times": worker_returns,
         "answer_token_ttft_seconds": round(first_token, 3)
         if first_token is not None
         else None,

@@ -88,20 +88,31 @@ def normalize_citations(answer, registered):
             result.append(replacement)
         return "".join(result)
 
+    # Provider/model Markdown labels resolve through the trusted registry. Discard
+    # generated URL targets; the browser owns inspection links for each source ID.
+    answer = re.sub(r"\[([SFC]\d+)(?::\s*[^\]\n]+)?\]\([^\)\n]*\)", r"[\1]", answer)
     answer = re.sub(r"\[([SFC]\d+[^\[\]\n]*)\]", group, answer)
 
     def refuted(match):
         sid = match[1]
         if sid in registered:
             return match[0]
-        after = answer[match.end() : match.end() + 100]
-        before = answer[max(0, match.start() - 80) : match.start()]
+        after = answer[match.end() : match.end() + 100].lstrip("`*")
+        before = answer[max(0, match.start() - 160) : match.start()].rstrip("`* ")
         if re.match(
             r"\s+(?:is|was)\s+not\s+(?:a\s+)?(?:supplied|provided|registered|valid)\s+(?:source|citation|identifier)\b",
             after,
             re.I,
+        ) or re.match(
+            r"\s*(?:is|was)\s+(?:not\s+evidence|(?:an?\s+)?(?:unregistered|fabricated|fake|injected)\s+(?:source|citation|identifier))\b",
+            after,
+            re.I,
         ) or re.search(
             r"\b(?:fake|fabricated|invalid|unregistered)\s+(?:citation|source|identifier)\s*:?\s*$",
+            before,
+            re.I,
+        ) or re.search(
+            r"\b(?:ignored|rejected|disregarded)\b[^.\n]{0,100}\b(?:injected|fake|fabricated|unregistered)\b[^.\n]{0,50}$",
             before,
             re.I,
         ):

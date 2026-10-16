@@ -2,7 +2,7 @@
 
 Owner: Rylan Wade. The [milestone index](../README.md) owns status.
 
-Buy-Side Analyst has its own prompt and tools for inspecting market/estimate evidence and requesting Quant calculations. Each acquisition plan allows at most four quotes, four estimate calls, and one narrow basic Tavily search. Model tools inspect frozen evidence; they cannot expand web searches. Explicit refresh requests bypass freshness caches within the same work budgets. Quote-only requests use one worker.
+Buy-Side Analyst has its own prompt and tools for inspecting market/estimate evidence and requesting Quant calculations. Each acquisition plan allows at most four quotes, four estimate calls, and one narrow basic Tavily search. Quote-only requests use one worker. Explicit user EPS/multiple scenarios do not require consensus; web evidence is acquired for broader valuation or explicitly requested recent/supporting/opposing evidence. Model tools inspect acquired evidence and cannot expand web searches. Explicit refresh requests bypass freshness caches within the same work budgets.
 
 ## MCP access and entitlements
 
@@ -21,11 +21,13 @@ Public display is not accepted. [Twelve Data terms §§2.2–2.4](https://twelve
 
 ## Evidence and arithmetic
 
-Quotes preserve symbol, currency, UTC price timestamp, closed/open session, provider trading date, retrieval time, and unspecified feed/delay. Open-market observations older than 20 minutes and closed-market observations older than four days are stale. Quotes cache for 15 minutes; other responses cache for 24 hours. Frozen replay retains original dates and is labeled as replay. Content-addressed snapshots remain inspectable after a refresh; request-cache pointers are separate.
+Quotes preserve symbol, currency, UTC price timestamp, closed/open session, provider trading date, retrieval time, and unspecified feed/delay. A newer extended-session observation uses its own price and timestamp together. Open-market observations older than 20 minutes and closed-market observations older than four days are stale. Quotes cache for 15 minutes; other responses cache for 24 hours. Frozen replay retains original dates and is labeled as replay. Full-metadata checksums protect immutable snapshots; request-cache pointers are separate.
 
 Unqualified consensus stays visible with its provider period and analyst count, but does not enter verified forward P/E. Historical annual earnings never become current TTM. Missing shares, cash/debt dates, split reconciliation, and EBITDA/FCF definitions exclude affected multiples. Quant supports qualified P/E, forward P/E, EV/revenue, EV/EBITDA, and positive FCF yield. EV is equity value plus total debt less cash equivalents; FCF is operating cash flow less capital expenditures. Nonpositive denominators and incompatible currencies, periods, dilution, or accounting/split bases fail validation.
 
-Explicit user EPS and multiple assumptions support a conditional scenario even when consensus is unqualified. The default horizon is 12 months. `EPS grid: 8, 10, 12; P/E grid: 16, 18, 20` specifies a bounded 3×3 grid. Quant executes the arithmetic in the isolated runner, independently recomputes results and actual input lineage, and freezes CSV/PNG/code/ledger bundles. A recorded 18-calculation grid replays exactly. The analyst cites checked calculations, supplies supporting and opposing evidence, and names missing inputs; personalized portfolio instructions remain outside scope.
+Explicit user EPS and multiple assumptions support a conditional scenario even when consensus is unqualified. The default horizon is 12 months; an explicit alternative is preserved. `EPS grid: 8, 10, 12; P/E grid: 16, 18, 20` specifies a bounded 3×3 grid. Quant executes the arithmetic in the isolated runner, independently recomputes results and actual input lineage, and freezes CSV/PNG/code/ledger bundles. Valuation-v2 replay also checks units, denominator-owned periods, basis, horizon and formula. Hypothetical EPS has no invented fiscal year. The analyst cites checked calculations, supplies supporting and opposing evidence, and names missing inputs; personalized portfolio instructions remain outside scope.
+
+One SQLite ledger reserves all live calls before execution, including failures, browser tests and account audits. Twelve Data uses one active account with no overlapping calls across keys; only a demonstrated provider daily exhaustion permits automatic fallback. Tavily usage is checked before uncached searches, with a monotonic conservative projection that includes locally reserved credits despite lagging dashboard readings. The current credential-free [usage ledger](evidence/PROVIDER_USAGE_LEDGER.json) owns work totals; account quotas are separate from these work budgets.
 
 ## Verification
 

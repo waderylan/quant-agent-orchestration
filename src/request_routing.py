@@ -16,11 +16,11 @@ COMPONENT_ALIASES = {
     "iot": r"\b(iot|internet of things)\b",
 }
 METRIC_PATTERNS = {
-    "revenue": r"\brevenues?\b",
+    "revenue": r"\b(revenues?|sales)\b",
     "gross_profit": r"\bgross (profit|margin)\b",
     "operating_income": r"\boperating (income|loss|margin)\b",
     "operating_cash_flow": r"\b(?:operating )?cash flows?\b",
-    "net_income": r"\b(net income|net loss|earnings)\b",
+    "net_income": r"\b(net income|net loss|net margin|earnings)\b",
     "cost_of_revenue": r"\bcost of (revenue|sales)\b",
 }
 
@@ -56,6 +56,10 @@ def requested_metrics(question):
     ]
     if re.search(r"\bmargin", question, re.I) and "revenue" not in metrics:
         metrics.insert(0, "revenue")
+    if re.search(r"\bcash conversion\b", question, re.I):
+        metrics = list(dict.fromkeys([*metrics, "operating_cash_flow", "net_income"]))
+    if re.search(r"\boperating performance\b", question, re.I):
+        metrics = list(dict.fromkeys([*metrics, "revenue", "operating_income", "operating_cash_flow"]))
     return metrics
 
 
@@ -184,11 +188,11 @@ def has_unstructured_revenue_scope(question):
     return False
 
 
-def plan_request(question):
+def plan_request(question, *, financial_only=False):
     from src.buy_side import market_request
-    if market_request(question):
+    if not financial_only and market_request(question):
         return RequestPlan("buy", "Buy-Side Analyst acquires dated market evidence and delegates arithmetic to Quant")
-    if re.search(r"\brisks?\b|risk factors", question, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", question, re.I):
+    if not financial_only and re.search(r"\brisks?\b|risk factors", question, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", question, re.I):
         return RequestPlan("risk", "Risk Summary compares complete original risk sections, not search-hit omissions")
     metrics = requested_metrics(question)
     components = [
@@ -284,7 +288,7 @@ def plan_request(question):
             "analysis_data",
             "Compute checked same-period operating-cash-flow/net-income ratios",
             synthesize=explanation,
-            required_calculations=("ratio",),
+            required_calculations=("ratio", "margin") if re.search(r"\bmargin", question, re.I) else ("ratio",),
         )
     # Explanations add a filing-evidence step; they do not replace supported inputs.
     if (

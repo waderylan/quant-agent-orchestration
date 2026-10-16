@@ -94,6 +94,7 @@ async def local_process():
     process = await asyncio.create_subprocess_exec(
         *arguments, stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.DEVNULL, limit=LIMIT, cwd=tempfile.gettempdir(),
+        env=generation_environment(),
         start_new_session=os.name != "nt",
     )
     try:
@@ -102,6 +103,11 @@ async def local_process():
     finally:
         terminate_owned(process)
         await process.wait()
+
+
+def generation_environment():
+    """Generation uses host CLI login, without market-provider configuration."""
+    return {key: value for key, value in os.environ.items() if not key.upper().startswith(("ALPHA_VANTAGE", "TWELVE_DATA", "TAVILY")) and not key.upper().endswith("_API_KEY")}
 
 
 @asynccontextmanager

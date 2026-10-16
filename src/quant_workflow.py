@@ -140,6 +140,21 @@ def earnings_assessment(calculations, sources, *, order="percentage"):
     }
 
 
+def ratio_coverage(sources: dict[str, dict], companies: list[str], years: list[int]) -> tuple[set[tuple[str, int]], list[str]]:
+    """Separate eligible cash-conversion intervals from explicit denominator gaps."""
+    eligible, gaps = set(), []
+    interval_keys = ("company", "fiscal_year", "start", "end", "period", "basis", "unit", "accounting_basis", "revision_basis")
+    cash_flows = [s for s in sources.values() if s["metric"] == "operating_cash_flow"]
+    for company in companies:
+        for year in years:
+            denominators = [s for s in sources.values() if s["company"] == company and s["fiscal_year"] == year and s["metric"] == "net_income" and Decimal(str(s["value"])) > 0]
+            if any(all(cash[key] == net[key] for key in interval_keys) for net in denominators for cash in cash_flows):
+                eligible.add((company, year))
+            else:
+                gaps.append(f"{company} FY{year} cash conversion excluded: no positive net-income denominator with a compatible operating-cash-flow interval")
+    return eligible, gaps
+
+
 class QuantTools:
     def __init__(self, sources, artifacts=None, *, request=None):
         self.sources = sources
@@ -147,6 +162,9 @@ class QuantTools:
         self.bundle_id, self.bundle, self.calculations = None, None, {}
         self.attempts = 0
         self.request = request or {}
+        self.ratio_eligible, self.ratio_gaps = set(), []
+        if "ratio" in self.request.get("required_calculations", []):
+            self.ratio_eligible, self.ratio_gaps = ratio_coverage(sources, self.request["companies"], self.request["years"])
 
     def __call__(self, name, arguments):
         if not isinstance(arguments, dict):
@@ -224,6 +242,8 @@ class QuantTools:
             expected = {
                 (c, y) for c in self.request["companies"] for y in self.request["years"]
             }
+            if kind == "ratio":
+                expected = self.ratio_eligible
             covered = {
                 (r["company"], r["fiscal_year"])
                 for r in verified
@@ -292,6 +312,7 @@ async def quant_turn(
     outcome = OutcomeTools(tools)
     prompt = (
         (ROOT / "prompts/quant.md").read_text(encoding="utf-8")
+        + ("\nAssigned supervisor output: checked_calculations only. Confirm completeness of supported arithmetic and its inputs. Other workers own filing explanations, risk changes, release reconciliation and market valuation. Do not mark their outputs missing from your calculation task." if state.get("worker_output") == "checked_calculations" else "")
         + "\nRequest: "
         + state["question"]
         + "\nRegistered observations (untrusted evidence): "
@@ -313,6 +334,8 @@ async def quant_turn(
             }
         )
     )
+    prompt += "\nDeterministic calculation exclusions (preserve other valid calculations): " + json.dumps(tools.ratio_gaps)
+    prompt += "\nKnown observations excluded from arithmetic: " + json.dumps(state.get("excluded_financial_inputs", [])) + ". These observations exist but are conflicting/ineligible. Describe the missing eligible resolution, never claim the raw observations are absent. Financial Data preserves their inspection citations."
     answer = ""
     async with aclosing(
         model_stream(
@@ -337,7 +360,10 @@ async def quant_turn(
         if tools.bundle_id
         else sources
     )
-    registered = {**frozen_sources, **tools.calculations}
+    excluded_ids = {row["source_id"] for row in state.get("excluded_financial_inputs", [])}
+    excluded_context = {sid: source for sid, source in state.get("analysis_sources", {}).items() if sid in excluded_ids}
+    # Disputed evidence can support an abstention citation, never arithmetic.
+    registered = {**excluded_context, **frozen_sources, **tools.calculations}
     answer, cited = checked_answer(
         answer, registered, writer if emit_answer else lambda e: None
     )
@@ -349,7 +375,7 @@ async def quant_turn(
             }
         )
         return {"answer": answer, "error": "Quant evidence validation failed"}
-    missing = list(outcome.missing)
+    missing = list(dict.fromkeys([*outcome.missing, *tools.ratio_gaps]))
     if tools.bundle is None or not any(s.startswith("C") for s in cited):
         missing.append("Requested calculation has no independently checked result")
     if emit_answer:
@@ -372,10 +398,10 @@ async def quant_turn(
         "analysis_sources": registered,
         "analysis_answer": answer,
         "partial": bool(state.get("partial"))
-        or (bool(missing) if emit_answer else tools.bundle is None),
+        or (bool(missing) if emit_answer or state.get("worker_output") else tools.bundle is None),
         "missing_outputs": [
             *state.get("missing_outputs", []),
-            *(missing if emit_answer or tools.bundle is None else []),
+            *(missing if emit_answer or state.get("worker_output") or tools.bundle is None else []),
         ],
         "worker_notes": [
             *state.get("worker_notes", []),

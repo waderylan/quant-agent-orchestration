@@ -25,4 +25,4 @@ uv run --locked python scripts/verify_cooperation_edges.py --url http://127.0.0.
 uv run --locked python scripts/demo_supervisor.py --browser-only --url http://127.0.0.1:8084 --output artifacts/m9-docker-browser.json
 ```
 
-The authorized independent engineering review rounds retain their sealed questions, isolation details, outcomes, and fixes in this milestone's evidence. They are distinct from formal RAGAS evaluation and do not authorize new live calls outside the shared ledger.
+The [first independent engineering review](evidence/review-round-1/README.md) retains 48 sealed questions, worktree isolation and actual delegation evidence, application outcomes, exact source inspections, calculation replays and substantive fixes. The reviewer receives answers only after question sealing. Review cases and criteria remain unchanged. These checks are distinct from formal RAGAS evaluation and use the same shared live-provider budgets.

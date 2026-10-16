@@ -18,6 +18,7 @@ from src.request_routing import (
     mentioned_companies,
     mentioned_years,
     plan_request,
+    requested_metrics,
 )
 
 TOOLS = [
@@ -237,14 +238,27 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
 
     # Retrieve separately for each company/year so one filing cannot monopolize comparisons.
     def retrieve(request):
-        return sources.register(
-            [
+        passages = [
                 p
                 for c in request["companies"]
                 for y in request["years"]
                 for p in index.search(request["question"], [c], [y], k=4)
             ]
-        )
+        if request.get("worker_output") == "filing_explanation" and analysis_sources:
+            # Fixed, scoped supplemental searches keep a mixed request from
+            # losing an issuer's cash-flow drivers or a release reconciliation.
+            queries = []
+            if "operating_cash_flow" in requested_metrics(request["question"]):
+                queries.append(("operating activities cash flow changes working capital income taxes accounts receivable payables", "10-K", "mda"))
+            if re.search(r"\b(release|headline|adjusted|non.GAAP)\b", request["question"], re.I):
+                queries.append(("GAAP non-GAAP adjusted earnings reconciliation exclusions operating income", "Earnings release", None))
+            if re.search(r"\brisks?\b", request["question"], re.I):
+                queries.append(("customer concentration revenue business mix risks", "10-K", "risk_factors"))
+            for company in request["companies"]:
+                for year in request["years"]:
+                    for query, form, section in queries:
+                        passages.extend(index.search(query, [company], [year], form=form, section=section, k=2))
+        return sources.register(passages)
 
     def augment(passages):
         return (
@@ -287,6 +301,8 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
     writer({"type": "tool", "data": {"name": "initial_retrieval", "arguments": state}})
     prompt = await pipeline.ainvoke(state)
     writer({"type": "evidence", "data": {"sources": list(sources.sources.values())}})
+    if not sources.sources and not analysis_sources:
+        return {"answer": "No verified filing evidence is available for the selected request.", "partial": True, "coverage_gap": True, "missing_outputs": ["Original filing retrieval returned no passages; no reported values or risk conclusions are verified."], "research_sources": {}, "citation_verified": False}
     answer = ""
     exhausted = False
     async with aclosing(

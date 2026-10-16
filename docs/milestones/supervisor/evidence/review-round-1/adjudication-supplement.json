@@ -1,0 +1,64 @@
+{
+  "review_round": 1,
+  "run": "five affected-case application reruns after accepted fixes",
+  "questions_sha256": "CF478815A8B6AF08232D3C22E91DF2620BA0A67B613C775112672BC01F3CB570",
+  "affected_outcomes_sha256": "85756BA4E77EC406E0F6C8BFACB3B2032BE3C12A95D154062D7E076A1E16D676",
+  "baseline_adjudication_final_sha256": "5A671BF63222C3AAD17A3478FD2C26F2B5A149C625A2CC697FC156F2053C02D7",
+  "method": [
+    "Read only the newly authorized AFFECTED-final.json and the five original sealed criteria. Reviewed actual answers, terminal states, source provenance, calculation formulas, worker timing records and supplied HTTP inspection checks. No implementation inspection, external requests or product execution occurred.",
+    "Replace only these five verdicts when combining this supplement with adjudication-final.json. The initial and final adjudications are preserved as evidence of their respective runs.",
+    "Safe partial behavior passes when the sealed case permits partial and preserves supported evidence without guessing. R1-019 permits only completed and requires an original quarterly context; its correct omission reasoning does not authenticate visibly synthetic management language.",
+    "All 33 supplied source inspection checks across these five reruns pass. This observation concerns the provided application evidence; it does not establish external-display rights or independently certify financial facts.",
+    "Reasons contain no actual market prices, consensus observations, account details, credentials or licensed raw source answers."
+  ],
+  "rows": [
+    {
+      "case_id": "R1-011",
+      "previous_verdict": "condition_unverified",
+      "verdict": "pass",
+      "reason": "Both quote failure sources explicitly preserve HTTP429 quota/rate-limit diagnostics and the no-automatic-retry condition. Verified financial inputs and C1-C4 calculations survive; historical Quant completes before the market worker returns. The partial answer names missing quote/scenario evidence without inventing values or erasing completed work.",
+      "substantive_concern": null
+    },
+    {
+      "case_id": "R1-019",
+      "previous_verdict": "condition_unverified",
+      "verdict": "condition_unverified",
+      "reason": "The substituted quarter now omits the annual warning and refers back to annual risks, so the omission reasoning is exercised correctly. However, S1 explicitly identifies itself as synthetic rather than original company language. The actual authenticated Q2 management statement remains unavailable, and terminal status is partial rather than the sealed required completed outcome.",
+      "substantive_concern": "The original-authentication premise remains unrealized. Do not count this as a completed original-filing comparison, call synthetic wording original, or treat correct non-removal reasoning alone as a full pass. This is a setup/authentication limit rather than evidence that the product inferred removal."
+    },
+    {
+      "case_id": "R1-024",
+      "previous_verdict": "condition_unverified",
+      "verdict": "pass",
+      "reason": "F2 and F3 now preserve both conflicting FY2025 observations, distinct structured/statement-scale provenances, period and scale metadata, and explicit synthetic/conflicting labels. The answer displays the disagreement, excludes both from arithmetic and withholds growth; C1 uses only the eligible prior-year baseline. No averaging, convenient selection or confident growth from unresolved values appears.",
+      "substantive_concern": "The appended Quant paragraph and unresolved list still say the two observations are absent, contradicting the preceding Financial Data section that displays them. They are present as inspectable disputed evidence but absent from eligible arithmetic inputs. The answer should state that distinction consistently; the conflict display and safe calculation decision still satisfy this case's substantive criteria."
+    },
+    {
+      "case_id": "R1-027",
+      "previous_verdict": "fail",
+      "verdict": "pass",
+      "reason": "Both requested calculations now have checked sources: C1 uses parent-attributable income over revenue for net margin, and C2 uses operating cash flow over the same parent-income basis for cash conversion. The answer explains noncontrolling-interest attribution, distinguishes total from parent income, and labels substituted values as synthetic rather than actual Intel results.",
+      "substantive_concern": null
+    },
+    {
+      "case_id": "R1-029",
+      "previous_verdict": "fail",
+      "verdict": "pass",
+      "reason": "Preserves all three supported annual category/consolidated shares with explicit denominator labels and checked C2/C4/C6 lineage. Identifies missing Q1-Q4 quarterly and cumulative inputs, withholds unsupported quarter-versus-annual comparisons and does not invent Q4 data, divide annual values evenly or represent annual shares as quarterly results.",
+      "substantive_concern": null
+    }
+  ],
+  "effective_totals": {
+    "cases": 48,
+    "pass": 44,
+    "fail": 0,
+    "condition_unverified": 4,
+    "remaining_condition_unverified": ["R1-007", "R1-009", "R1-019", "R1-036"],
+    "calculation": "Baseline 40 pass, 2 fail, 6 condition_unverified; replace R1-011 and R1-024 with pass, R1-027 and R1-029 with pass, and retain R1-019 as condition_unverified."
+  },
+  "substantive_unresolved_issues": [
+    "Qualified estimate bases remain unverified for R1-007 and R1-036; R1-009 only partly realizes its restriction/horizon premise. Those unchanged verdicts are not qualified-scenario successes.",
+    "R1-019 lacks authenticated original Q2 omission wording and therefore does not meet its completed criterion.",
+    "R1-024 retains contradictory source-availability wording between specialist sections despite preserving both disputed sources and correctly excluding them from arithmetic."
+  ]
+}

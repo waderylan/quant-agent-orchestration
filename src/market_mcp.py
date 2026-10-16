@@ -26,6 +26,7 @@ from mcp.client.stdio import stdio_client
 from mcp.client.streamable_http import streamable_http_client
 
 from src.source_collection import ROOT, digest, now, write_json
+from src.market_evidence import payload_text
 
 TD_REVISION = "d139a77ea0f7d40995e6979cd09c22dd142fbfe8"
 ALLOW = {
@@ -84,13 +85,11 @@ def sanitized(value):
 
 
 def provider_error(payload):
+    if not isinstance(payload, dict):
+        return True
     if payload.get("isError"):
         return True
-    text = "\n".join(
-        c.get("text", "")
-        for c in payload.get("content", [])
-        if c.get("type", "text") == "text"
-    )
+    text = payload_text({"payload": payload})
     try:
         body = json.loads(text)
     except (ValueError, TypeError):
@@ -150,6 +149,8 @@ class UsageLedger:
     def reserve(self, provider, account, tool, symbol="", credits=1):
         if provider not in ALLOW or tool not in ALLOW[provider]:
             raise ValueError("Provider/tool is outside the read-only allowlist")
+        if type(credits) is not int or credits <= 0:
+            raise ValueError("Credit reservations must be positive integers")
         timestamp = datetime.now(timezone.utc).isoformat()
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -177,8 +178,16 @@ class UsageLedger:
                     raise ValueError(
                         "Only the active Twelve Data account may make data calls"
                     )
-                # Account status reports an 8-credit/minute entitlement; until proved
-                # otherwise never send more than 8 data calls/minute, including probes.
+                other_active = db.execute(
+                    "SELECT 1 FROM calls WHERE provider='twelve' AND account<>? AND outcome='reserved' LIMIT 1",
+                    (account,),
+                ).fetchone()
+                if other_active:
+                    raise ValueError(
+                        "Another Twelve Data account still has an outstanding call; account switching must be sequential"
+                    )
+                # Conservative local ceiling, not a claim about provider entitlement.
+                # Include probes and both account audits in the same minute budget.
                 recent = db.execute(
                     "SELECT COUNT(*) FROM calls WHERE provider='twelve' AND julianday(at)>julianday(?)-1.0/1440",
                     (timestamp,),
@@ -202,6 +211,11 @@ class UsageLedger:
                     if usage and baseline
                     else None
                 )
+                start = db.execute("SELECT value FROM settings WHERE key='tavily_work_start_observed_usage'").fetchone()
+                month = db.execute("SELECT value FROM settings WHERE key='tavily_work_start_month'").fetchone()
+                if start and month and month[0] == timestamp[:7]:
+                    start_reserved = db.execute("SELECT value FROM settings WHERE key='tavily_work_start_reserved'").fetchone()
+                    current = max(current or 0, int(start[0]) + spent - int(start_reserved[0] if start_reserved else 0))
                 if (
                     spent + credits > 100
                     or current is not None
@@ -229,6 +243,28 @@ class UsageLedger:
     def finish(self, identity, outcome):
         with self.connect() as db:
             db.execute("UPDATE calls SET outcome=? WHERE id=?", (outcome, identity))
+
+    def observe_tavily_usage(self, usage: int):
+        """Monotonic monthly projection; concurrent or lagging reads cannot erase it."""
+        if type(usage) is not int or usage < 0:
+            raise ValueError("Invalid Tavily usage observation")
+        timestamp = now()
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            settings = dict(db.execute("SELECT key,value FROM settings"))
+            spent = db.execute("SELECT COALESCE(SUM(credits),0) FROM calls WHERE provider='tavily'").fetchone()[0]
+            checked = settings.get("tavily_usage_checked_at", "")
+            new_month = bool(checked) and checked[:7] != timestamp[:7]
+            if new_month or "tavily_work_start_observed_usage" not in settings:
+                settings.update(tavily_work_start_observed_usage=str(usage), tavily_work_start_month=timestamp[:7], tavily_work_start_reserved=str(spent if new_month else 0))
+            previous = 0 if new_month else int(settings.get("tavily_month_usage", 0))
+            baseline = spent if new_month else int(settings.get("tavily_baseline_reserved", 0))
+            observed = usage if new_month else max(usage, int(settings.get("tavily_observed_usage", 0)))
+            floor = int(settings["tavily_work_start_observed_usage"]) + spent - int(settings.get("tavily_work_start_reserved", 0))
+            conservative = max(observed, previous + spent - baseline, floor)
+            settings.update(tavily_observed_usage=str(observed), tavily_month_usage=str(conservative), tavily_baseline_reserved=str(spent), tavily_usage_checked_at=timestamp)
+            db.executemany("INSERT OR REPLACE INTO settings VALUES (?,?)", settings.items())
+        return conservative
 
     def snapshot(self):
         with self.connect() as db:
@@ -280,17 +316,7 @@ class MarketGateway:
                 body = response.json()
             account = body.get("account", {})
             usage = int(account["plan_usage"]) + int(account.get("paygo_usage", 0))
-            previous = int(self.ledger.setting("tavily_month_usage", "0"))
-            previous_baseline = int(self.ledger.setting("tavily_baseline_reserved", "0"))
-            spent = sum(
-                c["credits"]
-                for c in self.ledger.snapshot()["calls"]
-                if c["provider"] == "tavily"
-            )
-            self.ledger.set("tavily_observed_usage", usage)
-            self.ledger.set("tavily_month_usage", max(usage, previous + spent - previous_baseline))
-            self.ledger.set("tavily_baseline_reserved", spent)
-            self.ledger.set("tavily_usage_checked_at", now())
+            self.ledger.observe_tavily_usage(usage)
             return {
                 "verified": True,
                 "account": {
@@ -431,6 +457,8 @@ class MarketGateway:
             legacy_file = file
         if legacy_file.exists() and not refresh:
             snapshot = json.loads(legacy_file.read_text(encoding="utf-8"))
+            if snapshot.get("schema_version") == 2 and digest(json.dumps({k: v for k, v in snapshot.items() if k != "snapshot_id"}, sort_keys=True).encode()) != snapshot.get("snapshot_id"):
+                raise ValueError("Market snapshot metadata checksum mismatch")
             if (
                 digest(json.dumps(snapshot["payload"], sort_keys=True).encode())
                 != snapshot["payload_sha256"]
@@ -464,7 +492,7 @@ class MarketGateway:
                 "error": "Market integration disabled or frozen snapshot missing",
                 "replayed": self.mode == "frozen",
             }
-        if provider == "tavily" and not self.ledger.setting("tavily_usage_checked_at"):
+        if provider == "tavily":
             await self.tavily_usage()
         account = (
             self.ledger.setting("twelve_active", "yahoo")
@@ -488,6 +516,7 @@ class MarketGateway:
             self.ledger.finish(identity, outcome)
             if (
                 provider == "twelve"
+                and outcome == "provider_error"
                 and "day" in body
                 and ("out of api credits" in body or "daily limit" in body)
             ):
