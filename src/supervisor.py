@@ -92,7 +92,7 @@ class TaskState(BaseModel):
 
 def tasks_for(question):
     """Select requested outputs; dependency order never implies all workers run."""
-    from src.buy_side import market_request
+    from src.buy_side import market_request, valuation_request
 
     base = plan_request(question)
     risk = base.worker == "risk" or risk_comparison_request(question)
@@ -210,7 +210,7 @@ def tasks_for(question):
         add(
             "buy",
             "valuation_brief"
-            if re.search(r"valu|premium|P/E|multiples?|upside|scenario", question, re.I)
+            if valuation_request(question)
             else "market_snapshot",
             "Requested market/valuation output needs dated market evidence and existing checked handoffs",
             [t.worker for t in plan if t.worker in ("quant", "risk", "research")],
@@ -313,9 +313,18 @@ def cooperative_graph(
         worker_answers: dict
         current: int
         last_failure: str
+        capability_answer: str
 
     def plan(state):
         writer = get_stream_writer()
+        from src.capabilities import capability_request
+        capability = capability_request(state["question"])
+        if capability and not capability["question"]:
+            task = TaskState(plan=[], requested_outputs=["system_capabilities"], required_workers=[], completed_outputs=["system_capabilities"])
+            writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation or market acquisition", "task": task.model_dump()}})
+            return {"capability_answer": capability["answer"], "task": task.model_dump(), "evidence": {}, "worker_answers": {}, "error": "", "current": 0}
+        if capability:
+            state = {**state, "question": capability["question"]}
         from src.request_routing import excluded_companies, mentioned_companies, mentioned_years
         companies = [company for company in state["companies"] if company not in excluded_companies(state["question"])]
         memory_reference = bool(re.search(r"\b(?:from (?:our |the )?(?:previous|prior|last) (?:conversation|chat)|same assumptions as before|as we discussed)\b", state["question"], re.I))
@@ -404,6 +413,8 @@ def cooperative_graph(
                 )
         return {
             **asdict(base),
+            "question": state["question"],
+            "capability_answer": capability["answer"] if capability else "",
             "companies": companies,
             "clarification": clarification,
             "error": error,
@@ -714,7 +725,9 @@ def cooperative_graph(
         writer = get_stream_writer()
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
-        if state.get("error"):
+        if state.get("capability_answer") and not task.plan:
+            answer, status = state["capability_answer"], "completed"
+        elif state.get("error"):
             answer, status = state["error"], "needs_clarification" if state.get("clarification") else "coverage_gap"
         elif not answers:
             answer = "No verified answer is available. " + "; ".join(
@@ -757,6 +770,8 @@ def cooperative_graph(
         if not task.registered_evidence and status == "partial":
             status = "failed" if "failed" in task.worker_outcomes.values() else "coverage_gap"
         task.terminal = status
+        if state.get("capability_answer") and task.plan:
+            answer = state["capability_answer"] + "\n\n" + answer
         if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
             answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
         writer({"type": "answer", "data": answer})
@@ -789,7 +804,7 @@ def cooperative_graph(
                 "data": {
                     "agent": "Supervisor",
                     "node": "termination",
-                    "reason": "All requested outputs have verified worker outcomes"
+                    "reason": "Implemented capabilities described locally" if state.get("capability_answer") and not task.plan else "All requested outputs have verified worker outcomes"
                     if status == "completed"
                     else "Preserve verified findings and expose missing or unresolved outputs",
                     "task": task.model_dump(),
@@ -820,7 +835,7 @@ def cooperative_graph(
     workflow.add_node("finish", finish)
     workflow.add_edge(START, "supervisor")
     workflow.add_conditional_edges(
-        "supervisor", lambda s: "finish" if s.get("error") else "worker"
+        "supervisor", lambda s: "finish" if s.get("error") or not s["task"]["plan"] else "worker"
     )
     workflow.add_conditional_edges(
         "worker",

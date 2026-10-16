@@ -4,6 +4,8 @@ Owner: Rylan Wade. The [milestone index](../README.md) owns status.
 
 The LangGraph supervisor plans requested outputs and executes only their required workers. Single filing, exact-figure, quote, and risk-change requests take short paths. Financial arithmetic orders Data before Quant; supported annual component gaps use one filing-extraction handoff. Mixed requests can run Data → Quant → Risk Summary → Filings Research → Buy-Side Analyst. Narrative specialists preserve checked figures; each receives its assigned output rather than responsibility for the entire request.
 
+System and agent capability questions use local descriptions before company-data acquisition. Capability-only requests have an empty worker plan and complete without a model call or fabricated citation status. Mixed questions retain the actual research request, selected-company scope and normal worker execution, then include both answers. The [selected-company stock review](../buy-side-analyst/evidence/STOCK_RESEARCH_REVIEW_2026-10-16.json) records HTTP and browser checks of this path.
+
 ## State and transitions
 
 `TaskState` records requested outputs, required workers, ordered `Task` dependencies and reasons, completed outputs, worker outcomes, `EvidenceRef` records, missing inputs, follow-up/tool/step counts, and terminal state. Each evidence record retains one owner, source ID, exact value/unit, fiscal dates, accounting basis, calculation lineage, inspection URL, bundle identity, and a stable provenance/value digest. Full source objects remain in the request registry; narrative handoffs carry bounded excerpts and exact metadata. New workers start above all existing S/F/C IDs.

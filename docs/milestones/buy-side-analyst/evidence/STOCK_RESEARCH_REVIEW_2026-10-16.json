@@ -1,0 +1,938 @@
+{
+  "checked_at": "2026-10-16T19:06:35.580602+00:00",
+  "kind": "Exploratory engineering checks, actual local subscription generation, recorded MCP replay, labeled synthetic conditions, rebuilt Linux container and Chromium UI replay. Not formal RAGAS or investment-answer accuracy scoring.",
+  "regression": {
+    "command": "uv run --locked pytest -q",
+    "passed": 242,
+    "seconds": 21.41
+  },
+  "budget": {
+    "limit": 49,
+    "model_turns": 17,
+    "tool_continuations": 22,
+    "live_market_calls": 1,
+    "counted_units": 40,
+    "method": "Provider tool requests plus local model turn starts and tool-result continuations; recorded provider replay, source inspection, local HTTP and browser replay do not add paid provider calls. MCP initialization/discovery are protocol setup, not data calls.",
+    "frozen_review_denied_live_attempts": 0,
+    "frozen_review_ledger_unchanged": true
+  },
+  "http_review": [
+    {
+      "case_id": "selected-price",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "seconds": 9.936,
+      "source_inspections": 2,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "selected-prices",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "NVDA",
+        "AMD",
+        "INTC",
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "NVDA get_quote: stale",
+          "AMD get_quote: stale",
+          "INTC get_quote: stale"
+        ]
+      },
+      "seconds": 13.998,
+      "source_inspections": 4,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "selected-valuation",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Verified forward P/E unavailable: consensus currency, accounting basis, dilution, split basis, as-of date and actual fiscal period are unverified; no other eligible valuation calculation inputs supplied."
+        ]
+      },
+      "seconds": 18.023,
+      "source_inspections": 4,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "QCOM latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "peer-valuation",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "NVDA",
+        "AMD"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "NVDA get_quote: stale",
+          "AMD get_quote: stale",
+          "Recent evidence unavailable: Market integration disabled or frozen snapshot missing",
+          "NVDA: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Comparable verified valuation multiples for NVDA and AMD; consensus currency, GAAP/adjusted basis, dilution, split basis, estimate as-of and actual fiscal ends are unverified.",
+          "Evidence establishing issuer-specific premium justification and a defensible relative-expensiveness ranking is unavailable."
+        ]
+      },
+      "seconds": 18.043,
+      "source_inspections": 6,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVDA AMD latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "all-four-overview",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "NVDA",
+        "AMD",
+        "INTC",
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "NVDA get_quote: stale",
+          "AMD get_quote: stale",
+          "INTC get_quote: stale",
+          "NVDA: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "INTC: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Verified comparable valuation multiples and justified valuation ranking unavailable for all four issuers: consensus currency, accounting, dilution, split basis, as-of and actual fiscal dates unverified; no eligible earnings or enterprise-value inputs supplied.",
+          "NVDA, AMD and INTC quote observations are marked stale."
+        ]
+      },
+      "seconds": 25.828,
+      "source_inspections": 10,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVDA AMD INTC QCOM latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "changed-selection",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "INTC"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "INTC get_quote: stale",
+          "INTC: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Verified valuation multiple: consensus accounting basis, currency, dilution, split basis, as-of date and actual fiscal periods remain unverified; no eligible earnings denominator or complete EV inputs supplied.",
+          "Fresh quote: supplied observation is stale, cached and replayed."
+        ]
+      },
+      "seconds": 15.99,
+      "source_inspections": 4,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "INTC latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "missing-multiples",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "AMD"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "AMD get_quote: stale",
+          "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Trailing P/E requires compatible current four-quarter diluted GAAP EPS; selected original annual earnings are not current TTM",
+          "EV/revenue, EV/EBITDA and FCF yield require matching share count, cash/debt dates, defined cash-flow/EBITDA basis, and split reconciliation",
+          "Trailing P/E: compatible current four-quarter diluted GAAP EPS unavailable.",
+          "Forward P/E: consensus currency, accounting basis, dilution, split basis, consensus as-of and actual fiscal period unverified.",
+          "EV/EBITDA: matching shares, total debt, cash equivalents and defined current EBITDA unavailable.",
+          "Free cash flow yield: defined current FCF and matching equity market capitalization unavailable."
+        ]
+      },
+      "seconds": 16.469,
+      "source_inspections": 4,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "AMD latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "stale-quote",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "stale_quote",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "QCOM get_quote: stale",
+          "Requested percentage upside/downside unavailable: checked valuation rejected the stale dated comparison quote F1. Conditional implied price established."
+        ]
+      },
+      "seconds": 20.009,
+      "source_inspections": 5,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        }
+      ],
+      "bundle_replays": [
+        {
+          "verified": true,
+          "calculations": 1
+        }
+      ],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "quota",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "quota_error",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "QCOM get_quote: Provider quota or rate limit exceeded (429); no automatic retry",
+          "QCOM EARNINGS_ESTIMATES: Provider quota or rate limit exceeded (429); no automatic retry",
+          "Recent evidence unavailable: provider error",
+          "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "QCOM stock price and quote timestamp unavailable: provider rate limit (429).",
+          "QCOM valuation unavailable: no numeric valuation inputs, consensus estimates, or source-reported multiples."
+        ]
+      },
+      "seconds": 14.717,
+      "source_inspections": 3,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "QCOM latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "scenario-grid",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "Downloadable table attachment: no file or artifact creation tool is available. All nine checked prices, inline chart, and CSV content are provided."
+        ]
+      },
+      "seconds": 27.768,
+      "source_inspections": 15,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [
+        {
+          "verified": true,
+          "calculations": 9
+        }
+      ],
+      "semantic_review": "Artifact delivery falsely reported unavailable; fixed and retested with identical grid-recheck question."
+    },
+    {
+      "case_id": "two-year",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "seconds": 16.482,
+      "source_inspections": 3,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [
+        {
+          "verified": true,
+          "calculations": 1
+        }
+      ],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "foreign-currency",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "needs_clarification",
+        "verified_citations": false,
+        "missing_outputs": [
+          "The EPS grid has a non-USD currency; no implicit currency conversion is supported. Specify compatible USD assumptions or a separately supported conversion.",
+          "USD implied price cannot be established: EPS is CAD-denominated and no supported CAD-to-USD conversion or USD EPS assumption was supplied."
+        ]
+      },
+      "seconds": 11.585,
+      "source_inspections": 0,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "source-injection",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "source_prompt_injection_single",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "QCOM get_quote: stale",
+          "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Verified valuation multiple unavailable: consensus currency, accounting basis, dilution, split basis, as-of date and actual fiscal period are unverified.",
+          "Company-specific strongest fundamental counterargument is not established by the supplied evidence."
+        ]
+      },
+      "seconds": 14.319,
+      "source_inspections": 4,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "QCOM latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "capabilities-system",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": false
+      },
+      "seconds": 0.055,
+      "source_inspections": 0,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "capabilities-buy",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "NVDA",
+        "AMD"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": false
+      },
+      "seconds": 0.041,
+      "source_inspections": 0,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "capabilities-mixed",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "QCOM get_quote: stale"
+        ]
+      },
+      "seconds": 9.598,
+      "source_inspections": 2,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "grid-recheck",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "completed",
+        "verified_citations": true
+      },
+      "seconds": 19.314,
+      "source_inspections": 15,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [],
+      "bundle_replays": [
+        {
+          "verified": true,
+          "calculations": 9
+        }
+      ],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    },
+    {
+      "case_id": "overview-recheck",
+      "question_fixture": "tests/fixtures/buy_side_review.json",
+      "companies": [
+        "NVDA",
+        "AMD",
+        "INTC",
+        "QCOM"
+      ],
+      "condition": "recorded MCP replay",
+      "terminal": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "NVDA get_quote: stale",
+          "AMD get_quote: stale",
+          "INTC get_quote: stale",
+          "QCOM get_quote: stale",
+          "NVDA: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "AMD: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "INTC: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "QCOM: forward P/E excluded until consensus currency, accounting/dilution/split basis, consensus as-of, and actual fiscal period are verified",
+          "Comparable current independently checked valuation multiples unavailable for all four issuers: eligible earnings inputs and aligned dates/bases are missing; supplied quotes are stale frozen replays."
+        ]
+      },
+      "seconds": 25.335,
+      "source_inspections": 9,
+      "all_inspections_http_200": true,
+      "acquisitions_requested": [
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "NVDA"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "AMD"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "INTC"
+          }
+        },
+        {
+          "provider": "twelve",
+          "tool": "get_quote",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "alpha",
+          "tool": "EARNINGS_ESTIMATES",
+          "arguments": {
+            "symbol": "QCOM"
+          }
+        },
+        {
+          "provider": "tavily",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVDA AMD INTC QCOM latest earnings guidance valuation risks investor relations",
+            "search_depth": "basic",
+            "max_results": 3,
+            "include_raw_content": false
+          }
+        }
+      ],
+      "bundle_replays": [],
+      "semantic_review": "Reviewed against fixture expectation; accepted with explicit data/basis gaps where applicable."
+    }
+  ],
+  "docker": {
+    "container_name": "hw2-research-local",
+    "url": "http://127.0.0.1:8084",
+    "market_mode": "live",
+    "capability_seconds": 0.198,
+    "capability_outcome": {
+      "status": "completed",
+      "verified_citations": false
+    },
+    "quote_seconds": 12.481,
+    "quote_outcome": {
+      "status": "completed",
+      "verified_citations": true
+    },
+    "fresh_market_tool_calls": 1,
+    "quote_sources": [
+      {
+        "source_id": "F1",
+        "company": "QCOM",
+        "provider": null,
+        "kind": "valuation_input",
+        "retrieved_at": null,
+        "snapshot_id": null,
+        "evidence_kind": "live MCP"
+      },
+      {
+        "source_id": "S1",
+        "company": "QCOM",
+        "provider": "twelve",
+        "kind": "market_evidence",
+        "retrieved_at": "2026-10-16T19:03:52.207464+00:00",
+        "snapshot_id": "dd8a75147182dc62193114f4aa28c21a0950c5b18a6cc5323f8a45507f2c8ae8",
+        "evidence_kind": "live MCP"
+      }
+    ],
+    "source_checks": [
+      {
+        "source_id": "F1",
+        "status": 200
+      },
+      {
+        "source_id": "S1",
+        "status": 200
+      }
+    ]
+  },
+  "browser": {
+    "checked_at": "2026-10-16T19:03:16.233338+00:00",
+    "kind": "Actual Chromium UI with recorded SSE answers; real local source/download routes; no generation or live market calls",
+    "checks": [
+      {
+        "case": "capabilities-system",
+        "companies_sent": [
+          "QCOM"
+        ],
+        "status": "Complete",
+        "table_rows": 0,
+        "passed": true
+      },
+      {
+        "case": "overview-recheck",
+        "companies_sent": [
+          "NVDA",
+          "AMD",
+          "INTC",
+          "QCOM"
+        ],
+        "status": "Partial answer · evidence gap",
+        "table_rows": 5,
+        "citation_inspection_characters": 2155,
+        "passed": true
+      },
+      {
+        "case": "changed-selection",
+        "companies_sent": [
+          "INTC"
+        ],
+        "status": "Partial answer · evidence gap",
+        "table_rows": 2,
+        "passed": true
+      },
+      {
+        "case": "grid-recheck",
+        "companies_sent": [
+          "QCOM"
+        ],
+        "status": "Complete · source references checked",
+        "table_rows": 4,
+        "downloads": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "passed": true
+      }
+    ],
+    "untrusted_table_cells_remain_text": true,
+    "page_errors": []
+  },
+  "totals": {
+    "http_turns": 20,
+    "source_inspections": 92,
+    "replayed_calculations": 20,
+    "browser_answer_replays": 4
+  },
+  "fixes": [
+    "Route ordinary selected-company stock research wording to Buy-Side.",
+    "Prioritize prices, analyst expectations and labeled source-reported valuation references; keep explicit assumptions optional.",
+    "Return implemented system/agent capabilities locally and retain mixed research clauses.",
+    "Return Quant artifact URLs so a successfully published chart/CSV is not reported unavailable.",
+    "Reject truncated grid notation, partial registration and implicit currency changes; preserve explicit horizons.",
+    "Render comparison tables and readable market-source labels with text-node safety."
+  ],
+  "limitations": [
+    "Most market responses were frozen recordings and became stale; only the Docker QCOM quote was newly acquired.",
+    "Available estimate metadata does not establish independently verified forward/trailing P/E, EV/EBITDA or FCF yield.",
+    "Source-reported valuation references have missing or conflicting dates and bases; they do not prove a current relative-value ranking.",
+    "Native local, frozen replay, browser replay and Linux container evidence are distinct; no Cloud Run or deployment-provider evaluation performed."
+  ],
+  "implementation_sha256": {
+    "src/buy_side.py": "e8acfcea4a8cae67476b5a9a89de72afcb914863b8a7239ad87c06e62441f491",
+    "src/supervisor.py": "c2dcbaf386e34559a8ef1fa235cfaf64f7d8bae98f3d5cb0b5d5d872fe9abb5a",
+    "src/capabilities.py": "b9f3d9a9a75a3be5ed6aa47e1f8861dbd0fd3c614ae65c317dc3d0e69dbcc4d3",
+    "prompts/buy_side.md": "ce2278269a5396dccfdab8639df24d8b35a3ed7352c703125b0dbb0efb76580c",
+    "web/index.html": "ab91a3cf8fa3cfeb4e07a4d62f26fe88eab01b634098ba28d15d5454f3ea5ef4"
+  }
+}

@@ -26,7 +26,7 @@ def valuation_request(question):
     question = re.sub(r"\bguaranteed upside\b", "promotional claim", question, flags=re.I)
     return bool(
         re.search(
-            r"\b(valu\w*|multiples?|peers?|premium|discount|cheaper|forward earnings|consensus.EPS|upside|downside|implied|sensitivity|price target|total return)\b|P\s*/\s*E|EV\s*/",
+            r"\b(valu\w*|multiples?|peers?|premium|discount|cheap(?:er)?|expensive|overpriced|underpriced|forward earnings|consensus.EPS|upside|downside|implied|sensitivity|price targets?|total return|market cap(?:italization)?|free cash flow yield|FCF yield)\b|P\s*/\s*E|EV\s*/|price[- ]to[- ]earnings",
             question,
             re.I,
         )
@@ -34,11 +34,11 @@ def valuation_request(question):
 
 
 def market_request(question):
-    price_context = bool(re.search(r"\b(stock price|share price|(?:stock|share|market) quotes?|trading|market snapshot|(?:dated|current|latest|live|price) quotes?)\b", question, re.I))
+    price_context = bool(re.search(r"\b(stock prices?|share prices?|(?:current|latest) prices?|(?:stock|share|market) quotes?|trading|market snapshot|(?:dated|current|latest|live|price) quotes?)\b", question, re.I))
     filing_quote = bool(re.search(r"\b(filing|wording|passage|original|annual risk|commentary)\b", question, re.I)) and not price_context
     return valuation_request(question) or price_context or bool(
         re.search(
-            r"\b(quotes?|analyst estimates?)\b",
+            r"\b(quotes?|analyst (?:estimates?|expectations?))\b",
             question,
             re.I,
         )
@@ -58,12 +58,32 @@ def search_arguments(companies):
 
 
 def explicit_eps(question):
-    return bool(re.search(r"\bEPS\s+(?:of|is|at|=|grid\s*:)", question, re.I)) and bool(re.search(r"\b(hypothetical|assum\w*|scenario|grid)\b", question, re.I))
+    return bool(re.search(r"\bEPS\s*(?:of\b|is\b|at\b|=|grid\s*:)", question, re.I)) and bool(re.search(r"\b(hypothetical|assum\w*|scenario|grid)\b", question, re.I))
+
+
+def acquisition_scope(question):
+    """Remove negated acquisition clauses before planning any provider work."""
+    excluded = set()
+
+    def remove(match):
+        clause = match[0]
+        if re.search(r"\bmarket data\b", clause, re.I):
+            excluded.update(("quote", "consensus", "web"))
+        if re.search(r"\b(quotes?|stock prices?|share prices?)\b", clause, re.I):
+            excluded.add("quote")
+        if re.search(r"\b(consensus|estimates?|analyst expectations?)\b", clause, re.I):
+            excluded.add("consensus")
+        if re.search(r"\b(web|news|Tavily|supporting evidence|counterargument|opposing evidence)\b", clause, re.I):
+            excluded.add("web")
+        return ""
+
+    positive = re.sub(r"\b(?:no|without|not|do not|don't)\b[^.;:\n]*", remove, question, flags=re.I)
+    return positive, excluded
 
 
 def needs_consensus(question):
-    positive = re.sub(r"\b(?:not|no|without|do not (?:use|fetch|request)|don't (?:use|fetch|request))\s+(?:any\s+)?(?:consensus(?:\s+estimates?)?|estimates?)\b", "", question, flags=re.I)
-    return valuation_request(question) and (not explicit_eps(question) or bool(re.search(r"\b(consensus|forward earnings|forward P/E|estimates?)\b", positive, re.I)))
+    positive, excluded = acquisition_scope(question)
+    return "consensus" not in excluded and (bool(re.search(r"\b(?:analyst (?:estimates?|expectations?)|consensus)\b", positive, re.I)) or valuation_request(question) and (not explicit_eps(question) or bool(re.search(r"\b(forward earnings|forward P/E|estimates?)\b", positive, re.I))))
 
 
 async def collect_market(gateway, state, writer):
@@ -71,11 +91,11 @@ async def collect_market(gateway, state, writer):
     evidence, gaps = [], []
     valuation = valuation_request(state["question"])
     question = state["question"]
-    positive = re.sub(r"\b(?:no|without|do not|don't)\b[^.;:\n]*(?:quotes?|returns?|stock prices?)[^.;:\n]*", "", question, flags=re.I)
+    positive, excluded = acquisition_scope(question)
     hypothetical_only = explicit_eps(question) and not re.search(r"\b(quotes?|upside|downside|returns?|difference|stock|share price|supporting evidence|counterargument)\b", positive, re.I)
     for company in state["companies"]:
         for provider, name in [
-            *([] if hypothetical_only else [("twelve", "get_quote")]),
+            *([] if hypothetical_only or "quote" in excluded else [("twelve", "get_quote")]),
             *([("alpha", "EARNINGS_ESTIMATES")] if needs_consensus(question) else []),
         ]:
             writer(
@@ -124,8 +144,8 @@ async def collect_market(gateway, state, writer):
                 gaps.append(
                     f"{company} {name}: {normalized.get('reason', normalized['status'])}"
                 )
-    recent_requested = not explicit_eps(question) or bool(re.search(r"\b(recent|news|web|Tavily|supporting evidence|counterargument|opposing)\b", question, re.I))
-    if valuation and not hypothetical_only and recent_requested:
+    recent_requested = not explicit_eps(question) or bool(re.search(r"\b(recent|news|web|Tavily|supporting evidence|counterargument|opposing)\b", positive, re.I))
+    if valuation and not hypothetical_only and recent_requested and "web" not in excluded:
         writer(
             {
                 "type": "trace",
@@ -261,6 +281,7 @@ class BuyTools:
             assigned = mentioned_companies(clause)
             if len(assigned) != 1 or assigned[0] not in companies:
                 self.missing.append("Scenario assumptions need an unambiguous issuer; no cross-company assumptions were inferred")
+                self.clarification_needed = True
                 continue
             groups.append((marker.start() - len(clause), assigned[0]))
         for position, (start, company) in enumerate(groups):
@@ -281,33 +302,63 @@ class BuyTools:
         )
         if not multiple:
             multiple = re.search(r"(?<![\w.,])(-?\d+(?:\.\d+)?)\s*[- ]?(?:times|x)[- ]?\s*(?:earnings\s+)?(?:multiple|valuation)", question, re.I)
-        eps_grid = re.search(r"\bEPS\s+grid\s*:\s*([-\d.,\s$]+)", question, re.I)
-        pe_grid = re.search(r"\bP/E\s+grid\s*:\s*([-\d.,\s$]+)", question, re.I)
-        horizon = re.search(r"\b(\d{1,2})[- ]month", question, re.I)
-        months = horizon[1] if horizon else "12"
+        eps_grid = re.search(r"\bEPS\s+grid\s*:\s*([^;\n]+?)(?=\s+and\b|\s+P/E\b|[.;](?:\s|$)|$)", question, re.I)
+        pe_grid = re.search(r"\bP/E\s+grid\s*:\s*([^;\n]+?)(?=\s+(?:and|show|over|for)\b|[.;](?:\s|$)|$)", question, re.I)
+        horizons = list(re.finditer(r"\b(\d+(?:\.\d+)?)[- ]+(months?|years?)\b", question, re.I))
+        month_values = {number(h[1]) * (12 if h[2].lower().startswith("year") else 1) for h in horizons}
+        months = "12"
         if not (eps or eps_grid) or not (multiple or pe_grid):
             if explicit_eps(question):
                 self.missing.append("Conditional price scenarios require explicit plain-decimal EPS and P/E assumptions; incomplete or unsupported numeric notation is not truncated")
+                self.clarification_needed = True
+            return
+        if len(month_values) > 1 or any(value <= 0 or value > 1200 or value != int(value) for value in month_values):
+            self.missing.append("Specify one positive scenario horizon in whole months, at most 100 years")
+            self.clarification_needed = True
+            return
+        if month_values:
+            months = str(int(next(iter(month_values))))
+        if not eps_grid and len(re.findall(r"\bEPS\s*(?:of|=|is|at)\b", question, re.I)) > 1 or not pe_grid and len(re.findall(r"\bP/E\s*(?:of|=|is|at)?\s*-?\d", question, re.I)) > 1:
+            self.missing.append("Multiple scenario assumptions for one issuer need an explicit EPS/P/E grid or one unambiguous pair")
+            self.clarification_needed = True
             return
         eps_region = question[:(pe_grid or multiple).start()]
         if eps and ((eps[1] or "").upper() == "EUR" or eps[2] == "€") or eps_grid and re.search(r"\bEUR\b|€", eps_region, re.I):
             self.missing.append("The explicit EPS or EPS grid is EUR; a compatible exchange rate and split basis are needed before USD targets or a USD comparison")
             self.clarification_needed = True
             return
-        if eps_grid and re.search(r"\b(?:GBP|CAD|AUD|JPY|CHF|CNY|HKD|INR|KRW|TWD)\b|[£¥]|\b(?!USD\b)[A-Z]{3}\s+per share\b", eps_region, re.I):
-            self.missing.append("The EPS grid has a non-USD currency; no implicit currency conversion is supported. Specify compatible USD assumptions or a separately supported conversion.")
+        if re.search(r"\b(?:EUR|GBP|CAD|AUD|JPY|CHF|CNY|HKD|INR|KRW|TWD)\b|[£¥€]|\b(?!USD\b)[A-Z]{3}\s+per share\b", eps_region, re.I):
+            self.missing.append("The explicit EPS assumption has a non-USD currency; no implicit currency conversion is supported. Specify compatible USD assumptions or a separately supported conversion.")
             self.clarification_needed = True
             return
+        parsed_values = []
         for metric, match, grid in (
             ("eps", eps, eps_grid),
             ("multiple", multiple, pe_grid),
         ):
-            values = re.findall(r"-?\d+(?:\.\d+)?", grid[1]) if grid else [match[3] if metric == "eps" else match[1]]
+            if grid:
+                # Validate complete tokens before registering either axis. Scientific
+                # notation and thousands separators must never become smaller inputs.
+                region = re.split(r"\s+(?:in|USD|EUR|per)\b", grid[1], maxsplit=1, flags=re.I)[0].strip()
+                values = [part.strip().removeprefix("$") for part in region.split(",")]
+                if any(not re.fullmatch(r"-?\d+(?:\.\d+)?", value) for value in values):
+                    self.missing.append("Conditional grids require complete plain-decimal numeric notation; unsupported values are not truncated")
+                    self.clarification_needed = True
+                    return
+                if re.search(r"\d,\d{3}(?:\D|$)", region):
+                    self.missing.append("Ambiguous thousands separators in a grid; separate plain-decimal values with comma and space")
+                    self.clarification_needed = True
+                    return
+            else:
+                values = [match[3] if metric == "eps" else match[1]]
             if not 1 <= len(values) <= 3:
                 self.missing.append(
                     "Sensitivity grids support at most three explicit EPS and P/E values each"
                 )
+                self.clarification_needed = True
                 return
+            parsed_values.append((metric, match, grid, values))
+        for metric, match, grid, values in parsed_values:
             for explicit in values:
                 sid = self.next_id("F")
                 value = ValuationInput(
@@ -371,6 +422,7 @@ class BuyTools:
                 "calculations": result["calculations"],
                 "sources": result["sources"],
                 "bundle_id": result["bundle_id"],
+                "artifacts": result["artifacts"],
             }
         raise ValueError("Unknown Buy-Side Analyst tool")
 

@@ -147,6 +147,7 @@
       }
       .table-scroll {
         overflow: auto;
+        white-space: normal;
       }
       #artifacts img {
         max-width: 100%;
@@ -169,8 +170,9 @@
     <main>
       <h1>Public-Company Research</h1>
       <p>
-        Research the collected filings and earnings releases. Each question uses
-        the selected companies and fiscal years.
+        Research filings, dated stock prices, and available valuation evidence for
+        the selected companies. Fiscal years apply to the collected filings;
+        market observations show their own dates.
       </p>
       <form id="research">
         <div class="filters">
@@ -193,8 +195,14 @@
         <div id="scope-help" role="alert"></div>
         <label for="question">Research question</label
         ><textarea id="question" required minlength="3" maxlength="2000">
-What drove NVIDIA's revenue growth in FY2026?</textarea
+What are the selected companies' stock prices, and how are they valued?</textarea
         >
+        <div id="stock-questions" aria-label="Stock research examples">
+          <button type="button" data-question="What are the selected companies' stock prices? Show dates, currencies and freshness.">Stock prices</button>
+          <button type="button" data-question="Compare the selected companies' stock prices, valuations and analyst expectations in a table. Explain available evidence and missing valuation inputs.">Valuation overview</button>
+          <button type="button" data-question="Which selected stock looks expensive relative to its peers? Compare available valuation evidence and give the strongest counterargument. A higher share price alone is not a higher valuation.">Compare valuations</button>
+          <button type="button" data-question="What can this system do, and what does each agent do?">System capabilities</button>
+        </div>
         <button id="ask" type="submit">Research</button>
         <button id="stop" type="button" disabled>Stop</button
         ><span id="status" role="status">Ready</span>
@@ -273,6 +281,13 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
         });
       $("company").addEventListener("change", () => years());
       $("year").addEventListener("change", showSelection);
+      for (const button of document.querySelectorAll("[data-question]")) {
+        button.addEventListener("click", () => {
+          if (controller) return;
+          $("question").value = button.dataset.question;
+          $("question").focus();
+        });
+      }
       async function inspect(source) {
         if (!source.inspection_url) {
           $("source-label").textContent = "Explicit assumption or unavailable source";
@@ -364,19 +379,25 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
                 ? `[${s.source_id}] ${s.label}`
                 : s.kind === "financial_observation"
                   ? `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.metric} · ${s.period} ${s.basis}`
+                  : s.kind === "market_evidence"
+                    ? `[${s.source_id}] ${s.company} · ${s.section} · ${s.provider || "unavailable"}`
+                  : s.kind === "valuation_input"
+                    ? `[${s.source_id}] ${s.company} · ${s.metric} · ${s.value} ${s.unit}`
                   : `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.form} (${s.version}) · ${s.section}`;
             b.onclick = () => inspect(s);
             return b;
           }),
         );
-        const text = $("answer").textContent,
-          parts = text.split(/(\[[A-Z]\d+\])/);
-        $("answer").replaceChildren(
-          ...parts.map((part) => {
+        const text = $("answer").textContent;
+        function appendCitations(target, text) {
+          for (const part of text.split(/(\[[A-Z]\d+\])/)) {
             const source = sources.find(
               (s) => "[" + s.source_id + "]" === part,
             );
-            if (!source) return document.createTextNode(part);
+            if (!source) {
+              target.append(document.createTextNode(part));
+              continue;
+            }
             const a = document.createElement("a");
             a.href = source.inspection_url;
             a.textContent = part;
@@ -384,9 +405,34 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
               e.preventDefault();
               inspect(source);
             };
-            return a;
-          }),
-        );
+            target.append(a);
+          }
+        }
+        // Render bounded Markdown tables with text nodes, never source HTML.
+        const lines = text.split("\n");
+        const cells = (line) => line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
+        $("answer").replaceChildren();
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].trim().startsWith("|") && /^\s*\|?\s*:?-+:?\s*\|[\s|:\-]*$/.test(lines[i + 1] || "")) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-scroll";
+            const table = document.createElement("table");
+            function row(line, header) {
+              const tr = document.createElement("tr");
+              for (const value of cells(line)) {
+                const cell = document.createElement(header ? "th" : "td");
+                appendCitations(cell, value);
+                tr.append(cell);
+              }
+              table.append(tr);
+            }
+            row(lines[i], true);
+            i++;
+            while (i + 1 < lines.length && lines[i + 1].trim().startsWith("|")) row(lines[++i], false);
+            wrapper.append(table);
+            $("answer").append(wrapper);
+          } else appendCitations($("answer"), lines[i] + (i + 1 < lines.length ? "\n" : ""));
+        }
       }
       function event(type, data) {
         if (type === "token") $("answer").append(document.createTextNode(data));
@@ -433,7 +479,7 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
           if (data.status !== "failed")
             $("status").textContent =
               data.status === "completed"
-                ? "Complete · source references checked"
+                ? data.verified_citations ? "Complete · source references checked" : "Complete"
                 : data.status === "coverage_gap"
                   ? "Coverage gap"
                   : data.status === "needs_clarification"
