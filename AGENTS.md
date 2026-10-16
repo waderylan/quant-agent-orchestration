@@ -103,9 +103,17 @@ For every qualifying event entry:
 - Preserve user-authored and unrelated changes.
 - Keep `CLAUDE.md` as the single-line import `@AGENTS.md`.
 - Keep documentation factual; never invent decisions, measurements, or personal reflections.
-- Keep project documentation synchronized with the current verified scope, decisions, implementation status, and gaps. State the active policy directly; omit superseded plans and chat-history explanations. Preserve dates and version relationships needed for source evidence.
 
-## 6. Project Workflow
+## 6. Documentation and Communication
+
+- Address the user as **rwade** in chat; use **Rylan Wade** in documents. Give short, direct bullet updates and final reports: outcome, verification, and decisions that need review. Cut filler.
+- Write concise, plain technical English. State current behavior in the present tense. Keep the facts needed to understand or verify it; remove repetition, speculative detail, superseded plans, chat-history explanations, and pointers to obsolete paths. Preserve dates and version relationships needed to interpret evidence.
+- Follow the [documentation map](docs/README.md). Keep the root README for setup and runnable commands; `docs/project.md` for scope; `docs/architecture.md` for current contracts; `docs/evaluation.md` for measured results. Put each fact in one owning page and link to it elsewhere.
+- Keep M1–M13 in [one milestone index](docs/milestones/README.md), which alone owns order and status. Each milestone has one short `README.md`. Completed records state the capability, key decisions, verification, limits, and evidence. Future records stay brief: goal plus details and acceptance criteria to decide during implementation.
+- Keep research decisions in `docs/research/`, supplied material in `docs/reference/`, reusable cases in `tests/fixtures/`, and dated results under the owning milestone's `evidence/`. Preserve recorded evidence; write new local run output to ignored `artifacts/`.
+- After changing docs, check local links, milestone coverage, runnable commands, referenced paths, and consistency with verified code and results. Update scripts that consume moved files. Documentation-only work does not trigger a transcript event under §3.
+
+## 7. Project Workflow
 
 - Selected product: [Public-Company Research Assistant](docs/project.md). [Architecture](docs/architecture.md) describes current behavior; [milestones](docs/milestones/README.md) own order and status. The assignment takes precedence.
 - Implement only authorized increments. Demonstrate each with source checks, relevant tests, and a runnable local path; request Rylan Wade's feedback before an unauthorized next milestone.
@@ -115,6 +123,6 @@ For every qualifying event entry:
 - [Instructor references](docs/reference/instructor/README.md) are guidance, not implementation contracts. Do not copy HW1 implementation, credentials, deployment config, artifacts, or reflections.
 - Leave [PROCESS_LOG.md](PROCESS_LOG.md) as a template until Rylan Wade provides his own 200–300-word reflection across four sections. Include the completed log in the final archive.
 
-## 7. Product Ideas
+## 8. Product Ideas
 
 - The company project is selected. [Law and ski concepts](docs/reference/alternatives/README.md) remain unselected; revisions to them do not authorize implementation.
