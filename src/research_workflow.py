@@ -25,7 +25,7 @@ TOOLS = [
     {
         "type": "function",
         "name": "search_sources",
-        "description": "Retrieve passages within the selected companies and fiscal years. Use section or version to narrow evidence.",
+        "description": "Retrieve passages balanced across every selected company/year unless narrowed by filters. Use one shared query for a comparison, then refine only missing evidence. Use section or version to narrow evidence.",
         "inputSchema": {
             "type": "object",
             "properties": {
@@ -79,6 +79,8 @@ class ResearchTools:
         self.index, self.companies, self.years = index, companies, years
         self.sources = {}
         self.identifiers = {}
+        # Each scope cell can need a search and contextual inspections; keep a hard cap.
+        self.max_tool_calls = min(24, max(8, 3 * len(companies) * len(years)))
 
     def register(self, passages):
         result = []
@@ -140,18 +142,29 @@ class ResearchTools:
         query = arguments["query"]
         if not isinstance(query, str) or not 1 <= len(query) <= 1500:
             raise ValueError("Query must contain 1–1500 characters")
-        return {
-            "sources": self.register(
-                self.index.search(
+        companies = [company] if company else self.companies
+        years = [year] if year else self.years
+        passages, coverage = [], []
+        for selected_company in companies:
+            for selected_year in years:
+                found = self.index.search(
                     query,
-                    [company] if company else self.companies,
-                    [year] if year else self.years,
+                    [selected_company],
+                    [selected_year],
                     section=arguments.get("section"),
                     version=arguments.get("version"),
                     form=arguments.get("form"),
+                    k=6 if len(companies) * len(years) == 1 else 4,
                 )
-            )
-        }
+                passages.extend(found)
+                coverage.append(
+                    {
+                        "company": selected_company,
+                        "fiscal_year": selected_year,
+                        "passages": len(found),
+                    }
+                )
+        return {"sources": self.register(passages), "retrieval_coverage": coverage}
 
 
 def scope_error(question, companies, years, coverage):
@@ -214,10 +227,16 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
     prompt = await pipeline.ainvoke(state)
     writer({"type": "evidence", "data": {"sources": list(sources.sources.values())}})
     answer = ""
+    exhausted = False
     async with aclosing(model_stream(prompt, TOOLS, sources)) as model_events:
         async for event in model_events:
             if event["type"] == "token":
                 answer += event["data"]
+            if (
+                event["type"] == "trace"
+                and event["data"].get("decision") == "synthesize_existing_evidence"
+            ):
+                exhausted = True
             writer(event)
     cited = set(re.findall(r"\[(S\d+)\]", answer))
     invalid = cited - sources.sources.keys()
@@ -243,7 +262,11 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             ],
         }
     )
-    return {"answer": answer}
+    if exhausted:
+        limitation = "\n\n- Research reached its retrieval limit. These findings use the evidence collected; the requested comparison may be incomplete."
+        answer += limitation
+        writer({"type": "token", "data": limitation})
+    return {"answer": answer, "partial": bool(state.get("partial")) or exhausted}
 
 
 def select_worker(question):

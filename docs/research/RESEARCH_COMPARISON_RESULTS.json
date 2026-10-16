@@ -1,0 +1,1092 @@
+[
+  {
+    "question": "what were comon factors driving revenue growth for all companies",
+    "answer": "- No single revenue-growth driver applied to all four companies in FY2024–FY2025. Intel’s total revenue declined in both years: $53.1 billion in FY2024 versus $54.2 billion previously, and $52.9 billion in FY2025. [S19] [S68]\n\n- The clearest shared driver for NVIDIA and AMD was data-center demand:\n  - NVIDIA FY2024: generative AI increased Data Center demand. FY2025: accelerated computing and AI demand, particularly for Hopper, drove growth. [S53] [S56]\n  - AMD FY2024: higher Instinct GPU and EPYC CPU sales drove Data Center growth. FY2025: strong demand for EPYC processors and Instinct accelerators continued that growth. [S35] [S41]\n  - Intel shared part of this trend in FY2025: higher hyperscale server and networking demand increased DCAI revenue, but did not produce company-wide growth. [S71]\n\n- Higher-value product mix and pricing supported a different subset:\n  - AMD FY2024: Ryzen demand increased both client shipments and average selling prices. [S35]\n  - Intel FY2024: a higher mix of high-core-count server products increased server selling prices despite lower server volume. [S20]\n  - Qualcomm FY2025: premium-tier Snapdragon demand supported higher handset chipset prices, favorable mix and higher shipments. [S65] [S67]\n\n- Qualcomm’s growth was more handset- and automotive-led than data-center-led: both businesses grew in FY2024 and FY2025; FY2025 also benefited from higher IoT shipments and vehicle launches using Snapdragon digital cockpit products. [S28] [S31] [S67]\n\n- Bottom line: AI/data-center demand was a shared driver for NVIDIA and AMD, with a narrower Intel segment benefit—not a demonstrated universal driver across all four companies. [S53] [S56] [S35] [S41] [S71]",
+    "sources": [
+      {
+        "source_id": "S19",
+        "chunk_id": "731546ed2b2e19920c6cc55951c668c0d8541d8b85d5101092dc0f4c9de386b2",
+        "text": "and development expenditures and operating costs from our remaining non-reportable segments and start-up businesses.\n| | | | | | | |\n| MD&A | 22\nTable of Contents\n| | | | |\nConsolidated Results of Operations |\n|\n| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |\nYears Ended (In Millions, Except Per Share Amounts) | | December 28, 2024 | | December 30, 2023 | | December 31, 2022\n| Amount | | % of NetRevenue | | Amount | | % of NetRevenue | | Amount | | % of NetRevenue\nNet revenue | | $ | 53,101 | | | 100.0 | % | | $ | 54,228 | | | 100.0 | % | | $ | 63,054 | | | 100.0 | %\nCost of sales | | 35,756 | | | 67.3 | % | | 32,51",
+        "form": "10-K",
+        "kind": "filing",
+        "company": "INTC",
+        "fiscal_year": 2024,
+        "document_id": "intc-0000050863-25-000009",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+        "period_end": "2024-12-28",
+        "section": "mda",
+        "end": 111390,
+        "page": 0,
+        "version": "original",
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+        "start": 110739,
+        "distance": 0.4592936635017395,
+        "inspection_url": "/api/sources/731546ed2b2e19920c6cc55951c668c0d8541d8b85d5101092dc0f4c9de386b2"
+      },
+      {
+        "source_id": "S20",
+        "chunk_id": "bde5db83a8180acbcf28fc16ae6303621e6da9b66b88b4f07c437fee7c1fdd07",
+        "text": ".0 billion from 2023. Notebook revenue was $19.1 billion in 2024, up $2.1 billion from 2023. Notebook volume increased 12% from 2023, as customer inventory levels improved compared to higher levels in 2023. Notebook ASPs were roughly flat with 2023. Desktop revenue was $9.7 billion, down $516 million from 2023. Desktop volume decreased 5% from 2023, primarily due to lower demand compared to 2023. Desktop ASPs were roughly flat with 2023. Other CCG revenue was $1.6 billion, down $530 million from 2023, primarily driven by the exit of legacy businesses.\n▪DCAI revenue increased $182 million from 2023, primarily driven by an increase in server revenue. Server ASPs increased 12% from 2023, primarily due to a higher mix of high core count products. Server volume decreased 10% from 2023, due to lower demand in a competitive environment and a higher mix of high core count products.\n▪NEX revenue increased $68 million from 2023, primarily driven",
+        "kind": "filing",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+        "period_end": "2024-12-28",
+        "section": "mda",
+        "document_id": "intc-0000050863-25-000009",
+        "form": "10-K",
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+        "company": "INTC",
+        "end": 91444,
+        "version": "original",
+        "page": 0,
+        "start": 90495,
+        "fiscal_year": 2024,
+        "distance": 0.46054553985595703,
+        "inspection_url": "/api/sources/bde5db83a8180acbcf28fc16ae6303621e6da9b66b88b4f07c437fee7c1fdd07"
+      },
+      {
+        "source_id": "S28",
+        "chunk_id": "2e7c565c9bf04927781203dea063cc02b082520ed4fb53dc1bdb57e276937fed",
+        "text": "+5%\n     EBT                                                                                                                                                                                                                                                                                                                                                                              $9,527                                                                                                                 $7,924                                                                                                                      +20%                                                                                                              $4,027                                                                                                                 $3,628                                                                                                                     +11%\n                            EBT as % of revenues                                                                                                                                                                                                                                                                                                                                                   29%                                                                                                                    26%                                                                                          +3 points                                                                                                                                       72%                                                                                                                    68%                                                                                           +4 points\n\nQCT Revenue Streams                                                                                                                                                                                                                               1\n\n                                                                                                                                                                                                                                                                                                                                                                                                                                                                Fourth Quarter                                                                                                                                                                                                                                                                                                                                                                                                      Fiscal\n     (in millions, except percentages)                                                                                                                                                                                                                                                                                                                                                         2024                                                                                                                   2023                                                                                                      Change                                                                                                                             2024                                                                                                                   2023                                                                                                     Change\n     Handsets                                                                                                                                                                                                                                                                                                                                                                         $6,096                                                                                                                 $5,456                                                                                                                      +12%                                                                                                        $24,863                                                                                                                $22,570                                                                                                                         +10%\n     Automotive                                                                                                                                                                                                                                                                                                                                                                                      899                                                                                                                   535                                                                                                           +68%                                                                                                                    2,910                                                                                                                  1,872                                                                                                               +55%\n     IoT                                                                                                                                                                                                                                                                                                                                                                                    1,683                                                                                                                  1,383                                                                                                                 +22%                                                                                                                    5,423                                                                                                                  5,940                                                                                                                     (9%)\n                            Total QCT revenues                                                                                                                                                                                                                                                                                                                                        $8,678                                                                                                                 $7,374                                                                                                                      +18%                                                                                                        $33,196                                                                                                                $30,382                                                                                                                               +9%\n\n(1) We disaggregate QCT revenues based on the industries and applications in which our products are sold.\n\nReturn of Capital to Stockholders\n\nThe following table summarizes our return of capital to stockholders",
+        "company": "QCOM",
+        "version": "original",
+        "end": 42799,
+        "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2024/q4/FY2024-4th-Quarter-Earnings-Release.pdf",
+        "text_sha256": "b984802af0e8463b5e3a5bce4b20f3b9b7afa2074d57c6410a81a5cdcc80c61d",
+        "document_id": "qcom-fy2024-earnings",
+        "kind": "earnings_release",
+        "period_end": "2024-09-29",
+        "fiscal_year": 2024,
+        "section": "other",
+        "start": 34646,
+        "page": 2,
+        "form": "Earnings release",
+        "distance": 0.5344879627227783,
+        "inspection_url": "/api/sources/2e7c565c9bf04927781203dea063cc02b082520ed4fb53dc1bdb57e276937fed"
+      },
+      {
+        "source_id": "S31",
+        "chunk_id": "8fff703403f276a018d7b6e1ab00652079d681a2f5bd31b7f445d5585d9d0b91",
+        "text": "2                                                                                              $5,572                                                                                                                 —\n    EBT                                                                                                                                                                                                                                                                                                                $11,670                                                                                                 $9,527                                                                                                  +22%                                                                                             $4,043                                                                                              $4,027                                                                                                                 —\n                        EBT as % of revenues                                                                                                                                                                                                                                                                                          30%                                                                                                 29%                                                                                +1 point                                                                                                             72%                                                                                                 72%                                                                                                         —\n\nQCT Revenue Streams                                                                                                                                                                                         1\n\n                                                                                                                                                                                                                                                                                                                                                                                         Fourth Quarter                                                                                                                                                                                                                                                                                                                                       Fiscal\n    (in millions, except percentages)                                                                                                                                                                                                                                                                                             2025                                                                                                 2024                                                                                     Change                                                                                                         2025                                                                                                2024                                                                                    Change\n    Handsets                                                                                                                                                                                                                                                                                                               $6,961                                                                                              $6,096                                                                                                  +14%                                                                                        $27,793                                                                                             $24,863                                                                                                     +12%\n    Automotive                                                                                                                                                                                                                                                                                                                  1,053                                                                                                      899                                                                                         +17%                                                                                                 3,957                                                                                                2,910                                                                                             +36%\n    IoT (internet of things)                                                                                                                                                                                                                                                                                                    1,807                                                                                               1,683                                                                                                   +7%                                                                                             6,617                                                                                                5,423                                                                                             +22%\n                        Total QCT revenues                                                                                                                                                                                                                                                                                 $9,821                                                                                              $8,678                                                                                                  +13%                                                                                        $38,367                                                                                             $33,196                                                                                                     +16%\n\n(1) We disaggregate QCT revenues based on the industries and applications in which our products are sold.\n\nReturn of Capital to Stockholders\n\nThe following table summarizes our",
+        "company": "QCOM",
+        "form": "Earnings release",
+        "period_end": "2025-09-28",
+        "end": 38910,
+        "document_id": "qcom-fy2025-earnings",
+        "text_sha256": "c985a83463bd8ef17a4d32aaa9dc2fd04fab6a657b38ed294db07956f252592b",
+        "canonical_url": "https://s204.q4cdn.com/645488518/files/doc_financials/2025/q4/FY2025-4th-Quarter-Earnings-Release.pdf",
+        "page": 2,
+        "fiscal_year": 2025,
+        "start": 31797,
+        "version": "original",
+        "kind": "earnings_release",
+        "section": "other",
+        "distance": 0.530116081237793,
+        "inspection_url": "/api/sources/8fff703403f276a018d7b6e1ab00652079d681a2f5bd31b7f445d5585d9d0b91"
+      },
+      {
+        "source_id": "S35",
+        "chunk_id": "4e65eb00df77d9b6035e027a21c3e4c2640d9d10c285dc5915eec4f5597ba71a",
+        "text": "8 |\nAll Other | (4,190) | | | (4,419) |\nTotal operating income | $ | 1,900 | | | $ | 401 |\nData Center\nData Center net revenue of $12.6 billion in 2024 increased by 94%, compared to net revenue of $6.5 billion in 2023. The increase was primarily driven by higher sales of AMD Instinct GPUs and AMD EPYC CPUs.\nData Center operating income was $3.5 billion in 2024, compared to operating income of $1.3 billion in 2023. The increase in operating income was primarily due to higher revenue, partially offset by higher R&D investment.\nClient\nClient net revenue of $7.1 billion in 2024 increased by 52%, compared to net revenue of $4.7 billion in 2023, primarily due to a 34% increase in unit shipments and a 13% increase in average selling price driven by strong demand for AMD mobile and desktop Ryzen processors.\nClient operating income was $897 million in 2024, compared",
+        "fiscal_year": 2024,
+        "start": 218577,
+        "end": 219446,
+        "kind": "filing",
+        "period_end": "2024-12-28",
+        "version": "original",
+        "form": "10-K",
+        "page": 0,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "section": "mda",
+        "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+        "document_id": "amd-0000002488-25-000012",
+        "company": "AMD",
+        "distance": 0.39426809549331665,
+        "inspection_url": "/api/sources/4e65eb00df77d9b6035e027a21c3e4c2640d9d10c285dc5915eec4f5597ba71a"
+      },
+      {
+        "source_id": "S41",
+        "chunk_id": "6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9",
+        "text": "| | | $ | 1,900 |\nData Center\nData Center net revenue of $16.6 billion in 2025 increased by 32%, compared to net revenue of $12.6 billion in 2024. The increase was primarily driven by strong demand for our AMD EPYC™ processors and AMD Instinct™ GPU accelerators.\nData Center operating income was $3.6 billion in 2025, compared to operating income of $3.5 billion in 2024. The increase in operating income was primarily due to higher revenue, partially offset by higher cost of sales, approximately $440 million of net inventory and related charges associated with the U.S. government export control on AMD Instinct™ MI308 Data Center GPU products and higher operating expenses.\nClient and Gaming\nClient and Gaming net revenue of $14.6 billion in 2025 increased by 51%, compared to net revenue of $9.6 billion in 2024.\nClient net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in",
+        "form": "10-K",
+        "end": 230676,
+        "page": 0,
+        "section": "mda",
+        "document_id": "amd-0000002488-26-000018",
+        "kind": "filing",
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "period_end": "2025-12-27",
+        "company": "AMD",
+        "version": "original",
+        "start": 229754,
+        "fiscal_year": 2025,
+        "distance": 0.5052953362464905,
+        "inspection_url": "/api/sources/6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9"
+      },
+      {
+        "source_id": "S53",
+        "chunk_id": "bcdd11bedeb924f4c02df9877e0050fc1efbda3850330a83838c10b63b531b4e",
+        "text": "our gross margins and financial results.\n\nWe build technology and introduce products for new and innovative use cases and applications, such as NVIDIA DGX Cloud services, NVIDIA AI Foundations,\nOmniverse platform, LLMs, and generative AI models. Our demand estimates for new use cases, applications, and services can be incorrect and create volatility\nin our revenue or supply levels, and we may not be able to generate significant revenue from these use cases, applications, and services. Recent technologies,\nsuch as generative AI models, have emerged, and while they have driven increased demand for Data Center, the long-term trajectory is unknown. Because our\nproducts may be used in multiple use cases and applications, it is difficult for us to estimate with any reasonable degree of precision the impact of generative AI\nmodels  on  our  reported  revenue  or  forecasted  demand. Additionally,  we  started  shipping  our  CPU  product  offerings,  the  Grace  CPU  and  Grace  Hopper\nSuperchips, in the third quarter of fiscal year 2024. Our ability to adequately predict our CPU demand may create volatility in our revenue",
+        "end": 89986,
+        "document_id": "nvda-0001045810-24-000029",
+        "period_end": "2024-01-28",
+        "section": "risk_factors",
+        "form": "10-K",
+        "page": 17,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+        "start": 88853,
+        "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+        "kind": "filing",
+        "company": "NVDA",
+        "version": "original",
+        "fiscal_year": 2024,
+        "distance": 0.3262932300567627,
+        "inspection_url": "/api/sources/bcdd11bedeb924f4c02df9877e0050fc1efbda3850330a83838c10b63b531b4e"
+      },
+      {
+        "source_id": "S56",
+        "chunk_id": "dce3d4353a4abcb9895ae147b1e8d59905ced8fc06879bfd4a04f90f975c6006",
+        "text": "Item 15 of this Annual Report on Form 10-K for additional information.\n\nHeadquartered in Santa Clara, California, NVIDIA was incorporated in California in April 1993 and reincorporated in Delaware in April 1998.\n\nRecent Developments, Future Objectives and Challenges\nDemand and Supply\nRevenue growth in fiscal year 2025 was driven by data center compute and networking platforms for accelerated computing and AI solutions. Demand for our\nHopper architecture drove our significant growth for the full year. We began shipping production systems of the Blackwell architecture in the fourth quarter of\nfiscal year 2025.\n\nDemand estimates for our products, applications, and services can be incorrect and create volatility in our revenue or supply levels. We may not be able to\ngenerate significant revenue from them. Advancements in accelerated computing and generative AI models, along with the growth in model complexity and\nscale, have driven increased demand for our Data Center systems.\n\nWe continue to increase our supply and capacity purchases with existing and new suppliers to support our demand projections and increasing complexity of our\ndata center products. With these additions, we have also entered and may continue to enter into prep",
+        "period_end": "2025-01-26",
+        "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "fiscal_year": 2025,
+        "section": "other",
+        "end": 201729,
+        "start": 200483,
+        "form": "10-K",
+        "kind": "filing",
+        "version": "original",
+        "document_id": "nvda-0001045810-25-000023",
+        "company": "NVDA",
+        "page": 36,
+        "distance": 0.24642813205718994,
+        "inspection_url": "/api/sources/dce3d4353a4abcb9895ae147b1e8d59905ced8fc06879bfd4a04f90f975c6006"
+      },
+      {
+        "source_id": "S65",
+        "chunk_id": "7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205",
+        "text": "in “Notes to Consolidated Financial Statements,\n               Note 2. Composition of Certain Financial Statement Items.”\n   (2) Earnings before income taxes.\n                   Substantially all of QCT’s revenues consist of equipment and services revenues, which were                                                                                                                                                                                                                                              $37.7 billion                                 and             $32.6\n   billion                 in         fiscal 2025                             and             2024             , respectively. QCT revenues mostly relate to sales of our Snapdragon and Dragonwing\n   platforms (which include processors and modems), stand-alone Mobile Data Modems, radio frequency transceiver, power\n   management and wireless connectivity integrated chipsets as well as sales of 4G, 5G sub 6 and 5G millimeter wave RFFE\n   products.\n   2025 vs. 2024\n   The increase in QCT revenues in                                                                                        fiscal 2025                             was primarily due to:\n                   +               higher                  handsets revenues, due to $2.5 billion in higher revenues per chipset primarily driven by higher average\n                                   selling prices and favorable mix, and $423 million in higher chipset shipments by certain major OEMs, both of\n                                   which benefited from an increase in demand for premium-tier Snapdragon platforms in",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+        "start": 348544,
+        "end": 350195,
+        "version": "original",
+        "company": "QCOM",
+        "kind": "filing",
+        "section": "other",
+        "fiscal_year": 2025,
+        "period_end": "2025-09-28",
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+        "document_id": "qcom-0000804328-25-000085",
+        "page": 42,
+        "form": "10-K",
+        "distance": 0.287689208984375,
+        "inspection_url": "/api/sources/7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205"
+      },
+      {
+        "source_id": "S67",
+        "chunk_id": "69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c",
+        "text": "prices and favorable mix, and $423 million in higher chipset shipments by certain major OEMs, both of\n                                   which benefited from an increase in demand for premium-tier Snapdragon platforms in Android devices\n                   +               higher                  IoT revenues due to $1.5 billion in higher shipments across edge networking, consumer and industrial\n                                   products, partially offset by unfavorable mix\n                   +               higher                  automotive revenues, primarily driven by an increase in shipments from new vehicle launches with our\n                                   Snapdragon digital cockpit products\n   QCT EBT as a percentage of revenues increased in                                                                                                                                       fiscal 2025                            primarily due to:\n                   +               higher revenues\n                    -              higher operating expenses, primarily driven by higher selling, general and administrative expenses\n   Gross margin percentage remained approximately flat in                                                                                                                                                    fiscal 2025                           , primarily driven by higher product costs, partially offset\n   by higher average selling prices.\n                   QTL Segment (in millions, except percentages)\n\n                                                                                                                                                                                                                                                                                                           2025                                                     2024                                                Change\n      Licensing revenues                                                                                                                                                                                                                                                                   $          5,582                                        $          5,572                                         $                  10\n      EBT                                                                                                                                                                                                                                                                                              4,043                                                   4,027                                                            16\n      EBT as a % of revenues                                                                                                                                                                                                                                                                                                 72%                                                      72%                                       —\n\n   2025 vs. 2024\n   Q",
+        "section": "other",
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+        "start": 349975,
+        "version": "original",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+        "kind": "filing",
+        "fiscal_year": 2025,
+        "company": "QCOM",
+        "page": 42,
+        "end": 353211,
+        "form": "10-K",
+        "period_end": "2025-09-28",
+        "document_id": "qcom-0000804328-25-000085",
+        "distance": 0.33358150720596313,
+        "inspection_url": "/api/sources/69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c"
+      },
+      {
+        "source_id": "S68",
+        "chunk_id": "3bc02313ce835a8860c19281c1465620a66282ce31eed52cd5117a896650b705",
+        "text": "| | $ | (4.38) | | | | | $ | 0.40 | | |\n1 Totals may not sum due to rounding.\nThe following discussion includes the 2025, 2024 and 2023 consolidated financial results and related discussion of our consolidated results of operations for 2025 relative to 2024. A discussion regarding our consolidated results of operations for 2024 relative to 2023 is included in our 2024 Form 10-K. Our consolidated results exclude all intersegment transactions.\nConsolidated Revenue\n| |\nConsolidated Revenue Walk $B1\n1 Excludes intersegment revenue; totals may not sum due to rounding.\n2025 vs. 2024\n| | | | | | | | | | | | | |\nOur 2025 revenue was $52.9 billion, down $248 million from 2024. Intel Products revenue was roughly flat with 2024, primarily due to lower CCG revenue that was substantially offset by higher DCAI revenue. CCG revenue decreased 3% from 2024 primarily due to lower client revenue in the first half of 2025 driven by lower client volumes",
+        "version": "original",
+        "end": 132177,
+        "start": 131231,
+        "company": "INTC",
+        "kind": "filing",
+        "period_end": "2025-12-27",
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "section": "mda",
+        "page": 0,
+        "form": "10-K",
+        "fiscal_year": 2025,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "document_id": "intc-0000050863-26-000011",
+        "distance": 0.3310643434524536,
+        "inspection_url": "/api/sources/3bc02313ce835a8860c19281c1465620a66282ce31eed52cd5117a896650b705"
+      },
+      {
+        "source_id": "S71",
+        "chunk_id": "d79432ae11b48caea5c14c5c4b4663a84d764e7b36483e1a3cc82d9f4999e8b9",
+        "text": "CCG revenue that was substantially offset by higher DCAI revenue. CCG revenue decreased 3% from 2024 primarily due to lower client revenue in the first half of 2025 driven by lower client volumes that were primarily attributable to the reduction of incremental incentives offered to certain customers in the first half of 2024. In addition, CCG 2025 revenue was impacted by customer inventory level reductions in 2025 and by supply constraints on our internally manufactured wafers in 2025 which affected our ability to fully meet market demand primarily for our products manufactured using our Intel 7 process node. DCAI revenue increased 5% from 2024 driven by higher server revenue due to higher hyperscale customer-related demand and higher product revenue from higher networking customer-related demand. Our 2025 DCAI revenue was limited in Q4 2025 by our available supply of products due to wafer fabrication supply constraints at our manufacturing facilities, primarily with respect to our Intel 7 and Intel 3 process nodes, which impacted our ability to fully meet customer demand. We expect these supply constraints to persist into 2026 and",
+        "version": "original",
+        "fiscal_year": 2025,
+        "page": 0,
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "company": "INTC",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "period_end": "2025-12-27",
+        "end": 133131,
+        "form": "10-K",
+        "start": 131982,
+        "kind": "filing",
+        "section": "mda",
+        "document_id": "intc-0000050863-26-000011",
+        "distance": 0.3734797239303589,
+        "inspection_url": "/api/sources/d79432ae11b48caea5c14c5c4b4663a84d764e7b36483e1a3cc82d9f4999e8b9"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Filings Research",
+          "companies": [
+            "NVDA",
+            "AMD",
+            "INTC",
+            "QCOM"
+          ],
+          "years": [
+            2024,
+            2025
+          ],
+          "reason": "Requested disclosure/metric is outside the structured financial schema; search the collected filings"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_retrieval",
+          "arguments": {
+            "question": "what were comon factors driving revenue growth for all companies",
+            "companies": [
+              "NVDA",
+              "AMD",
+              "INTC",
+              "QCOM"
+            ],
+            "years": [
+              2024,
+              2025
+            ],
+            "error": "",
+            "worker": "research",
+            "revenue_component": null,
+            "revenue_share": false,
+            "earnings_ranking": false,
+            "needs_evidence": null,
+            "partial": false
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Filings Research",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Historical filing research using local evidence",
+          "max_tool_calls": 24
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "query": "full year revenue increased decreased drivers demand higher unit shipments average selling prices data center client handsets",
+            "form": "10-K",
+            "section": "mda"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "NVDA",
+            "form": "10-K",
+            "query": "Revenue increased driven demand Hopper accelerated computing generative AI Data Center"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "QCOM",
+            "form": "10-K",
+            "query": "QCT revenues increase handsets higher average selling prices shipments automotive 2025 2024"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "INTC",
+            "year": 2025,
+            "form": "10-K",
+            "query": "2025 revenue decreased 2024 consolidated revenue DCAI demand"
+          }
+        }
+      }
+    ],
+    "seconds": 26.842,
+    "answer_token_ttft_seconds": 18.048
+  },
+  {
+    "question": "Which revenue growth drivers were shared by NVIDIA, AMD, Intel and Qualcomm in FY2025, and which were company-specific? Check whether each company actually grew.",
+    "answer": "- Not all four grew in FY2025:\n  - NVIDIA, year ended January 26, 2025: revenue rose 114% to $130.5 billion. [S17]\n  - AMD, year ended December 27, 2025: revenue rose 34% to $34.6 billion. [S21]\n  - Intel, year ended December 27, 2025: revenue declined $248 million to $52.9 billion. [S25]\n  - Qualcomm, year ended September 28, 2025: revenue rose 14% to $44.3 billion. [S30]\n\n- No single revenue-growth driver is established across all four. The supported overlaps were:\n  - Data-center demand: NVIDIA benefited from accelerated computing and AI; AMD from EPYC processors and Instinct accelerators; Intel from higher hyperscale server demand. This was not a disclosed Qualcomm growth driver in the retrieved annual explanation. [S19] [S39] [S36] [S30]\n  - Gaming: NVIDIA benefited from GeForce RTX 40 Series sales; AMD from Radeon GPU demand and higher semi-custom revenue. [S18] [S38]\n  - Automotive: NVIDIA benefited from self-driving-platform sales; Qualcomm from new vehicle launches using Snapdragon digital cockpit products. [S18] [S13]\n\n- Company-specific drivers and qualifications:\n  - NVIDIA: Hopper demand for large language models, recommendation engines and generative AI; Ethernet-for-AI networking, including Spectrum-X; and Ada RTX workstation adoption. [S19] [S18]\n  - AMD: Ryzen desktop/mobile processor demand and semi-custom game-console SoCs complemented data-center growth. Embedded revenue fell 3%, partially offsetting growth. [S8]\n  - Intel: server volume rose 9% on hyperscale demand, but server selling prices fell 4%. Lower client volumes, reduced purchasing incentives, customer inventory reductions and wafer-supply constraints weighed on revenue; data-center gains did not produce consolidated growth. [S36] [S25]\n  - Qualcomm: premium-tier Snapdragon handset demand increased pricing/mix and shipments; IoT shipments rose across edge networking, consumer and industrial products. A licensing-dispute settlement added $143 million of revenue. [S13] [S29]",
+    "sources": [
+      {
+        "source_id": "S8",
+        "chunk_id": "dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7",
+        "text": "16.6 billion increased by 32% compared to $12.6 billion in 2024, primarily driven by strong demand for our 5th generation AMD EPYC™ processors and AMD Instinct™ MI350 Series GPUs. Client and Gaming segment net revenue of $14.6 billion in 2025 increased by 51% compared to $9.6 billion in 2024, primarily driven by strong demand for our AMD Ryzen™ processors, semi-custom game consoles SoCs and Radeon™ gaming GPUs. The increase in annual net revenue was partially offset by a decrease in net revenue in our Embedded segment. Embedded net revenue of $3.5 billion decreased by 3% compared to net revenue of $3.6 billion in 2024, as certain end market demand remained mixed.\nGross margin of 50% increased by 1% compared to 49% in 2024, primarily due to product mix partially offset by approximately $440 million of net inventory and related charges associated with the U.S. government export control on AMD Instinct™ MI308 Data Center GPU products",
+        "form": "10-K",
+        "document_id": "amd-0000002488-26-000018",
+        "fiscal_year": 2025,
+        "start": 208902,
+        "section": "mda",
+        "version": "original",
+        "page": 0,
+        "company": "AMD",
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "end": 209846,
+        "period_end": "2025-12-27",
+        "kind": "filing",
+        "distance": 0.4892032742500305,
+        "inspection_url": "/api/sources/dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7"
+      },
+      {
+        "source_id": "S13",
+        "chunk_id": "7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205",
+        "text": "in “Notes to Consolidated Financial Statements,\n               Note 2. Composition of Certain Financial Statement Items.”\n   (2) Earnings before income taxes.\n                   Substantially all of QCT’s revenues consist of equipment and services revenues, which were                                                                                                                                                                                                                                              $37.7 billion                                 and             $32.6\n   billion                 in         fiscal 2025                             and             2024             , respectively. QCT revenues mostly relate to sales of our Snapdragon and Dragonwing\n   platforms (which include processors and modems), stand-alone Mobile Data Modems, radio frequency transceiver, power\n   management and wireless connectivity integrated chipsets as well as sales of 4G, 5G sub 6 and 5G millimeter wave RFFE\n   products.\n   2025 vs. 2024\n   The increase in QCT revenues in                                                                                        fiscal 2025                             was primarily due to:\n                   +               higher                  handsets revenues, due to $2.5 billion in higher revenues per chipset primarily driven by higher average\n                                   selling prices and favorable mix, and $423 million in higher chipset shipments by certain major OEMs, both of\n                                   which benefited from an increase in demand for premium-tier Snapdragon platforms in",
+        "document_id": "qcom-0000804328-25-000085",
+        "company": "QCOM",
+        "form": "10-K",
+        "version": "original",
+        "section": "other",
+        "start": 348544,
+        "period_end": "2025-09-28",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+        "fiscal_year": 2025,
+        "end": 350195,
+        "kind": "filing",
+        "page": 42,
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+        "distance": 0.46236687898635864,
+        "inspection_url": "/api/sources/7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205"
+      },
+      {
+        "source_id": "S17",
+        "chunk_id": "14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4",
+        "text": "[PDF page 41]\nTable of Contents\n\n\n\n\n\nReportable Segments\nRevenue by Reportable Segments\n                                                                                                                                   Year Ended\n                                                                                          Jan 26, 2025                 Jan 28, 2024                 Change$                   Change%\n\n                                                                                                                                  ($ in millions)\nCompute & Networking                                                                  $              116,193      $               47,405      $            68,788                      145  %\nGraphics                                                                                              14,304                      13,517                      787                         6 %\nTotal                                                                                 $             130,497       $               60,922      $            69,575                      114  %\n\nOperating Income by Reportable Segments\n\n                                                                                                                                   Year Ended\n                                                                                          Jan 26, 2025                 Jan 28, 2024                 Change$                   Change%\n\n                                                                                                                                  ($ in millions)\nCompute & Networking                                                                  $               82,875      $               32,016      $            50,859                      159  %\nGraphics                                                                                               5,085                       5,846                     (761)                     (13)%\nAll Other                                                                                             (6,507)                     (4,890)                  (1,617)                      33  %\nTotal                                                                                 $               81,453      $               32,972      $            48,481                      147  %\n\nCompute & Networking revenue – The year over year increase was due to strong demand for our accelerated computing and AI solutions. Revenue from Data\nCenter computing grew 162% driven",
+        "start": 227159,
+        "period_end": "2025-01-26",
+        "section": "other",
+        "version": "original",
+        "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+        "page": 41,
+        "end": 229744,
+        "document_id": "nvda-0001045810-25-000023",
+        "fiscal_year": 2025,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "company": "NVDA",
+        "form": "10-K",
+        "kind": "filing",
+        "distance": 0.43810462951660156,
+        "inspection_url": "/api/sources/14b608e3beae571e8a39d39058f58c27a1938620c59dde077fa123f948afe4e4"
+      },
+      {
+        "source_id": "S18",
+        "chunk_id": "00b3c182aea5936b5d8153c742264b38cc26a2e761f2b6fb575d7ccde547a749",
+        "text": "fiscal year 2025 was up 142% from a year ago. The strong year-on-year growth was driven by demand for our Hopper architecture\naccelerated computing platform used for large language models, recommendation engines, and generative AI applications. We began shipping production\nsystems of the Blackwell architecture in the fourth quarter of fiscal year 2025.\n\nGaming revenue for fiscal year 2025 was up 9% from a year ago, driven by sales of our GeForce RTX 40 Series GPUs.\n\nProfessional Visualization revenue for fiscal year 2025 was up 21% from a year ago, driven by the continued ramp of Ada RTX GPU workstations for use cases\nsuch as generative AI-powered design, simulation, and engineering.\n\nAutomotive revenue for fiscal year 2025 was up 55% from a year ago, driven by sales of our self-driving platforms.\n\nGross margin increased in fiscal year 2025 driven by a higher mix of Data Center revenue.\n\nOperating expenses for fiscal year 2025 were up 45% from a year ago, driven by higher compensation and benefits expenses due to employee growth and\ncompensation increases,",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "company": "NVDA",
+        "fiscal_year": 2025,
+        "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+        "start": 213888,
+        "document_id": "nvda-0001045810-25-000023",
+        "kind": "filing",
+        "end": 214960,
+        "version": "original",
+        "form": "10-K",
+        "period_end": "2025-01-26",
+        "page": 38,
+        "section": "other",
+        "distance": 0.4472537636756897,
+        "inspection_url": "/api/sources/00b3c182aea5936b5d8153c742264b38cc26a2e761f2b6fb575d7ccde547a749"
+      },
+      {
+        "source_id": "S19",
+        "chunk_id": "94e27a42b2ab7e8f37642907c6003cd0dcd11a19c98efdaddca79ad0aca2b07d",
+        "text": "2      $            48,481                      147  %\n\nCompute & Networking revenue – The year over year increase was due to strong demand for our accelerated computing and AI solutions. Revenue from Data\nCenter computing grew 162% driven primarily by demand for our Hopper computing platform used for large language models, recommendation engines, and\ngenerative AI applications. Revenue from Data Center networking grew 51% driven by Ethernet for AI revenue, which includes Spectrum-X end-to-end ethernet\nplatform.\nGraphics revenue – The year over year increase was driven by sales of our GeForce RTX 40 Series GPUs.\n\nReportable segment operating income – The year over year increase in Compute & Networking segment operating income was driven by growth in revenue. The\nyear over year decrease in Graphics segment operating income was driven by an increase of 44% in segment operating expenses, partially offset by growth in\nrevenue.\n\nAll  Other  operating  loss  –  The  year  over  year  increase  was  due  to  an  increase  in  stock-based  compensation  expense  reflecting  employee  growth  and\ncompensation increases.\n\nConcentration of Revenue\nWe refer to customers who purchase products directly from NVIDIA as direct customers, such as AIBs",
+        "fiscal_year": 2025,
+        "section": "other",
+        "document_id": "nvda-0001045810-25-000023",
+        "start": 229505,
+        "kind": "filing",
+        "version": "original",
+        "period_end": "2025-01-26",
+        "end": 230758,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+        "company": "NVDA",
+        "form": "10-K",
+        "page": 41,
+        "distance": 0.4770010709762573,
+        "inspection_url": "/api/sources/94e27a42b2ab7e8f37642907c6003cd0dcd11a19c98efdaddca79ad0aca2b07d"
+      },
+      {
+        "source_id": "S21",
+        "chunk_id": "f9c07efd5353e063ae4f5afac6ccd637385a2744645a1cf20a906d87411bccdf",
+        "text": "our off-balance sheet arrangements. Discussions of 2023 items and year-to-year comparisons between 2024 and 2023 that are not included in this Form 10-K can be found in “Management’s Discussion and Analysis of Financial Condition and Results of Operations” in Part II, Item 7 of our Annual Report on Form 10-K for the fiscal year ended December 28, 2024.\nBeginning in the first quarter of fiscal year 2025, we combined the Client and Gaming segments into one reportable segment to align with how we manage our business. All prior period segment data were retrospectively adjusted.\nOverview\nIn 2025, we delivered strong annual revenue growth with net revenue increasing 34% to $34.6 billion, compared to $25.8 billion in 2024. This growth was driven by the performance of our Data Center and Client and Gaming segments. Data Center net revenue of $16.6 billion increased by 32% compared to $12.6 billion in 2024, primarily driven by strong demand for our 5th generation AMD EPYC™ processors and AMD Instinct™",
+        "company": "AMD",
+        "form": "10-K",
+        "page": 0,
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "document_id": "amd-0000002488-26-000018",
+        "period_end": "2025-12-27",
+        "start": 208055,
+        "end": 209062,
+        "kind": "filing",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "version": "original",
+        "section": "mda",
+        "fiscal_year": 2025,
+        "distance": 0.4620436429977417,
+        "inspection_url": "/api/sources/f9c07efd5353e063ae4f5afac6ccd637385a2744645a1cf20a906d87411bccdf"
+      },
+      {
+        "source_id": "S25",
+        "chunk_id": "3bc02313ce835a8860c19281c1465620a66282ce31eed52cd5117a896650b705",
+        "text": "| | $ | (4.38) | | | | | $ | 0.40 | | |\n1 Totals may not sum due to rounding.\nThe following discussion includes the 2025, 2024 and 2023 consolidated financial results and related discussion of our consolidated results of operations for 2025 relative to 2024. A discussion regarding our consolidated results of operations for 2024 relative to 2023 is included in our 2024 Form 10-K. Our consolidated results exclude all intersegment transactions.\nConsolidated Revenue\n| |\nConsolidated Revenue Walk $B1\n1 Excludes intersegment revenue; totals may not sum due to rounding.\n2025 vs. 2024\n| | | | | | | | | | | | | |\nOur 2025 revenue was $52.9 billion, down $248 million from 2024. Intel Products revenue was roughly flat with 2024, primarily due to lower CCG revenue that was substantially offset by higher DCAI revenue. CCG revenue decreased 3% from 2024 primarily due to lower client revenue in the first half of 2025 driven by lower client volumes",
+        "version": "original",
+        "company": "INTC",
+        "kind": "filing",
+        "fiscal_year": 2025,
+        "section": "mda",
+        "period_end": "2025-12-27",
+        "start": 131231,
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "end": 132177,
+        "page": 0,
+        "document_id": "intc-0000050863-26-000011",
+        "form": "10-K",
+        "distance": 0.4795585870742798,
+        "inspection_url": "/api/sources/3bc02313ce835a8860c19281c1465620a66282ce31eed52cd5117a896650b705"
+      },
+      {
+        "source_id": "S29",
+        "chunk_id": "761f87bfafdbc2ffd04e12c4684e3cddc50dbf11a2c418d8077510c99e8f41fb",
+        "text": "Big Beautiful Bill Act (OBBB) enacted on July 4, 2025.\n   Results of Operations\n                Revenues (in millions)\n\n                                                                                                                                                                                                                                                                            2025                                               2024                                          Change\n     Equipment and services                                                                                                                                                                                                                                  $           37,869                                 $           32,791                                 $             5,078\n     Licensing                                                                                                                                                                                                                                                              6,415                                              6,171                                                 244\n                                                                                                                                                                                                                                                             $           44,284                                 $           38,962                                 $             5,322\n\n   2025 vs. 2024\n   The increase in revenues in fiscal                                                                         2025             was primarily due to:\n                 +             $5.1 billion                          in higher equipment and services revenue from our QCT segment\n                 +             $143 million                              in licensing revenues resulting from a settlement of a licensing dispute in the second quarter of fiscal\n                               2025, which was not allocated to our segment results\n\n                Costs and Expenses (in millions, except percentages)\n\n                                                                                                                                                                                                                                                                            2025                                               2024                                          Change\n     Cost of revenues                                                                                                                                                                                                                                        $        19,738                                    $        17,060                                    $             2,678\n     Gross margin                                                                                                                                                                                                                                                                           55%                                                56%\n\n   2025 vs. 2024\n   Gross margin percentage decreased in                                                                                      fiscal 2025                         primarily due to a decrease in the proportion of total revenues related to\n   QTL licensing revenues (which have a higher margin percentage contribution).\n\n\n                                                                                                                                                                                                                                                                            2025                                               202",
+        "period_end": "2025-09-28",
+        "section": "other",
+        "kind": "filing",
+        "document_id": "qcom-0000804328-25-000085",
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+        "page": 39,
+        "fiscal_year": 2025,
+        "version": "original",
+        "end": 325725,
+        "company": "QCOM",
+        "start": 321731,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+        "form": "10-K",
+        "distance": 0.49357855319976807,
+        "inspection_url": "/api/sources/761f87bfafdbc2ffd04e12c4684e3cddc50dbf11a2c418d8077510c99e8f41fb"
+      },
+      {
+        "source_id": "S30",
+        "chunk_id": "ad8965033ad0e0c6596d1a85842c3e61cdffc70fb98267234d101fcad0deadb5",
+        "text": "[PDF page 39]\n   Fiscal                2025             Overview\n                 Revenues were                                     $44.3 billion                           , an          increase                   of       14%             compared to revenues of                                                         $39.0 billion                             in fiscal                   2024           , with net income\n   of       $5.5 billion                        ,   a decrease                       of        45%            compared to net income of                                                               $10.1 billion                            in fiscal                   2024            . Key items from fiscal                                                    2025\n   included:\n                 •             QCT revenues increased by                                                                 16%            in       fiscal 2025                         compared to the prior year, primarily due to higher handsets, IoT and\n                               automotive revenues.\n                 •             QTL revenues remained approximately flat in                                                                                                        fiscal 2025                         compared to the prior year.\n                 •             We recorded a charge of $5.7 billion to income tax expense to establish a valuation allowance in the fourth quarter\n                               of fiscal 2025 as we no longer expect to realize substantially all of our existing federal deferred tax assets as a result\n                               of the tax reform legislation included in the One Big Beautiful Bill Act (OBBB) enacted on July 4, 2025.\n   Results of Operations\n                Revenues (in millions)\n\n                                                                                                                                                                                                                                                                            2025                                               2024                                          Change\n     Equipment and services                                                                                                                                                                                                                                  $           37,869                                 $           32,",
+        "end": 322542,
+        "company": "QCOM",
+        "section": "other",
+        "kind": "filing",
+        "start": 320007,
+        "document_id": "qcom-0000804328-25-000085",
+        "version": "original",
+        "form": "10-K",
+        "page": 39,
+        "fiscal_year": 2025,
+        "period_end": "2025-09-28",
+        "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+        "distance": 0.5109536647796631,
+        "inspection_url": "/api/sources/ad8965033ad0e0c6596d1a85842c3e61cdffc70fb98267234d101fcad0deadb5"
+      },
+      {
+        "source_id": "S36",
+        "chunk_id": "cdc7f0ce3ec300858c955163524952db260ee8bad7ee1f38ffc810e8c800aa2c",
+        "text": "1 2026, limiting our ability to fully meet customer demand. Client ASPs in 2025 were roughly flat with 2024. Other CCG revenue was $4.6 billion, roughly flat with 2024.\n▪DCAI revenue increased $794 million from 2024, primarily driven by higher server revenue due to higher hyperscale customer-related demand, which contributed to an increase in server volume of 9%. Server ASPs decreased by 4% from 2024, primarily due to pricing actions taken primarily during the first half of 2025 and a higher mix of lower core count products, both driven by a competitive environment, partially offset by higher ASPs in the second half of 2025 resulting from higher demand. Our 2025 server revenue was limited in Q4 2025 by our available supply of products due to Intel Foundry wafer fabrication supply constraints, primarily with respect to our Intel 7 and Intel 3 process nodes, impacting our ability to fully meet demand. We expect these supply constraints to persist into 2026, with the most severe constraints impacting Q1 2026. Other DC",
+        "kind": "filing",
+        "section": "mda",
+        "form": "10-K",
+        "page": 0,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "version": "original",
+        "company": "INTC",
+        "start": 117261,
+        "fiscal_year": 2025,
+        "document_id": "intc-0000050863-26-000011",
+        "period_end": "2025-12-27",
+        "end": 118291,
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "distance": 0.3974670171737671,
+        "inspection_url": "/api/sources/cdc7f0ce3ec300858c955163524952db260ee8bad7ee1f38ffc810e8c800aa2c"
+      },
+      {
+        "source_id": "S38",
+        "chunk_id": "dca58d801c54728b1b85a2ad768bee7cc5244a8211acb2694969f2531c6e3fd3",
+        "text": "net revenue of $9.6 billion in 2024.\nClient net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 31% increase in unit shipments of processors and a 15% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.\nGaming net revenue of $3.9 billion in 2025 increased by 51%, compared to net revenue of $2.6 billion in 2024. The increase was primarily driven by higher semi-custom revenue and strong demand of our Radeon™ gaming GPUs.\nClient and Gaming operating income was $2.9 billion in 2025, compared to operating income of $1.2 billion in 2024. The increase in operating income was primarily driven by higher revenue, partially offset by higher cost of sales and operating expenses.\n52\nTable of Contents\nEmbedded\nEmbedded net revenue of $3.5 billion in 2025 decreased by 3%, compared to net revenue of $3.6 billion in",
+        "page": 0,
+        "document_id": "amd-0000002488-26-000018",
+        "kind": "filing",
+        "section": "mda",
+        "fiscal_year": 2025,
+        "company": "AMD",
+        "form": "10-K",
+        "end": 231486,
+        "start": 230535,
+        "period_end": "2025-12-27",
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "version": "original",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "distance": 0.38619792461395264,
+        "inspection_url": "/api/sources/dca58d801c54728b1b85a2ad768bee7cc5244a8211acb2694969f2531c6e3fd3"
+      },
+      {
+        "source_id": "S39",
+        "chunk_id": "6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9",
+        "text": "| | | $ | 1,900 |\nData Center\nData Center net revenue of $16.6 billion in 2025 increased by 32%, compared to net revenue of $12.6 billion in 2024. The increase was primarily driven by strong demand for our AMD EPYC™ processors and AMD Instinct™ GPU accelerators.\nData Center operating income was $3.6 billion in 2025, compared to operating income of $3.5 billion in 2024. The increase in operating income was primarily due to higher revenue, partially offset by higher cost of sales, approximately $440 million of net inventory and related charges associated with the U.S. government export control on AMD Instinct™ MI308 Data Center GPU products and higher operating expenses.\nClient and Gaming\nClient and Gaming net revenue of $14.6 billion in 2025 increased by 51%, compared to net revenue of $9.6 billion in 2024.\nClient net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in",
+        "period_end": "2025-12-27",
+        "start": 229754,
+        "fiscal_year": 2025,
+        "form": "10-K",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "kind": "filing",
+        "document_id": "amd-0000002488-26-000018",
+        "version": "original",
+        "section": "mda",
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "company": "AMD",
+        "end": 230676,
+        "page": 0,
+        "distance": 0.44924813508987427,
+        "inspection_url": "/api/sources/6e586de9e12c32b78c6c062996ed0bd93fae2854c3a85a33a74ca12d4cf581b9"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Filings Research",
+          "companies": [
+            "NVDA",
+            "AMD",
+            "INTC",
+            "QCOM"
+          ],
+          "years": [
+            2025
+          ],
+          "reason": "Requested disclosure/metric is outside the structured financial schema; search the collected filings"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_retrieval",
+          "arguments": {
+            "question": "Which revenue growth drivers were shared by NVIDIA, AMD, Intel and Qualcomm in FY2025, and which were company-specific? Check whether each company actually grew.",
+            "companies": [
+              "NVDA",
+              "AMD",
+              "INTC",
+              "QCOM"
+            ],
+            "years": [
+              2025
+            ],
+            "error": "",
+            "worker": "research",
+            "revenue_component": null,
+            "revenue_share": false,
+            "earnings_ranking": false,
+            "needs_evidence": null,
+            "partial": false
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Filings Research",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Historical filing research using local evidence",
+          "max_tool_calls": 12
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "query": "FY2025 full year revenue increased decreased growth drivers consolidated revenue data center client automotive",
+            "form": "10-K"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_source",
+          "arguments": {
+            "source_id": "S25"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_source",
+          "arguments": {
+            "source_id": "S13"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "INTC",
+            "year": 2025,
+            "form": "10-K",
+            "query": "DCAI revenue increased 5% 2025 higher server revenue demand hyperscale All other Altera divestiture"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "AMD",
+            "year": 2025,
+            "form": "10-K",
+            "version": "original",
+            "query": "Client revenue 2025 15% unit shipments 31% average selling price Ryzen"
+          }
+        }
+      }
+    ],
+    "seconds": 25.6,
+    "answer_token_ttft_seconds": 15.812
+  },
+  {
+    "question": "Compare the demand headwinds described by AMD and Intel in FY2024 and FY2025. Cite the filings and distinguish annual from quarterly evidence.",
+    "answer": "- FY2024 annual evidence — both fiscal years ended December 28, 2024:\n  - AMD’s headwinds were concentrated in Embedded and Gaming, not company-wide demand. Embedded revenue fell 33% as customers normalized inventories; Gaming revenue fell 58%, primarily from lower semi-custom revenue. Data Center and Client growth drove overall revenue growth. [S1][S2]\n  - Intel described broader pockets of weakness: lower desktop demand; lower server demand in a competitive environment; and inventory reductions by 5G, Altera and Mobileye customers. Notebook volumes improved as customer inventories normalized. [S34][S10][S35]\n  - Shared driver: customer inventory correction, but in different businesses—AMD Embedded versus Intel’s 5G, Altera and Mobileye exposures. Intel additionally identified desktop and competitive server-demand weakness. [S2][S10][S34][S35]\n\n- FY2025 annual evidence — both fiscal years ended December 27, 2025:\n  - AMD’s original 10-K described mixed Embedded end-market demand, with revenue down 3%. In contrast, demand strengthened for EPYC, Instinct, Ryzen, semi-custom console chips and Radeon products. The annual picture therefore was not a broad demand downturn. [S5]\n  - Intel’s client weakness reflected customer inventory reductions and comparison against incremental purchasing incentives offered in first-half 2024. Server demand strengthened among hyperscalers, although competition pressured pricing. Late-year client and server sales were constrained by wafer supply despite demand—not simply by weak demand. [S38][S39]\n  - The contrast shifted: AMD retained mixed Embedded demand, while Intel combined client inventory adjustment with stronger underlying demand and supply limitations. [S5][S38][S39]\n\n- Quarterly evidence — distinct from annual conclusions:\n  - FY2024: AMD’s Q2 10-Q, ended June 29, reported Embedded inventory normalization and lower Gaming semi-custom revenue. Intel’s Q1 10-Q, ended March 30, reported competitive server-demand weakness and inventory reductions across 5G, Altera and Mobileye. [S41][S42][S49]\n  - FY2025: AMD’s Q1 10-Q, ended March 29, still reported lower semi-custom Gaming revenue despite Client growth. Intel’s nine-month 10-Q, ended September 27, reported client inventory reductions but stronger Q3 client demand and hyperscale server demand. These interim observations do not establish full-year weakness. [S47][S53]",
+    "sources": [
+      {
+        "source_id": "S1",
+        "chunk_id": "54db0ca908b9bd907090e20e6d990c914efefca59eb0e490b674daca75276acb",
+        "text": "our off-balance sheet arrangements. Discussions of 2022 items and year-to-year comparisons between 2023 and 2022 that are not included in this Form 10-K can be found in “Management’s Discussion and Analysis of Financial Condition and Results of Operations” in Part II, Item 7 of our Annual Report on Form 10-K for the fiscal year ended December 30, 2023.\nOverview\nIn 2024, we delivered strong annual revenue growth with net revenue increasing 14% to $25.8 billion, compared to $22.7 billion in 2023. This growth was driven by the performance of our Data Center and Client segments. Data Center net revenue of $12.6 billion increased by 94% compared to $6.5 billion in 2023, driven by higher sales of our AMD Instinct™ GPUs and AMD EPYC™ CPUs. Client segment net revenue of $7.1 billion in 2024 increased by 52% compared to $4.7 billion in 2023, primarily due to higher sales of our AMD Ryzen™ mobile and desktop",
+        "period_end": "2024-12-28",
+        "end": 201013,
+        "document_id": "amd-0000002488-25-000012",
+        "kind": "filing",
+        "section": "mda",
+        "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+        "company": "AMD",
+        "fiscal_year": 2024,
+        "form": "10-K",
+        "version": "original",
+        "page": 0,
+        "start": 200102,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "distance": 0.5124350786209106,
+        "inspection_url": "/api/sources/54db0ca908b9bd907090e20e6d990c914efefca59eb0e490b674daca75276acb"
+      },
+      {
+        "source_id": "S2",
+        "chunk_id": "f2647d41cd823584ba83750b152286c731be615edffded7878b411184bf4800d",
+        "text": "increase in unit shipments and a 13% increase in average selling price driven by strong demand for AMD mobile and desktop Ryzen processors.\nClient operating income was $897 million in 2024, compared to operating loss of $46 million in 2023. The increase in operating income was primarily due to higher revenue, partially offset by higher operating expenses.\nGaming\nGaming net revenue of $2.6 billion in 2024 decreased by 58%, compared to net revenue of $6.2 billion in 2023. The decrease in net revenue was primarily due to lower semi-custom product revenue.\nGaming operating income was $290 million in 2024, compared to operating income of $971 million in 2023. The decrease in operating income was primarily driven by lower revenue.\nEmbedded\nEmbedded net revenue of $3.6 billion in 2024 decreased by 33%, compared to net revenue of $5.3 billion in 2023. The decrease in net revenue was primarily due to lower demand as customers continued to normalize their inventory levels.\nEmbedded operating income was $1.4 billion in 2024,",
+        "form": "10-K",
+        "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+        "start": 219248,
+        "page": 0,
+        "document_id": "amd-0000002488-25-000012",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000012/amd-20241228.htm",
+        "version": "original",
+        "company": "AMD",
+        "section": "mda",
+        "end": 220277,
+        "kind": "filing",
+        "period_end": "2024-12-28",
+        "fiscal_year": 2024,
+        "distance": 0.5410954356193542,
+        "inspection_url": "/api/sources/f2647d41cd823584ba83750b152286c731be615edffded7878b411184bf4800d"
+      },
+      {
+        "source_id": "S5",
+        "chunk_id": "dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7",
+        "text": "16.6 billion increased by 32% compared to $12.6 billion in 2024, primarily driven by strong demand for our 5th generation AMD EPYC™ processors and AMD Instinct™ MI350 Series GPUs. Client and Gaming segment net revenue of $14.6 billion in 2025 increased by 51% compared to $9.6 billion in 2024, primarily driven by strong demand for our AMD Ryzen™ processors, semi-custom game consoles SoCs and Radeon™ gaming GPUs. The increase in annual net revenue was partially offset by a decrease in net revenue in our Embedded segment. Embedded net revenue of $3.5 billion decreased by 3% compared to net revenue of $3.6 billion in 2024, as certain end market demand remained mixed.\nGross margin of 50% increased by 1% compared to 49% in 2024, primarily due to product mix partially offset by approximately $440 million of net inventory and related charges associated with the U.S. government export control on AMD Instinct™ MI308 Data Center GPU products",
+        "end": 209846,
+        "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+        "company": "AMD",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+        "kind": "filing",
+        "section": "mda",
+        "form": "10-K",
+        "start": 208902,
+        "period_end": "2025-12-27",
+        "page": 0,
+        "version": "original",
+        "document_id": "amd-0000002488-26-000018",
+        "fiscal_year": 2025,
+        "distance": 0.4957791566848755,
+        "inspection_url": "/api/sources/dd9df69286d6a9611bf2673fcb9770ffddd1ea4498aaf9ebc3b08b3b60e42ea7"
+      },
+      {
+        "source_id": "S10",
+        "chunk_id": "e7f696840516bba25c2aee7607d6fb3cd68e34f217d1938b2ef9e2ba17d32564",
+        "text": "volume decreased 10% from 2023, due to lower demand in a competitive environment and a higher mix of high core count products.\n▪NEX revenue increased $68 million from 2023, primarily driven by higher Network and Edge revenue, partially offset by 5G customers tempering purchases to reduce existing inventories.\n| | | | | | | |\n| MD&A | 17\nTable of Contents\n2023 vs. 2022\nTotal Intel Products revenue was $47.7 billion in 2023, down $9.4 billion from 2022.\n▪CCG revenue decreased $2.5 billion from 2022. Notebook revenue was $17.0 billion, down $1.8 billion from 2022. Notebook volume decreased 5% from 2022, driven by lower demand across market segments, partially offset by increased volume in the second half of 2023 as customer inventory levels normalized compared to higher levels in the first half of 2023. Notebook ASPs decreased 5% from 2022 due to relative strength in the education market segment resulting in a higher mix of small core products combined with a higher",
+        "form": "10-K",
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+        "page": 0,
+        "fiscal_year": 2024,
+        "end": 92232,
+        "company": "INTC",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+        "document_id": "intc-0000050863-25-000009",
+        "kind": "filing",
+        "start": 91255,
+        "version": "original",
+        "period_end": "2024-12-28",
+        "section": "mda",
+        "distance": 0.5248935222625732,
+        "inspection_url": "/api/sources/e7f696840516bba25c2aee7607d6fb3cd68e34f217d1938b2ef9e2ba17d32564"
+      },
+      {
+        "source_id": "S34",
+        "chunk_id": "bde5db83a8180acbcf28fc16ae6303621e6da9b66b88b4f07c437fee7c1fdd07",
+        "text": ".0 billion from 2023. Notebook revenue was $19.1 billion in 2024, up $2.1 billion from 2023. Notebook volume increased 12% from 2023, as customer inventory levels improved compared to higher levels in 2023. Notebook ASPs were roughly flat with 2023. Desktop revenue was $9.7 billion, down $516 million from 2023. Desktop volume decreased 5% from 2023, primarily due to lower demand compared to 2023. Desktop ASPs were roughly flat with 2023. Other CCG revenue was $1.6 billion, down $530 million from 2023, primarily driven by the exit of legacy businesses.\n▪DCAI revenue increased $182 million from 2023, primarily driven by an increase in server revenue. Server ASPs increased 12% from 2023, primarily due to a higher mix of high core count products. Server volume decreased 10% from 2023, due to lower demand in a competitive environment and a higher mix of high core count products.\n▪NEX revenue increased $68 million from 2023, primarily driven",
+        "fiscal_year": 2024,
+        "period_end": "2024-12-28",
+        "page": 0,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+        "kind": "filing",
+        "document_id": "intc-0000050863-25-000009",
+        "company": "INTC",
+        "end": 91444,
+        "section": "mda",
+        "form": "10-K",
+        "start": 90495,
+        "version": "original",
+        "distance": 0.39483654499053955,
+        "inspection_url": "/api/sources/bde5db83a8180acbcf28fc16ae6303621e6da9b66b88b4f07c437fee7c1fdd07"
+      },
+      {
+        "source_id": "S35",
+        "chunk_id": "6267fd798be2c70402e74b083954a16f02e4098cc28a3c106b9829006e98a4af",
+        "text": ".8 billion, down $1.8 billion from 2023. Altera revenue was $1.5 billion, down $1.3 billion from 2023 as customers tempered purchases to reduce existing inventories across all product lines. Mobileye revenue was $1.7 billion, down $425 million from 2023 as customers tempered purchases to reduce existing inventories of EyeQ products.\n2023 vs. 2022\nAll other revenue was $5.6 billion, up $78 million from 2022. Altera revenue was $2.9 billion, up $314 million from 2022, driven by improved external supply, which enabled the fulfillment of customer backlog. Mobileye revenue was $2.1 billion, up $210 million from 2022, due to higher demand for EyeQ products. These 2023 increases were partially offset by a decrease in revenue from our remaining non-reportable segments and start-up businesses.\n| | | | | | | | | | | | | |\nOperating Segments Cost of Sales and Operating Expenses Summary\n2024 vs. 2023\nCost of Sales",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+        "start": 109246,
+        "period_end": "2024-12-28",
+        "fiscal_year": 2024,
+        "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+        "section": "mda",
+        "company": "INTC",
+        "form": "10-K",
+        "kind": "filing",
+        "end": 110161,
+        "page": 0,
+        "version": "original",
+        "document_id": "intc-0000050863-25-000009",
+        "distance": 0.4389622211456299,
+        "inspection_url": "/api/sources/6267fd798be2c70402e74b083954a16f02e4098cc28a3c106b9829006e98a4af"
+      },
+      {
+        "source_id": "S38",
+        "chunk_id": "bb94c4e5768c5fade20bdda34f19ae8d1a93859670756a25cc882c2bf3fe5db6",
+        "text": "revenue (collectively notebook and desktop) was $27.6 billion in 2025, down $1.1 billion from 2024, primarily due to lower 2025 client volume resulting from incremental customer incentives offered to certain customers in the first half of 2024 and customer inventory level reductions in 2025. Customers normalized inventory levels through Q3 2025 and continued to reduce inventory levels in Q4 2025, when supply constraints on our internally manufactured wafers limited product availability despite underlying demand. This decrease in 2025 revenue was partially offset by higher Q3 2025 client volumes driven by higher demand; however, client volume decreased in Q4 2025 as market demand exceeded our available supply of products due to Intel Foundry wafer fabrication supply constraints, primarily with respect to our Intel 7 process node. We expect these supply constraints to persist into 2026, with the most severe constraints impacting Q1 2026, limiting our ability to fully meet customer demand. Client ASPs in 2025 were roughly flat with 2024. Other CCG revenue was $4.6 billion, roughly flat with",
+        "start": 116319,
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "section": "mda",
+        "version": "original",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "form": "10-K",
+        "end": 117423,
+        "company": "INTC",
+        "period_end": "2025-12-27",
+        "fiscal_year": 2025,
+        "kind": "filing",
+        "document_id": "intc-0000050863-26-000011",
+        "page": 0,
+        "distance": 0.3507741689682007,
+        "inspection_url": "/api/sources/bb94c4e5768c5fade20bdda34f19ae8d1a93859670756a25cc882c2bf3fe5db6"
+      },
+      {
+        "source_id": "S39",
+        "chunk_id": "cdc7f0ce3ec300858c955163524952db260ee8bad7ee1f38ffc810e8c800aa2c",
+        "text": "1 2026, limiting our ability to fully meet customer demand. Client ASPs in 2025 were roughly flat with 2024. Other CCG revenue was $4.6 billion, roughly flat with 2024.\n▪DCAI revenue increased $794 million from 2024, primarily driven by higher server revenue due to higher hyperscale customer-related demand, which contributed to an increase in server volume of 9%. Server ASPs decreased by 4% from 2024, primarily due to pricing actions taken primarily during the first half of 2025 and a higher mix of lower core count products, both driven by a competitive environment, partially offset by higher ASPs in the second half of 2025 resulting from higher demand. Our 2025 server revenue was limited in Q4 2025 by our available supply of products due to Intel Foundry wafer fabrication supply constraints, primarily with respect to our Intel 7 and Intel 3 process nodes, impacting our ability to fully meet demand. We expect these supply constraints to persist into 2026, with the most severe constraints impacting Q1 2026. Other DC",
+        "fiscal_year": 2025,
+        "document_id": "intc-0000050863-26-000011",
+        "period_end": "2025-12-27",
+        "company": "INTC",
+        "page": 0,
+        "end": 118291,
+        "version": "original",
+        "kind": "filing",
+        "form": "10-K",
+        "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+        "section": "mda",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+        "start": 117261,
+        "distance": 0.3791753649711609,
+        "inspection_url": "/api/sources/cdc7f0ce3ec300858c955163524952db260ee8bad7ee1f38ffc810e8c800aa2c"
+      },
+      {
+        "source_id": "S41",
+        "chunk_id": "8efc47eee283a88238399d0a24009b252e22884eb23446f8a40b139d7cea27a6",
+        "text": "weak PC market conditions and inventory corrections across the PC supply chain experienced in the first half of fiscal year 2023.\n21\nTable of Contents\nClient operating income was $89 million for the three months ended June 29, 2024, compared to operating loss of $69 million for the prior year period. Client operating income was $175 million for the six months ended June 29, 2024, compared to operating loss of $241 million for the prior year period. The increase in operating income in both periods was primarily driven by higher revenue, partially offset by higher operating expenses.\nGaming\nGaming net revenue of $648 million for the three months ended June 29, 2024 decreased by 59%, compared to net revenue of $1.6 billion for the prior year period. Gaming net revenue of $1.6 billion for the six months ended June 29, 2024 decreased by 53%, compared to net revenue of $3.3 billion for the prior year period. The decrease in both periods was primarily due to lower semi-custom revenue.\nGaming operating income was $77 million for the three months ended",
+        "form": "10-Q",
+        "period_end": "2024-06-29",
+        "fiscal_year": 2024,
+        "company": "AMD",
+        "start": 57902,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000123/amd-20240629.htm",
+        "document_id": "amd-0000002488-24-000123",
+        "kind": "filing",
+        "text_sha256": "11ea328d37275061baf9b12c8573736aabebbc0e36802945a409e1d83d71cc7f",
+        "page": 0,
+        "version": "original",
+        "section": "mda",
+        "end": 58961,
+        "distance": 0.5083755254745483,
+        "inspection_url": "/api/sources/8efc47eee283a88238399d0a24009b252e22884eb23446f8a40b139d7cea27a6"
+      },
+      {
+        "source_id": "S42",
+        "chunk_id": "a379250f23d67041f06914ba1956ede143497cf37d017e618ccb45d417b31e54",
+        "text": "revenue of $3.3 billion for the prior year period. The decrease in both periods was primarily due to lower semi-custom revenue.\nGaming operating income was $77 million for the three months ended June 29, 2024, compared to operating income of $225 million for the prior year period. Gaming operating income was $228 million for the six months ended June 29, 2024, compared to operating income of $539 million for the prior year period. The decrease in operating income in both periods was primarily due to lower revenue.\nEmbedded\nEmbedded net revenue of $861 million for the three months ended June 29, 2024 decreased by 41%, compared to net revenue of $1.5 billion for the prior year period. Embedded net revenue of $1.7 billion for the six months ended June 29, 2024 decreased by 43%, compared to net revenue of $3.0 billion for the prior year period. The decrease in both periods was primarily due to customers continuing to normalize their inventory levels.\nEmbedded operating income was $345 million for the three months ended June 29",
+        "page": 0,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248824000123/amd-20240629.htm",
+        "section": "mda",
+        "period_end": "2024-06-29",
+        "document_id": "amd-0000002488-24-000123",
+        "company": "AMD",
+        "form": "10-Q",
+        "text_sha256": "11ea328d37275061baf9b12c8573736aabebbc0e36802945a409e1d83d71cc7f",
+        "end": 59805,
+        "start": 58767,
+        "kind": "filing",
+        "fiscal_year": 2024,
+        "version": "original",
+        "distance": 0.5466779470443726,
+        "inspection_url": "/api/sources/a379250f23d67041f06914ba1956ede143497cf37d017e618ccb45d417b31e54"
+      },
+      {
+        "source_id": "S47",
+        "chunk_id": "92f3f579e6fc1626aeb229b677eeb0a755a9b7270e43c56f9183efd5e32d12fb",
+        "text": "was primarily driven by higher revenue, partially offset by higher operating expenses.\nClient and Gaming\nClient and Gaming net revenue of $2.9 billion for the three months ended March 29, 2025 increased by 28%, compared to net revenue of $2.3 billion for the prior year period. Client revenue was $2.3 billion, up 68% from the prior year period, primarily driven by a 43% increase in average selling price, and a 23% increase in unit shipments of AMD Ryzen mobile and desktop processors. Gaming revenue was $647 million, down 30% from the prior year period, primarily due to a decrease in semi-custom revenue.\nClient and Gaming operating income was $496 million for the three months ended March 29, 2025, compared to operating income of $237 million for the prior year period. The increase in operating income was primarily driven by higher revenue, partially offset by higher operating expenses.\n24\nTable of Contents\nEmbedded\nEmbedded net revenue of $823 million for the three months ended March 29, 2025 decreased by 3%, compared to net",
+        "fiscal_year": 2025,
+        "period_end": "2025-03-29",
+        "form": "10-Q",
+        "version": "original",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+        "end": 59757,
+        "text_sha256": "80bdc02b7dbca846a5bc0bdd8ec4f0853a28d62d3c8ff063f6867213e01debce",
+        "document_id": "amd-0000002488-25-000047",
+        "company": "AMD",
+        "section": "mda",
+        "start": 58719,
+        "kind": "filing",
+        "page": 0,
+        "distance": 0.5260065197944641,
+        "inspection_url": "/api/sources/92f3f579e6fc1626aeb229b677eeb0a755a9b7270e43c56f9183efd5e32d12fb"
+      },
+      {
+        "source_id": "S49",
+        "chunk_id": "e9e76f48ab1ee898ed4375892a2bf5d57ed1337e906ba2d9b4d2ced9402d60a3",
+        "text": ", up $1.0 billion or 9% from Q1 2023. CCG revenue increased 31% from Q1 2023 primarily due to higher notebook and desktop volumes as customer inventory levels normalized compared to higher levels in Q1 2023. Notebook and desktop ASPs were roughly flat with Q1 2023. DCAI revenue increased 5% from Q1 2023 due to higher server ASPs primarily due to a lower mix of hyperscale customer-related revenue and a higher mix of high core count products, partially offset by lower server volume due to lower demand in a competitive environment. NEX revenue decreased 8% primarily due to 5G customers tempering purchases to reduce existing inventories, partially offset by higher Edge and Network Xeon revenue. Altera revenue decreased 58% from Q1 2023 as customers tempered purchases to reduce existing inventories across all product lines and Mobileye revenue decreased 48% from Q1 2023 as customers tempered purchases to reduce existing inventories across EyeQ products. External Intel Foundry revenue decreased 77% from Q1 2023 due to lower multi-",
+        "period_end": "2024-03-30",
+        "fiscal_year": 2024,
+        "version": "original",
+        "start": 100349,
+        "document_id": "intc-0000050863-24-000076",
+        "company": "INTC",
+        "form": "10-Q",
+        "text_sha256": "31eee538a09ebee9ebecc57ddd06243d7513896e818f8fad947044259ddcb0b0",
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086324000076/intc-20240330.htm",
+        "section": "mda",
+        "page": 0,
+        "kind": "filing",
+        "end": 101389,
+        "distance": 0.5249664783477783,
+        "inspection_url": "/api/sources/e9e76f48ab1ee898ed4375892a2bf5d57ed1337e906ba2d9b4d2ced9402d60a3"
+      },
+      {
+        "source_id": "S53",
+        "chunk_id": "f5d005459334a8625def69a7db7c400c73660cc477fc3340acb09c08dd66ccab",
+        "text": "| | | | | | | | | | | | | |\n■CCG revenue decreased $542 million from YTD 2024. Client revenue (collectively notebook and desktop) was $20.5 billion in YTD 2025, down $605 million from YTD 2024, primarily due to lower YTD 2025 client volume resulting from incremental customer incentives offered to certain customers in the first half of 2024 and lower YTD 2025 customer inventory levels. This decrease was partially offset by higher Q3 2025 client volume driven by higher demand. Client ASPs in YTD 2025 were roughly flat with YTD 2024. Other CCG revenue was $3.5 billion, up $63 million from YTD 2024.\n■DCAI revenue increased $408 million from YTD 2024, primarily driven by higher server revenue due to higher hyperscale customer-related demand which contributed to an increase in server volume of 10%. Server ASPs decreased by 6% from YTD 2024,",
+        "kind": "filing",
+        "start": 141954,
+        "section": "mda",
+        "page": 0,
+        "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000179/intc-20250927.htm",
+        "company": "INTC",
+        "period_end": "2025-09-27",
+        "end": 142800,
+        "form": "10-Q",
+        "document_id": "intc-0000050863-25-000179",
+        "text_sha256": "dcf2ff7ddd02b2b99d621b1c97d6a5973051c1eddb078bab2caa4838d35f29d4",
+        "fiscal_year": 2025,
+        "version": "original",
+        "distance": 0.515468955039978,
+        "inspection_url": "/api/sources/f5d005459334a8625def69a7db7c400c73660cc477fc3340acb09c08dd66ccab"
+      }
+    ],
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "verified_citations": true,
+        "status": "completed"
+      }
+    },
+    "trace": [
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Supervisor",
+          "node": "scope",
+          "decision": "Filings Research",
+          "companies": [
+            "AMD",
+            "INTC"
+          ],
+          "years": [
+            2024,
+            2025
+          ],
+          "reason": "Search filing evidence for requests outside a supported structured lookup"
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "initial_retrieval",
+          "arguments": {
+            "question": "Compare the demand headwinds described by AMD and Intel in FY2024 and FY2025. Cite the filings and distinguish annual from quarterly evidence.",
+            "companies": [
+              "AMD",
+              "INTC"
+            ],
+            "years": [
+              2024,
+              2025
+            ],
+            "error": "",
+            "worker": "research",
+            "revenue_component": null,
+            "revenue_share": false,
+            "earnings_ranking": false,
+            "needs_evidence": null,
+            "partial": false
+          }
+        }
+      },
+      {
+        "type": "trace",
+        "data": {
+          "agent": "Filings Research",
+          "provider": "Codex subscription",
+          "model": "gpt-6.1-sol",
+          "reason": "Historical filing research using local evidence",
+          "max_tool_calls": 12
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "query": "demand headwinds lower demand customer inventory adjustment competitive environment uncertainty",
+            "form": "10-K"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "company": "INTC",
+            "query": "2025 2024 revenue lower demand inventory customer competitive client server",
+            "form": "10-K",
+            "section": "mda"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "inspect_source",
+          "arguments": {
+            "source_id": "S10"
+          }
+        }
+      },
+      {
+        "type": "tool",
+        "data": {
+          "name": "search_sources",
+          "arguments": {
+            "query": "lower demand inventory normalization gaming embedded client uncertainty tariffs",
+            "form": "10-Q",
+            "section": "mda"
+          }
+        }
+      }
+    ],
+    "seconds": 28.795,
+    "answer_token_ttft_seconds": 17.433
+  }
+]

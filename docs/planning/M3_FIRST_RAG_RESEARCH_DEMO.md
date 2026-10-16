@@ -9,11 +9,11 @@
 ## Implemented behavior and decisions
 
 - Ingest **41/41 documents into 10,681 chunks**. Use 220 WordPiece tokens, 40-token overlap, page/section boundaries, and exact character offsets. MiniLM supplies normalized local 384-dimensional embeddings; Chroma uses cosine distance.
-- Filter by company/fiscal year and optional form, section, and version. Preserve original/amendment distinctions and quarterly risk context. Initial augmentation retrieves four passages per company/year; tools retrieve six.
+- Filter by company/fiscal year and optional form, section, and version. Preserve original/amendment distinctions and quarterly risk context. Initial augmentation retrieves four passages per company/year; comparison tool searches retrieve four per pair and single-pair searches retrieve six. [Comparison research](RESEARCH_COMPARISONS.md) defines scope-balanced retrieval and its verification.
 - Filings Research uses its actual role prompt and scoped retrieval/inspection tools. A minimal LangGraph supervisor validates coverage and delegates research. Direct Codex executes application-managed tool round trips and streams final answer text.
 - The browser exposes routing/tool evidence, linked citations, highlighted exact passages, nearby context, fiscal dates, version, official links, collected originals, and Stop.
 - Keep collection/index refresh reproducible through the CLI. A complete fingerprinted index publishes atomically; no scheduler or automatic freshness claim exists.
-- Codex CLI owns authentication. Generation is bounded to eight tool calls/180 seconds and two simultaneous application turns per process.
+- Codex CLI owns authentication. Research generation permits `min(24, max(8, 3 × selected company/year pairs))` executed calls and 180 seconds, with remaining-call notices and bounded final synthesis after excess requests. Citation-checked budget-limited findings finish as partial. The application permits two simultaneous turns per process.
 - Citation validation checks registered evidence identity; comprehensive claim support remains a review/formal-evaluation task.
 
 ## Reproduce and inspect

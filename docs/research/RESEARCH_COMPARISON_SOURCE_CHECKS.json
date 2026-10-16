@@ -1,0 +1,33 @@
+[
+  {
+    "question": "what were comon factors driving revenue growth for all companies",
+    "verified_passages": 12,
+    "cited_companies": [
+      "AMD",
+      "INTC",
+      "NVDA",
+      "QCOM"
+    ],
+    "dynamic_calls": 4
+  },
+  {
+    "question": "Which revenue growth drivers were shared by NVIDIA, AMD, Intel and Qualcomm in FY2025, and which were company-specific? Check whether each company actually grew.",
+    "verified_passages": 12,
+    "cited_companies": [
+      "AMD",
+      "INTC",
+      "NVDA",
+      "QCOM"
+    ],
+    "dynamic_calls": 5
+  },
+  {
+    "question": "Compare the demand headwinds described by AMD and Intel in FY2024 and FY2025. Cite the filings and distinguish annual from quarterly evidence.",
+    "verified_passages": 13,
+    "cited_companies": [
+      "AMD",
+      "INTC"
+    ],
+    "dynamic_calls": 4
+  }
+]

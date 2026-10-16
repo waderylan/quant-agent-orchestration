@@ -132,6 +132,53 @@ def test_source_inspection_detects_corrupt_text_and_stale_index(small_index):
         small_index.search("revenue", ["AMD"], [2025])
 
 
+def test_comparison_search_balances_scope_and_reports_empty_cells(small_index):
+    tools = ResearchTools(small_index, ["AMD", "NVDA"], [2024, 2025])
+    result = tools("search_sources", {"query": "revenue"})
+    assert {(s["company"], s["fiscal_year"]) for s in result["sources"]} == {
+        ("AMD", 2024),
+        ("AMD", 2025),
+        ("NVDA", 2025),
+    }
+    assert {
+        (c["company"], c["fiscal_year"]): c["passages"]
+        for c in result["retrieval_coverage"]
+    } == {
+        ("AMD", 2024): 1,
+        ("AMD", 2025): 2,
+        ("NVDA", 2024): 0,
+        ("NVDA", 2025): 1,
+    }
+    assert tools.max_tool_calls == 12
+    assert ResearchTools(small_index, ["AMD"], [2025]).max_tool_calls == 8
+    assert (
+        ResearchTools(
+            small_index, ["AMD", "NVDA", "INTC", "QCOM"], [2024, 2025]
+        ).max_tool_calls
+        == 24
+    )
+
+
+@pytest.mark.asyncio
+async def test_research_keeps_cited_findings_and_marks_budget_limited_answer_partial(
+    small_index,
+):
+    async def limited(prompt, tools, handler):
+        yield {"type": "trace", "data": {"decision": "synthesize_existing_evidence"}}
+        yield {"type": "token", "data": "Revenue evidence [S1]."}
+
+    result = [
+        e
+        async for e in events(
+            small_index, "Revenue drivers", ["AMD"], [2025], model_stream=limited
+        )
+    ]
+    assert result[-1]["data"] == {"status": "partial", "verified_citations": True}
+    answer = "".join(e["data"] for e in result if e["type"] == "token")
+    assert "Revenue evidence [S1]" in answer and "may be incomplete" in answer
+    assert any(e["type"] == "sources" for e in result)
+
+
 @pytest.mark.asyncio
 async def test_unsupported_scope_returns_gap_without_model_call(small_index):
     async def forbidden(*args):
