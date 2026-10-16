@@ -18,9 +18,9 @@ The selected companies are NVIDIA (NVDA), AMD, Intel (INTC), and Qualcomm (QCOM)
 
 Fiscal labels do not imply matching calendar periods. Comparisons display the actual dates. Qualcomm's reported gross profit is derived from revenue minus cost of revenue. AMD's amendment corrects FY2025 MD&A language and stays separate from the original filing.
 
-The application has a LangGraph supervisor and four specialists: Filings Research, Financial Data, Financial Analysis / Quant, and Risk Summary. The selected full design adds Buy-Side Analyst. [Milestones](milestones/README.md) give the authoritative implementation state. Additional companies and reporting formats require source checks and feedback.
+The application has a LangGraph supervisor and five specialists: Filings Research, Financial Data, Financial Analysis / Quant, Risk Summary, and Buy-Side Analyst. [Milestones](milestones/README.md) give the authoritative implementation state. Additional companies and reporting formats require source checks and feedback.
 
-The assistant handles self-contained requests. It does not retain a conversation across turns, trade, recommend a personal portfolio, or claim a live price. Market snapshots, forward estimates, and valuation are planned for Buy-Side Analyst. Current developments and shared source MCP are planned separately. All claims of freshness need dated source evidence.
+The assistant handles self-contained requests. It does not retain a conversation across turns, trade, or recommend a personal portfolio. Buy-Side Analyst supports dated market snapshots, unqualified forward estimates, and checked explicit-assumption scenarios in private local use. Current TTM and verified forward multiples remain limited by missing source definitions; public market-data display rights are unverified. Broader current research and shared MCP are separate increments. All freshness claims need dated source evidence.
 
 Local development uses Python 3.13 and uv. Codex app-server supplies local subscription generation. Nebius Token Factory is the selected future deployment provider; NVIDIA-hosted NIM remains tentative. Exact models, access, prices, and routing thresholds require verification. The local Codex login stays on the host and is not a deployed credential. Cloud Run deployment and formal evaluation remain pending.
 

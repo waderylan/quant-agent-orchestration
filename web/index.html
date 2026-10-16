@@ -274,6 +274,13 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
       $("company").addEventListener("change", () => years());
       $("year").addEventListener("change", showSelection);
       async function inspect(source) {
+        if (!source.inspection_url) {
+          $("source-label").textContent = "Explicit assumption or unavailable source";
+          const pre = document.createElement("pre");
+          pre.textContent = JSON.stringify(source, null, 2);
+          $("passage").replaceChildren(pre);
+          return;
+        }
         const r = await fetch(source.inspection_url);
         if (!r.ok) {
           $("source-label").textContent =
@@ -281,6 +288,13 @@ What drove NVIDIA's revenue growth in FY2026?</textarea
           return;
         }
         const p = await r.json();
+        if (p.kind === "market_evidence" || p.kind === "valuation_input") {
+          $("source-label").textContent = `${p.provider || p.company || "Scenario"} · ${p.retrieved_at || p.as_of || "explicit assumption"} · ${p.evidence_kind || p.source_kind || "market source"}`;
+          const pre = document.createElement("pre");
+          pre.textContent = JSON.stringify(p, null, 2);
+          $("passage").replaceChildren(pre);
+          return;
+        }
         if (p.kind === "calculation") {
           $("source-label").textContent =
             `${p.label} · ${p.unit} · ${p.start} → ${p.end}`;

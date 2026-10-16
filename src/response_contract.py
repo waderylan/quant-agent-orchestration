@@ -72,7 +72,23 @@ def normalize_citations(answer, registered):
             return "".join(f"[{prefix}{number}]" for number in range(first, last + 1))
         return match.group(0)
 
-    answer = re.sub(r"\[([SFC])(\d+)\s*[–—-]\s*\1?(\d+)\]", expand, answer)
+    def group(match):
+        parts = re.split(r"\s*[,;]\s*", match[1])
+        result = []
+        for part in parts:
+            if re.fullmatch(r"[SFC]\d+", part):
+                result.append("[" + part + "]")
+                continue
+            span = re.fullmatch(r"([SFC])(\d+)\s*[–—-]\s*\1?(\d+)", part)
+            if not span:
+                return match[0]
+            replacement = expand(span)
+            if replacement == span[0]:
+                return match[0]
+            result.append(replacement)
+        return "".join(result)
+
+    answer = re.sub(r"\[([SFC]\d+[^\[\]\n]*)\]", group, answer)
 
     def refuted(match):
         sid = match[1]
@@ -100,6 +116,6 @@ def checked_answer(answer, registered, writer):
     if normalized != answer:
         writer({"type": "answer", "data": normalized})
     cited = set(re.findall(r"\[([SFC]\d+)\]", normalized))
-    if re.search(r"\[[SFC]\d+\s*[–—-]", normalized):
+    if re.search(r"\[[SFC]\d+\s*[–—,;-]", normalized):
         cited.add("invalid_citation_range")
     return normalized, cited

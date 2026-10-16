@@ -182,7 +182,7 @@ class ArtifactStore:
         return {
             **source,
             "inspection_url": f"/api/analysis/{identity}/observations/{source['source_id']}",
-            "original_url": f"/api/originals/{source['document_id']}",
+            **({"original_url": f"/api/originals/{source['document_id']}"} if source.get("document_id") else {}),
             **(
                 {
                     "snapshot_url": f"/api/analysis/{identity}/snapshots/{source['snapshot_sha256']}"

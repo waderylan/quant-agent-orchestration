@@ -185,6 +185,9 @@ def has_unstructured_revenue_scope(question):
 
 
 def plan_request(question):
+    from src.buy_side import market_request
+    if market_request(question):
+        return RequestPlan("buy", "Buy-Side Analyst acquires dated market evidence and delegates arithmetic to Quant")
     if re.search(r"\brisks?\b|risk factors", question, re.I) and re.search(r"\b(chang\w*|add\w*|remov\w*|relocat\w*|mov\w*|compar\w*|reword\w*|unchanged)\b", question, re.I):
         return RequestPlan("risk", "Risk Summary compares complete original risk sections, not search-hit omissions")
     metrics = requested_metrics(question)

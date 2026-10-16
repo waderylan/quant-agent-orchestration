@@ -34,4 +34,16 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 uv run --locked pytest -q
 ```
 
-Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) has the local Docker acceptance command. The [milestone index](docs/milestones/README.md) identifies the next work; live research, valuation, two-provider routing, formal evaluation, and Cloud Run are planned.
+Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) has the local Docker acceptance command. The [milestone index](docs/milestones/README.md) identifies the next work; broader live research, two-provider routing, formal evaluation, and Cloud Run remain planned.
+
+Private market testing requires the four runtime keys listed in `.env.example`, `MARKET_MODE=live`, and the official Twelve Data checkout. Public market-data display rights are unverified; [M8](docs/milestones/buy-side-analyst/README.md) records actual entitlements, budgets, and excluded valuation inputs.
+
+```powershell
+git clone https://github.com/twelvedata/mcp.git artifacts/twelvedata-mcp
+git -C artifacts/twelvedata-mcp checkout d139a77ea0f7d40995e6979cd09c22dd142fbfe8
+uv run --locked python scripts/market_access.py --usage
+uv run --locked python scripts/demo_buy.py --direct
+uv run --locked python scripts/start_local_container.py --market-mode live
+```
+
+Use `MARKET_MODE=frozen` to replay cached provider responses without new calls, retaining original dates. The single ledger at `artifacts/market/usage.sqlite3` reserves calls before network execution; native and Docker acceptance share it. Do not run independent live account probes outside this adapter. The hard work limits remain Alpha Vantage 10/day and 40 total, Twelve Data 60 combined, and Tavily 100 additional credits with a 300-credit monthly stop. No plan upgrade is automatic.

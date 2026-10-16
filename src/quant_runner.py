@@ -135,7 +135,7 @@ def interpret(code, values):
             not isinstance(row["label"], str)
             or not isinstance(row["kind"], str)
             or not isinstance(row["inputs"], list)
-            or not 1 <= len(row["inputs"]) <= 2
+            or not 1 <= len(row["inputs"]) <= 5
             or any(not isinstance(s, str) for s in row["inputs"])
         ):
             raise ValueError(

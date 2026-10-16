@@ -102,6 +102,15 @@ def risk_source(document_id: str, start: int, end: int):
         raise HTTPException(404, str(error)) from error
 
 
+@app.get("/api/market/{identity}")
+def market_source(identity: str):
+    from src.market_mcp import MarketGateway
+    try:
+        return {"kind": "market_evidence", **MarketGateway().inspect(identity)}
+    except (KeyError, ValueError, FileNotFoundError) as error:
+        raise HTTPException(404, str(error)) from error
+
+
 @app.get("/api/financial/observations/{observation_id}")
 def financial_observation(observation_id: str):
     try:
