@@ -92,12 +92,46 @@
         font-size: 18px;
         margin-top: 0;
       }
-      pre,
-      #answer {
+      pre {
         white-space: pre-wrap;
         overflow-wrap: anywhere;
         font: inherit;
       }
+      #answer {
+        overflow-wrap: anywhere;
+      }
+      #answer > :first-child { margin-top: 0; }
+      #answer h1, #answer h2, #answer h3 {
+        line-height: 1.3;
+        margin: 1.2em 0 0.5em;
+      }
+      #answer h1 { font-size: 24px; }
+      #answer h2 { font-size: 21px; }
+      #answer h3 { font-size: 18px; }
+      #answer p, #answer ul, #answer ol { margin: 0 0 0.8em; }
+      #answer li > p { margin-bottom: 0.3em; }
+      #answer p { color: inherit; }
+      #answer code {
+        font: 0.88em ui-monospace, monospace;
+        background: #f1f3f6;
+        border-radius: 3px;
+        padding: 0.15em 0.3em;
+      }
+      #answer pre {
+        white-space: pre;
+        overflow: auto;
+        padding: 12px;
+        background: #f1f3f6;
+        border-radius: 4px;
+      }
+      #answer pre code { padding: 0; }
+      #answer blockquote {
+        margin: 1em 0;
+        padding-left: 16px;
+        border-left: 3px solid #aab3c0;
+        color: #4c5768;
+      }
+      #answer .table-scroll { margin: 1em 0; }
       #status {
         margin-left: 12px;
         font-size: 14px;
@@ -227,10 +261,70 @@ What are the selected companies' stock prices, and how are they valued?</textare
         </aside>
       </div>
     </main>
+    <script src="/static/vendor/marked.umd.js"></script>
+    <script src="/static/vendor/purify.min.js"></script>
     <script>
       const $ = (id) => document.getElementById(id);
       let coverage = {},
         controller;
+      let answerMarkdown = "", answerSources = [], renderFrame;
+      marked.use({ renderer: { html: () => "" } });
+      function renderAnswer() {
+        cancelAnimationFrame(renderFrame);
+        renderFrame = null;
+        $("answer").innerHTML = DOMPurify.sanitize(marked.parse(answerMarkdown), {
+          USE_PROFILES: { html: true },
+          FORBID_TAGS: ["img", "input", "form", "button", "style"],
+          FORBID_ATTR: ["style", "id", "name"],
+        });
+        // Resolve citations through the trusted source registry, including labels
+        // that Markdown interpreted as ordinary links or reference definitions.
+        for (const link of $("answer").querySelectorAll("a")) {
+          const id = link.textContent.replace(/^\[|\]$/g, "");
+          const source = answerSources.find((source) => source.source_id === id);
+          if (source) {
+            link.textContent = `[${id}]`;
+            link.href = source.inspection_url || "#";
+            link.onclick = (event) => { event.preventDefault(); inspect(source); };
+          } else if (link.hasAttribute("href")) {
+            try {
+              const url = new URL(link.getAttribute("href"), location.href);
+              if (!["http:", "https:"].includes(url.protocol)) link.removeAttribute("href");
+              else if (url.origin !== location.origin) {
+                link.target = "_blank";
+                link.rel = "noopener noreferrer";
+              }
+            } catch { link.removeAttribute("href"); }
+          }
+        }
+        const walker = document.createTreeWalker($("answer"), NodeFilter.SHOW_TEXT);
+        const nodes = [];
+        while (walker.nextNode()) {
+          if (!walker.currentNode.parentElement.closest("a, code, pre")) nodes.push(walker.currentNode);
+        }
+        for (const node of nodes) {
+          const fragment = document.createDocumentFragment();
+          for (const part of node.textContent.split(/(\[[SFC]\d+\])/)) {
+            const source = answerSources.find((source) => `[${source.source_id}]` === part);
+            if (!source) { fragment.append(document.createTextNode(part)); continue; }
+            const link = document.createElement("a");
+            link.textContent = part;
+            link.href = source.inspection_url || "#";
+            link.onclick = (event) => { event.preventDefault(); inspect(source); };
+            fragment.append(link);
+          }
+          node.replaceWith(fragment);
+        }
+        for (const table of $("answer").querySelectorAll("table")) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "table-scroll";
+          table.replaceWith(wrapper);
+          wrapper.append(table);
+        }
+      }
+      function scheduleAnswer() {
+        if (!renderFrame) renderFrame = requestAnimationFrame(renderAnswer);
+      }
       const selected = (id) =>
         Array.from($(id).selectedOptions, (o) => o.value);
       function years(preferred = selected("year")) {
@@ -369,6 +463,7 @@ What are the selected companies' stock prices, and how are they valued?</textare
         $("passage").replaceChildren(pre);
       }
       function displaySources(sources) {
+        answerSources = sources;
         $("sources").replaceChildren(
           ...sources.map((s) => {
             const b = document.createElement("button");
@@ -388,55 +483,11 @@ What are the selected companies' stock prices, and how are they valued?</textare
             return b;
           }),
         );
-        const text = $("answer").textContent;
-        function appendCitations(target, text) {
-          for (const part of text.split(/(\[[A-Z]\d+\])/)) {
-            const source = sources.find(
-              (s) => "[" + s.source_id + "]" === part,
-            );
-            if (!source) {
-              target.append(document.createTextNode(part));
-              continue;
-            }
-            const a = document.createElement("a");
-            a.href = source.inspection_url;
-            a.textContent = part;
-            a.onclick = (e) => {
-              e.preventDefault();
-              inspect(source);
-            };
-            target.append(a);
-          }
-        }
-        // Render bounded Markdown tables with text nodes, never source HTML.
-        const lines = text.split("\n");
-        const cells = (line) => line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
-        $("answer").replaceChildren();
-        for (let i = 0; i < lines.length; i++) {
-          if (lines[i].trim().startsWith("|") && /^\s*\|?\s*:?-+:?\s*\|[\s|:\-]*$/.test(lines[i + 1] || "")) {
-            const wrapper = document.createElement("div");
-            wrapper.className = "table-scroll";
-            const table = document.createElement("table");
-            function row(line, header) {
-              const tr = document.createElement("tr");
-              for (const value of cells(line)) {
-                const cell = document.createElement(header ? "th" : "td");
-                appendCitations(cell, value);
-                tr.append(cell);
-              }
-              table.append(tr);
-            }
-            row(lines[i], true);
-            i++;
-            while (i + 1 < lines.length && lines[i + 1].trim().startsWith("|")) row(lines[++i], false);
-            wrapper.append(table);
-            $("answer").append(wrapper);
-          } else appendCitations($("answer"), lines[i] + (i + 1 < lines.length ? "\n" : ""));
-        }
+        renderAnswer();
       }
       function event(type, data) {
-        if (type === "token") $("answer").append(document.createTextNode(data));
-        else if (type === "answer") $("answer").replaceChildren(document.createTextNode(data));
+        if (type === "token") { answerMarkdown += data; scheduleAnswer(); }
+        else if (type === "answer") { answerMarkdown = data; scheduleAnswer(); }
         else if (type === "sources") displaySources(data);
         else if (type === "scope") {
           const button = document.createElement("button");
@@ -471,6 +522,7 @@ What are the selected companies' stock prices, and how are they valued?</textare
           $("trace").textContent +=
             JSON.stringify({ event: type, data }, null, 2) + "\n";
         } else if (type === "complete") {
+          renderAnswer();
           if (data.missing_outputs?.length) {
             const missing = document.createElement("p");
             missing.textContent = "Still needed: " + [...new Set(data.missing_outputs)].join("; ");
@@ -496,7 +548,9 @@ What are the selected companies' stock prices, and how are they valued?</textare
       $("research").onsubmit = async (e) => {
         e.preventDefault();
         controller = new AbortController();
-        $("answer").replaceChildren();
+        answerMarkdown = "";
+        answerSources = [];
+        renderAnswer();
         $("sources").replaceChildren();
         $("artifacts").replaceChildren();
         $("trace").textContent = "";

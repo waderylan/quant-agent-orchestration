@@ -9,6 +9,7 @@ import anyio
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from dataclasses import dataclass
 from collections.abc import Callable, AsyncIterator
@@ -40,6 +41,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="Public-Company Research Assistant", lifespan=lifespan)
+app.mount("/static/vendor", StaticFiles(directory=ROOT / "web/vendor"), name="vendor")
 
 
 class Question(BaseModel):

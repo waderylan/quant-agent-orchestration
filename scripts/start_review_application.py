@@ -22,6 +22,7 @@ def main():
     args = parser.parse_args()
     paths = [ROOT / "main.py", ROOT / "web/index.html", ROOT / "data/source_inventory.json", ROOT / "scripts/review_application.py", ROOT / "scripts/review_filing_conditions.py"]
     paths += sorted((ROOT / "src").glob("*.py")) + sorted((ROOT / "prompts").glob("*.md"))
+    paths += sorted(path for path in (ROOT / "web/vendor").iterdir() if path.is_file())
     files = {str(p.relative_to(ROOT)).replace("\\", "/"): p.read_bytes() for p in paths}
     manifest = {"files": {name: digest(body) for name, body in files.items()}, "implementation_parent": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()}
     identity = digest(json.dumps(manifest, sort_keys=True).encode())

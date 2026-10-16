@@ -85,7 +85,7 @@ async def main(args):
             checks["passed"] = True
             report["checks"].append(checks)
         # Table cells are untrusted text even when they resemble executable markup.
-        await page.evaluate("""() => { document.getElementById('answer').textContent = '| Field | Value |\\n|---|---|\\n| Hostile | <img src=x onerror=window.__injected=1> |'; displaySources([]); }""")
+        await page.evaluate("""() => { event('answer', '| Field | Value |\\n|---|---|\\n| Hostile | <img src=x onerror=window.__injected=1> |'); displaySources([]); }""")
         assert await page.locator("#answer table").count() == 1
         assert await page.locator("#answer img").count() == 0
         assert not await page.evaluate("Boolean(window.__injected)")

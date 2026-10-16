@@ -8,5 +8,7 @@
 !prompts/*.md
 !web/
 !web/index.html
+!web/vendor/
+!web/vendor/*
 !data/
 !data/source_inventory.json

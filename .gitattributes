@@ -3,3 +3,7 @@ docs/milestones/supervisor/evidence/review-round-*/questions.json -text
 docs/milestones/supervisor/evidence/review-round-*/reviewer-notes.md -text
 docs/milestones/supervisor/evidence/review-round-*/REVIEW_FINDINGS.md -text
 docs/milestones/supervisor/evidence/review-round-*/adjudication*.json -text
+
+# Preserve vendored browser distributions and their manifest hashes.
+web/vendor/*.js -text
+web/vendor/*LICENSE* -whitespace
