@@ -142,8 +142,18 @@ def remove_unsupported(answer, claims):
                 if "\n" not in match[0] and re.search(r"\b(?:Inc|Corp|Ltd|Co|Mr|Ms|Dr|U\.S|e\.g|i\.e)\.$", answer[:match.start()], re.I):
                     continue
                 boundaries.append(match.end())
+            claim_start = start
             start = max(i for i in boundaries if i <= start)
             end = end if claim.endswith((".", "!", "?")) else min(i for i in boundaries if i >= end)
+            # Citations after a removed sentence's period belong to that sentence.
+            if trailing := re.match(r"(?:[ \t]*\[[SFCW]\d+\])+", answer[end:]):
+                end += trailing.end()
+            # Keep a list marker when the rest of its line remains.
+            line_end = answer.find("\n", end) if "\n" in answer[end:] else len(answer)
+            marker = re.match(r"[ \t]*(?:[-*]|\d+\.)[ \t]+", answer[start:claim_start])
+            if marker and answer[end:line_end].strip():
+                start += marker.end()
+                end += len(answer[end:line_end]) - len(answer[end:line_end].lstrip(" \t"))
             answer = answer[:start] + answer[end:]
     answer = re.sub(r"(?m)^\s*[-*]\s*$\n?", "", answer)
     answer = re.sub(r"(?m)^(?:Outside research|From the filings|Financial analysis|Changes in filing risks):\s*(?=\Z|(?:Outside research|From the filings|Financial analysis|Changes in filing risks):)", "", answer)

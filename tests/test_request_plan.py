@@ -13,6 +13,16 @@ def test_repair_removes_a_partial_unsupported_claim_as_a_sentence():
     assert repaired == 'Analysts raised concentration concerns. [W1]\nThis suggests execution risk. [W1]'
 
 
+def test_repair_removes_its_trailing_citation_and_keeps_the_list_marker():
+    # Recorded 2026-10-19 QCOM answer: removal left "[F1]" alone and dropped "- ".
+    answer = ('- QCOM revenue: USD 44,284,000,000 (52 weeks). [F1]\n'
+              '- Basis: 10-K filed November 5, 2025. No conflicting observations were supplied. [F1]\n'
+              '- Handoff complete.')
+    repaired = remove_unsupported(answer, ['Basis: 10-K filed November 5, 2025.'])
+    assert repaired == '- QCOM revenue: USD 44,284,000,000 (52 weeks). [F1]\n- No conflicting observations were supplied. [F1]\n- Handoff complete.'
+    assert remove_unsupported(repaired, ['QCOM revenue: USD 44,284,000,000 (52 weeks).']) == '- No conflicting observations were supplied. [F1]\n- Handoff complete.'
+
+
 @pytest.mark.parametrize('prefix', ['Qualcomm Inc.', 'The U.S. company'])
 def test_repair_keeps_abbreviations_inside_the_removed_sentence(prefix):
     answer = prefix + ' reported an unsupported acquisition completion. Supported revenue [F1].'
