@@ -106,7 +106,7 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     assert 'No named analyst praise' not in await page.locator('#request-plan').inner_text()
     assert 'Unresolved outputs' not in await page.locator('#answer').inner_text()
     assert 'Still needed' not in await page.locator('#scope-help').inner_text()
-    assert await page.locator('#status').inner_text() == 'Final answer ready · 1 gap noted'
+    assert await page.locator('#status').inner_text() == "Final answer ready · 2 notes on what's missing"
     assert await page.locator('.agent-call', has_text='Answer Reviewer').locator('.agent-status').inner_text() == 'Found a gap'
     assert not await page.locator('#answer script, #request-plan script').count()
 

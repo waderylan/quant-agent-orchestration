@@ -307,6 +307,7 @@
       .final-gaps { margin: 6px 0 0; padding-left: 18px; }
       .final-gaps li { margin-bottom: 6px; }
       .gap-row { margin: 4px 0 8px; }
+      .final-tip, .plan-tip { color: #245e64 !important; font-weight: 600; }
       .gap-kind { display: inline-block; margin-bottom: 2px; padding: 1px 8px; border-radius: 999px; background: #f3e6c4; color: #6b4e0c; font-size: 11px; font-weight: 650; }
       .gap-row[data-kind="removed"] .gap-kind { background: #f5dddd; color: #7a3b3b; }
       .gap-row[data-kind="scope"] .gap-kind { background: #e6eae5; color: #46524d; }
@@ -665,7 +666,7 @@ What has happened at the selected companies since their latest filings? Cite dat
         traceLog.add(type, data);
         activity.receive(type, data);
         progress.receive(type, data);
-        if (type === "plan") $("request-coverage").hidden = true;
+        if (type === "plan" || type === "answer_sections") $("request-coverage").hidden = true;
         if (progress.statusText()) $("status").textContent = progress.statusText();
         if (type === "activity") return;
         if (type === "trace" && data.node === "request_understanding" && !progress.active) {

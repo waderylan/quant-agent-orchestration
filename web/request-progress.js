@@ -25,6 +25,17 @@ function hostname(url) {
   try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return "a web page"; }
 }
 
+/* Replace internal identifiers in gap text with words a reader knows. */
+function plain(text) {
+  return String(text)
+    .replace(/\bquery_financials\b/g, "the reported-figures lookup")
+    .replace(/\b(?:is|was) not registered\b/g, "was not found")
+    .replace(/\b(?:are|were) not registered\b/g, "were not found")
+    .replace(/\bnot registered\b/g, "not found")
+    .replace(/\b[FCSW] observations?\b/g, "reported figure")
+    .replace(/\bregistered\b/g, "collected");
+}
+
 function clip(text, length = 90) {
   text = String(text ?? "").replace(/\s+/g, " ").trim();
   return text.length > length ? text.slice(0, length - 1) + "…" : text;
@@ -82,6 +93,7 @@ class RequestProgress {
     this.outputs = new Map();
     this.current = null;
     this.reviewState = "pending";
+    this.noteCount = 0;
     this.stepsOpen = true;
     this.frame = null;
     this.dirty = new Set();
@@ -329,17 +341,23 @@ class RequestProgress {
   finalSummary(data) {
     const review = data.review || {};
     const gaps = data.gaps || [];
+    const answered = data.sections.some((section) => section.id !== "supervisor");
     const box = document.createElement("section");
     box.className = "final-summary";
-    box.dataset.state = gaps.length ? "partial" : review.status === "failed" ? "unreviewed" : "complete";
+    box.dataset.state = !answered || gaps.length ? "partial" : review.status === "failed" ? "unreviewed" : "complete";
     box.setAttribute("aria-label", "Final answer summary");
-    box.append(this.text("h3", "", gaps.length ? "Final answer · partly complete" : "Final answer"));
-    const lead = gaps.length
+    const unanswered = {
+      coverage_gap: ["Outside what this assistant covers", "No research agent was run for this request. The note below says what the assistant can do instead."],
+      needs_clarification: ["More detail needed", "The request needs more detail before an agent can answer it. See the note below."],
+    }[data.status] || ["No verified answer", "No agent produced a verified answer. The notes below say why."];
+    box.append(this.text("h3", "", !answered ? unanswered[0] : gaps.length ? "Final answer · partly complete" : "Final answer"));
+    const lead = !answered ? unanswered[1] : gaps.length
       ? "This is the finished answer. Everything it states is backed by its cited sources. Notes on what it could not fully cover:"
       : review.status === "completed" || review.status === "partial" ? "This is the finished answer. The Answer Reviewer checked every requested part against the cited sources."
       : review.status === "failed" ? "This is the finished answer, but the review step was unavailable, so it was not checked. Its citations still point to registered sources."
       : "This is the finished answer.";
     box.append(this.text("p", "final-lead", lead));
+    if (data.tip) box.append(this.text("p", "final-tip", data.tip));
     if (!gaps.length) return box;
     const list = document.createElement("ul");
     list.className = "final-gaps";
@@ -349,6 +367,7 @@ class RequestProgress {
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(gap);
     }
+    this.noteCount = groups.size;
     for (const [key, rows] of groups) {
       const output = this.outputs.get(key);
       const index = this.plan?.outputs.findIndex((o) => o.id === key) ?? -1;
@@ -362,7 +381,7 @@ class RequestProgress {
         row.dataset.kind = kind;
         row.append(this.text("span", "gap-kind", label), this.text("span", "gap-why", why));
         const details = kind === "removed" && review.removed_claims?.length ? review.removed_claims : [gap.text];
-        for (const text of details) row.append(this.text(kind === "removed" ? "del" : "span", "gap-text", text));
+        for (const text of details) row.append(this.text(kind === "removed" ? "del" : "span", "gap-text", plain(text)));
         item.append(row);
       }
       list.append(item);
@@ -386,6 +405,8 @@ class RequestProgress {
       return ["unreviewed", "Not reviewed", "The review step did not finish, so this answer was not checked."];
     if (/^(Financial Data|Financial Analysis \/ Quant|Filings Research|Risk Summary|Current Developments): /.test(gap.text))
       return ["failed", "A step did not finish", "This agent stopped before producing a verified result:"];
+    if (/not provided|not registered|unavailable|does not support|not support|no eligible|not available|not found/i.test(gap.text))
+      return ["unavailable", "Data not available", "The collected filings and financial data do not include this for the selected companies and years:"];
     return ["scope", "Outside what this tool covers", "This assistant does not provide:"];
   }
 
@@ -429,6 +450,7 @@ class RequestProgress {
       this.text("p", "plan-route", plan.steps.length ? `Route: ${plan.route}` : "Route: answered by the Supervisor without agent calls"),
     );
     if (plan.reason) head.append(this.text("p", "plan-reason", `Why: ${plan.reason}`));
+    if (plan.tip) head.append(this.text("p", "plan-tip", plan.tip));
 
     const list = document.createElement("ol");
     list.className = "plan-parts";
@@ -501,9 +523,9 @@ class RequestProgress {
 
   summary(complete) {
     const status = complete.status;
-    const needed = [...this.outputs.values()].filter((o) => this.partState(o)[1] === "gap").length;
+    const needed = this.noteCount ?? 0;
     const label = {completed: "Final answer ready", partial: "Final answer ready", coverage_gap: "Coverage gap", needs_clarification: "Clarification needed", unverified: "Response unverified", failed: "Failed"}[status] || status;
-    if (needed) return `${label} · ${needed} ${needed === 1 ? "gap" : "gaps"} noted`;
+    if (needed) return `${label} · ${needed} ${needed === 1 ? "note" : "notes"} on what's missing`;
     return status === "completed" && complete.coverage_checked ? `${label} · every part confirmed` : label;
   }
 

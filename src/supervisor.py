@@ -43,6 +43,25 @@ OUTPUT_TITLES = {
     "system_capabilities": "System capabilities",
     "unsupported": "Outside supported scope",
 }
+SCOPE_ANSWER = (
+    "This is outside what this assistant answers. It researches NVIDIA, AMD, Intel and Qualcomm filings, "
+    "reported financial figures, checked calculations, risk-factor changes and recent developments. "
+    "It does not give investment recommendations, price targets or trading advice. "
+    "For example, you could ask how the companies' revenue growth and margins compared in the selected fiscal year."
+)
+COMPARISON = re.compile(r"\b(?:grow\w*|grew|chang\w*|drop\w*|declin\w*|increas\w*|decreas\w*|ris(?:e|en|ing)|rose|fell|fall\w*|improv\w*|compar\w*|versus|vs\.?|year[- ]over[- ]year|yoy)\b", re.I)
+
+
+def year_tip(question, companies, years, coverage):
+    """A one-year selection cannot give checked year-over-year figures."""
+    if len(set(years)) != 1 or not COMPARISON.search(question):
+        return ""
+    year = years[0]
+    if re.search(r"\bFY\s*20\d\d\b.*\bFY\s*20\d\d\b", question, re.I) or not all(year - 1 in coverage.get(c, []) for c in companies):
+        return ""
+    return f"Your question compares periods, but only FY{year} is selected. Also select FY{year - 1} under Fiscal years for checked year-over-year figures."
+
+
 SECTION_LABELS = {"quant": "Financial analysis", "research": "From the filings", "current": "Outside research", "risk": "Changes in filing risks"}
 
 
@@ -556,7 +575,8 @@ def cooperative_graph(
             route_reason = base.reason if primary & {t.worker for t in tasks} else "Each part goes to the agent that owns it: " + "; ".join(
                 f"{OUTPUT_TITLES.get(t.output, t.output)} → {NAMES[t.worker]}" for t in tasks
             )
-            writer({"type": "plan", "data": plan_event(task, semantic, reason=route_reason, companies=companies, years=state["years"])})
+            tip = year_tip(original_question, companies, state["years"], index.coverage())
+            writer({"type": "plan", "data": {**plan_event(task, semantic, reason=route_reason, companies=companies, years=state["years"]), "tip": tip}})
         if error:
             from src.request_routing import mentioned_companies
 
@@ -589,6 +609,7 @@ def cooperative_graph(
             "current": 0,
             "needs_evidence": period_gap,
             "partial": bool(period_gap or capability_gaps),
+            "scope_tip": year_tip(original_question, companies, state["years"], index.coverage()) if not error else "",
         }
 
     async def execute(state):
@@ -911,6 +932,9 @@ def cooperative_graph(
             answer, status = state["capability_answer"], "completed"
         elif state.get("error"):
             answer, status = state["error"], "needs_clarification" if state.get("clarification") else "coverage_gap"
+        elif not answers and not task.plan and task.missing_inputs:
+            # No agent can answer: say what the assistant does instead of echoing the request.
+            answer, status = SCOPE_ANSWER, "coverage_gap"
         elif not answers:
             answer = "No verified answer is available. " + "; ".join(
                 task.missing_inputs
@@ -1054,6 +1078,8 @@ def cooperative_graph(
             "review": {"status": review_status, "results": review.get("results", []), "removed_claims": review.get("removed_claims", review.get("unsupported_claims", []))},
             "gaps": gaps,
             "fallback": fallback,
+            "status": status,
+            "tip": state.get("scope_tip", ""),
         }})
         writer({"type": "answer", "data": answer})
         if cited & evidence.keys():

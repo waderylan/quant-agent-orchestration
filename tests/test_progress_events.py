@@ -3,7 +3,7 @@
 import pytest
 
 from src.research_workflow import events
-from src.supervisor import compose
+from src.supervisor import SCOPE_ANSWER, compose, year_tip
 from tests.test_supervisor import source
 
 QUESTION = "Did AMD's operating margin improve from FY2024 to FY2025? Show the math, explain the reasons from its filings, then research what analysts liked and worried about when the results came out"
@@ -12,7 +12,7 @@ CROSSING = "Client demand drove the gain [S1].\n\nOutside research:\nAnalysts pr
 
 class Index:
     def coverage(self):
-        return {"AMD": [2024, 2025]}
+        return {"AMD": [2024, 2025], "NVDA": [2024, 2025]}
 
 
 async def turn(monkeypatch, claims):
@@ -87,6 +87,29 @@ async def test_each_step_streams_its_own_draft_and_finalizes_in_reviewed_section
     assert "Financial analysis" in folded["worker-1"] and "From the filings" in folded["worker-2"]
     assert {"output": "R3", "text": "No named analyst praise", "source": "Answer Reviewer"} in result["gaps"]
     assert first(es, "answer_sections") < len(es) - 1 - [e["type"] for e in reversed(es)].index("answer") < first(es, "complete")
+
+
+def test_a_one_year_selection_for_a_change_question_suggests_the_prior_year():
+    coverage = {"INTC": [2024, 2025]}
+    assert year_tip("why did intels gross margin drop", ["INTC"], [2025], coverage).startswith("Your question compares periods, but only FY2025 is selected. Also select FY2024")
+    assert year_tip("what was intel revenue", ["INTC"], [2025], coverage) == ""
+    assert year_tip("why did margin drop", ["INTC"], [2024, 2025], coverage) == ""
+    assert year_tip("why did margin drop", ["INTC"], [2024], coverage) == ""
+
+
+@pytest.mark.asyncio
+async def test_an_investment_recommendation_gets_a_scope_answer_not_an_echo(monkeypatch):
+    monkeypatch.setenv("REQUEST_PLANNER", "semantic")
+
+    async def model(prompt, tools, handler, **kwargs):
+        handler("submit_plan", {"outputs": [{"kind": "unsupported", "description": "Recommend whether to buy AMD or NVIDIA"}], "timeframe": "recent", "start_date": None, "end_date": None})
+        yield {"type": "token", "data": ""}
+
+    es = [e async for e in events(Index(), "should i buy amd or nvidia", ["AMD", "NVDA"], [2025], model_stream=model)]
+    result = next(e["data"] for e in es if e["type"] == "answer_sections")
+    assert result["status"] == "coverage_gap" and [s["id"] for s in result["sections"]] == ["supervisor"]
+    assert result["sections"][0]["markdown"] == SCOPE_ANSWER
+    assert es[-1]["data"]["status"] == "coverage_gap"
 
 
 @pytest.mark.asyncio
