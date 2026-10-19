@@ -138,8 +138,10 @@ class FinancialTools:
 
 
 async def financial_turn(
-    store, state, writer, *, model_stream=codex_stream, emit_answer=True, prefetch=None
+    store, state, writer, *, model_stream=codex_stream, emit_answer=True, prefetch=None, handoff=None
 ):
+    # Without a following Quant step, this answer is the user's reported-figures section.
+    handoff = not emit_answer if handoff is None else handoff
     if re.search(r"\bcurrent liabilities\b", state["question"], re.I):
         return {"answer": "Current liabilities are outside the supported structured metrics.", "partial": True, "missing_outputs": ["Original-report current liabilities are unavailable in the structured store."], "financial_sources": {}}
     tools = FinancialTools(store, state["companies"], state["years"])
@@ -196,6 +198,8 @@ async def financial_turn(
         + json.dumps(initial)
         + (
             "\nThis is an input-selection handoff. Report completeness of the required inputs, not whether downstream calculations/explanations are finished. Quant and Research handle those outputs."
+            if handoff
+            else "\nThis answer is shown to the user as the reported-figures part of a larger answer. State the requested figures directly with their actual periods and citations. Do not mention handoffs, other agents or outputs you do not answer."
             if not emit_answer
             else ""
         )

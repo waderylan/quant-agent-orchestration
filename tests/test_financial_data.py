@@ -269,6 +269,24 @@ async def test_financial_worker_uses_distinct_tools_and_rejects_unregistered_cit
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("handoff", [True, False])
+async def test_figures_are_written_for_the_user_unless_quant_consumes_them(financial_store, handoff):
+    # Data → Current showed a handoff note as the user's reported-figures answer.
+    prompts = []
+
+    async def model(prompt, tool_schema, handler, **kwargs):
+        prompts.append(prompt)
+        handler("query_financials", {"metrics": ["revenue"]})
+        yield {"type": "tool", "data": {"name": "query_financials"}}
+        yield {"type": "token", "data": "Revenue was 38,962 million USD [F1]."}
+
+    state = {"question": "Show Qualcomm revenue", "companies": ["QCOM"], "years": [2024]}
+    await financial_turn(financial_store, state, lambda e: None, model_stream=model, emit_answer=False, handoff=handoff)
+    assert ("This is an input-selection handoff" in prompts[0]) is handoff
+    assert ("shown to the user as the reported-figures part" in prompts[0]) is not handoff
+
+
+@pytest.mark.asyncio
 async def test_missing_quarter_cash_flow_abstains_before_generation(financial_store):
     async def forbidden(*args, **kwargs):
         pytest.fail("An empty scoped result must not generate a financial figure")

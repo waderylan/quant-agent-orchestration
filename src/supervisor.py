@@ -715,6 +715,7 @@ def cooperative_graph(
                         emit,
                         model_stream=bounded_model,
                         emit_answer=last,
+                        handoff=any(t.worker in ("quant", "filing_inputs") for t in task.plan[position + 1 :]),
                         prefetch=([{"period": "FY", "basis": "annual", "metrics": ["revenue"]}] if state.get("revenue_component") else prefetch_for_analysis(state["question"]))
                         if any(t.worker == "quant" for t in task.plan)
                         else None,
