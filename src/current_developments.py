@@ -231,6 +231,8 @@ async def current_turn(state, emit, *, gateway=None, model_stream=codex_stream, 
             if event["type"] == "token":
                 answer += event["data"]
                 if not emit_answer:
+                    # The supervisor shows handoff prose as this step's draft.
+                    emit({"type": "draft", "data": event["data"]})
                     continue
             emit(event)
     tools.flush(emit)

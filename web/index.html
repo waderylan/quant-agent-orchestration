@@ -181,11 +181,6 @@
       #passage pre {
         font: 13px/1.5 monospace;
       }
-      #trace {
-        font: 13px/1.5 monospace;
-        max-height: 300px;
-        overflow: auto;
-      }
       table {
         border-collapse: collapse;
         width: 100%;
@@ -262,6 +257,58 @@
       #agent-details p { margin-bottom: 8px; }
       #agent-details ul { padding-left: 18px; color: #64716b; }
       .activity-source { background: white; color: #245e64; border-color: #dce2dc; font-size: 12px; padding: 4px 8px; margin: 4px 5px 0 0; }
+      .agent-chip { margin: 0; padding: 2px 8px; font-size: 11px; font-weight: 600; background: white; color: var(--agent); border: 1px solid color-mix(in srgb, var(--agent) 45%, white); border-radius: 999px; }
+      .agent-chip:disabled { opacity: 1; cursor: default; }
+      #request-plan { border: 1px solid #e3e8e2; border-radius: 10px; padding: 14px 16px; margin-bottom: 18px; background: #fafbf9; font-size: 13px; }
+      #request-plan h3 { margin: 0 0 4px; font-size: 14px; }
+      #request-plan p { margin: 0 0 4px; }
+      .plan-route, .plan-reason { color: #52645c; font-size: 12px; overflow-wrap: anywhere; }
+      .plan-parts { list-style: none; padding: 0; margin: 12px 0 0; }
+      .plan-parts > li { padding: 8px 0; border-top: 1px solid #e6eae5; }
+      .plan-parts details { margin: 4px 0 0 28px; }
+      .plan-parts details p { color: #52645c; font-size: 12px; }
+      .part-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      .part-number { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #e6eae5; font-size: 11px; font-weight: 650; }
+      .part-title { font-weight: 600; }
+      .part-status { margin-left: auto; font-size: 11px; color: #52645c; }
+      .part-status[data-state="running"] { color: #245e64; font-weight: 650; }
+      .part-status[data-state="checked"] { color: #2c6a3f; font-weight: 650; }
+      .part-status[data-state="gap"] { color: #a62323; font-weight: 650; }
+      .part-gap, .part-report { margin: 4px 0 0 28px !important; font-size: 12px; overflow-wrap: anywhere; }
+      .part-gap { color: #a62323; }
+      .part-report { color: #64716b; }
+      .plan-steps { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid #e6eae5; }
+      .plan-steps ol { list-style: none; padding: 0; margin: 8px 0 0; }
+      .plan-steps li { border-left: 3px solid var(--agent); padding: 2px 0 6px 10px; margin-bottom: 8px; }
+      .plan-steps li[data-state="queued"] { border-left-style: dashed; opacity: 0.75; }
+      .step-row { display: flex; width: 100%; justify-content: space-between; gap: 8px; margin: 0; padding: 0; background: none; color: var(--agent); border: 0; font-weight: 650; font-size: 13px; text-align: left; }
+      .step-state { color: #52645c; font-weight: 450; font-size: 11px; }
+      .step-meta { color: #52645c; font-size: 12px; overflow-wrap: anywhere; }
+      .step-now { color: #245e64; font-size: 12px; font-weight: 600; overflow-wrap: anywhere; }
+      .answer-section { border-left: 3px solid var(--agent); padding: 0 0 4px 14px; margin: 0 0 20px; }
+      .answer-section header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+      .answer-section h3 { margin: 0; font-size: 15px; }
+      .section-badge { margin-left: auto; font-size: 11px; color: #64716b; }
+      .answer-section[data-state="drafting"] .section-badge, .answer-section[data-state="checking"] .section-badge { color: #245e64; font-weight: 600; }
+      .answer-section[data-state="checked"] .section-badge { color: #2c6a3f; font-weight: 600; }
+      .answer-section[data-state="failed"] .section-badge { color: #a62323; font-weight: 600; }
+      .answer-section:not([data-state="checked"]) .section-body { color: #46524d; }
+      .section-waiting { color: #64716b; font-style: italic; }
+      .section-note { font-size: 12px; color: #52645c; margin: 0 0 6px; }
+      .section-removed { font-size: 12px; }
+      .section-removed del { color: #7a3b3b; }
+      #gap-box { border: 1px solid #efc9c9; background: #fdf6f6; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 13px; }
+      #gap-box h3 { margin: 0 0 4px; font-size: 13px; color: #a62323; }
+      #gap-box ul { margin: 0; padding-left: 18px; }
+      #intermediate-drafts ol { list-style: none; padding: 0; }
+      #trace { list-style: none; padding: 0; margin: 8px 0 0; font: 12px/1.45 ui-monospace, monospace; max-height: 360px; overflow: auto; }
+      #trace li { border-bottom: 1px solid #eef1ed; }
+      #trace details { margin: 0; }
+      #trace summary { padding: 3px 0; font: inherit; color: #263331; overflow-wrap: anywhere; }
+      #trace pre { margin: 4px 0 8px; padding: 8px; background: #f5f7f3; border-radius: 4px; }
+      .trace-time { color: #64716b; margin-right: 6px; }
+      .trace-agent { font-weight: 650; }
+      #trace-download { background: white; color: #244e42; font-size: 12px; padding: 4px 10px; margin: 4px 0 0; }
       @media (max-width: 800px) {
         main { margin: 24px auto; padding: 0 16px; }
         form, .panel { padding: 18px; }
@@ -331,13 +378,17 @@ What has happened at the selected companies since their latest filings? Cite dat
         </section>
         <section class="panel answer-panel">
           <h2>Answer</h2>
+          <section id="request-plan" hidden aria-label="Request plan"></section>
           <ul id="request-coverage" hidden aria-label="Requested outputs"></ul>
           <div id="answer" aria-live="polite"></div>
+          <section id="gap-box" hidden aria-label="Not covered"><h3>Not covered</h3><ul></ul></section>
+          <details id="intermediate-drafts" hidden><summary>Intermediate drafts</summary><ol></ol></details>
           <div id="sources"></div>
           <div id="artifacts"></div>
           <details>
             <summary>Routing and tool trace</summary>
-            <pre id="trace"></pre>
+            <button id="trace-download" type="button">Download raw trace (JSON)</button>
+            <ol id="trace" aria-label="Trace events"></ol>
           </details>
         </section>
         <aside class="panel" id="source-panel">
@@ -352,24 +403,38 @@ What has happened at the selected companies since their latest filings? Cite dat
     <script src="/static/vendor/marked.umd.js"></script>
     <script src="/static/vendor/purify.min.js"></script>
     <script src="/static/agent-activity.js"></script>
+    <script src="/static/request-progress.js"></script>
     <script>
       const $ = (id) => document.getElementById(id);
       let coverage = {},
         controller;
       let answerMarkdown = "", answerSources = [], renderFrame;
       const activity = new AgentActivity((source) => inspect(source));
+      const progress = new RequestProgress({
+        render: (container, markdown) => renderMarkdown(container, markdown),
+        selectCall: (id) => {
+          if (activity.selected !== id) activity.select(id);
+          $("activity-panel").scrollIntoView({ block: "nearest", behavior: "smooth" });
+        },
+        colors: AgentActivity.colors,
+      });
+      const traceLog = new TraceLog(() => activity.now(), () => activity.calls.get(activity.active)?.agent);
       marked.use({ renderer: { html: () => "" } });
       function renderAnswer() {
         cancelAnimationFrame(renderFrame);
         renderFrame = null;
-        $("answer").innerHTML = DOMPurify.sanitize(marked.parse(answerMarkdown), {
+        if (progress.active) return progress.rerender();
+        renderMarkdown($("answer"), answerMarkdown);
+      }
+      function renderMarkdown(container, markdown) {
+        container.innerHTML = DOMPurify.sanitize(marked.parse(markdown), {
           USE_PROFILES: { html: true },
           FORBID_TAGS: ["img", "input", "form", "button", "style"],
           FORBID_ATTR: ["style", "id", "name"],
         });
         // Resolve citations through the trusted source registry, including labels
         // that Markdown interpreted as ordinary links or reference definitions.
-        for (const link of $("answer").querySelectorAll("a")) {
+        for (const link of container.querySelectorAll("a")) {
           const id = link.textContent.replace(/^\[|\]$/g, "");
           const source = answerSources.find((source) => source.source_id === id);
           if (source) {
@@ -387,7 +452,7 @@ What has happened at the selected companies since their latest filings? Cite dat
             } catch { link.removeAttribute("href"); }
           }
         }
-        const walker = document.createTreeWalker($("answer"), NodeFilter.SHOW_TEXT);
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
         const nodes = [];
         while (walker.nextNode()) {
           if (!walker.currentNode.parentElement.closest("a, code, pre")) nodes.push(walker.currentNode);
@@ -405,7 +470,7 @@ What has happened at the selected companies since their latest filings? Cite dat
           }
           node.replaceWith(fragment);
         }
-        for (const table of $("answer").querySelectorAll("table")) {
+        for (const table of container.querySelectorAll("table")) {
           const wrapper = document.createElement("div");
           wrapper.className = "table-scroll";
           table.replaceWith(wrapper);
@@ -586,9 +651,13 @@ What has happened at the selected companies since their latest filings? Cite dat
         renderAnswer();
       }
       function event(type, data) {
+        traceLog.add(type, data);
         activity.receive(type, data);
+        progress.receive(type, data);
+        if (type === "plan") $("request-coverage").hidden = true;
+        if (progress.statusText()) $("status").textContent = progress.statusText();
         if (type === "activity") return;
-        if (type === "trace" && data.node === "request_understanding") {
+        if (type === "trace" && data.node === "request_understanding" && !progress.active) {
           $("request-coverage").hidden = false;
           $("request-coverage").replaceChildren(...data.plan.outputs.map((output) => {
             const item = document.createElement("li");
@@ -603,8 +672,9 @@ What has happened at the selected companies since their latest filings? Cite dat
             if (item) item.textContent = (result.addressed ? "Addressed: " : "Still needed: ") + item.textContent.replace(/^Researching: /, "");
           }
         }
-        if (type === "token") { answerMarkdown += data; scheduleAnswer(); }
-        else if (type === "answer") { answerMarkdown = data; scheduleAnswer(); }
+        // The legacy single answer stays current as the sectioned-mode fallback.
+        if (type === "token") { answerMarkdown += data; if (!progress.active) scheduleAnswer(); }
+        else if (type === "answer") { answerMarkdown = data; if (!progress.active) scheduleAnswer(); }
         else if (type === "sources") displaySources(data);
         else if (type === "scope") {
           const button = document.createElement("button");
@@ -630,17 +700,14 @@ What has happened at the selected companies since their latest filings? Cite dat
             document.createTextNode(data.message + " "),
             button,
           );
-          $("trace").textContent +=
-            JSON.stringify({ event: type, data }, null, 2) + "\n";
         } else if (type === "artifacts") displayArtifacts(data);
         else if (type === "error") {
           $("status").textContent = data;
           $("status").className = "error";
-          $("trace").textContent +=
-            JSON.stringify({ event: type, data }, null, 2) + "\n";
         } else if (type === "complete") {
+          progress.unreviewed(answerMarkdown);
           renderAnswer();
-          if (data.missing_outputs?.length) {
+          if (data.missing_outputs?.length && !progress.active) {
             const missing = document.createElement("p");
             missing.textContent = "Still needed: " + [...new Set(data.missing_outputs)].join("; ");
             $("scope-help").append(missing);
@@ -656,22 +723,22 @@ What has happened at the selected companies since their latest filings? Cite dat
                   : data.status === "partial"
                     ? "Partial answer · evidence gap"
                     : "Response unverified";
+          if (data.status !== "failed" && progress.active) $("status").textContent = progress.summary(data);
           $("status").className = data.status === "completed" ? "" : "error";
-        } else
-          $("trace").textContent +=
-            JSON.stringify({ event: type, data }, null, 2) + "\n";
+        }
       }
       $("stop").onclick = () => controller?.abort();
       $("research").onsubmit = async (e) => {
         e.preventDefault();
         controller = new AbortController();
         activity.start();
+        progress.reset();
+        traceLog.reset();
         answerMarkdown = "";
         answerSources = [];
         renderAnswer();
         $("sources").replaceChildren();
         $("artifacts").replaceChildren();
-        $("trace").textContent = "";
         $("scope-help").replaceChildren();
         $("request-coverage").replaceChildren();
         $("request-coverage").hidden = true;

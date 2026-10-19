@@ -1,0 +1,195 @@
+{
+  "date": "2026-10-19",
+  "kind": "native local application, real Chromium, real Codex subscription generation",
+  "server": "branch ui-clarity on 127.0.0.1:8091 using the main checkout corpus, Chroma index, SEC snapshots and live ledger",
+  "question": "Did AMD's operating margin improve from FY2024 to FY2025? Show the math and explain the reasons from its filings.",
+  "companies": [
+    "AMD"
+  ],
+  "years": [
+    2024,
+    2025
+  ],
+  "first_draft_visible_s": 8.3,
+  "final_s": 69.6,
+  "final_status": "Complete · every part checked",
+  "state_changes": [
+    {
+      "t_s": 0.6,
+      "status": "Researching…",
+      "sections": [],
+      "parts": [],
+      "now": null
+    },
+    {
+      "t_s": 8.3,
+      "status": "Step 1 of 3 · Financial Data is working",
+      "sections": [
+        [
+          "worker-1",
+          "Reported figures",
+          "Draft · writing"
+        ]
+      ],
+      "parts": [
+        "1CalculationsFinancial Analysis / QuantQueued",
+        "2Explanation from filingsFilings ResearchQueued"
+      ],
+      "now": "Now: Loading financial observations for the selected scope"
+    },
+    {
+      "t_s": 22.2,
+      "status": "Step 2 of 3 · Financial Analysis / Quant is working",
+      "sections": [
+        [
+          "worker-1",
+          "Reported figures",
+          "Draft · waiting for review"
+        ],
+        [
+          "worker-2",
+          "Financial analysis",
+          "Draft · writing"
+        ]
+      ],
+      "parts": [
+        "1CalculationsFinancial Analysis / QuantWorking",
+        "2Explanation from filingsFilings ResearchQueued"
+      ],
+      "now": null
+    },
+    {
+      "t_s": 41.0,
+      "status": "Step 3 of 3 · Filings Research is working",
+      "sections": [
+        [
+          "worker-1",
+          "Reported figures",
+          "Draft · waiting for review"
+        ],
+        [
+          "worker-2",
+          "Financial analysis",
+          "Draft · waiting for review"
+        ],
+        [
+          "worker-3",
+          "From the filings",
+          "Draft · writing"
+        ]
+      ],
+      "parts": [
+        "1CalculationsFinancial Analysis / QuantDrafted",
+        "2Explanation from filingsFilings ResearchWorking"
+      ],
+      "now": "Now: Retrieving filing passages for the selected companies and years"
+    },
+    {
+      "t_s": 62.5,
+      "status": "Answer Reviewer is checking the drafts",
+      "sections": [
+        [
+          "worker-1",
+          "Reported figures",
+          "Draft · being checked"
+        ],
+        [
+          "worker-2",
+          "Financial analysis",
+          "Draft · being checked"
+        ],
+        [
+          "worker-3",
+          "From the filings",
+          "Draft · being checked"
+        ]
+      ],
+      "parts": [
+        "1CalculationsFinancial Analysis / QuantBeing checked",
+        "2Explanation from filingsFilings ResearchBeing checked"
+      ],
+      "now": null
+    },
+    {
+      "t_s": 69.6,
+      "status": "Complete · every part checked",
+      "sections": [
+        [
+          "worker-3",
+          "From the filings",
+          "Checked by Answer Reviewer"
+        ]
+      ],
+      "parts": [
+        "1CalculationsFinancial Analysis / QuantChecked",
+        "2Explanation from filingsFilings ResearchChecked"
+      ],
+      "now": null
+    }
+  ],
+  "final": {
+    "plan_card": "The supervisor split your request into 2 parts\n\nRoute: Financial Data → Financial Analysis / Quant → Filings Research\n\nWhy: Calculate supported figures before synthesizing the filing explanation\n\n1\nCalculations\nFinancial Analysis / Quant\nChecked\nWhat the planner understood\n2\nExplanation from filings\nFilings Research\nChecked\nWhat the planner understood\nHow the agents work on it (3 steps)",
+    "answer_sections": [
+      [
+        "worker-3",
+        "From the filings",
+        "Checked by Answer Reviewer"
+      ]
+    ],
+    "intermediate_drafts": "Intermediate drafts (2)Reported figuresFinancial DataIntermediate draftIts results were handed to Filings Research, whose answer uses them.\nRequired financial inputs are complete. All amounts below ar",
+    "gap_box": null,
+    "answer_citation_links": 14,
+    "trace_rows": [
+      "0.4sRequest Planner Codex subscription · gpt-6.1-sol — Understand every requested output and check original-request coverage",
+      "7.3sSupervisor understood 2 requested outputs",
+      "7.3sSupervisor route: Financial Data → Financial Analysis / Quant → Filings Research — Calculate supported figures before synthesizing the filing explanation",
+      "7.3sSupervisor plan · 2 parts, 3 steps",
+      "7.3sSupervisor handoff → Financial Data · 0 evidence items",
+      "7.3sFinancial Data initial_financial_query · Loading financial observations for the selected scope",
+      "7.3sFinancial Data 4 sources returned",
+      "7.6sFinancial Data Codex subscription · gpt-6.1-sol — Select source-linked financial observations with exact fiscal intervals and original accessions",
+      "13.4sFinancial Data query_financials · Looking up AMD FY2024 revenue, operating income",
+      "13.4sFinancial Data 2 sources returned",
+      "13.4sFinancial Data query_financials · Looking up AMD FY2025 revenue, operating income",
+      "13.4sFinancial Data 2 sources returned",
+      "15.0sFinancial Data report_outcome · Reporting outcome: complete",
+      "15.0sFinancial Data outcome complete",
+      "21.1sSupervisor data completed · 4 evidence · 3 tool calls",
+      "21.1sFinancial Data draft complete · completed",
+      "21.1sSupervisor handoff → Financial Analysis / Quant · 4 evidence items (F1–F4)",
+      "21.4sFinancial Analysis / Quant Codex subscription · gpt-6.1-sol — Generate bounded analysis code; independently check financial calculations and source lineage",
+      "29.8sFinancial Analysis / Quant run_analysis · Running checked calculation code",
+      "30.0sFinancial Analysis / Quant 3 calculations checked",
+      "31.8sFinancial Analysis / Quant inspect_calculation · Checking calculation C3",
+      "31.8sFinancial Analysis / Quant inspected C3",
+      "31.8sFinancial Analysis / Quant report_outcome · Reporting outcome: complete",
+      "31.8sFinancial Analysis / Quant outcome complete",
+      "40.2sFinancial Analysis / Quant 3 verified calculations",
+      "40.2sSupervisor quant completed · 7 evidence · 6 tool calls",
+      "40.2sFinancial Analysis / Quant draft complete · completed",
+      "40.2sSupervisor handoff → Filings Research · 7 evidence items (F1–F4, C1–C3)",
+      "40.2sFilings Research initial_retrieval · Retrieving filing passages for the selected companies and years",
+      "40.7sFilings Research 12 sources returned",
+      "41.0sFilings Research Codex subscription · gpt-6.1-sol — Historical filing research using local evidence",
+      "45.4sFilings Research search_sources · Searching filings: gross margin operating income research development marketing general administrative 2025 …",
+      "45.8sFilings Research 8 sources returned",
+      "48.1sFilings Research search_sources · Searching filings: operating income 2025 increase primarily driven Client Gaming Data Center higher revenue",
+      "48.3sFilings Research 6 sources returned",
+      "50.5sFilings Research report_outcome · Reporting outcome: complete",
+      "50.5sFilings Research outcome complete",
+      "61.8sFilings Research 12 cited sources",
+      "61.8sSupervisor research completed · 32 evidence · 9 tool calls",
+      "61.8sFilings Research draft complete · completed",
+      "62.1sAnswer Reviewer Codex subscription · gpt-6.1-sol — Understand every requested output and check original-request coverage",
+      "68.9sSupervisor review: R1 ✓ R2 ✓",
+      "68.9sSupervisor final answer · 1 sections, 2 folded, review completed",
+      "68.9sSupervisor 12 cited sources",
+      "68.9sSupervisor termination · All requested outputs have verified worker outcomes",
+      "68.9sSupervisor complete · completed"
+    ]
+  },
+  "page_errors": [],
+  "tavily_calls": 0,
+  "tavily_ledger_rows_before_and_after": 231,
+  "baseline": "Before U1, the 2026-10-19 15:12 AMD request showed no answer prose until Current Developments, the last of four steps, began writing after its final tool call at 15:14:00."
+}

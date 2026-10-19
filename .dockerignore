@@ -9,6 +9,7 @@
 !web/
 !web/index.html
 !web/agent-activity.js
+!web/request-progress.js
 !web/vendor/
 !web/vendor/*
 !data/

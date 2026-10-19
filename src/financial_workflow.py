@@ -214,6 +214,8 @@ async def financial_turn(
             if event["type"] == "token":
                 answer += event["data"]
                 if not emit_answer:
+                    # The supervisor shows handoff prose as this step's draft.
+                    writer({"type": "draft", "data": event["data"]})
                     continue
             if event["type"] == "tool":
                 calls += 1

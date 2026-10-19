@@ -18,5 +18,6 @@ This is the authoritative order and status. Completed records describe verified 
 | M12 | [Experience and evaluation](experience-evaluation/README.md) | Planned |
 | M13 | [Deployment and submission](deployment/README.md) | Planned |
 | C1 | [Codebase cleanup](cleanup/README.md) | Verified locally |
+| U1 | [Agent progress clarity](progress-clarity/README.md) | Verified locally; completed after C1, before M11 |
 
 The implementation contract is in [architecture](../architecture.md). Formal scores and deployment results belong in [evaluation](../evaluation.md) when measured. Further milestones require Rylan Wade's feedback and authorization.

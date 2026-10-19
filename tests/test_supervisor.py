@@ -301,6 +301,8 @@ async def test_missing_structured_source_uses_one_bounded_followup():
     )
     assert task["steps"] == 2 and task["followups"] == 1 and task["steps"] <= MAX_STEPS
     assert es[-1]["data"]["status"] == "partial"
+    plans = [e["data"] for e in es if e["type"] == "plan"]
+    assert [[s["worker"] for s in p["steps"]] for p in plans] == [["data"], ["data", "research"]]
 
 
 @pytest.mark.asyncio

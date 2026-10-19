@@ -28,6 +28,84 @@ NAMES = {
 }
 MAX_STEPS, MAX_TOOL_CALLS, MAX_FOLLOWUPS = 7, 64, 1
 WORKER_TIMEOUT_SECONDS = 210
+OUTPUT_OWNERS = {"financial_inputs": "data", "checked_calculations": "quant", "filing_explanation": "research", "risk_changes": "risk", "official_update": "research", "current_developments": "current", "public_reaction": "current"}
+OUTPUT_TITLES = {
+    "financial_inputs": "Reported figures",
+    "filing_financial_inputs": "Filing table inputs",
+    "checked_calculations": "Calculations",
+    "filing_explanation": "Explanation from filings",
+    "filing_evidence_followup": "Filing evidence follow-up",
+    "risk_changes": "Risk-factor changes",
+    "official_update": "Official update check",
+    "current_developments": "Recent developments",
+    "public_reaction": "Outside reaction",
+    "capabilities": "System capabilities",
+    "system_capabilities": "System capabilities",
+    "unsupported": "Outside supported scope",
+}
+SECTION_LABELS = {"quant": "Financial analysis", "research": "From the filings", "current": "Outside research", "risk": "Changes in filing risks"}
+
+
+def step_ids(plan):
+    """Execution increments steps and position together, so position names the call."""
+    return {t.worker: f"worker-{i}" for i, t in enumerate(plan, 1)}
+
+
+def plan_event(task, request_plan, *, reason="", companies=(), years=()):
+    """Plain-language request parts, their owners and the dispatch order."""
+    outputs = (request_plan or {}).get("outputs") or []
+    if outputs:
+        rows = [{"id": o["id"], "kind": o["kind"], "description": o["description"], "owner": OUTPUT_OWNERS.get(o["kind"]), "timeframe": o.get("timeframe")} for o in outputs]
+    else:
+        rows = [{"id": f"O{i}", "kind": t.output, "description": t.reason, "owner": t.worker, "timeframe": None} for i, t in enumerate(task.plan, 1)]
+    if not rows and task.requested_outputs == ["system_capabilities"]:
+        rows = [{"id": "O1", "kind": "capabilities", "description": "Describe the implemented agents and their roles", "owner": None, "timeframe": None}]
+    planned = {t.worker for t in task.plan}
+    for row in rows:
+        row["title"] = OUTPUT_TITLES.get(row["kind"], row["kind"].replace("_", " ").capitalize())
+        row["agent"] = NAMES.get(row["owner"]) if row["owner"] else "Supervisor" if row["kind"] == "capabilities" else None
+        row["assigned"] = row["owner"] in planned or row["kind"] == "capabilities"
+    steps = []
+    for i, t in enumerate(task.plan, 1):
+        earlier = step_ids(task.plan[: i - 1])
+        steps.append({
+            "id": f"worker-{i}", "position": i, "worker": t.worker, "agent": NAMES[t.worker],
+            "title": OUTPUT_TITLES.get(t.output, t.output.replace("_", " ").capitalize()), "output": t.output, "reason": t.reason,
+            "called_by": "Supervisor", "after": [earlier[w] for w in t.depends_on if w in earlier],
+            "serves": [r["id"] for r in rows if r["owner"] == t.worker], "feeds": [],
+        })
+    for step in steps:
+        for prior in step["after"]:
+            next(s for s in steps if s["id"] == prior)["feeds"].append(step["id"])
+    return {
+        "planner": "semantic" if outputs else "rules",
+        "route": " → ".join(NAMES[t.worker] for t in task.plan),
+        "reason": reason,
+        "companies": list(companies),
+        "years": list(years),
+        "outputs": rows,
+        "steps": steps,
+    }
+
+
+def compose(rows):
+    return "\n\n".join((r["label"] + ":\n" if r["labeled"] else "") + r["markdown"] for r in rows)
+
+
+def strip_sections(rows, claims):
+    """Remove reviewer claims per section; None means a claim crossed a boundary."""
+    from src.request_plan import remove_unsupported
+
+    if not claims:
+        return rows
+    reviewed = []
+    for row in rows:
+        found = [c for c in claims if c and c in row["markdown"]]
+        reviewed.append({**row, "markdown": remove_unsupported(row["markdown"], claims), "removed": row["removed"] + found})
+    kept = [row for row in reviewed if row["markdown"].strip()]
+    if any(c and c in compose(kept) for c in claims):
+        return None
+    return reviewed
 
 
 class Task(BaseModel):
@@ -336,6 +414,7 @@ def cooperative_graph(
         if capability and not capability["question"] and not mixed_capability:
             task = TaskState(plan=[], requested_outputs=["system_capabilities"], required_workers=[], completed_outputs=["system_capabilities"])
             writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation acquisition", "task": task.model_dump()}})
+            writer({"type": "plan", "data": plan_event(task, {}, reason="Answered locally from implemented agent descriptions", companies=state["companies"], years=state["years"])})
             writer({"type": "activity", "data": {"id": "plan", "agent": "Supervisor", "status": "completed"}})
             return {"capability_answer": capability["answer"], "task": task.model_dump(), "evidence": {}, "worker_answers": {}, "error": "", "current": 0}
         if capability and capability["question"]:
@@ -367,7 +446,7 @@ def cooperative_graph(
                     intent = "none"
                     planning_gap.append("Outside research is requested but web acquisition is explicitly disabled by the question.")
                 tasks, base = tasks_for(state["question"], intent=intent, price_gap=price_gap)
-                owners = {"financial_inputs": "data", "checked_calculations": "quant", "filing_explanation": "research", "risk_changes": "risk", "official_update": "research", "current_developments": "current", "public_reaction": "current"}
+                owners = OUTPUT_OWNERS
                 needed = {owners[k] for k in kinds if k in owners}
                 if "quant" in needed:
                     needed.add("data")
@@ -454,6 +533,8 @@ def cooperative_graph(
                 },
             }
         )
+        if not error and tasks:
+            writer({"type": "plan", "data": plan_event(task, semantic, reason=base.reason, companies=companies, years=state["years"])})
         if error:
             from src.request_routing import mentioned_companies
 
@@ -545,6 +626,14 @@ def cooperative_graph(
                 yield event
 
         def emit(event):
+            # Every step's prose streams as its own tagged draft. The legacy answer
+            # stream still carries only the last step.
+            if event["type"] in ("token", "draft"):
+                writer({"type": "draft", "data": {"step": activity_id, "agent": NAMES[step.worker], "delta": event["data"]}})
+                if event["type"] == "draft":
+                    return
+            elif event["type"] == "answer":
+                writer({"type": "draft_replace", "data": {"step": activity_id, "agent": NAMES[step.worker], "markdown": event["data"]}})
             if event["type"] in ("token", "answer", "sources") and not last:
                 return
             writer(event)
@@ -712,6 +801,7 @@ def cooperative_graph(
                         task.required_workers.insert(position + 1, target)
                         if target == "research":
                             task.followups += 1
+                        writer({"type": "plan", "data": plan_event(task, state.get("request_plan"), reason=state.get("reason", ""), companies=state["companies"], years=state["years"])})
             task.missing_inputs = list(dict.fromkeys(task.missing_inputs))
         except asyncio.CancelledError:
             raise
@@ -764,6 +854,8 @@ def cooperative_graph(
                 },
             }
         )
+        added = sorted(set(evidence) - previous_ids, key=lambda s: (s[0], int(s[1:])))
+        writer({"type": "draft_final", "data": {"step": activity_id, "agent": NAMES[step.worker], "markdown": result.get("answer", ""), "outcome": task.worker_outcomes[step.worker], "evidence": added}})
         writer({"type": "activity", "data": {"id": activity_id, "agent": NAMES[step.worker], "status": task.worker_outcomes[step.worker], "sources": [evidence[sid] for sid in sorted(set(evidence) - previous_ids)]}})
         # Keep only bounded handoff sources in graph state, full evidence in registry.
         if "risk_sources" in result:
@@ -791,6 +883,7 @@ def cooperative_graph(
         writer = get_stream_writer()
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
+        sections, folded, answer = [], {}, ""
         if state.get("capability_answer") and not task.plan and not task.missing_inputs:
             answer, status = state["capability_answer"], "completed"
         elif state.get("error"):
@@ -820,15 +913,17 @@ def cooperative_graph(
             include = list(dict.fromkeys(include))
             if "quant" in include and "data" in include and not has_conflicts:
                 include.remove("data")
+                folded["data"] = "Its figures appear with checked calculations in Financial analysis."
             if "quant" in include and "research" in include and task.worker_outcomes.get("quant") == "completed":
                 calculations = set(re.findall(r"\[(C\d+)\]", answers["quant"]))
                 if calculations and calculations <= set(re.findall(r"\[(C\d+)\]", answers["research"])):
                     include.remove("quant")
-            labels = {"quant": "Financial analysis", "research": "From the filings", "current": "Outside research", "risk": "Changes in filing risks"}
-            answer = "\n\n".join(
-                (labels.get(w, NAMES[w]) + ":\n" if len(include) > 1 else "") + answers[w]
+                    folded["quant"] = "Its calculations are cited in From the filings."
+            ids = step_ids(task.plan)
+            sections = [
+                {"id": ids[w], "worker": w, "agent": NAMES[w], "label": SECTION_LABELS.get(w, NAMES[w]), "labeled": len(include) > 1, "markdown": answers[w], "removed": []}
                 for w in include
-            )
+            ]
             status = (
                 "needs_clarification"
                 if "needs_clarification" in task.worker_outcomes.values()
@@ -838,24 +933,54 @@ def cooperative_graph(
                 or any(v != "completed" for v in task.worker_outcomes.values())
                 else "completed"
             )
+        if not sections:
+            sections = [{"id": "capabilities" if state.get("capability_answer") and not task.plan else "supervisor", "worker": None, "agent": "Supervisor", "label": "System capabilities" if state.get("capability_answer") and not task.plan else "Supervisor", "labeled": False, "markdown": answer, "removed": []}]
+        final_agent = next((s["agent"] for s in reversed(sections) if s["worker"]), None)
+        for t in task.plan:
+            if t.worker in folded or any(s["worker"] == t.worker for s in sections):
+                continue
+            outcome = task.worker_outcomes.get(t.worker)
+            folded[t.worker] = (
+                "Not run before the supervisor stopped." if outcome is None
+                else f"No verified answer from this agent ({outcome})." if t.worker not in answers
+                else f"Its results were handed to {final_agent}, whose answer uses them." if final_agent
+                else "Its answer was not used."
+            )
         if not task.registered_evidence and status == "partial" and state.get("live_intent", "none") == "none":
             status = "failed" if "failed" in task.worker_outcomes.values() else "coverage_gap"
-        review = {}
+        review, review_status, fallback = {}, "skipped", False
         if state.get("capability_answer") and (task.plan or task.missing_inputs):
-            answer = state["capability_answer"] + "\n\n" + answer
+            sections.insert(0, {"id": "capabilities", "worker": None, "agent": "Supervisor", "label": "System capabilities", "labeled": False, "markdown": state["capability_answer"], "removed": []})
+        answer = compose(sections)
+
+        def reviewed(rows, claims):
+            # Sections are the source of truth; a claim crossing a section
+            # boundary falls back to whole-answer removal in one section.
+            nonlocal fallback
+            from src.request_plan import remove_unsupported
+
+            if not fallback and (result := strip_sections(rows, claims)) is not None:
+                return result
+            fallback = True
+            text = compose([r for r in rows if r["markdown"].strip()])
+            found = [c for c in claims if c and c in text]
+            return [{"id": "answer", "worker": None, "agent": "Supervisor", "label": "Answer", "labeled": False, "markdown": remove_unsupported(text, claims) if claims else text, "removed": [c for r in rows for c in r["removed"]] + found}]
+
         if state.get("request_plan") and (answers or state.get("capability_answer")) and not state.get("error"):
-            from src.request_plan import coverage, remove_unsupported
+            from src.request_plan import coverage
             writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": "running", "task": "Check answer"}})
             review_status = "failed"
             try:
                 review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
-                answer = remove_unsupported(answer, review["unsupported_claims"])
+                sections = reviewed(sections, review["unsupported_claims"])
+                answer = compose([s for s in sections if s["markdown"].strip()])
                 if review["unsupported_claims"]:
                     removed = review["unsupported_claims"]
                     review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
                     # One bounded repair pass. If a second check finds more unsupported
                     # claims, remove them and retain the partial outcome.
-                    answer = remove_unsupported(answer, review["unsupported_claims"])
+                    sections = reviewed(sections, review["unsupported_claims"])
+                    answer = compose([s for s in sections if s["markdown"].strip()])
                     review["removed_claims"] = removed + review["unsupported_claims"]
                 if not review["missing"]:
                     task.missing_inputs = [gap for gap in task.missing_inputs if gap not in task.reported_gaps]
@@ -870,12 +995,16 @@ def cooperative_graph(
             if task.missing_inputs and status == "completed":
                 status = "partial"
             writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": review_status}})
+        for row in sections:
+            if row["worker"] and not row["markdown"].strip():
+                folded[row["worker"]] = "Removed by the Answer Reviewer: no supported sentence remained."
+        sections = [s for s in sections if s["markdown"].strip()]
         task.terminal = status
+        suffix = ""
         if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
-            answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
-        writer({"type": "answer", "data": answer})
+            suffix = "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
         evidence = state.get("evidence", {})
-        cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
+        cited = set(re.findall(r"\[([SFCW]\d+)\]", compose(sections) + suffix))
         invalid = cited - evidence.keys()
         if invalid:
             status = task.terminal = "partial" if evidence else "failed"
@@ -883,8 +1012,26 @@ def cooperative_graph(
                 "Unregistered source references excluded: " + ", ".join(sorted(invalid))
             )
             for sid in invalid:
-                answer = answer.replace("[" + sid + "]", "[unverified source]")
-            writer({"type": "answer", "data": answer})
+                suffix = suffix.replace("[" + sid + "]", "[unverified source]")
+                for row in sections:
+                    row["markdown"] = row["markdown"].replace("[" + sid + "]", "[unverified source]")
+        answer = compose(sections) + suffix
+        outputs = (state.get("request_plan") or {}).get("outputs") or []
+        gaps = []
+        for gap in dict.fromkeys(task.missing_inputs):
+            match = re.match(r"([RO]\d+):\s*", gap)
+            owner = next((o for o in outputs if (match and o["id"] == match[1]) or gap.startswith(o["description"] + ":")), None)
+            text = gap[match.end():] if match else gap[len(owner["description"]) + 1:].strip() if owner else gap
+            gaps.append({"output": owner["id"] if owner else match[1] if match else None, "text": text, "source": "Answer Reviewer" if gap in review.get("missing", []) else "Agent" if gap in task.reported_gaps else "Supervisor"})
+        final_ids = step_ids(task.plan)
+        writer({"type": "answer_sections", "data": {
+            "sections": [{k: s[k] for k in ("id", "worker", "agent", "label", "labeled", "markdown", "removed")} for s in sections],
+            "folded": [{"id": f"worker-{i}", "worker": t.worker, "agent": NAMES[t.worker], "reason": folded[t.worker]} for i, t in enumerate(task.plan, 1) if t.worker in folded and final_ids[t.worker] == f"worker-{i}"],
+            "review": {"status": review_status, "results": review.get("results", []), "removed_claims": review.get("removed_claims", review.get("unsupported_claims", []))},
+            "gaps": gaps,
+            "fallback": fallback,
+        }})
+        writer({"type": "answer", "data": answer})
         if cited & evidence.keys():
             writer(
                 {
