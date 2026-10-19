@@ -2,9 +2,30 @@
 
 import pytest
 
-from src.request_plan import decompose, coverage
+from src.request_plan import decompose, coverage, remove_unsupported
 from src.research_workflow import events
 from tests.test_supervisor import source
+
+
+def test_repair_removes_a_partial_unsupported_claim_as_a_sentence():
+    answer = 'Analysts raised concentration concerns. [W1]\nDemand was strong, while an unsupported forecast was asserted. This suggests execution risk. [W1]'
+    repaired = remove_unsupported(answer, ['an unsupported forecast was asserted'])
+    assert repaired == 'Analysts raised concentration concerns. [W1]\nThis suggests execution risk. [W1]'
+
+
+@pytest.mark.parametrize('prefix', ['Qualcomm Inc.', 'The U.S. company'])
+def test_repair_keeps_abbreviations_inside_the_removed_sentence(prefix):
+    answer = prefix + ' reported an unsupported acquisition completion. Supported revenue [F1].'
+    assert remove_unsupported(answer, ['an unsupported acquisition completion']) == 'Supported revenue [F1].'
+
+
+@pytest.mark.asyncio
+async def test_review_requires_explicit_omission_and_claim_checks():
+    async def model(prompt, tools, handler, **kwargs):
+        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}]})
+        yield {'type': 'token', 'data': ''}
+    with pytest.raises(ValueError, match='missing_requests'):
+        await coverage('Explain filings', [{'id': 'R1', 'kind': 'filing_explanation', 'description': 'Explain filings'}], 'Filed fact [S1].', {'S1': source('S1')}, model, lambda e: None)
 
 
 @pytest.mark.asyncio
@@ -21,7 +42,7 @@ async def test_decomposition_preserves_the_casual_external_reaction_clause():
 @pytest.mark.asyncio
 async def test_reviewer_cannot_confirm_external_reaction_with_only_a_filing_citation():
     async def model(prompt, tools, handler, **kwargs):
-        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}]})
+        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})
         yield {'type': 'token', 'data': ''}
     outputs = [{'id': 'R1', 'kind': 'public_reaction', 'description': 'Outside reaction'}]
     result = await coverage('What did people think?', outputs, 'Management described growth [S1].', {'S1': source()}, model, lambda e: None)
@@ -38,7 +59,7 @@ async def test_supervisor_retains_an_unanswered_output_even_when_workers_finish(
         if kwargs['agent'] == 'Request Planner':
             handler('submit_plan', {'outputs': [{'kind': 'filing_explanation', 'description': 'Explain growth'}, {'kind': 'public_reaction', 'description': 'Outside reaction'}], 'timeframe': 'reaction', 'start_date': None, 'end_date': None})
         else:
-            handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}, {'id': 'R2', 'addressed': False, 'citations': [], 'missing': 'No outside viewpoints established'}]})
+            handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}, {'id': 'R2', 'addressed': False, 'citations': [], 'missing': 'No outside viewpoints established'}], 'missing_requests': [], 'unsupported_claims': []})
         yield {'type': 'token', 'data': ''}
     async def research(state, writer):
         return {'answer': 'Filed explanation [S1].', 'research_sources': {'S1': source(company='QCOM')}}

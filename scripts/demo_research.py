@@ -4,12 +4,12 @@ import argparse
 import asyncio
 import json
 import sys
-import time
 from pathlib import Path
 
 import httpx
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.demo_support import capture_turn
 from src.research_index import ResearchIndex
 from src.research_workflow import research_turn
 from src.source_collection import ROOT, now, write_json
@@ -31,27 +31,11 @@ QUESTIONS = [
 
 
 async def application_turn(client, company, year, question):
-    started = time.perf_counter()
-    events, first_token = [], None
-    async with client.stream(
-        "POST",
-        "/api/chat",
-        json={"question": question, "companies": [company], "years": [year]},
-    ) as response:
-        response.raise_for_status()
-        event_type = None
-        async for line in response.aiter_lines():
-            if line.startswith("event: "):
-                event_type = line[7:]
-            elif line.startswith("data: "):
-                data = json.loads(line[6:])
-                if event_type == "token" and first_token is None:
-                    first_token = time.perf_counter() - started
-                events.append({"type": event_type, "data": data})
-    answer = "".join(e["data"] for e in events if e["type"] == "token")
-    sources = next((e["data"] for e in events if e["type"] == "sources"), [])
+    turn = await capture_turn(client, question, [company], [year], include_events=True)
     inspections = []
-    for source in sources:
+    for source in turn["sources"]:
+        if not source.get("source_id", "").startswith("S") or not {"text", "document_id", "chunk_id"} <= source.keys():
+            continue
         inspected = (await client.get(source["inspection_url"])).json()
         exact = inspected.get("text") == source["text"]
         scoped = source["company"] == company and source["fiscal_year"] == year
@@ -64,10 +48,11 @@ async def application_turn(client, company, year, question):
                 "correct_scope": scoped,
             }
         )
-    final = events[-1] if events else {}
+    final = turn["terminal"] or {}
     passed = (
-        final.get("data", {}).get("status") == "completed"
-        and bool(sources)
+        final.get("type") == "complete"
+        and final.get("data", {}).get("status") == "completed"
+        and bool(inspections)
         and all(i["exact_passage"] and i["correct_scope"] for i in inspections)
     )
     return {
@@ -75,13 +60,11 @@ async def application_turn(client, company, year, question):
         "company": company,
         "fiscal_year": year,
         "passed": passed,
-        "seconds": round(time.perf_counter() - started, 3),
-        "answer_token_ttft_seconds": round(first_token, 3)
-        if first_token is not None
-        else None,
-        "answer": answer,
+        "seconds": turn["seconds"],
+        "answer_token_ttft_seconds": turn["answer_token_ttft_seconds"],
+        "answer": turn["answer"],
         "inspections": inspections,
-        "events": events,
+        "events": turn["events"],
     }
 
 
@@ -129,7 +112,6 @@ async def main(args):
             for company, year, question in [
                 ("AAPL", 2025, "Apple revenue drivers"),
                 ("AMD", 2027, "AMD FY2027 revenue drivers"),
-                ("QCOM", 2025, "Current Qualcomm revenue"),
             ]:
                 result = await application_turn(client, company, year, question)
                 report["coverage_gaps"].append(

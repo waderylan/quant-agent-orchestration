@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-19T20:10:01.694912+00:00",
+  "image_id": "sha256:0f2bd55fb60b800f242ab0bc09a88ed01c5d785bb60ac3da15447618d7905ac8",
+  "image_files_scanned": 21860,
+  "image_config_and_history_clean": true,
+  "image_filesystem_clean": true,
+  "no_external_market_download_stage": true,
+  "reports_scanned": [
+    "cleanup-docker.json",
+    "cleanup-native.json"
+  ],
+  "passed": true
+}

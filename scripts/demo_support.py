@@ -17,7 +17,7 @@ async def wait_ready(client):
     raise RuntimeError("Application readiness deadline exceeded")
 
 
-async def capture_turn(client, question, companies, years, *, headers=None):
+async def capture_turn(client, question, companies, years, *, headers=None, include_events=False):
     started, first_token, events, kind = time.perf_counter(), None, [], None
     worker_returns = []
     async with client.stream(
@@ -62,4 +62,5 @@ async def capture_turn(client, question, companies, years, *, headers=None):
         "answer_token_ttft_seconds": round(first_token, 3)
         if first_token is not None
         else None,
+        **({"events": events} if include_events else {}),
     }

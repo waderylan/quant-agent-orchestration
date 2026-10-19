@@ -20,8 +20,8 @@ they do not need citations or a web search. Exact reported table values can use 
 citations; new arithmetic requires checked C evidence.
 
 Check each factual claim against its cited excerpt, including claims inside otherwise
-useful paragraphs. In unsupported_claims quote the SHORTEST exact unsupported sentence
-or clause. Preserve supported neighboring sentences; never remove a whole paragraph
+useful paragraphs. In unsupported_claims quote the SHORTEST complete grammatical
+sentence containing the unsupported claim. Preserve supported neighboring sentences; never remove a whole paragraph
 because one detail is unsupported. Keep citations shared by supported neighboring
 claims outside the removal span. Do not paraphrase the span.
 Mark the affected output unaddressed and explain the specific missing support.

@@ -1,0 +1,76 @@
+{
+  "baseline": "1df22b7",
+  "scope": "Net changes in the usefulness and supplemental cleanup increments",
+  "areas": {
+    "application": {
+      "edited": [
+        ".env.example",
+        "prompts/current_developments.md",
+        "prompts/filings_research.md",
+        "prompts/quant.md",
+        "src/capabilities.py",
+        "src/current_developments.py",
+        "src/live_mcp.py",
+        "src/research_workflow.py",
+        "src/response_contract.py",
+        "src/risk_summary.py",
+        "src/supervisor.py",
+        "web/index.html"
+      ],
+      "added": [
+        "prompts/answer_coverage.md",
+        "prompts/request_plan.md",
+        "src/request_plan.py",
+        "src/web_evidence.py"
+      ]
+    },
+    "documentation": {
+      "edited": [
+        "README.md",
+        "docs/architecture.md",
+        "docs/evaluation.md",
+        "docs/milestones/README.md",
+        "docs/milestones/current-developments/README.md",
+        "docs/project.md"
+      ],
+      "added": [
+        "docs/milestones/current-developments/evidence/HOLDOUT_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/HOLDOUT_FINAL_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/HOLDOUT_ITERATION2_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/HOLDOUT_VALIDATION_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/USEFULNESS_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/USEFULNESS_CHECKS_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/USEFULNESS_SECURITY_2026-10-19.json",
+        "docs/milestones/cleanup/README.md",
+        "docs/milestones/cleanup/evidence/ACCEPTANCE_2026-10-19.json",
+        "docs/milestones/cleanup/evidence/SECURITY_2026-10-19.json",
+        "docs/milestones/cleanup/evidence/FILES_2026-10-19.json"
+      ]
+    },
+    "scripts": {
+      "edited": [
+        "scripts/demo_research.py",
+        "scripts/demo_risk.py",
+        "scripts/demo_support.py"
+      ],
+      "added": [
+        "scripts/evaluate_usefulness.py"
+      ],
+      "deleted": [
+        "scripts/record_risk_acceptance.py"
+      ]
+    },
+    "tests": {
+      "edited": [
+        "tests/conftest.py",
+        "tests/test_current_developments.py",
+        "tests/test_markdown.py"
+      ],
+      "added": [
+        "tests/test_request_plan.py",
+        "tests/test_web_evidence.py",
+        "tests/test_demo_support.py"
+      ]
+    }
+  }
+}

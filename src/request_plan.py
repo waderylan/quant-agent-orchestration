@@ -5,7 +5,7 @@ import re
 from contextlib import aclosing
 from datetime import datetime, timezone
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Literal
 
 from src.source_collection import ROOT
@@ -27,6 +27,21 @@ class RequestPlan(BaseModel):
     timeframe: Literal["recent", "since_filing", "reaction", "specified"]
     start_date: str | None
     end_date: str | None
+
+
+class OutputReview(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: str
+    addressed: StrictBool
+    citations: list[str]
+    missing: str
+
+
+class AnswerReview(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    results: list[OutputReview]
+    missing_requests: list[str]
+    unsupported_claims: list[str]
 
 
 async def structured(prompt, name, schema, model_stream, emit, *, agent):
@@ -67,8 +82,6 @@ async def decompose(state, model_stream, emit):
 
 
 async def coverage(question, outputs, answer, sources, model_stream, emit):
-    strings = {"type": "array", "items": {"type": "string"}}
-    schema = {"type": "object", "properties": {"results": {"type": "array", "items": {"type": "object", "properties": {"id": {"type": "string"}, "addressed": {"type": "boolean"}, "citations": strings, "missing": {"type": "string"}}, "required": ["id", "addressed", "citations", "missing"], "additionalProperties": False}}, "missing_requests": strings, "unsupported_claims": strings}, "required": ["results", "missing_requests", "unsupported_claims"], "additionalProperties": False}
     cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
     # Checked calculations retain their original inputs even when only the derived
     # measure belongs in the answer. Make that lineage available to the reviewer.
@@ -95,7 +108,7 @@ async def coverage(question, outputs, answer, sources, model_stream, emit):
         excerpts.append(excerpt)
     from src.capabilities import capability_request
     prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "untrusted_source_excerpts": excerpts})
-    review = await structured(prompt, "submit_coverage", schema, model_stream, emit, agent="Answer Reviewer")
+    review = AnswerReview.model_validate(await structured(prompt, "submit_coverage", AnswerReview.model_json_schema(), model_stream, emit, agent="Answer Reviewer")).model_dump()
     rows = review.get("results", [])
     if len(rows) != len(outputs) or {r.get("id") for r in rows} != {o["id"] for o in outputs}:
         raise ValueError("Answer review omitted a requested output")
@@ -117,9 +130,19 @@ async def coverage(question, outputs, answer, sources, model_stream, emit):
 
 
 def remove_unsupported(answer, claims):
-    """Remove only the reviewer's exact quoted spans; never rewrite financial facts."""
+    """Remove unsupported sentences without leaving a partial clause behind."""
     for claim in sorted(claims, key=len, reverse=True):
-        answer = answer.replace(claim, "")
+        while claim and claim in answer:
+            start = answer.index(claim)
+            end = start + len(claim)
+            boundaries = [0, len(answer)]
+            for match in re.finditer(r"(?<=[.!?])\s+|(?<=\])\s+(?=[A-Z])|\n+", answer):
+                if "\n" not in match[0] and re.search(r"\b(?:Inc|Corp|Ltd|Co|Mr|Ms|Dr|U\.S|e\.g|i\.e)\.$", answer[:match.start()], re.I):
+                    continue
+                boundaries.append(match.end())
+            start = max(i for i in boundaries if i <= start)
+            end = end if claim.endswith((".", "!", "?")) else min(i for i in boundaries if i >= end)
+            answer = answer[:start] + answer[end:]
     answer = re.sub(r"(?m)^\s*[-*]\s*$\n?", "", answer)
     answer = re.sub(r"(?m)^(?:Outside research|From the filings|Financial analysis|Changes in filing risks):\s*(?=\Z|(?:Outside research|From the filings|Financial analysis|Changes in filing risks):)", "", answer)
     return re.sub(r"\n{3,}", "\n\n", answer).strip()

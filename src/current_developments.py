@@ -14,8 +14,7 @@ import tldextract
 from src.codex_model import stream as codex_stream
 from src.live_mcp import LiveGateway, payload_body, sanitized, search_arguments
 from src.request_routing import COMPANY_ALIASES
-from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
-from src.risk_summary import tool
+from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer, tool
 from src.source_collection import ROOT, digest
 from src.web_evidence import clean_text, publication_date, canonical_url, source_tier
 

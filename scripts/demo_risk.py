@@ -10,7 +10,7 @@ import httpx
 from playwright.async_api import async_playwright
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.demo_support import capture_turn
+from scripts.demo_support import capture_turn, wait_ready
 from src.risk_summary import RiskTools, risk_turn
 from src.research_index import ResearchIndex
 from src.source_collection import ROOT, now, write_json
@@ -57,15 +57,7 @@ async def main(args):
         report["direct"] = {"answer": result["answer"], "partial": result["partial"], "changes": result["risk_changes"], "trace": [e for e in events if e["type"] == "trace"]}
         write_json(args.output, report)
     async with httpx.AsyncClient(base_url=args.url, timeout=300) as client:
-        for attempt in range(40):
-            try:
-                if (await client.get("/api/coverage")).status_code == 200:
-                    break
-            except httpx.HTTPError:
-                pass
-            await asyncio.sleep(.5)
-        else:
-            raise RuntimeError("Application did not become ready")
+        await wait_ready(client)
         report["api"] = []
         for company, question, years in [
             ("QCOM", "Did Qualcomm add a customer concentration risk from FY2024 to FY2025, or move/rephrase existing language? Inspect the complete sections and cite before/after.", [2024, 2025]),

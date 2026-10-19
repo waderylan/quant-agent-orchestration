@@ -1,0 +1,136 @@
+{
+  "checked_at": "2026-10-19T20:11:45.273321+00:00",
+  "profile": "Actual native application and local Linux Docker with local Codex generation; not Cloud Run or deployment providers",
+  "tests": {
+    "command": "uv run --locked pytest -q",
+    "passed": 271,
+    "failed": 0,
+    "seconds": 23.56,
+    "tavily_transport_blocked": true
+  },
+  "native": {
+    "question": "from amds filings did operating margin improve from fy24 to fy25? just show the margins and the change then a quick takeaway. no news or long list of underlying numbers",
+    "answer": "- FY2024 (ended December 28, 2024): GAAP operating margin of 7.37%. [C1]\n- FY2025 (ended December 27, 2025): 10.66%. [C2]\n- Change: +3.30 percentage points. [C3]\n- Takeaway: Yes—AMD kept a larger share of revenue as operating profit in FY2025, based on its original annual filings. [C3]",
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "status": "completed",
+        "verified_citations": true,
+        "coverage_checked": true
+      }
+    },
+    "seconds": 62.201,
+    "source_inspections": [
+      {
+        "source_id": "C1",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "C2",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "C3",
+        "inspection_passed": true
+      }
+    ],
+    "live_calls": 0
+  },
+  "docker": {
+    "question": "Using only the filings, compare Qualcomm gross margin in FY2024 and FY2025. Give the margin change and a brief explanation.",
+    "answer": "- Qualcomm’s consolidated GAAP gross margin declined from 56.21% in FY2024 [C1] to 55.43% in FY2025 [C2], down 0.79 percentage points. [C3]\n- Management attributed the decline primarily to revenue mix: higher-margin QTL licensing revenues represented a smaller proportion of total revenue. QCT gross margin remained approximately flat, with higher product costs partially offset by higher average selling prices. [S23] [S25]\n- Original-report comparison, without normalization: FY2024 ran September 25, 2023–September 29, 2024 (53 weeks); FY2025 ran September 30, 2024–September 28, 2025 (52 weeks). [F1] [F3]",
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "status": "completed",
+        "verified_citations": true,
+        "coverage_checked": true
+      }
+    },
+    "seconds": 94.935,
+    "source_inspections": [
+      {
+        "source_id": "C1",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "C2",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "C3",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "F1",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "F3",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "S23",
+        "inspection_passed": true
+      },
+      {
+        "source_id": "S25",
+        "inspection_passed": true
+      }
+    ],
+    "live_calls": 0
+  },
+  "verification_bug": {
+    "trigger": "SSE tokens/first source set differ from the authoritative final answer/latest source set",
+    "contract": "Demonstration capture and source inspection use final replacements and the terminal completion status",
+    "fixture_cases": 2,
+    "fixture_transport": "httpx.MockTransport; no network"
+  },
+  "sentence_repair": "A flagged partial clause removes its containing sentence while preserving supported neighboring sentences and common company abbreviations",
+  "review_schema": "Explicit omission and unsupported-claim lists are required; absent checks fail validation",
+  "image_security": "SECURITY_2026-10-19.json",
+  "tavily": {
+    "new_calls_in_cleanup": 0,
+    "task_acquisition_calls": 183,
+    "task_conservative_reserved_credits": 366,
+    "task_authorized_call_ceiling": 200,
+    "billing_measured": false
+  },
+  "checks": {
+    "local_links": 211,
+    "broken_links": [],
+    "compileall": "passed",
+    "diff_check": "passed",
+    "actual_secret_scan": "passed",
+    "earlier_evidence_and_routing_fixture_preserved": true,
+    "M11_and_M12_unchanged": true,
+    "milestone_order": "M1–M13 plus supplemental C1",
+    "frontend_url": "http://127.0.0.1:8080"
+  },
+  "files": {
+    "tracked_changes": [
+      "M\tdocs/architecture.md",
+      "M\tdocs/evaluation.md",
+      "M\tdocs/milestones/README.md",
+      "M\tdocs/milestones/current-developments/README.md",
+      "M\tprompts/answer_coverage.md",
+      "M\tscripts/demo_research.py",
+      "M\tscripts/demo_risk.py",
+      "M\tscripts/demo_support.py",
+      "D\tscripts/record_risk_acceptance.py",
+      "M\tsrc/capabilities.py",
+      "M\tsrc/current_developments.py",
+      "M\tsrc/request_plan.py",
+      "M\tsrc/response_contract.py",
+      "M\tsrc/risk_summary.py",
+      "M\ttests/test_request_plan.py"
+    ],
+    "new_files": [
+      "docs/milestones/cleanup/README.md",
+      "docs/milestones/cleanup/evidence/ACCEPTANCE_2026-10-19.json",
+      "docs/milestones/cleanup/evidence/FILES_2026-10-19.json",
+      "docs/milestones/cleanup/evidence/SECURITY_2026-10-19.json",
+      "tests/test_demo_support.py"
+    ]
+  }
+}

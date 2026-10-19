@@ -4,6 +4,11 @@ from __future__ import annotations
 
 import re
 
+
+def tool(name, description, properties, required):
+    return {"type": "function", "name": name, "description": description, "inputSchema": {"type": "object", "properties": properties, "required": required, "additionalProperties": False}}
+
+
 OUTCOME_TOOL = {
     "type": "function",
     "name": "report_outcome",

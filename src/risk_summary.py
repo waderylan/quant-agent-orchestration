@@ -16,7 +16,7 @@ from datetime import date
 from typing import TypedDict, Literal
 
 from src.codex_model import stream as codex_stream
-from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
+from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer, tool
 from src.source_collection import ROOT, digest
 
 # Leave the supervisor's 210-second worker limit time to publish prior issuers.
@@ -214,10 +214,6 @@ class RiskTools:
             self.changes.append(change)
             return {"recorded": change, "qualification": "Language classification; absence of an exact phrase does not prove a new economic exposure"}
         raise ValueError("Unknown Risk Summary tool")
-
-
-def tool(name, description, properties, required):
-    return {"type": "function", "name": name, "description": description, "inputSchema": {"type": "object", "properties": properties, "required": required, "additionalProperties": False}}
 
 
 TOOLS = [
