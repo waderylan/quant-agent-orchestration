@@ -136,6 +136,21 @@ async def test_unsupported_claim_is_removed_from_authoritative_answer(monkeypatc
 
 
 @pytest.mark.asyncio
+async def test_reviewer_sees_the_passage_a_long_section_citation_relies_on():
+    # NVIDIA risk sections exceed 110,000 characters; the export-control text sits
+    # far past the first 12,000, and the reviewer removed every risk-change sentence.
+    seen = []
+    async def model(prompt, tools, handler, **kwargs):
+        seen.append(prompt)
+        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})
+        yield {'type': 'token', 'data': ''}
+    section = '\n'.join(['General supply chain and competition boilerplate paragraph.' * 4] * 600 + ['New licensing requirements restrict exports of data center GPUs to China.'])
+    answer = '- The later filing adds licensing requirements on GPU exports to China. [S1]'
+    await coverage('What changed in export-control risks?', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk changes'}], answer, {'S1': {'source_id': 'S1', 'kind': 'filing', 'text': section}}, model, lambda e: None)
+    assert 'New licensing requirements restrict exports of data center GPUs to China.' in seen[0]
+
+
+@pytest.mark.asyncio
 async def test_reviewer_sees_the_period_and_filing_behind_a_reported_figure():
     # A 2026-10-19 QCOM review removed a correct revenue sentence because the F1
     # excerpt lacked the fiscal dates and filing date the sentence stated.

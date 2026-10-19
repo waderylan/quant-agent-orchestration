@@ -81,6 +81,24 @@ async def decompose(state, model_stream, emit):
     return plan
 
 
+def relevant_text(text, answer, sid, limit=12000):
+    """For a long source, the paragraphs that best match the sentences citing it."""
+    if len(text) <= limit:
+        return text
+    # Citations follow their sentence's period, so never split before "[".
+    citing = " ".join(s for s in re.split(r"(?<=[.!?])\s+(?!\[)|\n+", answer) if f"[{sid}]" in s)
+    terms = {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", citing)}
+    paragraphs = [p for p in re.split(r"\n+", text) if p.strip()]
+    score = lambda i: len(terms & {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", paragraphs[i])})
+    chosen, size = set(), 0
+    for i in sorted(range(len(paragraphs)), key=lambda i: (-score(i), i)):
+        if size + len(paragraphs[i]) > limit:
+            continue
+        chosen.add(i)
+        size += len(paragraphs[i])
+    return "\n…\n".join(paragraphs[i] for i in sorted(chosen))
+
+
 async def coverage(question, outputs, answer, sources, model_stream, emit, context=None):
     cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
     # Checked calculations retain their original inputs even when only the derived
@@ -98,7 +116,7 @@ async def coverage(question, outputs, answer, sources, model_stream, emit, conte
             continue
         excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year",
             # Exact periods, filing identity and basis let the reviewer check stated dates.
-            "fiscal_start", "fiscal_end", "start", "end", "period", "basis", "accounting_basis", "revision_basis", "form", "filed", "accession")}, "text": source.get("text", "")[:12000]}
+            "fiscal_start", "fiscal_end", "start", "end", "period", "basis", "accounting_basis", "revision_basis", "form", "filed", "accession")}, "text": relevant_text(source.get("text", ""), answer, sid)}
         remaining, observations = 24000, []
         for row in source.get("observations", []):
             if row.get("text") == source.get("text") or not remaining:
