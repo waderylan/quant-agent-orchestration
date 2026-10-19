@@ -14,7 +14,7 @@ uv run --locked python scripts/financials.py collect
 uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 ```
 
-Open `http://127.0.0.1:8080`, select companies and fiscal years, and ask a self-contained question. Fiscal years select historical filings and numbers; current web research uses the timeframe in the question. The page streams answers, a requested-output checklist, routing/tool traces, inspectable citations, and checked analysis artifacts. Local data and generated outputs are ignored by Git. `uv run --locked python scripts/collect_sources.py verify` checks downloaded originals.
+Open `http://127.0.0.1:8080`, select companies and fiscal years, and ask a self-contained question. Fiscal years select historical filings and numbers; current web research uses the timeframe in the question. The page streams answers, a requested-output checklist, inspectable citations, and checked analysis artifacts. Activity shows each agent call in color with its status and duration. Expand Timeline or select a call to inspect its task, model, tools, and sources. [Architecture](docs/architecture.md#http-browser-and-local-container) defines the activity contract. Local data and generated outputs are ignored by Git. `uv run --locked python scripts/collect_sources.py verify` checks downloaded originals.
 
 Try:
 

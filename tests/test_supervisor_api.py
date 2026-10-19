@@ -61,6 +61,12 @@ async def test_api_preserves_safe_terminal_contract(monkeypatch, tmp_path, fault
             if block.startswith("event:")
         ]
         parsed = [{"type": b[0][7:], "data": json.loads(b[1][6:])} for b in blocks]
+        activity = [e["data"] for e in parsed if e["type"] == "activity"]
+        assert activity and [p["elapsed_ms"] for p in activity] == sorted(p["elapsed_ms"] for p in activity)
+        for identity in {p["id"] for p in activity}:
+            points = [p for p in activity if p["id"] == identity]
+            assert points[0]["status"] == "running" and points[-1]["status"] != "running"
+            assert points[0]["agent"] == points[-1]["agent"]
         assert parsed[-1]["type"] == "complete"
         assert parsed[-1]["data"]["status"] == (
             "coverage_gap" if fault == "unsupported" else "partial"

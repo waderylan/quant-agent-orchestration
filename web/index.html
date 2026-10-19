@@ -13,33 +13,36 @@
           16px/1.5 system-ui,
           sans-serif;
         margin: 0;
-        background: #f4f5f7;
-        color: #202735;
+        background: #f3f4f2;
+        color: #263331;
       }
       main {
-        max-width: 1200px;
-        margin: 32px auto;
-        padding: 0 24px;
+        max-width: 1320px;
+        margin: 48px auto;
+        padding: 0 32px;
       }
       h1 {
-        font-size: 28px;
-        margin-bottom: 4px;
+        font-size: clamp(24px, 3vw, 34px);
+        letter-spacing: -1px;
+        font-weight: 650;
+        margin: 0 0 8px;
       }
       p {
         margin-top: 0;
-        color: #4c5768;
+        color: #64716b;
       }
       form,
       .panel {
         background: white;
-        border: 1px solid #d6dbe3;
-        border-radius: 8px;
-        padding: 20px;
-        margin: 18px 0;
+        border: 1px solid #dce2dc;
+        border-radius: 14px;
+        padding: 24px;
+        margin: 24px 0;
       }
       label {
         display: block;
         font-weight: 600;
+        font-size: 13px;
         margin-bottom: 8px;
       }
       select,
@@ -47,29 +50,39 @@
       button {
         font: inherit;
         padding: 8px;
-        border: 1px solid #aab3c0;
-        border-radius: 4px;
+        border: 1px solid #c6d0c8;
+        border-radius: 7px;
       }
       textarea {
         display: block;
         width: 100%;
-        min-height: 90px;
+        min-height: 88px;
+        padding: 14px;
+        background: #fafbf9;
         resize: vertical;
       }
       select {
         width: 100%;
+        background: #fafbf9;
+        padding: 5px;
+        font-size: 13px;
       }
       .filters {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 16px;
+        gap: 14px;
+        margin-bottom: 0;
+        grid-column: 2;
+        grid-row: 1;
       }
       button {
         cursor: pointer;
-        background: #174a8b;
+        background: #244e42;
         color: white;
         margin-top: 12px;
+        padding: 9px 16px;
+        font-size: 14px;
+        font-weight: 550;
       }
       button:disabled {
         opacity: 0.5;
@@ -77,20 +90,23 @@
       }
       #stop {
         background: white;
-        color: #174a8b;
+        color: #244e42;
       }
       .layout {
         display: grid;
-        grid-template-columns: 3fr 2fr;
-        gap: 20px;
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+        grid-template-rows: min-content 1fr;
+        gap: 24px;
+        align-items: start;
       }
       .panel {
-        margin-top: 0;
+        margin: 0;
         min-width: 0;
       }
       h2 {
-        font-size: 18px;
+        font-size: 16px;
         margin-top: 0;
+        font-weight: 650;
       }
       pre {
         white-space: pre-wrap;
@@ -133,14 +149,15 @@
       }
       #answer .table-scroll { margin: 1em 0; }
       #status {
-        margin-left: 12px;
-        font-size: 14px;
+        margin-left: auto;
+        font-size: 12px;
+        color: #64716b;
       }
       details {
         margin: 12px 0;
       }
       a {
-        color: #174a8b;
+        color: #245e64;
       }
       .source {
         display: block;
@@ -153,6 +170,7 @@
       .error {
         color: #a62323;
       }
+      #status.error { color: #a62323; }
       mark {
         background: #fff2ac;
       }
@@ -193,10 +211,68 @@
         flex-wrap: wrap;
         margin: 16px 0;
       }
+      [hidden] { display: none !important; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      button:hover:not(:disabled) { filter: brightness(0.95); }
+      button:focus-visible, summary:focus-visible, textarea:focus-visible, select:focus-visible {
+        outline: 3px solid #558f80;
+        outline-offset: 3px;
+      }
+      #examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+      #examples button { background: transparent; border-color: #dce2dc; color: #52645c; font-size: 12px; padding: 6px 10px; }
+      #research { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; }
+      .query { grid-column: 1; grid-row: 1; }
+      select option { padding: 5px 8px; border-radius: 4px; }
+      select option:checked { background: #e1ede5; color: #234a3e; font-weight: 600; }
+      .filter-hint { display: block; color: #64716b; font-size: 10px; margin-top: 6px; }
+      .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+      .actions button { margin: 0; }
+      #ask { min-width: 112px; }
+      .answer-panel { grid-column: 1; grid-row: 1 / span 2; min-height: 220px; }
+      #activity-panel { grid-column: 2; grid-row: 1; }
+      #source-panel { grid-column: 2; grid-row: 2; }
+      .activity-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+      .activity-heading h2 { margin: 0; }
+      #agent-elapsed, .agent-duration, .timeline-axis { font-variant-numeric: tabular-nums; font-size: 12px; color: #64716b; }
+      #agent-activity { list-style: none; margin: 0; padding: 0; }
+      #agent-activity li { position: relative; padding-bottom: 6px; }
+      #agent-activity li:not(:last-child)::after { content: ""; position: absolute; left: 13px; top: 32px; bottom: 0; border-left: 1px solid #dce2dc; }
+      #agent-activity li:last-child { padding-bottom: 0; }
+      .agent-call { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; align-items: center; position: relative; width: 100%; margin: 0; padding: 12px 8px 12px 30px; background: transparent; color: #263331; border: 1px solid transparent; text-align: left; }
+      .agent-call::before { content: ""; position: absolute; left: 9px; top: 17px; width: 8px; height: 8px; background: var(--agent); border-radius: 50%; }
+      .agent-call[aria-expanded="true"] { border-color: var(--agent); background: white; }
+      .agent-name { font-size: 13px; font-weight: 600; color: var(--agent); }
+      .agent-status { grid-column: 2; grid-row: 1; font-size: 10px; font-weight: 450; color: #64716b; }
+      .agent-duration { grid-column: 3; grid-row: 1; font-size: 11px; min-width: 35px; text-align: right; }
+      [data-status="running"] .agent-call { background: white; border-color: #c6d0c8; box-shadow: 0 2px 8px #26333108; }
+      [data-status="running"] .agent-call::before { box-shadow: 0 0 0 4px color-mix(in srgb, var(--agent) 12%, transparent); }
+      [data-status="failed"] .agent-status, [data-status="partial"] .agent-status { font-weight: 650; }
+      .activity-waiting { color: #64716b; font-size: 13px; }
+      #timeline { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid #e6eae5; }
+      summary { cursor: pointer; font-size: 12px; color: #52645c; }
+      #agent-timeline { margin: 14px 0 6px; }
+      .timeline-call { display: grid; grid-template-columns: 42% minmax(0, 1fr); align-items: center; gap: 8px; border: 0; border-radius: 3px; background: transparent; color: #52645c; padding: 5px 0; margin: 0; width: 100%; text-align: left; }
+      .timeline-call[aria-expanded="true"] { background: #f1f4ef; }
+      .timeline-name { font-size: 10px; font-weight: 500; line-height: 1.3; overflow-wrap: anywhere; }
+      .timeline-track { position: relative; height: 12px; border-left: 1px solid #dce2dc; border-right: 1px solid #dce2dc; background: #f5f7f3; }
+      .timeline-bar { position: absolute; height: 100%; min-width: 2px; max-width: 100%; border-radius: 2px; background: var(--agent); }
+      .timeline-axis { display: flex; justify-content: space-between; margin-left: 44%; font-size: 10px; }
+      #agent-details { margin-top: 18px; padding-top: 16px; border-top: 1px solid #e6eae5; font-size: 12px; overflow-wrap: anywhere; }
+      #agent-details h3 { margin: 0 0 8px; font-size: 13px; }
+      #agent-details p { margin-bottom: 8px; }
+      #agent-details ul { padding-left: 18px; color: #64716b; }
+      .activity-source { background: white; color: #245e64; border-color: #dce2dc; font-size: 12px; padding: 4px 8px; margin: 4px 5px 0 0; }
       @media (max-width: 800px) {
+        main { margin: 24px auto; padding: 0 16px; }
+        form, .panel { padding: 18px; }
         .layout {
           grid-template-columns: 1fr;
         }
+        #activity-panel, #source-panel, .answer-panel { grid-column: 1; grid-row: auto; }
+        #research { grid-template-columns: 1fr; gap: 20px; }
+        .filters { grid-column: 1; grid-row: 1; }
+        .query { grid-column: 1; grid-row: 2; }
+        .actions #status { margin-left: 0; flex-basis: 100%; }
       }
     </style>
   </head>
@@ -204,28 +280,28 @@
     <main>
       <h1>Public-Company Research</h1>
       <p>
-        Research collected filings, checked financial figures, and dated current
-        developments for the selected companies.
+        Filings, financials and current developments.
       </p>
       <form id="research">
         <div class="filters">
           <div>
-            <label for="company">Companies (Ctrl/Cmd to select several)</label>
+            <label for="company">Companies</label>
             <select id="company" multiple size="4">
               <option value="NVDA" selected>NVIDIA</option>
               <option value="AMD">AMD</option>
               <option value="INTC">Intel</option>
               <option value="QCOM">Qualcomm</option>
             </select>
+            <small class="filter-hint">Ctrl/Cmd for multiple</small>
           </div>
           <div>
             <label for="year">Fiscal years (up to two)</label
             ><select id="year" multiple size="3"></select
-            ><small id="coverage"></small>
+            ><small id="coverage" class="sr-only"></small>
           </div>
         </div>
-        <p id="selection" aria-live="polite"></p>
-        <div id="scope-help" role="alert"></div>
+        <p id="selection" class="sr-only" aria-live="polite"></p>
+        <div class="query">
         <label for="question">Research question</label
         ><textarea id="question" required minlength="3" maxlength="2000">
 What has happened at the selected companies since their latest filings? Cite dated sources.</textarea
@@ -235,12 +311,25 @@ What has happened at the selected companies since their latest filings? Cite dat
           <button type="button" data-question="Is the export-control risk in the latest annual filing still current? Check for an official update.">Check an official update</button>
           <button type="button" data-question="What can this system do, and what does each agent do?">System capabilities</button>
         </div>
-        <button id="ask" type="submit">Research</button>
+        <div class="actions"><button id="ask" type="submit">Research</button>
         <button id="stop" type="button" disabled>Stop</button
-        ><span id="status" role="status">Ready</span>
+        ><span id="status" role="status">Ready</span></div>
+        <div id="scope-help" role="alert"></div>
+        </div>
       </form>
       <div class="layout">
-        <section class="panel">
+        <section class="panel" id="activity-panel" hidden aria-label="Agent activity">
+          <div class="activity-heading"><h2>Activity</h2><span id="agent-elapsed"></span></div>
+          <span id="agent-announcement" class="sr-only" role="status"></span>
+          <ol id="agent-activity"></ol>
+          <details id="timeline">
+            <summary>Timeline</summary>
+            <div id="agent-timeline" aria-label="Agent timeline"></div>
+            <div class="timeline-axis"><span>0s</span><span id="timeline-end"></span></div>
+          </details>
+          <div id="agent-details" hidden></div>
+        </section>
+        <section class="panel answer-panel">
           <h2>Answer</h2>
           <ul id="request-coverage" hidden aria-label="Requested outputs"></ul>
           <div id="answer" aria-live="polite"></div>
@@ -251,7 +340,7 @@ What has happened at the selected companies since their latest filings? Cite dat
             <pre id="trace"></pre>
           </details>
         </section>
-        <aside class="panel">
+        <aside class="panel" id="source-panel">
           <h2>Source passage</h2>
           <p id="source-label">
             Select a citation to inspect its exact passage.
@@ -262,11 +351,13 @@ What has happened at the selected companies since their latest filings? Cite dat
     </main>
     <script src="/static/vendor/marked.umd.js"></script>
     <script src="/static/vendor/purify.min.js"></script>
+    <script src="/static/agent-activity.js"></script>
     <script>
       const $ = (id) => document.getElementById(id);
       let coverage = {},
         controller;
       let answerMarkdown = "", answerSources = [], renderFrame;
+      const activity = new AgentActivity((source) => inspect(source));
       marked.use({ renderer: { html: () => "" } });
       function renderAnswer() {
         cancelAnimationFrame(renderFrame);
@@ -495,6 +586,8 @@ What has happened at the selected companies since their latest filings? Cite dat
         renderAnswer();
       }
       function event(type, data) {
+        activity.receive(type, data);
+        if (type === "activity") return;
         if (type === "trace" && data.node === "request_understanding") {
           $("request-coverage").hidden = false;
           $("request-coverage").replaceChildren(...data.plan.outputs.map((output) => {
@@ -572,6 +665,7 @@ What has happened at the selected companies since their latest filings? Cite dat
       $("research").onsubmit = async (e) => {
         e.preventDefault();
         controller = new AbortController();
+        activity.start();
         answerMarkdown = "";
         answerSources = [];
         renderAnswer();
@@ -618,10 +712,12 @@ What has happened at the selected companies since their latest filings? Cite dat
             }
           }
         } catch (error) {
+          activity.finish(error.name === "AbortError" ? "stopped" : "failed");
           $("status").textContent =
             error.name === "AbortError" ? "Stopped" : error.message;
           $("status").className = "error";
         } finally {
+          activity.finish("unverified");
           $("ask").disabled = false;
           $("stop").disabled = true;
           controller = null;

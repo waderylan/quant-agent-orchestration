@@ -126,6 +126,32 @@ async def test_unsupported_claim_is_removed_from_authoritative_answer(monkeypatc
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize('fail_at', [1, 2])
+async def test_activity_marks_a_failed_initial_or_repair_review(monkeypatch, fail_at):
+    monkeypatch.setenv('REQUEST_PLANNER', 'semantic')
+    class Index:
+        def coverage(self):
+            return {'QCOM': [2025]}
+    reviews = 0
+    async def model(prompt, tools, handler, **kwargs):
+        nonlocal reviews
+        if kwargs['agent'] == 'Request Planner':
+            handler('submit_plan', {'outputs': [{'kind': 'current_developments', 'description': 'Recent developments'}], 'timeframe': 'recent', 'start_date': None, 'end_date': None})
+        else:
+            reviews += 1
+            if reviews == fail_at:
+                raise RuntimeError('Fixture review failure')
+            handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['W1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': ['Unsupported forecast.']})
+        yield {'type': 'token', 'data': ''}
+    async def current(state, writer):
+        return {'answer': 'Reported event [W1]. Unsupported forecast.', 'live_sources': {'W1': source('W1')}}
+    result = [e async for e in events(Index(), 'Qualcomm news lately', ['QCOM'], [2025], model_stream=model, worker_overrides={'current': current})]
+    review = [e['data'] for e in result if e['type'] == 'activity' and e['data']['id'] == 'review']
+    assert [e['status'] for e in review] == ['running', 'failed']
+    assert result[-1]['data']['status'] == 'partial'
+
+
+@pytest.mark.asyncio
 async def test_casual_capability_question_does_not_invoke_a_research_worker(monkeypatch):
     monkeypatch.setenv('REQUEST_PLANNER', 'semantic')
     class Index:

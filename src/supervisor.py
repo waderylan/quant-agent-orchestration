@@ -328,6 +328,7 @@ def cooperative_graph(
 
     async def plan(state):
         writer = get_stream_writer()
+        writer({"type": "activity", "data": {"id": "plan", "agent": "Supervisor", "status": "running", "task": "Plan"}})
         from src.capabilities import capability_request
         original_question = state["question"]
         capability = capability_request(state["question"])
@@ -335,6 +336,7 @@ def cooperative_graph(
         if capability and not capability["question"] and not mixed_capability:
             task = TaskState(plan=[], requested_outputs=["system_capabilities"], required_workers=[], completed_outputs=["system_capabilities"])
             writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation acquisition", "task": task.model_dump()}})
+            writer({"type": "activity", "data": {"id": "plan", "agent": "Supervisor", "status": "completed"}})
             return {"capability_answer": capability["answer"], "task": task.model_dump(), "evidence": {}, "worker_answers": {}, "error": "", "current": 0}
         if capability and capability["question"]:
             state = {**state, "question": capability["question"]}
@@ -467,6 +469,7 @@ def cooperative_graph(
                         },
                     }
                 )
+        writer({"type": "activity", "data": {"id": "plan", "agent": "Supervisor", "status": "partial" if error or planning_gap else "completed"}})
         return {
             **asdict(base),
             "live_intent": intent,
@@ -492,6 +495,9 @@ def cooperative_graph(
         step = task.plan[position]
         task.steps += 1
         evidence, answers = dict(state["evidence"]), dict(state["worker_answers"])
+        previous_ids = set(evidence)
+        activity_id = f"worker-{task.steps}"
+        writer({"type": "activity", "data": {"id": activity_id, "agent": NAMES[step.worker], "status": "running", "task": step.reason}})
         last = position == len(task.plan) - 1
         writer(
             {
@@ -758,6 +764,7 @@ def cooperative_graph(
                 },
             }
         )
+        writer({"type": "activity", "data": {"id": activity_id, "agent": NAMES[step.worker], "status": task.worker_outcomes[step.worker], "sources": [evidence[sid] for sid in sorted(set(evidence) - previous_ids)]}})
         # Keep only bounded handoff sources in graph state, full evidence in registry.
         if "risk_sources" in result:
             result["risk_sources"] = {
@@ -838,6 +845,8 @@ def cooperative_graph(
             answer = state["capability_answer"] + "\n\n" + answer
         if state.get("request_plan") and (answers or state.get("capability_answer")) and not state.get("error"):
             from src.request_plan import coverage, remove_unsupported
+            writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": "running", "task": "Check answer"}})
+            review_status = "failed"
             try:
                 review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
                 answer = remove_unsupported(answer, review["unsupported_claims"])
@@ -854,11 +863,13 @@ def cooperative_graph(
                         status = "completed"
                 task.missing_inputs.extend(review["missing"])
                 writer({"type": "trace", "data": {"agent": "Supervisor", "node": "answer_coverage", **review}})
+                review_status = "partial" if review["missing"] else "completed"
             except Exception:
                 task.missing_inputs.append("Full-question coverage review is unavailable.")
             task.missing_inputs = list(dict.fromkeys(task.missing_inputs))
             if task.missing_inputs and status == "completed":
                 status = "partial"
+            writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": review_status}})
         task.terminal = status
         if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
             answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])

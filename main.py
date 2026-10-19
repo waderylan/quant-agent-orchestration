@@ -3,6 +3,7 @@
 import asyncio
 import json
 import os
+import time
 from contextlib import aclosing, asynccontextmanager, suppress
 
 import anyio
@@ -42,7 +43,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="Public-Company Research Assistant", lifespan=lifespan)
-app.mount("/static/vendor", StaticFiles(directory=ROOT / "web/vendor"), name="vendor")
+app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 
 
 class Question(BaseModel):
@@ -230,6 +231,7 @@ async def chat(
 
         async def produce_owned():
             async with app.state.turns:
+                started = time.monotonic()
                 async with aclosing(
                     events(
                         services.index or app.state.index,
@@ -247,6 +249,8 @@ async def chat(
                     )
                 ) as stream:
                     async for event in stream:
+                        if event["type"] == "activity":
+                            event = {**event, "data": {**event["data"], "elapsed_ms": round((time.monotonic() - started) * 1000)}}
                         await queue.put(event)
             await queue.put(None)
 

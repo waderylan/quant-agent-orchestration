@@ -38,7 +38,7 @@ async def browser_check(url, question, company, years):
             exact = await page.locator("#passage mark").inner_text()
             href = await page.get_by_role("link", name="Collected original", exact=True).get_attribute("href")
             original = (await page.request.get(urljoin(url, href))).status
-        await page.locator("summary").click()
+        await page.get_by_text("Routing and tool trace", exact=True).click()
         trace = await page.locator("#trace").inner_text()
         await browser.close()
         return {"status": status, "answer": answer, "citations": count, "inspected_characters": len(exact), "original_status": original, "errors": errors, "distinct_worker": "Risk Summary" in trace, "passed": count >= 2 and bool(exact) and original == 200 and not errors and "Risk Summary" in trace}

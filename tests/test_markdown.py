@@ -26,7 +26,7 @@ async def page():
                 await route.fulfill(json={"kind": "filing_passage", "text": "150.25", "context": "150.25", "start": 0, "context_start": 0})
             elif path == "/api/live/recorded":
                 await route.fulfill(json={"kind": "live_source", "payload": {}})
-            elif path == "/" or path.startswith("/static/vendor/"):
+            elif path == "/" or path.startswith("/static/"):
                 response = await client.get(path)
                 assert response.status_code == 200
                 await route.fulfill(status=response.status_code, content_type=response.headers["content-type"], body=response.content)
