@@ -20,13 +20,13 @@ async def test_repeated_invocations_keep_timing_selection_and_sources_in_sync(pa
     calls = page.locator('.agent-call')
     assert await calls.count() == 2
     assert await calls.locator('.agent-duration').all_text_contents() == ['1.0s', '2.0s']
-    assert await calls.locator('.agent-status').all_text_contents() == ['Complete', 'Evidence gap']
+    assert await calls.locator('.agent-status').all_text_contents() == ['Complete', 'Done · reported a gap']
     await page.locator('#timeline summary').click()
     bars = page.locator('.timeline-bar')
     assert await bars.count() == 2
     assert await bars.nth(1).evaluate('e => parseFloat(e.style.left)') == pytest.approx(1100/3100*100, abs=1)
     assert await bars.nth(0).evaluate('e => getComputedStyle(e).backgroundColor') == await bars.nth(1).evaluate('e => getComputedStyle(e).backgroundColor')
-    await page.get_by_role('button', name='Filings Research, Evidence gap', exact=True).click()
+    await page.get_by_role('button', name='Filings Research, Done · reported a gap', exact=True).click()
     assert await calls.nth(1).get_attribute('aria-expanded') == 'true'
     assert 'Follow-up <script>bad()</script>' in await page.locator('#agent-details').inner_text()
     assert not await page.locator('#agent-details script').count()

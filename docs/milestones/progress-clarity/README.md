@@ -66,20 +66,23 @@ Sections are the source of truth for the final answer:
 
 - **Plan card:**
   - The header says "The supervisor split your request into N parts" and shows the route and the supervisor's reason.
-  - Each part shows a number, short title and owner chip in the Activity colour, with status Queued → Working → Drafted → Being checked → Checked or Still needed.
+  - Each part shows a number, short title and owner chip in the Activity colour, with status Queued → Working → Drafted → Being checked → Confirmed, or "Gap noted · see answer".
   - "What the planner understood" expands the planner's description and timeframe.
   - Steps list the caller and dependencies ("Called by Supervisor after Step 2 (Financial Analysis / Quant)"), the part each step works on or the step it supplies, its task, and the received evidence ranges ("Received 7 evidence items: F1–F4, C1–C3"). They also show the model/provider and the newly registered evidence ranges.
   - A "Now:" line narrates the running step: tool calls in plain language ("Looking up AMD FY2025 revenue, operating income", "Searching filings: …", "Reading reuters.com"), empty live results, and "Writing its answer" once prose streams.
   - The step list collapses when the answer is final. Chips and step rows select the same call in the Activity panel.
 - **Answer sections:**
   - A section appears when its step starts, labelled with the final heading (Reported figures, Financial analysis, From the filings, Changes in filing risks, Outside research) and an agent chip.
-  - Badges move through "Draft · writing", "Draft · waiting for review", "Draft · being checked" and "Checked by Answer Reviewer". A step without review shows "Final"; a failed review shows "Not checked · review unavailable".
+  - Badges move through "Draft · writing", "Draft · waiting for review" and "Draft · being checked", then "Reviewed" or "Reviewed · gap noted above" when the part it answers has a gap. A step without review shows "Final"; a failed review shows "Not reviewed · review unavailable".
   - Reviewed text replaces the draft in the same DOM node. A "N sentences removed by the Answer Reviewer" disclosure lists struck-through removed sentences.
   - Folded drafts move into a closed "Intermediate drafts (N)" disclosure with their reason.
-  - A stream that ends without `answer_sections` shows the latest legacy answer as "Answer (unreviewed)".
-- **Gaps:**
-  - Each gap appears once. Part gaps appear on the plan row as "Still needed: …"; worker reports appear as "Agent report: …". Other gaps go in one "Not covered" box.
-  - In sectioned mode the "Unresolved outputs" suffix and the "Still needed" banner are not rendered. The status line reads "Step 3 of 4 · Filings Research is working" while running, then "Partial answer · 1 part still needed" or "Complete · every part checked".
+  - A stream that ends without `answer_sections` shows the latest legacy answer, with the final banner saying it was not reviewed.
+- **Final answer banner and gaps:**
+  - When review finishes, the answer opens with a banner titled "Final answer" or "Final answer · partly complete". It says the answer is finished and states whether the Answer Reviewer checked every part, or whether the review was unavailable.
+  - Every gap appears once, in that banner, grouped by request part ("Part 1 · Recent developments") or under "Other limits". Each gap says who raised it and what that means. For a reviewer gap, the point is unconfirmed by the cited sources, not that the findings shown are wrong. An agent gap was reported by the researching agent. A Supervisor gap is a scope limit or an unfinished step. The plan row shows only "Gap noted · see answer".
+  - In sectioned mode the "Unresolved outputs" suffix and the "Still needed" banner are not rendered. The status line reads "Step 3 of 4 · Filings Research is working" while running, then "Final answer ready · 1 gap noted" or "Final answer ready · every part confirmed".
+  - In Activity, a partial reviewer outcome reads "Found a gap" and a partial worker outcome reads "Done · reported a gap".
+- **Route reason:** a turn routed only to Current Developments shows "The question asks for outside research only" instead of the filing router's fallback reason.
 - **Legacy mode:** without `plan` or `answer_sections` (scope errors, older event fixtures), the single answer, requested-output checklist and status behave as before.
 - **Trace:** one row per event with elapsed time, agent and summary. Examples: "handoff → Filings Research · 7 evidence items (F1–F4, C1–C3)", "query_financials · Looking up AMD FY2024 revenue, operating income" and "review: R1 ✓ R2 ✓". Opening a row renders its raw JSON. "Download raw trace (JSON)" saves every received event in order, including draft deltas.
 
@@ -94,11 +97,11 @@ Sections are the source of truth for the final answer:
 - [Supervisor tests](../../../tests/test_supervisor.py) check that a follow-up insertion refreshes the plan.
 - [Browser tests](../../../tests/test_request_progress.py) run real Chromium:
   - Narrated tool and model lines, per-agent streaming, the "being checked" badge, and the reviewed text finalizing in the same DOM node in final order.
-  - The removed-sentence disclosure, folded intermediate drafts, and each gap shown exactly once.
+  - The removed-sentence disclosure, folded intermediate drafts, the final banner first in the answer, gaps grouped by part with their explanations and shown only there, and the reviewer's "Found a gap" label.
   - Citation inspection, chip-to-Activity selection, readable trace rows with raw JSON, the raw-trace download, script-safe rendering, phone width without horizontal scroll, and the unreviewed fallback.
   - Existing [Markdown](../../../tests/test_markdown.py) and [Activity](../../../tests/test_agent_activity.py) browser tests still pass.
 - [Live UI evidence](evidence/LIVE_UI_2026-10-19.json): a native local application run in Chromium with real Codex subscription generation. The question was the AMD operating-margin question (filings and math only).
-  - The first draft was visible at 8.3 s; the final answer, "Complete · every part checked", arrived at 69.6 s.
+  - The first draft was visible at 8.3 s; the final answer, then labelled "Complete · every part checked", arrived at 69.6 s. The labels changed after this run; the event flow did not.
   - Financial Data and Quant drafts streamed before Filings Research. The final section was checked in place, and both earlier drafts were folded with reasons.
   - 46 trace rows; no page errors.
   - The run made no Tavily calls (ledger at 231 rows before and after). Testing stays under the account's 500-credit monthly cap; the web path is covered by the event and browser tests.

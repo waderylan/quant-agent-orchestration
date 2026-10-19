@@ -534,7 +534,9 @@ def cooperative_graph(
             }
         )
         if not error and tasks:
-            writer({"type": "plan", "data": plan_event(task, semantic, reason=base.reason, companies=companies, years=state["years"])})
+            # The filing router's fallback reason does not describe a web-only route.
+            route_reason = "The question asks for outside research only" if all(t.worker == "current" for t in tasks) else base.reason
+            writer({"type": "plan", "data": plan_event(task, semantic, reason=route_reason, companies=companies, years=state["years"])})
         if error:
             from src.request_routing import mentioned_companies
 

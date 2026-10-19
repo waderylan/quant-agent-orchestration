@@ -84,7 +84,8 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     # The reviewed text replaced the draft inside the same node, in final order.
     assert await page.evaluate("document.querySelector('#answer .answer-section[data-step=\"worker-3\"]') === window.draftNode")
     assert await page.locator('#answer > .answer-section').evaluate_all('nodes => nodes.map(n => n.dataset.step)') == ['worker-3', 'worker-4']
-    assert await page.locator('[data-step="worker-3"] .section-badge').inner_text() == 'Checked by Answer Reviewer'
+    assert await page.locator('[data-step="worker-3"] .section-badge').inner_text() == 'Reviewed'
+    assert await page.locator('[data-step="worker-4"] .section-badge').inner_text() == 'Reviewed · gap noted above'
     removed = page.locator('[data-step="worker-4"] .section-removed')
     assert await removed.locator('summary').inner_text() == '1 sentence removed by the Answer Reviewer'
     assert await removed.locator('del').text_content() == 'Unsupported praise.'
@@ -92,13 +93,20 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     assert await drafts.locator(':scope > summary').inner_text() == 'Intermediate drafts (1)'
     assert 'Its figures appear with checked calculations' in await drafts.text_content()
 
-    # Each gap appears once: tied to its part, or in the general box.
-    assert await page.locator('[data-output="R3"] .part-status').inner_text() == 'Still needed'
-    assert await page.locator('.part-gap').all_text_contents() == ['Still needed: No named analyst praise']
-    assert await page.locator('#gap-box li').all_text_contents() == ['Market prices are outside scope']
+    # The answer opens with one banner that names it final and explains each gap once.
+    summary = page.locator('#answer > .final-summary')
+    assert await page.locator('#answer > *').first.get_attribute('class') == 'final-summary'
+    assert await summary.locator('h3').inner_text() == 'Final answer · partly complete'
+    assert await summary.locator('.final-gaps > li > strong').all_text_contents() == ['Part 3 · Outside reaction', 'Other limits']
+    assert await summary.locator('.gap-text').all_text_contents() == ['No named analyst praise', 'Market prices are outside scope']
+    assert 'not that the findings shown are wrong' in await summary.locator('[data-output="R3"] .gap-why').inner_text()
+    assert await page.locator('[data-output="R3"] .part-status').inner_text() == 'Gap noted · see answer'
+    assert await page.locator('[data-output="R1"] .part-status').inner_text() == 'Confirmed'
+    assert 'No named analyst praise' not in await page.locator('#request-plan').inner_text()
     assert 'Unresolved outputs' not in await page.locator('#answer').inner_text()
     assert 'Still needed' not in await page.locator('#scope-help').inner_text()
-    assert await page.locator('#status').inner_text() == 'Partial answer · 1 part still needed'
+    assert await page.locator('#status').inner_text() == 'Final answer ready · 1 gap noted'
+    assert await page.locator('.agent-call', has_text='Answer Reviewer').locator('.agent-status').inner_text() == 'Found a gap'
     assert not await page.locator('#answer script, #request-plan script').count()
 
     await page.locator('[data-step="worker-3"] .section-body a').click()
@@ -130,7 +138,7 @@ async def test_stream_without_reviewed_sections_keeps_the_latest_answer_marked_u
       event('complete', {status:'partial'});
     }""")
     final = page.locator('#answer > .answer-section[data-step="unreviewed"]')
-    assert await final.locator('h3').inner_text() == 'Answer (unreviewed)'
     assert await final.locator('.section-body').inner_text() == 'Latest supervisor answer.'
-    assert await final.locator('.section-badge').inner_text() == 'Not checked · review unavailable'
+    assert await final.locator('.section-badge').inner_text() == 'Not reviewed · review unavailable'
+    assert 'was not checked' in await page.locator('#answer > .final-summary').inner_text()
     assert await page.locator('#intermediate-drafts .answer-section[data-step="worker-1"]').count() == 1

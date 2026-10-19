@@ -273,7 +273,7 @@
       .part-status { margin-left: auto; font-size: 11px; color: #52645c; }
       .part-status[data-state="running"] { color: #245e64; font-weight: 650; }
       .part-status[data-state="checked"] { color: #2c6a3f; font-weight: 650; }
-      .part-status[data-state="gap"] { color: #a62323; font-weight: 650; }
+      .part-status[data-state="gap"] { color: #7a5a12; font-weight: 650; }
       .part-gap, .part-report { margin: 4px 0 0 28px !important; font-size: 12px; overflow-wrap: anywhere; }
       .part-gap { color: #a62323; }
       .part-report { color: #64716b; }
@@ -297,9 +297,17 @@
       .section-note { font-size: 12px; color: #52645c; margin: 0 0 6px; }
       .section-removed { font-size: 12px; }
       .section-removed del { color: #7a3b3b; }
-      #gap-box { border: 1px solid #efc9c9; background: #fdf6f6; border-radius: 8px; padding: 10px 14px; margin: 0 0 16px; font-size: 13px; }
-      #gap-box h3 { margin: 0 0 4px; font-size: 13px; color: #a62323; }
-      #gap-box ul { margin: 0; padding-left: 18px; }
+      .final-summary { border: 1px solid #b9d3c1; background: #f2f8f3; border-radius: 10px; padding: 12px 16px; margin: 0 0 18px; font-size: 13px; }
+      .final-summary[data-state="partial"] { border-color: #e6cf98; background: #fdf8ec; }
+      .final-summary[data-state="unreviewed"] { border-color: #e2b4b4; background: #fdf4f4; }
+      .final-summary h3 { margin: 0 0 4px; font-size: 15px; color: #2c6a3f; }
+      .final-summary[data-state="partial"] h3 { color: #7a5a12; }
+      .final-summary[data-state="unreviewed"] h3 { color: #a62323; }
+      #answer .final-summary p { margin: 0 0 6px; }
+      .final-gaps { margin: 6px 0 0; padding-left: 18px; }
+      .final-gaps li { margin-bottom: 6px; }
+      .gap-text { display: block; overflow-wrap: anywhere; }
+      .gap-why { display: block; color: #64716b; font-size: 12px; }
       #intermediate-drafts ol { list-style: none; padding: 0; }
       #trace { list-style: none; padding: 0; margin: 8px 0 0; font: 12px/1.45 ui-monospace, monospace; max-height: 360px; overflow: auto; }
       #trace li { border-bottom: 1px solid #eef1ed; }
@@ -381,7 +389,6 @@ What has happened at the selected companies since their latest filings? Cite dat
           <section id="request-plan" hidden aria-label="Request plan"></section>
           <ul id="request-coverage" hidden aria-label="Requested outputs"></ul>
           <div id="answer" aria-live="polite"></div>
-          <section id="gap-box" hidden aria-label="Not covered"><h3>Not covered</h3><ul></ul></section>
           <details id="intermediate-drafts" hidden><summary>Intermediate drafts</summary><ol></ol></details>
           <div id="sources"></div>
           <div id="artifacts"></div>

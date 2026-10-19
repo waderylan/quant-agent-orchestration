@@ -8,7 +8,7 @@ class AgentActivity {
     "Current Developments": "#c04f64",
   };
   static statuses = {
-    running: "Working", completed: "Complete", partial: "Evidence gap",
+    running: "Working", completed: "Complete", partial: "Done · reported a gap",
     failed: "Failed", stopped: "Stopped", unverified: "Unverified",
     needs_clarification: "Clarification needed",
   };
@@ -51,6 +51,12 @@ class AgentActivity {
     this.timer = setInterval(() => this.tick(), 250);
   }
 
+  /* The reviewer's partial outcome means it found a gap, not that it failed. */
+  label(call) {
+    if (call.agent === "Answer Reviewer" && call.status === "partial") return "Found a gap";
+    return AgentActivity.statuses[call.status] || call.status;
+  }
+
   seconds(milliseconds) {
     return `${(milliseconds / 1000).toFixed(1)}s`;
   }
@@ -70,7 +76,7 @@ class AgentActivity {
         this.calls.set(data.id, call);
       }
       Object.assign(call, data);
-      document.getElementById("agent-announcement").textContent = `${call.agent}: ${AgentActivity.statuses[call.status] || call.status}`;
+      document.getElementById("agent-announcement").textContent = `${call.agent}: ${this.label(call)}`;
       if (data.status === "running") this.active = call.id;
       else {
         call.end = this.elapsed;
@@ -141,7 +147,7 @@ class AgentActivity {
       time.className = "agent-duration";
       const status = document.createElement("span");
       status.className = "agent-status";
-      status.textContent = AgentActivity.statuses[call.status] || call.status;
+      status.textContent = this.label(call);
       button.append(name, time, status);
       item.append(button);
       this.list.append(item);
@@ -180,7 +186,7 @@ class AgentActivity {
       const bar = row.querySelector(".timeline-bar");
       bar.style.left = `${Math.min(100, call.start / elapsed * 100)}%`;
       bar.style.width = `${Math.min(100, duration / elapsed * 100)}%`;
-      row.title = `${call.agent} · ${AgentActivity.statuses[call.status] || call.status} · ${this.seconds(duration)}`;
+      row.title = `${call.agent} · ${this.label(call)} · ${this.seconds(duration)}`;
     }
   }
 

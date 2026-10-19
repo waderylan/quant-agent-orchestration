@@ -60,7 +60,7 @@ class RequestProgress {
     research: "From the filings", current: "Outside research", risk: "Changes in filing risks",
   };
   static stepStates = {
-    queued: "Queued", running: "Working", completed: "Done", partial: "Done · evidence gap",
+    queued: "Queued", running: "Working", completed: "Done", partial: "Done · reported a gap",
     failed: "Failed", unverified: "Unverified", needs_clarification: "Needs clarification", stopped: "Stopped",
   };
 
@@ -71,7 +71,6 @@ class RequestProgress {
     this.card = document.getElementById("request-plan");
     this.answer = document.getElementById("answer");
     this.intermediate = document.getElementById("intermediate-drafts");
-    this.gapBox = document.getElementById("gap-box");
     this.reset();
   }
 
@@ -90,8 +89,6 @@ class RequestProgress {
     this.card.hidden = true;
     this.intermediate.hidden = true;
     this.intermediate.querySelector(":scope > ol").replaceChildren();
-    this.gapBox.querySelector("ul").replaceChildren();
-    this.gapBox.hidden = true;
   }
 
   chip(agent) {
@@ -251,7 +248,9 @@ class RequestProgress {
   badge(step) {
     const badge = step.node.querySelector(".section-badge");
     let text, state;
-    if (step.checked) [text, state] = [step.checked, "checked"];
+    const gaps = (step.serves || []).reduce((n, id) => n + (this.outputs.get(id)?.gaps?.length ? 1 : 0), 0);
+    if (step.checked === "Reviewed" && gaps) [text, state] = ["Reviewed · gap noted above", "checked"];
+    else if (step.checked) [text, state] = [step.checked, "checked"];
     else if (step.state === "running") [text, state] = ["Draft · writing", "drafting"];
     else if (["failed", "unverified"].includes(step.state)) [text, state] = [RequestProgress.stepStates[step.state], "failed"];
     else if (this.reviewState === "checking") [text, state] = ["Draft · being checked", "checking"];
@@ -279,8 +278,12 @@ class RequestProgress {
     cancelAnimationFrame(this.frame);
     this.frame = null;
     const review = data.review || {};
-    const checked = review.status === "completed" || review.status === "partial" ? "Checked by Answer Reviewer"
-      : review.status === "failed" ? "Not checked · review unavailable" : "Final";
+    const checked = review.status === "completed" || review.status === "partial" ? "Reviewed"
+      : review.status === "failed" ? "Not reviewed · review unavailable" : "Final";
+    for (const gap of data.gaps || []) {
+      const output = gap.output && this.outputs.get(gap.output);
+      if (output) output.gaps.push(gap);
+    }
     const shown = new Set();
     for (const section of data.sections) {
       let step = this.steps.get(section.id);
@@ -316,16 +319,56 @@ class RequestProgress {
       this.intermediate.hidden = false;
       this.intermediate.querySelector(":scope > summary").textContent = `Intermediate drafts (${this.intermediate.querySelectorAll(".answer-section").length})`;
     }
-    for (const gap of data.gaps || []) {
-      const output = gap.output && this.outputs.get(gap.output);
-      if (output) output.gaps.push(gap);
-      else this.gapBox.querySelector("ul").append(this.text("li", "", gap.text));
-    }
-    this.gapBox.hidden = !this.gapBox.querySelector("li");
     this.coverage(review.results || []);
+    this.answer.prepend(this.finalSummary(data));
     this.reviewState = review.status || "skipped";
     this.stepsOpen = false;
     this.renderCard();
+  }
+
+  finalSummary(data) {
+    const review = data.review || {};
+    const gaps = data.gaps || [];
+    const box = document.createElement("section");
+    box.className = "final-summary";
+    box.dataset.state = gaps.length ? "partial" : review.status === "failed" ? "unreviewed" : "complete";
+    box.setAttribute("aria-label", "Final answer summary");
+    box.append(this.text("h3", "", gaps.length ? "Final answer · partly complete" : "Final answer"));
+    const lead = gaps.length
+      ? "This is the finished, reviewed answer. What it states is backed by its cited sources. Some of what you asked for could not be confirmed:"
+      : review.status === "completed" || review.status === "partial" ? "This is the finished answer. The Answer Reviewer checked every requested part against the cited sources."
+      : review.status === "failed" ? "This is the finished answer, but the review step was unavailable, so it was not checked. Its citations still point to registered sources."
+      : "This is the finished answer.";
+    box.append(this.text("p", "final-lead", lead));
+    if (!gaps.length) return box;
+    const why = {
+      "Answer Reviewer": "Raised by the Answer Reviewer, which compares the answer with its cited sources. It means this point is unconfirmed, not that the findings shown are wrong.",
+      Agent: "Reported by the agent that did the research, before review.",
+      Supervisor: "System note: outside what this tool covers, or a step that did not finish.",
+    };
+    const list = document.createElement("ul");
+    list.className = "final-gaps";
+    const groups = new Map();
+    for (const gap of gaps) {
+      const key = gap.output || "";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(gap);
+    }
+    for (const [key, rows] of groups) {
+      const output = this.outputs.get(key);
+      const index = this.plan?.outputs.findIndex((o) => o.id === key) ?? -1;
+      const item = document.createElement("li");
+      item.dataset.output = key;
+      item.append(this.text("strong", "", output ? `Part ${index + 1} · ${output.title}` : "Other limits"));
+      for (const gap of rows) {
+        const row = document.createElement("p");
+        row.append(this.text("span", "gap-text", gap.text), this.text("span", "gap-why", why[gap.source] || why.Supervisor));
+        item.append(row);
+      }
+      list.append(item);
+    }
+    box.append(list);
+    return box;
   }
 
   removed(step, claims) {
@@ -342,8 +385,8 @@ class RequestProgress {
   partState(output) {
     const steps = [...this.steps.values()].filter((step) => step.serves?.includes(output.id));
     const step = steps.at(-1);
-    if (output.result) return output.result.addressed ? ["Checked", "checked"] : ["Still needed", "gap"];
-    if (output.gaps?.length) return ["Still needed", "gap"];
+    if (output.result) return output.result.addressed ? ["Confirmed", "checked"] : ["Gap noted · see answer", "gap"];
+    if (output.gaps?.length) return ["Gap noted · see answer", "gap"];
     if (output.kind === "capabilities") return [this.finalized ? "Answered locally" : "Supervisor", "checked"];
     if (output.kind === "unsupported") return ["Outside supported scope", "gap"];
     if (!step) return [this.finalized ? "Not assigned" : "Not assigned to an agent", "gap"];
@@ -390,9 +433,6 @@ class RequestProgress {
       status.dataset.state = state;
       line.append(status);
       item.append(line);
-      for (const gap of output.gaps || []) item.append(this.text("p", gap.source === "Agent" ? "part-report" : "part-gap", (gap.source === "Agent" ? "Agent report: " : "Still needed: ") + gap.text));
-      if (output.result && !output.result.addressed && output.result.missing && !(output.gaps || []).some((g) => g.source !== "Agent"))
-        item.append(this.text("p", "part-gap", "Still needed: " + output.result.missing));
       const details = document.createElement("details");
       details.open = open.has(output.id);
       details.append(this.text("summary", "", "What the planner understood"), this.text("p", "", output.description));
@@ -444,15 +484,15 @@ class RequestProgress {
   summary(complete) {
     const status = complete.status;
     const needed = [...this.outputs.values()].filter((o) => this.partState(o)[1] === "gap").length;
-    const label = {completed: "Complete", partial: "Partial answer", coverage_gap: "Coverage gap", needs_clarification: "Clarification needed", unverified: "Response unverified", failed: "Failed"}[status] || status;
-    if (needed) return `${label} · ${needed} ${needed === 1 ? "part" : "parts"} still needed`;
-    return status === "completed" && complete.coverage_checked ? "Complete · every part checked" : label;
+    const label = {completed: "Final answer ready", partial: "Final answer ready", coverage_gap: "Coverage gap", needs_clarification: "Clarification needed", unverified: "Response unverified", failed: "Failed"}[status] || status;
+    if (needed) return `${label} · ${needed} ${needed === 1 ? "gap" : "gaps"} noted`;
+    return status === "completed" && complete.coverage_checked ? `${label} · every part confirmed` : label;
   }
 
   /* A stream that ended without reviewed sections keeps the latest answer, marked unreviewed. */
   unreviewed(markdown) {
     if (!this.active || this.finalized || !markdown) return;
-    this.finalize({sections: [{id: "unreviewed", worker: null, agent: "Supervisor", label: "Answer (unreviewed)", markdown, removed: []}], folded: [], review: {status: "failed"}, gaps: []});
+    this.finalize({sections: [{id: "unreviewed", worker: null, agent: "Supervisor", label: "Answer", markdown, removed: []}], folded: [], review: {status: "failed"}, gaps: []});
   }
 }
 
