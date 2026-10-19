@@ -140,6 +140,8 @@ class FinancialTools:
 async def financial_turn(
     store, state, writer, *, model_stream=codex_stream, emit_answer=True, prefetch=None
 ):
+    if re.search(r"\bcurrent liabilities\b", state["question"], re.I):
+        return {"answer": "Current liabilities are outside the supported structured metrics.", "partial": True, "missing_outputs": ["Original-report current liabilities are unavailable in the structured store."], "financial_sources": {}}
     tools = FinancialTools(store, state["companies"], state["years"])
     outcome = OutcomeTools(tools)
     filters = request_filters(state["question"])

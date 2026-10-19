@@ -1,0 +1,150 @@
+{
+  "checked_at": "2026-10-19T18:39:49.119952+00:00",
+  "areas": {
+    "Dependencies and container configuration": {
+      "added": [],
+      "deleted": [],
+      "edited": [
+        ".env.example",
+        "Dockerfile",
+        "pyproject.toml",
+        "requirements.txt",
+        "uv.lock"
+      ]
+    },
+    "Documentation and evidence": {
+      "added": [
+        "docs/milestones/current-developments/README.md",
+        "docs/milestones/current-developments/evidence/ACCEPTANCE_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/APPLICATION_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/BROWSER_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/BROWSER_GATE_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/BUDGET_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/CHECKS_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/DIRECT_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/DISCOVERY_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/DOCKER_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/FILES_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/SECURITY_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/SHARING_2026-10-19.json",
+        "docs/milestones/current-developments/evidence/TESTS_2026-10-19.json",
+        "docs/milestones/supervisor/evidence/review-round-1/README_2026-10-16.json",
+        "docs/milestones/supervisor/evidence/review-round-2/README_2026-10-16.json",
+        "docs/milestones/supervisor/evidence/review-round-2/REVIEW_FINDINGS_2026-10-16.json"
+      ],
+      "deleted": [
+        "docs/milestones/live-research/README.md"
+      ],
+      "edited": [
+        "README.md",
+        "docs/README.md",
+        "docs/architecture.md",
+        "docs/evaluation.md",
+        "docs/milestones/README.md",
+        "docs/milestones/buy-side-analyst/README.md",
+        "docs/milestones/deployment/README.md",
+        "docs/milestones/experience-evaluation/README.md",
+        "docs/milestones/quant/README.md",
+        "docs/milestones/supervisor/README.md",
+        "docs/milestones/supervisor/evidence/review-round-1/README.md",
+        "docs/milestones/supervisor/evidence/review-round-2/README.md",
+        "docs/milestones/supervisor/evidence/review-round-2/REVIEW_FINDINGS.md",
+        "docs/project.md",
+        "docs/reference/instructor/alternative_vertex_ai_search.md",
+        "docs/research/README.md",
+        "AI_TRANSCRIPT.md"
+      ]
+    },
+    "API and browser": {
+      "added": [],
+      "deleted": [],
+      "edited": [
+        "main.py",
+        "web/index.html"
+      ]
+    },
+    "Runtime and prompts": {
+      "added": [
+        "prompts/current_developments.md",
+        "src/current_developments.py",
+        "src/live_mcp.py"
+      ],
+      "deleted": [
+        "prompts/buy_side.md",
+        "src/buy_side.py",
+        "src/market_evidence.py",
+        "src/market_mcp.py",
+        "src/quant_valuation.py"
+      ],
+      "edited": [
+        "prompts/filings_research.md",
+        "prompts/financial_data.md",
+        "prompts/quant.md",
+        "prompts/risk_summary.md",
+        "src/capabilities.py",
+        "src/codex_transport.py",
+        "src/financial_workflow.py",
+        "src/quant_workflow.py",
+        "src/request_routing.py",
+        "src/research_workflow.py",
+        "src/response_contract.py",
+        "src/risk_summary.py",
+        "src/supervisor.py"
+      ]
+    },
+    "Scripts": {
+      "added": [
+        "scripts/demo_current.py"
+      ],
+      "deleted": [
+        "scripts/audit_second_market_account.py",
+        "scripts/demo_buy.py",
+        "scripts/demo_market_injection.py",
+        "scripts/market_access.py",
+        "scripts/probe_market_accounts.py",
+        "scripts/record_buy_acceptance.py",
+        "scripts/record_supervisor_acceptance.py",
+        "scripts/review_application.py",
+        "scripts/run_review_cases.py",
+        "scripts/start_review_application.py",
+        "scripts/verify_buy_side_research.py",
+        "scripts/verify_stock_browser.py"
+      ],
+      "edited": [
+        "scripts/audit_review_results.py",
+        "scripts/demo_supervisor.py",
+        "scripts/explore_pm_questions.py",
+        "scripts/quant.py",
+        "scripts/start_local_container.py"
+      ]
+    },
+    "Tests and fixtures": {
+      "added": [
+        "tests/conftest.py",
+        "tests/fixtures/live_routing.json",
+        "tests/fixtures/live_sources.json",
+        "tests/test_current_developments.py",
+        "tests/test_live_mcp.py",
+        "tests/test_live_routing.py"
+      ],
+      "deleted": [
+        "tests/fixtures/buy_side_review.json",
+        "tests/test_buy_side.py",
+        "tests/test_buy_side_research.py"
+      ],
+      "edited": [
+        "tests/fixtures/README.md",
+        "tests/fixtures/pm/questions.json",
+        "tests/test_capabilities.py",
+        "tests/test_codex_transport.py",
+        "tests/test_markdown.py",
+        "tests/test_pm_workflows.py",
+        "tests/test_research.py",
+        "tests/test_supervisor.py"
+      ]
+    }
+  },
+  "retained_unchanged": "docs/milestones/buy-side-analyst/evidence/",
+  "no_commit_or_push": true,
+  "preserved_user_work": "Existing staged milestone rename and instructor reference link remain in place."
+}

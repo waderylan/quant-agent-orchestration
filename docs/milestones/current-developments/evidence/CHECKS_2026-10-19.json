@@ -1,0 +1,157 @@
+{
+  "checked_at": "2026-10-19T18:38:36.808640+00:00",
+  "local_links_checked": 198,
+  "broken_links": [],
+  "milestone_coverage": "M1–M13, one ordered index and existing records",
+  "referenced_commands": [
+    "scripts/collect_sources.py",
+    "scripts/demo_current.py",
+    "scripts/demo_quant.py",
+    "scripts/demo_supervisor.py",
+    "scripts/financials.py",
+    "scripts/quant.py",
+    "scripts/research.py",
+    "scripts/start_local_container.py",
+    "scripts/verify_cooperation_edges.py"
+  ],
+  "compileall": "passed",
+  "locked_sync": "133 resolved; 130 installed packages audited",
+  "truth_table_matches_original_contract": true,
+  "m8_evidence_files_unchanged": 4,
+  "original_m9_markdown_preserved_with_checksums": [
+    "docs\\milestones\\supervisor\\evidence\\review-round-1\\README_2026-10-16.json",
+    "docs\\milestones\\supervisor\\evidence\\review-round-2\\README_2026-10-16.json",
+    "docs\\milestones\\supervisor\\evidence\\review-round-2\\REVIEW_FINDINGS_2026-10-16.json"
+  ],
+  "code_removal_hits": [
+    {
+      "file": "prompts/quant.md",
+      "line": 96,
+      "classification": "explicit unsupported scope"
+    },
+    {
+      "file": "scripts/demo_capability_fixes.py",
+      "line": 231,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "scripts/demo_current.py",
+      "line": 23,
+      "classification": "required price-request boundary case"
+    },
+    {
+      "file": "scripts/demo_sources.py",
+      "line": 1,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "scripts/explore_pm_questions.py",
+      "line": 133,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "src/capabilities.py",
+      "line": 9,
+      "classification": "explicit unsupported scope"
+    },
+    {
+      "file": "src/capabilities.py",
+      "line": 53,
+      "classification": "explicit unsupported scope"
+    },
+    {
+      "file": "src/filing_financials.py",
+      "line": 81,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "src/live_mcp.py",
+      "line": 13,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "src/live_mcp.py",
+      "line": 53,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "src/live_mcp.py",
+      "line": 179,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "src/request_routing.py",
+      "line": 8,
+      "classification": "price-request boundary or filing-quotation intent"
+    },
+    {
+      "file": "src/request_routing.py",
+      "line": 9,
+      "classification": "price-request boundary or filing-quotation intent"
+    },
+    {
+      "file": "src/request_routing.py",
+      "line": 285,
+      "classification": "price-request boundary or filing-quotation intent"
+    },
+    {
+      "file": "tests/fixtures/live_routing.json",
+      "line": 113,
+      "classification": "required price-request boundary case"
+    },
+    {
+      "file": "tests/fixtures/pm/questions.json",
+      "line": 17,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "tests/fixtures/pm/questions.json",
+      "line": 24,
+      "classification": "required price-request boundary case"
+    },
+    {
+      "file": "tests/test_capability_routing.py",
+      "line": 110,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "tests/test_live_routing.py",
+      "line": 29,
+      "classification": "required price-request boundary case"
+    },
+    {
+      "file": "tests/test_markdown.py",
+      "line": 55,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "tests/test_risk_summary.py",
+      "line": 16,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "tests/test_risk_summary.py",
+      "line": 17,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "tests/test_supervisor.py",
+      "line": 57,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    },
+    {
+      "file": "web/index.html",
+      "line": 128,
+      "classification": "unrelated evaluation, filing quotation, URL encoding or hostile-source fixture"
+    }
+  ],
+  "unallowed_code_hits": [],
+  "doc_search_policy": "Only removed M8 record/index, dated evidence JSON, transcript, research/reference records, explicit unsupported-scope statements, and unrelated evaluation substrings remain. The M8 index row and unsupported-scope text are explicitly required by the documentation contract.",
+  "changed_test_expectations": [
+    "Current/live scope cases stop expecting historical-only coverage gaps because live routing is implemented.",
+    "Removed-agent tests/metadata and capability/Markdown fixtures use the current worker, W evidence and unsupported-price boundary.",
+    "PM price boundary retains a coverage limitation and names no worker; its removed-source terminology is omitted."
+  ],
+  "no_unrequested_historical_routing_expectations_changed": true,
+  "passed": true
+}

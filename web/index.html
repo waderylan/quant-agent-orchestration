@@ -204,9 +204,8 @@
     <main>
       <h1>Public-Company Research</h1>
       <p>
-        Research filings, dated stock prices, and available valuation evidence for
-        the selected companies. Fiscal years apply to the collected filings;
-        market observations show their own dates.
+        Research collected filings, checked financial figures, and dated current
+        developments for the selected companies.
       </p>
       <form id="research">
         <div class="filters">
@@ -229,12 +228,11 @@
         <div id="scope-help" role="alert"></div>
         <label for="question">Research question</label
         ><textarea id="question" required minlength="3" maxlength="2000">
-What are the selected companies' stock prices, and how are they valued?</textarea
+What has happened at the selected companies since their latest filings? Cite dated sources.</textarea
         >
-        <div id="stock-questions" aria-label="Stock research examples">
-          <button type="button" data-question="What are the selected companies' stock prices? Show dates, currencies and freshness.">Stock prices</button>
-          <button type="button" data-question="Compare the selected companies' stock prices, valuations and analyst expectations in a table. Explain available evidence and missing valuation inputs.">Valuation overview</button>
-          <button type="button" data-question="Which selected stock looks expensive relative to its peers? Compare available valuation evidence and give the strongest counterargument. A higher share price alone is not a higher valuation.">Compare valuations</button>
+        <div id="examples" aria-label="Research examples">
+          <button type="button" data-question="What has happened at the selected companies since their latest filings? Cite dated sources.">Current developments</button>
+          <button type="button" data-question="Is the export-control risk in the latest annual filing still current? Check for an official update.">Check an official update</button>
           <button type="button" data-question="What can this system do, and what does each agent do?">System capabilities</button>
         </div>
         <button id="ask" type="submit">Research</button>
@@ -304,7 +302,7 @@ What are the selected companies' stock prices, and how are they valued?</textare
         }
         for (const node of nodes) {
           const fragment = document.createDocumentFragment();
-          for (const part of node.textContent.split(/(\[[SFC]\d+\])/)) {
+          for (const part of node.textContent.split(/(\[[SFCW]\d+\])/)) {
             const source = answerSources.find((source) => `[${source.source_id}]` === part);
             if (!source) { fragment.append(document.createTextNode(part)); continue; }
             const link = document.createElement("a");
@@ -396,12 +394,24 @@ What are the selected companies' stock prices, and how are they valued?</textare
             "Passage unavailable; rebuild the index if sources changed.";
           return;
         }
-        const p = await r.json();
-        if (p.kind === "market_evidence" || p.kind === "valuation_input") {
-          $("source-label").textContent = `${p.provider || p.company || "Scenario"} · ${p.retrieved_at || p.as_of || "explicit assumption"} · ${p.evidence_kind || p.source_kind || "market source"}`;
+        const snapshot = await r.json();
+        const p = source.kind === "live_source" ? { ...snapshot, ...source } : snapshot;
+        if (p.kind === "live_source") {
+          $("source-label").textContent = `${p.publisher} · ${p.published_date || "undated"} · ${p.source_tier} · ${p.retrieved_at}`;
           const pre = document.createElement("pre");
-          pre.textContent = JSON.stringify(p, null, 2);
+          pre.textContent = p.text;
           $("passage").replaceChildren(pre);
+          try {
+            const url = new URL(p.url);
+            if (["http:", "https:"].includes(url.protocol)) {
+              const link = document.createElement("a");
+              link.href = url.href;
+              link.textContent = "Open source";
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              $("source-label").append(document.createTextNode(" · "), link);
+            }
+          } catch {}
           return;
         }
         if (p.kind === "calculation") {
@@ -474,10 +484,8 @@ What are the selected companies' stock prices, and how are they valued?</textare
                 ? `[${s.source_id}] ${s.label}`
                 : s.kind === "financial_observation"
                   ? `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.metric} · ${s.period} ${s.basis}`
-                  : s.kind === "market_evidence"
-                    ? `[${s.source_id}] ${s.company} · ${s.section} · ${s.provider || "unavailable"}`
-                  : s.kind === "valuation_input"
-                    ? `[${s.source_id}] ${s.company} · ${s.metric} · ${s.value} ${s.unit}`
+                  : s.kind === "live_source"
+                    ? `[${s.source_id}] ${s.publisher} · ${s.published_date || "undated"} · ${s.source_tier}`
                   : `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.form} (${s.version}) · ${s.section}`;
             b.onclick = () => inspect(s);
             return b;

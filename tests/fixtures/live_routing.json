@@ -1,0 +1,140 @@
+[
+  {
+    "question": "What has happened at NVIDIA since its latest filing?",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "current"
+    ]
+  },
+  {
+    "question": "Any recent news on AMD?",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "current"
+    ]
+  },
+  {
+    "question": "What did Intel announce this week?",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "current"
+    ]
+  },
+  {
+    "question": "What is Qualcomm doing now?",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "current"
+    ]
+  },
+  {
+    "question": "What does NVIDIA's latest 10-K say about export controls?",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": [
+      "research"
+    ]
+  },
+  {
+    "question": "Explain AMD's FY2025 revenue change.",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": [
+      "data",
+      "quant",
+      "research"
+    ]
+  },
+  {
+    "question": "What were Intel's current liabilities in FY2025?",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": [
+      "data"
+    ]
+  },
+  {
+    "question": "Is the export-control risk in AMD's FY2025 10-K still current?",
+    "live_intent": "verify",
+    "price_gap": false,
+    "workers": [
+      "research"
+    ]
+  },
+  {
+    "question": "Has Qualcomm's FY2025 customer-concentration disclosure been updated?",
+    "live_intent": "verify",
+    "price_gap": false,
+    "workers": [
+      "research"
+    ]
+  },
+  {
+    "question": "Explain Qualcomm's FY2025 revenue change and what has happened since the filing.",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "data",
+      "quant",
+      "research",
+      "current"
+    ]
+  },
+  {
+    "question": "Compare AMD's FY2024 and FY2025 risk factors and any news since.",
+    "live_intent": "developments",
+    "price_gap": false,
+    "workers": [
+      "risk",
+      "current"
+    ]
+  },
+  {
+    "question": "As of FY2024, what did Intel say about foundry? Use only the filings.",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": [
+      "research"
+    ]
+  },
+  {
+    "question": "What's new at Intel? Do not use live news.",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": [
+      "research"
+    ]
+  },
+  {
+    "question": "What is NVIDIA's stock price and P/E?",
+    "live_intent": "none",
+    "price_gap": true,
+    "workers": []
+  },
+  {
+    "question": "Show AMD FY2025 revenue and its current share price.",
+    "live_intent": "none",
+    "price_gap": true,
+    "workers": [
+      "data"
+    ]
+  },
+  {
+    "question": "What are analysts expecting for Qualcomm and any recent news?",
+    "live_intent": "developments",
+    "price_gap": true,
+    "workers": [
+      "current"
+    ]
+  },
+  {
+    "question": "What can the Current Developments agent do?",
+    "live_intent": "none",
+    "price_gap": false,
+    "workers": []
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-19T18:38:35.959253+00:00",
+  "command": "uv run --locked pytest -q",
+  "passed": 209,
+  "failed": 0,
+  "raw_summary": "209 passed in 29.81s",
+  "phase_gates": {
+    "1": "compileall and 177 tests pass",
+    "2": "17 truth-table rows and 194 tests pass",
+    "3": "3 gateway tests and real MCP discovery pass",
+    "4": "worker/sharing/failure checks and 205 tests pass",
+    "5": "native Chromium gate pass",
+    "6": "209 regression tests pass; real native/browser/container checks pass with explicit partial-output limits"
+  },
+  "frozen_failures": [
+    "blank key",
+    "429",
+    "timeout",
+    "LIVE_MODE=off"
+  ],
+  "test_isolation": "Every test forces frozen mode and temporary ledger/cache. Default Tavily session and usage methods are forbidden; explicit live gateway tests replace both with local stubs."
+}

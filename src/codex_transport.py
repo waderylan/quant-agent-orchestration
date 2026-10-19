@@ -106,8 +106,8 @@ async def local_process():
 
 
 def generation_environment():
-    """Generation uses host CLI login, without market-provider configuration."""
-    return {key: value for key, value in os.environ.items() if not key.upper().startswith(("ALPHA_VANTAGE", "TWELVE_DATA", "TAVILY")) and not key.upper().endswith("_API_KEY")}
+    """Generation uses host CLI login, without live-source or provider credentials."""
+    return {key: value for key, value in os.environ.items() if not key.upper().startswith("TAVILY") and not key.upper().endswith("_API_KEY")}
 
 
 @asynccontextmanager

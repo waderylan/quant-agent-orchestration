@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-19T18:38:40.009656+00:00",
+  "image_id": "sha256:4021deccfeda7b1b7b0b14a2fd7d36a8b0d129a681658104a062146078765ffa",
+  "image_files_scanned": 21854,
+  "image_config_and_history_clean": true,
+  "image_filesystem_clean": true,
+  "no_external_market_download_stage": true,
+  "reports_scanned": [
+    "m10-browser-final.json",
+    "m10-deleted.json",
+    "m10-direct.json",
+    "m10-docker-final.json",
+    "m10-docker-last.json",
+    "m10-docker-refresh-final.json",
+    "m10-docker-refresh.json",
+    "m10-native-final.json",
+    "m10-native.json"
+  ],
+  "passed": true
+}

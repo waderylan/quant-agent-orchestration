@@ -1,0 +1,7 @@
+{
+  "checked_at": "2026-10-19T18:04:58.460942+00:00",
+  "kind": "Native Chromium against native FastAPI; capability response and example selection, no live search",
+  "passed": true,
+  "company_selection_preserved": true,
+  "page_errors": []
+}

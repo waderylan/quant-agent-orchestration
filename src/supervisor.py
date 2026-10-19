@@ -13,17 +13,17 @@ from langgraph.config import get_stream_writer
 from langgraph.graph import START, END, StateGraph
 from pydantic import BaseModel, ConfigDict, Field
 
-from src.request_routing import plan_request, requested_metrics, risk_comparison_request
+from src.request_routing import plan_request, requested_metrics, risk_comparison_request, price_request, live_intent, live_phrase, filing_clauses, PRICE_GAP
 from src.source_collection import digest
 
-Worker = Literal["data", "filing_inputs", "quant", "risk", "research", "buy"]
+Worker = Literal["data", "filing_inputs", "quant", "risk", "research", "current"]
 NAMES = {
     "data": "Financial Data",
     "filing_inputs": "Filings Research",
     "quant": "Financial Analysis / Quant",
     "risk": "Risk Summary",
     "research": "Filings Research",
-    "buy": "Buy-Side Analyst",
+    "current": "Current Developments",
 }
 MAX_STEPS, MAX_TOOL_CALLS, MAX_FOLLOWUPS = 7, 64, 1
 WORKER_TIMEOUT_SECONDS = 210
@@ -57,10 +57,11 @@ class EvidenceRef(BaseModel):
     status: str | None = None
     freshness: str | None = None
     currency: str | None = None
-    dilution: str | None = None
-    split_basis: str | None = None
+    url: str | None = None
+    publisher: str | None = None
+    source_tier: str | None = None
+    published_date: str | None = None
     as_of: str | None = None
-    horizon: str | None = None
     inspection_url: str | None = None
     source_ids: list[str] = Field(default_factory=list)
     bundle_id: str | None = None
@@ -90,17 +91,11 @@ class TaskState(BaseModel):
     ] = "running"
 
 
-def tasks_for(question):
+def filing_tasks(question):
     """Select requested outputs; dependency order never implies all workers run."""
-    from src.buy_side import market_request, valuation_request
 
     base = plan_request(question)
     risk = base.worker == "risk" or risk_comparison_request(question)
-    market = market_request(question)
-    unsupported_market = bool(re.search(r"\b(discounted.cash.flow|DCF|total return)\b|reinvested dividends", question, re.I))
-    supported_market = bool(re.search(r"\b(quotes?|stock price|share price|EPS|multiples?|forward earnings)\b|P\s*/\s*E|EV\s*/", question, re.I))
-    if unsupported_market and not supported_market:
-        market = False
     financial = bool(requested_metrics(question)) and bool(
         re.search(
             r"\b(revenues?|sales|gross (?:profit|margin)|operating (?:income|margin|cash|performance)|net (?:income|loss|margin)|cash (?:flow|generation|conversion)|earnings)\b",
@@ -109,8 +104,6 @@ def tasks_for(question):
         )
     )
     if re.search(r"\b(hypothetical|suppose)\b", question, re.I) and not re.search(r"\bFY\s*20\d\d\b", question, re.I):
-        financial = False
-    if requested_metrics(question) == ["net_income"] and re.search(r"\b(forward|consensus|EPS)\b", question, re.I) and not re.search(r"\bnet (?:income|loss)\b", question, re.I):
         financial = False
     consolidated = not re.search(r"\b(adjusted|non.GAAP|EBITDA)\b", question, re.I) or bool(re.search(r"\b(?:consolidated GAAP|GAAP (?:margins?|result|operating|parent))\b", question, re.I))
     if financial and consolidated:
@@ -156,7 +149,7 @@ def tasks_for(question):
                 )
             )
 
-    if base.worker in ("data", "analysis_data") or financial and consolidated and (numeric or risk or market or re.search(r"\b(show|reported|tell me|what was)\b", question, re.I)):
+    if base.worker in ("data", "analysis_data") or financial and consolidated and (numeric or risk or re.search(r"\b(show|reported|tell me|what was)\b", question, re.I)):
         add(
             "data",
             "financial_inputs",
@@ -197,7 +190,6 @@ def tasks_for(question):
         or financial and not risk and re.search(r"\brisks?\b", question, re.I)
         or base.worker == "research"
         and not risk
-        and not market
         and not plan
     ):
         add(
@@ -206,22 +198,34 @@ def tasks_for(question):
             "Explain requested disclosure context after checked figures and risk evidence",
             [t.worker for t in plan if t.worker in ("quant", "risk")],
         )
-    if market:
-        add(
-            "buy",
-            "valuation_brief"
-            if valuation_request(question)
-            else "market_snapshot",
-            "Requested market/valuation output needs dated market evidence and existing checked handoffs",
-            [t.worker for t in plan if t.worker in ("quant", "risk", "research")],
-        )
     if not plan:
         add("research", "filing_explanation", base.reason)
     return plan, base
 
 
+def tasks_for(question, *, intent=None, price_gap=None):
+    from src.capabilities import capability_request
+    intent = live_intent(question) if intent is None else intent
+    price_gap = price_request(question) if price_gap is None else price_gap
+    capability = capability_request(question)
+    if capability and not capability["question"]:
+        return [], plan_request("")
+    scoped = filing_clauses(question, developments=intent == "developments") if price_gap or intent == "developments" else question
+    if re.search(r"\bcurrent liabilities\b", scoped, re.I):
+        tasks, base = [Task(worker="data", output="financial_inputs", reason="Identify the requested structured metric gap")], plan_request(scoped)
+    elif scoped:
+        tasks, base = filing_tasks(scoped)
+    else:
+        tasks, base = [], plan_request("")
+    if intent == "verify" and not any(t.worker == "research" for t in tasks):
+        tasks.append(Task(worker="research", output="filing_explanation", reason="Check a specific filed statement for an official update", depends_on=[t.worker for t in tasks]))
+    if intent == "developments":
+        tasks.append(Task(worker="current", output="current_developments", reason="Discover dated developments after the collected filings", depends_on=[t.worker for t in tasks]))
+    return tasks, base
+
+
 def evidence_ref(sid, source, owner):
-    if not re.fullmatch(r"[SFC][1-9]\d{0,5}", sid) or source.get("source_id") != sid:
+    if not re.fullmatch(r"[SFCW][1-9]\d{0,5}", sid) or source.get("source_id") != sid:
         raise ValueError("Evidence key and typed source identifier differ")
     kind = source.get("kind", "filing_passage")
     # URLs may become frozen bundle URLs; identity is the stable provenance/value,
@@ -249,15 +253,16 @@ def evidence_ref(sid, source, owner):
             "period",
             "basis",
             "currency",
-            "horizon",
             "source_kind",
             "formula",
             "source_ids",
             "accounting_basis",
             "revision_basis",
             "as_of",
-            "dilution",
-            "split_basis",
+            "url",
+            "publisher",
+            "source_tier",
+            "published_date",
         )
     }
     return EvidenceRef(
@@ -279,10 +284,11 @@ def evidence_ref(sid, source, owner):
         status=source.get("status"),
         freshness=source.get("freshness"),
         currency=source.get("currency"),
-        dilution=source.get("dilution"),
-        split_basis=source.get("split_basis"),
         as_of=source.get("as_of"),
-        horizon=source.get("horizon"),
+        url=source.get("url"),
+        publisher=source.get("publisher"),
+        source_tier=source.get("source_tier"),
+        published_date=source.get("published_date"),
         inspection_url=source.get("inspection_url"),
         source_ids=source.get("source_ids", []),
         bundle_id=source.get("bundle_id"),
@@ -305,7 +311,7 @@ def cooperative_graph(
     from src.quant_workflow import quant_turn, prefetch_for_analysis
     from src.risk_summary import risk_turn
     from src.filing_financials import filing_revenue_turn
-    from src.buy_side import buy_turn
+    from src.current_developments import current_turn
 
     class GraphState(State, total=False):
         task: dict
@@ -321,7 +327,7 @@ def cooperative_graph(
         capability = capability_request(state["question"])
         if capability and not capability["question"]:
             task = TaskState(plan=[], requested_outputs=["system_capabilities"], required_workers=[], completed_outputs=["system_capabilities"])
-            writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation or market acquisition", "task": task.model_dump()}})
+            writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation acquisition", "task": task.model_dump()}})
             return {"capability_answer": capability["answer"], "task": task.model_dump(), "evidence": {}, "worker_answers": {}, "error": "", "current": 0}
         if capability:
             state = {**state, "question": capability["question"]}
@@ -334,7 +340,8 @@ def cooperative_graph(
         )
         if clarification:
             error = "Each request is self-contained. Specify the company, fiscal comparison years and any assumptions from the previous conversation; UI defaults cannot recover that context."
-        tasks, base = tasks_for(state["question"])
+        intent, price_gap = live_intent(state["question"]), price_request(state["question"])
+        tasks, base = tasks_for(state["question"], intent=intent, price_gap=price_gap)
         # Preserve the supported annual component boundary.
         period_gap = None
         capability_gaps = []
@@ -345,6 +352,8 @@ def cooperative_graph(
         ):
             if re.search(pattern, state["question"], re.I):
                 capability_gaps.append(message)
+        if price_gap:
+            capability_gaps.append(PRICE_GAP)
         if base.revenue_component and re.search(
             r"\bQ[1-4]\b|\b(quarter|ytd)\b", state["question"], re.I
         ):
@@ -379,6 +388,9 @@ def cooperative_graph(
                 "data": {
                     "agent": "Supervisor",
                     "node": "task_selection",
+                    "live_intent": intent,
+                    "matched_phrase": live_phrase(state["question"], intent),
+                    "price_gap": price_gap,
                     "decision": "needs_clarification" if clarification else "coverage_gap"
                     if error
                     else " → ".join(NAMES[t.worker] for t in tasks),
@@ -413,6 +425,7 @@ def cooperative_graph(
                 )
         return {
             **asdict(base),
+            "live_intent": intent,
             "question": state["question"],
             "capability_answer": capability["answer"] if capability else "",
             "companies": companies,
@@ -491,8 +504,10 @@ def cooperative_graph(
                 raise ValueError("Supervisor work budget exhausted")
             local = {
                 **state,
+                "live_check": state.get("live_intent") == "verify",
                 "analysis_sources": handoff_sources(evidence),
                 "risk_sources": handoff_sources(state.get("risk_sources", {})),
+                "live_offset": max([int(s[1:]) for s in evidence if re.fullmatch(r"W\d+", s)], default=0),
                 "source_offset": max(
                     [int(s[1:]) for s in evidence if re.fullmatch(r"S\d+", s)],
                     default=0,
@@ -508,6 +523,7 @@ def cooperative_graph(
                 and len(task.plan) > 1
             ):
                 clauses = re.split(r"(?<=[.!?;])\s+", state["question"])
+                clauses = [filing_clauses(state["question"], developments=True)] if state.get("live_intent") == "developments" else clauses
                 narrative = " ".join(c for c in clauses if re.search(r"\b(explain|explanations?|reasons?|why|drivers?|management|relate|implications?|amend\w*)\b|MD&A|10-K/A", c, re.I)) or state["question"]
                 local["question"] = (
                     "Provide only the requested filing interpretation: " + narrative
@@ -515,13 +531,15 @@ def cooperative_graph(
                     + ", ".join(state["companies"])
                     + " in fiscal years "
                     + ", ".join(map(str, state["years"]))
-                    + ". Preserve supplied verified figures and calculations with original filing citations and actual fiscal dates. Do not calculate new figures. Assess only the requested explanation; do not demand unrequested metrics, a full causal bridge or a full reconciliation when a qualified explanation of important differences answers the question. Risk-change and market outputs belong to their assigned specialists."
+                    + ". Preserve supplied verified figures and calculations with original filing citations and actual fiscal dates. Do not calculate new figures. Assess only the requested explanation; do not demand unrequested metrics, a full causal bridge or a full reconciliation when a qualified explanation of important differences answers the question. Risk-change and live outputs belong to their assigned specialists."
                 + (" Include the requested original annual risk context and its relationship to the business mix; do not infer reduced risk from a calculated mix alone." if not any(t.worker == "risk" for t in task.plan) and re.search(r"\brisks?\b", state["question"], re.I) else "")
                 + (" Explain the release headline versus consolidated GAAP measures with the release's reconciliation and definitions; do not substitute adjusted earnings for GAAP operating income." if re.search(r"\b(release|headline|adjusted|non.GAAP)\b", state["question"], re.I) else "")
                 )
             local["handoff_role_note"] = (
-                "Provide only the requested filing drivers and interpretation of supplied checked figures. Preserve F/C values and bases. Risk Summary and Buy-Side outputs are composed separately; do not duplicate their briefs or recalculate their figures."
+                "Provide only the requested filing drivers and interpretation of supplied checked figures. Preserve F/C values and bases. Risk Summary outputs are composed separately; do not duplicate their briefs or recalculate their figures."
             )
+            if step.worker == "current":
+                local["handoff_role_note"] = "Report only developments published after each company's anchor date, with W citations. Filing explanations, figures, calculations and risk comparisons belong to other workers and are already in the answer."
             async with asyncio.timeout(WORKER_TIMEOUT_SECONDS):
                 if step.worker == "quant" and not local.get("financial_sources"):
                     result = {"answer": "", "partial": True, "coverage_gap": True, "missing_outputs": ["No trusted financial inputs for Quant; unsupported calculations remain missing"], "analysis_sources": {}}
@@ -555,17 +573,11 @@ def cooperative_graph(
                     result = await risk_turn(
                         index, local, emit, model_stream=bounded_model, emit_answer=last
                     )
+                elif step.worker == "current":
+                    result = await current_turn(local, emit, gateway=gateway, model_stream=bounded_model, emit_answer=last)
                 elif step.worker == "research":
                     result = await research_turn(
-                        index, local, emit, model_stream=bounded_model
-                    )
-                else:
-                    result = await buy_turn(
-                        local,
-                        emit,
-                        gateway=gateway,
-                        model_stream=bounded_model,
-                        emit_answer=last,
+                        index, local, emit, model_stream=bounded_model, gateway=gateway
                     )
             if result.get("error"):
                 raise ValueError(result["error"])
@@ -575,15 +587,15 @@ def cooperative_graph(
                 **result.get("financial_sources", {}),
                 **result.get("analysis_sources", {}),
                 **result.get("risk_sources", {}),
-                **result.get("buy_sources", {}),
                 **result.get("research_sources", {}),
+                **result.get("live_sources", {}),
             }
             pending_refs, pending_sources = {}, {}
             for sid, source in sources.items():
                 # Risk tools register navigation candidates too. Pass only citations
                 # and classification endpoints to subsequent specialists.
                 if step.worker == "risk" and sid not in set(
-                    re.findall(r"\[([SFC]\d+)\]", result.get("answer", ""))
+                    re.findall(r"\[([SFCW]\d+)\]", result.get("answer", ""))
                 ) | {
                     c[k]
                     for c in result.get("risk_changes", [])
@@ -651,9 +663,9 @@ def cooperative_graph(
         except asyncio.CancelledError:
             raise
         except Exception as error:
-            # Market transport exceptions are already scrubbed by the gateway.
+            # Live transport exceptions are already scrubbed by the gateway.
             # Never allow an arbitrary worker exception to expose runtime credentials.
-            from src.market_mcp import sanitized
+            from src.live_mcp import sanitized
 
             failed = f"{NAMES[step.worker]}: " + sanitized(
                 str(error)
@@ -725,7 +737,7 @@ def cooperative_graph(
         writer = get_stream_writer()
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
-        if state.get("capability_answer") and not task.plan:
+        if state.get("capability_answer") and not task.plan and not task.missing_inputs:
             answer, status = state["capability_answer"], "completed"
         elif state.get("error"):
             answer, status = state["error"], "needs_clarification" if state.get("clarification") else "coverage_gap"
@@ -742,9 +754,9 @@ def cooperative_graph(
             )
         else:
             # A synthesis can explain calculations, but cannot erase a requested risk
-            # or valuation output. Preserve specialist evidence when the task is mixed.
+            # or filing output. Preserve specialist evidence when the task is mixed.
             has_conflicts = any(source.get("status") == "conflicting" for source in state.get("evidence", {}).values())
-            mixed = "risk" in answers or "buy" in answers or has_conflicts
+            mixed = "risk" in answers or "current" in answers or has_conflicts
             include = [
                 t.worker
                 for t in task.plan
@@ -767,16 +779,16 @@ def cooperative_graph(
                 or any(v != "completed" for v in task.worker_outcomes.values())
                 else "completed"
             )
-        if not task.registered_evidence and status == "partial":
+        if not task.registered_evidence and status == "partial" and state.get("live_intent", "none") == "none":
             status = "failed" if "failed" in task.worker_outcomes.values() else "coverage_gap"
         task.terminal = status
-        if state.get("capability_answer") and task.plan:
+        if state.get("capability_answer") and (task.plan or task.missing_inputs):
             answer = state["capability_answer"] + "\n\n" + answer
         if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
             answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
         writer({"type": "answer", "data": answer})
         evidence = state.get("evidence", {})
-        cited = set(re.findall(r"\[([SFC]\d+)\]", answer))
+        cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
         invalid = cited - evidence.keys()
         if invalid:
             status = task.terminal = "partial" if evidence else "failed"

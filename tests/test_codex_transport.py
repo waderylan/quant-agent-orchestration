@@ -11,13 +11,13 @@ from scripts.codex_bridge import Bridge
 from src.codex_transport import connection, terminate_owned
 
 
-def test_generation_environment_excludes_market_auth_and_keeps_cli_configuration(monkeypatch):
+def test_generation_environment_excludes_provider_auth_and_keeps_cli_configuration(monkeypatch):
     from src.codex_transport import generation_environment
     monkeypatch.setenv("TAVILY_API_KEY", "synthetic-provider-credential")
-    monkeypatch.setenv("TWELVE_DATA_GMAIL_API_KEY", "synthetic-other-credential")
+    monkeypatch.setenv("OTHER_API_KEY", "synthetic-other-credential")
     monkeypatch.setenv("RESEARCH_MODEL", "fixture-model")
     environment = generation_environment()
-    assert "TAVILY_API_KEY" not in environment and "TWELVE_DATA_GMAIL_API_KEY" not in environment
+    assert "TAVILY_API_KEY" not in environment and "OTHER_API_KEY" not in environment
     assert environment["RESEARCH_MODEL"] == "fixture-model"
 
 

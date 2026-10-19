@@ -22,8 +22,10 @@ async def page():
             path = urlsplit(route.request.url).path
             if path == "/api/coverage":
                 await route.fulfill(json={"QCOM": [2025]})
-            elif path == "/api/market/recorded":
-                await route.fulfill(json={"kind": "market_evidence", "provider": "fixture", "retrieved_at": "2026-10-16", "payload": {"price": "150.25"}})
+            elif path == "/api/sources/recorded":
+                await route.fulfill(json={"kind": "filing_passage", "text": "150.25", "context": "150.25", "start": 0, "context_start": 0})
+            elif path == "/api/live/recorded":
+                await route.fulfill(json={"kind": "live_source", "payload": {}})
             elif path == "/" or path.startswith("/static/vendor/"):
                 response = await client.get(path)
                 assert response.status_code == 200
@@ -61,17 +63,22 @@ async def test_markdown_streams_and_replaces_answers_with_normal_formatting(page
 @pytest.mark.asyncio
 async def test_citations_survive_rerenders_and_cannot_be_redirected(page):
     await page.evaluate("""() => {
-      event('answer', '**Price [S1]**; [S1](https://evil.test/forged). `Example [S1]`.\\n\\n| Source | Value |\\n|---|---|\\n| [S1] | 150.25 |');
-      const sources = [{source_id:'S1',kind:'market_evidence',provider:'fixture',company:'QCOM',section:'quote',inspection_url:'/api/market/recorded'}];
+      event('answer', '**Evidence [W1]**; [W1](https://evil.test/forged). `Example [W1]`.\\n\\n| Source | Value |\\n|---|---|\\n| [W1] | dated event |');
+      const sources = [{source_id:'W1',kind:'live_source',publisher:'qualcomm.com',published_date:'2026-10-18',source_tier:'official',retrieved_at:'2026-10-19',text:'Dated event <script>attack</script>',url:'https://qualcomm.com/event',company:'QCOM',inspection_url:'/api/live/recorded'}];
       event('sources', sources); event('sources', sources);
     }""")
     links = page.locator("#answer a")
     assert await links.count() == 3
-    assert all([await link.get_attribute("href") == "/api/market/recorded" for link in await links.all()])
+    assert all([await link.get_attribute("href") == "/api/live/recorded" for link in await links.all()])
     assert await page.locator("#answer table tr").count() == 2
-    assert await page.locator("#answer code").inner_text() == "Example [S1]"
+    assert await page.locator("#answer code").inner_text() == "Example [W1]"
     await links.first.click()
-    await page.wait_for_function("document.getElementById('passage').textContent.includes('150.25')")
+    await page.wait_for_function("document.getElementById('passage').textContent.includes('Dated event')")
+    assert not await page.locator("#passage script").count()
+    assert "qualcomm.com · 2026-10-18 · official · 2026-10-19" in await page.locator("#source-label").inner_text()
+    external = page.locator("#source-label a")
+    assert await external.get_attribute("target") == "_blank"
+    assert await external.get_attribute("rel") == "noopener noreferrer"
 
 
 @pytest.mark.asyncio

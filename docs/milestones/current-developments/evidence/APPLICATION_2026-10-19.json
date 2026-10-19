@@ -1,0 +1,936 @@
+{
+  "checked_at": "2026-10-19T18:38:21.380203+00:00",
+  "kind": "Actual native FastAPI POST/SSE, original corpus, local subscription, real Tavily/cache provenance",
+  "cases": {
+    "nvda": {
+      "question": "What has happened at NVIDIA since its latest filing? Cite dated sources.",
+      "answer": "- **NVIDIA (NVDA)—since the February 25, 2026 filing anchor:**\n  - **March 16, 2026 — Samsung Global Newsroom | third_party:** Samsung announced plans to showcase its NVIDIA collaboration at GTC, including accelerated-computing and digital-twin manufacturing applications. The extracted page also describes memory designed for NVIDIA’s Vera Rubin platform. [W5][W11]\n  - **March 17, 2026 — TSPA Semiconductor/Substack | third_party:** TSPA reported that NVIDIA’s GTC keynote introduced Vera Rubin, Vera CPU and NemoClaw, while previewing the Feynman platform. These are attributed reports of announcements, not independently verified deployment outcomes. [W1]\n  - **August 12, 2026 — Network World | third_party:** Network World’s roundup reported NVIDIA’s cuFile open-sourcing initiative, the Open Secure AI Alliance and a new Spectrum-X networking platform. This is the roundup’s supplied publication date, not a separately verified publication date for each announcement. [W3][W12]\n\n- **Missing outputs:** Dated official NVIDIA releases and developments published after August 12 were not established within the search budget. Returned official pages lacked supplied publication dates; their retrieval freshness does not establish when developments occurred or confirm their claims.\n\nUnresolved outputs:\n- Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.\n- Dated official NVIDIA releases were not established within the two-search budget; returned official sources lacked published_date.\n- Post–August 12, 2026 developments were not established within the search budget.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+            "Dated official NVIDIA releases were not established within the two-search budget; returned official sources lacked published_date.",
+            "Post–August 12, 2026 developments were not established within the search budget."
+          ]
+        }
+      },
+      "sources": [
+        {
+          "source_id": "W1",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://tspasemiconductor.substack.com/p/gtc-2026-review-how-nvidia-is-redefining",
+          "publisher": "substack.com",
+          "title": "GTC 2026 Review: How NVIDIA Is Redefining the AI Ecosystem — From Compute Competition to Infrastructure Transformation",
+          "source_tier": "third_party",
+          "published_date": "Tue, 17 Mar 2026 00:00:00 GMT",
+          "retrieved_at": "2026-10-19T18:19:47.607712+00:00",
+          "freshness": "dated",
+          "text_sha256": "f1e803f0abd4e56d4d5f77f30c125d102a03d22e032ce720b94447b258b7c253",
+          "snapshot_id": "11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b"
+        },
+        {
+          "source_id": "W3",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html",
+          "publisher": "networkworld.com",
+          "title": "Nvidia: Latest news and insights | Network World",
+          "source_tier": "third_party",
+          "published_date": "Wed, 12 Aug 2026 00:00:00 GMT",
+          "retrieved_at": "2026-10-19T18:19:47.607712+00:00",
+          "freshness": "fresh",
+          "text_sha256": "bae3c57760c2afcdbce36e39b0dc7354de9254d529ea8265c1044ac1e0a80e3d",
+          "snapshot_id": "11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b"
+        },
+        {
+          "source_id": "W5",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "publisher": "samsung.com",
+          "title": "Samsung Unveils HBM4E, Showcasing Comprehensive AI Solutions, NVIDIA Partnership and Vision at NVIDIA GTC 2026 – Samsung Global Newsroom",
+          "source_tier": "third_party",
+          "published_date": "Mon, 16 Mar 2026 20:30:00 GMT",
+          "retrieved_at": "2026-10-19T18:19:47.607712+00:00",
+          "freshness": "dated",
+          "text_sha256": "dbcde42cb9e9d5188705f18945624b987f906b1b3973f9b7b507dd899628a413",
+          "snapshot_id": "11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b"
+        },
+        {
+          "source_id": "W11",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026",
+          "publisher": "samsung.com",
+          "title": "Samsung Unveils HBM4E, Showcasing Comprehensive AI Solutions, NVIDIA Partnership and Vision at NVIDIA GTC 2026 – Samsung Global Newsroom",
+          "source_tier": "third_party",
+          "published_date": null,
+          "retrieved_at": "2026-10-19T18:07:29.656538+00:00",
+          "freshness": "undated",
+          "text_sha256": "b7e10b08fc8f7eb1d2354478a7abaa91666cc0e288ac6559fdda5ff17e1f10df",
+          "snapshot_id": "8b0dbbfab937f8d149c6fd49cad79960f2961427cae153d91ae2e85f07267402",
+          "tool": "tavily_extract",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/8b0dbbfab937f8d149c6fd49cad79960f2961427cae153d91ae2e85f07267402"
+        },
+        {
+          "source_id": "W12",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html",
+          "publisher": "networkworld.com",
+          "title": "Nvidia: Latest news and insights | Network World",
+          "source_tier": "third_party",
+          "published_date": null,
+          "retrieved_at": "2026-10-19T18:07:24.580817+00:00",
+          "freshness": "undated",
+          "text_sha256": "fa9bd076d4f8e5dd233a241571761c76e1a097350a73910176005647677f2e2f",
+          "snapshot_id": "e83ba02b6cd42c3fd7b1f1e8da350a7c997f0919ec823ab0d6ee249a4363f3fa",
+          "tool": "tavily_extract",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/e83ba02b6cd42c3fd7b1f1e8da350a7c997f0919ec823ab0d6ee249a4363f3fa"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "current"
+        ],
+        "live_events": [
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "NVIDIA announcements after February 25 2026 partnership GTC",
+              "topic": "news",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b",
+            "cache": false,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "site.nvidianews.nvidia.com 2026 NVIDIA announces October September March",
+              "topic": "general",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "e1bde5a24a56843c3951c0c3569201df9b29e9afc84349740fabba351999c729",
+            "cache": false,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_extract",
+            "arguments": {
+              "urls": [
+                "https://news.samsung.com/global/samsung-unveils-hbm4e-showcasing-comprehensive-ai-solutions-nvidia-partnership-and-vision-at-nvidia-gtc-2026"
+              ],
+              "extract_depth": "basic"
+            },
+            "result_count": 1,
+            "snapshot_id": "8b0dbbfab937f8d149c6fd49cad79960f2961427cae153d91ae2e85f07267402",
+            "cache": true,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_extract",
+            "arguments": {
+              "urls": [
+                "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html"
+              ],
+              "extract_depth": "basic"
+            },
+            "result_count": 1,
+            "snapshot_id": "e83ba02b6cd42c3fd7b1f1e8da350a7c997f0919ec823ab0d6ee249a4363f3fa",
+            "cache": true,
+            "outcome": "returned"
+          }
+        ]
+      },
+      "inspections": [
+        {
+          "source_id": "W1",
+          "status": 200
+        },
+        {
+          "source_id": "W3",
+          "status": 200
+        },
+        {
+          "source_id": "W5",
+          "status": 200
+        },
+        {
+          "source_id": "W11",
+          "status": 200
+        },
+        {
+          "source_id": "W12",
+          "status": 200
+        }
+      ],
+      "seconds": 30.281,
+      "answer_token_ttft_seconds": 23.999,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "current",
+          "outcome": "partial",
+          "evidence_count": 12,
+          "tool_calls": 5,
+          "missing_inputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+            "Dated official NVIDIA releases were not established within the two-search budget; returned official sources lacked published_date.",
+            "Post–August 12, 2026 developments were not established within the search budget."
+          ]
+        }
+      ]
+    },
+    "verify": {
+      "question": "Is the export-control risk in AMD's FY2025 10-K still current? Check for an official update.",
+      "answer": "- Filed statement: AMD’s FY2025 10-K, for the year ended December 27, 2025, says certain Instinct and Versal products require export licenses. MI308 sales into China remain dependent on customer demand, China’s import rules and U.S. licenses—even though some licenses had been granted. [S3] [S5]\n- Official update: AMD’s subsequent 10-Q for the quarter ended June 27, 2026, continues to disclose the MI308 licensing restriction and those same conditions on China sales. [W1]\n- Conclusion: Yes—the later official filing confirms that the export-control exposure persists; the licenses do not establish unrestricted market access. This verifies the specific filed statement, not every aspect of current export policy. [W1]\n\nUnresolved outputs:\n- Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      },
+      "sources": [
+        {
+          "source_id": "S3",
+          "chunk_id": "1c2c319e457c15c4b3d5f675410b295aad8db466ab36f15bd420e7879840b507",
+          "start": 138883,
+          "fiscal_year": 2025,
+          "version": "original",
+          "period_end": "2025-12-27",
+          "kind": "filing",
+          "section": "risk_factors",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "document_id": "amd-0000002488-26-000018",
+          "page": 0,
+          "company": "AMD",
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "form": "10-K",
+          "end": 140024,
+          "distance": 0.5100904107093811,
+          "inspection_url": "/api/sources/1c2c319e457c15c4b3d5f675410b295aad8db466ab36f15bd420e7879840b507"
+        },
+        {
+          "source_id": "S5",
+          "chunk_id": "341fba0c033ea855f922e3b51d9fd7d0b679d6f7a9febbfff10711008f245e28",
+          "section": "risk_factors",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "version": "original",
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "document_id": "amd-0000002488-26-000018",
+          "end": 141883,
+          "form": "10-K",
+          "start": 140773,
+          "fiscal_year": 2025,
+          "period_end": "2025-12-27",
+          "page": 0,
+          "kind": "filing",
+          "company": "AMD",
+          "distance": 0.20008742809295654,
+          "inspection_url": "/api/sources/341fba0c033ea855f922e3b51d9fd7d0b679d6f7a9febbfff10711008f245e28"
+        },
+        {
+          "source_id": "W1",
+          "kind": "live_source",
+          "company": "AMD",
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+          "publisher": "amd.com",
+          "title": "August 5, 2026 - 10-Q: Quarterly report [Sections 13 or 15(d)] | Advanced Micro Devices, Inc. (AMD)",
+          "source_tier": "official",
+          "published_date": null,
+          "retrieved_at": "2026-10-19T18:20:23.289166+00:00",
+          "freshness": "undated",
+          "text_sha256": "59ff920c2b8a4e913be457542df8dc1a883cc74a6d67db62dc1345196809650a",
+          "snapshot_id": "701e32c072b244077a44bdd51fe3f659dc057e2827ddb0c769ac0f6d40bd73cf",
+          "tool": "tavily_search",
+          "agent": "Filings Research",
+          "inspection_url": "/api/live/701e32c072b244077a44bdd51fe3f659dc057e2827ddb0c769ac0f6d40bd73cf"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "research"
+        ],
+        "live_events": [
+          {
+            "agent": "Filings Research",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "site:amd.com OR site:sec.gov AMD MI308 export license China 2026 export controls update",
+              "topic": "general",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "701e32c072b244077a44bdd51fe3f659dc057e2827ddb0c769ac0f6d40bd73cf",
+            "cache": false,
+            "outcome": "returned"
+          }
+        ]
+      },
+      "inspections": [
+        {
+          "source_id": "S3",
+          "status": 200
+        },
+        {
+          "source_id": "S5",
+          "status": 200
+        },
+        {
+          "source_id": "W1",
+          "status": 200
+        }
+      ],
+      "seconds": 19.266,
+      "answer_token_ttft_seconds": 15.48,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "research",
+          "outcome": "partial",
+          "evidence_count": 14,
+          "tool_calls": 3,
+          "missing_inputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      ]
+    },
+    "mixed": {
+      "question": "Explain Qualcomm's FY2025 revenue change and what has happened since the filing.",
+      "answer": "Financial Analysis / Quant:\n- Qualcomm’s FY2025 consolidated revenue increased by $5.322 billion [C1], or 13.66% [C2], from $38.962 billion [F1] to $44.284 billion [F2].\n- Comparison uses original-report US GAAP figures: FY2024 ran September 25, 2023–September 29, 2024 (53 weeks) [F1]; FY2025 ran September 30, 2024–September 28, 2025 (52 weeks) [F2]. No week-count normalization was applied.\n- Supported arithmetic and inputs are complete; growth calculation independently inspected. Verified CSV table and PNG chart are available.\n- Filing explanations and developments since the November 5, 2025 filing [F2] remain with Research and Current Developments, respectively; they are outside this calculation output.\n\nFilings Research:\n- Qualcomm’s FY2025 revenue rose from $38.962 billion [F1] to $44.284 billion [F2], an increase of $5.322 billion [C1], or 13.66% [C2].\n- Growth was primarily driven by QCT, with higher revenue across handsets, IoT and automotive; licensing revenue was broadly unchanged. [S18] [S16]\n- Handsets benefited from higher average selling prices, favorable product mix and higher chipset shipments by certain major manufacturers. Both pricing/mix and shipments benefited from stronger demand for premium-tier Snapdragon platforms in Android devices. [S14] [S16]\n- IoT growth reflected higher shipments across edge networking, consumer and industrial products, partially offset by unfavorable mix. Automotive growth primarily reflected increased shipments associated with new vehicle launches using Snapdragon digital cockpit products. [S16]\n- The comparison uses original-report US GAAP figures: FY2025 covered September 30, 2024–September 28, 2025, or 52 weeks [F2]; FY2024 covered September 25, 2023–September 29, 2024, or 53 weeks [F1]. The supplied growth calculation is not week-count normalized. [C2]\n\nCurrent Developments:\n- **Qualcomm developments published after the November 5, 2025 filing:**\n  - **February 4, 2026 — q4cdn.com | third_party:** Qualcomm’s earnings presentation described the Augentix acquisition as expanding its intelligent-camera capabilities and an expanded Google collaboration on automotive innovation and AI-powered mobility. [W2]\n  - **June 24, 2026 — Qualcomm | official:** Its Investor Day business update emphasized diversification into data centers, industrial AI, robotics and automotive autonomy. These were strategic priorities and forward-looking opportunities, not established outcomes. [W4]\n  - **August 3, 2026 — Futurum | third_party:** Futurum reported that Qualcomm’s Modular acquisition added an open AI software stack for heterogeneous computing across data-center and edge deployments. [W1]\n- **Evidence limits:** Publication dates establish that these sources appeared after the filing; they do not independently verify the claims or establish present status.\n\nUnresolved outputs:\n- Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      },
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_change",
+          "unit": "USD",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "difference",
+          "source_id": "C1",
+          "label": "QCOM FY2025 revenue change vs FY2024",
+          "requested_label": "Qualcomm FY2025 consolidated revenue change versus FY2024 (reported fiscal years; 52 versus 53 weeks)",
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "F2 - F1",
+          "value": "5322000000",
+          "display_value": "5,322,000,000",
+          "bundle_id": "ecfaee9c556564d4445f9c4556083497137322ffc0fd295f4f6f6f80c5c9b2b8",
+          "inspection_url": "/api/analysis/ecfaee9c556564d4445f9c4556083497137322ffc0fd295f4f6f6f80c5c9b2b8/calculations/C1"
+        },
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C2",
+          "label": "QCOM FY2025 revenue growth vs FY2024",
+          "requested_label": "Qualcomm FY2025 consolidated revenue growth versus FY2024 (reported fiscal years; 52 versus 53 weeks)",
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "(F2 / F1 - 1) * 100",
+          "value": "13.65946306657769108361993740",
+          "display_value": "13.6595",
+          "bundle_id": "ecfaee9c556564d4445f9c4556083497137322ffc0fd295f4f6f6f80c5c9b2b8",
+          "inspection_url": "/api/analysis/ecfaee9c556564d4445f9c4556083497137322ffc0fd295f4f6f6f80c5c9b2b8/calculations/C2"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-24-000075",
+          "accession": "0000804328-24-000075",
+          "form": "10-K",
+          "filed": "2024-11-06",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 38962000000,
+          "conflicting_comparatives": [],
+          "observation_id": "c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "filed": "2025-11-05",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 44284000000,
+          "conflicting_comparatives": [],
+          "observation_id": "489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae"
+        },
+        {
+          "source_id": "S14",
+          "chunk_id": "7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205",
+          "company": "QCOM",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "page": 42,
+          "period_end": "2025-09-28",
+          "form": "10-K",
+          "version": "original",
+          "start": 348544,
+          "document_id": "qcom-0000804328-25-000085",
+          "end": 350195,
+          "kind": "filing",
+          "section": "other",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "fiscal_year": 2025,
+          "distance": 0.29216468334198,
+          "inspection_url": "/api/sources/7be78a986ce0662ab3383a72914b8ef158aee1d17f070ee83a4a705fab6a9205"
+        },
+        {
+          "source_id": "S16",
+          "chunk_id": "69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c",
+          "fiscal_year": 2025,
+          "document_id": "qcom-0000804328-25-000085",
+          "version": "original",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "start": 349975,
+          "form": "10-K",
+          "kind": "filing",
+          "company": "QCOM",
+          "end": 353211,
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "section": "other",
+          "period_end": "2025-09-28",
+          "page": 42,
+          "distance": 0.3264310359954834,
+          "inspection_url": "/api/sources/69b56c5b07f8cdd159600b1cbb579b7ea759229a009f89ab67a53b2219cf660c"
+        },
+        {
+          "source_id": "S18",
+          "chunk_id": "0d55258a94fd0d685e3e85fca6f529d452fddc7a7784d1a9278660e834022d56",
+          "page": 42,
+          "fiscal_year": 2025,
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "end": 348791,
+          "company": "QCOM",
+          "section": "other",
+          "kind": "filing",
+          "period_end": "2025-09-28",
+          "start": 344969,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "version": "original",
+          "document_id": "qcom-0000804328-25-000085",
+          "form": "10-K",
+          "distance": 0.38228482007980347,
+          "inspection_url": "/api/sources/0d55258a94fd0d685e3e85fca6f529d452fddc7a7784d1a9278660e834022d56"
+        },
+        {
+          "source_id": "W1",
+          "kind": "live_source",
+          "company": "QCOM",
+          "url": "https://futurumgroup.com/insights/qualcomm-q3-fy-2026-automotive-growth-offsets-handset-weakness",
+          "publisher": "futurumgroup.com",
+          "title": "Qualcomm Q3 FY 2026: Automotive Growth Offsets Handset Weakness - Futurum",
+          "source_tier": "third_party",
+          "published_date": "Mon, 03 Aug 2026 00:00:00 GMT",
+          "retrieved_at": "2026-10-19T18:21:27.008825+00:00",
+          "freshness": "fresh",
+          "text_sha256": "af10239c8c8452b63b3fdff8349d5870b9ed56effb310951bb5a9120d4a755c5",
+          "snapshot_id": "29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8"
+        },
+        {
+          "source_id": "W2",
+          "kind": "live_source",
+          "company": "QCOM",
+          "url": "https://s204.q4cdn.com/645488518/files/doc_financials/2026/q1/FY2026-1st-Quarter-Earnings-Presentation_2-4-26_final_distributed.pdf",
+          "publisher": "q4cdn.com",
+          "title": "First Quarter Fiscal 2026 Earnings",
+          "source_tier": "third_party",
+          "published_date": "Wed, 04 Feb 2026 00:00:00 GMT",
+          "retrieved_at": "2026-10-19T18:21:27.008825+00:00",
+          "freshness": "dated",
+          "text_sha256": "38b41fec04e0b2f1f080460be80e91808a2b9d3865c9989ccf1f1039945d9ee8",
+          "snapshot_id": "29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8"
+        },
+        {
+          "source_id": "W4",
+          "kind": "live_source",
+          "company": "QCOM",
+          "url": "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_APalkhiwala_Business-Update.pdf",
+          "publisher": "qualcomm.com",
+          "title": "Investor-Day-2026_APalkhiwala_Business-Update.pdf",
+          "source_tier": "official",
+          "published_date": "Wed, 24 Jun 2026 23:25:56 GMT",
+          "retrieved_at": "2026-10-19T18:21:27.008825+00:00",
+          "freshness": "dated",
+          "text_sha256": "c23e9a1592c917962e8b27a7667ca80ec5ce48bdca56cb67aae3c5ba05eb0bd0",
+          "snapshot_id": "29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "data",
+          "quant",
+          "research",
+          "current"
+        ],
+        "live_events": [
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "Qualcomm after November 5 2025 developments acquisition automotive AI 2026",
+              "topic": "news",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "29ec8e76c92379efd64c9e4c803eec8962fbafbcecaea5a23ba9b6df475643c8",
+            "cache": false,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "site.qualcomm.com/news/releases 2026 Qualcomm acquisition Ventana Google automotive",
+              "topic": "general",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "fd866a3e86f737f6f491fa2389e0b355b7471ffcc817ef95a9b49c0d005febb4",
+            "cache": false,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_extract",
+            "arguments": {
+              "urls": [
+                "https://s204.q4cdn.com/645488518/files/doc_financials/2026/q1/FY2026-1st-Quarter-Earnings-Presentation_2-4-26_final_distributed.pdf"
+              ],
+              "extract_depth": "basic"
+            },
+            "result_count": 1,
+            "snapshot_id": "ae8a0a050d217ea0caa161e06f4d2b2c109454a912b805efbdd00ba8ce59303d",
+            "cache": true,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_extract",
+            "arguments": {
+              "urls": [
+                "https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/Investor-Day-2026_APalkhiwala_Business-Update.pdf"
+              ],
+              "extract_depth": "basic"
+            },
+            "result_count": 1,
+            "snapshot_id": "2171e32fc0684c956383b90018bfb66fcd98054589703504ffd02c7351333dd9",
+            "cache": false,
+            "outcome": "returned"
+          }
+        ]
+      },
+      "inspections": [
+        {
+          "source_id": "C1",
+          "status": 200
+        },
+        {
+          "source_id": "C2",
+          "status": 200
+        },
+        {
+          "source_id": "F1",
+          "status": 200
+        },
+        {
+          "source_id": "F2",
+          "status": 200
+        },
+        {
+          "source_id": "S14",
+          "status": 200
+        },
+        {
+          "source_id": "S16",
+          "status": 200
+        },
+        {
+          "source_id": "S18",
+          "status": 200
+        },
+        {
+          "source_id": "W1",
+          "status": 200
+        },
+        {
+          "source_id": "W2",
+          "status": 200
+        },
+        {
+          "source_id": "W4",
+          "status": 200
+        }
+      ],
+      "seconds": 81.294,
+      "answer_token_ttft_seconds": 77.166,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "data",
+          "outcome": "completed",
+          "evidence_count": 2,
+          "tool_calls": 3,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "quant",
+          "outcome": "completed",
+          "evidence_count": 4,
+          "tool_calls": 6,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "research",
+          "outcome": "completed",
+          "evidence_count": 23,
+          "tool_calls": 9,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "current",
+          "outcome": "partial",
+          "evidence_count": 35,
+          "tool_calls": 14,
+          "missing_inputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      ]
+    },
+    "price": {
+      "question": "What is NVIDIA's stock price and P/E?",
+      "answer": "No verified answer is available. Market prices, quotes, valuation multiples and analyst estimates are outside this application's scope.\n\nUnresolved outputs:\n- Market prices, quotes, valuation multiples and analyst estimates are outside this application's scope.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "coverage_gap",
+          "verified_citations": false,
+          "missing_outputs": [
+            "Market prices, quotes, valuation multiples and analyst estimates are outside this application's scope."
+          ]
+        }
+      },
+      "sources": [],
+      "checks": {
+        "passed": true,
+        "workers": [],
+        "live_events": []
+      },
+      "inspections": [],
+      "seconds": 0.035,
+      "answer_token_ttft_seconds": null,
+      "worker_outcomes": []
+    },
+    "historical": {
+      "question": "As of FY2024, what did Intel say about its foundry strategy? Use only the filings.",
+      "answer": "- In its FY2024 10-K, Intel described a dual-purpose foundry strategy: manufacture Intel’s own products while becoming a major semiconductor manufacturer for external customers. Intel expected its factories to remain primarily devoted to its own products for many years. [S7]\n- The economic rationale was scale: Intel’s own products would support leading-edge operations and help derisk offerings for external customers. Third-party business would add leading-edge volume and improve monetization of mature technologies and factories. [S7]\n- Intel separated reporting for Intel Products and Intel Foundry beginning in Q1 2024 to improve transparency, accountability, costs, and efficiency. It also announced plans to establish Foundry as an independent subsidiary—not a completed separation—to provide clearer independence for customers and suppliers and more funding flexibility. [S9] [S7]\n- Its competitive proposition combined wafer fabrication, advanced packaging, chiplets, and software/services, supported by an IP ecosystem and committed US and European capacity available to global customers. [S10]\n- The technology roadmap targeted both leading-edge and mature-node offerings. At the filing date, Intel expected volume production of products on Intel 18A in 2025; that was an expectation, not an achieved milestone. [S5]\n- Intel sought customer advance payments and participation in capacity build-outs to secure volume and derisk investment. It also intended to keep using external foundries where their capabilities or capacity supported Intel Products. [S8]",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "sources": [
+        {
+          "source_id": "S5",
+          "chunk_id": "4884cfbeee1240f5e418e54df8979d8ffe33f088bbf5b15b242e05f14d25eb87",
+          "section": "mda",
+          "document_id": "intc-0000050863-25-000009",
+          "company": "INTC",
+          "version": "original",
+          "fiscal_year": 2024,
+          "page": 0,
+          "end": 101607,
+          "period_end": "2024-12-28",
+          "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+          "form": "10-K",
+          "kind": "filing",
+          "start": 100307,
+          "distance": 0.3283334970474243,
+          "inspection_url": "/api/sources/4884cfbeee1240f5e418e54df8979d8ffe33f088bbf5b15b242e05f14d25eb87"
+        },
+        {
+          "source_id": "S7",
+          "chunk_id": "91bced6d5ab128d014b02fcd591ce6b7a0052cd0ea9f9b3319f1e0975bf7b8a6",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+          "document_id": "intc-0000050863-25-000009",
+          "section": "mda",
+          "kind": "filing",
+          "period_end": "2024-12-28",
+          "version": "original",
+          "fiscal_year": 2024,
+          "company": "INTC",
+          "page": 0,
+          "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+          "end": 100576,
+          "form": "10-K",
+          "start": 99249,
+          "distance": 0.3448665142059326,
+          "inspection_url": "/api/sources/91bced6d5ab128d014b02fcd591ce6b7a0052cd0ea9f9b3319f1e0975bf7b8a6"
+        },
+        {
+          "source_id": "S8",
+          "chunk_id": "59765cd622d64eecdfc5a1550d1ecf756f6341dccfeec9eccca3c9d1aa22ae5a",
+          "page": 0,
+          "section": "other",
+          "fiscal_year": 2024,
+          "document_id": "intc-0000050863-25-000009",
+          "start": 27209,
+          "version": "original",
+          "form": "10-K",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+          "period_end": "2024-12-28",
+          "company": "INTC",
+          "end": 28357,
+          "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+          "kind": "filing",
+          "distance": 0.35251671075820923,
+          "inspection_url": "/api/sources/59765cd622d64eecdfc5a1550d1ecf756f6341dccfeec9eccca3c9d1aa22ae5a"
+        },
+        {
+          "source_id": "S9",
+          "chunk_id": "1b3f8af7dc297427c384ecbfeac867f5535dbf146c5820049de44c8f037cf7d6",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+          "version": "original",
+          "page": 0,
+          "start": 68771,
+          "document_id": "intc-0000050863-25-000009",
+          "fiscal_year": 2024,
+          "form": "10-K",
+          "kind": "filing",
+          "end": 69980,
+          "company": "INTC",
+          "section": "mda",
+          "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+          "period_end": "2024-12-28",
+          "distance": 0.3600931763648987,
+          "inspection_url": "/api/sources/1b3f8af7dc297427c384ecbfeac867f5535dbf146c5820049de44c8f037cf7d6"
+        },
+        {
+          "source_id": "S10",
+          "chunk_id": "b0f26f3278ff213a69e155459639dbae98e725b9305d170f29fd7af34b59e8db",
+          "period_end": "2024-12-28",
+          "kind": "filing",
+          "text_sha256": "ea720899789f93f236b814b0e88db2a943d81e3d0cb91c4bfdce29e094df46f8",
+          "company": "INTC",
+          "end": 25356,
+          "section": "other",
+          "page": 0,
+          "fiscal_year": 2024,
+          "start": 24206,
+          "document_id": "intc-0000050863-25-000009",
+          "form": "10-K",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000009/intc-20241228.htm",
+          "version": "original",
+          "distance": 0.37516146898269653,
+          "inspection_url": "/api/sources/b0f26f3278ff213a69e155459639dbae98e725b9305d170f29fd7af34b59e8db"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "research"
+        ],
+        "live_events": []
+      },
+      "inspections": [
+        {
+          "source_id": "S5",
+          "status": 200
+        },
+        {
+          "source_id": "S7",
+          "status": 200
+        },
+        {
+          "source_id": "S8",
+          "status": 200
+        },
+        {
+          "source_id": "S9",
+          "status": 200
+        },
+        {
+          "source_id": "S10",
+          "status": 200
+        }
+      ],
+      "seconds": 14.759,
+      "answer_token_ttft_seconds": 8.594,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "research",
+          "outcome": "completed",
+          "evidence_count": 10,
+          "tool_calls": 2,
+          "missing_inputs": []
+        }
+      ]
+    }
+  },
+  "passed": true
+}

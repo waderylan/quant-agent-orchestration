@@ -3,6 +3,68 @@
 import re
 from dataclasses import dataclass
 from decimal import Decimal
+from typing import Literal
+
+PRICE_GAP = "Market prices, quotes, valuation multiples and analyst estimates are outside this application's scope."
+PRICE_PATTERN = r"\b(?:stock prices?|share prices?|stock quotes?|dated quotes?|market cap(?:italization)?|valuations?|multiples?|forward earnings|analyst (?:estimates?|expectations?)|analysts? expecting|consensus|cheap(?:er|est)?|expensive|trading|total return|discounted.cash.flow|FCF yield|free cash flow yield)\b|P\s*/\s*E|EV\s*/|price[- ]to[- ]earnings"
+FILING_PATTERN = r"\b(?:filings?|10-[KQ]|annual report|quarterly report|releases?|MD&A|risk factors|FY\s*20\d\d)\b"
+NEGATED_LIVE = r"\b(?:(?:do not|don't)\s+(?:use|include|search|retrieve)(?:\s+for)?|without)\s+(?:any\s+)?(?:live(?:\s+news)?|web(?:\s+search)?|news|search)\b|\b(?:do not|don't)\s+search\b"
+
+
+def price_request(question) -> bool:
+    return bool(re.search(PRICE_PATTERN, question, re.I))
+
+
+def filing_clauses(question, *, developments=False):
+    """Keep independently requested filing work when live/price clauses coexist."""
+    clauses = re.split(r"[.!?;](?:\s|$)|\s+(?:and|then|also)\s+(?=(?:what|any|its current share|give|show|tell me how)\b)", question, flags=re.I)
+    kept = []
+    for clause in clauses:
+        if re.search(PRICE_PATTERN, clause, re.I):
+            # Preserve supported clauses on either side of an excluded output.
+            clause = "; ".join(part for part in re.split(r"\s+(?:and|then|also)\s+", clause, flags=re.I) if not re.search(PRICE_PATTERN, part, re.I))
+        if developments and not (requested_metrics(clause) or risk_comparison_request(clause) or re.search(r"\b(?:explain|why|management|say|said|disclosure)\b", clause, re.I)):
+            continue
+        if clause.strip():
+            kept.append(clause.strip())
+    return "; ".join(kept)
+
+
+def live_match(question):
+    from src.capabilities import capability_request
+    capability = capability_request(question)
+    if capability:
+        question = capability['question']
+    if re.search(NEGATED_LIVE, question, re.I):
+        return "none", None
+    historical = re.search(r"\bhistorical\b|at that fiscal year.end|\bas of (?:FY\s*)?20\d\d\b|\b(?:in|using|use) (?:only (?:the )?filings|the filings only)\b|using only.*filing", question, re.I)
+    if historical:
+        return "none", historical[0]
+    question = re.sub(r"\bcurrent (?:assets|liabilities|portion|ratio|period|fiscal year)\b|\bcurrent quarter(?=\s+(?:results|revenues?|gross|operating|net|cash))\b|\blatest (?:filings?|10-[KQ]|annual report|quarterly report|collected)\b|\brecent (?:quarter|fiscal year)\b", lambda m: "filing context" if m[0].lower().startswith("latest") else "accounting context", question, flags=re.I)
+    verified = re.search(r"\b(?:still(?: in effect| current| true)?|has (?:that|this) changed|been updated|any update to|remains in effect)\b", question, re.I)
+    if verified:
+        return "verify", verified[0]
+    clauses = re.split(r"[.!?;](?:\s|$)|\s+and\s+(?=(?:what|any)\b)", question, flags=re.I)
+    for clause in clauses:
+        if re.search(PRICE_PATTERN, clause, re.I):
+            continue
+        strong = re.search(r"\b(?:news|what has happened|what['’]s new|any updates|recent developments|today|this week|this month)\b|\b(?:since|after)\b(?:\s+[\w'-]+){0,6}\s+(?:filings?|10-[KQ]|report|release|fiscal)\b", clause, re.I)
+        weak = re.search(r"\b(?:latest|recent|recently|current|currently|now|this quarter|this year|so far|upcoming|announced)\b", clause, re.I)
+        if strong or weak and not re.search(FILING_PATTERN, clause, re.I):
+            return "developments", (strong or weak)[0]
+    return "none", None
+
+
+def live_phrase(question, intent):
+    if intent == "none":
+        return None
+    pattern = r"\b(?:still(?: in effect| current| true)?|has (?:that|this) changed|been updated|any update to|remains in effect)\b" if intent == "verify" else r"\b(?:news|what has happened|what['’]s new|any updates|recent developments|today|this week|this month|since|after|latest|recent|recently|current|currently|now|this quarter|this year|so far|upcoming|announced)\b"
+    match = re.search(pattern, question, re.I)
+    return match[0] if match else None
+
+
+def live_intent(question) -> Literal["none", "verify", "developments"]:
+    return live_match(question)[0]
 
 COMPANY_ALIASES = {
     "NVDA": ("NVIDIA", r"\b(nvidia|nvda)\b"),
@@ -201,9 +263,6 @@ def risk_comparison_request(question):
 
 
 def plan_request(question, *, financial_only=False):
-    from src.buy_side import market_request
-    if not financial_only and market_request(question):
-        return RequestPlan("buy", "Buy-Side Analyst acquires dated market evidence and delegates arithmetic to Quant")
     if not financial_only and risk_comparison_request(question):
         return RequestPlan("risk", "Risk Summary compares complete original risk sections, not search-hit omissions")
     metrics = requested_metrics(question)

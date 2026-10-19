@@ -1,0 +1,75 @@
+{
+  "checked_at": "2026-10-19T18:39:49.104938+00:00",
+  "milestone": "M10 Current Developments",
+  "items": {
+    "1": {
+      "passed": true,
+      "evidence": "TESTS_2026-10-19.json"
+    },
+    "2": {
+      "passed": true,
+      "evidence": "DIRECT_2026-10-19.json"
+    },
+    "3": {
+      "passed": true,
+      "evidence": "APPLICATION_2026-10-19.json"
+    },
+    "4": {
+      "passed": true,
+      "evidence": "SHARING_2026-10-19.json"
+    },
+    "5": {
+      "passed": true,
+      "evidence": "BROWSER_2026-10-19.json"
+    },
+    "6": {
+      "passed": true,
+      "evidence": "DOCKER_2026-10-19.json"
+    },
+    "7": {
+      "passed": true,
+      "evidence": "TESTS_2026-10-19.json"
+    },
+    "8": {
+      "passed": true,
+      "evidence": "BUDGET_2026-10-19.json"
+    },
+    "9": {
+      "passed": true,
+      "evidence": "CHECKS_2026-10-19.json"
+    },
+    "10": {
+      "passed": true,
+      "evidence": "CHECKS_2026-10-19.json"
+    }
+  },
+  "item_11": {
+    "evidence": "../../../../AI_TRANSCRIPT.md",
+    "entry_id": "event:8af54b0f-0e1e-4cfb-b3a7-1e845615c62a",
+    "verification": "Finalization appends this single event last, then checks ID uniqueness, unchanged preceding bytes, exact prompt/response, Tool and final EOF marker using read-only verification. The transcript entry and final handoff hold the receipt."
+  },
+  "phase_gates": {
+    "1": "pass: compileall, 177 tests",
+    "2": "pass: fixed 17-row truth table, 194 tests",
+    "3": "pass: gateway tests, real schema discovery",
+    "4": "pass: worker/sharing/failure tests, 205 tests",
+    "5": "pass: native Chromium gate",
+    "6": "pass: real API/browser/container; final 209 tests",
+    "7": "pass: current docs, 198 local links, milestone coverage, removal and path checks; transcript finalization last"
+  },
+  "credits": {
+    "calls": 35,
+    "conservatively_reserved": 70,
+    "per_call": 2,
+    "billed_usage": "not measured"
+  },
+  "changed_expectations": "Removed-agent/citation fixtures and two obsolete live-coverage gaps; no unchanged historical question requires a different routing expectation. Fixed live-routing expected values match the original contract.",
+  "limits": [
+    "Publication metadata can be absent; those sources do not establish post-anchor events.",
+    "The usage endpoint can return 429. A verified monthly floor plus all local reservations keeps the 600-credit stop conservative; output remains partial.",
+    "Per-host SQLite does not establish a shared cap across Cloud Run instances; M13 owns that decision."
+  ],
+  "file_manifest": "FILES_2026-10-19.json",
+  "unresolved_blockers": [],
+  "no_commit_or_push": true
+}

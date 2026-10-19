@@ -1,7 +1,6 @@
 """Start the local acceptance container with host-owned generation authentication.
 
-No market credentials enter the image. Stop the printed container and bridge after
-acceptance. The market adapter can use an explicitly mounted ignored runtime file.
+Stop the printed container and bridge after acceptance.
 """
 
 import json
@@ -20,7 +19,7 @@ from src.source_collection import ROOT
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--market-mode", choices=["off", "live", "frozen"], default="off"
+        "--live-mode", choices=["off", "live", "frozen"], default="off"
     )
     parser.add_argument("--reuse-bridge", action="store_true")
     parser.add_argument("--skip-build", action="store_true")
@@ -72,33 +71,16 @@ def main():
         "-e",
         "CODEX_BRIDGE_TOKEN_FILE=/run/secrets/codex-bridge",
     ]
-    if options.market_mode != "off":
-        market_path = ROOT / "artifacts/market"
-        market_path.mkdir(parents=True, exist_ok=True)
-        args.extend(
-            [
-                "-e",
-                "MARKET_MODE=" + options.market_mode,
-                "--mount",
-                f"type=bind,source={market_path},target=/app/artifacts/market",
-            ]
-        )
-        if options.market_mode == "live":
-            values = dotenv_values(ROOT / ".env")
-            runtime = staging / "market-runtime.env"
-            runtime.write_text(
-                "\n".join(
-                    k + "=" + (values.get(k) or "")
-                    for k in (
-                        "TWELVE_DATA_API_KEY",
-                        "TWELVE_DATA_GMAIL_API_KEY",
-                        "ALPHA_VANTAGE_API_KEY",
-                        "TAVILY_API_KEY",
-                    )
-                ),
-                encoding="utf-8",
-            )
-            args.extend(["--env-file", str(runtime)])
+    live_path = ROOT / "artifacts/live"
+    live_path.mkdir(parents=True, exist_ok=True)
+    runtime_env = dict(os.environ)
+    if options.live_mode != "off":
+        args.extend(["-e", "LIVE_MODE=" + options.live_mode, "--mount", f"type=bind,source={live_path},target=/app/artifacts/live"])
+        if options.live_mode == "live":
+            runtime_env["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY") or dotenv_values(ROOT / ".env").get("TAVILY_API_KEY") or ""
+            args.extend(["-e", "TAVILY_API_KEY"])
+    else:
+        args.extend(["-e", "LIVE_MODE=off"])
     for source, target, readonly in [
         (ROOT / "data/corpus", "/app/data/corpus", True),
         (ROOT / "data/financials", "/app/data/financials", True),
@@ -118,7 +100,7 @@ def main():
             ]
         )
     args.append("hw2-sequence")
-    container = subprocess.check_output(args, text=True).strip()
+    container = subprocess.check_output(args, text=True, env=runtime_env).strip()
     (staging / "running.json").write_text(
         json.dumps(
             {"container": container, "bridge_pid": bridge.pid if bridge else None}
@@ -131,7 +113,7 @@ def main():
                 "container": container,
                 "bridge_pid": bridge.pid if bridge else None,
                 "url": "http://127.0.0.1:8084",
-                "market_mode": options.market_mode,
+                "live_mode": options.live_mode,
             }
         )
     )

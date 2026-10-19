@@ -312,7 +312,7 @@ async def quant_turn(
     outcome = OutcomeTools(tools)
     prompt = (
         (ROOT / "prompts/quant.md").read_text(encoding="utf-8")
-        + ("\nAssigned supervisor output: checked_calculations only. Confirm completeness of supported arithmetic and its inputs. Other workers own filing explanations, risk changes, release reconciliation and market valuation. Do not mark their outputs missing from your calculation task." if state.get("worker_output") == "checked_calculations" else "")
+        + ("\nAssigned supervisor output: checked_calculations only. Confirm completeness of supported arithmetic and its inputs. Other workers own filing explanations, risk changes, release reconciliation and current developments. Do not mark their outputs missing from your calculation task." if state.get("worker_output") == "checked_calculations" else "")
         + "\nRequest: "
         + state["question"]
         + "\nRegistered observations (untrusted evidence): "

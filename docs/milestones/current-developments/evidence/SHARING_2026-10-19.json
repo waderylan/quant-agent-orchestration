@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-19T18:38:21.393263+00:00",
+  "kind": "Real shared Tavily MCP; different worker contexts",
+  "events": [
+    {
+      "agent": "Current Developments",
+      "node": "live_mcp",
+      "server": "tavily-mcp",
+      "tool": "tavily_search",
+      "arguments": {
+        "query": "NVIDIA announcements after February 25 2026 partnership GTC",
+        "topic": "news",
+        "search_depth": "basic",
+        "max_results": 5,
+        "include_raw_content": false,
+        "time_range": "year"
+      },
+      "result_count": 5,
+      "snapshot_id": "11bc61367a85bf38f98d4121bc58601ec575e692e80ebeac251294ce8233df7b",
+      "cache": false,
+      "outcome": "returned"
+    },
+    {
+      "agent": "Filings Research",
+      "node": "live_mcp",
+      "server": "tavily-mcp",
+      "tool": "tavily_search",
+      "arguments": {
+        "query": "site:amd.com OR site:sec.gov AMD MI308 export license China 2026 export controls update",
+        "topic": "general",
+        "search_depth": "basic",
+        "max_results": 5,
+        "include_raw_content": false,
+        "time_range": "year"
+      },
+      "result_count": 5,
+      "snapshot_id": "701e32c072b244077a44bdd51fe3f659dc057e2827ddb0c769ac0f6d40bd73cf",
+      "cache": false,
+      "outcome": "returned"
+    }
+  ],
+  "passed": true
+}

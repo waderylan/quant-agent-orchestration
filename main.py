@@ -21,7 +21,7 @@ from src.financial_data import FinancialStore, FINANCIALS
 from src.analysis_artifacts import ArtifactStore
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
-from src.market_mcp import MarketGateway
+from src.live_mcp import LiveGateway
 
 load_dotenv()
 
@@ -37,6 +37,7 @@ async def lifespan(app):
         (ROOT / os.getenv("FINANCIAL_DATA_DIR", str(FINANCIALS))).resolve()
     )
     app.state.artifacts = ArtifactStore()
+    app.state.gateway = LiveGateway()
     yield
 
 
@@ -54,7 +55,7 @@ class Question(BaseModel):
 class TurnServices:
     """Request-local service injection for controlled application acceptance."""
 
-    gateway: MarketGateway | None = None
+    gateway: LiveGateway | None = None
     worker_overrides: dict | None = None
     index: ResearchIndex | None = None
     financials: FinancialStore | None = None
@@ -62,7 +63,7 @@ class TurnServices:
 
 
 def turn_services(request: Request):
-    return TurnServices()
+    return TurnServices(gateway=getattr(request.app.state, "gateway", None))
 
 
 class ClosingStreamingResponse(StreamingResponse):
@@ -123,14 +124,12 @@ def risk_source(document_id: str, start: int, end: int):
         raise HTTPException(404, str(error)) from error
 
 
-@app.get("/api/market/{identity}")
-def market_source(identity: str):
-    from src.market_mcp import MarketGateway
-
+@app.get("/api/live/{snapshot_id}")
+def live_source(snapshot_id: str):
     try:
-        return {"kind": "market_evidence", **MarketGateway().inspect(identity)}
-    except (KeyError, ValueError, FileNotFoundError) as error:
-        raise HTTPException(404, str(error)) from error
+        return {"kind": "live_source", **app.state.gateway.inspect(snapshot_id)}
+    except (KeyError, ValueError, FileNotFoundError):
+        raise HTTPException(404, "Live snapshot unavailable") from None
 
 
 @app.get("/api/financial/observations/{observation_id}")

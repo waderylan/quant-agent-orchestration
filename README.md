@@ -1,6 +1,6 @@
 # Public-Company Research Assistant
 
-Rylan Wade's CSCI 599 Assignment 2 project. The local application answers cited filing questions and checks consolidated GAAP figures and calculations for NVIDIA, AMD, Intel, and Qualcomm. All four cover FY2024–FY2025; NVIDIA also covers FY2026. [Documentation map](docs/README.md) links the current scope, architecture, milestones, evidence, and assignment.
+Rylan Wade's CSCI 599 Assignment 2 project. The local application answers cited filing questions, checks consolidated GAAP figures and calculations, and researches dated current developments for NVIDIA, AMD, Intel, and Qualcomm. All four cover FY2024–FY2025; NVIDIA also covers FY2026. [Documentation map](docs/README.md) links the current scope, architecture, milestones, evidence, and assignment.
 
 ## Run locally
 
@@ -18,8 +18,8 @@ Open `http://127.0.0.1:8080`, select companies and fiscal years, and ask a self-
 
 Try:
 
-- “What are the selected companies' stock prices, and how are they valued?” Select one or several companies; stock observations retain their own dates.
-- “Compare the selected companies' valuations and analyst expectations. Give the strongest counterargument.” The stock examples above the Research button retain the current company selection.
+- “What has happened at the selected companies since their latest filings? Cite dated sources.”
+- “Is the export-control risk in the latest annual filing still current? Check for an official update.” Both examples preserve the selected companies.
 - “What can this system do, and what does each agent do?” The supervisor answers implemented-capability questions locally without provider calls.
 - “How much of Qualcomm's FY2025 revenue came from automotive?”
 - “Show Qualcomm FY2024 and FY2025 GAAP revenue, gross profit, operating income, and operating cash flow, then compare them.” Select QCOM and both years.
@@ -37,25 +37,20 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 uv run --locked pytest -q
 ```
 
-Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) has the local Docker acceptance command. The [milestone index](docs/milestones/README.md) identifies the next work; broader live research, two-provider routing, formal evaluation, and Cloud Run remain planned.
+Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) describes the local container profile. [Milestones](docs/milestones/README.md) own status; generation-provider routing, formal evaluation and Cloud Run deployment remain planned.
 
-Private market testing requires the four runtime keys listed in `.env.example`, `MARKET_MODE=live`, and the official Twelve Data checkout. Public market-data display rights are unverified; [M8](docs/milestones/buy-side-analyst/README.md) records actual entitlements, budgets, and excluded valuation inputs.
+## Live sources
 
-```powershell
-git clone https://github.com/twelvedata/mcp.git artifacts/twelvedata-mcp
-git -C artifacts/twelvedata-mcp checkout d139a77ea0f7d40995e6979cd09c22dd142fbfe8
-uv run --locked python scripts/market_access.py --usage
-uv run --locked python scripts/demo_buy.py --direct
-uv run --locked python scripts/start_local_container.py --market-mode live
-```
+Copy `.env.example` to ignored `.env` and supply `TAVILY_API_KEY` from your Tavily account. The key stays in the runtime environment. Live mode is the default when a key exists; set `LIVE_MODE=off` to disable acquisition or `LIVE_MODE=frozen` to replay recorded snapshots without new calls. `LIVE_CACHE` defaults to `artifacts/live/cache` and `LIVE_LEDGER` to `artifacts/live/usage.sqlite3`.
 
-Use `MARKET_MODE=frozen` to replay cached provider responses without new calls, retaining original dates. The single ledger at `artifacts/market/usage.sqlite3` reserves calls before network execution; native and Docker acceptance share it. Do not run independent live account probes outside this adapter. The hard work limits remain Alpha Vantage 10/day and 40 total, Twelve Data 60 combined, and Tavily 100 additional credits with a 300-credit monthly stop. No plan upgrade is automatic.
-
-The [selected-company stock review](docs/milestones/buy-side-analyst/evidence/STOCK_RESEARCH_REVIEW_2026-10-16.json) separates actual generation over frozen market responses, a fresh Docker quote, and browser replay checks. With local source/index and recorded market responses available, reproduce its application path with a new output file:
+Current Developments uses Tavily Remote MCP search/extraction after the collected filing anchor. Research shares search for a single official-update check. [Architecture](docs/architecture.md) owns tool limits, freshness, caching and the 600-credit monthly stop; [M10](docs/milestones/current-developments/README.md) owns measured acceptance. Unknown publication dates and unavailable account-usage reads remain explicit partial results. Prices and valuation are unsupported.
 
 ```powershell
-uv run --locked python scripts/verify_buy_side_research.py --output artifacts/buy-side-research-new.json
-uv run --locked python scripts/verify_stock_browser.py --review artifacts/buy-side-research-new.json --url http://127.0.0.1:8084
+uv run --locked python scripts/demo_current.py --direct --output artifacts/current-direct.json
+uv run --locked python scripts/demo_current.py --url http://127.0.0.1:8080 --output artifacts/current-app.json
+uv run --locked python scripts/demo_current.py --browser --url http://127.0.0.1:8080 --output artifacts/current-browser.json
+uv run --locked python scripts/start_local_container.py --live-mode live
+uv run --locked python scripts/demo_current.py --url http://127.0.0.1:8084 --case nvda --refresh --output artifacts/current-container.json
 ```
 
-The application review blocks live market acquisition and caps model starts plus tool continuations at 49. Browser checks replay captured answers without generation and require the referenced market snapshots and analysis bundles to be available to the target app. Structural checks do not replace semantic review of answers.
+Real demonstrations use account credits. Tests force frozen mode, isolated ledgers/caches and blocked default Tavily transport. Docker receives the key through an inherited runtime environment variable; the image contains no credentials. Native and container demonstrations share the per-host live ledger. [Evaluation](docs/evaluation.md) separates these checks from formal scores and deployed-provider measurements.

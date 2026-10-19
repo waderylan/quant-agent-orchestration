@@ -1,0 +1,261 @@
+{
+  "kind": "All M10 real acquisition attempts, including repeat acceptance runs; each data call reserves two credits before execution. Usage HTTP checks and MCP discovery spend no data-call reservation. Totals are conservative reserved credits, not a provider-reported bill.",
+  "started_reserved_credits": 0,
+  "checked_at": "2026-10-19T18:38:21.706567+00:00",
+  "monthly_stop": 600,
+  "settings": {
+    "month": "2026-10",
+    "projection": "103",
+    "reserved": "68",
+    "observed_usage": "35",
+    "checked_at": "2026-10-19T18:36:15.521405+00:00"
+  },
+  "calls": [
+    {
+      "id": "faea0c69-6eca-45c0-abd7-ff388196a6eb",
+      "at": "2026-10-19T18:06:12.696607+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "8ee94e5a-032e-445a-adc1-a1f299d96bdd",
+      "at": "2026-10-19T18:06:19.162494+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "07952253-f79a-4e6c-856c-7cdce71ad00e",
+      "at": "2026-10-19T18:06:25.505565+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "70f41efc-6d8f-451e-a3d9-a33048e2edce",
+      "at": "2026-10-19T18:07:05.137114+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "eb3f00c6-127a-4b8b-b0a3-1665417b2a96",
+      "at": "2026-10-19T18:07:10.711079+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "4d4a2198-5c2f-496f-8f8c-44ad6c22436e",
+      "at": "2026-10-19T18:07:23.127609+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "514dd73b-871e-4652-8581-74ab17c8c2a2",
+      "at": "2026-10-19T18:07:28.405901+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "ddda42bb-d3c5-478a-80b2-ecd42956f335",
+      "at": "2026-10-19T18:07:51.404664+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "ac02e0b8-3311-4b2e-871e-0037cdfbfa6e",
+      "at": "2026-10-19T18:08:47.357680+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "3906c7ef-deb3-4ceb-ad88-093ef627c595",
+      "at": "2026-10-19T18:09:02.119582+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "d2816e3b-037b-43cb-95af-efe8f9ebd44d",
+      "at": "2026-10-19T18:09:07.440426+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "780a7180-ece0-43d0-a12c-9e3843ebbc92",
+      "at": "2026-10-19T18:09:10.062153+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "28b139a4-8a68-4921-b319-ccf665083b2b",
+      "at": "2026-10-19T18:09:14.403173+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "0db7aefb-69a3-4dc5-8fc4-1c7145942d91",
+      "at": "2026-10-19T18:09:20.721346+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "60b96f97-179f-4ebf-86a4-e69bc86efce7",
+      "at": "2026-10-19T18:19:12.404819+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "8037bc90-cd35-43eb-b6a0-f9a0e5ef48fb",
+      "at": "2026-10-19T18:19:18.119898+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "eb22e519-26f0-4138-b847-1417cabb8ee6",
+      "at": "2026-10-19T18:19:40.765552+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "bb2baf13-334c-4cad-b57b-517724540d6a",
+      "at": "2026-10-19T18:19:45.291999+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "f2f4988e-4794-46ed-a204-1973cb8c1aa4",
+      "at": "2026-10-19T18:19:50.305448+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "b2682d11-6690-46d8-801e-5de1a93d4020",
+      "at": "2026-10-19T18:20:09.901116+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "24c28d25-fc28-45b0-bd4f-6d830af045ee",
+      "at": "2026-10-19T18:20:19.325584+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "5958bd3d-8806-47d6-93ac-a89595e21ace",
+      "at": "2026-10-19T18:21:21.276744+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "8609c8fb-7759-468c-9ecf-31cff04e14b4",
+      "at": "2026-10-19T18:21:31.774441+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "71b4684d-0883-4ba1-8cca-7c4732c2e0f5",
+      "at": "2026-10-19T18:21:38.543043+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "7c38a69f-96b8-4276-b7aa-7bf9cb08884d",
+      "at": "2026-10-19T18:22:28.598225+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "0204fdbb-1758-4935-9ed3-87ee6d36ff8f",
+      "at": "2026-10-19T18:22:35.126599+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "34172bd9-ac95-4527-9a4b-10f3d760565e",
+      "at": "2026-10-19T18:22:40.286313+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "294468e5-64ae-4ced-8e2a-dddd2f788225",
+      "at": "2026-10-19T18:22:44.649787+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "b822c6b3-48e5-47ff-b98c-7f90b2f08f3c",
+      "at": "2026-10-19T18:31:15.977314+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "2958681e-c88d-448c-a01a-9e526e51647f",
+      "at": "2026-10-19T18:31:20.357837+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "62074d74-84d0-4d0f-b238-cff9140ac46e",
+      "at": "2026-10-19T18:31:26.473637+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "dfd48a30-1a4b-4ad0-b956-99ba412183a0",
+      "at": "2026-10-19T18:36:03.755118+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "de0c6818-c9ad-492f-a65a-0453367edc2d",
+      "at": "2026-10-19T18:36:08.311343+00:00",
+      "tool": "tavily_search",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "c5c4131c-a814-41f9-a800-f5eb2c63b7aa",
+      "at": "2026-10-19T18:36:13.469539+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    },
+    {
+      "id": "6427b5ce-c63c-46d2-b8ca-21bced1b7182",
+      "at": "2026-10-19T18:36:15.535344+00:00",
+      "tool": "tavily_extract",
+      "credits": 2,
+      "outcome": "returned"
+    }
+  ],
+  "reserved_credits": 70
+}

@@ -52,7 +52,7 @@ def test_scope_respects_exclusions_and_historical_temporal_context():
     )
     historical = "Using only NVIDIA's FY2025 annual filing, describe current demand at that fiscal year-end."
     assert not scope_error(historical, ["NVDA"], [2025], {"NVDA": [2025]})
-    assert scope_error("NVIDIA latest demand today", ["NVDA"], [2025], {"NVDA": [2025]})
+    assert not scope_error("NVIDIA latest demand today", ["NVDA"], [2025], {"NVDA": [2025]})
     assert scope_error("Compare AMD and NVIDIA", ["AMD"], [2025], {"AMD": [2025]})
     assert mentioned_companies("Excluding NVIDIA, compare AMD and Intel.") == [
         "AMD",

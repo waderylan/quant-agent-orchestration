@@ -1,0 +1,225 @@
+{
+  "checked_at": "2026-10-19T18:38:21.698339+00:00",
+  "kind": "Docker Desktop Linux engine, runtime-inherited key, host subscription bridge",
+  "image_id": "sha256:4021deccfeda7b1b7b0b14a2fd7d36a8b0d129a681658104a062146078765ffa",
+  "container": "5801304b34d7994f5dbddd65eaaa5176883491819ed401cc74ae8a2554994d12",
+  "build_exit": 0,
+  "non_root_user": "appuser",
+  "port": 9090,
+  "case": {
+    "question": "What has happened at NVIDIA since its latest filing? Cite dated sources. Refresh live sources.",
+    "answer": "- **NVIDIA — March 17, 2026 | NVIDIA Developer Forums | official:** NVIDIA announced its Metropolis Blueprint for Video Search and Summarization at GTC. The inspected page describes modular architecture, agentic search for actions and temporal events, and real-time video-intelligence microservices. This publication follows the supplied February 25, 2026 filing anchor. [W1][W11]\n- **Evidence limits:** This establishes NVIDIA’s announcement, not independently verified performance or deployment. Publication metadata dates the announcement; it does not establish current product status.\n- **Missing outputs — partial coverage:** Volvo, Adobe and semiconductor-collaboration pages lack `published_date` metadata, so they cannot establish additional post-anchor developments. Broader dated coverage remains unresolved within the search budget. [W6][W7][W8]\n\nUnresolved outputs:\n- Broader post-anchor NVIDIA coverage could not be established within the two-search budget; Volvo, Adobe and semiconductor collaboration sources lack published_date metadata and cannot establish dated developments.",
+    "terminal": {
+      "type": "complete",
+      "data": {
+        "status": "partial",
+        "verified_citations": true,
+        "missing_outputs": [
+          "Broader post-anchor NVIDIA coverage could not be established within the two-search budget; Volvo, Adobe and semiconductor collaboration sources lack published_date metadata and cannot establish dated developments."
+        ]
+      }
+    },
+    "sources": [
+      {
+        "source_id": "W1",
+        "kind": "live_source",
+        "company": "NVDA",
+        "url": "https://forums.developer.nvidia.com/t/nvidia-vision-ai-at-nvidia-gtc-san-jose-2026-announcements/363762",
+        "publisher": "nvidia.com",
+        "title": "NVIDIA Vision AI at NVIDIA GTC San Jose 2026 | Announcements - Announcements - NVIDIA Developer Forums",
+        "source_tier": "official",
+        "published_date": "Tue, 17 Mar 2026 05:59:09 GMT",
+        "retrieved_at": "2026-10-19T18:36:05.005209+00:00",
+        "freshness": "dated",
+        "text_sha256": "4bf69d827c1a020c6513aa51c5330c63c2d365b1efea86e1163e5ade481506d5",
+        "snapshot_id": "7ce2d47e6f2ac6d7d87e2ac7d26d3669ce59fefb14f0fc0ede9d2bb3b692e15e",
+        "tool": "tavily_search",
+        "agent": "Current Developments",
+        "inspection_url": "/api/live/7ce2d47e6f2ac6d7d87e2ac7d26d3669ce59fefb14f0fc0ede9d2bb3b692e15e"
+      },
+      {
+        "source_id": "W6",
+        "kind": "live_source",
+        "company": "NVDA",
+        "url": "https://nvidianews.nvidia.com/news/volvo-cars-and-nvidia-expand-partnership-to-advance-safe-automated-driving",
+        "publisher": "nvidia.com",
+        "title": "Volvo Cars and NVIDIA Expand Partnership to Advance Safe Automated Driving | NVIDIA Newsroom",
+        "source_tier": "official",
+        "published_date": null,
+        "retrieved_at": "2026-10-19T18:36:09.503032+00:00",
+        "freshness": "undated",
+        "text_sha256": "a2cbd1bb5bc146a26e87f08c8fef8ba9f62045552d9287dadb6013fec56efbb1",
+        "snapshot_id": "bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e",
+        "tool": "tavily_search",
+        "agent": "Current Developments",
+        "inspection_url": "/api/live/bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e"
+      },
+      {
+        "source_id": "W7",
+        "kind": "live_source",
+        "company": "NVDA",
+        "url": "https://nvidianews.nvidia.com/news/adobe-and-nvidia-expand-collaboration-to-speed-agentic-creation",
+        "publisher": "nvidia.com",
+        "title": "Adobe and NVIDIA Expand Collaboration to Speed Agentic Creation | NVIDIA Newsroom",
+        "source_tier": "official",
+        "published_date": null,
+        "retrieved_at": "2026-10-19T18:36:09.503032+00:00",
+        "freshness": "undated",
+        "text_sha256": "514197e4dc0185764a5e7aae1b441a6a83be6defc0d4076f5c5730bded3413f6",
+        "snapshot_id": "bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e",
+        "tool": "tavily_search",
+        "agent": "Current Developments",
+        "inspection_url": "/api/live/bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e"
+      },
+      {
+        "source_id": "W8",
+        "kind": "live_source",
+        "company": "NVDA",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-and-semiconductor-leaders-advance-ai-across-chip-design-and-manufacturing-for-ai-defined-labs",
+        "publisher": "nvidia.com",
+        "title": "NVIDIA and Semiconductor Leaders Advance AI Across Chip Design and Manufacturing for AI-Defined Fabs | NVIDIA Newsroom",
+        "source_tier": "official",
+        "published_date": null,
+        "retrieved_at": "2026-10-19T18:36:09.503032+00:00",
+        "freshness": "undated",
+        "text_sha256": "131c0b54fa3313dd66686aa04c9269b4d6460c56c99bb480453f9f4ed0101eda",
+        "snapshot_id": "bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e",
+        "tool": "tavily_search",
+        "agent": "Current Developments",
+        "inspection_url": "/api/live/bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e"
+      },
+      {
+        "source_id": "W11",
+        "kind": "live_source",
+        "company": "NVDA",
+        "url": "https://forums.developer.nvidia.com/t/nvidia-vision-ai-at-nvidia-gtc-san-jose-2026-announcements/363762",
+        "publisher": "nvidia.com",
+        "title": "NVIDIA Vision AI at NVIDIA GTC San Jose 2026 | Announcements - Announcements - NVIDIA Developer Forums",
+        "source_tier": "official",
+        "published_date": null,
+        "retrieved_at": "2026-10-19T18:36:14.657332+00:00",
+        "freshness": "undated",
+        "text_sha256": "3f4a790462ec296002a719bc3b91defbb0daadc6d8a7fd5dc43af59366052788",
+        "snapshot_id": "3cab7b096020ae1e2eda2abf8a7eb2ee73e8628f07338c5c34c4c1b6b77c0556",
+        "tool": "tavily_extract",
+        "agent": "Current Developments",
+        "inspection_url": "/api/live/3cab7b096020ae1e2eda2abf8a7eb2ee73e8628f07338c5c34c4c1b6b77c0556"
+      }
+    ],
+    "checks": {
+      "passed": true,
+      "workers": [
+        "current"
+      ],
+      "live_events": [
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA official announcements after February 25 2026",
+            "topic": "news",
+            "search_depth": "basic",
+            "max_results": 5,
+            "include_raw_content": false,
+            "time_range": "year"
+          },
+          "result_count": 5,
+          "snapshot_id": "7ce2d47e6f2ac6d7d87e2ac7d26d3669ce59fefb14f0fc0ede9d2bb3b692e15e",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "site.nvidianews.nvidia.com October 2026 NVIDIA Volvo Adobe semiconductor",
+            "topic": "general",
+            "search_depth": "basic",
+            "max_results": 5,
+            "include_raw_content": false,
+            "time_range": "year"
+          },
+          "result_count": 5,
+          "snapshot_id": "bfd06c0d7ebf7a68c234d99577a830e3c1032526c76952e8df41f40585024b2e",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_extract",
+          "arguments": {
+            "urls": [
+              "https://forums.developer.nvidia.com/t/nvidia-vision-ai-at-nvidia-gtc-san-jose-2026-announcements/363762"
+            ],
+            "extract_depth": "basic"
+          },
+          "result_count": 1,
+          "snapshot_id": "3cab7b096020ae1e2eda2abf8a7eb2ee73e8628f07338c5c34c4c1b6b77c0556",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_extract",
+          "arguments": {
+            "urls": [
+              "https://nvidianews.nvidia.com/news/volvo-cars-and-nvidia-expand-partnership-to-advance-safe-automated-driving"
+            ],
+            "extract_depth": "basic"
+          },
+          "result_count": 1,
+          "snapshot_id": "3a82e26153631ad5f5685750311e89cc611a2fddd93e129c5edbe5b1a6debf1e",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ]
+    },
+    "inspections": [
+      {
+        "source_id": "W1",
+        "status": 200
+      },
+      {
+        "source_id": "W6",
+        "status": 200
+      },
+      {
+        "source_id": "W7",
+        "status": 200
+      },
+      {
+        "source_id": "W8",
+        "status": 200
+      },
+      {
+        "source_id": "W11",
+        "status": 200
+      }
+    ],
+    "seconds": 27.322,
+    "answer_token_ttft_seconds": 23.844,
+    "worker_outcomes": [
+      {
+        "agent": "Supervisor",
+        "node": "worker_outcome",
+        "worker": "current",
+        "outcome": "partial",
+        "evidence_count": 12,
+        "tool_calls": 5,
+        "missing_inputs": [
+          "Broader post-anchor NVIDIA coverage could not be established within the two-search budget; Volvo, Adobe and semiconductor collaboration sources lack published_date metadata and cannot establish dated developments."
+        ]
+      }
+    ]
+  },
+  "logs_credential_free": true,
+  "passed": true
+}

@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from scripts.demo_support import capture_turn, wait_ready
 from src.source_collection import ROOT, now, write_json
 
-FULL = "For Qualcomm FY2024-FY2025, compare revenue, gross and operating margins, explain management's drivers and risk changes, and give a conditional valuation view with the strongest counterargument. State actual dates, preserve checked figures, and tell me which valuation inputs are missing."
+FULL = "For Qualcomm FY2024-FY2025, compare revenue, gross and operating margins, explain management's drivers and risk changes, and report what has happened since the filing. State actual dates and preserve checked figures."
 
 
 async def browser_check(url):
@@ -65,7 +65,7 @@ async def browser_check(url):
                 "Financial Analysis / Quant",
                 "Risk Summary",
                 "Filings Research",
-                "Buy-Side Analyst",
+                "Current Developments",
             )
         )
         # Cancel a separate actual turn after generation starts, then ensure controls reset.
@@ -112,7 +112,7 @@ async def main(args):
                 (
                     ["QCOM"],
                     [2025],
-                    "Give a dated Qualcomm stock price quote with market session and freshness.",
+                    "Explain Qualcomm business strategy from the filings.",
                 ),
                 (
                     ["QCOM"],
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     parser.add_argument("--url", default="http://127.0.0.1:8082")
     parser.add_argument(
         "--kind",
-        default="Actual subscription five-worker application; market cache/live provenance retained",
+        default="Actual subscription five-worker application; checked evidence",
     )
     parser.add_argument("--browser-only", action="store_true")
     parser.add_argument(

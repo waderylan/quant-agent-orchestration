@@ -102,7 +102,7 @@ async def capture(client, case, raw_path):
         "source_checks": checks,
         "bundles": bundles,
         "unregistered_citations": sorted(
-            set(re.findall(r"\[([SFC]\d+)\]", answer))
+            set(re.findall(r"\[([SFCW]\d+)\]", answer))
             - {s["source_id"] for s in sources}
         ),
         "trace": [

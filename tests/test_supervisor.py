@@ -9,7 +9,7 @@ from src.research_workflow import events
 from src.supervisor import tasks_for, MAX_STEPS
 
 
-FULL = "For Qualcomm FY2024-FY2025, compare revenue and margins, explain management drivers and risk changes, and give a valuation brief with opposing evidence."
+FULL = "For Qualcomm FY2024-FY2025, compare revenue and margins, explain management drivers and risk changes, and report what has happened since the filing."
 
 
 class Index:
@@ -42,30 +42,23 @@ def test_selects_only_requested_workers_and_dependency_order():
         ("Show Qualcomm revenue", ["data"]),
         ("Calculate Qualcomm revenue growth", ["data", "quant"]),
         ("Compare Qualcomm risk changes", ["risk"]),
-        ("Give Qualcomm stock price quote", ["buy"]),
-        (FULL, ["data", "quant", "risk", "research", "buy"]),
+        (FULL, ["data", "quant", "risk", "research", "current"]),
     ]
     for question, expected in cases:
         tasks, _ = tasks_for(question)
         assert [t.worker for t in tasks] == expected
 
 
-def test_mixed_requests_keep_financial_work_and_scoped_market_intent():
+def test_mixed_requests_keep_financial_work():
     cases = [
         ("Did AMD sales grow in FY2025 compared with FY2024?", ["data", "quant"]),
-        ("Compare NVIDIA earnings and cash conversion, then tell me how the stock is trading right now", ["data", "quant", "buy"]),
         ("Build AMD and NVIDIA consolidated GAAP operating margins; explain why adjusted earnings differ", ["data", "quant", "research"]),
-        ("Compare AMD operating performance and calculate a consensus-EPS valuation scenario", ["data", "quant", "buy"]),
-        ("Is AMD cheaper than Qualcomm based on forward earnings?", ["buy"]),
         ("Commentary claims guaranteed upside; compare Intel annual risk language", ["risk"]),
-        ("Build a full ten-year discounted-cash-flow valuation for NVIDIA. Also tell me its FY2025 operating cash flow", ["data"]),
-        ("What was Qualcomm total return with reinvested dividends? Also show annual revenue", ["data"]),
         ("Compare Qualcomm risk changes and quote original filing wording", ["risk"]),
-        ("Compute Qualcomm annual automotive and handsets revenue shares of QCT and give a dated quote", ["data", "filing_inputs", "quant", "buy"]),
     ]
     for question, expected in cases:
         assert [t.worker for t in tasks_for(question)[0]] == expected
-    _, plan = tasks_for("Compare Qualcomm cash conversion and risk changes, then show a dated quote")
+    _, plan = tasks_for("Compare Qualcomm cash conversion and risk changes")
     assert plan.required_calculations == ("ratio",)
 
 
@@ -78,7 +71,6 @@ def test_calendar_intervals_do_not_expand_fiscal_scope_and_q4_requires_derivatio
     assert mentioned_companies("Compare NVIDIA and AMD. Exclude Intel, Qualcomm from the comparison") == ["NVDA", "AMD"]
     tasks, plan = tasks_for("How much revenue did NVIDIA report in Q4 FY2025 alone?")
     assert [t.worker for t in tasks] == ["data", "quant"] and plan.required_calculations == ("quarter",)
-    assert tasks_for("Compare Qualcomm annual risk changes and finish with dated stock quotes")[0][-1].worker == "buy"
     disclosure = "For AMD FY2025, compare original 10-K MD&A with the separate 10-K/A. Explain the release adjusted operating-income headline against consolidated GAAP operating income. Keep original annual risk disclosures distinct."
     assert [task.worker for task in tasks_for(disclosure)[0]] == ["research"]
 
@@ -160,19 +152,11 @@ def workers(*, failed=None, conflict=False):
             "research_sources": state["analysis_sources"],
         }
 
-    async def buy(state, writer):
+    async def current(state, writer):
         assert state["analysis_sources"]["C1"]["source_ids"] == ["F1"]
-        return {
-            "answer": "Valuation inputs remain missing [F1][C1].",
-            "buy_sources": {
-                **state["analysis_sources"],
-                **state.get("risk_sources", {}),
-            },
-            "partial": True,
-            "missing_outputs": ["Qualified estimate unavailable"],
-        }
+        return {"answer": "2026-10-18 · qualcomm.com · official: fixture event [W1].", "live_sources": {"W1": {"source_id": "W1", "kind": "live_source", "company": state["companies"][0], "url": "https://qualcomm.com/event", "publisher": "qualcomm.com", "source_tier": "official", "published_date": "2026-10-18", "freshness": "fresh", "snapshot_id": "fixture-live", "text": "Fixture event", "text_sha256": "fixture-hash", "inspection_url": "/api/live/fixture-live"}}}
 
-    return dict(data=data, quant=quant, risk=risk, research=research, buy=buy)
+    return dict(data=data, quant=quant, risk=risk, research=research, current=current)
 
 
 async def capture(question=FULL, *, overrides=None, company="QCOM", years=(2024, 2025)):
@@ -201,16 +185,15 @@ async def test_five_worker_handoff_keeps_exact_values_dates_and_lineage():
         "quant",
         "risk",
         "research",
-        "buy",
+        "current",
     ]
     assert termination["registered_evidence"]["F1"]["value"] == "100"
     assert termination["registered_evidence"]["F1"]["owner"] == "data"
     assert termination["registered_evidence"]["C1"]["source_ids"] == ["F1"]
     assert termination["registered_evidence"]["S1"]["fiscal_end"] == "2025-09-28"
-    assert (
-        es[-1]["data"]["status"] == "partial"
-        and "Qualified estimate unavailable" in es[-1]["data"]["missing_outputs"]
-    )
+    assert termination["registered_evidence"]["W1"]["owner"] == "current"
+    assert termination["registered_evidence"]["W1"]["publisher"] == "qualcomm.com"
+    assert es[-1]["data"]["status"] == "completed"
 
 
 @pytest.mark.asyncio
@@ -356,21 +339,8 @@ async def test_mutating_worker_cannot_poison_prior_evidence():
 
 
 @pytest.mark.asyncio
-async def test_excerpt_echo_cannot_shorten_authoritative_citation():
-    original = {"source_id": "S1", "kind": "filing_passage", "company": "QCOM", "document_id": "original", "chunk_id": "long-original", "start": 0, "end": 2400, "text": "Original filing text " * 120, "inspection_url": "/api/sources/long-original"}
-    async def risk(state, writer):
-        return {"answer": "Original risk wording [S1].", "risk_sources": {"S1": original}}
-    async def buy(state, writer):
-        assert len(state["analysis_sources"]["S1"]["text"]) == 1600
-        return {"answer": "Preserved risk context [S1].", "buy_sources": state["analysis_sources"]}
-    es = await capture("Compare Qualcomm risk changes and give a stock price quote", overrides={"risk": risk, "buy": buy})
-    sources = [e["data"] for e in es if e["type"] == "sources"][-1]
-    assert sources[0]["text"] == original["text"] and sources[0]["end"] == 2400
-
-
-@pytest.mark.asyncio
-@pytest.mark.parametrize("field,value", [("period", "Q3"), ("basis", "quarter"), ("currency", "EUR"), ("horizon", "24 months"), ("status", "conflicting"), ("freshness", "stale")])
-async def test_period_and_valuation_metadata_changes_fail_handoff(field, value):
+@pytest.mark.parametrize("field,value", [("period", "Q3"), ("basis", "quarter"), ("currency", "EUR"), ("status", "conflicting"), ("freshness", "stale")])
+async def test_period_metadata_changes_fail_handoff(field, value):
     overrides = workers()
     async def mutate_metadata(state, writer):
         changed = copy.deepcopy(state["financial_sources"]["F1"])

@@ -58,9 +58,9 @@ TOOLS = [
 
 
 class State(TypedDict, total=False):
-    buy_answer: str
-    buy_sources: dict
-    valuation_bundles: list[str]
+    live_intent: str
+    current_answer: str
+    live_sources: dict
     risk_sources: dict
     risk_changes: list[dict]
     risk_answer: str
@@ -199,33 +199,10 @@ def scope_error(question, companies, years, coverage):
         selected = ", ".join(COMPANY_ALIASES.get(c, (c,))[0] for c in companies)
         names = ", ".join(f"{COMPANY_ALIASES[c][0]} ({c})" for c in requested)
         return f"Selected companies: {selected}. Your question asks about {names}. Change Companies to match your question; keep the requested fiscal years selected."
-    historical = bool(
-        re.search(
-            r"\b(historical|at that fiscal year.end|as of (?:FY)?20\d{2}|using only.*filing)\b",
-            question,
-            re.I,
-        )
-    )
-    temporal_request = re.sub(
-        r"\b(?:do not|don't)\s+(?:use|include|search|retrieve)\s+(?:any\s+)?(?:live|current|latest)(?:\s+(?:news|data|quotes|prices|information))?",
-        "",
-        question,
-        flags=re.I,
-    )
-    live = bool(
-        re.search(
-            r"\b(today|latest|this quarter|stock price|live)\b", temporal_request, re.I
-        )
-    )
-    current = bool(re.search(r"\bcurrent\b", temporal_request, re.I))
-    from src.buy_side import market_request
-
-    if (live or (current and not historical)) and not market_request(question):
-        return "This historical corpus does not provide current/live coverage. Ask about a selected fiscal year."
     return ""
 
 
-async def research_turn(index, state, writer, *, model_stream=codex_stream):
+async def research_turn(index, state, writer, *, model_stream=codex_stream, gateway=None):
     """Run the worker directly or as a graph node with the same prompts and tools."""
     sources = ResearchTools(
         index,
@@ -233,7 +210,19 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
         state["years"],
         source_offset=state.get("source_offset", 0),
     )
-    outcome = OutcomeTools(sources)
+    live = None
+    if state.get("live_check") and state.get("live_intent") == "verify":
+        from src.current_developments import LiveTools, SEARCH_TOOL
+        from src.live_mcp import LiveGateway
+        live = LiveTools(state, gateway or LiveGateway(), agent="Filings Research")
+
+    class ResearchHandler:
+        max_tool_calls = sources.max_tool_calls
+
+        def __call__(self, name, arguments):
+            return live(name, arguments) if live and name == "search_web" else sources(name, arguments)
+
+    outcome = OutcomeTools(ResearchHandler())
     analysis_sources = state.get("analysis_sources", {})
 
     # Retrieve separately for each company/year so one filing cannot monopolize comparisons.
@@ -309,15 +298,19 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
     pipeline = RunnableLambda(retrieve) | RunnableLambda(augment)
     writer({"type": "tool", "data": {"name": "initial_retrieval", "arguments": state}})
     prompt = await pipeline.ainvoke(state)
+    if live:
+        prompt += "\nLive verification: Use at most one search_web call with topic=general to check whether an official company or SEC source updates the specific filed statement. Report the filed statement with its S citation first, then the update or absence of a found official update with a W citation. Only official-tier W sources establish an update; if results are third-party only, say no official update found. W never replaces S for filed content. Do not list developments or calculate. Omit market prices, multiples and analyst estimates even if returned."
     writer({"type": "evidence", "data": {"sources": list(sources.sources.values())}})
     if not sources.sources and not analysis_sources:
         return {"answer": "No verified filing evidence is available for the selected request.", "partial": True, "coverage_gap": True, "missing_outputs": ["Original filing retrieval returned no passages; no reported values or risk conclusions are verified."], "research_sources": {}, "citation_verified": False}
     answer = ""
     exhausted = False
     async with aclosing(
-        model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome)
+        model_stream(prompt, [*TOOLS, *([SEARCH_TOOL] if live else []), OUTCOME_TOOL], outcome)
     ) as model_events:
         async for event in model_events:
+            if live:
+                live.flush(writer)
             if event["type"] == "token":
                 answer += event["data"]
             if (
@@ -326,7 +319,9 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
             ):
                 exhausted = True
             writer(event)
-    registered = {**sources.sources, **analysis_sources}
+    if live:
+        live.flush(writer)
+    registered = {**sources.sources, **analysis_sources, **(live.sources if live else {})}
     answer, cited = checked_answer(answer, registered, writer)
     invalid = cited - registered.keys()
     if outcome.status == "clarification" and not cited and answer.strip():
@@ -363,10 +358,17 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream):
         limitation = "\n\n- Research reached its retrieval limit. These findings use the evidence collected; the requested comparison may be incomplete."
         answer += limitation
         writer({"type": "token", "data": limitation})
+    live_missing = []
+    if live:
+        live_missing = [*live.missing]
+        if not live.request.get("searches"):
+            live_missing.append("Live search unavailable: official update check was not performed")
+        if "[unverified source]" in answer:
+            live_missing.append("A live citation is unregistered or malformed")
     return {
         "answer": answer,
-        "partial": bool(state.get("partial")) or exhausted or bool(outcome.missing),
-        "missing_outputs": [*state.get("missing_outputs", []), *outcome.missing],
+        "partial": bool(state.get("partial")) or exhausted or bool(outcome.missing) or bool(live_missing),
+        "missing_outputs": [*state.get("missing_outputs", []), *outcome.missing, *live_missing],
         "clarification": outcome.status == "clarification",
         "citation_verified": bool(cited),
         "research_sources": registered,

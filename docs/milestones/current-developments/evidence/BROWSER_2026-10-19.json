@@ -1,0 +1,377 @@
+{
+  "checked_at": "2026-10-19T18:38:21.400534+00:00",
+  "kind": "Actual native Chromium with live application submissions; no response replay",
+  "screenshot_sha256": "e3b6331352a262e9d8e649d6a57ba6640f9386af04ad1c028820d957b1e4be8b",
+  "passed": true,
+  "same_session_inspections": [
+    {
+      "kind": "W",
+      "label": "networkworld.com · Wed, 12 Aug 2026 00:00:00 GMT · third_party · 2026-10-19T18:19:15.375618+00:00 · Open source",
+      "excerpt_characters": 1000,
+      "passed": true,
+      "external_url": "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html"
+    },
+    {
+      "kind": "S",
+      "label": "AMD · FY2025 · 10-K · 2025-12-27 · original · risk_factors SEC filing · Official retrieval source · Collected original ·",
+      "excerpt_characters": 2110,
+      "passed": true
+    },
+    {
+      "kind": "C",
+      "label": "QCOM FY2025 revenue growth vs FY2024 · percent · 2024-09-30 → 2025-09-28",
+      "excerpt_characters": 4710,
+      "passed": true
+    }
+  ],
+  "page_errors": [],
+  "turns": {
+    "nvda": {
+      "question": "What has happened at the selected companies since their latest filings? Cite dated sources.",
+      "answer": "- **NVDA — developments published after the February 25, 2026 filing anchor:**\n  - **Published August 12, 2026 | Network World | third_party:** Network World reported NVIDIA partnerships with Lumentum and Coherent to advance optical technologies for AI data-center infrastructure. [W1]\n  - **Published August 12, 2026 | Network World | third_party:** Network World reported the formal launch of Vera Rubin, a combined CPU/GPU platform targeting AI and high-performance computing. [W1]\n- **Evidence limits:** Publication dates above come from the dated search snapshot; the extracted page supplied no publication date. These are attributed reports, not independent verification or confirmation of present status.\n- **Missing outputs:** Official NVIDIA post-anchor coverage was not established within the search budget. Undated results were excluded.\n\nUnresolved outputs:\n- Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.\n- Official NVIDIA post-anchor developments were not established within the two-search budget; available qualifying coverage is third-party.\n- Network World extraction has no published_date; publication dating relies on its dated search snapshot W1.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+            "Official NVIDIA post-anchor developments were not established within the two-search budget; available qualifying coverage is third-party.",
+            "Network World extraction has no published_date; publication dating relies on its dated search snapshot W1."
+          ]
+        }
+      },
+      "sources": [
+        {
+          "source_id": "W1",
+          "kind": "live_source",
+          "company": "NVDA",
+          "url": "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html",
+          "publisher": "networkworld.com",
+          "title": "Nvidia: Latest news and insights | Network World",
+          "source_tier": "third_party",
+          "published_date": "Wed, 12 Aug 2026 00:00:00 GMT",
+          "retrieved_at": "2026-10-19T18:19:15.375618+00:00",
+          "freshness": "fresh",
+          "text_sha256": "53da1f4fa4b7ad1b46ed18e8123ee5806045509f52f2570870f5b5ca872fd488",
+          "snapshot_id": "d0b6da360ceede68828c332f8dd3f05d7faab42b08f255b5bd9818467a208452",
+          "tool": "tavily_search",
+          "agent": "Current Developments",
+          "inspection_url": "/api/live/d0b6da360ceede68828c332f8dd3f05d7faab42b08f255b5bd9818467a208452"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "current"
+        ],
+        "live_events": [
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "NVIDIA announcements after February 25 2026 partnerships product launch",
+              "topic": "news",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "d0b6da360ceede68828c332f8dd3f05d7faab42b08f255b5bd9818467a208452",
+            "cache": true,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "site.nvidianews.nvidia.com October 2026 NVIDIA partnership announces",
+              "topic": "general",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 5,
+            "snapshot_id": "0fc90ef060071cf2a61c07f796ef3058694f4989339e108f3dabae546b8abf43",
+            "cache": false,
+            "outcome": "returned"
+          },
+          {
+            "agent": "Current Developments",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_extract",
+            "arguments": {
+              "urls": [
+                "https://www.networkworld.com/article/3562856/nvidia-latest-news-and-insights.html"
+              ],
+              "extract_depth": "basic"
+            },
+            "result_count": 1,
+            "snapshot_id": "e83ba02b6cd42c3fd7b1f1e8da350a7c997f0919ec823ab0d6ee249a4363f3fa",
+            "cache": true,
+            "outcome": "returned"
+          }
+        ]
+      },
+      "inspections": null,
+      "seconds": null,
+      "answer_token_ttft_seconds": null,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "current",
+          "outcome": "partial",
+          "evidence_count": 11,
+          "tool_calls": 5,
+          "missing_inputs": [
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+            "Official NVIDIA post-anchor developments were not established within the two-search budget; available qualifying coverage is third-party.",
+            "Network World extraction has no published_date; publication dating relies on its dated search snapshot W1."
+          ]
+        }
+      ]
+    },
+    "verify": {
+      "question": "Is the export-control risk in the latest annual filing still current? Check for an official update.",
+      "answer": "- AMD’s FY2025 10-K, for the year ended December 27, 2025, states that MI308 sales into China depend on customer demand, China’s import controls, and U.S. export licenses. Some licenses had been granted and shipments had resumed, but that did not eliminate the dependency. [S5]\n- No later official update was found in the permitted search. The official result returned the same FY2025 annual filing, not a subsequent confirmation or change. [W1]\n- Conclusion: the filing describes an ongoing restriction, but its current status remains unverified; the search does not establish that the risk has ended. [S5] [W1]\n\nUnresolved outputs:\n- A later official update to the annual filing's MI308 export-license dependency was not found; continued current applicability cannot be independently established from the returned annual-filing source.\n- Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "missing_outputs": [
+            "A later official update to the annual filing's MI308 export-license dependency was not found; continued current applicability cannot be independently established from the returned annual-filing source.",
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      },
+      "sources": [
+        {
+          "source_id": "S5",
+          "chunk_id": "341fba0c033ea855f922e3b51d9fd7d0b679d6f7a9febbfff10711008f245e28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "kind": "filing",
+          "company": "AMD",
+          "version": "original",
+          "section": "risk_factors",
+          "form": "10-K",
+          "document_id": "amd-0000002488-26-000018",
+          "page": 0,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "end": 141883,
+          "period_end": "2025-12-27",
+          "start": 140773,
+          "fiscal_year": 2025,
+          "distance": 0.18855679035186768,
+          "inspection_url": "/api/sources/341fba0c033ea855f922e3b51d9fd7d0b679d6f7a9febbfff10711008f245e28"
+        },
+        {
+          "source_id": "W1",
+          "kind": "live_source",
+          "company": "AMD",
+          "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "publisher": "sec.gov",
+          "title": "amd-20251227",
+          "source_tier": "official",
+          "published_date": null,
+          "retrieved_at": "2026-10-19T18:20:12.368489+00:00",
+          "freshness": "undated",
+          "text_sha256": "9bedb710fe52ed7c522adbca5c842f6254f3ec3d368d3bd4c78ae715bab96faa",
+          "snapshot_id": "15d4afe6292f9f65fcb6ccc4c4b0fabf214d75076ebf7d4095eb7ec2a88fe0f0",
+          "tool": "tavily_search",
+          "agent": "Filings Research",
+          "inspection_url": "/api/live/15d4afe6292f9f65fcb6ccc4c4b0fabf214d75076ebf7d4095eb7ec2a88fe0f0"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "research"
+        ],
+        "live_events": [
+          {
+            "agent": "Filings Research",
+            "node": "live_mcp",
+            "server": "tavily-mcp",
+            "tool": "tavily_search",
+            "arguments": {
+              "query": "site.amd.com OR site.sec.gov AMD MI308 China export licenses 2026 update after February 2026",
+              "topic": "general",
+              "search_depth": "basic",
+              "max_results": 5,
+              "include_raw_content": false,
+              "time_range": "year"
+            },
+            "result_count": 1,
+            "snapshot_id": "15d4afe6292f9f65fcb6ccc4c4b0fabf214d75076ebf7d4095eb7ec2a88fe0f0",
+            "cache": false,
+            "outcome": "returned"
+          }
+        ]
+      },
+      "inspections": null,
+      "seconds": null,
+      "answer_token_ttft_seconds": null,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "research",
+          "outcome": "partial",
+          "evidence_count": 10,
+          "tool_calls": 3,
+          "missing_inputs": [
+            "A later official update to the annual filing's MI308 export-license dependency was not found; continued current applicability cannot be independently established from the returned annual-filing source.",
+            "Live search unavailable: account usage verification (usage endpoint HTTP 429); source results retain conservative credit reservations."
+          ]
+        }
+      ]
+    },
+    "calculation": {
+      "question": "Calculate Qualcomm FY2024 to FY2025 revenue growth with actual dates.",
+      "answer": "- Qualcomm revenue grew **13.66%** from FY2024 to FY2025, calculated as `(FY2025 / FY2024 − 1) × 100`. [C1]\n- FY2024: **$38.962 billion**, September 25, 2023–September 29, 2024 (**53 weeks**). [F1]\n- FY2025: **$44.284 billion**, September 30, 2024–September 28, 2025 (**52 weeks**). [F2]\n- Uses original-report US GAAP consolidated revenue; growth is **not week-normalized**. Arithmetic and inputs verified; requested calculation complete. [C1]\n- Verified CSV table and PNG chart are available.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true
+        }
+      },
+      "sources": [
+        {
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue_growth",
+          "unit": "percent",
+          "revision_basis": "original_report",
+          "accounting_basis": "US GAAP consolidated",
+          "filed": "2025-11-05",
+          "kind": "calculation",
+          "calculation_kind": "growth",
+          "source_id": "C1",
+          "label": "QCOM FY2025 revenue growth vs FY2024",
+          "requested_label": "Qualcomm FY2024 to FY2025 reported revenue growth (53 weeks to 52 weeks; not normalized)",
+          "source_ids": [
+            "F1",
+            "F2"
+          ],
+          "formula": "(F2 / F1 - 1) * 100",
+          "value": "13.65946306657769108361993740",
+          "display_value": "13.6595",
+          "bundle_id": "487fb603b0fae7a9d56dfb9824cae52695f975d891ca04850e8de967e17795ee",
+          "inspection_url": "/api/analysis/487fb603b0fae7a9d56dfb9824cae52695f975d891ca04850e8de967e17795ee/calculations/C1"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2024,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2023-09-25",
+          "end": "2024-09-29",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-24-000075",
+          "accession": "0000804328-24-000075",
+          "form": "10-K",
+          "filed": "2024-11-06",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432824000075/qcom-20240929.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 38962000000,
+          "conflicting_comparatives": [],
+          "observation_id": "c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6",
+          "source_id": "F1",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/c1f2128bd74f5d689fa390b48ac548df3675c40f0edb2c39b6bea13333b954d6"
+        },
+        {
+          "kind": "financial_observation",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "period": "FY",
+          "basis": "annual",
+          "start": "2024-09-30",
+          "end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "metric": "revenue",
+          "unit": "USD",
+          "accounting_basis": "US GAAP consolidated",
+          "revision_basis": "original_report",
+          "version": "original",
+          "document_id": "qcom-0000804328-25-000085",
+          "accession": "0000804328-25-000085",
+          "form": "10-K",
+          "filed": "2025-11-05",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "facts_url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json",
+          "snapshot_sha256": "bb7a668b9d54074b397cd3ada697e4db1ab09a0f8fd7837ef83cf5345a9728f2",
+          "retrieved_at": "2026-10-15T17:14:02.024934+00:00",
+          "formula": null,
+          "status": "available",
+          "tag": "us-gaap:Revenues",
+          "value": 44284000000,
+          "conflicting_comparatives": [],
+          "observation_id": "489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae",
+          "source_id": "F2",
+          "section": "financial_observation",
+          "inspection_url": "/api/financial/observations/489bdb470c3685532617178a77cf900deeb76ab7ca000f71788cbe093a0342ae"
+        }
+      ],
+      "checks": {
+        "passed": true,
+        "workers": [
+          "data",
+          "quant"
+        ]
+      },
+      "inspections": null,
+      "seconds": null,
+      "answer_token_ttft_seconds": null,
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "data",
+          "outcome": "completed",
+          "evidence_count": 2,
+          "tool_calls": 4,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "quant",
+          "outcome": "completed",
+          "evidence_count": 3,
+          "tool_calls": 7,
+          "missing_inputs": []
+        }
+      ]
+    }
+  }
+}

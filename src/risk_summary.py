@@ -243,7 +243,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
             except asyncio.CancelledError:
                 raise
             except Exception as error:
-                from src.market_mcp import sanitized
+                from src.live_mcp import sanitized
                 gap = company + " risk review unavailable: " + sanitized(str(error) or type(error).__name__)
                 result = {"answer": gap, "risk_sources": {}, "risk_changes": [], "partial": True, "missing_outputs": [gap], "citation_verified": False}
                 writer({"type": "trace", "data": {"agent": "Risk Summary", "company": company, "decision": "preserve_completed_issuers", "reason": gap}})
@@ -314,7 +314,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
                 characters += len(s["text"])
             else:
                 gaps.append(f"{s['company']} FY{s['fiscal_year']} {s['form']}: complete text exceeds bounded context; inspect separately")
-    role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers and valuation. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
+    role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
     prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": state["question"], "assigned_companies_only": state["companies"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts, "amendment_scope_context_only": [s for s in tools.sources.values() if s["section"] == "amendment_scope"]}, ensure_ascii=False)
     outcome, answer = OutcomeTools(tools), ""
     async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare complete original filing risk inventories; preserve exact before/after evidence")) as stream:

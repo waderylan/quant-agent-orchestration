@@ -10,7 +10,7 @@ Owner: Rylan Wade. This milestone makes the full browser workflow easy to inspec
 
 ## Work to implement
 
-- Define supported task families and a versioned fixed dataset: filing explanation, cross-company comparison, exact GAAP figures, calculations, risk changes, valuation, current news, missing coverage, ambiguity, and source conflict. Review expected source passages, periods, units, formulas, and acceptable partial outcomes by hand.
+- Define supported task families and a versioned fixed dataset: filing explanation, cross-company comparison, exact GAAP figures, calculations, risk changes, current developments, official-update verification, missing coverage, ambiguity, and source conflict. Review expected source passages, periods, units, formulas, and acceptable partial outcomes by hand.
 - Build a repeatable evaluator command using pinned dependencies and recorded dataset/code/model versions. Verify RAGAS client and judge compatibility before scoring; never label an unavailable metric as zero or silently substitute a paid judge. Calibrate model-judged cases against reviewed good and bad answers.
 - Report all four required RAGAS metrics with sample sizes and method. Separately measure claim-level citation support, financial correctness, requested-output completion, agent trajectory/delegation, shared-MCP use, prompt-injection resistance, and failure handling. Allow more than one valid tool path where the outcome is correct.
 - Capture retrieval, model, and total wall time plus answer-token time to first token for local runs. Record token counts and dated price estimates for both real serving providers where exposed. Cloud cold-start and actual billing results follow in M13.

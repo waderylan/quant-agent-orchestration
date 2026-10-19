@@ -7,6 +7,7 @@ Read only the pages needed for the task:
 | Understand the product and coverage | [Project](project.md) |
 | Change a worker, tool, source, or API | [Architecture](architecture.md) |
 | Find the next increment or its evidence | [Milestones](milestones/README.md) |
+| Inspect live research and its acceptance evidence | [Current Developments](milestones/current-developments/README.md) |
 | Assess test results and remaining evaluation | [Evaluation](evaluation.md) |
 | Review exploratory questions or data-source options | [Research](research/README.md) |
 | Check assignment rules or supplied guidance | [Reference](reference/README.md) |

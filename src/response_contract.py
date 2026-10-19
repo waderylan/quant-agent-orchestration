@@ -76,10 +76,10 @@ def normalize_citations(answer, registered):
         parts = re.split(r"\s*[,;]\s*", match[1])
         result = []
         for part in parts:
-            if re.fullmatch(r"[SFC]\d+", part):
+            if re.fullmatch(r"[SFCW]\d+", part):
                 result.append("[" + part + "]")
                 continue
-            span = re.fullmatch(r"([SFC])(\d+)\s*[–—-]\s*\1?(\d+)", part)
+            span = re.fullmatch(r"([SFCW])(\d+)\s*[–—-]\s*\1?(\d+)", part)
             if not span:
                 return match[0]
             replacement = expand(span)
@@ -90,8 +90,8 @@ def normalize_citations(answer, registered):
 
     # Provider/model Markdown labels resolve through the trusted registry. Discard
     # generated URL targets; the browser owns inspection links for each source ID.
-    answer = re.sub(r"\[([SFC]\d+)(?::\s*[^\]\n]+)?\]\([^\)\n]*\)", r"[\1]", answer)
-    answer = re.sub(r"\[([SFC]\d+[^\[\]\n]*)\]", group, answer)
+    answer = re.sub(r"\[([SFCW]\d+)(?::\s*[^\]\n]+)?\]\([^\)\n]*\)", r"[\1]", answer)
+    answer = re.sub(r"\[([SFCW]\d+[^\[\]\n]*)\]", group, answer)
 
     def refuted(match):
         sid = match[1]
@@ -119,14 +119,15 @@ def normalize_citations(answer, registered):
             return f"unverified identifier {sid}"
         return match[0]
 
-    return re.sub(r"\[([SFC]\d+)\]", refuted, answer)
+    return re.sub(r"\[([SFCW]\d+)\]", refuted, answer)
 
 
 def checked_answer(answer, registered, writer):
     normalized = normalize_citations(answer, registered)
+    normalized = re.sub(r"\[(W\d[^\]\n]*)\]", lambda m: m[0] if re.fullmatch(r"W[1-9]\d{0,5}", m[1]) and m[1] in registered else "[unverified source]", normalized)
     if normalized != answer:
         writer({"type": "answer", "data": normalized})
-    cited = set(re.findall(r"\[([SFC]\d+)\]", normalized))
-    if re.search(r"\[[SFC]\d+\s*[–—,;-]", normalized):
+    cited = set(re.findall(r"\[([SFCW]\d+)\]", normalized))
+    if re.search(r"\[[SFCW]\d+\s*[–—,;-]", normalized):
         cited.add("invalid_citation_range")
     return normalized, cited

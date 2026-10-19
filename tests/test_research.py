@@ -189,7 +189,6 @@ async def test_unsupported_scope_returns_gap_without_model_call(small_index):
     for question, companies, years in [
         ("Apple revenue", ["AAPL"], [2025]),
         ("AMD FY2027 revenue", ["AMD"], [2027]),
-        ("Current AMD revenue", ["AMD"], [2025]),
         ("NVIDIA revenue", ["AMD"], [2025]),
     ]:
         result = [
