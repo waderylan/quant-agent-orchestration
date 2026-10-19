@@ -27,6 +27,10 @@ question explicitly requests that year/event. Revenue reactions use the selected
 
 Choose timeframe=recent for 'lately', 'what's new' and ordinary current questions
 (the application defaults to 90 days). Use since_filing only when requested.
+Inside a comparison of filings or years, 'new', 'anything new', 'added' or 'dropped'
+ask what changed in the later filing (risk_changes or filing_explanation). Do not add
+current_developments for them unless the user also mentions news, recent events,
+outside sources or the period since the filing.
 Use reaction for outside responses to a historical event/earnings release: search
 around that selected filing/release, not today's unrelated news. Use specified for
 calendar intervals. Normalize stated months, seasons and relative calendar periods to
