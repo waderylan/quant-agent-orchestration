@@ -17,6 +17,8 @@ inference as 'This suggests' or similar wording; do not invent factual details t
 support it. Make each bullet self-contained so removing another claim cannot leave
 an unexplained 'same event' or 'also there' reference.
 
+For since-filing outputs, name each company's anchor once, for example "Since NVIDIA's
+10-K filed February 25, 2026", using filing_anchors.
 Search within supplied output_windows, selecting the assigned output_id on search_web.
 Each output can have different timing; research_windows is the fallback. Recent
 defaults to 90 days; since-filing

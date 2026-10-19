@@ -88,6 +88,22 @@ def plan_event(task, request_plan, *, reason="", companies=(), years=()):
     }
 
 
+def review_context(state):
+    """Trusted dates the reviewer needs to judge since-filing and reaction windows."""
+    from src.current_developments import anchors, research_windows
+
+    outputs = [o for o in (state.get("request_plan") or {}).get("outputs", []) if o["kind"] in ("current_developments", "public_reaction", "official_update")]
+    if not outputs:
+        return None
+    try:
+        return {
+            "latest_collected_filings": anchors(state["companies"]),
+            "research_windows": {o["id"]: research_windows(state, o) for o in outputs},
+        }
+    except (ValueError, KeyError):
+        return None
+
+
 def compose(rows):
     return "\n\n".join((r["label"] + ":\n" if r["labeled"] else "") + r["markdown"] for r in rows)
 
@@ -970,15 +986,16 @@ def cooperative_graph(
 
         if state.get("request_plan") and (answers or state.get("capability_answer")) and not state.get("error"):
             from src.request_plan import coverage
+            context = review_context(state)
             writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": "running", "task": "Check answer"}})
             review_status = "failed"
             try:
-                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, context)
                 sections = reviewed(sections, review["unsupported_claims"])
                 answer = compose([s for s in sections if s["markdown"].strip()])
                 if review["unsupported_claims"]:
                     removed = review["unsupported_claims"]
-                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, context)
                     # One bounded repair pass. If a second check finds more unsupported
                     # claims, remove them and retain the partial outcome.
                     sections = reviewed(sections, review["unsupported_claims"])

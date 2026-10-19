@@ -126,6 +126,44 @@ async def test_unsupported_claim_is_removed_from_authoritative_answer(monkeypatc
 
 
 @pytest.mark.asyncio
+async def test_reviewer_sees_the_period_and_filing_behind_a_reported_figure():
+    # A 2026-10-19 QCOM review removed a correct revenue sentence because the F1
+    # excerpt lacked the fiscal dates and filing date the sentence stated.
+    seen = []
+    async def model(prompt, tools, handler, **kwargs):
+        seen.append(prompt)
+        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['F1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})
+        yield {'type': 'token', 'data': ''}
+    figure = {**source(), 'fiscal_start': '2024-09-30', 'fiscal_end': '2025-09-28', 'form': '10-K', 'filed': '2025-11-05', 'accession': '0000804328-25-000085'}
+    await coverage('QCOM FY2025 revenue', [{'id': 'R1', 'kind': 'financial_inputs', 'description': 'Reported revenue'}], 'Revenue was USD 100 for the 52 weeks ended September 28, 2025, per the 10-K filed November 5, 2025. [F1]', {'F1': figure}, model, lambda e: None)
+    for field in ('"fiscal_start": "2024-09-30"', '"fiscal_end": "2025-09-28"', '"filed": "2025-11-05"', '"form": "10-K"'):
+        assert field in seen[0]
+
+
+@pytest.mark.asyncio
+async def test_reviewer_receives_the_filing_anchor_for_a_since_filing_window(monkeypatch):
+    # Without the anchor, dated developments could not be placed after the latest filing.
+    monkeypatch.setenv('REQUEST_PLANNER', 'semantic')
+    class Index:
+        def coverage(self):
+            return {'NVDA': [2026]}
+    seen = []
+    async def model(prompt, tools, handler, **kwargs):
+        if kwargs['agent'] == 'Request Planner':
+            handler('submit_plan', {'outputs': [{'kind': 'current_developments', 'description': 'Developments since the latest filing'}], 'timeframe': 'since_filing', 'start_date': None, 'end_date': None})
+        else:
+            seen.append(prompt)
+            handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['W1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})
+        yield {'type': 'token', 'data': ''}
+    async def current(state, writer):
+        return {'answer': 'NVIDIA announced Rubin systems on June 22, 2026. [W1]', 'live_sources': {'W1': source('W1', company='NVDA')}}
+    result = [e async for e in events(Index(), 'What has happened at NVIDIA since its latest filing?', ['NVDA'], [2026], model_stream=model, worker_overrides={'current': current})]
+    assert '"latest_collected_filings": {"NVDA": "2026-02-25"}' in seen[0]
+    assert '"research_windows": {"R1": {"NVDA": {"start_date": "2026-02-26"' in seen[0]
+    assert result[-1]['data']['status'] == 'completed'
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize('fail_at', [1, 2])
 async def test_activity_marks_a_failed_initial_or_repair_review(monkeypatch, fail_at):
     monkeypatch.setenv('REQUEST_PLANNER', 'semantic')

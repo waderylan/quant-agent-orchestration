@@ -81,7 +81,7 @@ async def decompose(state, model_stream, emit):
     return plan
 
 
-async def coverage(question, outputs, answer, sources, model_stream, emit):
+async def coverage(question, outputs, answer, sources, model_stream, emit, context=None):
     cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
     # Checked calculations retain their original inputs even when only the derived
     # measure belongs in the answer. Make that lineage available to the reviewer.
@@ -96,7 +96,9 @@ async def coverage(question, outputs, answer, sources, model_stream, emit):
     for sid, source in sources.items():
         if sid not in cited:
             continue
-        excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year")}, "text": source.get("text", "")[:12000]}
+        excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year",
+            # Exact periods, filing identity and basis let the reviewer check stated dates.
+            "fiscal_start", "fiscal_end", "start", "end", "period", "basis", "accounting_basis", "revision_basis", "form", "filed", "accession")}, "text": source.get("text", "")[:12000]}
         remaining, observations = 24000, []
         for row in source.get("observations", []):
             if row.get("text") == source.get("text") or not remaining:
@@ -107,7 +109,7 @@ async def coverage(question, outputs, answer, sources, model_stream, emit):
         excerpt["observations"] = observations
         excerpts.append(excerpt)
     from src.capabilities import capability_request
-    prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "untrusted_source_excerpts": excerpts})
+    prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "untrusted_source_excerpts": excerpts, **({"application_context": context} if context else {})})
     review = AnswerReview.model_validate(await structured(prompt, "submit_coverage", AnswerReview.model_json_schema(), model_stream, emit, agent="Answer Reviewer")).model_dump()
     rows = review.get("results", [])
     if len(rows) != len(outputs) or {r.get("id") for r in rows} != {o["id"] for o in outputs}:
