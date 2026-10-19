@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import copy
 import json
+import os
 import re
 from dataclasses import asdict, replace
 from typing import Literal
@@ -77,6 +78,7 @@ class TaskState(BaseModel):
     worker_outcomes: dict[str, str] = Field(default_factory=dict)
     registered_evidence: dict[str, EvidenceRef] = Field(default_factory=dict)
     missing_inputs: list[str] = Field(default_factory=list)
+    reported_gaps: list[str] = Field(default_factory=list)
     followups: int = 0
     tool_calls: int = 0
     steps: int = 0
@@ -320,31 +322,73 @@ def cooperative_graph(
         current: int
         last_failure: str
         capability_answer: str
+        request_plan: dict
+        coverage_review: dict
+        original_question: str
 
-    def plan(state):
+    async def plan(state):
         writer = get_stream_writer()
         from src.capabilities import capability_request
+        original_question = state["question"]
         capability = capability_request(state["question"])
-        if capability and not capability["question"]:
+        mixed_capability = bool(re.search(r"\b(?:and|then|also)\b", original_question, re.I)) and os.getenv("REQUEST_PLANNER", "semantic") == "semantic"
+        if capability and not capability["question"] and not mixed_capability:
             task = TaskState(plan=[], requested_outputs=["system_capabilities"], required_workers=[], completed_outputs=["system_capabilities"])
             writer({"type": "trace", "data": {"agent": "Supervisor", "node": "capabilities", "decision": "local_capability_answer", "reason": "Describe implemented behavior without model generation acquisition", "task": task.model_dump()}})
             return {"capability_answer": capability["answer"], "task": task.model_dump(), "evidence": {}, "worker_answers": {}, "error": "", "current": 0}
-        if capability:
+        if capability and capability["question"]:
             state = {**state, "question": capability["question"]}
         from src.request_routing import excluded_companies, mentioned_companies, mentioned_years
         companies = [company for company in state["companies"] if company not in excluded_companies(state["question"])]
         memory_reference = bool(re.search(r"\b(?:from (?:our |the )?(?:previous|prior|last) (?:conversation|chat)|same assumptions as before|as we discussed)\b", state["question"], re.I))
         clarification = memory_reference and (not mentioned_companies(state["question"]) or not mentioned_years(state["question"]) or bool(re.search(r"same assumptions as before", state["question"], re.I)))
         error = scope_error(
-            state["question"], companies, state["years"], index.coverage()
+            state["question"], companies, state["years"], index.coverage(), check_years=os.getenv("REQUEST_PLANNER", "semantic") != "semantic"
         )
         if clarification:
             error = "Each request is self-contained. Specify the company, fiscal comparison years and any assumptions from the previous conversation; UI defaults cannot recover that context."
         intent, price_gap = live_intent(state["question"]), price_request(state["question"])
         tasks, base = tasks_for(state["question"], intent=intent, price_gap=price_gap)
+        semantic, planning_gap = {}, []
+        if not error and (tasks or capability) and os.getenv("REQUEST_PLANNER", "semantic") == "semantic":
+            from src.request_plan import decompose
+            from src.request_routing import NEGATED_LIVE
+            try:
+                semantic = await decompose({**state, "question": original_question, "companies": companies}, model_stream, writer)
+                kinds = {o["kind"] for o in semantic["outputs"]}
+                if "capabilities" in kinds and not capability:
+                    capability = capability_request("What can this system do?")
+                forbidden = bool(re.search(NEGATED_LIVE + r"|\b(?:no (?:web|live|online)(?: research| search)?|only (?:the )?filings|filings only)\b", state["question"], re.I))
+                needs_live = bool(kinds & {"current_developments", "public_reaction"})
+                intent = "developments" if needs_live else "verify" if "official_update" in kinds else "none"
+                if forbidden and intent != "none":
+                    intent = "none"
+                    planning_gap.append("Outside research is requested but web acquisition is explicitly disabled by the question.")
+                tasks, base = tasks_for(state["question"], intent=intent, price_gap=price_gap)
+                owners = {"financial_inputs": "data", "checked_calculations": "quant", "filing_explanation": "research", "risk_changes": "risk", "official_update": "research", "current_developments": "current", "public_reaction": "current"}
+                needed = {owners[k] for k in kinds if k in owners}
+                if "quant" in needed:
+                    needed.add("data")
+                    if base.revenue_component:
+                        needed.add("filing_inputs")
+                tasks = [t for t in tasks if t.worker in needed and (t.worker != "current" or not forbidden)]
+                for worker in ("data", "quant", "risk", "research", "current"):
+                    if worker in needed and not any(t.worker == worker for t in tasks) and (worker != "current" or not forbidden):
+                        tasks.append(Task(worker=worker, output=next(k for k,v in owners.items() if v == worker and k in kinds) if worker != "data" or "financial_inputs" in kinds else "financial_inputs", reason="Requested output identified from the whole question"))
+                order = ["data", "filing_inputs", "quant", "risk", "research", "current"]
+                tasks.sort(key=lambda t: order.index(t.worker))
+                for step in tasks:
+                    step.depends_on = [worker for worker in step.depends_on if any(t.worker == worker for t in tasks)]
+                planning_gap.extend(o["description"] for o in semantic["outputs"] if o["kind"] == "unsupported" and not price_gap)
+                writer({"type": "trace", "data": {"agent": "Supervisor", "node": "request_understanding", "plan": semantic, "reason": "Preserve every requested output independently of worker selection"}})
+            except Exception:
+                planning_gap.append("The complete request could not be checked; the answer covers the recognized filing tasks only.")
+        if not error and os.getenv("REQUEST_PLANNER", "semantic") == "semantic":
+            historical = not semantic or any(o["kind"] in ("financial_inputs", "checked_calculations", "filing_explanation", "risk_changes") for o in semantic["outputs"])
+            error = scope_error(state["question"], companies, state["years"], index.coverage(), check_years=historical)
         # Preserve the supported annual component boundary.
         period_gap = None
-        capability_gaps = []
+        capability_gaps = list(planning_gap)
         for pattern, message in (
             (r"\b(?:ten.year|10.year|discounted.cash.flow|discount rate|terminal value)\b", "A full DCF requires an unsupported forecast model, discount rate and terminal assumptions; historical cash-flow evidence remains available."),
             (r"\btotal return\b|reinvested dividends", "Historical total return is unavailable: adjusted price history, dividends and reinvestment inputs are not supplied."),
@@ -378,7 +422,7 @@ def cooperative_graph(
                 tasks = quarterly_tasks
         task = TaskState(
             plan=tasks,
-            requested_outputs=[t.output for t in tasks],
+            requested_outputs=[o["description"] for o in semantic["outputs"]] if semantic else [t.output for t in tasks],
             required_workers=[t.worker for t in tasks],
             missing_inputs=([period_gap["message"]] if period_gap else []) + capability_gaps,
         )
@@ -426,7 +470,9 @@ def cooperative_graph(
         return {
             **asdict(base),
             "live_intent": intent,
+            "request_plan": semantic,
             "question": state["question"],
+            "original_question": original_question,
             "capability_answer": capability["answer"] if capability else "",
             "companies": companies,
             "clarification": clarification,
@@ -504,7 +550,7 @@ def cooperative_graph(
                 raise ValueError("Supervisor work budget exhausted")
             local = {
                 **state,
-                "live_check": state.get("live_intent") == "verify",
+                "live_check": state.get("live_intent") != "none" and (state.get("live_intent") == "verify" or any(o["kind"] == "official_update" for o in state.get("request_plan", {}).get("outputs", []))),
                 "analysis_sources": handoff_sources(evidence),
                 "risk_sources": handoff_sources(state.get("risk_sources", {})),
                 "live_offset": max([int(s[1:]) for s in evidence if re.fullmatch(r"W\d+", s)], default=0),
@@ -539,7 +585,7 @@ def cooperative_graph(
                 "Provide only the requested filing drivers and interpretation of supplied checked figures. Preserve F/C values and bases. Risk Summary outputs are composed separately; do not duplicate their briefs or recalculate their figures."
             )
             if step.worker == "current":
-                local["handoff_role_note"] = "Report only developments published after each company's anchor date, with W citations. Filing explanations, figures, calculations and risk comparisons belong to other workers and are already in the answer."
+                local["handoff_role_note"] = "Answer external-research outputs within research_windows with W citations. Filing explanations, figures, calculations and risk comparisons are already in the answer; relate outside findings to them without repeating them."
             async with asyncio.timeout(WORKER_TIMEOUT_SECONDS):
                 if step.worker == "quant" and not local.get("financial_sources"):
                     result = {"answer": "", "partial": True, "coverage_gap": True, "missing_outputs": ["No trusted financial inputs for Quant; unsupported calculations remain missing"], "analysis_sources": {}}
@@ -629,6 +675,7 @@ def cooperative_graph(
             if status == "completed":
                 task.completed_outputs.append(step.output)
             task.missing_inputs.extend(result.get("missing_outputs", []))
+            task.reported_gaps.extend(result.get("reported_missing_outputs", []))
             if result.get("answer"):
                 answers[step.worker] = result["answer"]
             # One supported recovery from structured absence to filing extraction.
@@ -733,7 +780,7 @@ def cooperative_graph(
             else state.get("last_failure", ""),
         }
 
-    def finish(state):
+    async def finish(state):
         writer = get_stream_writer()
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
@@ -766,8 +813,13 @@ def cooperative_graph(
             include = list(dict.fromkeys(include))
             if "quant" in include and "data" in include and not has_conflicts:
                 include.remove("data")
+            if "quant" in include and "research" in include and task.worker_outcomes.get("quant") == "completed":
+                calculations = set(re.findall(r"\[(C\d+)\]", answers["quant"]))
+                if calculations and calculations <= set(re.findall(r"\[(C\d+)\]", answers["research"])):
+                    include.remove("quant")
+            labels = {"quant": "Financial analysis", "research": "From the filings", "current": "Outside research", "risk": "Changes in filing risks"}
             answer = "\n\n".join(
-                (NAMES[w] + ":\n" if len(include) > 1 else "") + answers[w]
+                (labels.get(w, NAMES[w]) + ":\n" if len(include) > 1 else "") + answers[w]
                 for w in include
             )
             status = (
@@ -781,9 +833,33 @@ def cooperative_graph(
             )
         if not task.registered_evidence and status == "partial" and state.get("live_intent", "none") == "none":
             status = "failed" if "failed" in task.worker_outcomes.values() else "coverage_gap"
-        task.terminal = status
+        review = {}
         if state.get("capability_answer") and (task.plan or task.missing_inputs):
             answer = state["capability_answer"] + "\n\n" + answer
+        if state.get("request_plan") and (answers or state.get("capability_answer")) and not state.get("error"):
+            from src.request_plan import coverage, remove_unsupported
+            try:
+                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                answer = remove_unsupported(answer, review["unsupported_claims"])
+                if review["unsupported_claims"]:
+                    removed = review["unsupported_claims"]
+                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                    # One bounded repair pass. If a second check finds more unsupported
+                    # claims, remove them and retain the partial outcome.
+                    answer = remove_unsupported(answer, review["unsupported_claims"])
+                    review["removed_claims"] = removed + review["unsupported_claims"]
+                if not review["missing"]:
+                    task.missing_inputs = [gap for gap in task.missing_inputs if gap not in task.reported_gaps]
+                    if status == "partial" and not task.missing_inputs and not any(v in ("failed", "unverified", "needs_clarification") for v in task.worker_outcomes.values()):
+                        status = "completed"
+                task.missing_inputs.extend(review["missing"])
+                writer({"type": "trace", "data": {"agent": "Supervisor", "node": "answer_coverage", **review}})
+            except Exception:
+                task.missing_inputs.append("Full-question coverage review is unavailable.")
+            task.missing_inputs = list(dict.fromkeys(task.missing_inputs))
+            if task.missing_inputs and status == "completed":
+                status = "partial"
+        task.terminal = status
         if task.missing_inputs and status in ("partial", "coverage_gap", "needs_clarification"):
             answer += "\n\nUnresolved outputs:\n" + "\n".join("- " + gap for gap in task.missing_inputs[:12])
         writer({"type": "answer", "data": answer})
@@ -831,6 +907,7 @@ def cooperative_graph(
                 "data": {
                     "status": status,
                     "verified_citations": bool(cited & evidence.keys()) and not invalid,
+                    **({"coverage_checked": True} if review else {}),
                     **(
                         {"missing_outputs": task.missing_inputs}
                         if task.missing_inputs and status != "failed"
@@ -839,7 +916,7 @@ def cooperative_graph(
                 },
             }
         )
-        return {"answer": answer, "task": task.model_dump()}
+        return {"answer": answer, "task": task.model_dump(), "coverage_review": review}
 
     workflow = StateGraph(GraphState)
     workflow.add_node("supervisor", plan)

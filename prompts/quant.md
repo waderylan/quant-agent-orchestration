@@ -103,3 +103,6 @@ citations. If a later Research step adds filing explanations, assess numerical o
 here; do not declare that downstream explanation missing.
 Cite every calculated figure, and mention the available table/chart. Use sensible display
 rounding while preserving full precision in the ledger. Keep the answer under 400 words.
+Do not narrate worker responsibilities, internal checks or downstream tasks in the
+answer. Give the requested findings and only qualifications that affect their meaning.
+Omit completion announcements such as 'supported calculations are complete'.

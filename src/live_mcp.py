@@ -196,9 +196,14 @@ class LiveGateway:
             raise ValueError("Tool is outside the live allowlist")
         if tool == "tavily_search":
             required = {"query", "topic", "search_depth", "max_results", "include_raw_content"}
-            if set(arguments) - (required | {"time_range"}) or required - set(arguments) or not isinstance(arguments["query"], str) or not 1 <= len(arguments["query"]) <= 160 or arguments["topic"] not in ("news", "general") or arguments["search_depth"] != "basic" or type(arguments["max_results"]) is not int or arguments["max_results"] != 5 or arguments["include_raw_content"] is not False or arguments.get("time_range", "year") != "year":
+            if set(arguments) - (required | {"time_range", "start_date", "end_date", "include_domains"}) or required - set(arguments) or not isinstance(arguments["query"], str) or not 1 <= len(arguments["query"]) <= 160 or arguments["topic"] not in ("news", "general") or arguments["search_depth"] not in ("basic", "advanced") or type(arguments["max_results"]) is not int or arguments["max_results"] != 5 or arguments["include_raw_content"] is not False or arguments.get("time_range", "year") not in ("day", "week", "month", "year"):
                 raise ValueError("Unsupported live search argument or value")
-        elif set(arguments) != {"urls", "extract_depth"} or arguments["extract_depth"] != "basic" or not isinstance(arguments["urls"], list) or len(arguments["urls"]) != 1 or arguments["urls"][0] not in request.get("urls", set()):
+            for key in ("start_date", "end_date"):
+                if key in arguments and not re.fullmatch(r"20\d\d-\d\d-\d\d", arguments[key]):
+                    raise ValueError("Invalid research date interval")
+            if "include_domains" in arguments and (not isinstance(arguments["include_domains"], list) or len(arguments["include_domains"]) > 8 or any(not re.fullmatch(r"[a-z0-9.-]+", d) for d in arguments["include_domains"])):
+                raise ValueError("Invalid search domain filter")
+        elif set(arguments) - {"urls", "extract_depth", "query", "format"} or not {"urls", "extract_depth"} <= arguments.keys() or arguments["extract_depth"] not in ("basic", "advanced") or arguments.get("format", "text") != "text" or not isinstance(arguments["urls"], list) or len(arguments["urls"]) != 1 or arguments["urls"][0] not in request.get("urls", set()):
             raise ValueError("Extraction requires one URL returned by this request's search")
 
     def store(self, tool, arguments, payload, metadata, *, retrieved_at=None):
@@ -221,7 +226,7 @@ class LiveGateway:
     async def fetch(self, tool, arguments, *, request, agent, emit, refresh=False):
         self.validate(tool, arguments, request)
         count = "searches" if tool == "tavily_search" else "extracts"
-        limit = (1 if agent == "Filings Research" else 2) if count == "searches" else (0 if agent == "Filings Research" else 2)
+        limit = (1 if agent == "Filings Research" else request.get("search_limit", 2)) if count == "searches" else (0 if agent == "Filings Research" else request.get("extract_limit", 2))
         event = {"agent": agent, "node": "live_mcp", "server": None, "tool": tool, "arguments": sanitized(arguments), "result_count": 0, "snapshot_id": None, "cache": False}
         def finish(result, outcome):
             body = payload_body(result.get("payload", {}))
@@ -261,7 +266,7 @@ class LiveGateway:
                 return finish({"error": usage["reason"]}, "unavailable")
             # A lagging/unavailable account read cannot erase reservations. Keep
             # the verified monthly floor and count every subsequent local call.
-            usage_warning = "Live search unavailable: account usage verification (" + usage["reason"] + "); source results retain conservative credit reservations."
+            usage_warning = "Account usage verification unavailable (" + usage["reason"] + "); conservative credit reservations remain enforced."
         try:
             identity = self.ledger.reserve(tool)
         except ValueError:
@@ -274,11 +279,10 @@ class LiveGateway:
                 schema = next((t for t in metadata["tools"] if t["name"] == tool), None)
                 if schema is None:
                     raise ValueError("Required MCP tool not discovered")
-                if tool == "tavily_search":
-                    arguments = {k:v for k,v in arguments.items() if k != "time_range"}
-                    if "time_range" in schema["inputSchema"].get("properties", {}):
-                        arguments["time_range"] = "year"
-                    event["arguments"] = arguments
+                supported = schema["inputSchema"].get("properties", {})
+                required = {"query", "topic", "search_depth", "max_results", "include_raw_content"} if tool == "tavily_search" else {"urls", "extract_depth"}
+                arguments = {k:v for k,v in arguments.items() if k in required or k in supported}
+                event["arguments"] = arguments
                 result = await session.call_tool(tool, arguments)
                 payload = sanitized(result.model_dump(mode="json"))
             body = payload_body(payload)

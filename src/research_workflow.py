@@ -58,6 +58,7 @@ TOOLS = [
 
 
 class State(TypedDict, total=False):
+    request_plan: dict
     live_intent: str
     current_answer: str
     live_sources: dict
@@ -186,13 +187,13 @@ class ResearchTools:
         return {"sources": self.register(passages), "retrieval_coverage": coverage}
 
 
-def scope_error(question, companies, years, coverage):
+def scope_error(question, companies, years, coverage, *, check_years=True):
     if not companies or not years:
         return "Select at least one company and fiscal year. Each question is self-contained."
     missing = [(c, y) for c in companies for y in years if y not in coverage.get(c, [])]
     if missing:
         return f"Unsupported coverage: {missing}. Available fiscal years: {coverage}."
-    if mentioned_years(question) - set(years):
+    if check_years and mentioned_years(question) - set(years):
         return f"Selected fiscal years: {years}. Your question asks about {sorted(mentioned_years(question))}. Select the requested years; fiscal labels can differ from calendar dates."
     requested = mentioned_companies(question)
     if set(requested) - set(companies):
@@ -211,7 +212,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
         source_offset=state.get("source_offset", 0),
     )
     live = None
-    if state.get("live_check") and state.get("live_intent") == "verify":
+    if state.get("live_check") and state.get("live_intent") in ("verify", "developments"):
         from src.current_developments import LiveTools, SEARCH_TOOL
         from src.live_mcp import LiveGateway
         live = LiveTools(state, gateway or LiveGateway(), agent="Filings Research")
@@ -369,6 +370,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
         "answer": answer,
         "partial": bool(state.get("partial")) or exhausted or bool(outcome.missing) or bool(live_missing),
         "missing_outputs": [*state.get("missing_outputs", []), *outcome.missing, *live_missing],
+        "reported_missing_outputs": outcome.missing,
         "clarification": outcome.status == "clarification",
         "citation_verified": bool(cited),
         "research_sources": registered,

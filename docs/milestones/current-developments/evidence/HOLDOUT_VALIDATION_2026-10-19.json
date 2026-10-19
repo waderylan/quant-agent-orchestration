@@ -1,0 +1,165 @@
+{
+  "reviewed_at": "2026-10-19",
+  "iteration": 4,
+  "profile": "Actual native application, local Codex generation, real Tavily/cache; not deployment-provider evaluation",
+  "method": "Two new casual questions are sealed without reading implementation changes after freeze4 is supplied. Root sees neither prompt until both one-shot native captures finish. Independent review checks the returned calculation records and filing excerpts without external searches.",
+  "runtime_freeze_sha256": "af4156602adea41b6033d94355aada0c0ffc506044d01240a4ebff579f029dac",
+  "runtime_all_32_hashes_verified_unchanged_immediately_after_capture": true,
+  "sealed_file_sha256": "961f8d7da555bac5f8d1af517163a66762875d4e89203ff35cb29f3e52ab41ef",
+  "raw_capture_sha256": "774d45bdeb2595ab4afc73926bee3edd6417964671eb9def0bc7711799e7b10b",
+  "rubric": {
+    "scale": "Each dimension is scored 0, 1, or 2: absent or materially wrong; partially useful; fully supported and useful. Every requested output must be tracked separately.",
+    "dimensions": {
+      "request_coverage": "Addresses every requested part; an explicit evidence gap counts as honest handling but not as a substantive answer. Does not mark a silently omitted part complete.",
+      "useful_synthesis": "Answers in plain language, prioritizes material findings, explains their relevance, and distinguishes evidence from interpretation. Avoids a string of source metadata and repeated caveats.",
+      "provenance": "Material factual claims have inspectable supporting citations. Filing facts, calculations, issuer statements, and third-party views remain distinguishable; duplicate views of one source do not imply corroboration.",
+      "honest_limits": "Does not invent dates, completed transactions, causation, or public consensus. Timeframes and partial coverage are stated briefly when material. Unsupported scope is identified without discarding supported parts."
+    },
+    "failure_conditions": [
+      "A requested part is omitted while the response is complete.",
+      "A material financial or event claim is unsupported, or an unsupported consensus is invented.",
+      "Explicit filings-only instructions trigger live research.",
+      "An unsupported price request receives an invented quote or blocks an otherwise answerable filing request.",
+      "The response consists primarily of restrictions or search diagnostics despite having usable relevant evidence."
+    ],
+    "evaluation_note": "Do not require particular current events, exact routes, exact phrasing, a fixed number of sources, or a positive news finding. Judge response quality against evidence actually available. A supported no-finding answer can pass when scope and search coverage are clear."
+  },
+  "summary": {
+    "captured": 2,
+    "valid_cases": 2,
+    "useful_pass": 2,
+    "fail": 0,
+    "critical_failures": 0,
+    "mean_score_out_of_8": 8.0,
+    "median_total_seconds": 37.754,
+    "median_answer_token_ttft_seconds": 26.584,
+    "live_tool_calls_in_these_two_cases": 0,
+    "global_task_calls_at_capture_end": 182,
+    "global_task_reserved_credits_at_capture_end": 364,
+    "budget_note": "Global shared ledger includes concurrent root activity. These two filings-only cases invoke no live tools and spend no Tavily calls.",
+    "latency_note": "Actual native wall-clock and answer-token timing includes application scheduling. This is not deployment-provider, Cloud Run or cold-start evidence."
+  },
+  "cases": [
+    {
+      "id": "L01",
+      "category": "derived_margin_comparison_without_printed_ancestors",
+      "question": "from amds filings did operating margin improve from fy24 to fy25? just show the margins and the change then a quick takeaway. no news or long list of underlying numbers",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "Checked FY2024 and FY2025 operating margins",
+        "The margin change with correct units",
+        "A concise supported interpretation"
+      ],
+      "criteria": [
+        "Does not require printing every revenue/operating-income ancestor when derived calculation citations provide inspection access",
+        "Distinguishes percentage-point change from percent change",
+        "Honors the no-news instruction",
+        "Does not produce a false missing-evidence status for registered calculation ancestry"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "source_checks": [
+        "Displayed references are C1/C2/C3 only. C1 records FY2024 operating margin 7.368625169672290091138258678%; C2 records FY2025 10.66428014665550391177574410%.",
+        "C3 records C2 minus C1 = 3.295654976983213820637485422 percentage points, correctly rounded to +3.30. Subtracting the rounded printed margins would differ; the calculation correctly uses unrounded values.",
+        "C1/C2 identify F1-F4 input ancestry; C3 preserves all four source IDs. Every calculation has a registered bundle and inspection URL.",
+        "The answer is complete without printing financial-input ancestors and gives the requested brief supported interpretation.",
+        "No search or extraction tool is invoked."
+      ],
+      "all_displayed_citations_registered": true,
+      "live_tools_invoked": [],
+      "seconds": 47.557,
+      "answer_token_ttft_seconds": 36.515,
+      "answer_sha256": "f96b69a33e5894a67b7e92f43a3ca4128893accf1a4981b38ae46fccdab8ce83",
+      "source_text_hashes": {
+        "C1": "44c826b7cb78745e345bd8b1b5ebc658dccff0c7e732181e3bf0cbbd83f5c177",
+        "C2": "6f09532dcace1361a4a0f00acd67b5fa87e1f941a0921076863bdea7fb46610e",
+        "C3": "3c82e2b8627c80d9f1ac530d7473bef1dcd4e66ef94ef18f7646428232e23809"
+      }
+    },
+    {
+      "id": "L02",
+      "category": "plain_filing_business_model_interpretation",
+      "question": "i keep seeing qct and qtl in qualcomms 2025 report. what are they and how does each make money? use the report only",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "A plain-language explanation of QCT",
+        "A plain-language explanation of QTL",
+        "How the two businesses earn revenue"
+      ],
+      "criteria": [
+        "Clearly distinguishes semiconductor/platform sales from intellectual-property licensing",
+        "Grounds explanations in the selected filing",
+        "Honors the report-only instruction without live search",
+        "Avoids exposing internal worker handoffs or introducing unnecessary calculation requirements"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "source_checks": [
+        "S5 explicitly identifies QCT as Qualcomm CDMA Technologies and QTL as Qualcomm Technology Licensing, and describes semiconductor platforms/software versus IP rights.",
+        "S6 supports substantially all QCT revenue being equipment revenue and QTL revenue principally being handset royalties.",
+        "S7 supports quarterly per-unit royalties based generally on wholesale complete-product prices, with caps/minimums and some fixed per-unit amounts.",
+        "S9 supports the 3G/4G/5G cellular-essential patent explanation.",
+        "No search or extraction tool is invoked; the final answer contains no internal worker-handoff commentary."
+      ],
+      "all_displayed_citations_registered": true,
+      "live_tools_invoked": [],
+      "seconds": 27.95,
+      "answer_token_ttft_seconds": 16.653,
+      "answer_sha256": "09c4db23f930a1ef4474d10a6eb1aa926097219d1e564e47259a3604a91515de",
+      "source_text_hashes": {
+        "S5": "75f8f065999eb499ed64998ef528abebfd021ec1da5289c96d94ddc68f001689",
+        "S6": "f0c441d39d6dc736b69ee694bbd41ab70e9f814776515dc9738640abeab46ad3",
+        "S7": "239140930dac4d3d5e97c38a6fd706ac7f45cdea3770d60a78dd4f8d9da8f51b",
+        "S9": "7cdeae14b21e6e01e5464473a0648b7e1d2ab6c914650aa83fc55bee11ab399b"
+      }
+    }
+  ],
+  "combined_fresh_validation": {
+    "useful_pass": 6,
+    "cases": 6,
+    "critical_failures_observed": 0,
+    "scope": "The latest two fresh sets span two separately frozen runtime versions: four cases on freeze3 and two additional filings-only cases on freeze4. This is not a six-case evaluation of one unchanged runtime and not a general accuracy estimate.",
+    "sets": [
+      {
+        "evidence": "HOLDOUT_FINAL_2026-10-19.json",
+        "runtime_freeze_sha256": "1d0bc859231c4f6bc300af464a871e958203c2f9c1b83b4c46ced7767d5e54a8",
+        "useful_pass": 4,
+        "cases": 4
+      },
+      {
+        "evidence": "HOLDOUT_VALIDATION_2026-10-19.json",
+        "runtime_freeze_sha256": "af4156602adea41b6033d94355aada0c0ffc506044d01240a4ebff579f029dac",
+        "useful_pass": 2,
+        "cases": 2
+      }
+    ],
+    "earlier_failures": "Initial eighteen-case and subsequent six-case failures remain preserved under their own runtime hashes and are not reclassified as unseen passes."
+  }
+}

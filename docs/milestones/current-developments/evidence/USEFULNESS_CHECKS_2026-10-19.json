@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-19T19:58:41.433625+00:00",
+  "local_links_checked": 204,
+  "broken_links": [],
+  "referenced_commands_exist": [
+    "scripts/collect_sources.py",
+    "scripts/demo_container.py",
+    "scripts/demo_current.py",
+    "scripts/demo_financials.py",
+    "scripts/demo_quant.py",
+    "scripts/demo_research.py",
+    "scripts/demo_risk.py",
+    "scripts/demo_supervisor.py",
+    "scripts/evaluate_usefulness.py",
+    "scripts/financials.py",
+    "scripts/quant.py",
+    "scripts/research.py",
+    "scripts/start_local_container.py",
+    "scripts/verify_cooperation_edges.py"
+  ],
+  "milestones": "M1–M13 order/status preserved except verified M10 status",
+  "truth_fixture_and_m8_evidence_unchanged": true,
+  "claude_import_valid": true,
+  "changed_files_actual_secret_scan": true,
+  "diff_check": "passed",
+  "compileall": "passed",
+  "locked_dependency_export_matches": true
+}

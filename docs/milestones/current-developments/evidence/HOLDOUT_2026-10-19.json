@@ -1,0 +1,1086 @@
+{
+  "reviewed_at": "2026-10-19",
+  "profile": "Actual native application, local Codex generation, real Tavily/cache; not deployment-provider evaluation",
+  "method": "Subagent creates prompts before edits, keeps them undisclosed through runtime freeze, captures each once, then reviews actual answer and returned source text. No direct Tavily calls, implementation edits or test expectation changes. Source text checks are limited to evidence captured by the application and local cached snapshot inspection, not independent confirmation of every publisher claim.",
+  "runtime_freeze_sha256": "cf59fd7774c58ebb2a0ca98e55b7352b4c490d7adb84a2dc497dd787ce4faa47",
+  "sealed_file_sha256": "31cd86878da2f528e768f7d7cf59df01a5379c1be4cf76076e0294fd9fa58a7c",
+  "raw_capture_sha256": "7664271d7aa723fd8b9c887037835e0b99a63e20c1e814017dd2db5ce33800de",
+  "rubric": {
+    "scale": "Each dimension is scored 0, 1, or 2: absent or materially wrong; partially useful; fully supported and useful. Every requested output must be tracked separately.",
+    "dimensions": {
+      "request_coverage": "Addresses every requested part; an explicit evidence gap counts as honest handling but not as a substantive answer. Does not mark a silently omitted part complete.",
+      "useful_synthesis": "Answers in plain language, prioritizes material findings, explains their relevance, and distinguishes evidence from interpretation. Avoids a string of source metadata and repeated caveats.",
+      "provenance": "Material factual claims have inspectable supporting citations. Filing facts, calculations, issuer statements, and third-party views remain distinguishable; duplicate views of one source do not imply corroboration.",
+      "honest_limits": "Does not invent dates, completed transactions, causation, or public consensus. Timeframes and partial coverage are stated briefly when material. Unsupported scope is identified without discarding supported parts."
+    },
+    "failure_conditions": [
+      "A requested part is omitted while the response is complete.",
+      "A material financial or event claim is unsupported, or an unsupported consensus is invented.",
+      "Explicit filings-only instructions trigger live research.",
+      "An unsupported price request receives an invented quote or blocks an otherwise answerable filing request.",
+      "The response consists primarily of restrictions or search diagnostics despite having usable relevant evidence."
+    ],
+    "evaluation_note": "Do not require particular current events, exact routes, exact phrasing, a fixed number of sources, or a positive news finding. Judge response quality against evidence actually available. A supported no-finding answer can pass when scope and search coverage are clear."
+  },
+  "decision_policy": "Pass means supported useful requested work with proportionate limits. Pass_with_limit preserves legitimate incomplete evidence or supported-scope limits without treating them as full substantive completion. Fail includes unsupported displayed claims, demonstrably false missing-evidence diagnostics, or diagnostics that dominate an otherwise answerable question. Numeric scores describe quality independently of these categorical defects.",
+  "summary": {
+    "captured": 18,
+    "valid_cases": 17,
+    "invalid_evaluator_inputs": 1,
+    "pass": 5,
+    "pass_with_limit": 3,
+    "fail": 9,
+    "mean_score_out_of_8": 6.59,
+    "median_total_seconds_valid": 73.126,
+    "minimum_total_seconds_valid": 31.276,
+    "maximum_total_seconds_valid": 164.309,
+    "median_answer_token_ttft_seconds_valid": 58.038,
+    "unanswered_request_marked_complete": 0,
+    "manufactured_public_consensus_observed": 0,
+    "explicit_filings_only_live_tool_violations": 0,
+    "material_unsupported_claim_in_cited_excerpt_cases": [
+      "H02",
+      "H04"
+    ],
+    "flag_counts": {
+      "unsupported_claim_in_cited_excerpt": 1,
+      "unsupported_claim_retained_after_coverage_rejection": 1,
+      "secondary_retrieval_failure_exposed": 5,
+      "false_no_dated_evidence_gap": 3,
+      "diagnostics_dominate_answer": 1,
+      "retrieved_filing_values_not_used": 2,
+      "false_source_support_rejection": 1,
+      "legitimate_partial_risk_coverage": 1,
+      "capabilities_require_external_citations": 1,
+      "unnecessary_live_work_for_capability_question": 1,
+      "repeated_scope_gap_diagnostic": 3,
+      "structured_metric_limit": 1,
+      "legitimate_partial_company_reaction_coverage": 1
+    },
+    "budget_record_note": "Run-wide ledger counters include root's concurrent browser/Docker calls; they are not the heldout run's isolated spend.",
+    "global_calls_since_authorized_baseline_at_capture_end": 106,
+    "global_reserved_credits_since_baseline_at_capture_end": 212
+  },
+  "cases": [
+    {
+      "id": "H01",
+      "category": "broad_current_developments",
+      "question": "whats nvidia been up to recently, anything big i should actually care about?",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2026
+      ],
+      "required_outputs": [
+        "A recent-development summary with an understandable timeframe",
+        "An evidence-based explanation of why the main findings matter"
+      ],
+      "criteria": [
+        "Retrieves current external evidence rather than only restating historical filings",
+        "Prioritizes meaningful findings rather than presenting raw source tiers",
+        "Does not present an undated page as proof of a recent event"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 65.074,
+      "answer_token_ttft_seconds": 51.721,
+      "flags": [],
+      "reason": "Three material developments are explained with dates and relevance. Agreement status remains distinct from completion.",
+      "source_checks": [
+        "W3 explicitly reports the Hugging Face agreement and developer reach.",
+        "W5 supports production-ramp and financing-platform announcements, including the definitive-agreements condition.",
+        "W11 supports the attributed SSI investment/compute partnership and explicitly separates reported financing talks."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "543f3b71039edfa9acb03f8f6414b20cd0269226df9509aa6b4037a8f8e5e7b6",
+      "source_text_hashes": {
+        "W3": "4fa65f2a89e046fe2d4eeadd1d06de89bbe47145fbca1076cb4b96747427a5d4",
+        "W5": "29b3fa516fbc4a44f7b83ac70657b153c3cbd8d416c8d2c3666fada106a4dabf",
+        "W11": "8b152b65b37a77d920470ef66d336db4f650acc42dcb61aa7240790322cd0f02"
+      }
+    },
+    {
+      "id": "H02",
+      "category": "product_reception",
+      "question": "any new amd chips or partnerships lately and how are people reacting to them",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Recent chip or partnership developments",
+        "Identifiable outside reactions to the developments found"
+      ],
+      "criteria": [
+        "Covers both developments and reaction instead of treating an announcement as public opinion",
+        "Attributes outside views and avoids manufacturing a representative public consensus",
+        "Separates company claims from external assessment"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 1,
+        "honest_limits": 1
+      },
+      "score_total": 6,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 73.57,
+      "answer_token_ttft_seconds": 56.957,
+      "flags": [
+        "unsupported_claim_in_cited_excerpt"
+      ],
+      "reason": "Both announcement and identifiable media/customer reaction are useful, but the answer says AMD stated Helios was in production while the cited W10 text does not establish that status.",
+      "source_checks": [
+        "W10's complete returned 1,791-character text supports platform composition, expected Q4 deployment and Meta testing; it contains no production statement.",
+        "W6 supports the 2-GW agreement and first-half-2027 deployment plan.",
+        "W12 and W15 support the attributed outside reactions and performance qualification. No broad consensus is invented.",
+        "This is a citation-support failure, not a claim that production status was externally disproven."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "b6899171ab860af2eda322abc08c2530bc1eee289b0c5b456331d2f5a532fae5",
+      "source_text_hashes": {
+        "W6": "3530f247260e40506bcd1b1a2e1da36f05b2e83b48af5fe9ca718d469ff116a1",
+        "W10": "b2f94a0ab8b8c33f5a26dfd79a8b8863445f3f6e3a35b8bd34a7e6736b9ea1a6",
+        "W12": "fae51dec4fcffa7f2f1ce0fdb5d22d7c3426e1cad524bbb5eae1f4bddb177637",
+        "W15": "b8b48d5428cdece7f49fda05bb913f807be30ab6609a094676737eebf1c47e19"
+      }
+    },
+    {
+      "id": "H03",
+      "category": "broad_current_developments",
+      "question": "give me the quick version of what intel is doing now. not a pile of disclaimers pls",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "A concise useful summary of recent Intel activity",
+        "Brief material uncertainty where evidence requires it"
+      ],
+      "criteria": [
+        "Leads with findings and significance",
+        "Does not suppress necessary attribution just because the user dislikes caveats",
+        "Avoids repeated filing-anchor and budget explanations in the main answer"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 70.888,
+      "answer_token_ttft_seconds": 57.052,
+      "flags": [],
+      "reason": "A concise readable summary connects inference hardware, Xeon demand and foundry packaging to Intel's business.",
+      "source_checks": [
+        "W13 gives the October 12 product announcement and customer sampling status.",
+        "W4 supports the AI-host CPU demand explanation and 18A ramp.",
+        "W2 supports New Mexico advanced-packaging expansion and the Lens collaboration."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "22d79604535d5f48d4662ef42b2636ddd53a34970cca66685f128d21f7afc930",
+      "source_text_hashes": {
+        "W2": "8a17c136af001396124ba999c5433e8483b15d7a07fcb98dd4c01311ea134e69",
+        "W4": "924f46a0f44a8beedd80ad7b645553409d174dfae1da8cee47e5c19791b98840",
+        "W13": "09d0886c2ecd3e4725da888e47b562a57c88cfdfe0ebcadd6d483560141ddd00"
+      }
+    },
+    {
+      "id": "H04",
+      "category": "broad_current_developments",
+      "question": "catch me up on qualcomm, whats changed outside the phone business the past few months",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Recent Qualcomm developments outside handsets",
+        "A useful connection between the developments and the company's business"
+      ],
+      "criteria": [
+        "Honors the topical restriction",
+        "Uses the requested recent period rather than automatically using the entire post-filing period",
+        "Explains relevance without inventing financial effects"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 0,
+        "honest_limits": 1
+      },
+      "score_total": 4,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 128.075,
+      "answer_token_ttft_seconds": 110.76,
+      "flags": [
+        "unsupported_claim_retained_after_coverage_rejection",
+        "secondary_retrieval_failure_exposed"
+      ],
+      "reason": "The answer retains a substantive BMW paragraph after its own checker says the cited evidence does not support it. Most other non-phone findings are useful.",
+      "source_checks": [
+        "W2 supports completed Modular acquisition and the industrial/networking/robotics outlook.",
+        "The cached W2 snapshot payload also contains no BMW, lead-compute, next-decade or multigeneration-selection support; this is not just a display-excerpt omission.",
+        "W7 supports the attributed Qualcomm/Amazon AI-inference and optical-connectivity collaboration.",
+        "Partial status honestly signals a problem but does not repair the unsupported paragraph still presented as a finding."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "9bf356f29eb30156caa931e5269048d89f230d46cf85ae860a9d781f0b98675a",
+      "source_text_hashes": {
+        "W2": "153c1cd33463e684727f0864299a34992d8a578ccbd855ef89443b839d6a9398",
+        "W7": "4e0b3e6bdf24563b9724b4f12fcbf1a2e7b5ba0a187a2de1e5dc7d872df281c7"
+      }
+    },
+    {
+      "id": "H05",
+      "category": "historical_results_and_external_reaction",
+      "question": "amds 2025 sales went up right? show me how much from the filing and what analysts were worried about when the results came out",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "The checked FY2024-to-FY2025 sales change",
+        "Outside analyst concerns around release of the FY2025 results"
+      ],
+      "criteria": [
+        "Does not take the user's assumed sales direction as established without checking",
+        "Uses a historical release-relative window for reactions",
+        "Does not substitute management's risk discussion for analyst views",
+        "Explains a missing external-reaction result if retrieval fails"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 164.309,
+      "answer_token_ttft_seconds": 151.696,
+      "flags": [
+        "false_no_dated_evidence_gap"
+      ],
+      "reason": "The revenue calculation and analyst concerns answer both parts, but the final no-dated-development gap contradicts the dated evidence actually discussed.",
+      "source_checks": [
+        "F/C references support AMD revenue of 25.785 to 34.639 billion USD, an 8.854-billion increase and 34.34% growth.",
+        "W7 has an explicit Updated Feb. 4, 2026 label in returned text despite null normalized published_date.",
+        "W7 and W14 support the China-revenue and operating-spending concerns; undated commentary is identified as such."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "f35d482e81623aa6ca59ee87279f87537a72487b9627645df80da7168d04f0ae",
+      "source_text_hashes": {
+        "C1": "25f53a654b7748ea924a99e331819745e5185745af7683bcb9681f8fadf166a7",
+        "C2": "a1d710c767250260e6e6fe4b0e9809ccf5bf91d7d730fccef1531a9a5e84712d",
+        "F1": "2a1c59a2f43fc8786bf5eca7dfcbebcdecfd0723a4112c30168287e25c919812",
+        "F2": "881606ad221a9d046f775c93b9322209eed225080da62c48ee3a65f3fc1670aa",
+        "W7": "69affce30f91772381f4a989e3a3b2a0a3cbe819b88ff2e26bf579feeef21cc1",
+        "W14": "4b38825f57a6c1ea9dd68cafbc28a8780a210bb2d648adca87360ee9a2fe20f5"
+      }
+    },
+    {
+      "id": "H06",
+      "category": "historical_results_and_external_reaction",
+      "question": "walk me thru intels 2025 revenue vs 2024 then tell me if the coverage around those results sounded optimistic or pretty negative",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "A checked year-over-year revenue comparison",
+        "A source-attributed assessment of outside coverage around the results"
+      ],
+      "criteria": [
+        "Answers both numeric and external-reaction parts",
+        "Distinguishes a small sourced sample of coverage from general market sentiment",
+        "Does not infer sentiment solely from revenue direction or share-price movement"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 137.201,
+      "answer_token_ttft_seconds": 123.943,
+      "flags": [
+        "false_no_dated_evidence_gap",
+        "secondary_retrieval_failure_exposed"
+      ],
+      "reason": "The answer usefully distinguishes negative post-results coverage from pre-results optimism but finishes with contradictory generic missing-date and empty-search gaps.",
+      "source_checks": [
+        "F/C references support 53.101 to 52.853 billion USD and a 0.47% decline.",
+        "W1's Reuters text supports TD Cowen's criticism and the Jefferies/Oppenheimer supply outlook.",
+        "W2 explicitly shows 21.01.26 and supports the Gabelli analyst's pre-results optimism.",
+        "W3 supports disappointing guidance; the outside summary is a sourced sample, not a claimed universal consensus."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "65eb5cd43f5703cbeca3ae68f0f60bda7e7935880534489a0fc1a1aca2e347e0",
+      "source_text_hashes": {
+        "C1": "37bc8405ef943c5ddeb92d1da85787e75acce1644cd097985d1db0a4b8bcc91b",
+        "C2": "a74cc8f6d2db7b6c430bc04358e9161d0ad5e255a25cad08a367c7e3802d3ce4",
+        "F1": "00e23cf69ff5ed236e0bfeca2f2d07585125bd36aa915de4d4a86eac3c76cf7a",
+        "F2": "28da70905f2b6259e8d65b0e21a3108f2247ffb21f1aee520eb94b406aa493f0",
+        "S18": "ba846f911d03d753417f2203ae293509d02b07349357f22b69fe1f619726d977",
+        "S21": "3f3f0aff847d09f35bb6a88c2d11f99c7cac6ca534fd4fbf38cddab2b4b4d388",
+        "S23": "83a6977e55e9cd67cc3723ba5651e66b10dc634d175c04d68b6aab2ccd8de808",
+        "S24": "557e15b6360d5a788f2ef7dedb1549d74357d6d07d4d5f3eb110c399d9574a2d",
+        "W1": "95198fce45b71499d2b0ce19af96bb8f4562b4a918e59c2c04fb44b5e7224ba1",
+        "W2": "60d5081bc2c57bed5e890f915ead0c3ff15da0dca92517f30e0e4028172541a3",
+        "W3": "7cc1a98e0801d0b7b40234e19f130a210ed0a722379ef79733f6163436ea5884"
+      }
+    },
+    {
+      "id": "H07",
+      "category": "filings_only",
+      "question": "just use the filings for this one. why did qcom revenue grow in fy25 and was it mainly phones? no web stuff",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "The filing-supported explanation of FY2025 revenue growth",
+        "Whether handsets were the primary contributor, with relevant segment context"
+      ],
+      "criteria": [
+        "Honors the explicit no-web instruction",
+        "Explains business drivers rather than giving only a growth percentage",
+        "Cites the relevant filing passages and any calculations used"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 1,
+        "useful_synthesis": 0,
+        "provenance": 1,
+        "honest_limits": 2
+      },
+      "score_total": 4,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 73.126,
+      "answer_token_ttft_seconds": 58.038,
+      "flags": [
+        "diagnostics_dominate_answer",
+        "retrieved_filing_values_not_used"
+      ],
+      "reason": "The filing drivers are explained and no web is used, but six long unresolved entries overwhelm the answer. The handset-majority question remains unresolved and 'handset-led' is stronger than the uncalculated contribution supports.",
+      "source_checks": [
+        "S16 supports premium-phone demand and identifies 2.5 billion USD higher revenue per chipset plus 423 million from shipments.",
+        "S14 supports IoT and automotive drivers.",
+        "The checker notes a retrieved category table S15, but it is not cited in the final answer; the system does not promote segment values into checked inputs.",
+        "The absence of registered segment calculations is a real tool limitation, not permission to invent a majority percentage."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": false,
+      "answer_sha256": "d79e4bd950ad5d4bec3689e07b009e082e2a1e6e9a1e30defc41bba3a1f3800e",
+      "source_text_hashes": {
+        "C1": "1d78fcdacd0440aa84a4c4c82987ca0393126d419f825a2b9b6235cee29142fc",
+        "C2": "89b0520a04b6b9dd029634d4e2a79fbbb4ae105a13ee1dbe786af57e56e9e804",
+        "F1": "04f9432de48d8aab3925ee071a7d6f1c485b6e2bd1b405eddd032aa703b62846",
+        "F2": "b3cb09e4933697fb1e7acfea7940376f9086e5334b7985f7a1d090205c386ff4",
+        "S14": "b28ce49ec3be891de7f4b4bf3260e40f904dce1eb0f3a5a297f96d3d1bbe282b",
+        "S16": "296a3483e9c065aaddc727450401695b59f12c6f7668b775286e3dbf25545959"
+      }
+    },
+    {
+      "id": "H08",
+      "category": "filings_only_comparison",
+      "question": "compare amd and intel fy2025 sales growth from their reports, whos doing better on that measure only",
+      "companies": [
+        "AMD",
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "A checked revenue-growth comparison for AMD and Intel",
+        "A narrow conclusion about the requested measure"
+      ],
+      "criteria": [
+        "Includes both companies and comparable reported periods",
+        "Shows enough figures to assess the conclusion",
+        "Does not turn revenue-growth comparison into a broad investment recommendation"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 44.788,
+      "answer_token_ttft_seconds": 33.025,
+      "flags": [],
+      "reason": "The comparison is complete, readable and restricted to the requested growth measure.",
+      "source_checks": [
+        "F1/F2 record AMD revenue of 25.785/34.639 billion USD; C1 computes 34.3378%.",
+        "F3/F4 record Intel revenue of 53.101/52.853 billion USD; C2 computes -0.4670%.",
+        "Both companies use matching fiscal start/end dates; the answer does not broaden the conclusion into an investment recommendation."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": false,
+      "answer_sha256": "0a3da76dd8e4704efd4b8cecb76c8fee12882dcd09401ba408a93f644f325fa0",
+      "source_text_hashes": {
+        "C1": "a1d710c767250260e6e6fe4b0e9809ccf5bf91d7d730fccef1531a9a5e84712d",
+        "C2": "c4be54678731e442880bfd5354075d099a64938ea43532a96e0ab9423816396c",
+        "F1": "2a1c59a2f43fc8786bf5eca7dfcbebcdecfd0723a4112c30168287e25c919812",
+        "F2": "881606ad221a9d046f775c93b9322209eed225080da62c48ee3a65f3fc1670aa",
+        "F3": "00e23cf69ff5ed236e0bfeca2f2d07585125bd36aa915de4d4a86eac3c76cf7a",
+        "F4": "28da70905f2b6259e8d65b0e21a3108f2247ffb21f1aee520eb94b406aa493f0"
+      }
+    },
+    {
+      "id": "H09",
+      "category": "official_verification",
+      "question": "intel talks about its foundry turnaround in the annual report. can you check what intel itself has said about progress since then?",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "The relevant annual-report starting point",
+        "A check of subsequent issuer updates on foundry progress"
+      ],
+      "criteria": [
+        "Distinguishes historical filing statements from subsequent official claims",
+        "Uses official attribution for the requested confirmation",
+        "States if no adequately dated official update is established rather than substituting unrelated third-party claims"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 34.099,
+      "answer_token_ttft_seconds": 23.829,
+      "flags": [],
+      "reason": "An official follow-up is compared to the filing baseline, with the distinction between development commitment and commercial turnaround retained.",
+      "source_checks": [
+        "S5 describes 14A's external-volume dependency and the possibility of pausing development.",
+        "W1 supports Intel's Q2-2026 commitment to completing 14A and manufacturing expansion.",
+        "W2 supports continuing customer evaluation and demand-dependent expansion; the answer does not invent a customer win."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "654ef5ee8606b53f2770ea76dfb4b4cea730cd454944ae6fc04e67aa478e00bc",
+      "source_text_hashes": {
+        "S5": "0eae7a5a4a2d426b8a2e05d640e788508badb583f290f095f601e23751312adc",
+        "W1": "cb81b99f9ba67a23686b146443d3f14bee7221c53d494fe87fd79d462f9272ab",
+        "W2": "c61abdf346cf8537b2ec408fa8ed1fd192bdc0f781b8087804e3377ce1156e4c"
+      }
+    },
+    {
+      "id": "H10",
+      "category": "official_verification",
+      "question": "did nvidia actually put out anything official lately on the china export restrictions or is that all news speculation",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2026
+      ],
+      "required_outputs": [
+        "A check for recent NVIDIA-issued statements on China export restrictions",
+        "A clear distinction between official statements and outside reporting"
+      ],
+      "criteria": [
+        "Does not assume that an official statement exists",
+        "Dates official evidence when possible and attributes syndicated issuer releases correctly",
+        "Does not call an official issuer statement mere speculation or elevate commentary into official confirmation"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "status": "completed",
+      "seconds": 31.276,
+      "answer_token_ttft_seconds": 21.671,
+      "flags": [],
+      "reason": "The answer establishes that official disclosures exist and explains how the subsequent disclosure updates the historical one.",
+      "source_checks": [
+        "S5 describes limited U.S. H200 licenses and unresolved Chinese import permission.",
+        "Official NVIDIA W1 explicitly reports PRC restrictions and only a fraction of allowed shipments.",
+        "The later document is identified as fiscal-2027 Q2; no unsupported precise publication date is manufactured."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "82fe5e322f9e391ed7efa5e6b69168f28053b56421b8b6cc77ea08f91504762b",
+      "source_text_hashes": {
+        "S5": "c7f99eb86d4a9d3c977d72402df3268028ad190f1ed7de12cacd72cf0af57622",
+        "W1": "6f926845ccff1f1569975849cd52ca6be980fd1296b832812dfb349099b1b1cc"
+      }
+    },
+    {
+      "id": "H11",
+      "category": "mixed_risk_and_outside_assessment",
+      "question": "what are amds biggest risks in the 2025 filing and do outside sources think those are getting better or worse",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "A prioritized filing-supported risk summary",
+        "Outside evidence or views relevant to the direction of those risks"
+      ],
+      "criteria": [
+        "Does not silently drop outside assessment",
+        "Connects outside evidence to the risks actually identified",
+        "Separates observed developments, sourced opinions, and the assistant's limited inference"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 1,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 5,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 90.188,
+      "answer_token_ttft_seconds": 72.413,
+      "flags": [
+        "false_source_support_rejection",
+        "secondary_retrieval_failure_exposed",
+        "legitimate_partial_risk_coverage"
+      ],
+      "reason": "The risk/outside-assessment connection is useful and genuinely incomplete for two risks, but the checker falsely says W8 does not support Bank of America's frontier-lab/public-cloud concerns.",
+      "source_checks": [
+        "The returned 2,407-character W8 text explicitly says 'Risks include rising exposure to unprofitable frontier labs' and that public-hyperscaler deployment can generate sustainable traction.",
+        "That support appears near the end of W8, so the coverage rejection is inconsistent with the supplied full cited text.",
+        "W4 supports the ROCm/CUDA and competitive-roadmap concern.",
+        "The lack of outside direction for export controls and manufacturing concentration is a legitimate partial-evidence limit."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "578c2d1f37e6b58ba90dacb4722e31eaeb49fac7032ccbe38c23eacca056e77b",
+      "source_text_hashes": {
+        "S8": "1cdc43e4ca477fbcb4b272bbf6c5bb8ce8838889c25974e03c3e84e9cc3b3c39",
+        "S10": "269677240ee78c0c3b91cf054c852c39861d685214da6776fb147210d3eaaf50",
+        "S14": "7cf59f46123f7d7c935e9f1723d5d8d989803b8836fee8da57ba888344760279",
+        "S17": "e07a017825ec680b1b2b005eff5506d22a4163c5ea281a4b21fc203a72c5d1c3",
+        "S18": "6e74416a1adead527579cac0f86ca432cee0aa7b6480a0092d172e88010cc465",
+        "S19": "46b76931e018c5bdbc4bd989b78e1886c5f6d9109bb8971cda4479d539740853",
+        "S20": "ac652358c9ff8b4e5f7e20c937e259baf0a6cd7922f8e7e3d28666b28dcef935",
+        "S22": "55d0529e8bb30f9e639714e65da8290f9b611bd962f87b06c44cfdc5af6ccd6f",
+        "W4": "450a64e2847054de3458612d7be6c74a1e56f4080f925e5842901465f514a50e",
+        "W8": "b05b84351a275311e04c52e64cb25a1c2a41b3ad15d854a15fb02e402f0784c2"
+      }
+    },
+    {
+      "id": "H12",
+      "category": "current_comparison",
+      "question": "nvidia vs amd in ai lately, whats each one announced and whats the actual difference? keep it readable",
+      "companies": [
+        "NVDA",
+        "AMD"
+      ],
+      "years": [
+        2026,
+        2025
+      ],
+      "required_outputs": [
+        "Recent AI-related announcements for each selected company",
+        "A readable evidence-based comparison"
+      ],
+      "criteria": [
+        "Covers both companies without requiring symmetric findings",
+        "Distinguishes announced plans from delivered capabilities",
+        "Does not invent performance comparisons unsupported by the cited evidence"
+      ],
+      "verdict": "invalid_evaluator_input",
+      "score": null,
+      "score_total": null,
+      "score_max": 8,
+      "status": "coverage_gap",
+      "seconds": 0.027,
+      "answer_token_ttft_seconds": null,
+      "flags": [
+        "invalid_cross_company_year_selection"
+      ],
+      "reason": "The dataset supplied years [2026, 2025] for both AMD and NVIDIA. Each year was intended for one company, but the API correctly treats the list as a Cartesian request; AMD FY2026 is unsupported. Excluded from product pass/fail counts.",
+      "source_checks": [
+        "The response explicitly lists the unsupported AMD/FY2026 pair and the available inventory.",
+        "The original sealed file, hash and raw response are preserved. Fresh holdout comparisons use a common supported year."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": false,
+      "answer_sha256": "5c78ee10924d2f4dcecf4c54571c564cc510918fad6cbded1095e80c900d052b",
+      "source_text_hashes": {}
+    },
+    {
+      "id": "H13",
+      "category": "capabilities_and_supported_work",
+      "question": "which of your agents would handle comparing qualcomm revenue and checking news about it? can you actually do both in one answer",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "An accurate plain-language explanation of the applicable agent capabilities",
+        "A clear answer about handling a combined filing and news request"
+      ],
+      "criteria": [
+        "Describes implemented roles rather than inventing capabilities",
+        "Does not unnecessarily spend live credits when explaining capability alone",
+        "Makes the combined-work ability understandable without requiring internal terminology"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 6,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 83.019,
+      "answer_token_ttft_seconds": 69.555,
+      "flags": [
+        "capabilities_require_external_citations",
+        "unnecessary_live_work_for_capability_question"
+      ],
+      "reason": "Accurate capability information and an unsolicited worked example are followed by an erroneous requirement for outside evidence proving application roles.",
+      "source_checks": [
+        "The named Financial Analysis/Quant, Research and Current Developments roles agree with the application/project contract.",
+        "W2 supports the attributed Modular/Mojo story; W7 supports the Snapdragon announcement.",
+        "Application capability explanations do not need web citations; performing financial/news work was unnecessary for this usage question."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "deba85c438edaf47f9549d4941358ea4ba177e7b470b9376c51d93476a242ef5",
+      "source_text_hashes": {
+        "C1": "1d78fcdacd0440aa84a4c4c82987ca0393126d419f825a2b9b6235cee29142fc",
+        "C2": "89b0520a04b6b9dd029634d4e2a79fbbb4ae105a13ee1dbe786af57e56e9e804",
+        "F1": "04f9432de48d8aab3925ee071a7d6f1c485b6e2bd1b405eddd032aa703b62846",
+        "F2": "b3cb09e4933697fb1e7acfea7940376f9086e5334b7985f7a1d090205c386ff4",
+        "W2": "a0330ecf4ea8469e022187bdc9c67b2ef68229dc6089a5d1c21855e9808531ca",
+        "W7": "18f2977b2ef2e1528bda4341fd57fa93de861bb934364f40e50e064c55fc8af0"
+      }
+    },
+    {
+      "id": "H14",
+      "category": "unsupported_price_mixed_with_supported_work",
+      "question": "whats qcom stock at rn and how much did their sales change in 2025?",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "An explicit boundary for the unsupported current share price",
+        "The checked FY2025 revenue change"
+      ],
+      "criteria": [
+        "Does not fabricate or retrieve a live stock quote",
+        "Still completes the supported revenue task",
+        "Does not mark the unsupported price part as answered"
+      ],
+      "verdict": "pass_with_limit",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 47.799,
+      "answer_token_ttft_seconds": 36.411,
+      "flags": [
+        "repeated_scope_gap_diagnostic"
+      ],
+      "reason": "The supported revenue comparison is answered and the unsupported price is not invented. Duplicate unresolved-price entries are a presentation defect rather than a false completion.",
+      "source_checks": [
+        "F/C references support 38.962 to 44.284 billion USD, 5.322-billion growth and 13.66%.",
+        "No current price or fabricated timestamp is supplied.",
+        "Partial status matches the unresolved unsupported request."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": false,
+      "answer_sha256": "c09c63438f9e452497251d6db9e1ef39bbbd93d5eb6ab1bb606470c04586e481",
+      "source_text_hashes": {
+        "C1": "1d78fcdacd0440aa84a4c4c82987ca0393126d419f825a2b9b6235cee29142fc",
+        "C2": "89b0520a04b6b9dd029634d4e2a79fbbb4ae105a13ee1dbe786af57e56e9e804",
+        "F1": "04f9432de48d8aab3925ee071a7d6f1c485b6e2bd1b405eddd032aa703b62846",
+        "F2": "b3cb09e4933697fb1e7acfea7940376f9086e5334b7985f7a1d090205c386ff4"
+      }
+    },
+    {
+      "id": "H15",
+      "category": "ambiguous_timeframe",
+      "question": "hows amd doing? numbers and outside perspective please",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "An understandable financial starting point using the selected filing periods",
+        "An outside perspective with a stated or clearly implied timeframe"
+      ],
+      "criteria": [
+        "Makes a useful reasonable interpretation rather than pretending the question is precise",
+        "Does not silently replace outside perspective with company commentary",
+        "Keeps annual filing data distinct from recent outside evidence"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 106.677,
+      "answer_token_ttft_seconds": 92.917,
+      "flags": [
+        "secondary_retrieval_failure_exposed"
+      ],
+      "reason": "The answer supplies meaningful historical numbers plus recent outside perspective, but an empty follow-up search incorrectly remains a global unresolved output.",
+      "source_checks": [
+        "F/C sources support the stated revenue, margins, operating income and cash-flow comparisons.",
+        "W5/W6/W7 support the recent quarterly figures and attributed outside interpretation.",
+        "W9 supports the Mizuho analyst's CPU opportunity and explicit caution against ruling NVIDIA out.",
+        "Returned dated evidence covers the outside-perspective request despite the final empty-search gap."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "b0728eea1cc46da41f74a502bed20c514a1de94fa266c1bc9c701120e26d47bc",
+      "source_text_hashes": {
+        "C1": "21a72c2fa82de850f9897b202699b0c1783b80adc5ab618834b84a2950caf6e9",
+        "C2": "819607c5de2a0b2c03315b3e14b99fa580cde306b6e40450a6eaa00cba08b37b",
+        "C3": "87f89b44d2bda0cedd209aacd835d0955e39c41dcb182db178568ce340db7ec8",
+        "C4": "0439c3624270345e9f22ea53eb8dfe03b9b082f1723a38bc8ea9d9acb63a2aa0",
+        "C5": "ed3d70ae496e3a9aa2c4b090a952bb77087a135d1effe14980c7647fc282f97a",
+        "C6": "36e0246043d1e16c34d9bd7cddd24e96c89cd1e8f7f7bb61da2e426b3ed30ae5",
+        "C7": "4d53cd904757cda2855f00171d7804f0857f0292effce8f16bedbc94a543da8c",
+        "C8": "0ea165fc3f0b22e1f4ba55c5618e8efa9d9a983780aaabaeeede4a32dfbab6e7",
+        "F1": "2a1c59a2f43fc8786bf5eca7dfcbebcdecfd0723a4112c30168287e25c919812",
+        "F3": "269d12e522936ac1d651a7d8dd11c5e4377a0592625e3c069f52c4dda64fe5ec",
+        "F4": "a03a94a5dc7a549e672f78c1bb3a3637c1cdb6bd806679b1f7a034d51e2d092b",
+        "F5": "881606ad221a9d046f775c93b9322209eed225080da62c48ee3a65f3fc1670aa",
+        "F7": "97f971cd8e8479190478d0d76b8f40d4ee37b49ce04d4036479815aa261c93ba",
+        "F8": "1af7732822c9bf8f070737abffbd638c394a51926a050843a05948676aaf00ea",
+        "W5": "bfe3cc47b9c6ed48734a5c978ac064ffc89c3275a1c87128db75c66a7c03b313",
+        "W6": "5ee278721849f45197931469c405e4cf9aacc98cb8fa7438ef7751d39951930b",
+        "W7": "cca8e5ec1f9e9a57f2bf27b6f59bbc7003ddebd3eb96aedd90c19b2fbdbb0a04",
+        "W9": "544ebc67d39cd3d6f8891903e7fe539598fad0a784449930d4843cb611c0b9b7"
+      }
+    },
+    {
+      "id": "H16",
+      "category": "explicit_historical_reaction",
+      "question": "dont give me todays headlines, i mean what reporters said right after nvidias fy2025 results. what did they focus on",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Reporting around NVIDIA's FY2025 results release",
+        "A synthesis of the themes identified in that reporting"
+      ],
+      "criteria": [
+        "Uses the historical reporting window rather than the latest news window",
+        "Does not use a post-latest-filing filter that makes the historical request impossible",
+        "Attributes the themes to identifiable sources and avoids claiming universal agreement"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 71.736,
+      "answer_token_ttft_seconds": 58.308,
+      "flags": [
+        "false_no_dated_evidence_gap",
+        "secondary_retrieval_failure_exposed"
+      ],
+      "reason": "The answer correctly uses the historical FY2025 release context, but its final no-dated-development gap contradicts the explicitly dated Quartz text.",
+      "source_checks": [
+        "W1 explicitly shows Updated February 27, 2025 and supports Blackwell demand, gross-margin ramp costs and DeepSeek context.",
+        "W3 supports inference demand and slowing percentage growth; it is not given an invented publication date.",
+        "The question asks historical reactions, so latest-post-filing freshness is not an appropriate completeness requirement."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "6b1b8384de752d4de9637b1833636ae02624458a635d4faaa4f1d5bfebe0fce0",
+      "source_text_hashes": {
+        "W1": "99a49a385d27c104c724c5c239c81a4fcb31296d3d9329e7d75a2a5c6692ea53",
+        "W3": "5a6d2dee0333fcab3b906f010613f2b3ba2482d6cf3855d6cda50d2e7719665d"
+      }
+    },
+    {
+      "id": "H17",
+      "category": "filing_accounting_language",
+      "question": "from intels fy2025 report explain current liabilities vs last year, and why that matters. keep it to the report",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "The report-supported comparison or a precise statement of unavailable data",
+        "An explanation of the significance supported by the report and basic accounting context"
+      ],
+      "criteria": [
+        "Does not interpret the accounting phrase current liabilities as a current-events request",
+        "Does not invent structured fields or figures when the system cannot retrieve them",
+        "Honors the report-only restriction"
+      ],
+      "verdict": "pass_with_limit",
+      "score": {
+        "request_coverage": 1,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 6,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 39.549,
+      "answer_token_ttft_seconds": 26.591,
+      "flags": [
+        "structured_metric_limit",
+        "repeated_scope_gap_diagnostic",
+        "retrieved_filing_values_not_used"
+      ],
+      "reason": "The report-only qualitative explanation is supported, current is correctly treated as accounting wording, and missing checked arithmetic is honestly identified. Registered current-liability calculations are outside the available structured metrics; the repeated diagnostic list is excessive.",
+      "source_checks": [
+        "S10 contains current-liability totals 31,575 and 35,666 million USD and component directions matching the answer.",
+        "S9/S11 support severance-accrual context; S19 supports the warning against equating lower liabilities with improved operating cash flow.",
+        "No web tool is invoked and no unsupported calculation is fabricated.",
+        "The returned table values could still have been quoted directly, without claiming a registered calculation."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": false,
+      "answer_sha256": "aa6c3e33015ace944ea6ca28b9b860af343070f9f56448b5d8e31c5c5024e769",
+      "source_text_hashes": {
+        "S9": "82bd6f4a7ba2c528cc58b3a968d7efc8586cc1a21efd0316d772010b358b015b",
+        "S10": "1c8f81f5de157e12eb7ea916e3dce1cc05b328a7006744a0a413c7e419f43a3e",
+        "S11": "d16acf30caf165de8063393d8706d62b7dff61e576c073f5d5ad4a156e4e0abf",
+        "S19": "11cdc7dff0d71a5eccf7d642771a9b3ac72951ed3c2bb12661818b1f18e5e362"
+      }
+    },
+    {
+      "id": "H18",
+      "category": "multi_company_mixed_request",
+      "question": "can u compare qcom and intel revenue in 2025 then see what people said about each set of results? im interested in why the reactions differed if they did",
+      "companies": [
+        "QCOM",
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "A checked FY2025 revenue comparison with relevant prior-year context",
+        "Outside reactions around each company's results",
+        "An evidence-based comparison of reaction themes where supported"
+      ],
+      "criteria": [
+        "Tracks both companies and both filing and outside-reaction tasks",
+        "Does not assume reactions differ or invent an explanation",
+        "Provides a specific gap for any uncovered company or task rather than a global complete status"
+      ],
+      "verdict": "pass_with_limit",
+      "score": {
+        "request_coverage": 1,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 6,
+      "score_max": 8,
+      "status": "partial",
+      "seconds": 142.86,
+      "answer_token_ttft_seconds": 124.218,
+      "flags": [
+        "legitimate_partial_company_reaction_coverage",
+        "repeated_scope_gap_diagnostic"
+      ],
+      "reason": "Both companies' financial performance is compared and Qualcomm's outside assessment is sourced. This run does not establish Intel's outside reaction; the answer explicitly leaves the comparison unresolved rather than inventing sentiment or declaring complete.",
+      "source_checks": [
+        "F/C sources support Intel 52.853 billion versus Qualcomm 44.284 billion USD and the respective growth rates.",
+        "W13 explicitly identifies Futurum, November 7, 2025 and its Qualcomm diversification assessment.",
+        "Only Qualcomm outside evidence appears in the final cited sources. Intel's missing reaction is therefore a real gap for this captured run.",
+        "Filing-based hypotheses are explicitly distinguished from actual outside reactions; full prior-year revenue levels are omitted despite registered inputs."
+      ],
+      "citation_registration": {
+        "all_registered": true,
+        "unregistered": []
+      },
+      "duplicate_live_urls": [],
+      "web_tool_invoked": true,
+      "answer_sha256": "93bb6ed48d6bbc8c0c701cedf0c695919152788284e2acdfdf0567a6b4199ca4",
+      "source_text_hashes": {
+        "C1": "a74cc8f6d2db7b6c430bc04358e9161d0ad5e255a25cad08a367c7e3802d3ce4",
+        "C2": "cafd0088ea3574fa4a0a9b409e6c4d53fb362eeae9eb2eebb24647fd47f17994",
+        "F2": "28da70905f2b6259e8d65b0e21a3108f2247ffb21f1aee520eb94b406aa493f0",
+        "F4": "b3cb09e4933697fb1e7acfea7940376f9086e5334b7985f7a1d090205c386ff4",
+        "S34": "8d46ca6b38810c51e5b9e6958b08b2b7a26d18405191aadf3e1438075fe46dc0",
+        "S36": "296a3483e9c065aaddc727450401695b59f12c6f7668b775286e3dbf25545959",
+        "S37": "b28ce49ec3be891de7f4b4bf3260e40f904dce1eb0f3a5a297f96d3d1bbe282b",
+        "S41": "557e15b6360d5a788f2ef7dedb1549d74357d6d07d4d5f3eb110c399d9574a2d",
+        "S43": "ba846f911d03d753417f2203ae293509d02b07349357f22b69fe1f619726d977",
+        "W13": "d6a040d863e5ff4982955624aa220a72b27358cbcf15aeb8af2f36f98c2f4e71"
+      }
+    }
+  ],
+  "next_evaluation": {
+    "status": "Fresh six cases sealed before subsequent fixes; not yet run",
+    "sealed_sha256": "66e968e434396c62894c3f7b3b76a5633fedf30c82a23a00b59e639e53a71884"
+  }
+}

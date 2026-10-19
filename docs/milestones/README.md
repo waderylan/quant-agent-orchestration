@@ -13,7 +13,7 @@ This is the authoritative order and status. Completed records describe verified 
 | M7 | [Risk Summary](risk-summary/README.md) | Verified |
 | M8 | [Buy-Side Analyst (removed)](buy-side-analyst/README.md) | Removed; evidence retained |
 | M9 | [Supervisor cooperation](supervisor/README.md) | Verified locally; two independent reviews completed |
-| M10 | [Current Developments](current-developments/README.md) | Verified locally; dated-source and usage limits |
+| M10 | [Current Developments](current-developments/README.md) | Verified locally; usefulness review passed |
 | M11 | [Provider routing](provider-routing/README.md) | Planned |
 | M12 | [Experience and evaluation](experience-evaluation/README.md) | Planned |
 | M13 | [Deployment and submission](deployment/README.md) | Planned |

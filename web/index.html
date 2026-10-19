@@ -242,6 +242,7 @@ What has happened at the selected companies since their latest filings? Cite dat
       <div class="layout">
         <section class="panel">
           <h2>Answer</h2>
+          <ul id="request-coverage" hidden aria-label="Requested outputs"></ul>
           <div id="answer" aria-live="polite"></div>
           <div id="sources"></div>
           <div id="artifacts"></div>
@@ -397,7 +398,7 @@ What has happened at the selected companies since their latest filings? Cite dat
         const snapshot = await r.json();
         const p = source.kind === "live_source" ? { ...snapshot, ...source } : snapshot;
         if (p.kind === "live_source") {
-          $("source-label").textContent = `${p.publisher} · ${p.published_date || "undated"} · ${p.source_tier} · ${p.retrieved_at}`;
+          $("source-label").textContent = `${p.publisher} · ${p.published_date || "Publication date unavailable"} · ${p.source_tier === "official" ? "Primary source" : "Independent reporting"} · Retrieved ${p.retrieved_at?.slice(0, 10) || "unknown"}${p.date_source ? " · Date from " + p.date_source : ""}`;
           const pre = document.createElement("pre");
           pre.textContent = p.text;
           $("passage").replaceChildren(pre);
@@ -485,7 +486,7 @@ What has happened at the selected companies since their latest filings? Cite dat
                 : s.kind === "financial_observation"
                   ? `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.metric} · ${s.period} ${s.basis}`
                   : s.kind === "live_source"
-                    ? `[${s.source_id}] ${s.publisher} · ${s.published_date || "undated"} · ${s.source_tier}`
+                    ? `[${s.source_id}] ${s.publisher} · ${s.published_date || "Date unavailable"}`
                   : `[${s.source_id}] ${s.company} FY${s.fiscal_year} ${s.form} (${s.version}) · ${s.section}`;
             b.onclick = () => inspect(s);
             return b;
@@ -494,6 +495,21 @@ What has happened at the selected companies since their latest filings? Cite dat
         renderAnswer();
       }
       function event(type, data) {
+        if (type === "trace" && data.node === "request_understanding") {
+          $("request-coverage").hidden = false;
+          $("request-coverage").replaceChildren(...data.plan.outputs.map((output) => {
+            const item = document.createElement("li");
+            item.dataset.outputId = output.id;
+            item.textContent = "Researching: " + output.description;
+            return item;
+          }));
+        }
+        if (type === "trace" && data.node === "answer_coverage") {
+          for (const result of data.results) {
+            const item = Array.from($("request-coverage").children).find((node) => node.dataset.outputId === result.id);
+            if (item) item.textContent = (result.addressed ? "Addressed: " : "Still needed: ") + item.textContent.replace(/^Researching: /, "");
+          }
+        }
         if (type === "token") { answerMarkdown += data; scheduleAnswer(); }
         else if (type === "answer") { answerMarkdown = data; scheduleAnswer(); }
         else if (type === "sources") displaySources(data);
@@ -539,7 +555,7 @@ What has happened at the selected companies since their latest filings? Cite dat
           if (data.status !== "failed")
             $("status").textContent =
               data.status === "completed"
-                ? data.verified_citations ? "Complete · source references checked" : "Complete"
+                ? data.coverage_checked ? "Complete · requested outputs checked" : "Complete"
                 : data.status === "coverage_gap"
                   ? "Coverage gap"
                   : data.status === "needs_clarification"
@@ -563,6 +579,8 @@ What has happened at the selected companies since their latest filings? Cite dat
         $("artifacts").replaceChildren();
         $("trace").textContent = "";
         $("scope-help").replaceChildren();
+        $("request-coverage").replaceChildren();
+        $("request-coverage").hidden = true;
         $("ask").disabled = true;
         $("stop").disabled = false;
         $("status").className = "";

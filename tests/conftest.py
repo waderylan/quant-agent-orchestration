@@ -5,6 +5,7 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def frozen_live(monkeypatch, tmp_path):
+    monkeypatch.setenv("REQUEST_PLANNER", "rules")
     monkeypatch.setenv("LIVE_MODE", "frozen")
     monkeypatch.setenv("LIVE_LEDGER", str(tmp_path / "usage.sqlite3"))
     monkeypatch.setenv("LIVE_CACHE", str(tmp_path / "cache"))

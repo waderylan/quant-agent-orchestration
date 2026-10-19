@@ -8,7 +8,7 @@ AGENTS = {
     "data": ("Financial Data", r"financial data|data agent", "Looks up original-report GAAP revenue, gross profit, operating income, parent-attributable net income and operating cash flow. Values retain company, currency and actual fiscal dates. Missing observations remain explicit."),
     "quant": ("Financial Analysis / Quant", r"financial analysis(?:\s*/\s*quant)?|quant(?: agent)?", "Calculates supported growth, changes, margins, ratios and explicit scenarios from compatible source inputs. Publishes independently checked calculations with charts, CSV, code and replayable ledgers. Missing inputs remain explicit. Valuation is unsupported."),
     "risk": ("Risk Summary", r"risk summary|risk agent", "Compares complete original risk sections and cites changed, added, removed, relocated or unchanged wording. Quarterly omissions do not prove an annual risk disappeared; semantic materiality is a model judgment."),
-    "current": ("Current Developments", r"current developments|news agent|live research", "Finds dated events after the selected companies’ collected filings using Tavily search and extraction; labels sources and freshness."),
+    "current": ("Current Developments", r"current developments|news agent|live research", "Finds recent developments and identifiable outside reactions using Tavily search and extraction. Uses the requested event or calendar window and shows source dates and freshness."),
     "supervisor": ("Supervisor", r"supervisor|router", "Uses the selected companies and fiscal years, chooses the specialists required by the question, orders dependent work and checks evidence handoffs. Shows routing, worker outcomes and missing outputs; a failed worker preserves earlier verified findings. Answers capability questions locally without model or external-provider calls."),
 }
 
@@ -50,5 +50,6 @@ def capability_request(question):
     if not selected or re.search(r"\b(each|every|all)\b.*\bagents?\b|\b(?:system|as a whole)\b", description, re.I):
         selected = list(AGENTS)
     answer = "\n".join(f"- **{AGENTS[key][0]}:** {AGENTS[key][2]}" for key in selected)
-    answer += "\n- **Scope:** NVIDIA, AMD, Intel and Qualcomm. Use the company controls to select one or several. Fiscal years select historical filings. Current Developments uses Tavily after each company's collected filing anchor. Market prices and valuation are outside scope. Each request is self-contained, with no cross-turn memory. Generation-provider routing, formal evaluation and Cloud Run deployment are pending."
+    answer += "\n- **Combined answers:** One request can combine a revenue comparison and current news. Financial Data retrieves reported figures, Quant checks changes, Filings Research explains filed drivers, and Current Developments researches outside events or reactions. The Supervisor combines their findings and reports any missing part."
+    answer += "\n- **Scope:** NVIDIA, AMD, Intel and Qualcomm. Use the company controls to select one or several. Fiscal years select historical filings; outside research follows the requested event or date window. Market prices and valuation are outside scope. Each request is self-contained, with no cross-turn memory. Generation-provider routing, formal evaluation and Cloud Run deployment are pending."
     return {"answer": answer, "question": "; ".join(work)}

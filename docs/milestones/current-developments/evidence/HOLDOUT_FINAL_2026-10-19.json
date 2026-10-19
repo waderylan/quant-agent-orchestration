@@ -1,0 +1,281 @@
+{
+  "reviewed_at": "2026-10-19",
+  "iteration": 3,
+  "profile": "Actual native application, local Codex generation, real Tavily/cache; not deployment-provider evaluation",
+  "method": "An independent subagent creates four fresh casual questions before shared fixes. Parent does not inspect the questions until all four one-shot actual application captures finish. The subagent then compares every requested output and material claim against returned source text. No direct Tavily calls or implementation edits are performed by the reviewer.",
+  "runtime_freeze_sha256": "1d0bc859231c4f6bc300af464a871e958203c2f9c1b83b4c46ced7767d5e54a8",
+  "runtime_all_32_hashes_verified_unchanged_immediately_after_capture": true,
+  "sealed_file_sha256": "7376329bd6002226429cbd5bfc507f2a9b3e388a8e1612d52a90c6d717ba97e5",
+  "raw_capture_sha256": "5dad0f738711955c4b729b018cb8dad79c3110122752c3555fc0f506661a27ca",
+  "rubric": {
+    "scale": "Each dimension is scored 0, 1, or 2: absent or materially wrong; partially useful; fully supported and useful. Every requested output must be tracked separately.",
+    "dimensions": {
+      "request_coverage": "Addresses every requested part; an explicit evidence gap counts as honest handling but not as a substantive answer. Does not mark a silently omitted part complete.",
+      "useful_synthesis": "Answers in plain language, prioritizes material findings, explains their relevance, and distinguishes evidence from interpretation. Avoids a string of source metadata and repeated caveats.",
+      "provenance": "Material factual claims have inspectable supporting citations. Filing facts, calculations, issuer statements, and third-party views remain distinguishable; duplicate views of one source do not imply corroboration.",
+      "honest_limits": "Does not invent dates, completed transactions, causation, or public consensus. Timeframes and partial coverage are stated briefly when material. Unsupported scope is identified without discarding supported parts."
+    },
+    "failure_conditions": [
+      "A requested part is omitted while the response is complete.",
+      "A material financial or event claim is unsupported, or an unsupported consensus is invented.",
+      "Explicit filings-only instructions trigger live research.",
+      "An unsupported price request receives an invented quote or blocks an otherwise answerable filing request.",
+      "The response consists primarily of restrictions or search diagnostics despite having usable relevant evidence."
+    ],
+    "evaluation_note": "Do not require particular current events, exact routes, exact phrasing, a fixed number of sources, or a positive news finding. Judge response quality against evidence actually available. A supported no-finding answer can pass when scope and search coverage are clear."
+  },
+  "decision_policy": "The usefulness gate requires at least 85% useful answers and zero critical failures. Useful means the requested work is answered with supported synthesis or a specific legitimate evidence limit; no silent omission, fabricated public consensus, unsupported material claim, ignored no-web instruction or false completeness is accepted. Minor punctuation defects reduce synthesis score without creating a critical failure.",
+  "summary": {
+    "captured": 4,
+    "valid_cases": 4,
+    "useful_pass": 4,
+    "fail": 0,
+    "useful_pass_rate": 1.0,
+    "required_useful_pass_rate": 0.85,
+    "critical_failures": 0,
+    "gate_passes": true,
+    "mean_score_out_of_8": 7.75,
+    "median_total_seconds": 91.256,
+    "minimum_total_seconds": 63.921,
+    "maximum_total_seconds": 122.746,
+    "median_answer_token_ttft_seconds": 75.828,
+    "unanswered_requested_output_marked_complete": 0,
+    "material_unsupported_displayed_claim_observed": 0,
+    "manufactured_public_consensus_observed": 0,
+    "explicit_filings_only_live_tool_violations": 0,
+    "unnecessary_missing_evidence_diagnostics_observed": 0,
+    "minor_editorial_defects": 1,
+    "global_task_calls_at_capture_end": 155,
+    "global_task_reserved_credits_at_capture_end": 310,
+    "budget_note": "Shared ledger includes concurrent development regression and other task calls; these totals are not isolated final-heldout consumption. The authorized task ceiling is 200 calls.",
+    "latency_note": "Actual native end-to-end latency includes app queue time and concurrent development regression. These are not Cloud Run, generation-provider or cold-start measurements.",
+    "interpretation_limit": "Four fresh questions establish this bounded usefulness gate, not a general accuracy rate. Earlier failures and their frozen runtime versions remain in separate evidence; exposed sets are development regressions."
+  },
+  "cases": [
+    {
+      "id": "K01",
+      "category": "natural_mixed_financial_and_outside_research",
+      "question": "i need qcoms fy25 sales change and a short rundown of how outsiders described those results. numbers first then what stood out to them",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "Checked FY2025-versus-FY2024 revenue change",
+        "Identifiable outside commentary around the FY2025 results release",
+        "An explanation of what the cited observers emphasized"
+      ],
+      "criteria": [
+        "Completes numeric and outside-research parts or identifies a specific real gap",
+        "Keeps the reaction research tied to the selected results rather than today's headlines",
+        "Preserves supported neighboring findings if a separate inference is removed",
+        "Does not manufacture a public consensus"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "flags": [],
+      "reason": "Both requested parts are answered in order. Checked annual growth is followed by source-attributed reactions to the relevant year-end results, without inventing public consensus.",
+      "source_checks": [
+        "F/C sources support 38.962 to 44.284 billion USD, a 5.322-billion increase and 13.66% growth; differing 52/53-week periods are explicit.",
+        "S15/S16 support the handset, IoT, automotive and licensing explanations.",
+        "CNBC W4 supports quarterly beats across handset/automotive/IoT, the licensing decline and income-tax explanation of reported net loss.",
+        "Futurum W2 explicitly identifies November 7, 2025, its analyst take and the diversified-growth interpretation.",
+        "Quarterly outside coverage and full-year filing figures are distinguished rather than conflated."
+      ],
+      "status": "completed",
+      "seconds": 115.449,
+      "answer_token_ttft_seconds": 105.32,
+      "all_displayed_citations_registered": true,
+      "web_tool_invoked": true,
+      "answer_sha256": "0a82a51941aa106a378fc3876dbd74182dcfbbeb4286c531957fe23156622546",
+      "source_text_hashes": {
+        "C1": "89b0520a04b6b9dd029634d4e2a79fbbb4ae105a13ee1dbe786af57e56e9e804",
+        "C2": "1d78fcdacd0440aa84a4c4c82987ca0393126d419f825a2b9b6235cee29142fc",
+        "F1": "04f9432de48d8aab3925ee071a7d6f1c485b6e2bd1b405eddd032aa703b62846",
+        "F2": "b3cb09e4933697fb1e7acfea7940376f9086e5334b7985f7a1d090205c386ff4",
+        "S15": "296a3483e9c065aaddc727450401695b59f12c6f7668b775286e3dbf25545959",
+        "S16": "b28ce49ec3be891de7f4b4bf3260e40f904dce1eb0f3a5a297f96d3d1bbe282b",
+        "W2": "ab2f0904a75f4cbf206afa94e56abdbfba604d3590f563afbbdabf65df8e7a79",
+        "W4": "a14585404436f53b3b413079f6c6abb933cbb0c19a5f9abda5a7d2e6cf913796"
+      }
+    },
+    {
+      "id": "K02",
+      "category": "calendar_period_web_with_historical_fiscal_controls",
+      "question": "what did amd announce during august and september 2026? looking for the useful business updates not every press release",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Material AMD business announcements within August through September 2026",
+        "A readable explanation of their significance"
+      ],
+      "criteria": [
+        "Uses the explicit calendar period even though historical FY2025 is selected for filings",
+        "Does not treat the selected fiscal year as a ceiling on current web evidence",
+        "Dates findings using source evidence and does not silently substitute July developments",
+        "Can report a genuine lack of relevant findings without fabricating announcements"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "flags": [],
+      "reason": "The requested August/September 2026 calendar period works with FY2025 filing controls. Two material announcements are synthesized, with reported versus official evidence and agreement versus completion distinguished.",
+      "source_checks": [
+        "Official AMD W7 explicitly states Aug. 6, 2026 and a definitive agreement to acquire Taalas; it supports the inference-specialization explanation and integration plan.",
+        "Third-party W1 explicitly dates publication September 29 and reports the September 28 World Labs agreement, value, expected close and regulatory condition.",
+        "The answer labels W1 as reporting rather than claiming a retrieved official release.",
+        "Both source dates are normalized from explicit datelines. No July event is substituted for the requested period."
+      ],
+      "status": "completed",
+      "seconds": 67.063,
+      "answer_token_ttft_seconds": 53.671,
+      "all_displayed_citations_registered": true,
+      "web_tool_invoked": true,
+      "answer_sha256": "610ea7996466c26f1707e17c5aa83d1cf0cf5b731893ed5ffba75ea854c7a56e",
+      "source_text_hashes": {
+        "W1": "efd20da1054d9fecca9cecdcf53c2f465a26a736cc49742712168fad5bb40bfc",
+        "W7": "3d13f18d7688d1c1d4ee85565eb58301fdb3d8fdcda743c25b6bd1456fef208c"
+      }
+    },
+    {
+      "id": "K03",
+      "category": "historical_outside_earnings_reaction",
+      "question": "when intels fy2025 earnings came out what were writers and analysts happy about and what bothered them? i dont mean their latest quarter",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Outside commentary associated with Intel's FY2025 results release",
+        "A supported distinction between favorable and unfavorable themes where evidence exists"
+      ],
+      "criteria": [
+        "Finds the historical annual-results window rather than a recent-quarter window",
+        "Attributes viewpoints and does not assume evidence must contain both positive and negative reactions",
+        "Does not require post-latest-filing freshness for historical commentary",
+        "Keeps actual sourced opinions distinct from management disclosures"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "flags": [
+        "minor_punctuation_after_claim_removal"
+      ],
+      "reason": "The historical annual-results release is correctly identified, favorable and unfavorable outside themes are explained, and an anonymous guest is not assigned a fabricated analyst identity. A '. ;' punctuation scar is a minor editing defect.",
+      "source_checks": [
+        "Official W2 explicitly says Released Jan 22, 2026, 4:01 PM EST and identifies combined Q4/full-year FY2025 results.",
+        "W5 identifies Sophie Brooks, January 23, and the stabilization/manufacturing-progress and execution-risk interpretation.",
+        "W10 supports above-expectation Q4 revenue/EPS and disappointing next-quarter forecasts; W8 supports supply-constrained data-center demand.",
+        "W3 supports the clean-quarter and guidance critique, plus the foundry/customer-momentum discussion. The retrieved excerpt does not identify the speaker; the answer explicitly preserves that limit.",
+        "The answer does not substitute the latest quarter or claim a universal analyst consensus."
+      ],
+      "status": "completed",
+      "seconds": 122.746,
+      "answer_token_ttft_seconds": 97.985,
+      "all_displayed_citations_registered": true,
+      "web_tool_invoked": true,
+      "answer_sha256": "26059ec2a23f22b0250b6f6a7bbe0e74703c4d03a9e406d6df5ed91b3802d0e3",
+      "source_text_hashes": {
+        "W2": "63c381598571e49babb1e2ffd41e52cc65ae99586999a132855337fc574c07f5",
+        "W3": "97d5d69bb8fd2d7cadd3bd1aa84f0125b70f209ec364b4bc389013281a3eff47",
+        "W5": "f89ff84d66cae954b1b11680ae0a5f49126c8c8aa4467cf3e650b1866d9cd7d4",
+        "W8": "956655384efc34b4083c4eea8b72471d3ec175c5bc1f5992d1be6aa307f6b18f",
+        "W10": "942919c54b8aa84c42105e949ec8853003b80afd0bd70dac0687049ac1d8b686"
+      }
+    },
+    {
+      "id": "K04",
+      "category": "straightforward_filings_only_interpretation",
+      "question": "in nvidias fy2025 report what drove the datacenter growth? explain it like im new to the company and stick to the filing",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "A plain-language filing-supported explanation of FY2025 Data Center growth",
+        "Enough business context for a reader unfamiliar with NVIDIA"
+      ],
+      "criteria": [
+        "Uses the selected filing and honors the filing-only instruction",
+        "Explains drivers instead of giving only a growth percentage",
+        "Does not assume current events explain historical reported performance",
+        "Does not expose worker handoff instructions as part of the final answer"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "flags": [],
+      "reason": "A readable filing-only explanation identifies Hopper computing demand, larger AI models and Ethernet networking, while keeping late-year Blackwell shipments distinct from the full-year growth driver.",
+      "source_checks": [
+        "S9 explicitly attributes computing growth to Hopper demand for language models, recommendation engines and generative AI, and networking growth to Ethernet/Spectrum-X.",
+        "S5 identifies model complexity/scale, full-year Hopper demand and Blackwell production shipments beginning in Q4 FY2025.",
+        "No web search or extraction tool is invoked.",
+        "The answer explains the business context without adding unsupported current events or requiring unnecessary calculations."
+      ],
+      "status": "completed",
+      "seconds": 63.921,
+      "answer_token_ttft_seconds": 52.563,
+      "all_displayed_citations_registered": true,
+      "web_tool_invoked": false,
+      "answer_sha256": "bc152fa79bf30a3f2ef7f4d10f03307435cc67b7ee75d4d08814a9aaa6018bcd",
+      "source_text_hashes": {
+        "S5": "529d187484705d0bd20f5f4b3a5270b6f0a644536b595acb74b41396146fdd0b",
+        "S9": "5c3b0ff76f706790cc92da581fac50990830c52b10e07ac956560ab59bacc213"
+      }
+    }
+  ],
+  "retained_previous_results": [
+    {
+      "evidence": "HOLDOUT_2026-10-19.json",
+      "runtime_freeze_sha256": "cf59fd7774c58ebb2a0ca98e55b7352b4c490d7adb84a2dc497dd787ce4faa47",
+      "valid": 17,
+      "pass": 5,
+      "pass_with_limit": 3,
+      "fail": 9,
+      "invalid_evaluator_input": 1
+    },
+    {
+      "evidence": "HOLDOUT_ITERATION2_2026-10-19.json",
+      "runtime_freeze_sha256": "f0e2a374d726dde4daecd16bcf375959ea6b2d5c92ca9ff44c9f722b7de4cde5",
+      "valid": 6,
+      "pass": 3,
+      "fail": 3
+    }
+  ]
+}

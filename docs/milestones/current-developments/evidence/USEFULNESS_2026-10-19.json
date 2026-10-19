@@ -1,0 +1,693 @@
+{
+  "checked_at": "2026-10-19T19:58:41.268114+00:00",
+  "profile": "Local Codex subscription generation; actual application, browser and Linux Docker. No deployment-provider or Cloud Run claim.",
+  "runtime": {
+    "frozen_at": "2026-10-19T19:54:22.173965+00:00",
+    "files": {
+      "main.py": "49af41262852cb3eb65c123ae177d6d66149e10041bb4ec8071466f1eee0ddd6",
+      "prompts/answer_coverage.md": "2d5f085cd4b99ad69825634c96b150c7fb43478be2476a19b791ed5111113bff",
+      "prompts/current_developments.md": "45aac934f5960b6a9d308b1ca82f27a9299ca913aa6d286b1fb6735d2f7218dc",
+      "prompts/filing_revenue_inputs.md": "61c86953a1d99250a3391a01a615e1225ac3010355c730e2e25a1d6980807cb9",
+      "prompts/filings_research.md": "ac60e30f3afa22fd9ff8b93b73cde94161a2a72fbc4751f9e2cc62bd1b2dcd50",
+      "prompts/financial_data.md": "0efeef2d9faaefd92ac6d28b3531c0260f75ebae651998a946cc2b6b3248d0d6",
+      "prompts/quant.md": "d680832a3f6944211cf43a8ddd51b0394af5263441ffa0d4cabcdb9ffda66a66",
+      "prompts/request_plan.md": "3b84f7318646e3ff182933ce11e3e3cb822b7d3d6dc7179e4c9dcf875bef2fb3",
+      "prompts/risk_summary.md": "df636ff22aa7b67304b3f33c5aebabf82f853c4a36fc94c9887c2a8df1b417e6",
+      "src/analysis_artifacts.py": "2e8d47e085053fd40c7bb71c397141618b931e770e491998f3193dc4ea0f608e",
+      "src/capabilities.py": "1ea5845e58c9ff9922271991b3871720af6e6936715da1dfc469f04b5d85ae98",
+      "src/codex_model.py": "8a21c1155941c4bdd2023fdcdaf32e65b49dc5b7179695a1537fd20a4d0f947b",
+      "src/codex_transport.py": "263fb4de22857bb5ea9a696e968718ea8eb266d04856b93f10ba416090d27386",
+      "src/current_developments.py": "65d0a103a9784a3054c40e5a2fb877b8a63cfb94907f6758f7d52a4d6e58029f",
+      "src/filing_financials.py": "2f752d8a332b74dc8c30e103185d7db8986769e4ea73c6845b4016caaaf3737c",
+      "src/financial_data.py": "916ed5f0fc6f5f99fa55f45cda18e75cc58eaf0a06a052da676f37ef23a6a8a8",
+      "src/financial_workflow.py": "c3f6951e56a48cccf7485c7aaff6bfbc8e2bc6f664b1e27ff1db10ef9d03438f",
+      "src/live_mcp.py": "2470ff610308d36e4f123ba7eb6e1987ef471c36875038c8b23fd729f5b97071",
+      "src/quant_analysis.py": "a1b84bb79de9adf6007393eca204da6ae2153ea486fce22f0ff1b22c5f31a6f6",
+      "src/quant_runner.py": "b626d174dd2c22cc6b132ee6866b7b4ff088404dcabf5312ce6f096675f4d0ef",
+      "src/quant_workflow.py": "9c541e216dda14518a92b721c23adc757ca6760daf158df2db80ad7849b393e4",
+      "src/request_plan.py": "e041143dc1a91b3d3767e9612eb0a859ba508c5596e47039d50e23930b755386",
+      "src/request_routing.py": "e807f7169a8266bd565eaf00631284e82a87ac7b7a4a028216d84a1b05f7aa36",
+      "src/research_index.py": "d4dea099c47f0d6f6353a04c50e08f886eb31ab13d63ce5d23bc9e3e4799c5e1",
+      "src/research_workflow.py": "ef258ae3a0144f719f17f6158134961e58eeb0af74c30872962511b1a8c30821",
+      "src/response_contract.py": "432876cacff65696ff2d7c52e2757b9aedc0fc398599e90b637958445d840847",
+      "src/risk_summary.py": "f12d77b47b46fa648a0acba905e3826ee8a8e5df33ec93049aa86535a3201953",
+      "src/source_collection.py": "3bbbb3d598e9e04399427e52d26ff03809442db084c538fda8a004902a3420a1",
+      "src/source_inventory.py": "7016cc3a1340d45b3fbfd810f5cbef94e90642aa5d44f5d1eebc28209618022e",
+      "src/supervisor.py": "5307d47c5f9c6331778651b7d629c2915a10ba17ef61fa653e04f44de25e645b",
+      "src/web_evidence.py": "5fd7d24f78fd165c9c1a6591c18614b5800f8add6cab590883d0305690528dbb",
+      "web/index.html": "4570fc1381d901b6558e127746c5ca434427ad31b1a08da0468c93fd280ea4ea"
+    },
+    "sha256": "af4156602adea41b6033d94355aada0c0ffc506044d01240a4ebff579f029dac"
+  },
+  "tests": {
+    "command": "uv run --locked pytest -q",
+    "passed": 265,
+    "failed": 0,
+    "real_tavily_transport_blocked": true
+  },
+  "acceptance": {
+    "fresh_usefulness": "Four of four pass, zero critical failures; frozen iteration-three runtime",
+    "fresh_lineage_validation": "Two new filings-only cases on the final validation runtime; see independent report",
+    "browser": {
+      "kind": "Actual native Chromium submission, no replay",
+      "status": "Complete · requested outputs checked",
+      "checklist": [
+        "Addressed: Calculate Qualcomm's revenue change from FY2024 to FY2025 using reported filing figures.",
+        "Addressed: Explain the filed drivers of Qualcomm's revenue change from FY2024 to FY2025.",
+        "Addressed: Research public reactions to Qualcomm's revenue change around the selected FY2025 earnings release."
+      ],
+      "inspections": [
+        {
+          "kind": "W",
+          "label": "cnbc.com · 2025-11-05T21:02:59+00:00 · Independent reporting · Retrieved 2026-10-19 · Date from tavily · Open source",
+          "excerpt_characters": 1844
+        },
+        {
+          "kind": "S",
+          "label": "QCOM · FY2025 · 10-K · 2025-09-28 · original · other · page 39 SEC filing · Official retrieval source · Collected original ·",
+          "excerpt_characters": 4994
+        },
+        {
+          "kind": "C",
+          "label": "QCOM FY2025 revenue change vs FY2024 · USD · 2024-09-30 → 2025-09-28",
+          "excerpt_characters": 4687
+        }
+      ],
+      "narrow_layout": true,
+      "stop": true,
+      "page_errors": [],
+      "passed": true
+    },
+    "docker_real_web": {
+      "id": "docker-acquisitions",
+      "question": "What has happened with Qualcomm and its acquisitions lately? Refresh the web sources.",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **Qualcomm completed its Modular acquisition on July 29, 2026.** Qualcomm’s release confirms completion; StorageReview’s July 30 report dates the closing and says Modular co-founder Chris Lattner became EVP of Advanced AI Software and Platforms. The acquisition adds AI software infrastructure across devices, edge computing and data centers. This suggests Qualcomm is buying the software capabilities needed to make its AI hardware easier to deploy—not just adding chip technology. [W11][W5]\n\n- **Post-acquisition integration is taking shape.** Jon Peddie Research reported on August 24 that Modular opened its Mojo compiler under an open-source license. ChosunBiz’s September 25 coverage of Snapdragon Summit reported that work had begun to extend Modular’s Mojo and MAX software to Snapdragon PCs and smartphones. This suggests a broader, shared AI development platform, although the Snapdragon integration was described as work underway, not a completed rollout. [W3][W6]\n\n- **Qualcomm also acquired IoT cybersecurity company SAM Seamless Network, according to SecurityWeek’s August 13 report.** The report says SAM’s network-security software is being embedded into Qualcomm wireless chipsets and gateways, and identifies AT&T and Verizon as SAM customers. This suggests an effort to differentiate Qualcomm’s connectivity platforms with integrated security. The article places the deal among July announcements but does not establish whether it occurred after . [W1]",
+      "seconds": 71.195,
+      "answer_token_ttft_seconds": 48.367,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W1",
+        "W3",
+        "W5",
+        "W6",
+        "W11"
+      ]
+    },
+    "docker_web_calls": [
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_search",
+        "arguments": {
+          "query": "Qualcomm acquisition acquisitions July August September October 2026",
+          "topic": "news",
+          "search_depth": "advanced",
+          "max_results": 5,
+          "include_raw_content": false,
+          "start_date": "2026-07-21",
+          "end_date": "2026-10-19"
+        },
+        "result_count": 5,
+        "snapshot_id": "9f55c639f8bc7944e247fb89a63d9f68b462d3d8f6662d4df283dc7c2e70c843",
+        "cache": false,
+        "outcome": "returned"
+      },
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_extract",
+        "arguments": {
+          "urls": [
+            "https://www.storagereview.com/news/qualcomm-closes-modular-deal-buying-a-cuda-independent-path-for-its-data-center-silicon"
+          ],
+          "extract_depth": "basic",
+          "format": "text",
+          "query": "Modular acquisition completed July 29 2026 software MAX Mojo Chris Lattner strategic significance"
+        },
+        "result_count": 1,
+        "snapshot_id": "58f90f535d80047054b4bda249ed7cd6f70bb7207480ed939d5803a6954d9ec0",
+        "cache": false,
+        "outcome": "returned"
+      },
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_search",
+        "arguments": {
+          "query": "Qualcomm September October 2026 acquisitions developments Snapdragon",
+          "topic": "news",
+          "search_depth": "advanced",
+          "max_results": 5,
+          "include_raw_content": false,
+          "start_date": "2026-07-21",
+          "end_date": "2026-10-19"
+        },
+        "result_count": 5,
+        "snapshot_id": "9e29f5df4c3f192b7ec21f67a87057c0576ca1caf0a42f0a6357c2f004818107",
+        "cache": false,
+        "outcome": "returned"
+      },
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_search",
+        "arguments": {
+          "query": "Qualcomm Modular acquisition completed July 29 2026 SAM Seamless Network acquisition",
+          "topic": "general",
+          "search_depth": "advanced",
+          "max_results": 5,
+          "include_raw_content": false,
+          "start_date": "2026-07-21",
+          "end_date": "2026-10-19",
+          "include_domains": [
+            "qualcomm.com"
+          ]
+        },
+        "result_count": 2,
+        "snapshot_id": "cae719837c7242abc95a60ee1a28e978fd186b94d95647dd25fb4718aa0b6548",
+        "cache": false,
+        "outcome": "returned"
+      },
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_extract",
+        "arguments": {
+          "urls": [
+            "https://www.securityweek.com/cybersecurity-ma-roundup-21-deals-announced-in-july-2026"
+          ],
+          "extract_depth": "basic",
+          "format": "text",
+          "query": "Qualcomm SAM Seamless Network acquisition date July terms security gateways"
+        },
+        "result_count": 1,
+        "snapshot_id": "a9635d376209aaa89767acd777df3e265bccacc34ca92510d361fb2f2e8afe03",
+        "cache": false,
+        "outcome": "returned"
+      },
+      {
+        "agent": "Current Developments",
+        "node": "live_mcp",
+        "server": "tavily-mcp",
+        "tool": "tavily_extract",
+        "arguments": {
+          "urls": [
+            "https://www.qualcomm.com/news/releases/2026/07/qualcomm-completes-acquisition-of-modular"
+          ],
+          "extract_depth": "basic",
+          "format": "text",
+          "query": "completion date July 29 2026 Chris Lattner Modular MAX Mojo Qualcomm AI hardware"
+        },
+        "result_count": 0,
+        "snapshot_id": "a0715d7efc2db79f9d5679a4ecbcbab1463ecdea3ec76d5b53161a12cbd53ddb",
+        "cache": false,
+        "outcome": "returned"
+      }
+    ],
+    "docker_final_lineage": {
+      "id": "docker-lineage",
+      "question": "Using only the filings, compare Qualcomm gross margin in FY2024 and FY2025. Give the margin change and a brief explanation.",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- Qualcomm’s consolidated US GAAP gross margin fell from 56.21% in FY2024 (ended September 29, 2024) [C1] to 55.43% in FY2025 (ended September 28, 2025) [C2], down 0.79 percentage points. Original-report figures are unnormalized;  [C3]\n- The primary driver was revenue mix: higher-margin QTL licensing revenues represented a smaller proportion of total revenue as QCT equipment and services revenue increased. [S22] QCT’s own gross margin remained approximately flat, with higher product costs partly offset by higher average selling prices. [S25]",
+      "seconds": 110.964,
+      "answer_token_ttft_seconds": 89.905,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "S22",
+        "S25"
+      ]
+    },
+    "security_record": "USEFULNESS_SECURITY_2026-10-19.json"
+  },
+  "development_examples": [
+    {
+      "id": "acquisitions",
+      "question": "What has happened with qualcomm and its acquisitions lately",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **Qualcomm completed its Modular acquisition on July 29, 2026.** StorageReview reported that co-founder Chris Lattner became executive vice president of advanced AI software and platforms, with Modular retained as a named organization. The acquisition adds software for deploying AI across CPUs, GPUs, NPUs and custom chips—supporting Qualcomm’s expansion beyond mobile into edge and data-center computing. [W5]\n\n- **Modular’s software strategy advanced after closing.** Jon Peddie Research reported on August 24 that the Mojo compiler had been open-sourced and Mojo reached version 1.0 on August 11. Its interpretation: hardware-independent software could weaken Nvidia CUDA lock-in and shift competition toward chip performance and power efficiency. Importantly, Modular had planned the open-source move before Qualcomm acquired it. [W4]\n\n- **The earlier Alphawave acquisition is feeding Qualcomm’s Amazon collaboration.** September 9 reporting from Futurum linked the newly announced AWS relationship to Alphawave-derived custom-silicon and optical-connectivity capabilities, including 1.6T optics. This is progress in using acquired technology for Qualcomm’s data-center expansion, rather than another acquisition announcement. [W8]\n\n- **Qualcomm also acquired IoT cybersecurity company SAM Seamless Network, according to SecurityWeek’s August 13 roundup.** The report describes embedding SAM’s security software into Qualcomm wireless chipsets and gateways. It places the deal in July but provides no exact transaction date, so whether it occurred after the July 21 window start is unclear. [W2]",
+      "seconds": 55.936,
+      "answer_token_ttft_seconds": 43.189,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W2",
+        "W4",
+        "W5",
+        "W8"
+      ]
+    },
+    {
+      "id": "broad",
+      "question": "what has happened with qualcomm lately",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **New flagship phone chips:** At Snapdragon Summit on September 22, 2026, Qualcomm introduced Snapdragon 8 Elite Gen 6 and 8 Elite Extreme Gen 6, emphasizing on-device AI agents, imaging and gaming. Xiaomi announced plans to use both platforms; Motorola previewed its Extreme-powered Signature 27 for launch later in 2026. These announcements connect Qualcomm’s AI strategy to upcoming premium Android devices, rather than demonstrations alone. [W2][W3]\n\n- **A broader push into business PCs:** September 28 analysis by TechNewsWorld’s Mark N. Vena described Qualcomm’s effort to expand Snapdragon across Windows, Googlebook and Linux. He viewed operating-system support and developer engagement as more consequential than benchmark competition—giving Qualcomm more routes into corporate computing. Execution remains important: Linux support was staged, and Vena identified device management, application support and access controls as unanswered enterprise questions for Googlebook. [W4]\n\n- **New broadband and networking platforms:** Qualcomm unveiled four AI-powered broadband technologies on October 12, ahead of Network X: an AI gateway, an intelligent software framework, wireless distribution/backhaul platforms and a fixed-wireless-access platform, according to The Elec’s October 13 report. The expansion puts Qualcomm’s on-device AI approach into telecom infrastructure, with the stated goals of improving responsiveness and security while simplifying operator workflows. [W15]",
+      "seconds": 60.009,
+      "answer_token_ttft_seconds": 47.641,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W2",
+        "W3",
+        "W4",
+        "W15"
+      ]
+    },
+    {
+      "id": "reaction",
+      "question": "explain qualcomms revenue change from the filinings then research what the public thought of it",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "Financial Analysis / Quant:\n- Qualcomm’s consolidated revenue increased by $5.322 billion [C1], or 13.66% [C2], in FY2025.\n- Verified inputs from original-report filings:\n  - FY2024: $38.962 billion; September 25, 2023–September 29, 2024. [F1]\n  - FY2025: $44.284 billion; September 30, 2024–September 28, 2025. [F2]\n- Comparability: FY2024 contained 53 weeks versus FY2025’s 52 weeks. Growth is reported, not week-normalized. [F1]\n- Supported arithmetic and input checks are complete. Filing explanations and public reaction belong to the Research and Current Developments workers.\n- Verified [table](/api/analysis/cd7d1934a41defeb6de1d5f353a78821c7252f6bc90b2c3ac39d34af9c96bdec/files/table.csv) and [chart](/api/analysis/cd7d1934a41defeb6de1d5f353a78821c7252f6bc90b2c3ac39d34af9c96bdec/files/chart.png) are available.\n\nFilings Research:\n- Qualcomm’s revenue rose from $38.962 billion in FY2024 (September 25, 2023–September 29, 2024) to $44.284 billion in FY2025 (September 30, 2024–September 28, 2025). [F1] [F2] The checked increase was $5.322 billion, or 13.66%. [C1] [C2]\n\n- The main driver was QCT’s semiconductor business: higher handset, IoT and automotive revenue. QTL licensing revenue remained approximately flat, so growth was primarily product-led rather than licensing-led. [S15]\n\n- Handsets benefited from higher average selling prices, favorable product mix and higher chipset shipments at certain major manufacturers. Both pricing/mix and shipments benefited from stronger demand for premium-tier Snapdragon platforms in Android devices. [S16]\n\n- IoT growth came from higher shipments across edge networking, consumer and industrial products, partly offset by unfavorable mix. Automotive growth primarily reflected increased shipments for new vehicle launches using Snapdragon digital cockpit products. [S16]\n\n- A licensing-dispute settlement also contributed to consolidated revenue growth; Qualcomm did not allocate that settlement revenue to its segments. It was a separate contributor from the underlying QCT product drivers. [S18]\n\n- Comparability caveat: FY2024 contained 53 weeks versus FY2025’s 52 weeks. The checked growth is reported growth, not week-normalized. [F1] [C2]\n\nCurrent Developments:\n- **Outside commentary viewed the results favorably.** On November 7, 2025, Futurum Research described Qualcomm’s performance as “broad-based execution,” highlighting record annual chip-business revenue and a mix shifting toward automotive, IoT and AI PCs. Its interpretation connects the filing’s revenue-growth drivers to a broader business story: Qualcomm was expanding beyond its core phone-chip market. [W6]\n\n- **Financial reporting emphasized stronger-than-expected operating performance.** CNBC’s November 5 coverage reported that quarterly revenue and adjusted earnings beat analyst expectations, with handset, automotive and IoT sales each exceeding StreetAccount estimates. That supports a favorable reading of the year-end momentum, although these comparisons concern the fourth quarter—not the full-year revenue change. [W7]\n\n- **Diversification remained central to the outside assessment.** CNBC framed Qualcomm’s expansion into PCs, headsets and smart glasses against the expected future loss of Apple modem business. Futurum took a more optimistic view, concluding that premium Android momentum and new businesses pointed toward a more diversified revenue base. These are identifiable media and research perspectives, not evidence of a measured public consensus; Qualcomm CEO Cristiano Amon’s upbeat statements are management’s view, separate from those outside reactions. [W6][W7]",
+      "seconds": 109.315,
+      "answer_token_ttft_seconds": 94.192,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "F1",
+        "F2",
+        "S15",
+        "S16",
+        "S18",
+        "W6",
+        "W7"
+      ]
+    }
+  ],
+  "regressions": [
+    {
+      "id": "H04",
+      "question": "catch me up on qualcomm, whats changed outside the phone business the past few months",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **Data centers became a more concrete expansion—not just a strategy slide.** Futurum’s August 3 report said Qualcomm had two hyperscaler custom-chip engagements with purchase orders and wafer production underway, with revenue expected to begin in the December quarter. Its HBC Gen 1 compute chip also completed tape-out. That gives Qualcomm another potential business beyond devices, although the expected revenue start was still ahead of the July–October research window. [W3]\n\n- **Automotive commitments broadened across future vehicle generations.** The BMW agreement reported July 29 covers next-generation digital cockpits, driver assistance and automated driving, using Snapdragon automotive chips and AI accelerators through the next decade. Futurum also described Stellantis collaboration extending into the 2030s. The important change is longer-running, broader compute relationships—not simply winning a component in one vehicle. [W11][W3]\n\n- **Robotics gained a software expansion.** On September 23, Qualcomm announced an agreement to acquire PickNik, steward of the MoveIt robot-manipulation framework. Qualcomm says MoveIt will remain open-source, with closer integration planned for Dragonwing robotics and Arduino platforms. That would give developers an easier route from AI models to robot planning and physical control, strengthening the software ecosystem around Qualcomm’s hardware. The announcement establishes an agreed acquisition, not a completed transaction. [W6]\n\n- **PCs remain in the mix, but outside commentary sees the emphasis shifting.** Trefis’s September 9 analysis highlighted growing AI-laptop design wins and Project Solara, a Microsoft collaboration for agent-first enterprise devices. Its interpretation: data centers now occupy more of Qualcomm’s diversification narrative, while PCs remain a developing opportunity. Taken together, the recent changes extend Qualcomm beyond phone-like devices into vehicle computing, infrastructure and robotics. [W10]",
+      "seconds": 64.907,
+      "answer_token_ttft_seconds": 48.876,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W3",
+        "W6",
+        "W10",
+        "W11"
+      ]
+    },
+    {
+      "id": "H13",
+      "question": "which of your agents would handle comparing qualcomm revenue and checking news about it? can you actually do both in one answer",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- **Filings Research:** Finds and explains passages in the selected companies' collected filings and earnings releases with S citations. Inspects original/amended disclosures. A verification request permits one Tavily search for an official update to a specific filed statement, with separate W citations.\n- **Financial Data:** Looks up original-report GAAP revenue, gross profit, operating income, parent-attributable net income and operating cash flow. Values retain company, currency and actual fiscal dates. Missing observations remain explicit.\n- **Financial Analysis / Quant:** Calculates supported growth, changes, margins, ratios and explicit scenarios from compatible source inputs. Publishes independently checked calculations with charts, CSV, code and replayable ledgers. Missing inputs remain explicit. Valuation is unsupported.\n- **Risk Summary:** Compares complete original risk sections and cites changed, added, removed, relocated or unchanged wording. Quarterly omissions do not prove an annual risk disappeared; semantic materiality is a model judgment.\n- **Current Developments:** Finds recent developments and identifiable outside reactions using Tavily search and extraction. Uses the requested event or calendar window and shows source dates and freshness.\n- **Supervisor:** Uses the selected companies and fiscal years, chooses the specialists required by the question, orders dependent work and checks evidence handoffs. Shows routing, worker outcomes and missing outputs; a failed worker preserves earlier verified findings. Answers capability questions locally without model or external-provider calls.\n\nUnresolved outputs:\n- Explain which application agents handle comparing Qualcomm revenue across FY2024 and FY2025 and checking current Qualcomm news, and whether both can be combined in one answer.: The answer lists relevant Financial Data, Financial Analysis / Quant, Current Developments and Supervisor capabilities, but does not explicitly connect them to comparing Qualcomm FY2024 versus FY2025 revenue or confirm that the revenue comparison and current news can be combined in one answer. The Scope paragraph also asserts company coverage, company controls, market-price exclusions, cross-turn memory limitations and pending implementation work that are not established by the supplied implemented_capabilities.\n- Unsupported claims were removed; the cited evidence does not establish them.",
+      "seconds": 19.888,
+      "answer_token_ttft_seconds": null,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": false,
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Explain which application agents handle comparing Qualcomm revenue across FY2024 and FY2025 and checking current Qualcomm news, and whether both can be combined in one answer.: The answer lists relevant Financial Data, Financial Analysis / Quant, Current Developments and Supervisor capabilities, but does not explicitly connect them to comparing Qualcomm FY2024 versus FY2025 revenue or confirm that the revenue comparison and current news can be combined in one answer. The Scope paragraph also asserts company coverage, company controls, market-price exclusions, cross-turn memory limitations and pending implementation work that are not established by the supplied implemented_capabilities.",
+            "Unsupported claims were removed; the cited evidence does not establish them."
+          ]
+        }
+      },
+      "source_ids": []
+    },
+    {
+      "id": "H05",
+      "question": "amds 2025 sales went up right? show me how much from the filing and what analysts were worried about when the results came out",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "Financial analysis:\n- Yes. AMD’s FY2025 sales increased by $8.854 billion [C1], or 34.34% [C2].\n- Reported consolidated revenue was $34.639 billion for FY2025, ended December 27, 2025 [F2], versus $25.785 billion for FY2024, ended December 28, 2024 [F1]. Both inputs use original-report 10-K figures.\n- Supported sales calculations and inputs are complete. \nOutside research:\n- **Analysts questioned the strength behind the results.** Reuters reporting carried by The Economic Times said AMD’s fourth-quarter data-center revenue would have missed expectations without the unexpected China MI308 chip sales. The concern was whether underlying AI demand was strong enough to challenge Nvidia—not whether annual sales had grown. [W3]\n- **Growth depended on relatively few customers and markets.** eMarketer analyst Gadjo Sevilla warned that growth was concentrated in “large deployments and specific regions,” with China shipments large enough to influence a quarter. The reporting also highlighted concern that Nvidia could win business from AMD’s small group of major customers. [W3]\n\nUnresolved outputs:\n- Identify what analysts were worried about when AMD's FY2025 results were released.: W3 supports identifiable analyst concerns about China-assisted results, customer concentration and the timing of AI-server growth, but does not explicitly establish that the second-half ramp is in 2026. Remove or substantiate that year. The answer also incorrectly states that the supplied evidence does not establish analysts’ concerns.\n- Unsupported claims were removed; the cited evidence does not establish them.",
+      "seconds": 98.23,
+      "answer_token_ttft_seconds": 78.251,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Identify what analysts were worried about when AMD's FY2025 results were released.: W3 supports identifiable analyst concerns about China-assisted results, customer concentration and the timing of AI-server growth, but does not explicitly establish that the second-half ramp is in 2026. Remove or substantiate that year. The answer also incorrectly states that the supplied evidence does not establish analysts’ concerns.",
+            "Unsupported claims were removed; the cited evidence does not establish them."
+          ]
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "F1",
+        "F2",
+        "W3"
+      ]
+    },
+    {
+      "id": "H17",
+      "question": "from intels fy2025 report explain current liabilities vs last year, and why that matters. keep it to the report",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- Intel’s FY2025 report shows lower total current liabilities at December 27, 2025 than at December 28, 2024. Accounts payable, short-term debt and income taxes payable fell; higher accrued compensation and benefits and other accrued liabilities partly offset those declines. [S16]\n\n- The report provides two relevant explanations:\n  - Unpaid capital-equipment purchases under extended supplier payment terms were $1.5 billion in 2025 versus $3.2 billion in 2024. Those obligations sit within accounts payable and other accrued liabilities—not just ordinary operating bills. [S13]\n  - Intel paid $3.7 billion of senior notes that matured during 2025. Its current debt classification reflects the time remaining until maturity, so the short-term balance also depends on the repayment schedule. [S11] [S12]\n\n- Why it matters: lower current liabilities mean fewer recorded near-term obligations competing for liquidity. The report also shows higher cash and short-term investments, supporting an improved year-end liquidity position. This is a balance-sheet interpretation, not evidence that operating profitability improved. [S16] [S11]\n\n- Don’t read the decline as uniform: employee-related accruals and other accrued liabilities increased. The cited disclosures also do not fully explain the income-taxes-payable decline or provide a complete causal bridge for every liability category. [S16]\n\nUnresolved outputs:\n- Using only Intel's FY2025 report, compare current liabilities with the prior-year amounts and explain the disclosed changes and why they matter for near-term obligations and liquidity.: The answer gives only directional changes in current liabilities, omitting the actual current-year and prior-year totals (31,575 versus 35,666 in S16) and component amounts. Include the reported amounts to complete the requested comparison. The disclosed explanations and liquidity interpretation are otherwise supported.",
+      "seconds": 45.81,
+      "answer_token_ttft_seconds": 28.294,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Using only Intel's FY2025 report, compare current liabilities with the prior-year amounts and explain the disclosed changes and why they matter for near-term obligations and liquidity.: The answer gives only directional changes in current liabilities, omitting the actual current-year and prior-year totals (31,575 versus 35,666 in S16) and component amounts. Include the reported amounts to complete the requested comparison. The disclosed explanations and liquidity interpretation are otherwise supported."
+          ]
+        }
+      },
+      "source_ids": [
+        "S11",
+        "S12",
+        "S13",
+        "S16"
+      ]
+    },
+    {
+      "id": "H13",
+      "question": "which of your agents would handle comparing qualcomm revenue and checking news about it? can you actually do both in one answer",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- **Filings Research:** Finds and explains passages in the selected companies' collected filings and earnings releases with S citations. Inspects original/amended disclosures. A verification request permits one Tavily search for an official update to a specific filed statement, with separate W citations.\n- **Financial Data:** Looks up original-report GAAP revenue, gross profit, operating income, parent-attributable net income and operating cash flow. Values retain company, currency and actual fiscal dates. Missing observations remain explicit.\n- **Financial Analysis / Quant:** Calculates supported growth, changes, margins, ratios and explicit scenarios from compatible source inputs. Publishes independently checked calculations with charts, CSV, code and replayable ledgers. Missing inputs remain explicit. Valuation is unsupported.\n- **Risk Summary:** Compares complete original risk sections and cites changed, added, removed, relocated or unchanged wording. Quarterly omissions do not prove an annual risk disappeared; semantic materiality is a model judgment.\n- **Current Developments:** Finds recent developments and identifiable outside reactions using Tavily search and extraction. Uses the requested event or calendar window and shows source dates and freshness.\n- **Supervisor:** Uses the selected companies and fiscal years, chooses the specialists required by the question, orders dependent work and checks evidence handoffs. Shows routing, worker outcomes and missing outputs; a failed worker preserves earlier verified findings. Answers capability questions locally without model or external-provider calls.\n- **Combined answers:** One request can combine a revenue comparison and current news. Financial Data retrieves reported figures, Quant checks changes, Filings Research explains filed drivers, and Current Developments researches outside events or reactions. The Supervisor combines their findings and reports any missing part.\n- **Scope:** NVIDIA, AMD, Intel and Qualcomm. Use the company controls to select one or several. Fiscal years select historical filings; outside research follows the requested event or date window. Market prices and valuation are outside scope. Each request is self-contained, with no cross-turn memory. Generation-provider routing, formal evaluation and Cloud Run deployment are pending.",
+      "seconds": 13.938,
+      "answer_token_ttft_seconds": null,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": false,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": []
+    },
+    {
+      "id": "H17",
+      "question": "from intels fy2025 report explain current liabilities vs last year, and why that matters. keep it to the report",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- Intel’s FY2025 report shows total current liabilities of $31,575 million at December 27, 2025, versus $35,666 million at December 28, 2024: a lower year-end balance of short-term obligations. [S14]\n\n- The main movements were:\n  - Accounts payable fell to $9,882 million from $12,556 million. The report also shows unpaid capital purchases under extended payment terms, included across accounts payable and other accrued liabilities, declining to $1.5 billion from $3.2 billion. [S14] [S11]\n  - Short-term debt fell to $2,499 million from $3,729 million. It primarily comprises long-term debt approaching maturity; Intel paid $3.7 billion of senior notes that matured during 2025. [S14] [S12] [S24]\n  - Income taxes payable fell to $604 million from $1,756 million. [S14]\n  - Partly offsetting those declines, accrued compensation and benefits increased to $3,990 million from $3,343 million, and other accrued liabilities increased to $14,600 million from $14,282 million. [S14]\n\n- Why it matters: the lower balance indicates less near-term liability pressure at year-end, particularly from supplier obligations, debt maturities and taxes. It does not mean every category improved: compensation and other accruals remained higher. [S14]\n\n- The report also cautions against treating the balance as a pure operating-performance signal: Intel says it manages liquidity partly by accelerating or delaying receipts and payments, including negotiating supplier payment terms. Paying obligations reduces liabilities but also uses cash, as its 2025 debt settlements illustrate. [S22] [S24]",
+      "seconds": 44.636,
+      "answer_token_ttft_seconds": 27.622,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "S11",
+        "S12",
+        "S14",
+        "S22",
+        "S24"
+      ]
+    },
+    {
+      "id": "H05",
+      "question": "amds 2025 sales went up right? show me how much from the filing and what analysts were worried about when the results came out",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "Financial analysis:\n- Yes. AMD’s FY2025 sales rose by $8.854 billion [C1], or 34.34% [C2].\n- Reported consolidated revenue increased from $25.785 billion in FY2024 [F1] to $34.639 billion in FY2025 [F2].\n- Comparison uses original-report GAAP figures: FY2024 ended December 28, 2024 [F1]; FY2025 ended December 27, 2025 [F2].\n\nOutside research:\n\nUnresolved outputs:\n- Identify what analysts were worried about when AMD's FY2025 results were released.: The excerpt supports analyst concerns about customer concentration, regional concentration, and China shipments. It does not establish the answer's added claim that broader demand and customer retention were important to sustaining the annual growth shown in the filing; that interpretation is stated as fact rather than identified as inference.\n- Unsupported claims were removed; the cited evidence does not establish them.",
+      "seconds": 110.869,
+      "answer_token_ttft_seconds": 76.35,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Identify what analysts were worried about when AMD's FY2025 results were released.: The excerpt supports analyst concerns about customer concentration, regional concentration, and China shipments. It does not establish the answer's added claim that broader demand and customer retention were important to sustaining the annual growth shown in the filing; that interpretation is stated as fact rather than identified as inference.",
+            "Unsupported claims were removed; the cited evidence does not establish them."
+          ]
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "F1",
+        "F2"
+      ]
+    },
+    {
+      "id": "H05",
+      "question": "amds 2025 sales went up right? show me how much from the filing and what analysts were worried about when the results came out",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "Financial analysis:\n- Yes. AMD’s FY2025 sales increased by $8.854 billion [C1], or 34.34% [C2].\n- Reported consolidated revenue was $34.639 billion for December 29, 2024–December 27, 2025 [F2], versus $25.785 billion for December 31, 2023–December 28, 2024 [F1]. Both inputs use the original-report 10-K basis.\n- Analyst concerns at the results release are not established by these financial observations.\n- Verified [table]( /api/analysis/1ceafd329c4a93c231c5029bb441cf4eb9fb3451dd91f50f918a6b5031e8ade2/files/table.csv) and [chart](/api/analysis/1ceafd329c4a93c231c5029bb441cf4eb9fb3451dd91f50f918a6b5031e8ade2/files/chart.png) are available.\n\nOutside research:\n- **Analysts questioned the strength underneath AMD’s growth.** Reuters’ results coverage reported that data-center sales would have missed expectations without unexpected China AI-chip sales. AMD’s first-quarter outlook pointed to a sequential revenue decline, while  This suggests concern about near-term momentum despite strong full-year growth. [W2]\n\n- **Customer concentration was another concern.** eMarketer analyst Gadjo Sevilla said growth appeared concentrated in large deployments and specific regions, with China shipments large enough to influence a quarter. Reuters reported worries that AMD depended on a handful of customers that Nvidia could pursue—making the durability and breadth of AI demand important questions. [W2]",
+      "seconds": 137.522,
+      "answer_token_ttft_seconds": 115.178,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "F1",
+        "F2",
+        "W2"
+      ]
+    },
+    {
+      "id": "J03",
+      "question": "what changed for qualcomm over the summer and early fall? id like the business story and which bits have happened already vs are still plans",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **The summer story was a bigger push beyond smartphones, while the existing business faced pressure.** Quartz’s July 30 reporting described higher costs and shrinking Apple chip revenue weighing on Qualcomm’s results. This suggests diversification became more urgent—not that the new businesses had already replaced handset earnings. [W1]\n\n- **Data-center expansion moved into concrete agreements, but much of the hardware remains a roadmap.** At its June 24 Investor Day, Qualcomm introduced a broader Dragonfly portfolio and announced a multigeneration CPU agreement with Meta. Those announcements happened; they are not evidence of completed deployments. Qualcomm expects commercial sampling of AI250 with its first-generation High Bandwidth Compute technology in mid-2027, and AI300 sampling in 2028. This suggests a larger opportunity beyond phones, with important execution milestones still ahead. [W6][W7][W8]\n\n- **The Modular acquisition was completed, rather than merely proposed.** Quartz reported on July 30 that Qualcomm had completed the AI-software acquisition. Its purpose is to strengthen data-center AI inference and deployment capabilities. This suggests Qualcomm is building the software layer needed to support its hardware expansion, rather than competing on chips alone. [W1]\n\n- **Early fall brought an actual mobile-platform unveiling, with customer devices still described as forthcoming.** On September 22, Qualcomm introduced Snapdragon 8 Elite Extreme Gen 6 and Snapdragon 8 Elite Gen 6, emphasizing on-device AI alongside gaming, camera and connectivity improvements. Qualcomm named brands including Xiaomi, OnePlus, HONOR and Motorola for future devices. The chip announcement happened; the release does not establish which phones had reached customers by October 19. Strategically, Qualcomm was refreshing its core smartphone franchise while pursuing the longer-term data-center expansion. [W10]",
+      "seconds": 88.819,
+      "answer_token_ttft_seconds": 73.175,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W1",
+        "W6",
+        "W7",
+        "W8",
+        "W10"
+      ]
+    },
+    {
+      "id": "J05",
+      "question": "using just nvidias reports, did its gross margin get better from fy24 to fy25 and what explains that? dont look up current news",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "answer": "- Yes. NVIDIA’s GAAP gross margin rose from 72.72% in FY2024 (ended January 28, 2024) [C1] to 74.99% in FY2025 (ended January 26, 2025) [C2], an improvement of 2.27 percentage points. [C3]\n- Main explanation: NVIDIA’s FY2025 10-K attributes the increase primarily to a higher mix of Data Center revenue—more of its sales came from that business. [S18]\n- Inventory-related charges also imposed a smaller margin drag: NVIDIA reported an unfavorable gross-margin impact of 2.3% in FY2025 versus 2.7% in FY2024 from inventory and excess-purchase-obligation provisions, net of releases. This was consistent with the improvement, but management identified Data Center mix as the primary driver. [S17] [S18]\n\nUnresolved outputs:\n- Compare NVIDIA’s gross margin for FY2024 and FY2025 using only its reports; calculate the change in percentage points to determine whether it improved.: Not supported in the answer",
+      "seconds": 63.974,
+      "answer_token_ttft_seconds": 52.362,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Compare NVIDIA’s gross margin for FY2024 and FY2025 using only its reports; calculate the change in percentage points to determine whether it improved.: Not supported in the answer"
+          ]
+        }
+      },
+      "source_ids": [
+        "C1",
+        "C2",
+        "C3",
+        "S17",
+        "S18"
+      ]
+    },
+    {
+      "id": "J06",
+      "question": "ive seen people saying amds ai business is taking off. what has amd itself actually announced recently, and whats an announcement vs something already in production",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "answer": "- **Already in production, according to AMD:** On July 23, 2026, AMD launched **Helios**,  AMD explicitly said Helios was “now in production.” This suggests its AI push has moved beyond individual accelerators into integrated rack-scale infrastructure—not just a future product roadmap. **Production does not mean every named customer’s deployment is already operational.** [W6][W7]\n\n- **Customer rollouts were at different stages:** AMD’s July 23 announcement said OpenAI **expected** to bring Helios online starting in Q4 2026, with deployments accelerating through 2027. Meta was testing and validating workloads on Helios racks ahead of deployment at scale. Those statements establish a rollout plan and validation work, respectively—not completed large-scale deployments. [W6]\n\n- **Anthropic was a major announced commitment, with deployment ahead:** On July 22, AMD announced a partnership to deploy **up to 2 gigawatts** of MI450-series GPUs in Helios systems, with the first gigawatt beginning deployment in the **first half of 2027**. That gives AMD a named customer and a substantial planned infrastructure expansion, but the announced capacity should not be described as already running. [W2]\n\n- **Software was another concrete development:** AMD announced **ROCm.AI on July 23**, describing tools for installing its software stack, serving models, diagnosing issues and optimizing workloads; its second-quarter results release  described ROCm.ai as “released.” This targets the practical work needed to turn AMD hardware into usable AI services, complementing the hardware production announcement. [W10][W8]",
+      "seconds": 65.081,
+      "answer_token_ttft_seconds": 41.088,
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "coverage_checked": true
+        }
+      },
+      "source_ids": [
+        "W2",
+        "W6",
+        "W7",
+        "W8",
+        "W10"
+      ]
+    }
+  ],
+  "review_records": [
+    "HOLDOUT_2026-10-19.json",
+    "HOLDOUT_ITERATION2_2026-10-19.json",
+    "HOLDOUT_FINAL_2026-10-19.json",
+    "HOLDOUT_VALIDATION_2026-10-19.json"
+  ],
+  "tavily": {
+    "authorized_acquisition_calls": 200,
+    "initial_ledger_calls": 42,
+    "acquisition_calls_used": 183,
+    "conservative_credits_reserved": 366,
+    "billing_usage_measured": false,
+    "scope": "All task iterations, failures, direct acquisition, native/browser and Docker; account-usage/schema reads do not consume these reservations"
+  },
+  "changed_expectations": [
+    "Same canonical URL retains W1 through extraction rather than creating W3; intentional citation identity behavior",
+    "Browser source authority label reads Primary source instead of raw official tier",
+    "Derived-answer review accepts original inputs reached through registered calculation lineage"
+  ],
+  "unchanged_expectations": "tests/fixtures/live_routing.json remains byte-for-byte identical to the committed baseline; rules profile protects all17 original rows",
+  "limits": [
+    "Four broad fresh cases and two narrow validation cases are small local checks on adjacent recorded runtimes, not a general accuracy rate or formal RAGAS score.",
+    "Initial18 and iteration2six contain failures and remain immutable; exposed questions are development regressions.",
+    "One pre-lineage-fix margin regression is correctly answered but falsely partial; final fresh lineage cases and browser check verify the shared correction.",
+    "Review repairs can leave minor punctuation or grammar fragments; source-tier and model review do not independently establish every publisher claim.",
+    "Latency includes queueing and local generation; provider routing, formal evaluation and Cloud Run remain planned."
+  ]
+}

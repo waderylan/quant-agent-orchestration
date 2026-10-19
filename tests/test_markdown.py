@@ -44,6 +44,18 @@ async def page():
 
 
 @pytest.mark.asyncio
+async def test_request_checklist_and_completion_are_separate_from_citation_registration(page):
+    await page.evaluate("""() => {
+      event('trace', {node:'request_understanding', plan:{outputs:[{id:'R1',description:'Filing explanation'},{id:'R2',description:'Outside reaction <script>bad()</script>'}]}});
+      event('trace', {node:'answer_coverage', results:[{id:'R1',addressed:true},{id:'R2',addressed:false}]});
+      event('complete', {status:'partial',verified_citations:true});
+    }""")
+    assert await page.locator('#request-coverage li').all_text_contents() == ['Addressed: Filing explanation', 'Still needed: Outside reaction <script>bad()</script>']
+    assert not await page.locator('#request-coverage script').count()
+    assert 'Partial answer' in await page.locator('#status').inner_text()
+
+
+@pytest.mark.asyncio
 async def test_markdown_streams_and_replaces_answers_with_normal_formatting(page):
     await page.evaluate("""() => event('token', '# Overview\\n\\n**Strong** and *emphasis* with `EPS`.\\n\\n- First\\n  - Nested\\n\\n1. Ordered\\n\\n> Dated evidence\\n\\n```python\\nvalue = 180\\n```\\n\\n| Company | Price |\\n|---|---:|\\n| QCOM | **150.25** |')""")
     await page.wait_for_selector("#answer table strong")
@@ -75,7 +87,7 @@ async def test_citations_survive_rerenders_and_cannot_be_redirected(page):
     await links.first.click()
     await page.wait_for_function("document.getElementById('passage').textContent.includes('Dated event')")
     assert not await page.locator("#passage script").count()
-    assert "qualcomm.com · 2026-10-18 · official · 2026-10-19" in await page.locator("#source-label").inner_text()
+    assert "qualcomm.com · 2026-10-18 · Primary source · Retrieved 2026-10-19" in await page.locator("#source-label").inner_text()
     external = page.locator("#source-label a")
     assert await external.get_attribute("target") == "_blank"
     assert await external.get_attribute("rel") == "noopener noreferrer"

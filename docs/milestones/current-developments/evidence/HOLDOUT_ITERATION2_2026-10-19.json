@@ -1,0 +1,403 @@
+{
+  "reviewed_at": "2026-10-19",
+  "iteration": 2,
+  "is_final_runtime_evaluation": false,
+  "profile": "Actual native application, local Codex generation, real Tavily/cache; not deployment-provider evaluation",
+  "method": "Fresh questions stay undisclosed through the next runtime freeze and six one-shot application captures. Independent review uses captured citations and source text only, with no new external searches. Scores from the first eighteen remain unchanged.",
+  "runtime_freeze_sha256": "f0e2a374d726dde4daecd16bcf375959ea6b2d5c92ca9ff44c9f722b7de4cde5",
+  "runtime_all_32_hashes_verified_unchanged_immediately_after_capture": true,
+  "sealed_file_sha256": "66e968e434396c62894c3f7b3b76a5633fedf30c82a23a00b59e639e53a71884",
+  "raw_capture_sha256": "05d690cdbd5738697145841dc8d84f9128b870ca3937dc484151a220940addde",
+  "rubric": {
+    "scale": "Each dimension is scored 0, 1, or 2: absent or materially wrong; partially useful; fully supported and useful. Every requested output must be tracked separately.",
+    "dimensions": {
+      "request_coverage": "Addresses every requested part; an explicit evidence gap counts as honest handling but not as a substantive answer. Does not mark a silently omitted part complete.",
+      "useful_synthesis": "Answers in plain language, prioritizes material findings, explains their relevance, and distinguishes evidence from interpretation. Avoids a string of source metadata and repeated caveats.",
+      "provenance": "Material factual claims have inspectable supporting citations. Filing facts, calculations, issuer statements, and third-party views remain distinguishable; duplicate views of one source do not imply corroboration.",
+      "honest_limits": "Does not invent dates, completed transactions, causation, or public consensus. Timeframes and partial coverage are stated briefly when material. Unsupported scope is identified without discarding supported parts."
+    },
+    "failure_conditions": [
+      "A requested part is omitted while the response is complete.",
+      "A material financial or event claim is unsupported, or an unsupported consensus is invented.",
+      "Explicit filings-only instructions trigger live research.",
+      "An unsupported price request receives an invented quote or blocks an otherwise answerable filing request.",
+      "The response consists primarily of restrictions or search diagnostics despite having usable relevant evidence."
+    ],
+    "evaluation_note": "Do not require particular current events, exact routes, exact phrasing, a fixed number of sources, or a positive news finding. Judge response quality against evidence actually available. A supported no-finding answer can pass when scope and search coverage are clear."
+  },
+  "decision_policy": "Supported useful answers pass despite minor editorial issues. False evidence gaps, invalid scope rejection and internal-dependency requirements fail usefulness even when substantive surviving claims are supported. Honest partial evidence is not equivalent to fabricated completion.",
+  "summary": {
+    "captured": 6,
+    "valid_cases": 6,
+    "pass": 3,
+    "fail": 3,
+    "mean_score_out_of_8": 6.5,
+    "median_total_seconds": 61.159,
+    "minimum_total_seconds": 8.924,
+    "maximum_total_seconds": 175.826,
+    "median_answer_token_ttft_seconds": 56.819,
+    "latency_note": "End-to-end native application latency includes server scheduling and any overlap with a queued development-regression request. No deployment-provider/cold-start claim is made.",
+    "unanswered_request_marked_complete": 0,
+    "material_unsupported_displayed_claim_observed": 0,
+    "manufactured_public_consensus_observed": 0,
+    "filings_only_live_tool_violations": 0,
+    "remaining_defects": [
+      "calendar year rejected against historical fiscal controls",
+      "unrequested intermediate input printing enforced",
+      "explicit datelines not normalized and false missing-date status",
+      "overbroad paragraph suppression in development regression"
+    ],
+    "global_task_calls_at_capture_end": 135,
+    "global_task_reserved_credits_at_capture_end": 270,
+    "budget_note": "Global counters include other task activity; not isolated held-out-call consumption."
+  },
+  "cases": [
+    {
+      "id": "J01",
+      "category": "two_company_recent_comparison",
+      "question": "im out of the loop on amd and nvidia. give me a couple meaningful recent updates for each and how their approaches differ",
+      "companies": [
+        "AMD",
+        "NVDA"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Recent meaningful updates for each selected company",
+        "A sourced explanation of similarities or differences in their approaches"
+      ],
+      "criteria": [
+        "Covers both companies with a clear recent timeframe",
+        "Does not force an unsupported direct performance ranking",
+        "Explains significance in readable language and distinguishes plans from realized events",
+        "Does not claim missing dated evidence when cited usable dates exist"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "flags": [
+        "dangling_context_after_claim_removal"
+      ],
+      "reason": "Both companies receive meaningful updates and a supported comparison. One AMD bullet starts 'At the same event' after the relevant introduction was removed; useful overall but editorially rough.",
+      "source_checks": [
+        "W10 and its preserved search observation support the open full-stack framing, Anthropic engineering/deployment agreement and OpenAI Q4 deployment plan.",
+        "W3 explicitly identifies NVIDIA as the source of the syndicated August 31 MediaTek/NVLink Fusion announcement.",
+        "W1 supports Cisco's August 25 secure-AI-factory expansion through Supermicro.",
+        "Planned deployment is not represented as completed operation."
+      ],
+      "status": "completed",
+      "seconds": 88.817,
+      "answer_token_ttft_seconds": 60.421,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "0d054f1b3e0a26356ccb4215629790b2689aabf97629fdd35b43b1beb3bcb994",
+      "source_text_hashes": {
+        "W1": "9b0973b3acda12bcdd5f2e6694ae6ffeea1875ed1888925e5d12b2733c04761c",
+        "W3": "09ef7da383ca2df929c977ff5fe029b6e6cedd130cec6d2455813823cce626f8",
+        "W10": "d64fe773896d404217f88332c8123e1ed5846b2c611840e3cf47eaafd87407e9"
+      }
+    },
+    {
+      "id": "J02",
+      "category": "historical_numbers_and_reception",
+      "question": "was intels fy25 sales performance actually an improvement on fy24? check the math then look at what outsiders made of the earnings release",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "Checked FY2025-versus-FY2024 revenue direction and magnitude",
+        "Identifiable outside assessments around the corresponding earnings release"
+      ],
+      "criteria": [
+        "Checks the user's implied premise rather than assuming improvement",
+        "Uses the historical earnings-release window for outside research",
+        "Explains what the cited observers focused on without inventing consensus",
+        "Does not add a generic freshness gap after finding usable historical reporting"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 8,
+      "score_max": 8,
+      "flags": [],
+      "reason": "The answer corrects the implied improvement premise, checks the revenue change, and explains identifiable outside reactions to the historical results.",
+      "source_checks": [
+        "F/C sources support 53.101 to 52.853 billion USD, -248 million USD and -0.47%.",
+        "W6 explicitly distinguishes flat annual revenue from reduced losses.",
+        "W4 supports Schulman's supply-constrained-not-demand-constrained assessment and the margin effect of the manufacturing ramp.",
+        "W9 supports Rasgon's tool-utilization/demand concerns and Lee's not-a-clean-story assessment."
+      ],
+      "status": "completed",
+      "seconds": 175.826,
+      "answer_token_ttft_seconds": 147.221,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "d06b05784dffdfef851d5eca8ece6efdd42674abd1d412444451ecb507d1a00c",
+      "source_text_hashes": {
+        "C1": "5db85b16118e7c7d0ab9f094b5b2cca127f9427353b5f66079e5bb6b5d1710d5",
+        "C2": "35b11456241ada0ad73addfe8ec3ea03c2fafec2bafe8ced2ad4cf65844bcd40",
+        "F1": "00e23cf69ff5ed236e0bfeca2f2d07585125bd36aa915de4d4a86eac3c76cf7a",
+        "F3": "28da70905f2b6259e8d65b0e21a3108f2247ffb21f1aee520eb94b406aa493f0",
+        "W4": "a75b62abcdfeb61c2b1d1c2323f3a20edaff7c9c3f8099e4c5f48e3d501ea767",
+        "W6": "b137a041a70f32b2dcc1a3d77f71ef090a4e20f509224df5dbd2ba98db9fceca",
+        "W9": "42e340562e292ee53b66a5106f8af597106704ac3e612a2538199a66bf0436d2"
+      }
+    },
+    {
+      "id": "J03",
+      "category": "event_status_and_synthesis",
+      "question": "what changed for qualcomm over the summer and early fall? id like the business story and which bits have happened already vs are still plans",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "A useful Qualcomm development summary for summer through early fall 2026",
+        "A distinction between completed events, announced agreements and future plans"
+      ],
+      "criteria": [
+        "Makes the implied current-year timeframe explicit",
+        "Synthesizes material findings across the requested period",
+        "Does not turn an agreement into a completed deal or a customer plan into deployed capacity",
+        "Removes or narrows unsupported claims instead of retaining them beside a diagnostic"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 0,
+        "useful_synthesis": 0,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 3,
+      "score_max": 8,
+      "flags": [
+        "calendar_year_incorrectly_limited_by_fiscal_selection"
+      ],
+      "reason": "No research is performed. A current-year calendar-period web request is rejected because its event year exceeds the selected historical fiscal year, despite the fiscal selection being valid.",
+      "source_checks": [
+        "Raw answer is 'No verified answer is available. Current Developments: Research event year exceeds selected fiscal scope'.",
+        "No source evidence or development summary is returned.",
+        "The selected QCOM FY2025 controls historical filings; they should not prohibit summer/fall 2026 outside research."
+      ],
+      "status": "failed",
+      "seconds": 8.924,
+      "answer_token_ttft_seconds": null,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "082eda253c9b8845f6b872dcff8e4e3227c99f1da17b1ce116edc5f509314c39",
+      "source_text_hashes": {}
+    },
+    {
+      "id": "J04",
+      "category": "capability_only",
+      "question": "before i ask anything, can this thing do both the financial math and outside research or do i need separate questions? just explain how to use it",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "An accurate concise explanation of combined financial and external research capability",
+        "Practical guidance for phrasing a combined request"
+      ],
+      "criteria": [
+        "Does not perform financial or live research because the user explicitly asks only for usage guidance",
+        "Does not demand outside evidence for implemented application capabilities",
+        "Does not claim unavailable conversation memory or stock-price functionality"
+      ],
+      "verdict": "pass",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 2
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "flags": [
+        "verbose_capability_answer"
+      ],
+      "reason": "The usage-only request receives an accurate local explanation and a combined-answer example without running financial or web research. The full role catalog is longer than necessary.",
+      "source_checks": [
+        "No citations or external evidence are required to describe implemented application roles.",
+        "No search or extraction tool is invoked.",
+        "The response explicitly identifies self-contained requests and unsupported market-price scope."
+      ],
+      "status": "completed",
+      "seconds": 14.109,
+      "answer_token_ttft_seconds": null,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "1080bbef24e67ce3e71f5e0194075af3d2aa135c704dfbd521f4d4f6aa3a6790",
+      "source_text_hashes": {}
+    },
+    {
+      "id": "J05",
+      "category": "filings_only_financial_interpretation",
+      "question": "using just nvidias reports, did its gross margin get better from fy24 to fy25 and what explains that? dont look up current news",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "required_outputs": [
+        "A checked FY2024-to-FY2025 gross-margin comparison",
+        "A filing-supported explanation of the change"
+      ],
+      "criteria": [
+        "Respects the no-current-news instruction",
+        "Distinguishes percentage-point margin change from percent change",
+        "Connects the result to filing evidence",
+        "Does not turn worker boundaries into user-facing unfinished-task commentary"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "flags": [
+        "internal_dependency_printing_required_for_completion"
+      ],
+      "reason": "The margin comparison and filing explanation answer the user, but the final reviewer demands underlying revenue/gross-profit values be printed and marks the answer partial. Those are calculation dependencies, not additional requested outputs.",
+      "source_checks": [
+        "C1/C2/C3 support margins 72.72% to 74.99%, a 2.27-percentage-point improvement.",
+        "S19 attributes improvement primarily to a greater Data Center mix; S17/S19 support the smaller inventory-charge margin effect.",
+        "No live search/extraction tool is invoked, respecting the reports-only instruction.",
+        "The final missing output describes internal financial inputs rather than missing margin results or missing explanation."
+      ],
+      "status": "partial",
+      "seconds": 68.054,
+      "answer_token_ttft_seconds": 53.217,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "b73d969c470d694d8f371c7b54d91a0476cb129b0389c192cf85463c34ec8dac",
+      "source_text_hashes": {
+        "C1": "a659b9eb1454d1e81e65e58b70dfadc9c925892a8b839ae99f8d84423a72d40c",
+        "C2": "bcd6ac6cfca072a1ca49181f0b376fd446292dbcce10e2f7eac0f0ffa9bd7c70",
+        "C3": "7fdf3b45b79c5a2914203b099dfd3b53f23cfa0198e138ccb8d436caca4c620a",
+        "S17": "9eb5eccc975926cef236532201d890182e5f9ef6a24aed3f729452abcee07d99",
+        "S19": "1b3af5b6b92d3cbec109ba09e24648d25cb543bebf5a8736bfa20786bf94244b"
+      }
+    },
+    {
+      "id": "J06",
+      "category": "official_claim_check",
+      "question": "ive seen people saying amds ai business is taking off. what has amd itself actually announced recently, and whats an announcement vs something already in production",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "required_outputs": [
+        "Recent AMD-issued AI-business announcements",
+        "A distinction between announced or planned capacity and production or deployment already claimed"
+      ],
+      "criteria": [
+        "Uses issuer-attributed evidence for the requested official claims",
+        "Recovers explicit page publication dates where available instead of requiring a populated API date field",
+        "Attributes production claims to AMD rather than pretending independent verification",
+        "Keeps caveats proportional and does not retain unsupported factual assertions"
+      ],
+      "verdict": "fail",
+      "score": {
+        "request_coverage": 2,
+        "useful_synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1
+      },
+      "score_total": 7,
+      "score_max": 8,
+      "flags": [
+        "false_no_dated_evidence_gap"
+      ],
+      "reason": "Official source text establishes dated announcements and separates production, testing and future deployments, but null normalized date metadata still generates a contradictory no-dated-development gap.",
+      "source_checks": [
+        "W3 explicitly says SAN FRANCISCO, July 23, 2026 and Helios 'now in production'; it separately describes OpenAI's Q4 plan and Meta testing.",
+        "W1 explicitly says July 22, 2026 and supports the future Anthropic deployment and up-to-5-billion-dollar investment commitment.",
+        "W10 explicitly says Aug. 5, 2026 and distinguishes the announced Instinct Coder solution from its expected hardware configuration.",
+        "All three normalized published_date fields are null despite explicit datelines in their returned text. The final global no-date gap is false."
+      ],
+      "status": "partial",
+      "seconds": 54.263,
+      "answer_token_ttft_seconds": 39.361,
+      "all_displayed_citations_registered": true,
+      "answer_sha256": "7e474b6a99ffc1503e94dce36febd3678326030ec173881ce4c3dfada864ac34",
+      "source_text_hashes": {
+        "W1": "5cf0358fb90786cf3ba8cbc46895163f7413c75d39732c8fee13105f97296f14",
+        "W3": "cab37e3e8f769efe430621ea23832de0049143808f94abacfd3482b9561250d4",
+        "W10": "01d593dda7753194ef0b92397ec7bab4cf41d24438c1aaa5c090f00d549900f7"
+      }
+    }
+  ],
+  "development_regressions": [
+    {
+      "profile": "Development regression after first-holdout disclosure; not held-out evaluation",
+      "id": "H04",
+      "question": "catch me up on qualcomm, whats changed outside the phone business the past few months",
+      "artifact": "artifacts/usefulness-regression2.json",
+      "verdict": "pass",
+      "reason": "The BMW agreement now has direct support in W11 and W3; the paragraph is no longer an unsupported assertion. Official W6 supports the PickNik agreement and planned open-source integration; agreement/completion remains distinct.",
+      "status": "completed",
+      "seconds": 64.907,
+      "answer_sha256": "f1887ed207dffdffe5439bf5873f9241db7d4ec05de0f0911a21130a7ccbb372"
+    },
+    {
+      "profile": "Development regression after first-holdout disclosure; not held-out evaluation",
+      "id": "H13",
+      "question": "which of your agents would handle comparing qualcomm revenue and checking news about it? can you actually do both in one answer",
+      "artifact": "artifacts/usefulness-regression3.json",
+      "verdict": "pass",
+      "reason": "The capability request is answered locally with accurate roles and combined-answer guidance; no externally sourced proof is required.",
+      "status": "completed",
+      "seconds": 13.938,
+      "answer_sha256": "1080bbef24e67ce3e71f5e0194075af3d2aa135c704dfbd521f4d4f6aa3a6790"
+    },
+    {
+      "profile": "Development regression after first-holdout disclosure; not held-out evaluation",
+      "id": "H17",
+      "question": "from intels fy2025 report explain current liabilities vs last year, and why that matters. keep it to the report",
+      "artifact": "artifacts/usefulness-regression3.json",
+      "verdict": "pass",
+      "reason": "The answer directly quotes total current liabilities of 31,575 versus 35,666 million USD and supported components from S14, with payment/debt context from S11/S12/S22/S24. No unsupported registered calculation or live research is needed.",
+      "status": "completed",
+      "seconds": 44.636,
+      "answer_sha256": "42982dfb16ec0862d30b312daf34add55f241c2b3c5e068186cbb7447be43c1a"
+    },
+    {
+      "profile": "Development regression after first-holdout disclosure; not held-out evaluation",
+      "id": "H05",
+      "question": "amds 2025 sales went up right? show me how much from the filing and what analysts were worried about when the results came out",
+      "artifact": "artifacts/usefulness-regression3.json",
+      "verdict": "fail",
+      "reason": "The revenue calculation survives, but Outside research is empty after the reviewer removes an entire paragraph for one unsupported added inference. The diagnostic itself says the excerpt supports genuine analyst concerns. Suppression removes useful supported neighboring findings and is not a complete recovery.",
+      "status": "partial",
+      "seconds": 110.869,
+      "answer_sha256": "7d7ea6f20d8b011ad89cf4f76a136210665ab2fac79a0000fc2daddb6d0b77c0"
+    }
+  ],
+  "next_sealed_set": {
+    "count": 4,
+    "sha256": "7376329bd6002226429cbd5bfc507f2a9b3e388a8e1612d52a90c6d717ba97e5",
+    "status": "Awaiting iteration-three freeze and explicit release"
+  }
+}
