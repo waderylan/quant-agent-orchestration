@@ -98,8 +98,9 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     assert await page.locator('#answer > *').first.get_attribute('class') == 'final-summary'
     assert await summary.locator('h3').inner_text() == 'Final answer · partly complete'
     assert await summary.locator('.final-gaps > li > strong').all_text_contents() == ['Part 3 · Outside reaction', 'Other limits']
+    assert await summary.locator('.gap-kind').all_text_contents() == ['Not fully answered', 'Outside what this tool covers']
     assert await summary.locator('.gap-text').all_text_contents() == ['No named analyst praise', 'Market prices are outside scope']
-    assert 'not that the findings shown are wrong' in await summary.locator('[data-output="R3"] .gap-why').inner_text()
+    assert 'checked this part against its cited sources' in await summary.locator('[data-output="R3"] .gap-why').inner_text()
     assert await page.locator('[data-output="R3"] .part-status').inner_text() == 'Gap noted · see answer'
     assert await page.locator('[data-output="R1"] .part-status').inner_text() == 'Confirmed'
     assert 'No named analyst praise' not in await page.locator('#request-plan').inner_text()

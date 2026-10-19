@@ -335,17 +335,12 @@ class RequestProgress {
     box.setAttribute("aria-label", "Final answer summary");
     box.append(this.text("h3", "", gaps.length ? "Final answer · partly complete" : "Final answer"));
     const lead = gaps.length
-      ? "This is the finished, reviewed answer. What it states is backed by its cited sources. Some of what you asked for could not be confirmed:"
+      ? "This is the finished answer. Everything it states is backed by its cited sources. Notes on what it could not fully cover:"
       : review.status === "completed" || review.status === "partial" ? "This is the finished answer. The Answer Reviewer checked every requested part against the cited sources."
       : review.status === "failed" ? "This is the finished answer, but the review step was unavailable, so it was not checked. Its citations still point to registered sources."
       : "This is the finished answer.";
     box.append(this.text("p", "final-lead", lead));
     if (!gaps.length) return box;
-    const why = {
-      "Answer Reviewer": "Raised by the Answer Reviewer, which compares the answer with its cited sources. It means this point is unconfirmed, not that the findings shown are wrong.",
-      Agent: "Reported by the agent that did the research, before review.",
-      Supervisor: "System note: outside what this tool covers, or a step that did not finish.",
-    };
     const list = document.createElement("ul");
     list.className = "final-gaps";
     const groups = new Map();
@@ -361,14 +356,37 @@ class RequestProgress {
       item.dataset.output = key;
       item.append(this.text("strong", "", output ? `Part ${index + 1} · ${output.title}` : "Other limits"));
       for (const gap of rows) {
-        const row = document.createElement("p");
-        row.append(this.text("span", "gap-text", gap.text), this.text("span", "gap-why", why[gap.source] || why.Supervisor));
+        const [kind, label, why] = this.gapKind(gap, output, review);
+        const row = document.createElement("div");
+        row.className = "gap-row";
+        row.dataset.kind = kind;
+        row.append(this.text("span", "gap-kind", label), this.text("span", "gap-why", why));
+        const details = kind === "removed" && review.removed_claims?.length ? review.removed_claims : [gap.text];
+        for (const text of details) row.append(this.text(kind === "removed" ? "del" : "span", "gap-text", text));
         item.append(row);
       }
       list.append(item);
     }
     box.append(list);
     return box;
+  }
+
+  /* A plain-language type for each gap, from who raised it and what it says. */
+  gapKind(gap, output, review) {
+    const agent = output?.agent || "The researching agent";
+    if (gap.source === "Answer Reviewer" && /^Unsupported claims were removed/.test(gap.text))
+      return ["removed", "Sentences removed", "The Answer Reviewer took these out because their cited sources do not support them. The rest of the answer is unaffected."];
+    if (gap.source === "Answer Reviewer" && output)
+      return ["incomplete", "Not fully answered", "The Answer Reviewer checked this part against its cited sources and found something missing:"];
+    if (gap.source === "Answer Reviewer")
+      return ["missed", "Part of your question was not covered", "The Answer Reviewer found a request that no agent was assigned:"];
+    if (gap.source === "Agent")
+      return ["not_found", "Not found", `${agent} searched but could not establish this:`];
+    if (/review is unavailable/i.test(gap.text))
+      return ["unreviewed", "Not reviewed", "The review step did not finish, so this answer was not checked."];
+    if (/^(Financial Data|Financial Analysis \/ Quant|Filings Research|Risk Summary|Current Developments): /.test(gap.text))
+      return ["failed", "A step did not finish", "This agent stopped before producing a verified result:"];
+    return ["scope", "Outside what this tool covers", "This assistant does not provide:"];
   }
 
   removed(step, claims) {

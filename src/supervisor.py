@@ -550,8 +550,12 @@ def cooperative_graph(
             }
         )
         if not error and tasks:
-            # The filing router's fallback reason does not describe a web-only route.
-            route_reason = "The question asks for outside research only" if all(t.worker == "current" for t in tasks) else base.reason
+            # The filing router's reason describes its primary worker; when that worker
+            # is not in the route, explain the route by part ownership instead.
+            primary = {"analysis_data": {"data", "quant"}}.get(base.worker, {base.worker})
+            route_reason = base.reason if primary & {t.worker for t in tasks} else "Each part goes to the agent that owns it: " + "; ".join(
+                f"{OUTPUT_TITLES.get(t.output, t.output)} → {NAMES[t.worker]}" for t in tasks
+            )
             writer({"type": "plan", "data": plan_event(task, semantic, reason=route_reason, companies=companies, years=state["years"])})
         if error:
             from src.request_routing import mentioned_companies

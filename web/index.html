@@ -306,8 +306,12 @@
       #answer .final-summary p { margin: 0 0 6px; }
       .final-gaps { margin: 6px 0 0; padding-left: 18px; }
       .final-gaps li { margin-bottom: 6px; }
-      .gap-text { display: block; overflow-wrap: anywhere; }
+      .gap-row { margin: 4px 0 8px; }
+      .gap-kind { display: inline-block; margin-bottom: 2px; padding: 1px 8px; border-radius: 999px; background: #f3e6c4; color: #6b4e0c; font-size: 11px; font-weight: 650; }
+      .gap-row[data-kind="removed"] .gap-kind { background: #f5dddd; color: #7a3b3b; }
+      .gap-row[data-kind="scope"] .gap-kind { background: #e6eae5; color: #46524d; }
       .gap-why { display: block; color: #64716b; font-size: 12px; }
+      .gap-text { display: block; overflow-wrap: anywhere; }
       #intermediate-drafts ol { list-style: none; padding: 0; }
       #trace { list-style: none; padding: 0; margin: 8px 0 0; font: 12px/1.45 ui-monospace, monospace; max-height: 360px; overflow: auto; }
       #trace li { border-bottom: 1px solid #eef1ed; }

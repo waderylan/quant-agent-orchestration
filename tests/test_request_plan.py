@@ -171,6 +171,8 @@ async def test_reviewer_receives_the_filing_anchor_for_a_since_filing_window(mon
     assert '"latest_collected_filings": {"NVDA": "2026-02-25"}' in seen[0]
     assert '"research_windows": {"R1": {"NVDA": {"start_date": "2026-02-26"' in seen[0]
     assert result[-1]['data']['status'] == 'completed'
+    plan = next(e['data'] for e in result if e['type'] == 'plan')
+    assert plan['reason'] == 'Each part goes to the agent that owns it: Recent developments → Current Developments'
 
 
 @pytest.mark.asyncio
