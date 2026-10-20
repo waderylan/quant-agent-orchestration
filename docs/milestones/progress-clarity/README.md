@@ -78,7 +78,7 @@ Sections are the source of truth for the final answer:
   - Folded drafts move into a closed "Intermediate drafts (N)" disclosure with their reason.
   - A stream that ends without `answer_sections` shows the latest legacy answer, with the final banner saying it was not reviewed.
 - **Final answer banner and gaps:**
-  - When review finishes, the answer opens with a banner titled "Final answer" or "Final answer · partly complete". It says the answer is finished and states whether the Answer Reviewer checked every part, or whether the review was unavailable.
+  - When review finishes, the answer opens with a banner titled "Final answer" or "Final answer · with notes". It says the answer is finished and states whether the Answer Reviewer checked every part, or whether the review was unavailable.
   - Every gap appears once, in that banner, grouped by request part ("Part 1 · Recent developments") or under "Other limits". Each gap has a plain-language type with a one-line explanation: Not fully answered (the reviewer found part of a requested output missing), Sentences removed (listed struck through), Part of your question was not covered, Not found (reported by the researching agent), A step did not finish, Not reviewed, or Outside what this tool covers. The plan row shows only "Gap noted · see answer".
   - In sectioned mode the "Unresolved outputs" suffix and the "Still needed" banner are not rendered. The status line reads "Step 3 of 4 · Filings Research is working" while running, then "Final answer ready · 1 gap noted" or "Final answer ready · every part confirmed".
   - In Activity, a partial reviewer outcome reads "Found a gap" and a partial worker outcome reads "Done · reported a gap".
@@ -88,7 +88,7 @@ Sections are the source of truth for the final answer:
 
 ## Verification
 
-- `uv run --locked pytest -q`: 282 tests pass on 2026-10-19.
+- `uv run --locked pytest -q`: 290 tests pass on 2026-10-19.
 - [Event tests](../../../tests/test_progress_events.py) run an AMD-shaped Data → Quant → Research → Current turn with fake workers:
   - Plan owners, `after`/`feeds`/`serves`, and `plan` before the first `draft`.
   - Every step's drafts carry its Activity ID; legacy tokens still come only from the last step.
@@ -107,6 +107,24 @@ Sections are the source of truth for the final answer:
   - The run made no Tavily calls (ledger at 231 rows before and after). Testing stays under the account's 500-credit monthly cap; the web path is covered by the event and browser tests.
 - A Docker build of the branch contains `web/request-progress.js` and the new supervisor events.
 
+### Simulated-user rounds (2026-10-19)
+
+A separate Sonnet agent posed casual questions through the local UI in Chromium, with no web-research questions, and graded each answer as a non-expert user would. Results stay in local scratch output and are not committed.
+
+- **Round 1** (q01–q09):
+  - The reviewer removed correct sentences: one fiscal-date sentence, and 17 NVIDIA risk sentences whose text lay beyond the first 12,000 characters.
+  - "Anything new" in a filing comparison started web research.
+  - A one-year selection produced change-question gaps.
+  - An investment question echoed back as its own answer, and the capability answer was full of jargon.
+  - Fixes: dated and filing-identified financial excerpts, application context, long-source passage selection, citation-safe removal, a year tip, a scope answer, plain gap types and plain capability text.
+- **Round 2** (q03–q08 plus n01–n05):
+  - q07, q08, n02, n04 and n05 passed; no run used web research.
+  - The reviewer still struck 13 q05 sentences, because one citation closed a multi-sentence bullet.
+  - It also demanded a percentage change that n01 correctly called not meaningful from a loss.
+  - n03 could not compute operating cash flow minus net income.
+  - Repeated missing-data notes, raw `**` in removed text, and a red status made mostly complete answers look like failures.
+  - Fixes: passage selection per citing block, paragraph-level citation coverage, a same-interval cash-flow difference, merged notes, amber "with notes" status, and more plain-language replacements.
+
 ```powershell
 uv run --locked pytest -q tests/test_progress_events.py tests/test_request_progress.py tests/test_agent_activity.py tests/test_markdown.py
 uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
@@ -118,5 +136,6 @@ uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 - A non-last Risk Summary draft appears at step completion rather than token by token.
 - The last step's prose is sent twice, as a legacy `token` and as a `draft`. This keeps the existing API contract at the cost of duplicate bytes.
 - A real web-research turn was not repeated through the new UI. Fixture tests cover the Current Developments path.
+- R&D expense is not a Financial Data metric. "R&D as a percent of revenue" is reported as data not available; adding it requires republishing the prepared financial observations.
 </content>
 </invoke>
