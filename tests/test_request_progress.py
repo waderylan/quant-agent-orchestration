@@ -148,3 +148,16 @@ async def test_stream_without_reviewed_sections_keeps_the_latest_answer_marked_u
     assert await final.locator('.section-badge').inner_text() == 'Not reviewed · review unavailable'
     assert 'was not checked' in await page.locator('#answer > .final-summary').inner_text()
     assert await page.locator('#intermediate-drafts .answer-section[data-step="worker-1"]').count() == 1
+
+
+@pytest.mark.asyncio
+async def test_calculation_details_say_who_made_them_and_stay_collapsed(page):
+    # Quant's table arrived mid-answer with no owner or purpose, which confused a user.
+    await page.evaluate("""() => event('artifacts', {
+      calculations: [{source_id:'C1', label:'NVDA FY2025 revenue growth vs FY2024', display_value:'114.2034', unit:'percent', start:'2024-01-29', end:'2025-01-26', inspection_url:'/api/sources/recorded'}],
+      downloads: [{name:'CSV table', url:'/api/artifacts/x.csv'}]})""")
+    box = page.locator('#artifacts > details.calculations')
+    assert await box.get_attribute('open') is None
+    assert await box.locator('summary').text_content() == 'Calculation details (1) Financial Analysis / Quant'
+    assert 'the answer cites them as C1' in await box.locator('.calculations-why').text_content()
+    assert await box.locator('td').nth(1).text_content() == '114.20'

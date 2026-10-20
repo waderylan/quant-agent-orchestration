@@ -197,6 +197,9 @@
         overflow: auto;
         white-space: normal;
       }
+      .calculations { margin: 16px 0; border: 1px solid #d7dfda; border-radius: 10px; padding: 10px 14px; }
+      .calculations > summary { cursor: pointer; font-weight: 650; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .calculations-why { color: #52645c; font-size: 13px; margin: 8px 0; }
       #artifacts img {
         max-width: 100%;
         height: auto;
@@ -827,9 +830,22 @@ What has happened at the selected companies since their latest filings? Cite dat
           controller = null;
         }
       };
+      // Quant's checked results arrive when that step ends, often before the answer;
+      // keep them collapsed and say who made them and how the answer uses them.
       function displayArtifacts(data) {
-        const title = document.createElement("h2");
-        title.textContent = "Verified calculations";
+        const box = document.createElement("details");
+        box.className = "calculations";
+        const title = document.createElement("summary");
+        title.append(
+          `Calculation details (${data.calculations.length}) `,
+          progress.chip("Financial Analysis / Quant"),
+        );
+        const why = document.createElement("p");
+        why.className = "calculations-why";
+        why.textContent =
+          "Every number the Financial Analysis / Quant agent calculated. Each was recomputed independently from the reported SEC figures before use; the answer cites them as " +
+          data.calculations.map((row) => row.source_id).join(", ") +
+          ". Download the table, chart, code or step-by-step ledger to check them yourself.";
         const table = document.createElement("table"),
           head = document.createElement("tr");
         for (const label of ["Calculation", "Value", "Unit", "Fiscal dates"]) {
@@ -840,9 +856,11 @@ What has happened at the selected companies since their latest filings? Cite dat
         table.append(head);
         for (const row of data.calculations) {
           const tr = document.createElement("tr");
+          const value = Number(row.display_value);
           for (const text of [
             row.label,
-            row.display_value,
+            // Percentages read like the answer; the exact value stays in the ledger.
+            /percent/.test(row.unit) && Number.isFinite(value) ? value.toFixed(2) : row.display_value,
             row.unit.replaceAll("_", " "),
             `${row.start} → ${row.end}`,
           ]) {
@@ -876,7 +894,9 @@ What has happened at the selected companies since their latest filings? Cite dat
         img.alt =
           "Verified financial calculations; values and units appear in the table.";
         if (chart) img.src = chart.url;
-        $("artifacts").replaceChildren(title, wrapper, nav, img);
+        box.append(title, why, wrapper, nav);
+        if (chart) box.append(img);
+        $("artifacts").replaceChildren(box);
       }
     </script>
   </body>
