@@ -123,7 +123,11 @@ A separate Sonnet agent posed casual questions through the local UI in Chromium,
   - It also demanded a percentage change that n01 correctly called not meaningful from a loss.
   - n03 could not compute operating cash flow minus net income.
   - Repeated missing-data notes, raw `**` in removed text, and a red status made mostly complete answers look like failures.
-  - Fixes: passage selection per citing block, paragraph-level citation coverage, a same-interval cash-flow difference, merged notes, amber "with notes" status, and more plain-language replacements.
+  - Fixes: passage selection per citing block, paragraph-level citation coverage, a same-interval cash-flow difference, merged notes, amber "with notes" status, and more plain-language replacements. Complete risk sections get a 40,000-character excerpt.
+- **Live recheck** after the fixes:
+  - n01 and n03 completed with every part confirmed. n03 reports operating cash flow $8.791 billion below net income.
+  - q05 lost 4 sentences instead of 13 and kept the AI Diffusion rule, China investigation and Blackwell licensing changes.
+  - q03 shows its R&D limit once, as merged "Data not available" notes.
 
 ```powershell
 uv run --locked pytest -q tests/test_progress_events.py tests/test_request_progress.py tests/test_agent_activity.py tests/test_markdown.py
