@@ -219,7 +219,8 @@
       #research { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; }
       .query { grid-column: 1; grid-row: 1; }
       select option { padding: 5px 8px; border-radius: 4px; }
-      select option:checked { background: #e1ede5; color: #234a3e; font-weight: 600; }
+      /* Chrome paints focused selections blue; a background image keeps the same green whether focused or not. */
+      select option:checked, select:focus option:checked { background: #e1ede5 linear-gradient(#e1ede5, #e1ede5); color: #234a3e; -webkit-text-fill-color: #234a3e; font-weight: 600; }
       .filter-hint { display: block; color: #64716b; font-size: 10px; margin-top: 6px; }
       .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
       .actions button { margin: 0; }
