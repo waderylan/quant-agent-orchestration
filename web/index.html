@@ -586,9 +586,12 @@ What has happened at the selected companies since their latest filings? Cite dat
         if (p.kind === "calculation") {
           $("source-label").textContent =
             `${p.label} · ${p.unit} · ${p.start} → ${p.end}`;
-          const pre = document.createElement("pre");
-          pre.textContent = JSON.stringify(p, null, 2);
-          $("passage").replaceChildren(pre);
+          $("passage").replaceChildren(...readable(p, [
+            `${p.label}: ${p.display_value ?? p.value} ${String(p.unit).replaceAll("_", " ")}`,
+            p.formula && `Formula: ${p.formula}`,
+            `Period: ${p.start} → ${p.end}`,
+            "Recomputed independently from the inputs below before it was shown.",
+          ]));
           for (const input of p.input_sources) {
             const b = document.createElement("button");
             b.className = "source";
@@ -621,9 +624,12 @@ What has happened at the selected companies since their latest filings? Cite dat
           $("source-label").append(link, document.createTextNode(" · "));
         }
         if (p.kind === "financial_observation") {
-          const pre = document.createElement("pre");
-          pre.textContent = JSON.stringify(p, null, 2);
-          $("passage").replaceChildren(pre);
+          const value = Number(p.value);
+          $("passage").replaceChildren(...readable(p, [
+            `${p.company} FY${p.fiscal_year} ${String(p.metric).replaceAll("_", " ")}: ${Number.isFinite(value) ? value.toLocaleString("en-US") : p.value} ${p.unit}`,
+            `Period: ${p.start} → ${p.end} (${p.period} ${p.basis})`,
+            `Source: ${p.form || "SEC filing"}${p.filed ? " filed " + p.filed : ""}${p.accession ? ", accession " + p.accession : ""} · ${p.accounting_basis || ""}`,
+          ]));
           return;
         }
         if (p.risk_context_note)
@@ -640,6 +646,21 @@ What has happened at the selected companies since their latest filings? Cite dat
           document.createTextNode(p.context.slice(start + p.text.length)),
         );
         $("passage").replaceChildren(pre);
+      }
+      // Plain lines for a figure or calculation, with the raw record kept inspectable.
+      function readable(record, lines) {
+        const nodes = lines.filter(Boolean).map((line) => {
+          const p = document.createElement("p");
+          p.textContent = line;
+          return p;
+        });
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = "Raw record";
+        const pre = document.createElement("pre");
+        pre.textContent = JSON.stringify(record, null, 2);
+        details.append(summary, pre);
+        return [...nodes, details];
       }
       function displaySources(sources) {
         answerSources = sources;

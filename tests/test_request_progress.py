@@ -63,6 +63,8 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     }""")
     await page.wait_for_function("document.querySelector('[data-step=\"worker-3\"] .section-body').textContent.includes('Client')")
     assert await page.locator('.answer-section').count() == 2
+    assert await page.locator('[data-step="worker-1"] h3').inner_text() == 'Inputs for Step 2 · Financial Analysis / Quant'
+    assert await page.locator('[data-step="worker-1"] .section-inputs').get_attribute('open') is None
     assert await page.locator('[data-step="worker-3"] .section-badge').inner_text() == 'Draft · writing'
     assert await page.locator('.step-now').inner_text() == 'Now: Writing its answer'
     assert 'Received 5 evidence items: F1–F4, C1' in await page.locator('#request-plan').inner_text()

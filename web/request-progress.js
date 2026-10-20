@@ -60,7 +60,8 @@ function describeTool(name, args = {}) {
     case "inspect_risk": return "Reading a complete risk-factor section";
     case "risk_pairs": return "Pairing risk factors across years";
     case "record_risk_change": return `Recording a risk change${args.change ? ": " + args.change : ""}`;
-    case "report_outcome": return `Reporting outcome: ${args.status || "done"}${args.missing?.length ? " with gaps" : ""}`;
+    case "inspect_observation": return `Checking reported figure ${args.source_id || ""}`.trim();
+    case "report_outcome": return args.missing?.length || args.status === "partial" ? "Finishing up: some parts could not be found" : "Finishing up";
     default: return String(name || "tool").replaceAll("_", " ");
   }
 }
@@ -159,6 +160,7 @@ class RequestProgress {
     step.state = data.status;
     if (data.status === "running") {
       this.current = step.id;
+      step.now = "Starting";
       this.section(step);
     } else if (this.current === step.id) {
       this.current = null;
@@ -243,13 +245,21 @@ class RequestProgress {
     header.append(title, chip, badge);
     const body = document.createElement("div");
     body.className = "section-body";
+    let content = body;
+    if (step.serves && !step.serves.length && step.feeds?.length) {
+      const next = this.steps.get(step.feeds[0]);
+      title.textContent = `Inputs for Step ${next?.position ?? ""} · ${next?.agent ?? "next agent"}`;
+      content = document.createElement("details");
+      content.className = "section-inputs";
+      content.append(this.text("summary", "", "Show what this agent passed on"), body);
+    }
     const removed = document.createElement("details");
     removed.className = "section-removed";
     removed.hidden = true;
     removed.append(document.createElement("summary"), document.createElement("ul"));
     const note = this.text("p", "section-note", "");
     note.hidden = true;
-    node.append(header, note, body, removed);
+    node.append(header, note, content, removed);
     step.node = node;
     this.answer.append(node);
     this.badge(step);
@@ -266,7 +276,7 @@ class RequestProgress {
     else if (step.state === "running") [text, state] = ["Draft · writing", "drafting"];
     else if (["failed", "unverified"].includes(step.state)) [text, state] = [RequestProgress.stepStates[step.state], "failed"];
     else if (this.reviewState === "checking") [text, state] = ["Draft · being checked", "checking"];
-    else [text, state] = ["Draft · waiting for review", "waiting"];
+    else [text, state] = ["Draft · not yet checked", "waiting"];
     badge.textContent = text;
     step.node.dataset.state = state;
   }
@@ -309,6 +319,7 @@ class RequestProgress {
       step.state = "completed";
       step.node.querySelector("h3").textContent = section.label || RequestProgress.labels[section.worker] || section.agent;
       step.node.querySelector(".section-note").hidden = true;
+      step.node.querySelector(".section-inputs")?.setAttribute("open", "");
       this.removed(step, section.removed || []);
       this.badge(step);
       this.renderSection(step);

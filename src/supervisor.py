@@ -990,7 +990,7 @@ def cooperative_graph(
             folded[t.worker] = (
                 "Not run before the supervisor stopped." if outcome is None
                 else f"No verified answer from this agent ({outcome})." if t.worker not in answers
-                else f"Its results were handed to {final_agent}, whose answer uses them." if final_agent
+                else f"Used by {final_agent} to write its answer." if final_agent
                 else "Its answer was not used."
             )
         if not task.registered_evidence and status == "partial" and state.get("live_intent", "none") == "none":
