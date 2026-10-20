@@ -82,20 +82,23 @@ async def decompose(state, model_stream, emit):
 
 
 def relevant_text(text, answer, sid, limit=12000):
-    """For a long source, the paragraphs that best match the sentences citing it."""
+    """For a long source, the paragraphs that best match each answer block citing it."""
     if len(text) <= limit:
         return text
-    # Citations follow their sentence's period, so never split before "[".
-    citing = " ".join(s for s in re.split(r"(?<=[.!?])\s+(?!\[)|\n+", answer) if f"[{sid}]" in s)
-    terms = {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", citing)}
+    words = lambda s: {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", s)}
+    # A citation at the end of a paragraph or bullet supports every sentence in it.
+    blocks = [words(b) for b in re.split(r"\n+", answer) if f"[{sid}]" in b]
     paragraphs = [p for p in re.split(r"\n+", text) if p.strip()]
-    score = lambda i: len(terms & {w.lower() for w in re.findall(r"[A-Za-z][A-Za-z0-9-]{3,}", paragraphs[i])})
+    vocab = [words(p) for p in paragraphs]
+    # Take each block's next-best paragraph in turn so every cited claim gets support.
+    ranked = [sorted(range(len(paragraphs)), key=lambda i: (-len(b & vocab[i]), i)) for b in blocks] or [list(range(len(paragraphs)))]
     chosen, size = set(), 0
-    for i in sorted(range(len(paragraphs)), key=lambda i: (-score(i), i)):
-        if size + len(paragraphs[i]) > limit:
-            continue
-        chosen.add(i)
-        size += len(paragraphs[i])
+    for depth in range(len(paragraphs)):
+        for order in ranked:
+            i = order[depth]
+            if i not in chosen and size + len(paragraphs[i]) <= limit:
+                chosen.add(i)
+                size += len(paragraphs[i])
     return "\n…\n".join(paragraphs[i] for i in sorted(chosen))
 
 

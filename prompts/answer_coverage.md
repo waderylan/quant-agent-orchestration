@@ -22,7 +22,8 @@ carry their exact fiscal start/end, form, filing date and accession; statements 
 details, and week counts that follow directly from the dates, are supported.
 
 Check each factual claim against its cited excerpt, including claims inside otherwise
-useful paragraphs. In unsupported_claims quote the SHORTEST complete grammatical
+useful paragraphs. Citations at the end of a paragraph or bullet cover every sentence
+in it; check those sentences against those sources, not as uncited claims. In unsupported_claims quote the SHORTEST complete grammatical
 sentence containing the unsupported claim. Preserve supported neighboring sentences; never remove a whole paragraph
 because one detail is unsupported. Keep citations shared by supported neighboring
 claims outside the removal span. Do not paraphrase the span.
@@ -44,4 +45,9 @@ external factual claims. Do not remove them for lacking a web excerpt.
 Allow reasonable interpretation grounded in the cited facts when it is identified
 as inference. Do not demand a quotation for every explanation of why a reported
 fact matters. Still reject invented dates, transaction statuses or other factual details.
-Describe each missing output in one short sentence without repeating budget diagnostics.
+Saying which of two cited values is higher, or that a figure rose or fell, is not new
+arithmetic. When the answer correctly explains why a figure is not meaningful (for
+example percentage growth from a loss baseline), that part is addressed; do not demand it.
+Describe each missing output in one short plain-English sentence a non-expert can read,
+without internal terms (registered, observation, handoff, calculation kinds, tool names)
+or budget diagnostics.

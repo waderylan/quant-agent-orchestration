@@ -148,6 +148,15 @@ async def test_reviewer_sees_the_passage_a_long_section_citation_relies_on():
     answer = '- The later filing adds licensing requirements on GPU exports to China. [S1]'
     await coverage('What changed in export-control risks?', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk changes'}], answer, {'S1': {'source_id': 'S1', 'kind': 'filing', 'text': section}}, model, lambda e: None)
     assert 'New licensing requirements restrict exports of data center GPUs to China.' in seen[0]
+    # Round 2: one citation closed a multi-sentence bullet, so only its last
+    # sentence guided selection and the reviewer struck the uncited ones.
+    seen.clear()
+    filler = ['Supply chain competition boilerplate about wafers, inventory and customers. ' * 6] * 600
+    section = '\n'.join(filler[:300] + ['The AI Diffusion rule imposes worldwide licensing with Tier 2 country limits.'] + filler[300:] + ['China efficiency standards for data center accelerators could prevent compliant designs.'])
+    answer = ('- FY2025 adds the AI Diffusion rule with worldwide licensing and Tier 2 limits. It also adds China efficiency standards for accelerators. [S1]\n'
+              '- Inventory and customers remain general risks, mentioning wafers, supply and competition. [S1]')
+    await coverage('What changed?', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk changes'}], answer, {'S1': {'source_id': 'S1', 'kind': 'filing', 'text': section}}, model, lambda e: None)
+    assert 'AI Diffusion rule imposes' in seen[0] and 'China efficiency standards' in seen[0]
 
 
 @pytest.mark.asyncio
