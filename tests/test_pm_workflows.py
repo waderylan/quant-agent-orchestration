@@ -148,6 +148,14 @@ def test_cash_conversion_is_independently_checked_and_rejects_invalid_basis():
         modified = {**sources, "F2": {**sources["F2"], **invalid}}
         with pytest.raises(ValueError):
             validate_results(run_isolated(code, modified), modified)
+    # "How much more cash than earnings" is a same-interval dollar difference.
+    gap = "results=[{'label':'cash minus earnings','kind':'difference','inputs':['F1','F2'],'value':values['F1']-values['F2']}]"
+    row = validate_results(run_isolated(gap, sources), sources)[0]
+    assert Decimal(row["value"]) == 3374000000 and row["unit"] == "USD"
+    assert row["label"] == "AMD FY2025 operating cash flow minus net income"
+    with pytest.raises(ValueError):
+        shifted = {**sources, "F2": {**sources["F2"], "end": "2025-09-27"}}
+        validate_results(run_isolated(gap, shifted), shifted)
 
 
 def test_component_scenario_retains_approved_assumption_and_checked_chain():

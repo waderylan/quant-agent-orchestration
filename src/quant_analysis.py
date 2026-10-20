@@ -376,6 +376,12 @@ def validate_results(rows, sources, *, scenario=None):
                 ).isoformat(),
             )
             formula = f"{row.inputs[0]} - {row.inputs[1]}"
+        elif row.kind == "difference" and (current["metric"], inputs[1]["metric"]) == ("operating_cash_flow", "net_income"):
+            # Cash generated beyond (or short of) reported earnings for one fiscal interval.
+            comparable(current, inputs[1], sources, same_interval=True)
+            expected = values[0] - values[1]
+            metadata["metric"] = "operating_cash_flow_minus_net_income"
+            formula = f"{row.inputs[0]} - {row.inputs[1]}"
         else:
             previous = inputs[1]
             comparable(current, previous, sources)
@@ -441,7 +447,7 @@ def validate_results(rows, sources, *, scenario=None):
         label = f"{metadata['company']} FY{metadata['fiscal_year']}{period_label} {metric_label}"
         if any(s.get("evidence_kind", "").startswith("synthetic") for s in inputs):
             label += " (synthetic fixture)"
-        if row.kind in ("growth", "difference"):
+        if row.kind in ("growth", "difference") and inputs[1]["metric"] == current["metric"]:
             prior_period = (
                 "" if inputs[1]["period"] == "FY" else " " + inputs[1]["period"]
             )

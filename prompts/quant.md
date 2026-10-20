@@ -57,6 +57,8 @@ Kinds:
   are valid. Never substitute total consolidated income for parent-attributable income.
 - difference: [new, old], new - old, matching metric/basis/company and ordered
   non-overlapping intervals. Margin differences use percentage points.
+  Also [operating_cash_flow, net_income] for the SAME fiscal interval: cash flow minus
+  net income, in USD, for "how much more cash than earnings" questions.
 - quarter: [current cumulative, previous cumulative], current - previous, matching
   company, metric, USD, fiscal year/start, original revision basis, and adjacent periods.
   Q2-only cash flow uses Q2 YTD minus Q1 YTD; Q3 uses Q3 YTD minus Q2 YTD;
