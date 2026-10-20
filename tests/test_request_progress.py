@@ -161,3 +161,14 @@ async def test_calculation_details_say_who_made_them_and_stay_collapsed(page):
     assert await box.locator('summary').text_content() == 'Calculation details (1) Financial Analysis / Quant'
     assert 'the answer cites them as C1' in await box.locator('.calculations-why').text_content()
     assert await box.locator('td').nth(1).text_content() == '114.20'
+
+
+@pytest.mark.asyncio
+async def test_dark_mode_toggle_recolors_the_page_and_survives_reload(page):
+    toggle = page.locator('#theme-toggle')
+    await toggle.click()
+    assert await toggle.text_content() == 'Light mode'
+    assert await page.evaluate("getComputedStyle(document.body).backgroundColor") == 'rgb(5, 7, 13)'
+    await page.reload()
+    assert await page.evaluate("document.documentElement.dataset.theme") == 'dark'
+    assert await toggle.get_attribute('aria-pressed') == 'true'
