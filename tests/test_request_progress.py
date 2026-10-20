@@ -24,14 +24,16 @@ PLAN = {
 SECTIONS = {
     "sections": [
         {"id": "worker-3", "worker": "research", "agent": "Filings Research", "label": "From the filings", "labeled": True, "markdown": "Client demand drove the gain [S1].", "removed": []},
-        {"id": "worker-4", "worker": "current", "agent": "Current Developments", "label": "Outside research", "labeled": True, "markdown": "Analysts questioned margins [W1].", "removed": ["Unsupported praise."]},
+        {"id": "worker-4", "worker": "current", "agent": "Current Developments", "label": "Outside research", "labeled": True, "markdown": "Analysts questioned margins [W1].", "removed": ["- **Unsupported** praise."]},
     ],
     "folded": [
         {"id": "worker-1", "worker": "data", "agent": "Financial Data", "reason": "Its figures appear with checked calculations in Financial analysis."},
         {"id": "worker-2", "worker": "quant", "agent": "Financial Analysis / Quant", "reason": "Its calculations are cited in From the filings."},
     ],
     "review": {"status": "partial", "results": [{"id": "R1", "addressed": True}, {"id": "R2", "addressed": True}, {"id": "R3", "addressed": False, "missing": "No named analyst praise"}], "removed_claims": ["Unsupported praise."]},
-    "gaps": [{"output": "R3", "text": "No named analyst praise", "source": "Answer Reviewer"}, {"output": None, "text": "Market prices are outside scope", "source": "Supervisor"}],
+    # Round 2 showed the same missing-data note three times in internal wording.
+    "gaps": [{"output": "R3", "text": "No named analyst praise", "source": "Answer Reviewer"}, {"output": None, "text": "Market prices are outside scope", "source": "Supervisor"},
+             {"output": None, "text": "INTC R&D: absent from supplied observations", "source": "Supervisor"}, {"output": None, "text": "INTC R&D: absent from supplied observations", "source": "Supervisor"}],
     "fallback": False,
 }
 
@@ -98,10 +100,11 @@ async def test_sections_stream_per_agent_and_finalize_in_place(page):
     # The answer opens with one banner that names it final and explains each gap once.
     summary = page.locator('#answer > .final-summary')
     assert await page.locator('#answer > *').first.get_attribute('class') == 'final-summary'
-    assert await summary.locator('h3').inner_text() == 'Final answer · partly complete'
+    assert await summary.locator('h3').inner_text() == 'Final answer · with notes'
     assert await summary.locator('.final-gaps > li > strong').all_text_contents() == ['Part 3 · Outside reaction', 'Other limits']
-    assert await summary.locator('.gap-kind').all_text_contents() == ['Not fully answered', 'Outside what this tool covers']
-    assert await summary.locator('.gap-text').all_text_contents() == ['No named analyst praise', 'Market prices are outside scope']
+    assert await summary.locator('.gap-kind').all_text_contents() == ['Not fully answered', 'Outside what this tool covers', 'Data not available']
+    assert await summary.locator('.gap-text').all_text_contents() == ['No named analyst praise', 'Market prices are outside scope', 'INTC R&D: absent from the collected figures']
+    assert await page.locator('#status').get_attribute('class') == 'notes'
     assert 'checked this part against its cited sources' in await summary.locator('[data-output="R3"] .gap-why').inner_text()
     assert await page.locator('[data-output="R3"] .part-status').inner_text() == 'Gap noted · see answer'
     assert await page.locator('[data-output="R1"] .part-status').inner_text() == 'Confirmed'

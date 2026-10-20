@@ -171,6 +171,7 @@
         color: #a62323;
       }
       #status.error { color: #a62323; }
+      #status.notes { color: #7a5a12; }
       mark {
         background: #fff2ac;
       }
@@ -757,7 +758,9 @@ What has happened at the selected companies since their latest filings? Cite dat
                     ? "Partial answer · evidence gap"
                     : "Response unverified";
           if (data.status !== "failed" && progress.active) $("status").textContent = progress.summary(data);
-          $("status").className = data.status === "completed" ? "" : "error";
+          // A finished answer with notes is amber; red is for failures.
+          $("status").className = data.status === "completed" ? ""
+            : progress.active && ["partial", "coverage_gap"].includes(data.status) ? "notes" : "error";
         }
       }
       $("stop").onclick = () => controller?.abort();

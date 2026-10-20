@@ -29,11 +29,25 @@ function hostname(url) {
 function plain(text) {
   return String(text)
     .replace(/\bquery_financials\b/g, "the reported-figures lookup")
+    .replace(/\bquery rejected because fiscal year exceeds request scope\b/gi, "that fiscal year is not selected")
+    .replace(/\bregistered evidence\b/g, "the collected data")
+    .replace(/\b(?:supplied|collected) (?:arithmetic )?observations?\b/g, "the collected figures")
+    .replace(/\bsupported calculation kinds do not permit\b/g, "the checked calculations do not include")
+    .replace(/\barithmetic input\b/g, "calculation input")
+    .replace(/\bQuant handoff\b/g, "calculation step")
+    .replace(/\b([A-Z]{2,5}) observations?\b/g, "$1 figure")
+    .replace(/\bobservations\b/g, "figures")
+    .replace(/\bobservation\b/g, "figure")
     .replace(/\b(?:is|was) not registered\b/g, "was not found")
     .replace(/\b(?:are|were) not registered\b/g, "were not found")
     .replace(/\bnot registered\b/g, "not found")
     .replace(/\b[FCSW] observations?\b/g, "reported figure")
     .replace(/\bregistered\b/g, "collected");
+}
+
+/* Removed sentences are shown as text, so drop Markdown emphasis marks. */
+function unmark(text) {
+  return String(text).replace(/\*\*|__|`/g, "").replace(/^\s*(?:[-*+]|\d+\.)\s+/, "");
 }
 
 function clip(text, length = 90) {
@@ -361,9 +375,9 @@ class RequestProgress {
       coverage_gap: ["Outside what this assistant covers", "No research agent was run for this request. The note below says what the assistant can do instead."],
       needs_clarification: ["More detail needed", "The request needs more detail before an agent can answer it. See the note below."],
     }[data.status] || ["No verified answer", "No agent produced a verified answer. The notes below say why."];
-    box.append(this.text("h3", "", !answered ? unanswered[0] : gaps.length ? "Final answer · partly complete" : "Final answer"));
+    box.append(this.text("h3", "", !answered ? unanswered[0] : gaps.length ? "Final answer · with notes" : "Final answer"));
     const lead = !answered ? unanswered[1] : gaps.length
-      ? "This is the finished answer. Everything it states is backed by its cited sources. Notes on what it could not fully cover:"
+      ? "Research is finished. Everything the answer states is backed by its cited sources; the notes below list what it could not cover."
       : review.status === "completed" || review.status === "partial" ? "This is the finished answer. The Answer Reviewer checked every requested part against the cited sources."
       : review.status === "failed" ? "This is the finished answer, but the review step was unavailable, so it was not checked. Its citations still point to registered sources."
       : "This is the finished answer.";
@@ -385,15 +399,25 @@ class RequestProgress {
       const item = document.createElement("li");
       item.dataset.output = key;
       item.append(this.text("strong", "", output ? `Part ${index + 1} · ${output.title}` : "Other limits"));
+      // One row per gap type, listing each distinct detail once.
+      const kinds = new Map();
       for (const gap of rows) {
         const [kind, label, why] = this.gapKind(gap, output, review);
-        const row = document.createElement("div");
-        row.className = "gap-row";
-        row.dataset.kind = kind;
-        row.append(this.text("span", "gap-kind", label), this.text("span", "gap-why", why));
+        if (!kinds.has(kind)) {
+          const row = document.createElement("div");
+          row.className = "gap-row";
+          row.dataset.kind = kind;
+          row.append(this.text("span", "gap-kind", label), this.text("span", "gap-why", why));
+          item.append(row);
+          kinds.set(kind, {row, seen: new Set()});
+        }
+        const {row, seen} = kinds.get(kind);
         const details = kind === "removed" && review.removed_claims?.length ? review.removed_claims : [gap.text];
-        for (const text of details) row.append(this.text(kind === "removed" ? "del" : "span", "gap-text", plain(text)));
-        item.append(row);
+        for (const text of details.map((d) => plain(kind === "removed" ? unmark(d) : d))) {
+          if (seen.has(text)) continue;
+          seen.add(text);
+          row.append(this.text(kind === "removed" ? "del" : "span", "gap-text", text));
+        }
       }
       list.append(item);
     }
@@ -416,7 +440,7 @@ class RequestProgress {
       return ["unreviewed", "Not reviewed", "The review step did not finish, so this answer was not checked."];
     if (/^(Financial Data|Financial Analysis \/ Quant|Filings Research|Risk Summary|Current Developments): /.test(gap.text))
       return ["failed", "A step did not finish", "This agent stopped before producing a verified result:"];
-    if (/not provided|not registered|unavailable|does not support|not support|no eligible|not available|not found/i.test(gap.text))
+    if (/not provided|not registered|unavailable|does not support|not support|no eligible|not available|not found|absent from|not selected/i.test(gap.text))
       return ["unavailable", "Data not available", "The collected filings and financial data do not include this for the selected companies and years:"];
     return ["scope", "Outside what this tool covers", "This assistant does not provide:"];
   }
@@ -427,7 +451,7 @@ class RequestProgress {
     box.querySelector("summary").textContent = `${claims.length} ${claims.length === 1 ? "sentence" : "sentences"} removed by the Answer Reviewer`;
     box.querySelector("ul").replaceChildren(...claims.map((claim) => {
       const item = document.createElement("li");
-      item.append(this.text("del", "", claim), document.createTextNode(" — not supported by its cited sources"));
+      item.append(this.text("del", "", unmark(claim)), document.createTextNode(" — not supported by its cited sources"));
       return item;
     }));
   }
