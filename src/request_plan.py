@@ -119,7 +119,11 @@ async def coverage(question, outputs, answer, sources, model_stream, emit, conte
             continue
         excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year",
             # Exact periods, filing identity and basis let the reviewer check stated dates.
-            "fiscal_start", "fiscal_end", "start", "end", "period", "basis", "accounting_basis", "revision_basis", "form", "filed", "accession")}, "text": relevant_text(source.get("text", ""), answer, sid)}
+            "fiscal_start", "fiscal_end", "start", "end", "period", "basis", "accounting_basis", "revision_basis", "form", "filed", "accession", "complete_section")},
+            # A complete risk section backs many claims in one comparison; give it more room.
+            "text": relevant_text(source.get("text", ""), answer, sid, 40000 if source.get("complete_section") else 12000)}
+        if source.get("complete_section") and len(source.get("text", "")) > len(excerpt["text"]):
+            excerpt["section_characters"] = len(source["text"])
         remaining, observations = 24000, []
         for row in source.get("observations", []):
             if row.get("text") == source.get("text") or not remaining:

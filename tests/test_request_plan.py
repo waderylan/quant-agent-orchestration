@@ -157,6 +157,10 @@ async def test_reviewer_sees_the_passage_a_long_section_citation_relies_on():
               '- Inventory and customers remain general risks, mentioning wafers, supply and competition. [S1]')
     await coverage('What changed?', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk changes'}], answer, {'S1': {'source_id': 'S1', 'kind': 'filing', 'text': section}}, model, lambda e: None)
     assert 'AI Diffusion rule imposes' in seen[0] and 'China efficiency standards' in seen[0]
+    # A complete section is marked partial so absence claims rest on the full comparison.
+    seen.clear()
+    await coverage('What changed?', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk changes'}], answer, {'S1': {'source_id': 'S1', 'kind': 'filing', 'text': section, 'complete_section': True}}, model, lambda e: None)
+    assert f'"section_characters": {len(section)}' in seen[0]
 
 
 @pytest.mark.asyncio
