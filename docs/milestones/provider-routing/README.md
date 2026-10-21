@@ -11,7 +11,7 @@ Owner: Rylan Wade. The [milestone index](../README.md) owns status and order.
 | [generation.py](../../../src/generation.py) | Profile selection, invocation deadline, recovery, event stream |
 | [generation_context.py](../../../src/generation_context.py) | Immutable request/activity IDs, phase, scope and evidence facts |
 | [provider_models.py](../../../src/provider_models.py), [provider_policy.py](../../../src/provider_policy.py) | Named model identities and deterministic routing |
-| [provider_client.py](../../../src/provider_client.py) | Fixed endpoints, price verification, bounded SSE/tool-call assembly |
+| [provider_client.py](../../../src/provider_client.py) | Fixed endpoints, bounded SSE/tool-call assembly, failure cause codes |
 | [generation_tools.py](../../../src/generation_tools.py) | JSON Schema validation, serial execution and completion budget |
 | [provider_limits.py](../../../src/provider_limits.py) | NVIDIA rate pacing and recorded usage; no spend stops |
 
@@ -32,9 +32,9 @@ Policy `m11-v2` identifies the serving organization separately from the publishe
 | Other review and financial lookup | NVIDIA / `nvidia/nemotron-3.5-super-vl-120b-a12b` | Free grounded response and citation compliance |
 | Other supported work | NVIDIA / Super | Free specialist synthesis |
 
-DeepSeek replaces the earlier non-reasoning Qwen route and NVIDIA Lightning planner: the hosted full workflows remained partial on multi-step filing and risk work, and Lightning was not measured against a planner reference. DeepSeek V4 Flash is the lowest-priced Nebius reasoning model with tools and structured outputs ($0.14/M input, $0.28/M output). Super supplies narrow financial answers and simple review. Complex review is a separate DeepSeek invocation; independent review does not require another publisher.
+DeepSeek V4 Flash handles planning and multi-step evidence work because it reasons before acting; it is the lowest-priced Nebius reasoning model with tools and structured outputs ($0.14/M input, $0.28/M output). Super supplies narrow financial answers and simple review. Complex review is a separate DeepSeek invocation; independent review does not require another publisher.
 
-Super disables thinking using `chat_template_kwargs.enable_thinking=false`, with a 2,048-token planner fallback cap and 4,096 otherwise. DeepSeek reasons; its `reasoning_content` is never streamed or replayed. Reasoning tokens count toward completion limits, so DeepSeek caps are 16,384 for planning and 32,768 otherwise. Acceptance calls use at most 3,882 completion tokens; the caps are a deliberate grading-reliability margin beyond expected use, bounded by invocation deadlines and spending reservations. The complete serialized history, schemas and tool results are bounded conservatively by UTF-8 bytes plus framing allowance before every continuation. Configured context ceilings are 1,024,000 for DeepSeek and 1,048,576 for Super; these are endpoint limits, not measured large-context accuracy. Oversized DeepSeek context can use Super once; evidence is never silently truncated.
+Super disables thinking using `chat_template_kwargs.enable_thinking=false`, with a 2,048-token planner fallback cap and 4,096 otherwise. DeepSeek reasons; its `reasoning_content` is never streamed or replayed. Reasoning tokens count toward completion limits, so DeepSeek caps are 16,384 for planning and 32,768 otherwise. Acceptance calls use at most 3,882 completion tokens; the caps are a deliberate grading-reliability margin beyond expected use, bounded by invocation deadlines. The complete serialized history, schemas and tool results are bounded conservatively by UTF-8 bytes plus framing allowance before every continuation. Configured context ceilings are 1,024,000 for DeepSeek and 1,048,576 for Super; these are endpoint limits, not measured large-context accuracy. Oversized DeepSeek context can use Super once; evidence is never silently truncated.
 
 Named function selection handles the sole structured/completion tool; multiple tools use automatic choice. Tool-bearing responses can finish with `stop`; actual tool calls take precedence over final prose. Fragments are assembled before validation; explicit JSON nulls for absent stream fields are treated as absent. Unknown tools, duplicate IDs, missing terminals and truncated output fail explicitly. Invalid arguments receive at most two corrections; omitted optional null fields are removed before validation. Required and undeclared fields retain validation.
 
@@ -46,9 +46,23 @@ A context-based selection before dispatch does not consume the HTTP recovery all
 
 ## Recovery and inspectability
 
-Each invocation permits at most one same-model retry for a transient failure, then one provider fallback, within its original deadline. Rejected streams record a fixed cause code, never provider text. HTTP 429 honors numeric/date `Retry-After` without holding a concurrency lease during backoff. Any NVIDIA failure, including HTTP 429, invalid credentials and local 40 RPM pacing, reroutes the call to DeepSeek when its context fits. A failing Nebius call retries once on transient errors, then uses Super. Completed tool results stay in the conversation without replay. Recovery stops after visible answer text. Cancellation closes the transport and releases the concurrency lease.
+Every model call is an invocation with its own deadline. Before the first request, a call whose complete context exceeds DeepSeek's window goes to Super instead; context larger than both endpoints fails without truncating evidence. After dispatch, failures are handled as follows:
 
-Before each generation request, `provider_route` records request/activity/invocation IDs, provider, publisher, exact model, policy/rule/reason, task facts, input bound, output/context limits, maximum possible cost and queue duration. Usage traces record tokens, request duration, answer TTFT and token-based cost. Missing usage is recorded as unknown cost. Final events include route summaries; activity details show actual model and selection reason. `GET /api/runtime` exposes the profile without credentials.
+| Failure | Result |
+| --- | --- |
+| Any NVIDIA failure: HTTP error (including 429, 401/403, 404 and 5xx), connection or read timeout, malformed or truncated stream, missing key | The call moves to DeepSeek immediately, with no NVIDIA retry. If the context is too large for DeepSeek, a transient failure retries Super once instead |
+| Local NVIDIA pacing window full (40 requests/minute or two active requests) | The call moves to DeepSeek instead of waiting; if the context is too large for DeepSeek, it waits for a pacing slot |
+| DeepSeek transient failure: HTTP 429, 5xx, connection or read timeout | One retry on DeepSeek after `Retry-After` (numeric or date) or 0.5 s; if it fails again, the call moves to Super, or fails if it already moved from NVIDIA |
+| DeepSeek non-transient failure: malformed or truncated stream, other HTTP error, missing key | The call moves to Super |
+| DeepSeek invalid credentials (401/403) | The call fails; no retry or provider change |
+| Failure after answer text has streamed | The call fails; visible text is never replaced by another model |
+| Both providers fail for one call | The call fails. A failed worker is recorded as failed while earlier verified findings remain; a failed planner leaves rule-based routing with a coverage gap; a failed review prevents a complete result |
+
+Each invocation changes provider at most once and retries at most once, so it makes at most three provider attempts. Completed tool results stay in the conversation and are never re-executed. The HTTP client allows 10 seconds to connect and 65 seconds between received bytes; a response that keeps streaming past the invocation deadline fails that invocation. Cancellation closes the transport and releases the pacing lease.
+
+Rejected streams record a fixed cause code (for example `malformed_TypeError` or `finish_length`), never provider response text. `provider_retry` and `provider_fallback` trace events name the failed provider, the cause and the replacement model; activity details list every model a call used.
+
+Before each generation request, `provider_route` records request/activity/invocation IDs, provider, publisher, exact model, policy/rule/reason, task facts, input bound, output/context limits, maximum possible cost and queue duration. Usage traces record tokens, request duration, answer TTFT and token-based cost. Missing usage is recorded as unknown cost. Final events include route summaries. `GET /api/runtime` exposes the profile without credentials.
 
 ## Account limits and usage
 
@@ -73,27 +87,22 @@ No code blocks provider or Tavily spend. Credit limits are operating instruction
 
 ## Verification and handoff
 
-[DeepSeek acceptance](evidence/DEEPSEEK_2026-10-20.json) records policy `m11-v2` on the native application with `LIVE_MODE=frozen`, after the defects below were fixed. Both full five-agent workflows complete Data, Quant, Risk Summary and Filings Research on DeepSeek with no provider fallback (131.6 s AMD, 140.2 s Qualcomm, $0.10–0.13 token cost each). Current Developments remains partial because frozen replay has no snapshots for model-written queries, so both requests are **partial**. Route cases: reported figures, filing explanation and Data → Quant → Research complete; amendment and risk comparison are partial on reviewer content judgments; missing scope and price requests return coverage gaps without generation.
+[DeepSeek acceptance](evidence/DEEPSEEK_2026-10-20.json) records policy `m11-v2` on the native application with `LIVE_MODE=frozen`. Both full five-agent workflows complete Data, Quant, Risk Summary and Filings Research on DeepSeek with no provider fallback (131.6 s AMD, 140.2 s Qualcomm, $0.10–0.13 token cost each). Current Developments is partial because frozen replay has no snapshots for model-written queries, so both requests are **partial**. Route cases: reported figures, filing explanation and Data → Quant → Research complete; amendment and risk comparison are partial on reviewer content judgments; missing scope and price requests return coverage gaps without generation. One run per case does not establish intermittent reliability; formal RAGAS and Cloud Run results are pending. Each evidence file records the configuration it tested.
 
-Defects found by real DeepSeek runs and fixed, each with a regression test:
+Provider-boundary behavior covered by regression tests:
 
-| Defect | Evidence | Fix |
-| --- | --- | --- |
-| Explicit JSON nulls in stream chunks | Every early fallback recorded `malformed_TypeError` | Null-tolerant parsing |
-| Provider switch before retry | One failure removed DeepSeek for the invocation | Same-model retry first |
-| Planner prescribed S citations to Financial Data | 1 of 6 reproductions cited unregistered `[S1]`; 0 of 6 after | Citation ownership in both prompts |
-| String `"null"` in tool fields | Plan parsing failed; request lost planning and review | Shared schema-aware [`normalize`](../../../src/tool_arguments.py) at the hosted and Codex tool boundaries |
-| Malformed arguments echoed in history | Direct probe: HTTP 400; sanitized echo: HTTP 200 | Echo `{}` and return the parse error |
-| Constraints planned as outputs | "Filings only" became an unaddressed output | Planner prompt rule |
-
-Rejected streams record a fixed cause code. Bracketed `(F1)`, `【F1】` and `[Source: F1]` resolve for registered IDs; bare labels remain uncited.
-
-[Policy `m11-v1` evidence](evidence/ACCEPTANCE_2026-10-20.json) records the earlier Lightning/Super/Qwen routes: both full workflows partial with Research and Risk gaps, a completed filings-only Linux-container run (63.220 s), controlled model comparisons, real UI profile switching, source inspection and Stop. [Direct endpoint evidence](evidence/MODEL_READINESS_2026-10-20.json) covers that model set's streamed tool continuations.
-
-These acceptance runs predate the removal of code spend stops; their ledger fields record the conservative reservations in use then. One run per case does not establish intermittent reliability; formal RAGAS and Cloud Run results remain pending.
+| Behavior | Protects against |
+| --- | --- |
+| Explicit JSON nulls in stream chunks are treated as absent | Parser failure on every DeepSeek tool round |
+| Transient DeepSeek failures retry the same model before changing provider | One hiccup dropping the reasoning model for the call |
+| Financial Data cites only its own F identifiers; the planner describes content, not citation types | Unregistered `[S1]` citations failing the Data worker |
+| A shared schema-aware [`normalize`](../../../src/tool_arguments.py) turns `"null"`/`"none"` into absent values at the hosted and Codex tool boundaries | Plans and tool calls rejected for string nulls |
+| Malformed tool arguments are echoed as `{}` while the parse error returns to the model | Nebius HTTP 400 on the next request |
+| Constraints such as "filings only" restrict outputs rather than becoming outputs | False partial results |
+| Bracketed `(F1)`, `【F1】` and `[Source: F1]` resolve for registered IDs; bare labels stay uncited | Valid citations rejected for bracket style |
 
 The fixed [development cases](../../../tests/fixtures/provider_routes.json) cover reported figures, filing explanation, Data → Quant → Research, amendment, risk comparison, missing scope and unsupported prices. [Provider tests](../../../tests/test_providers.py) cover fragmented streams, structured arguments, terminal failures, credentials, retries without repeated tools, NVIDIA failure and pacing reroutes to DeepSeek, cancellation, shared rate pacing and recorded usage. Ordinary tests block provider HTTP and isolate ledgers.
 
-The [full-workflow cases](../../../tests/fixtures/provider_full_workflows.json) request every specialist for AMD and Qualcomm, including dated real MCP research. [Controlled comparisons](../../../scripts/compare_provider_models.py) run Super and DeepSeek on the same financial lookup and the same filing question. Comparison selection is confined to that development process; the normal client, tool validation and spending guards remain active.
+The [full-workflow cases](../../../tests/fixtures/provider_full_workflows.json) request every specialist for AMD and Qualcomm, including dated real MCP research. [Controlled comparisons](../../../scripts/compare_provider_models.py) run Super and DeepSeek on the same financial lookup and the same filing question. Comparison selection is confined to that development process; the normal client and tool validation apply.
 
 M11 acceptance is an engineering check, not RAGAS or a general accuracy estimate. M13 owns the four required RAGAS metrics over a fixed vector-store-only set with web disabled; Data/Quant/current checks remain separate. M14 owns public deployment, cold/warm latency, concurrency and provider-access terms.
