@@ -480,6 +480,7 @@ What has happened at the selected companies since their latest filings? Cite dat
             option.selected = profile.id === runtime.generation_profile;
             return option;
           }));
+          control.dataset.ready = "true";
           control.disabled = false;
         })
         .catch(() => { $("status").textContent = "Model settings unavailable"; });
@@ -708,7 +709,10 @@ What has happened at the selected companies since their latest filings? Cite dat
               question: $("question").value,
               companies: selected("company"),
               years: selected("year").map(Number),
-              generation_profile: $("generation-profile").value,
+              // Without runtime metadata, omit the field so the server default applies.
+              ...($("generation-profile").dataset.ready
+                ? { generation_profile: $("generation-profile").value }
+                : {}),
             }),
             signal: controller.signal,
           });
@@ -741,7 +745,7 @@ What has happened at the selected companies since their latest filings? Cite dat
         } finally {
           activity.finish("unverified");
           $("ask").disabled = false;
-          $("generation-profile").disabled = false;
+          $("generation-profile").disabled = !$("generation-profile").dataset.ready;
           $("stop").disabled = true;
           controller = null;
         }

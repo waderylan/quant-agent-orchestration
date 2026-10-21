@@ -53,10 +53,12 @@ app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 @app.get("/api/runtime")
 def runtime_profile():
     from src import provider_models, provider_policy
+    # Both profiles are local-only until M13 replaces the development ledger gate.
+    local = not os.getenv("K_SERVICE")
     return {"generation_profile": os.getenv("GENERATION_PROFILE", "codex"),
-            "profiles": [{"id": "codex", "label": "Codex", "available": not bool(os.getenv("K_SERVICE")) and bool(os.getenv("CODEX_BRIDGE_URL") or shutil.which("codex"))},
+            "profiles": [{"id": "codex", "label": "Codex", "available": local and bool(os.getenv("CODEX_BRIDGE_URL") or shutil.which("codex"))},
                          {"id": "api", "label": "Hosted (NVIDIA + Nebius)",
-                          "available": all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
+                          "available": local and all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
             "policy": provider_policy.POLICY,
             "models": [provider_models.NVIDIA_LIGHTNING, provider_models.NVIDIA_SUPER, provider_models.NEBIUS_QWEN],
             "provider_coordination": "shared local ledger"}
