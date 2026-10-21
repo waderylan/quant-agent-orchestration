@@ -1,4 +1,4 @@
-"""Start the local acceptance container with host-owned generation authentication.
+"""Start the local acceptance container with Codex or direct provider generation.
 
 Stop the printed container and bridge after acceptance.
 """
@@ -23,6 +23,9 @@ def main():
     )
     parser.add_argument("--reuse-bridge", action="store_true")
     parser.add_argument("--skip-build", action="store_true")
+    parser.add_argument("--profile", choices=["codex", "api"], default="codex")
+    parser.add_argument("--port", type=int, default=8084)
+    parser.add_argument("--image", default="hw2-sequence")
     options = parser.parse_args()
     staging = ROOT / "artifacts/sequence-container"
     staging.mkdir(parents=True, exist_ok=True)
@@ -34,7 +37,7 @@ def main():
     log = (staging / "bridge.log").open("w", encoding="utf-8")
     bridge = (
         None
-        if options.reuse_bridge
+        if options.reuse_bridge or options.profile == "api"
         else subprocess.Popen(
             [
                 sys.executable,
@@ -52,7 +55,7 @@ def main():
     )
     if not options.skip_build:
         subprocess.run(
-            ["docker", "build", "-t", "hw2-sequence", "."], cwd=ROOT, check=True
+            ["docker", "build", "-t", options.image, "."], cwd=ROOT, check=True
         )
     args = [
         "docker",
@@ -63,17 +66,27 @@ def main():
         "--cpus",
         "2",
         "-p",
-        "127.0.0.1:8084:9090",
+        f"127.0.0.1:{options.port}:9090",
         "-e",
         "PORT=9090",
-        "-e",
-        "CODEX_BRIDGE_URL=tcp://host.docker.internal:8765",
-        "-e",
-        "CODEX_BRIDGE_TOKEN_FILE=/run/secrets/codex-bridge",
     ]
     live_path = ROOT / "artifacts/live"
     live_path.mkdir(parents=True, exist_ok=True)
     runtime_env = dict(os.environ)
+    args.extend(["-e", "GENERATION_PROFILE=" + options.profile])
+    extra_mounts = []
+    if options.profile == "api":
+        config = dotenv_values(ROOT / ".env")
+        for name in ("NEBIUS_API_KEY", "NVIDIA_API_KEY"):
+            runtime_env[name] = os.getenv(name) or config.get(name) or ""
+            args.extend(["-e", name])
+        provider_dir = Path(os.getenv("PROVIDER_LEDGER", str(ROOT / "artifacts/providers/usage.sqlite3"))).resolve().parent
+        provider_dir.mkdir(parents=True, exist_ok=True)
+        args.extend(["-e", "PROVIDER_LEDGER=/app/artifacts/providers/usage.sqlite3"])
+        extra_mounts.append((provider_dir, "/app/artifacts/providers", False))
+    else:
+        args.extend(["-e", "CODEX_BRIDGE_URL=tcp://host.docker.internal:8765", "-e", "CODEX_BRIDGE_TOKEN_FILE=/run/secrets/codex-bridge"])
+        extra_mounts.append((token, "/run/secrets/codex-bridge", True))
     if options.live_mode != "off":
         args.extend(["-e", "LIVE_MODE=" + options.live_mode, "--mount", f"type=bind,source={live_path},target=/app/artifacts/live"])
         if options.live_mode == "live":
@@ -90,8 +103,7 @@ def main():
             "/home/appuser/.cache/chroma/onnx_models/all-MiniLM-L6-v2",
             True,
         ),
-        (token, "/run/secrets/codex-bridge", True),
-    ]:
+    ] + extra_mounts:
         args.extend(
             [
                 "--mount",
@@ -99,7 +111,7 @@ def main():
                 + (",readonly" if readonly else ""),
             ]
         )
-    args.append("hw2-sequence")
+    args.append(options.image)
     container = subprocess.check_output(args, text=True, env=runtime_env).strip()
     (staging / "running.json").write_text(
         json.dumps(
@@ -112,7 +124,8 @@ def main():
             {
                 "container": container,
                 "bridge_pid": bridge.pid if bridge else None,
-                "url": "http://127.0.0.1:8084",
+                "url": f"http://127.0.0.1:{options.port}",
+                "generation_profile": options.profile,
                 "live_mode": options.live_mode,
             }
         )

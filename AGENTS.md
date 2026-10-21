@@ -120,6 +120,8 @@ For every qualifying event entry:
 - Use Python 3.13 with `uv sync --locked` and `uv run --locked`. Pin direct dependencies in `pyproject.toml`, commit `uv.lock`, and export `requirements.txt` using `uv export --frozen --no-dev --no-hashes --no-emit-project --output-file requirements.txt`.
 - Use local Codex/Claude Code subscriptions for development and testing. Distinguish direct-worker, fixture, browser/application, Docker, and deployment-provider evidence. Keep local CLI authentication out of the deployed runtime.
 - Verify Nebius/NVIDIA access, model IDs, pricing, and routing in final integration; then deploy to Cloud Run and retest. Formal evaluation requirements are in [evaluation](docs/evaluation.md).
+- Follow the binding [provider limits and spending policy](docs/milestones/provider-routing/README.md#account-limits-and-spending-policy). Never incur Nebius charges beyond promotional credits. Do not make billable Nebius calls until remaining credit, expiry, and a verified spending guard establish that the call stays within the limit; uncertain accounting blocks the call. Credentials alone do not authorize paid overage.
+- When asked for Nebius/NVIDIA dashboards, keys, prices, or account limits, use the [provider dashboard links](docs/milestones/provider-routing/README.md#provider-dashboards).
 - [Instructor references](docs/reference/instructor/README.md) are guidance, not implementation contracts. Do not copy HW1 implementation, credentials, deployment config, artifacts, or reflections.
 - Leave [PROCESS_LOG.md](PROCESS_LOG.md) as a template until Rylan Wade provides his own 200–300-word reflection across four sections. Include the completed log in the final archive.
 

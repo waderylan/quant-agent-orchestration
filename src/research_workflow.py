@@ -5,12 +5,14 @@ from __future__ import annotations
 import asyncio
 import json
 import re
+import uuid
 from contextlib import aclosing
 from typing import TypedDict
 
 from langchain_core.runnables import RunnableLambda
 
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
+from src.task_scope import assigned_question
 from src.source_collection import ROOT
 from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
 from src.request_routing import (
@@ -31,7 +33,7 @@ TOOLS = [
             "properties": {
                 "query": {"type": "string"},
                 "company": {"type": "string"},
-                "year": {"type": "integer"},
+                "year": {"type": "integer", "description": "One fiscal year. Omit this filter to search all selected years; never pass an array."},
                 "section": {"type": "string", "enum": ["mda", "risk_factors", "other"]},
                 "form": {
                     "type": "string",
@@ -58,6 +60,8 @@ TOOLS = [
 
 
 class State(TypedDict, total=False):
+    generation_request_id: str
+    provider_routes: list[dict]
     request_plan: dict
     live_intent: str
     current_answer: str
@@ -221,6 +225,9 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
         max_tool_calls = sources.max_tool_calls
 
         def __call__(self, name, arguments):
+            if name == "inspect_source" and set(arguments) == {"source_id"} and arguments["source_id"] in analysis_sources:
+                return {"source": analysis_sources[arguments["source_id"]],
+                        "use": "Verified handoff evidence; preserve its identity and assigned specialist scope"}
             return live(name, arguments) if live and name == "search_web" else sources(name, arguments)
 
     outcome = OutcomeTools(ResearchHandler())
@@ -267,7 +274,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
                 {"companies": state["companies"], "fiscal_years": state["years"]}
             )
             + "\nQuestion: "
-            + state["question"]
+            + assigned_question(state, "filing_explanation", "official_update")
             + (
                 "\nSupervisor role boundary: " + state["handoff_role_note"]
                 if state.get("handoff_role_note")
@@ -297,8 +304,8 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
         )
 
     pipeline = RunnableLambda(retrieve) | RunnableLambda(augment)
-    writer({"type": "tool", "data": {"name": "initial_retrieval", "arguments": state}})
-    prompt = await pipeline.ainvoke(state)
+    writer({"type": "tool", "data": {"name": "initial_retrieval", "arguments": {k: state[k] for k in ("question", "companies", "years")}}})
+    prompt = await pipeline.ainvoke({**state, "question": assigned_question(state, "filing_explanation", "official_update")})
     if live:
         prompt += "\nLive verification: Use at most one search_web call with topic=general to check whether an official company or SEC source updates the specific filed statement. Report the filed statement with its S citation first, then the update or absence of a found official update with a W citation. Only official-tier W sources establish an update; if results are third-party only, say no official update found. W never replaces S for filed content. Do not list developments or calculate. Omit market prices, multiples and analyst estimates even if returned."
     writer({"type": "evidence", "data": {"sources": list(sources.sources.values())}})
@@ -420,7 +427,7 @@ async def events(
                 gateway=gateway,
                 worker_overrides=worker_overrides,
             ).astream(
-                {"question": question, "companies": companies, "years": years},
+                {"question": question, "companies": companies, "years": years, "generation_request_id": uuid.uuid4().hex},
                 stream_mode="custom",
             )
         ) as graph_events:

@@ -311,6 +311,11 @@ What has happened at the selected companies since their latest filings? Cite dat
           <button type="button" data-question="Is the export-control risk in the latest annual filing still current? Check for an official update.">Check an official update</button>
           <button type="button" data-question="What can this system do, and what does each agent do?">System capabilities</button>
         </div>
+        <label for="generation-profile">Models</label>
+        <select id="generation-profile" disabled aria-label="Generation models">
+          <option value="codex">Codex</option>
+          <option value="api">Hosted (NVIDIA + Nebius)</option>
+        </select>
         <div class="actions"><button id="ask" type="submit">Research</button>
         <button id="stop" type="button" disabled>Stop</button
         ><span id="status" role="status">Ready</span></div>
@@ -463,6 +468,21 @@ What has happened at the selected companies since their latest filings? Cite dat
         .catch(() => {
           $("status").textContent = "Coverage unavailable";
         });
+      fetch("/api/runtime")
+        .then((r) => { if (!r.ok) throw Error(); return r.json(); })
+        .then((runtime) => {
+          const control = $("generation-profile");
+          control.replaceChildren(...runtime.profiles.map((profile) => {
+            const option = document.createElement("option");
+            option.value = profile.id;
+            option.textContent = profile.label;
+            option.disabled = !profile.available;
+            option.selected = profile.id === runtime.generation_profile;
+            return option;
+          }));
+          control.disabled = false;
+        })
+        .catch(() => { $("status").textContent = "Model settings unavailable"; });
       $("company").addEventListener("change", () => years());
       $("year").addEventListener("change", showSelection);
       for (const button of document.querySelectorAll("[data-question]")) {
@@ -676,6 +696,7 @@ What has happened at the selected companies since their latest filings? Cite dat
         $("request-coverage").replaceChildren();
         $("request-coverage").hidden = true;
         $("ask").disabled = true;
+        $("generation-profile").disabled = true;
         $("stop").disabled = false;
         $("status").className = "";
         $("status").textContent = "Researching…";
@@ -687,6 +708,7 @@ What has happened at the selected companies since their latest filings? Cite dat
               question: $("question").value,
               companies: selected("company"),
               years: selected("year").map(Number),
+              generation_profile: $("generation-profile").value,
             }),
             signal: controller.signal,
           });
@@ -719,6 +741,7 @@ What has happened at the selected companies since their latest filings? Cite dat
         } finally {
           activity.finish("unverified");
           $("ask").disabled = false;
+          $("generation-profile").disabled = false;
           $("stop").disabled = true;
           controller = null;
         }

@@ -4,7 +4,7 @@ Rylan Wade's CSCI 599 Assignment 2 project. The local application answers cited 
 
 ## Run locally
 
-Requirements: Python 3.13, [uv](https://docs.astral.sh/uv/), an authenticated Codex CLI (`codex login`), and network access for initial source/model downloads.
+Requirements: Python 3.13, [uv](https://docs.astral.sh/uv/), network access for initial source/model downloads, and either an authenticated Codex CLI (`codex login`) or the API provider setup below.
 
 ```powershell
 uv sync --locked
@@ -40,7 +40,34 @@ uv run --locked python scripts/quant.py replay BUNDLE_ID
 uv run --locked pytest -q
 ```
 
-Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) describes the local container profile. [Milestones](docs/milestones/README.md) own status; generation-provider routing, formal evaluation and Cloud Run deployment remain planned.
+Use `--help` on each script for additional commands. [M4](docs/milestones/local-container/README.md) describes the local container profile. [Milestones](docs/milestones/README.md) own status; formal evaluation and Cloud Run deployment remain pending.
+
+## Generation providers
+
+The default `GENERATION_PROFILE=codex` uses the host subscription. For direct providers, copy `.env.example` to ignored `.env` and supply `NVIDIA_API_KEY` and `NEBIUS_API_KEY`. Select **Hosted (NVIDIA + Nebius)** in the browser Models control, or set `GENERATION_PROFILE=api` as the server default. Each request keeps its selection; model names and reasons share the existing activity details. Both providers are required for normal hosted routing. API mode never uses CLI authentication.
+
+[M11](docs/milestones/provider-routing/README.md) owns model IDs, prices, dashboard links and binding limits: NVIDIA 40 RPM; Nebius $100 promo credit with a $10 buffer, a $5 local campaign cap and a $1 local per-request cap. The SQLite ledger is local test tooling, not an assignment requirement or an intended production component. Application stops do not disable card billing. Reuse the test ledger while testing; M13 chooses production spending controls separately.
+
+```powershell
+uv run --locked python scripts/providers.py status
+# Only for a new ledger: substitute a current verified dashboard observation.
+uv run --locked python scripts/providers.py init --balance VERIFIED_CREDIT --observed-at UTC_TIMESTAMP --exclusive-account-use
+# Refresh an existing observation without resetting consumption/reservations.
+uv run --locked python scripts/providers.py refresh --balance VERIFIED_REMAINING_CREDIT --observed-at UTC_TIMESTAMP --exclusive-account-use
+$env:GENERATION_PROFILE='api'
+uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
+```
+
+Observations expire after 24 hours. Missing/stale credit or uncertain pricing blocks Nebius and exposes the free-provider fallback in the trace. Set an earlier known expiry with `init --expires-at UTC_TIMESTAMP`; the January 1, 2027 cutoff always applies. Never initialize a second ledger to restore allowance. `/api/runtime` identifies the profile; activity details show each provider/model and routing reason.
+
+```powershell
+uv run --locked python scripts/evaluate_provider_routes.py --url http://127.0.0.1:8080 --output artifacts/providers/application.json
+uv run --locked python scripts/evaluate_provider_routes.py --url http://127.0.0.1:8080 --dataset tests/fixtures/provider_full_workflows.json --output artifacts/providers/full-workflows.json
+uv run --locked python scripts/compare_provider_models.py --output artifacts/providers/comparison.json
+uv run --locked python scripts/start_local_container.py --profile api --port 8084
+```
+
+Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run generation stays blocked until M13 resolves production spending controls; the assignment does not require deploying the local ledger.
 
 ## Live sources
 

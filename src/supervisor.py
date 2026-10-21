@@ -16,6 +16,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from src.request_routing import plan_request, requested_metrics, risk_comparison_request, price_request, live_intent, live_phrase, filing_clauses, PRICE_GAP
 from src.source_collection import digest
+from src.generation_context import RoutingContext
 
 Worker = Literal["data", "filing_inputs", "quant", "risk", "research", "current"]
 NAMES = {
@@ -315,6 +316,13 @@ def cooperative_graph(
     from src.filing_financials import filing_revenue_turn
     from src.current_developments import current_turn
 
+    provider_routes = []
+
+    def recorded_writer(event):
+        if event["type"] == "trace" and event["data"].get("node") == "provider_route":
+            provider_routes.append(event["data"])
+        get_stream_writer()(event)
+
     class GraphState(State, total=False):
         task: dict
         evidence: dict
@@ -327,7 +335,7 @@ def cooperative_graph(
         original_question: str
 
     async def plan(state):
-        writer = get_stream_writer()
+        writer = recorded_writer
         writer({"type": "activity", "data": {"id": "plan", "agent": "Supervisor", "status": "running", "task": "Plan"}})
         from src.capabilities import capability_request
         original_question = state["question"]
@@ -489,7 +497,7 @@ def cooperative_graph(
         }
 
     async def execute(state):
-        writer = get_stream_writer()
+        writer = recorded_writer
         task = TaskState.model_validate(state["task"])
         position = state["current"]
         step = task.plan[position]
@@ -519,6 +527,7 @@ def cooperative_graph(
         class BoundedTools:
             def __init__(self, handler):
                 self.handler = handler
+                self.routing_context = RoutingContext.from_state(state, activity_id=activity_id, output=step.output)
                 self.max_tool_calls = max(
                     1,
                     min(
@@ -539,9 +548,7 @@ def cooperative_graph(
                 return self.handler(name, arguments)
 
         async def bounded_model(prompt, schemas, handler, **kwargs):
-            async for event in model_stream(
-                prompt, schemas, BoundedTools(handler), **kwargs
-            ):
+            async for event in model_stream(prompt, schemas, BoundedTools(handler), **kwargs):
                 yield event
 
         def emit(event):
@@ -788,7 +795,7 @@ def cooperative_graph(
         }
 
     async def finish(state):
-        writer = get_stream_writer()
+        writer = recorded_writer
         task = TaskState.model_validate(state["task"])
         answers = state.get("worker_answers", {})
         if state.get("capability_answer") and not task.plan and not task.missing_inputs:
@@ -810,7 +817,8 @@ def cooperative_graph(
             # A synthesis can explain calculations, but cannot erase a requested risk
             # or filing output. Preserve specialist evidence when the task is mixed.
             has_conflicts = any(source.get("status") == "conflicting" for source in state.get("evidence", {}).values())
-            mixed = "risk" in answers or "current" in answers or has_conflicts
+            mixed = ("risk" in answers or "current" in answers or has_conflicts
+                     or ("quant" in answers and "research" in answers))
             include = [
                 t.worker
                 for t in task.plan
@@ -820,7 +828,9 @@ def cooperative_graph(
             include = list(dict.fromkeys(include))
             if "quant" in include and "data" in include and not has_conflicts:
                 include.remove("data")
-            if "quant" in include and "research" in include and task.worker_outcomes.get("quant") == "completed":
+            # Review can remove a research sentence that embeds otherwise valid
+            # arithmetic. Retain Quant's independent brief whenever review runs.
+            if not state.get("request_plan") and "quant" in include and "research" in include and task.worker_outcomes.get("quant") == "completed":
                 calculations = set(re.findall(r"\[(C\d+)\]", answers["quant"]))
                 if calculations and calculations <= set(re.findall(r"\[(C\d+)\]", answers["research"])):
                     include.remove("quant")
@@ -848,11 +858,11 @@ def cooperative_graph(
             writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": "running", "task": "Check answer"}})
             review_status = "failed"
             try:
-                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"))
                 answer = remove_unsupported(answer, review["unsupported_claims"])
                 if review["unsupported_claims"]:
                     removed = review["unsupported_claims"]
-                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer)
+                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"))
                     # One bounded repair pass. If a second check finds more unsupported
                     # claims, remove them and retain the partial outcome.
                     answer = remove_unsupported(answer, review["unsupported_claims"])
@@ -918,6 +928,7 @@ def cooperative_graph(
                 "data": {
                     "status": status,
                     "verified_citations": bool(cited & evidence.keys()) and not invalid,
+                    **({"provider_routes": provider_routes, "request_id": state.get("generation_request_id")} if provider_routes else {}),
                     **({"coverage_checked": True} if review else {}),
                     **(
                         {"missing_outputs": task.missing_inputs}
@@ -927,7 +938,7 @@ def cooperative_graph(
                 },
             }
         )
-        return {"answer": answer, "task": task.model_dump(), "coverage_review": review}
+        return {"answer": answer, "task": task.model_dump(), "coverage_review": review, "provider_routes": provider_routes}
 
     workflow = StateGraph(GraphState)
     workflow.add_node("supervisor", plan)

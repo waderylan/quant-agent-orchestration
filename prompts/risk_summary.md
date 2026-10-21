@@ -22,6 +22,11 @@ qualification. Distinguish new wording from new economic exposure. Rephrased lan
 is changed; identical wording moved between subjects is relocated; identical wording
 in the same subject is unchanged. Do not infer relocation from character offsets alone.
 
+Complete section texts are already supplied. Use risk_pairs only for targeted
+navigation; do not exhaustively page candidates before recording findings. Register
+the requested material changes with record_risk_change before spending remaining
+calls on additional comparisons. Keep a slot for report_outcome.
+
 AMD FY2025 10-K/A corrects MD&A and does not replace original risks. Annual comparisons
 always use original 10-Ks. A 10-Q supplies incremental updates, never a full annual
 inventory; omitted language is not removed risk. For quarterly requests inspect the

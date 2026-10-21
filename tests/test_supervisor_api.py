@@ -12,6 +12,29 @@ from tests.test_supervisor import FULL, Index, workers
 
 
 @pytest.mark.asyncio
+async def test_model_profile_is_bound_to_each_http_request(monkeypatch, tmp_path):
+    import main
+    monkeypatch.setattr(app.state, 'turns', asyncio.Semaphore(2), raising=False)
+    monkeypatch.setattr(app.state, 'index', Index(), raising=False)
+    monkeypatch.setattr(app.state, 'financials', SimpleNamespace(path=tmp_path / 'absent'), raising=False)
+    async def stream(*args, profile, **kwargs):
+        await asyncio.sleep(0)
+        yield {'type': 'token', 'data': profile}
+    async def events(*args, model_stream, **kwargs):
+        async for event in model_stream('', [], None):
+            yield event
+        yield {'type': 'complete', 'data': {'status': 'completed'}}
+    monkeypatch.setattr(main, 'generation_stream', stream)
+    monkeypatch.setattr(main, 'events', events)
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://fixture') as client:
+        body = {'question': 'Show revenue', 'companies': ['AMD'], 'years': [2025]}
+        responses = await asyncio.gather(*[client.post('/api/chat', json={**body, 'generation_profile': p}) for p in ('codex', 'api')])
+        assert 'data: "codex"' in responses[0].text and 'data: "api"' in responses[1].text
+        invalid = await client.post('/api/chat', json={**body, 'generation_profile': 'arbitrary'})
+        assert invalid.status_code == 422
+
+
+@pytest.mark.asyncio
 async def test_sse_capture_uses_final_combined_source_registry():
     from scripts.demo_support import capture_turn
     frames = "event: sources\ndata: [{\"source_id\":\"S1\"}]\n\nevent: answer\ndata: \"Combined [F1][S1]\"\n\nevent: sources\ndata: [{\"source_id\":\"F1\"},{\"source_id\":\"S1\"}]\n\nevent: complete\ndata: {\"status\":\"completed\"}\n\n"

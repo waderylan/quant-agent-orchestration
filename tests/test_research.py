@@ -106,6 +106,24 @@ def small_index(tmp_path):
     return index
 
 
+@pytest.mark.asyncio
+async def test_research_can_inspect_registered_risk_handoff_without_retrieving_a_new_identity(small_index):
+    from src.research_workflow import research_turn
+    handed = {"source_id": "S1", "kind": "filing_passage", "text": "Verified prior risk wording"}
+    async def model(prompt, schema, handler, **kwargs):
+        assert "Only the filing interpretation" in prompt and "Recent outside developments" not in prompt
+        assert handler("inspect_source", {"source_id": "S1"})["source"] == handed
+        with pytest.raises(KeyError):
+            handler("inspect_source", {"source_id": "S99"})
+        handler("report_outcome", {"status": "complete", "missing": []})
+        yield {"type": "token", "data": "Prior risk wording [S1]."}
+    result = await research_turn(small_index, {"question": "Explain AMD filing context", "companies": ["AMD"],
+        "years": [2025], "analysis_sources": {"S1": handed}, "source_offset": 1,
+        "request_plan": {"outputs": [{"kind": "filing_explanation", "description": "Only the filing interpretation"},
+                                      {"kind": "current_developments", "description": "Recent outside developments"}]}}, lambda event: None, model_stream=model)
+    assert result["citation_verified"] and result["research_sources"]["S1"] == handed
+
+
 def test_retrieval_filters_and_tools_cannot_cross_company_year_or_version(small_index):
     found = small_index.search("revenue", ["AMD"], [2025], version="amendment")
     assert [p["chunk_id"] for p in found] == ["amendment"]

@@ -10,7 +10,7 @@ import json
 import re
 from contextlib import aclosing
 
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
 from src.financial_workflow import FinancialTools
 from src.source_collection import ROOT, digest
 

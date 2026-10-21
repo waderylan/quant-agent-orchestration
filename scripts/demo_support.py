@@ -17,7 +17,7 @@ async def wait_ready(client):
     raise RuntimeError("Application readiness deadline exceeded")
 
 
-async def capture_turn(client, question, companies, years, *, headers=None, include_events=False):
+async def capture_turn(client, question, companies, years, *, headers=None, include_events=False, generation_profile=None):
     started, first_token, events, kind = time.perf_counter(), None, [], None
     worker_returns = []
     async with client.stream(
@@ -27,6 +27,7 @@ async def capture_turn(client, question, companies, years, *, headers=None, incl
             "question": question,
             "companies": companies,
             "years": years,
+            **({"generation_profile": generation_profile} if generation_profile is not None else {}),
         },
         headers=headers,
     ) as response:

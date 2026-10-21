@@ -1,0 +1,9 @@
+[
+  {"id":"exact_metric","question":"What was AMD's reported FY2025 GAAP revenue? Give the exact value and cite the source. No web.","companies":["AMD"],"years":[2025]},
+  {"id":"filing_drivers","question":"What did Intel's FY2024 annual filing say about its foundry strategy? Use only the filings and cite the source.","companies":["INTC"],"years":[2024]},
+  {"id":"mixed_calculation","question":"Compare AMD FY2024 and FY2025 revenue and gross margin. Calculate the revenue growth and explain the filed business drivers. No web.","companies":["AMD"],"years":[2024,2025]},
+  {"id":"amendment","question":"What does AMD's amended FY2025 MD&A correct? Separate the original and amendment and cite both. No web.","companies":["AMD"],"years":[2025]},
+  {"id":"risk_changes","question":"Compare Qualcomm's FY2024 and FY2025 annual risk disclosures. Explain two material changes and cite before and after. No web.","companies":["QCOM"],"years":[2024,2025]},
+  {"id":"missing_scope","question":"What was AMD's FY2030 revenue? No web.","companies":["AMD"],"years":[2030]},
+  {"id":"unsupported_price","question":"What is Qualcomm's current stock price?","companies":["QCOM"],"years":[2025]}
+]

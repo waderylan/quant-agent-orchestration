@@ -4,6 +4,7 @@ import asyncio
 import json
 import os
 import time
+import shutil
 from contextlib import aclosing, asynccontextmanager, suppress
 
 import anyio
@@ -14,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 from dataclasses import dataclass
 from collections.abc import Callable, AsyncIterator
+from functools import partial
 
 from src.research_index import INDEX, ResearchIndex
 from src.research_workflow import events
@@ -23,6 +25,8 @@ from src.analysis_artifacts import ArtifactStore
 from src.source_collection import DEFAULT_OUTPUT, ROOT
 from src.source_collection import digest
 from src.live_mcp import LiveGateway
+from src.generation import stream as generation_stream
+from src.generation_context import GenerationProfile
 
 load_dotenv()
 
@@ -46,10 +50,23 @@ app = FastAPI(title="Public-Company Research Assistant", lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 
 
+@app.get("/api/runtime")
+def runtime_profile():
+    from src import provider_models, provider_policy
+    return {"generation_profile": os.getenv("GENERATION_PROFILE", "codex"),
+            "profiles": [{"id": "codex", "label": "Codex", "available": not bool(os.getenv("K_SERVICE")) and bool(os.getenv("CODEX_BRIDGE_URL") or shutil.which("codex"))},
+                         {"id": "api", "label": "Hosted (NVIDIA + Nebius)",
+                          "available": all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
+            "policy": provider_policy.POLICY,
+            "models": [provider_models.NVIDIA_LIGHTNING, provider_models.NVIDIA_SUPER, provider_models.NEBIUS_QWEN],
+            "provider_coordination": "shared local ledger"}
+
+
 class Question(BaseModel):
     question: str = Field(min_length=3, max_length=2000)
     companies: list[str] = Field(min_length=1, max_length=4)
     years: list[int] = Field(min_length=1, max_length=2)
+    generation_profile: GenerationProfile | None = None
 
 
 @dataclass(frozen=True)
@@ -221,6 +238,11 @@ async def chat(
     request: Request,
     services: TurnServices = Depends(turn_services),
 ):
+    selected_profile = question.generation_profile or os.getenv("GENERATION_PROFILE", "codex")
+    if selected_profile == "codex" and os.getenv("K_SERVICE"):
+        raise HTTPException(400, "Codex subscription generation is local only")
+    model_stream = services.model_stream or partial(generation_stream, profile=selected_profile)
+
     async def response():
         queue = asyncio.Queue(maxsize=128)
         closers = []
@@ -240,7 +262,7 @@ async def chat(
                         list(dict.fromkeys(question.years)),
                         gateway=services.gateway,
                         worker_overrides=services.worker_overrides,
-                        **({"model_stream": services.model_stream} if services.model_stream is not None else {}),
+                        model_stream=model_stream,
                         **(
                             {"financials": services.financials or app.state.financials}
                             if services.financials is not None or app.state.financials.path.exists()

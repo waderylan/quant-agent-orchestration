@@ -37,13 +37,13 @@ def test_search_and_extract_share_identity_and_keep_the_supplied_publication_dat
 
 
 def test_historical_reactions_use_the_selected_release_while_recent_ignores_fiscal_controls():
-    from datetime import date, timedelta
+    from datetime import datetime, timezone, timedelta
     state = {'companies': ['QCOM'], 'years': [2024, 2025]}
     historical = research_windows({**state, 'request_plan': {'timeframe': 'reaction'}})['QCOM']
     assert historical == {'start_date': '2025-11-02', 'end_date': '2025-12-05'}
     recent = research_windows({**state, 'request_plan': {'timeframe': 'recent'}})['QCOM']
-    assert recent['start_date'] == (date.today() - timedelta(days=90)).isoformat()
-    assert recent['end_date'] == date.today().isoformat()
+    assert recent['start_date'] == (datetime.now(timezone.utc).date() - timedelta(days=90)).isoformat()
+    assert recent['end_date'] == datetime.now(timezone.utc).date().isoformat()
 
 
 def test_output_windows_keep_historical_reactions_separate_from_recent_updates():
@@ -76,10 +76,11 @@ def test_explicit_windows_override_reaction_defaults_and_validate_scope():
 
 
 def test_output_timeframe_override_does_not_inherit_other_clauses_date_bounds():
-    from datetime import date, timedelta
+    from datetime import datetime, timezone, timedelta
     state = {"companies": ["QCOM"], "years": [2025], "request_plan": {"timeframe": "specified", "start_date": "2025-11-01", "end_date": "2025-11-20"}}
     recent = research_windows(state, {"timeframe": "recent"})["QCOM"]
-    assert recent == {"start_date": (date.today() - timedelta(days=90)).isoformat(), "end_date": date.today().isoformat()}
+    today = datetime.now(timezone.utc).date()
+    assert recent == {"start_date": (today - timedelta(days=90)).isoformat(), "end_date": today.isoformat()}
     assert research_windows(state, {"timeframe": "specified"})["QCOM"] == {"start_date": "2025-11-01", "end_date": "2025-11-20"}
 
 

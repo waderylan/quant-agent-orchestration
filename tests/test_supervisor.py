@@ -173,6 +173,37 @@ async def capture(question=FULL, *, overrides=None, company="QCOM", years=(2024,
 
 
 @pytest.mark.asyncio
+async def test_filing_explanation_does_not_erase_checked_calculations():
+    async def research(state, writer):
+        return {"answer": "Filed business explanation [F1].", "research_sources": state["analysis_sources"]}
+    overrides = {**workers(), "research": research}
+    result = await capture("Compare Qualcomm revenue growth and explain management drivers", overrides=overrides)
+    answer = next(e["data"] for e in reversed(result) if e["type"] == "answer")
+    assert "Checked growth 10% [C1]" in answer and "Filed business explanation [F1]" in answer
+
+
+@pytest.mark.asyncio
+async def test_review_repair_keeps_quant_when_it_removes_a_research_sentence(monkeypatch):
+    monkeypatch.setenv("REQUEST_PLANNER", "semantic")
+    sentence = "Checked growth 10% [C1] because an unsupported acquisition occurred [F1]."
+    async def model(prompt, tools, handler, **kwargs):
+        if kwargs["agent"] == "Request Planner":
+            handler("submit_plan", {"outputs": [{"kind": "checked_calculations", "description": "Revenue growth"},
+                {"kind": "filing_explanation", "description": "Filed drivers"}], "timeframe": "since_filing", "start_date": None, "end_date": None})
+        else:
+            handler("submit_coverage", {"results": [{"id": "R1", "addressed": True, "citations": ["C1"], "missing": ""},
+                {"id": "R2", "addressed": False, "citations": [], "missing": "Filed driver evidence is missing"}],
+                "missing_requests": [], "unsupported_claims": [sentence] if sentence in prompt else []})
+        yield {"type": "token", "data": ""}
+    async def research(state, writer):
+        return {"answer": sentence, "research_sources": state["analysis_sources"]}
+    result = [e async for e in events(Index(), "Calculate Qualcomm revenue growth and explain the filed drivers", ["QCOM"],
+        [2024, 2025], model_stream=model, worker_overrides={**workers(), "research": research})]
+    answer = next(e["data"] for e in reversed(result) if e["type"] == "answer")
+    assert "Checked growth 10% [C1]" in answer and "unsupported acquisition" not in answer
+
+
+@pytest.mark.asyncio
 async def test_five_worker_handoff_keeps_exact_values_dates_and_lineage():
     es = await capture()
     termination = next(

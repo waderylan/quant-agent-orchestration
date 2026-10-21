@@ -77,9 +77,14 @@ class AgentActivity {
         if (this.active === call.id) this.active = null;
       }
       this.render();
-    } else if (type === "trace" && (data.provider || data.model) && this.active) {
-      Object.assign(this.calls.get(this.active), {provider: data.provider, model: data.model});
-      if (this.selected === this.active) this.renderDetails();
+    } else if (type === "trace" && (data.provider || data.model) && (data.activity_id || this.active)) {
+      const call = this.calls.get(data.activity_id || this.active);
+      if (call && (!data.node || data.node === "provider_route")) {
+        call.models ??= [];
+        if (!call.models.some((model) => model.provider === data.provider && model.model === data.model))
+          call.models.push({provider: data.provider, model: data.model, reason: data.reason});
+        if (this.selected === call.id) this.renderDetails();
+      }
     } else if (type === "tool" && this.active) {
       this.calls.get(this.active).tools.push(data.name);
       if (this.selected === this.active) this.renderDetails();
@@ -192,7 +197,8 @@ class AgentActivity {
     const heading = document.createElement("h3");
     heading.textContent = call.agent;
     this.details.append(heading);
-    for (const text of [call.task, [call.provider, call.model].filter(Boolean).join(" · ")]) {
+    for (const text of [call.task, ...(call.models || []).flatMap((model) =>
+      [[model.provider, model.model].filter(Boolean).join(" · "), model.reason])]) {
       if (!text) continue;
       const line = document.createElement("p");
       line.textContent = text;

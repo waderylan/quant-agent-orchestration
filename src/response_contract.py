@@ -20,7 +20,7 @@ OUTCOME_TOOL = {
                 "type": "string",
                 "enum": ["complete", "partial", "clarification"],
             },
-            "missing": {"type": "array", "items": {"type": "string"}, "maxItems": 12},
+            "missing": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 300}, "maxItems": 12},
         },
         "required": ["status", "missing"],
         "additionalProperties": False,

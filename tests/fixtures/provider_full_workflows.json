@@ -1,0 +1,14 @@
+[
+  {
+    "id": "amd_full_workflow",
+    "question": "For AMD FY2024 and FY2025, show reported revenue and gross profit, calculate revenue growth and gross margin, explain the filed business drivers, compare one material change in annual risk disclosures, and research one dated development from the last 90 days. Keep filing evidence separate from current web evidence and cite every part.",
+    "companies": ["AMD"],
+    "years": [2024, 2025]
+  },
+  {
+    "id": "qcom_full_workflow",
+    "question": "For Qualcomm FY2024 versus FY2025, show reported revenue and operating income, calculate revenue growth and operating margins, explain management's filed business drivers, identify one material annual risk change, and summarize one dated development from the past 90 days. Cite the before and after filings and a separate current web source.",
+    "companies": ["QCOM"],
+    "years": [2024, 2025]
+  }
+]

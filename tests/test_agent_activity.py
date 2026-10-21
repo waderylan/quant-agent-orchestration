@@ -42,6 +42,49 @@ async def test_repeated_invocations_keep_timing_selection_and_sources_in_sync(pa
 
 
 @pytest.mark.asyncio
+async def test_provider_route_attaches_to_its_invocation_during_review(page):
+    await page.evaluate("""() => {
+      activity.start();
+      event('activity', {id:'worker-1',agent:'Filings Research',status:'running',elapsed_ms:0});
+      event('activity', {id:'review',agent:'Answer Reviewer',status:'running',elapsed_ms:100});
+      event('trace', {node:'provider_route',activity_id:'worker-1',agent:'Filings Research',
+        provider:'nebius',model:'Qwen3-235B',reason:'Comparison across fiscal years'});
+      event('complete', {status:'completed'});
+    }""")
+    await page.locator('.agent-call').first.click()
+    details = await page.locator('#agent-details').inner_text()
+    assert 'nebius' in details and 'Qwen3-235B' in details and 'Comparison across fiscal years' in details
+    await page.locator('.agent-call').nth(1).click()
+    assert 'Qwen3-235B' not in await page.locator('#agent-details').inner_text()
+
+
+@pytest.mark.asyncio
+async def test_profile_switch_submits_selection_and_uses_shared_model_details(page):
+    requests = []
+    async def chat(route):
+        body = route.request.post_data_json
+        requests.append(body)
+        model = 'nvidia/hosted-model' if body['generation_profile'] == 'api' else 'codex-model'
+        import json
+        frames = [('activity', {'id': 'worker', 'agent': 'Financial Data', 'status': 'running'}),
+                  ('trace', {'node': 'provider_route', 'activity_id': 'worker', 'provider': body['generation_profile'], 'model': model, 'reason': 'Selected models'}),
+                  ('activity', {'id': 'worker', 'agent': 'Financial Data', 'status': 'completed'}),
+                  ('complete', {'status': 'completed'})]
+        await route.fulfill(content_type='text/event-stream', body=''.join(
+            'event: ' + kind + '\ndata: ' + json.dumps(data) + '\n\n' for kind, data in frames))
+    await page.route('**/api/chat', chat)
+    await page.wait_for_function("!document.getElementById('generation-profile').disabled")
+    await page.locator('#question').fill('Show reported revenue')
+    for profile, model in [('codex', 'codex-model'), ('api', 'nvidia/hosted-model')]:
+        await page.locator('#generation-profile').select_option(profile)
+        await page.locator('#ask').click()
+        await page.wait_for_function("!document.getElementById('ask').disabled")
+        await page.locator('.agent-call').click()
+        assert model in await page.locator('#agent-details').inner_text()
+    assert [body['generation_profile'] for body in requests] == ['codex', 'api']
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize('status', ['stopped', 'failed', 'unverified'])
 async def test_interrupted_activity_freezes_and_next_request_resets(page, status):
     await page.evaluate("""status => {

@@ -22,6 +22,10 @@ async def page():
             path = urlsplit(route.request.url).path
             if path == "/api/coverage":
                 await route.fulfill(json={"QCOM": [2025]})
+            elif path == "/api/runtime":
+                await route.fulfill(json={"generation_profile": "codex", "profiles": [
+                    {"id": "codex", "label": "Codex", "available": True},
+                    {"id": "api", "label": "Hosted (NVIDIA + Nebius)", "available": True}]})
             elif path == "/api/sources/recorded":
                 await route.fulfill(json={"kind": "filing_passage", "text": "150.25", "context": "150.25", "start": 0, "context_start": 0})
             elif path == "/api/live/recorded":

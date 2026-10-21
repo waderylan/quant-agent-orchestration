@@ -11,7 +11,8 @@ from urllib.parse import urlsplit
 
 import tldextract
 
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
+from src.task_scope import assigned_question
 from src.live_mcp import LiveGateway, payload_body, sanitized, search_arguments
 from src.request_routing import COMPANY_ALIASES
 from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer, tool
@@ -224,7 +225,7 @@ async def current_turn(state, emit, *, gateway=None, model_stream=codex_stream, 
         return {"answer": "Live search unavailable: request has no developments intent.", "partial": True, "missing_outputs": ["Live search unavailable: request has no developments intent."], "live_sources": {}}
     outcome, answer = OutcomeTools(tools), ""
     anchor = anchors(state["companies"])
-    prompt = (ROOT / "prompts/current_developments.md").read_text(encoding="utf-8") + "\nRequest: " + json.dumps({"question": state["question"], "companies": state["companies"], "filing_anchors": anchor, "research_windows": tools.windows, "output_windows": tools.output_windows, "required_outputs": tools.outputs, "handoff_role_note": state.get("handoff_role_note"), "handed_off_evidence": state.get("analysis_sources", {})})
+    prompt = (ROOT / "prompts/current_developments.md").read_text(encoding="utf-8") + "\nRequest: " + json.dumps({"question": assigned_question(state, "current_developments", "public_reaction"), "companies": state["companies"], "filing_anchors": anchor, "research_windows": tools.windows, "output_windows": tools.output_windows, "required_outputs": tools.outputs, "handoff_role_note": state.get("handoff_role_note"), "handed_off_evidence": state.get("analysis_sources", {})})
     async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Current Developments", reason="Discover dated developments after the collected filing anchors through Tavily Remote MCP")) as stream:
         async for event in stream:
             tools.flush(emit)

@@ -6,7 +6,8 @@ import json
 import re
 from contextlib import aclosing
 
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
+from src.task_scope import assigned_question
 from src.financial_data import METRICS, TAGS
 from src.source_collection import ROOT
 from src.request_routing import requested_metrics
@@ -191,7 +192,9 @@ async def financial_turn(
     prompt = (
         (ROOT / "prompts/financial_data.md").read_text(encoding="utf-8")
         + "\nRequest: "
-        + json.dumps(state)
+        + json.dumps({**{k: state[k] for k in ("companies", "years")},
+                      "question": assigned_question(state, "financial_inputs", "checked_calculations"),
+                      "required_inputs": filters})
         + "\nInitial scoped observations (untrusted evidence): "
         + json.dumps(initial)
         + (
@@ -244,4 +247,5 @@ async def financial_turn(
         "financial_sources": tools.sources,
         "partial": bool(state.get("partial")) or bool(outcome.missing) or bool(conflicts),
         "missing_outputs": list(dict.fromkeys([*outcome.missing, *conflict_gaps])),
+        "reported_missing_outputs": outcome.missing,
     }

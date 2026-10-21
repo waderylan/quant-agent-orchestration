@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool
 from typing import Literal
 
 from src.source_collection import ROOT
+from src.generation_context import RoutingContext
 
 
 class Output(BaseModel):
@@ -44,10 +45,11 @@ class AnswerReview(BaseModel):
     unsupported_claims: list[str]
 
 
-async def structured(prompt, name, schema, model_stream, emit, *, agent):
+async def structured(prompt, name, schema, model_stream, emit, *, agent, context=None):
     class Handler:
         max_tool_calls = 1
         value = None
+        routing_context = context
 
         def __call__(self, tool, args):
             if tool != name or self.value is not None:
@@ -68,7 +70,7 @@ async def structured(prompt, name, schema, model_stream, emit, *, agent):
 
 async def decompose(state, model_stream, emit):
     prompt = (ROOT / "prompts/request_plan.md").read_text(encoding="utf-8")
-    value = await structured(prompt + "\nRequest: " + json.dumps({**{k: state[k] for k in ("question", "companies", "years")}, "today": datetime.now(timezone.utc).date().isoformat()}), "submit_plan", RequestPlan.model_json_schema(), model_stream, emit, agent="Request Planner")
+    value = await structured(prompt + "\nRequest: " + json.dumps({**{k: state[k] for k in ("question", "companies", "years")}, "today": datetime.now(timezone.utc).date().isoformat()}), "submit_plan", RequestPlan.model_json_schema(), model_stream, emit, agent="Request Planner", context=RoutingContext.from_state(state, activity_id="plan", phase="planner"))
     plan = RequestPlan.model_validate(value).model_dump()
     for scope in [plan, *plan["outputs"]]:
         for key in ("start_date", "end_date"):
@@ -81,7 +83,7 @@ async def decompose(state, model_stream, emit):
     return plan
 
 
-async def coverage(question, outputs, answer, sources, model_stream, emit):
+async def coverage(question, outputs, answer, sources, model_stream, emit, *, routing_context=None):
     cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
     # Checked calculations retain their original inputs even when only the derived
     # measure belongs in the answer. Make that lineage available to the reviewer.
@@ -108,7 +110,12 @@ async def coverage(question, outputs, answer, sources, model_stream, emit):
         excerpts.append(excerpt)
     from src.capabilities import capability_request
     prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "untrusted_source_excerpts": excerpts})
-    review = AnswerReview.model_validate(await structured(prompt, "submit_coverage", AnswerReview.model_json_schema(), model_stream, emit, agent="Answer Reviewer")).model_dump()
+    context = routing_context or RoutingContext(activity_id="review", phase="reviewer",
+                             companies=len({s.get("company") for s in sources.values() if s.get("company")}) or 1,
+                             years=len({s.get("fiscal_year") for s in sources.values() if s.get("fiscal_year")}) or 1,
+                             evidence_kinds=tuple(sorted({s[0] for s in cited})),
+                             source_conflict=bool(re.search(r"amend|10-K/A", question, re.I)))
+    review = AnswerReview.model_validate(await structured(prompt, "submit_coverage", AnswerReview.model_json_schema(), model_stream, emit, agent="Answer Reviewer", context=context)).model_dump()
     rows = review.get("results", [])
     if len(rows) != len(outputs) or {r.get("id") for r in rows} != {o["id"] for o in outputs}:
         raise ValueError("Answer review omitted a requested output")

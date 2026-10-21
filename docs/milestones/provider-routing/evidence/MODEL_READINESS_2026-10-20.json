@@ -1,0 +1,369 @@
+{
+  "checked_at": "2026-10-20T22:24:24.790393+00:00",
+  "kind": "Direct hosted API compatibility probes over synthetic source text; not application, browser, Docker, routing acceptance, or formal evaluation",
+  "implementation_changed": false,
+  "reported_nebius_baseline_usd": 100,
+  "reported_promo_expiry": "No displayed expiry, user-reported",
+  "local_nebius_cutoff": "2027-01-01T00:00:00Z",
+  "nebius_estimated_usage_cost_usd": "0.0001364",
+  "nebius_reservations_retained": true,
+  "records": [
+    {
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "synthetic_only": true,
+      "checked_at": "2026-10-20T22:22:40.962658+00:00",
+      "checks": {
+        "tool_arguments": true,
+        "tool_stream_terminal": false,
+        "answer": true,
+        "answer_stream_terminal": true,
+        "usage_returned": true
+      },
+      "requests": [
+        {
+          "http_status": 200,
+          "content": "",
+          "tool_calls": {
+            "0": {
+              "id": "chatcmpl-tool-bcd58834c6c5c972",
+              "type": "function",
+              "function": {
+                "name": "record_probe",
+                "arguments": "{\"source_id\": \"S1\", \"new_revenue_usd\": 120}"
+              }
+            }
+          },
+          "usage": {
+            "prompt_tokens": 250,
+            "total_tokens": 271,
+            "completion_tokens": 21
+          },
+          "finish_reason": "stop",
+          "first_answer_token_seconds": null,
+          "done": true,
+          "reservation_id": "1e041ac2-3494-49c7-9527-80826b1db91e",
+          "seconds": 0.984
+        },
+        {
+          "http_status": 200,
+          "content": "Acme Example reported revenue of USD 120 [S1].",
+          "tool_calls": {},
+          "usage": {
+            "prompt_tokens": 321,
+            "total_tokens": 337,
+            "completion_tokens": 16
+          },
+          "finish_reason": "stop",
+          "first_answer_token_seconds": 1.297,
+          "done": true,
+          "reservation_id": "8a6d2b5f-cec0-41f5-8823-6c366f91b78d",
+          "seconds": 1.724
+        }
+      ],
+      "price_per_token": {
+        "input": "0.0000002",
+        "output": "0.0000006"
+      },
+      "maximum_reserved_per_request_usd": "0.0525824",
+      "baseline": {
+        "balance_usd": 100,
+        "source": "User-confirmed immediately before probes",
+        "displayed_expiry": "none, user-reported",
+        "local_cutoff": "2027-01-01T00:00:00+00:00"
+      },
+      "estimated_reported_usage_cost_usd": "0.0001364",
+      "passed": false
+    },
+    {
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "synthetic_only": true,
+      "checked_at": "2026-10-20T22:22:40.072039+00:00",
+      "checks": {},
+      "requests": [
+        {
+          "http_status": 404,
+          "content": "",
+          "tool_calls": {},
+          "usage": null,
+          "finish_reason": null,
+          "first_answer_token_seconds": null,
+          "done": false,
+          "reservation_id": null,
+          "error": "Provider rejected request; body withheld."
+        }
+      ],
+      "passed": false,
+      "error_type": "ValueError",
+      "error": "Tool request rejected"
+    },
+    {
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "synthetic_only": true,
+      "checked_at": "2026-10-20T22:22:39.798107+00:00",
+      "checks": {
+        "tool_arguments": true,
+        "tool_stream_terminal": true,
+        "answer": false,
+        "answer_stream_terminal": true,
+        "usage_returned": true
+      },
+      "requests": [
+        {
+          "http_status": 200,
+          "content": "",
+          "tool_calls": {
+            "0": {
+              "id": "call-4165ad8c-fbd8-4f5d-b4e1-3b9c010f858b",
+              "type": "function",
+              "function": {
+                "name": "record_probe",
+                "arguments": "{\n  \"source_id\": \"S1\",\n  \"new_revenue_usd\": 120\n}"
+              }
+            }
+          },
+          "usage": {
+            "prompt_tokens": 389,
+            "completion_tokens": 25,
+            "total_tokens": 414,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "tool_calls",
+          "first_answer_token_seconds": null,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 0.686
+        },
+        {
+          "http_status": 200,
+          "content": "S1: 120",
+          "tool_calls": {},
+          "usage": {
+            "prompt_tokens": 162,
+            "completion_tokens": 8,
+            "total_tokens": 170,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "stop",
+          "first_answer_token_seconds": 0.275,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 0.324
+        }
+      ],
+      "passed": false
+    },
+    {
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "synthetic_only": true,
+      "checked_at": "2026-10-20T22:23:35.524570+00:00",
+      "checks": {
+        "tool_arguments": true,
+        "tool_stream_terminal": true,
+        "answer": true,
+        "answer_stream_terminal": true,
+        "usage_returned": true
+      },
+      "requests": [
+        {
+          "http_status": 200,
+          "content": "",
+          "tool_calls": {
+            "0": {
+              "id": "call-94f4202e-73b1-4cf1-ae32-e6a426c026a7",
+              "type": "function",
+              "function": {
+                "name": "record_probe",
+                "arguments": "{\"source_id\": \"S1\", \"new_revenue_usd\": 120}"
+              }
+            }
+          },
+          "usage": {
+            "prompt_tokens": 406,
+            "completion_tokens": 21,
+            "total_tokens": 427,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "tool_calls",
+          "first_answer_token_seconds": null,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 0.526
+        },
+        {
+          "http_status": 200,
+          "content": "Acme Example reported revenue of USD 120 [S1].",
+          "tool_calls": {},
+          "usage": {
+            "prompt_tokens": 179,
+            "completion_tokens": 16,
+            "total_tokens": 195,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "stop",
+          "first_answer_token_seconds": 0.28,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 0.358
+        }
+      ],
+      "passed": true
+    },
+    {
+      "provider": "nvidia",
+      "model": "nvidia/nemotron-3.5-super-vl-120b-a12b",
+      "synthetic_only": true,
+      "checked_at": "2026-10-20T22:23:35.887148+00:00",
+      "checks": {
+        "tool_arguments": true,
+        "tool_stream_terminal": true,
+        "answer": true,
+        "answer_stream_terminal": true,
+        "usage_returned": true
+      },
+      "requests": [
+        {
+          "http_status": 200,
+          "content": "",
+          "tool_calls": {
+            "0": {
+              "id": "call-2d73a190-c1be-4b03-97f8-5e5f25caecca",
+              "type": "function",
+              "function": {
+                "name": "record_probe",
+                "arguments": "{\"source_id\":\"S1\",\"new_revenue_usd\":120}"
+              }
+            }
+          },
+          "usage": {
+            "prompt_tokens": 406,
+            "completion_tokens": 40,
+            "total_tokens": 446,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "tool_calls",
+          "first_answer_token_seconds": null,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 3.901
+        },
+        {
+          "http_status": 200,
+          "content": "Acme Example reported revenue of USD 120 [S1].",
+          "tool_calls": {},
+          "usage": {
+            "prompt_tokens": 179,
+            "completion_tokens": 16,
+            "total_tokens": 195,
+            "prompt_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0
+            },
+            "completion_tokens_details": {
+              "accepted_prediction_tokens": null,
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "rejected_prediction_tokens": null
+            }
+          },
+          "finish_reason": "stop",
+          "first_answer_token_seconds": 0.3,
+          "done": true,
+          "reservation_id": null,
+          "seconds": 0.371
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "focused_followups": [
+    {
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "checked_at": "2026-10-20T22:23:13.121868+00:00",
+      "kind": "focused follow-up",
+      "synthetic_only": true,
+      "http_status": 404,
+      "provider_error": "{\"status\":404,\"title\":\"Not Found\",\"detail\":\"Function 'ac74040f-9fc9-4c5e-ac74-279ba5161d69': Not found for account '[REDACTED]'\"}"
+    },
+    {
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "checked_at": "2026-10-20T22:23:13.261650+00:00",
+      "kind": "focused follow-up",
+      "synthetic_only": true,
+      "http_status": 200,
+      "answer": null,
+      "finish_reason": "length",
+      "usage": {
+        "prompt_tokens": 61,
+        "completion_tokens": 64,
+        "total_tokens": 125,
+        "prompt_tokens_details": {
+          "audio_tokens": null,
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": null,
+          "audio_tokens": null,
+          "reasoning_tokens": 64,
+          "rejected_prediction_tokens": null
+        }
+      }
+    }
+  ],
+  "conclusions": [
+    "NVIDIA Lightning passes tool round-trip, streamed answer, bracketed citation, terminal event, and usage with enable_thinking=False and explicit final format. Initial loosely worded probe omitted brackets.",
+    "NVIDIA Super 3 120B returns 404 for tool and plain generation despite catalog listing; exclude from executable routes.",
+    "NVIDIA Super 3.5 VL 120B passes the same synthetic tool round-trip and is a replacement candidate, pending real workflow acceptance.",
+    "Nebius Qwen3 235B completes streamed tool round-trip and cited answer; tool-bearing first message uses finish_reason=stop. Dispatch validated tool_calls before treating stop as final.",
+    "The first strict probe status remains failed where its expected finish_reason or citation formatting was not met; these records retain that evidence.",
+    "The Lightning plain follow-up without enable_thinking=False used all 64 output tokens for reasoning and produced no answer."
+  ]
+}

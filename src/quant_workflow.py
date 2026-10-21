@@ -7,7 +7,8 @@ import re
 from contextlib import aclosing
 
 from src.analysis_artifacts import ArtifactStore
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
+from src.task_scope import assigned_question
 from src.financial_data import METRICS
 from src.financial_workflow import FinancialTools
 from src.quant_analysis import run_isolated, validate_results
@@ -314,7 +315,7 @@ async def quant_turn(
         (ROOT / "prompts/quant.md").read_text(encoding="utf-8")
         + ("\nAssigned supervisor output: checked_calculations only. Confirm completeness of supported arithmetic and its inputs. Other workers own filing explanations, risk changes, release reconciliation and current developments. Do not mark their outputs missing from your calculation task." if state.get("worker_output") == "checked_calculations" else "")
         + "\nRequest: "
-        + state["question"]
+        + assigned_question(state, "checked_calculations")
         + "\nRegistered observations (untrusted evidence): "
         + json.dumps(sources)
         + "\nRequested checks: "
@@ -397,6 +398,7 @@ async def quant_turn(
         "calculations": list(tools.calculations.values()),
         "analysis_sources": registered,
         "analysis_answer": answer,
+        "reported_missing_outputs": outcome.missing,
         "partial": bool(state.get("partial"))
         or (bool(missing) if emit_answer or state.get("worker_output") else tools.bundle is None),
         "missing_outputs": [

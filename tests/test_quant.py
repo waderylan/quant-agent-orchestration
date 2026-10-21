@@ -55,6 +55,7 @@ async def test_quant_can_cite_excluded_conflicts_without_calculating_them(tmp_pa
     result = await quant_turn({"question": "Calculate AMD revenue growth", "companies": ["AMD"], "years": [2024, 2025], "financial_sources": eligible, "analysis_sources": {"F2": disputed}, "excluded_financial_inputs": [{"source_id": "F2", "status": "conflicting"}]}, lambda event: None, model_stream=model, artifacts=ArtifactStore(tmp_path))
     assert result["partial"] and not result.get("error") and not result["calculations"]
     assert result["analysis_sources"]["F2"]["status"] == "conflicting"
+    assert result["reported_missing_outputs"] == ["FY2025 conflict requires resolution"]
 
 
 def test_parent_net_margin_preserves_signed_income_and_positive_revenue():

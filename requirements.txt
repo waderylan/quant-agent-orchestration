@@ -138,6 +138,7 @@ jsonschema==4.26.0
     # via
     #   chromadb
     #   mcp
+    #   public-company-research-assistant
 jsonschema-specifications==2025.9.1
     # via jsonschema
 kiwisolver==1.5.1

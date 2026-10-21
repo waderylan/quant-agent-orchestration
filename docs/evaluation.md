@@ -1,9 +1,10 @@
 # Evaluation
 
-Formal RAGAS, agent trajectory, provider, and Cloud Run reports are pending. The checks below are exploratory acceptance evidence; their dated JSON retains exact cases, sources, and timing. [Milestones](milestones/README.md) link the individual records.
+Formal RAGAS, agent trajectory and Cloud Run reports are pending. Local provider checks below are engineering acceptance evidence; their dated JSON retains exact cases, sources and timing. [Milestones](milestones/README.md) link individual records.
 
 | Area | Measured evidence |
 | --- | --- |
+| Hosted provider routing | [M11 acceptance](milestones/provider-routing/evidence/ACCEPTANCE_2026-10-20.json) records real NVIDIA/Nebius application calls, Codex/Hosted browser switching, source inspection, controlled worker comparisons and two concurrent Linux requests invoking every specialist. Both full requests remain partial: filing/risk coverage and completion checks retain gaps, and AMD's live acquisition hits the configured Tavily monthly stop. This is not a passing full-workflow quality result. |
 | Source preparation | 46 verified selected bodies/extractions; source and hash checks in [M2](milestones/source-preparation/README.md) |
 | Filings Research | 19 focused tests; four company turns, one direct worker, browser/source checks, and failure probes in [M3](milestones/filings-research/README.md) |
 | Local container | 22 focused tests; cited SSE, browser, auth isolation, cancellation, and model failure in [M4](milestones/local-container/README.md) |

@@ -15,7 +15,8 @@ from difflib import SequenceMatcher
 from datetime import date
 from typing import TypedDict, Literal
 
-from src.codex_model import stream as codex_stream
+from src.generation import stream as codex_stream
+from src.task_scope import assigned_question
 from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer, tool
 from src.source_collection import ROOT, digest
 
@@ -199,7 +200,9 @@ class RiskTools:
             if old and new and (old["section"] != "risk_factors" or new["section"] != "risk_factors"):
                 raise ValueError("Risk classifications require risk sections; amendment scope is context only")
             if not old or not new or old["company"] != new["company"] or old["fiscal_year"] >= new["fiscal_year"]:
-                raise ValueError("Classification needs ordered same-company before and after evidence; use complete section for an absence")
+                choices = [{"source_id": sid, "company": source["company"], "fiscal_year": source["fiscal_year"]}
+                           for sid, source in self.sources.items() if source["complete_section"]]
+                raise ValueError("Classification needs registered S source IDs ordered by fiscal year for the same company. Complete section IDs: " + json.dumps(choices))
             kind = args["classification"]
             if kind in ("added", "removed"):
                 absent, present = (old, new) if kind == "added" else (new, old)
@@ -219,7 +222,7 @@ class RiskTools:
 TOOLS = [
     tool("inspect_risk", "Read exact risk span or COMPLETE section; full sections establish the comparison universe.", {"source_id": {"type": "string"}}, ["source_id"]),
     tool("risk_pairs", "Page subject/wording candidates from exhaustive section alignment. Unmatched does not mean added/removed.", {"comparison": {"type": "string"}, "offset": {"type": "integer"}}, ["comparison"]),
-    tool("record_risk_change", "Record an inspected material classification with both citations. Added/removed uses complete absent-side section. Rephrasing is changed, not new exposure.", {"classification": {"type": "string", "enum": ["added", "removed", "changed", "relocated", "unchanged"]}, "before": {"type": "string"}, "after": {"type": "string"}, "rationale": {"type": "string"}}, ["classification", "before", "after", "rationale"]),
+    tool("record_risk_change", "Record an inspected material classification with both citations. Added/removed uses complete absent-side section. Rephrasing is changed, not new exposure.", {"classification": {"type": "string", "enum": ["added", "removed", "changed", "relocated", "unchanged"]}, "before": {"type": "string", "description": "Registered S source ID from the OLDER year, e.g. S1. Never a year, document ID or comparison name."}, "after": {"type": "string", "description": "Registered S source ID from the NEWER year of the same company, e.g. S2."}, "rationale": {"type": "string", "minLength": 20, "maxLength": 1200}}, ["classification", "before", "after", "rationale"]),
 ]
 
 
@@ -253,7 +256,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
             writer({"type": "answer", "data": answer})
             cited = set(re.findall(r"\[(S\d+)\]", answer))
             writer({"type": "sources", "data": [sources[sid] for sid in sorted(cited, key=lambda s: int(s[1:]))]})
-        return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
+        return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "reported_missing_outputs": [gap for r in results for gap in r.get("reported_missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
     tools = RiskTools(index, state["companies"], state["years"], source_offset=state.get("source_offset", 0))
     quarterly = bool(re.search(r"\b(?:Q[1-4]|quarter\w*|10-Q)\b", state["question"], re.I))
     annual_comparison = not quarterly or len(set(state["years"])) > 1 and bool(re.search(r"\b(?:annual|10-K)\b", state["question"], re.I)) and bool(re.search(r"\bbetween\b|\bFY\s*20\d\d\s*(?:to|and|[-–])", state["question"], re.I))
@@ -311,7 +314,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
             else:
                 gaps.append(f"{s['company']} FY{s['fiscal_year']} {s['form']}: complete text exceeds bounded context; inspect separately")
     role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
-    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": state["question"], "assigned_companies_only": state["companies"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts, "amendment_scope_context_only": [s for s in tools.sources.values() if s["section"] == "amendment_scope"]}, ensure_ascii=False)
+    prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": assigned_question(state, "risk_changes"), "assigned_companies_only": state["companies"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts, "amendment_scope_context_only": [s for s in tools.sources.values() if s["section"] == "amendment_scope"]}, ensure_ascii=False)
     outcome, answer = OutcomeTools(tools), ""
     async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare complete original filing risk inventories; preserve exact before/after evidence")) as stream:
         async for event in stream:
@@ -333,4 +336,4 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
         gaps.append("No material risk classification was registered; comparison remains unverified")
     if emit_answer:
         writer({"type": "sources", "data": [tools.sources[s] for s in sorted(cited, key=lambda s: int(s[1:]))]})
-    return {"answer": answer, "risk_answer": answer, "risk_sources": tools.sources, "risk_changes": tools.changes, "partial": bool(gaps), "missing_outputs": gaps, "clarification": outcome.status == "clarification", "citation_verified": True}
+    return {"answer": answer, "risk_answer": answer, "risk_sources": tools.sources, "risk_changes": tools.changes, "partial": bool(gaps), "missing_outputs": gaps, "reported_missing_outputs": outcome.missing, "clarification": outcome.status == "clarification", "citation_verified": True}

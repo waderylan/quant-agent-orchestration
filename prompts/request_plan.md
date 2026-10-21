@@ -20,6 +20,9 @@ The verb 'research' alone does not require browsing; infer the evidence needed.
 Do not confuse company/management statements with outside reactions. General
 updates permit attributed third-party reporting; official confirmation is required
 only when explicitly requested. Company controls define the selected companies.
+An explicitly historical filings-only question requests filing_explanation, not an
+official_update. Add official_update only when the user asks whether a statement
+remains current or asks to check a later official update.
 Fiscal-year controls constrain FILINGS and NUMBERS, not current web research.
 A 'lately' question uses the present recent window even if FY2025 is selected.
 Never add a fiscal-year restriction to an outside-research output unless the user's
