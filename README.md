@@ -71,6 +71,8 @@ Capture makes real calls against seven development cases; it is not formal RAGAS
 
 ## Live sources
 
+**MCP tool sharing (graded):** Current Developments and Filings Research invoke the same Tavily Remote MCP `tavily_search` tool in different contexts. Exercise both with a full five-agent request and the “Check an official update” example; each call appears in the trace as `node=live_mcp`. Live calls need `TAVILY_API_KEY` and remaining monthly credit. [Rationale](docs/architecture.md#mcp-tool-sharing).
+
 Copy `.env.example` to ignored `.env` and supply `TAVILY_API_KEY` from your Tavily account. The key stays in the runtime environment. Live mode is the default when a key exists; set `LIVE_MODE=off` to disable acquisition or `LIVE_MODE=frozen` to replay recorded snapshots without new calls. `LIVE_CACHE` defaults to `artifacts/live/cache` and `LIVE_LEDGER` to `artifacts/live/usage.sqlite3`.
 
 Current Developments uses Tavily Remote MCP search/extraction for recent events, requested calendar windows, developments since a filing, and outside reactions to selected releases. Research shares search for a specific official-update check, including mixed requests that also need developments. Explicit no-web instructions prevent acquisition. The planner identifies each requested output, and a separate reviewer checks the original question, answer and cited excerpts before completion. Unsupported claim spans are removed and the repaired answer receives one bounded recheck; unresolved requested findings remain partial. [Architecture](docs/architecture.md) owns tool limits, dates, caching and the 600-credit monthly stop; [M10](docs/milestones/current-developments/README.md) owns measured acceptance. Prices and valuation are unsupported.
