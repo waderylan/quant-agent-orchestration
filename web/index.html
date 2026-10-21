@@ -231,6 +231,9 @@
       .answer-panel { grid-column: 1; grid-row: 1 / span 2; min-height: 220px; }
       #activity-panel { grid-column: 2; grid-row: 1; }
       #source-panel { grid-column: 2; grid-row: 2; }
+      .citation-key { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; margin: 18px 0 0; padding-top: 12px; border-top: 1px solid #e6eae5; font-size: 11px; color: #64716b; }
+      .citation-key dt { font: 600 11px ui-monospace, monospace; color: #245e64; }
+      .citation-key dd { margin: 0; }
       .activity-heading { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
       .activity-heading h2 { margin: 0; }
       #agent-elapsed, .agent-duration, .timeline-axis { font-variant-numeric: tabular-nums; font-size: 12px; color: #64716b; }
@@ -351,6 +354,12 @@ What has happened at the selected companies since their latest filings? Cite dat
             Select a citation to inspect its exact passage.
           </p>
           <div id="passage"></div>
+          <dl class="citation-key" aria-label="Citation key">
+            <dt>S1</dt><dd>SEC filing passage</dd>
+            <dt>F1</dt><dd>Reported GAAP figure</dd>
+            <dt>C1</dt><dd>Verified calculation</dd>
+            <dt>W1</dt><dd>Web source</dd>
+          </dl>
         </aside>
       </div>
     </main>
