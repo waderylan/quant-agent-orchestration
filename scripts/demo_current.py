@@ -143,9 +143,9 @@ async def main(args):
                 write_json(args.output, sanitized(report))
                 print(name, turn["terminal"]["data"]["status"], flush=True)
     report["ledger_after"] = UsageLedger().snapshot()
-    report["reserved_credits"] = report["ledger_after"]["reserved_credits"] - before["reserved_credits"]
+    report["estimated_credits"] = report["ledger_after"]["estimated_credits"] - before["estimated_credits"]
     write_json(args.output, sanitized(report))
-    print(json.dumps({"output": str(args.output), "reserved_credits": report["reserved_credits"]}))
+    print(json.dumps({"output": str(args.output), "estimated_credits": report["estimated_credits"]}))
 
 
 if __name__ == "__main__":

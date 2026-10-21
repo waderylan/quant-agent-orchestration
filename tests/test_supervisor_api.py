@@ -35,13 +35,13 @@ async def test_model_profile_is_bound_to_each_http_request(monkeypatch, tmp_path
 
 
 @pytest.mark.asyncio
-async def test_runtime_reports_no_profile_available_on_cloud_run(monkeypatch):
+async def test_cloud_run_offers_hosted_generation_but_not_local_codex(monkeypatch):
     monkeypatch.setenv('K_SERVICE', 'hw2')
     monkeypatch.setenv('NVIDIA_API_KEY', 'test')
     monkeypatch.setenv('NEBIUS_API_KEY', 'test')
     async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url='http://fixture') as client:
         profiles = (await client.get('/api/runtime')).json()['profiles']
-    assert not any(profile['available'] for profile in profiles)
+    assert {p['id']: p['available'] for p in profiles} == {'codex': False, 'api': True}
 
 
 @pytest.mark.asyncio

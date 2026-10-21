@@ -46,19 +46,16 @@ Use `--help` on each script for additional commands. [M4](docs/milestones/local-
 
 The default `GENERATION_PROFILE=codex` uses the host subscription. For direct providers, copy `.env.example` to ignored `.env` and supply `NVIDIA_API_KEY` and `NEBIUS_API_KEY`. Select **Hosted (NVIDIA + Nebius)** in the browser Models control, or set `GENERATION_PROFILE=api` as the server default. Each request keeps its selection; model names and reasons share the existing activity details. Both providers are required for normal hosted routing. API mode never uses CLI authentication.
 
-[M11](docs/milestones/provider-routing/README.md) owns model IDs, prices, dashboard links and binding limits: NVIDIA 40 RPM; Nebius $100 promo credit with a $10 buffer, a $5 local campaign cap and a $1 local per-request cap. The SQLite ledger is local test tooling, not an assignment requirement or an intended production component. Application stops do not disable card billing. Reuse the test ledger while testing; M14 chooses production spending controls separately.
+[M11](docs/milestones/provider-routing/README.md) owns model IDs, prices, dashboard links and account limits. No code blocks spend; limits are instructions in [AGENTS.md](AGENTS.md). NVIDIA failures and its 40 requests/minute pacing reroute calls to DeepSeek on Nebius.
 
 ```powershell
-uv run --locked python scripts/providers.py status
-# Only for a new ledger: substitute a current verified dashboard observation.
-uv run --locked python scripts/providers.py init --balance VERIFIED_CREDIT --observed-at UTC_TIMESTAMP --exclusive-account-use
-# Refresh an existing observation without resetting consumption/reservations.
-uv run --locked python scripts/providers.py refresh --balance VERIFIED_REMAINING_CREDIT --observed-at UTC_TIMESTAMP --exclusive-account-use
+# Recorded calls and token-estimated cost per provider.
+uv run --locked python scripts/providers.py
 $env:GENERATION_PROFILE='api'
 uv run --locked uvicorn main:app --host 127.0.0.1 --port 8080
 ```
 
-Observations expire after 24 hours. Missing/stale credit or uncertain pricing blocks Nebius and exposes the free-provider fallback in the trace. Set an earlier known expiry with `init --expires-at UTC_TIMESTAMP`; the January 1, 2027 cutoff always applies. Never initialize a second ledger to restore allowance. `/api/runtime` identifies the profile; activity details show each provider/model and routing reason.
+`/api/runtime` identifies the profile; activity details show each provider/model and routing reason.
 
 ```powershell
 uv run --locked python scripts/evaluate_provider_routes.py --url http://127.0.0.1:8080 --output artifacts/providers/application.json
@@ -75,7 +72,7 @@ Capture makes real calls against seven development cases; it is not formal RAGAS
 
 Copy `.env.example` to ignored `.env` and supply `TAVILY_API_KEY` from your Tavily account. The key stays in the runtime environment. Live mode is the default when a key exists; set `LIVE_MODE=off` to disable acquisition or `LIVE_MODE=frozen` to replay recorded snapshots without new calls. `LIVE_CACHE` defaults to `artifacts/live/cache` and `LIVE_LEDGER` to `artifacts/live/usage.sqlite3`.
 
-Current Developments uses Tavily Remote MCP search/extraction for recent events, requested calendar windows, developments since a filing, and outside reactions to selected releases. Research shares search for a specific official-update check, including mixed requests that also need developments. Explicit no-web instructions prevent acquisition. The planner identifies each requested output, and a separate reviewer checks the original question, answer and cited excerpts before completion. Unsupported claim spans are removed and the repaired answer receives one bounded recheck; unresolved requested findings remain partial. [Architecture](docs/architecture.md) owns tool limits, dates, caching and the 600-credit monthly stop; [M10](docs/milestones/current-developments/README.md) owns measured acceptance. Prices and valuation are unsupported.
+Current Developments uses Tavily Remote MCP search/extraction for recent events, requested calendar windows, developments since a filing, and outside reactions to selected releases. Research shares search for a specific official-update check, including mixed requests that also need developments. Explicit no-web instructions prevent acquisition. The planner identifies each requested output, and a separate reviewer checks the original question, answer and cited excerpts before completion. Unsupported claim spans are removed and the repaired answer receives one bounded recheck; unresolved requested findings remain partial. [Architecture](docs/architecture.md) owns tool limits, dates and caching; [M10](docs/milestones/current-developments/README.md) owns measured acceptance. Prices and valuation are unsupported.
 
 ```powershell
 uv run --locked python scripts/demo_current.py --direct --output artifacts/current-direct.json
@@ -90,7 +87,7 @@ Real demonstrations use account credits. Tests force frozen mode, isolated ledge
 Capture the three development questions through the running application:
 
 ```powershell
-uv run --locked python scripts/evaluate_usefulness.py --url http://127.0.0.1:8080 --budget artifacts/usefulness-budget.json --output artifacts/usefulness-development.json
+uv run --locked python scripts/evaluate_usefulness.py --url http://127.0.0.1:8080 --output artifacts/usefulness-development.json
 ```
 
-The capture command creates a local budget baseline when absent, records actual answers/traces and Tavily reservations, and stops before its 200-call run allowance is exhausted. Reuse the budget file across iterations. `--dataset` accepts a JSON case list with `id`, `question`, `companies` and `years`; capture alone does not establish answer quality or a formal evaluation score.
+The capture command records actual answers/traces and the Tavily calls made since it started. `--dataset` accepts a JSON case list with `id`, `question`, `companies` and `years`; capture alone does not establish answer quality or a formal evaluation score.

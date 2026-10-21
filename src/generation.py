@@ -17,13 +17,12 @@ from src.generation_tools import ToolConversation
 from src.provider_limits import LimitError, ProviderLedger
 
 
-def usage_cost(usage, payload, bound, limits):
+def usage_cost(usage, limits):
     if usage is None:
         return None
     prompt, completion = usage.get("prompt_tokens"), usage.get("completion_tokens")
-    if (type(prompt) is not int or type(completion) is not int or
-            prompt < 0 or completion < 0 or prompt > bound or completion > payload["max_tokens"]):
-        raise LimitError("Unverifiable provider token usage; reservation retained")
+    if type(prompt) is not int or type(completion) is not int or prompt < 0 or completion < 0:
+        return None
     return Decimal(prompt) * limits.input_price + Decimal(completion) * limits.output_price
 
 
@@ -74,6 +73,11 @@ async def stream(prompt, tools, handler, *, model=None, timeout=180, agent="Fili
     retried = False
     selected = provider_policy.route(context, agent=agent, input_bound=provider_client.input_bound({"messages": messages, "tools": conversation.wire_tools}))
     start = time.monotonic()
+
+    def can_reroute():
+        deepseek = provider_models.LIMITS[provider_models.NEBIUS_DEEPSEEK]
+        bound = provider_client.input_bound({"messages": messages, "tools": conversation.wire_tools})
+        return not visible and not switched and bound + deepseek.output <= deepseek.context
     async with asyncio.timeout(timeout), provider_client.client() as http:
         for round_number in range(conversation.limit + 4):
             limits = provider_models.LIMITS[selected.model]
@@ -106,31 +110,28 @@ async def stream(prompt, tools, handler, *, model=None, timeout=180, agent="Fili
                            "blocked_provider": "nebius", **selected.trace()}}
                     continue
                 raise LimitError("Generation context exceeds the verified endpoint limit; evidence is not truncated")
-            reservation = permit = None
+            permit = None
             result = None
             text = ""
             first_token = None
             try:
-                # Check the monetary guard before a queued request can acquire a permit.
-                if selected.provider == "nebius":
-                    key = os.getenv("NEBIUS_API_KEY")
-                    if not key:
-                        raise LimitError("Nebius key is missing")
-                    maximum = Decimal(bound)*limits.input_price + Decimal(output_limit)*limits.output_price
-                    reservation = ledger.reserve(maximum, selected.model, request_id)
-                    await provider_client.verify_prices(http, key, selected.model)
+                maximum = Decimal(bound)*limits.input_price + Decimal(output_limit)*limits.output_price
                 key = os.getenv(selected.provider.upper()+"_API_KEY")
                 if not key:
                     raise LimitError(f"{selected.provider} key is missing")
                 queue_start = time.monotonic()
-                permit = await ledger.permit(selected.provider, lease=timeout+10)
-                if reservation:
-                    ledger.authorize(reservation)
+                if selected.provider == "nvidia" and can_reroute():
+                    # Reaching NVIDIA's request pacing reroutes instead of queueing.
+                    permit = ledger.try_permit("nvidia", lease=timeout+10)
+                    if permit is None:
+                        raise LimitError("NVIDIA 40 requests/minute pacing reached")
+                else:
+                    permit = await ledger.permit(selected.provider, lease=timeout+10)
                 trace = {"node": "provider_route", "agent": agent, "request_id": request_id,
                        "activity_id": context.activity_id, "invocation_id": invocation, "round": round_number,
                        **selected.trace(), "reason": selected.reason + "; " + reason,
                        "task_context": asdict(context), "input_token_bound": bound, "max_output_tokens": output_limit,
-                       "maximum_cost_usd": str(maximum) if reservation else "0", "reservation_id": reservation,
+                       "maximum_cost_usd": str(maximum),
                        "queue_seconds": round(time.monotonic()-queue_start, 3)}
                 yield {"type": "trace", "data": trace}
                 request_started = time.monotonic()
@@ -148,26 +149,29 @@ async def stream(prompt, tools, handler, *, model=None, timeout=180, agent="Fili
                             result = chunk["data"]
                 if result is None:
                     raise provider_client.ProviderError(selected.provider, cause="missing_result")
-                actual = usage_cost(result["usage"], payload, bound, limits) if reservation else None
-                if reservation and actual is not None:
-                    ledger.settle(reservation, actual, "complete")
+                actual = usage_cost(result["usage"], limits)
+                ledger.record(selected.provider, selected.model, request_id, actual)
                 yield {"type": "trace", "data": {"node": "provider_usage", "agent": agent,
                        "activity_id": context.activity_id, "invocation_id": invocation,
                        "provider": selected.provider, "model": selected.model, "round": round_number,
-                       "usage": result["usage"], "cost_usd": str(actual) if actual is not None else ("0" if not reservation else None),
-                       "cost_basis": "token estimate" if reservation else "free developer endpoint",
+                       "usage": result["usage"], "cost_usd": str(actual) if actual is not None else None,
+                       "cost_basis": "token estimate" if limits.input_price else "free developer endpoint",
                        "request_seconds": round(time.monotonic()-request_started, 3),
                        "answer_ttft_seconds": round(first_token-start, 3) if first_token else None,
                        "total_seconds": round(time.monotonic()-start, 3)}}
             except (LimitError, provider_client.ProviderError) as error:
                 invalid_auth = isinstance(error, provider_client.ProviderError) and error.status in (401, 403)
                 transient = isinstance(error, provider_client.ProviderError) and error.retryable
-                deepseek = provider_models.LIMITS[provider_models.NEBIUS_DEEPSEEK]
-                super_recovery = (transient and error.status != 429 and selected.model == provider_models.NVIDIA_SUPER
-                                  and bound + deepseek.output <= deepseek.context
-                                  and not visible and not retried and not switched)
-                # A transient failure retries the routed model once before any downgrade.
-                if transient and not super_recovery and not visible and not retried and not switched:
+                # Any NVIDIA failure, including rate limiting, moves the call to DeepSeek.
+                if selected.provider == "nvidia" and can_reroute():
+                    switched = True
+                    selected = provider_policy.reasoning("provider_recovery", "NVIDIA unavailable or rate limited; route to DeepSeek")
+                    yield {"type": "trace", "data": {"node": "provider_fallback", "agent": agent,
+                           "activity_id": context.activity_id, "invocation_id": invocation,
+                           "blocked_provider": "nvidia", **selected.trace(), "reason": str(error)}}
+                    continue
+                # A transient Nebius failure retries the routed model once before any downgrade.
+                if transient and not visible and not retried:
                     retried = True
                     yield {"type": "trace", "data": {"node": "provider_retry", "agent": agent,
                            "activity_id": context.activity_id, "invocation_id": invocation,
@@ -184,14 +188,6 @@ async def stream(prompt, tools, handler, *, model=None, timeout=180, agent="Fili
                            "blocked_provider": selected.provider, "reason": str(error),
                            "provider": "nvidia", "model": provider_policy.fallback("").model}}
                     selected = provider_policy.fallback("Preferred Nebius route blocked; bounded free-provider fallback")
-                    continue
-                if super_recovery:
-                    switched = True
-                    selected = provider_policy.reasoning("provider_recovery",
-                                     "Free synthesis endpoint unavailable; guarded alternate provider")
-                    yield {"type": "trace", "data": {"node": "provider_fallback", "agent": agent,
-                           "activity_id": context.activity_id, "invocation_id": invocation,
-                           "blocked_provider": "nvidia", **selected.trace()}}
                     continue
                 raise
             finally:

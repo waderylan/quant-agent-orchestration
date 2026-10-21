@@ -53,15 +53,15 @@ app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 @app.get("/api/runtime")
 def runtime_profile():
     from src import provider_models, provider_policy
-    # Both profiles are local-only until M14 replaces the development ledger gate.
+    # Codex uses a local subscription login; hosted generation runs anywhere with keys.
     local = not os.getenv("K_SERVICE")
     return {"generation_profile": os.getenv("GENERATION_PROFILE", "codex"),
             "profiles": [{"id": "codex", "label": "Codex", "available": local and bool(os.getenv("CODEX_BRIDGE_URL") or shutil.which("codex"))},
                          {"id": "api", "label": "Hosted (NVIDIA + Nebius)",
-                          "available": local and all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
+                          "available": all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
             "policy": provider_policy.POLICY,
             "models": list(provider_models.LIMITS),
-            "provider_coordination": "shared local ledger"}
+            "provider_coordination": "local rate pacing and usage record"}
 
 
 class Question(BaseModel):

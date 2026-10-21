@@ -9,7 +9,7 @@ import httpx
 import pytest
 
 from src import generation, provider_client
-from src.provider_limits import CUTOFF, LimitError, ProviderLedger
+from src.provider_limits import ProviderLedger
 from src.provider_policy import route
 from src.generation_context import RoutingContext
 from src.provider_models import NVIDIA_SUPER as SUPER, NEBIUS_DEEPSEEK as DEEPSEEK
@@ -69,56 +69,12 @@ def test_routing_uses_task_complexity_and_independent_review():
     assert route(RoutingContext(),agent="Filings Research",input_bound=65000).model==DEEPSEEK
 
 
-def test_reservations_are_atomic_durable_and_cannot_reset(tmp_path):
-    ledger=ProviderLedger(tmp_path/"money.sqlite3",clock=lambda:NOW)
-    ledger.initialize(balance=100,observed_at=NOW,prior_reserved=89,exclusive=True)
-    def attempt(_):
-        try:
-            return ledger.reserve("0.6",DEEPSEEK,str(_))
-        except LimitError:
-            return None
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        accepted=list(pool.map(attempt,range(2)))
-    assert len([x for x in accepted if x])==1
-    reopened=ProviderLedger(ledger.path,clock=lambda:NOW)
-    assert reopened.status()["accounted_usd"]=="0.6"
-    with pytest.raises(LimitError,match="reset"):
-        reopened.initialize(balance=100,observed_at=NOW,exclusive=True)
-    reservation=next(x for x in accepted if x)
-    reopened.settle(reservation,"0.01","complete")
-    assert reopened.status()["accounted_usd"]=="0.01"
-    with pytest.raises(LimitError,match="duplicate"):
-        reopened.settle(reservation,"0.01","complete")
-
-
-def test_missing_stale_expired_and_overrun_accounting_fail_closed(tmp_path):
-    now=[NOW]
-    ledger=ProviderLedger(tmp_path/"money.sqlite3",clock=lambda:now[0])
-    with pytest.raises(LimitError,match="missing"):
-        ledger.reserve("0.01",DEEPSEEK)
-    ledger.initialize(balance=100,observed_at=NOW,exclusive=True)
-    reservation=ledger.reserve("0.01",DEEPSEEK)
-    with pytest.raises(LimitError,match="exceeds"):
-        ledger.settle(reservation,"0.02","complete")
-    with pytest.raises(LimitError,match="blocked"):
-        ledger.reserve("0.01",DEEPSEEK)
-    other=ProviderLedger(tmp_path/"expiry.sqlite3",clock=lambda:now[0])
-    other.initialize(balance=100,observed_at=NOW,exclusive=True)
-    now[0]+=86401
-    with pytest.raises(LimitError,match="stale"):
-        other.reserve("0.01",DEEPSEEK)
-    now[0]=CUTOFF
-    with pytest.raises(LimitError,match="cutoff"):
-        other.reserve("0.01",DEEPSEEK)
-
-
-def test_request_spend_stop_and_shared_sliding_rate_limit(tmp_path):
+def test_shared_nvidia_pacing_window_and_unlimited_recorded_usage(tmp_path):
     now=[NOW]
     ledger=ProviderLedger(tmp_path/"limits.sqlite3",clock=lambda:now[0])
-    ledger.initialize(balance=100,observed_at=NOW,exclusive=True)
-    ledger.reserve("0.6",DEEPSEEK,"same-request")
-    with pytest.raises(LimitError):
-        ledger.reserve("0.6",DEEPSEEK,"same-request")
+    for _ in range(3):
+        ledger.record("nebius",DEEPSEEK,"same-request","0.6")
+    assert ledger.status()["nebius"]=={"calls":3,"estimated_usd":"1.8","unknown_cost_calls":0}
     one,two=ledger.try_permit("nvidia"),ledger.try_permit("nvidia")
     assert one and two and ledger.try_permit("nvidia") is None
     ledger.release(one)
@@ -130,22 +86,6 @@ def test_request_spend_stop_and_shared_sliding_rate_limit(tmp_path):
     assert ProviderLedger(ledger.path,clock=lambda:now[0]).try_permit("nvidia") is None
     now[0]+=61
     assert ledger.try_permit("nvidia")
-
-
-def test_balance_refresh_never_resets_spend_or_releases_unknown_cost(tmp_path, monkeypatch):
-    now = [NOW]
-    ledger = ProviderLedger(tmp_path / "refresh.sqlite3", clock=lambda: now[0])
-    ledger.initialize(balance=100, observed_at=NOW, exclusive=True)
-    ledger.reserve("0.2", DEEPSEEK, "unknown")
-    now[0] += 86401
-    ledger.refresh(balance="10.5", observed_at=now[0], exclusive=True)
-    ledger.reserve("0.3", DEEPSEEK, "new")
-    ledger.refresh(balance=100, observed_at=now[0], exclusive=True)
-    with pytest.raises(LimitError, match="spending stop"):
-        ledger.reserve("0.01", DEEPSEEK, "another")
-    monkeypatch.setenv("K_SERVICE", "test-service")
-    with pytest.raises(LimitError, match="global provider accounting"):
-        ProviderLedger(tmp_path / "cloud.sqlite3")
 
 
 @pytest.mark.asyncio
@@ -190,11 +130,7 @@ async def test_fragmented_tools_completion_slot_and_final_stream(api):
 
 @pytest.mark.asyncio
 async def test_tool_call_with_stop_finish_still_executes_and_accounts(api):
-    ledger=ProviderLedger()
-    ledger.initialize(balance=100,observed_at=ledger.clock(),exclusive=True)
     def respond(request):
-        if request.method=="GET":
-            return httpx.Response(200,json={"data":[{"id":DEEPSEEK,"context_length":1024000,"pricing":{"prompt":"0.00000014","completion":"0.00000028"}}]})
         payload=json.loads(request.content)
         if "tools" in payload:
             return tool("report_outcome",{"status":"complete","missing":[]},finish="stop")
@@ -202,19 +138,14 @@ async def test_tool_call_with_stop_finish_still_executes_and_accounts(api):
     requests=api(respond)
     events=[e async for e in generation.stream("question",[OUTCOME_TOOL],OutcomeTools(Handler()),routing_context=RoutingContext(companies=2))]
     assert any(e["type"]=="token" for e in events)
-    assert ledger.status()["unsettled"]==0
-    assert Decimal(ledger.status()["accounted_usd"])>0
-    assert len([r for r in requests if r.method=="POST"])==2
+    assert Decimal(ProviderLedger().status()["nebius"]["estimated_usd"])>0
+    assert len(requests)==2
 
 
 @pytest.mark.asyncio
 async def test_deepseek_nulls_parse_and_transient_failure_retries_before_downgrade(api):
-    ledger=ProviderLedger()
-    ledger.initialize(balance=100,observed_at=ledger.clock(),exclusive=True)
     posts=[0]
     def respond(request):
-        if request.method=="GET":
-            return httpx.Response(200,json={"data":[{"id":DEEPSEEK,"context_length":1024000,"pricing":{"prompt":"0.00000014","completion":"0.00000028"}}]})
         assert request.url.host=="api.tokenfactory.nebius.com"
         posts[0]+=1
         if posts[0]==1:
@@ -228,7 +159,8 @@ async def test_deepseek_nulls_parse_and_transient_failure_retries_before_downgra
 
 
 @pytest.mark.asyncio
-async def test_blocked_nebius_never_sends_paid_request_and_falls_back(api):
+async def test_missing_nebius_key_never_contacts_nebius_and_falls_back(api, monkeypatch):
+    monkeypatch.setenv("NEBIUS_API_KEY", "")
     def respond(request):
         assert request.url.host=="integrate.api.nvidia.com"
         return tool("submit_plan",{"ready":True},finish="stop")
@@ -274,11 +206,11 @@ async def test_invalid_provider_results_do_not_execute_tools_or_leak_errors(api,
         _=[e async for e in generation.stream("question",[SEARCH,OUTCOME_TOOL],OutcomeTools(handler))]
     assert not handler.executed and "fixture-nvidia-secret" not in str(error.value)
     if fault=="auth":
-        assert len(requests)==1
+        assert [r.url.host for r in requests]==["integrate.api.nvidia.com","api.tokenfactory.nebius.com"]
 
 
 @pytest.mark.asyncio
-async def test_rate_retry_is_bounded_and_reuses_completed_tools(api):
+async def test_nvidia_rate_limit_reroutes_to_deepseek_and_reuses_completed_tools(api):
     count=[0]
     def respond(request):
         count[0]+=1
@@ -291,8 +223,20 @@ async def test_rate_retry_is_bounded_and_reuses_completed_tools(api):
     requests=api(respond)
     outcome=OutcomeTools(Handler())
     events=[e async for e in generation.stream("question",[OUTCOME_TOOL],outcome)]
-    assert len(requests)==3 and outcome.status=="complete"
+    assert [r.url.host for r in requests][-1]=="api.tokenfactory.nebius.com" and outcome.status=="complete"
     assert len([e for e in events if e["type"]=="tool"])==1
+    assert any(e["type"]=="trace" and e["data"]["node"]=="provider_fallback" and e["data"]["model"]==DEEPSEEK for e in events)
+
+
+@pytest.mark.asyncio
+async def test_full_nvidia_pacing_window_reroutes_instead_of_waiting(api):
+    ledger=ProviderLedger()
+    for _ in range(40):
+        ledger.release(ledger.try_permit("nvidia"))
+    requests=api(lambda request: sse({"content":"Fact [S1]."}))
+    events=[e async for e in generation.stream("question",[],Handler())]
+    assert [r.url.host for r in requests]==["api.tokenfactory.nebius.com"]
+    assert "pacing" in next(e["data"]["reason"] for e in events if e["type"]=="trace" and e["data"]["node"]=="provider_fallback")
 
 
 def test_retry_after_does_not_retry_earlier_than_the_provider_requests(monkeypatch):

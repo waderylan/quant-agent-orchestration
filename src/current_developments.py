@@ -201,8 +201,6 @@ class LiveTools:
             message = "Live search unavailable: " + sanitized(snapshot["error"])
             (self.warnings if self.state.get("request_plan") else self.missing).append(message)
             return {"error": message}
-        if snapshot.get("usage_warning"):
-            self.warnings.append(snapshot["usage_warning"])
         return self.register(snapshot, companies)
 
     def flush(self, emit):

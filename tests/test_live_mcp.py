@@ -28,34 +28,22 @@ def test_credentials_and_account_identity_are_scrubbed(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_reservation_precedes_execution_and_monthly_stop(tmp_path, monkeypatch):
+async def test_usage_is_recorded_before_execution_and_never_blocks(tmp_path, monkeypatch):
     ledger = UsageLedger()
     gateway = LiveGateway(mode="live", ledger=ledger)
     monkeypatch.setenv("TAVILY_API_KEY", "synthetic-test-key")
     calls = []
-    async def usage():
-        ledger.observe_tavily_usage(594)
-        return {"verified": True}
     async def session(stack):
-        assert ledger.snapshot()["calls"][-1]["outcome"] == "reserved"
+        assert ledger.snapshot()["calls"][-1]["outcome"] == "started"
         calls.append("connected")
         async def call_tool(tool, args):
             return SimpleNamespace(model_dump=lambda **kw: {"content": [{"type": "text", "text": json.dumps({"results": [{"url": "https://nvidia.com/update", "content": "Dated event"}]})}]})
         return SimpleNamespace(call_tool=call_tool), {"server": {"name": "frozen-test-server"}, "tools": [{"name": "tavily_search", "inputSchema": {"properties": {"time_range": {}}}}]}
-    monkeypatch.setattr(gateway, "tavily_usage", usage)
     monkeypatch.setattr(gateway, "_session", session)
-    for attempt in range(3):
-        if attempt:
-            async def unavailable_usage():
-                return {"verified": False, "reason": "usage endpoint HTTP 429"}
-            monkeypatch.setattr(gateway, "tavily_usage", unavailable_usage)
+    for _ in range(4):
         result = await gateway.fetch("tavily_search", SEARCH, request={}, agent="Current Developments", emit=lambda e: None, refresh=True)
         assert result.get("snapshot_id")
-        if attempt:
-            assert "HTTP 429" in result["usage_warning"]
-    stopped = await gateway.fetch("tavily_search", SEARCH, request={}, agent="Current Developments", emit=lambda e: None, refresh=True)
-    assert stopped["error"] == "monthly budget stop" and len(calls) == 3
-    assert ledger.snapshot()["reserved_credits"] == 6
+    assert len(calls) == 4 and ledger.snapshot()["estimated_credits"] == 8
     frozen = LiveGateway(mode="frozen", path=gateway.path)
     snapshot = frozen.inspect(result["snapshot_id"])
     file = gateway.path / (result["snapshot_id"] + ".json")

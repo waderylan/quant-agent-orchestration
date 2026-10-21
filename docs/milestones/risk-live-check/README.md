@@ -16,7 +16,7 @@ Risk Summary checks whether a registered material risk change has materialized a
 
 - After `record_risk_change`, allow at most one `tavily_search` per registered added/changed change, anchored on the before/after S-cited pair and the post-filing window.
 - Return dated, tier-labeled W evidence as post-filing context. W evidence never changes the filed classification and never replaces S evidence.
-- Gate acquisition so ordinary risk comparisons stay within the existing credit stop; record the trigger rule.
+- Choose a trigger rule that keeps ordinary risk comparisons within the project's Tavily allowance; record it.
 - Share the existing gateway, credential, ledger, scrubber and `node=live_mcp` trace; add Risk Summary as a permitted caller.
 
 ## Comparison and handoff
@@ -29,7 +29,7 @@ Risk Summary checks whether a registered material risk change has materialized a
 
 1. Real or frozen MCP calls from Risk Summary appear as `node=live_mcp` with `agent=Risk Summary`, `server=tavily-mcp`, `tool=tavily_search`.
 2. Filed classifications and S citations are identical with the check on and off.
-3. Credit use stays within the configured monthly stop; denied or unavailable acquisition yields an explicit gap, not a failure.
+3. Extra credit use per request is reported; unavailable acquisition yields an explicit gap, not a failure.
 4. The dated comparison report is stored under this milestone's `evidence/`.
 
 ## Decisions to verify

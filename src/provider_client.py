@@ -3,12 +3,10 @@ import json
 import os
 import time
 from email.utils import parsedate_to_datetime
-from decimal import Decimal, DecimalException
 
 import httpx
 
 from src.provider_limits import LimitError
-from src import provider_models
 
 ENDPOINTS = {"nvidia": "https://integrate.api.nvidia.com/v1",
              "nebius": "https://api.tokenfactory.nebius.com/v1"}
@@ -39,24 +37,6 @@ def retry_delay(value):
         return max(0, float(value)) if value.replace(".", "", 1).isdigit() else max(0, parsedate_to_datetime(value).timestamp()-time.time())
     except (ValueError, TypeError, OverflowError):
         return 0
-
-
-async def verify_prices(http, key, model):
-    try:
-        response = await http.get(ENDPOINTS["nebius"] + "/models", params={"verbose": "true"},
-                                  headers={"Authorization": "Bearer " + key})
-        if response.status_code in (401, 403):
-            raise ProviderError("nebius", response.status_code)
-        if response.status_code != 200:
-            raise LimitError("Cannot verify Nebius prices")
-        row = next(r for r in response.json()["data"] if r["id"] == model)
-        prices, limits = row["pricing"], provider_models.LIMITS[model]
-        if (Decimal(prices["prompt"]) != limits.input_price or Decimal(prices["completion"]) != limits.output_price
-                or row["context_length"] != limits.context
-                or any(Decimal(str(prices.get(k) or 0)) != 0 for k in ("request", "image", "price_per_minute"))):
-            raise LimitError("Nebius price/context snapshot changed; acquisition blocked")
-    except (httpx.HTTPError, KeyError, TypeError, ValueError, DecimalException, StopIteration):
-        raise LimitError("Cannot verify Nebius prices; acquisition blocked") from None
 
 
 async def complete(http, selected, payload, *, key):

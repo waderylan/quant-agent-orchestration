@@ -18,7 +18,7 @@ Current Developments researches dated external events and identifiable outside r
 
 Semantic requests use bounded advanced discovery with explicit research dates, optional domain filters and focused extraction. The gateway discovers the actual tool schema and omits unsupported parameters, including `chunks_per_source`. Research keeps narrow shared-search access; Current Developments also extracts and inspects sources. [Architecture](../../architecture.md#mcp-tool-sharing) owns call/context limits, supported fields, caching, source authority and credit reservations.
 
-The per-host ledger enforces the monthly stop even when account usage is throttled. A verified monthly floor plus local reservations permits acquisition; successful results carry a trace warning without an artificial evidence gap. Without a verified floor, acquisition stops. Real acquisition failures, unsupported citations and missing requested evidence remain partial. Configuration is in [.env.example](../../../.env.example).
+The per-host ledger records each uncached call at an estimated two credits; no code limits monthly use (removed 2026-10-20, after the dated budget evidence below). Real acquisition failures, unsupported citations and missing requested evidence remain partial. Configuration is in [.env.example](../../../.env.example).
 
 `REQUEST_PLANNER=semantic` enables whole-request understanding and independent coverage review by default. `rules` is the frozen regression profile, without model understanding/review. The unchanged [17-row fixture](../../../tests/fixtures/live_routing.json) checks its deterministic worker sequences and price gaps.
 
@@ -45,7 +45,7 @@ The acceptance records below describe version `1df22b7`; the usefulness evidence
 | 5. Chromium | Both new examples run; W/S/C inspection in one session, safe external link and no stock buttons; [browser](evidence/BROWSER_2026-10-19.json) |
 | 6. Linux container | Runtime-only key, real uncached search and extraction on refresh; [container](evidence/DOCKER_2026-10-19.json), [security scan](evidence/SECURITY_2026-10-19.json) |
 | 7. Failures | Blank key, 429, timeout and off return partial and preserve earlier Data; [tests](evidence/TESTS_2026-10-19.json) |
-| 8. Budget | Atomic reservations, conservative usage floor and monthly stop; [ledger](evidence/BUDGET_2026-10-19.json) |
+| 8. Budget | Recorded at the time with atomic reservations and a monthly stop, since removed; [ledger](evidence/BUDGET_2026-10-19.json) |
 | 9–10. Docs and removal | Local links, paths, coverage, compile and removal classifications; [checks](evidence/CHECKS_2026-10-19.json), [file manifest](evidence/FILES_2026-10-19.json) |
 | 11. Transcript | One local M10 event is finalized after documentation; [acceptance metadata](evidence/ACCEPTANCE_2026-10-19.json) identifies the entry and its final read-only checks. |
 

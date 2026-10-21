@@ -1,4 +1,4 @@
-"""Tavily Remote MCP, checked frozen snapshots, and conservative credit reservations."""
+"""Tavily Remote MCP, checked frozen snapshots, and recorded credit usage."""
 
 import asyncio
 import json
@@ -12,7 +12,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 
-import httpx
 from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 
@@ -93,7 +92,7 @@ def failure_reason(value):
 
 
 class UsageLedger:
-    """Atomic reservations count failures, crashes and lagging usage observations."""
+    """Records each uncached Tavily call for usage visibility; it never blocks acquisition."""
 
     def __init__(self, path=None):
         self.path = Path(path or os.getenv("LIVE_LEDGER", ROOT / "artifacts/live/usage.sqlite3"))
@@ -104,34 +103,12 @@ class UsageLedger:
     def connect(self):
         return sqlite3.connect(self.path, timeout=15)
 
-    def observe_tavily_usage(self, usage):
-        if type(usage) is not int or usage < 0:
-            raise ValueError("Invalid Tavily usage observation")
-        month = now()[:7]
-        with self.connect() as db:
-            db.execute("BEGIN IMMEDIATE")
-            settings = dict(db.execute("SELECT key,value FROM settings"))
-            spent = db.execute("SELECT COALESCE(SUM(credits),0) FROM calls WHERE substr(at,1,7)=?", (month,)).fetchone()[0]
-            previous = int(settings.get("projection", 0)) if settings.get("month") == month else 0
-            baseline = int(settings.get("reserved", 0)) if settings.get("month") == month else 0
-            # Include all local reservations in the first observation conservatively.
-            projection = max(usage, previous + spent - baseline, spent)
-            db.executemany("INSERT OR REPLACE INTO settings VALUES (?,?)", [("month", month), ("projection", str(projection)), ("reserved", str(spent)), ("observed_usage", str(usage)), ("checked_at", now())])
-        return projection
-
-    def reserve(self, tool):
+    def record(self, tool):
         if tool not in ALLOW:
             raise ValueError("Tool is outside the live allowlist")
-        timestamp = now()
+        identity = str(uuid.uuid4())
         with self.connect() as db:
-            db.execute("BEGIN IMMEDIATE")
-            settings = dict(db.execute("SELECT key,value FROM settings"))
-            spent = db.execute("SELECT COALESCE(SUM(credits),0) FROM calls WHERE substr(at,1,7)=?", (timestamp[:7],)).fetchone()[0]
-            projection = max(spent, int(settings.get("projection", 0)) + spent - int(settings.get("reserved", 0))) if settings.get("month") == timestamp[:7] else spent
-            if projection + 2 > 600:
-                raise ValueError("Tavily monthly stop reached (600 projected credits)")
-            identity = str(uuid.uuid4())
-            db.execute("INSERT INTO calls VALUES (?,?,?,?,?)", (identity, timestamp, tool, 2, "reserved"))
+            db.execute("INSERT INTO calls VALUES (?,?,?,?,?)", (identity, now(), tool, 2, "started"))
         return identity
 
     def finish(self, identity, outcome):
@@ -142,8 +119,9 @@ class UsageLedger:
         with self.connect() as db:
             db.row_factory = sqlite3.Row
             calls = [dict(r) for r in db.execute("SELECT * FROM calls ORDER BY at")]
-            settings = dict(db.execute("SELECT key,value FROM settings"))
-        return {"checked_at": now(), "monthly_stop": 600, "settings": settings, "calls": calls, "reserved_credits": sum(r["credits"] for r in calls)}
+        month = now()[:7]
+        return {"checked_at": now(), "calls": calls, "estimated_credits": sum(r["credits"] for r in calls),
+                "estimated_credits_this_month": sum(r["credits"] for r in calls if r["at"][:7] == month)}
 
 
 class LiveGateway:
@@ -153,22 +131,6 @@ class LiveGateway:
             raise ValueError("LIVE_MODE must be live, frozen, or off")
         self.path = Path(path or os.getenv("LIVE_CACHE", ROOT / "artifacts/live/cache"))
         self.ledger = ledger or UsageLedger()
-
-    async def tavily_usage(self):
-        key = os.getenv("TAVILY_API_KEY", "")
-        if not key:
-            return {"verified": False, "reason": "missing Tavily key"}
-        try:
-            async with httpx.AsyncClient(timeout=20) as http:
-                response = await http.get("https://api.tavily.com/usage", headers={"Authorization": "Bearer " + key})
-                response.raise_for_status()
-                account = response.json()["account"]
-            self.ledger.observe_tavily_usage(int(account["plan_usage"]) + int(account.get("paygo_usage", 0)))
-            return {"verified": True}
-        except httpx.HTTPStatusError as error:
-            return {"verified": False, "reason": "usage endpoint HTTP " + str(error.response.status_code)}
-        except (httpx.HTTPError, ValueError, KeyError):
-            return {"verified": False, "reason": "usage check unavailable"}
 
     async def _session(self, stack):
         key = os.getenv("TAVILY_API_KEY", "")
@@ -258,23 +220,10 @@ class LiveGateway:
             return finish({"error": "frozen snapshot missing"}, "unavailable")
         if not os.getenv("TAVILY_API_KEY"):
             return finish({"error": "missing Tavily key"}, "unavailable")
-        usage = await self.tavily_usage()
-        usage_warning = None
-        if not usage["verified"]:
-            settings = self.ledger.snapshot()["settings"]
-            if settings.get("month") != now()[:7] or "observed_usage" not in settings:
-                return finish({"error": usage["reason"]}, "unavailable")
-            # A lagging/unavailable account read cannot erase reservations. Keep
-            # the verified monthly floor and count every subsequent local call.
-            usage_warning = "Account usage verification unavailable (" + usage["reason"] + "); conservative credit reservations remain enforced."
-        try:
-            identity = self.ledger.reserve(tool)
-        except ValueError:
-            return finish({"error": "monthly budget stop"}, "budget_stop")
+        identity = self.ledger.record(tool)
         try:
             async with asyncio.timeout(30), AsyncExitStack() as stack:
                 session, metadata = await self._session(stack)
-                metadata["usage_check"] = {"verified": usage["verified"], "warning": usage_warning}
                 event["server"] = metadata["server"]["name"]
                 schema = next((t for t in metadata["tools"] if t["name"] == tool), None)
                 if schema is None:
@@ -294,7 +243,7 @@ class LiveGateway:
             # A tool without time_range uses the same deterministic request key.
             write_json(cached, snapshot)
             self.ledger.finish(identity, "returned")
-            return finish({**snapshot, "cache": False, "replayed": False, "usage_warning": usage_warning}, "returned")
+            return finish({**snapshot, "cache": False, "replayed": False}, "returned")
         except asyncio.CancelledError:
             self.ledger.finish(identity, "cancelled_reserved")
             raise

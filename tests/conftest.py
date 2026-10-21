@@ -15,7 +15,6 @@ def frozen_live(monkeypatch, tmp_path):
     async def forbidden(*args, **kwargs):
         pytest.fail("Tests cannot connect to Tavily")
     monkeypatch.setattr(LiveGateway, "_session", forbidden)
-    monkeypatch.setattr(LiveGateway, "tavily_usage", forbidden)
     from src import provider_client
     def provider_forbidden(*args, **kwargs):
         pytest.fail("Tests must inject a frozen provider HTTP transport")
