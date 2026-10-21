@@ -21,22 +21,22 @@ The browser Models selector and optional HTTP `generation_profile` field select 
 
 ## Models and routing
 
-Policy `m11-v1` identifies the serving organization separately from the publisher. Normal supported requests exercise two serving providers.
+Policy `m11-v2` identifies the serving organization separately from the publisher. Normal supported requests exercise two serving providers.
 
 | Condition, in precedence order | Serving provider / model | Rationale |
 | --- | --- | --- |
 | Local capability shortcut | No generation | Implemented local facts |
-| Request Planner | NVIDIA / `nvidia/nemotron-3.5-lightning-30b-a3b` | Small free model for bounded structured decomposition |
-| Multiple companies/years, amendment conflict, mixed evidence kinds, or input bound over 64,000 | Nebius / `Qwen/Qwen3-235B-A22B-Instruct-2507` | Larger evidence set or comparison |
-| Assigned filing explanation, checked calculation, risk change, current development, reaction or official update | Nebius / Qwen | Grounded synthesis and tool orchestration |
+| Request Planner | Nebius / `deepseek-ai/DeepSeek-V4-Flash-0731` | Reasoning model; planning errors cascade to every worker |
+| Multiple companies/years, amendment conflict, mixed evidence kinds, or input bound over 64,000 | Nebius / DeepSeek | Larger evidence set or comparison |
+| Assigned filing explanation, checked calculation, risk change, current development, reaction or official update | Nebius / DeepSeek | Grounded synthesis and tool orchestration |
 | Other review and financial lookup | NVIDIA / `nvidia/nemotron-3.5-super-vl-120b-a12b` | Free grounded response and citation compliance |
 | Other supported work | NVIDIA / Super | Free specialist synthesis |
 
-Lightning is confined to planning: real financial answers intermittently omit required citation brackets. Super supplies narrow financial answers. Complex review is a separate Qwen invocation; independent review does not require another publisher.
+DeepSeek replaces the earlier non-reasoning Qwen route and NVIDIA Lightning planner: the hosted full workflows remained partial on multi-step filing and risk work, and Lightning was not measured against a planner reference. DeepSeek V4 Flash is the lowest-priced Nebius reasoning model with tools and structured outputs ($0.14/M input, $0.28/M output). Super supplies narrow financial answers and simple review. Complex review is a separate DeepSeek invocation; independent review does not require another publisher.
 
-Both NVIDIA routes disable thinking using `chat_template_kwargs.enable_thinking=false`. The planner has a 2,048-token output cap; other calls have 4,096. The complete serialized history, schemas and tool results are bounded conservatively by UTF-8 bytes plus framing allowance before every continuation. Configured context ceilings are 262,144 for Lightning/Qwen and 1,048,576 for Super; these are endpoint limits, not measured large-context accuracy. Oversized Qwen context can use Super once; evidence is never silently truncated.
+Super disables thinking using `chat_template_kwargs.enable_thinking=false`, with a 2,048-token planner fallback cap and 4,096 otherwise. DeepSeek reasons; its `reasoning_content` is never streamed or replayed. Reasoning tokens count toward completion limits, so DeepSeek caps are 16,384 for planning and 32,768 otherwise. Acceptance calls use at most 3,882 completion tokens; the caps are a deliberate grading-reliability margin beyond expected use, bounded by invocation deadlines and spending reservations. The complete serialized history, schemas and tool results are bounded conservatively by UTF-8 bytes plus framing allowance before every continuation. Configured context ceilings are 1,024,000 for DeepSeek and 1,048,576 for Super; these are endpoint limits, not measured large-context accuracy. Oversized DeepSeek context can use Super once; evidence is never silently truncated.
 
-Named function selection handles the sole structured/completion tool; multiple tools use automatic choice. Tool-bearing Qwen responses can finish with `stop`; actual tool calls take precedence over final prose. Fragments are assembled before validation. Unknown tools, duplicate IDs, missing terminals and truncated output fail explicitly. Invalid arguments receive at most two corrections; omitted optional null fields are removed before validation. Required and undeclared fields retain validation.
+Named function selection handles the sole structured/completion tool; multiple tools use automatic choice. Tool-bearing responses can finish with `stop`; actual tool calls take precedence over final prose. Fragments are assembled before validation; explicit JSON nulls for absent stream fields are treated as absent. Unknown tools, duplicate IDs, missing terminals and truncated output fail explicitly. Invalid arguments receive at most two corrections; omitted optional null fields are removed before validation. Required and undeclared fields retain validation.
 
 Workers keep existing call budgets and the reserved `report_outcome` slot. Only final answer text streams as tokens; reasoning and tool arguments do not. Final composition preserves checked calculations when a filing explanation omits them.
 
@@ -46,7 +46,7 @@ A context-based selection before dispatch does not consume the HTTP recovery all
 
 ## Recovery and inspectability
 
-Each invocation permits one recovery: one retry or one provider fallback, within its original deadline. HTTP 429 honors numeric/date `Retry-After` without holding a concurrency lease during backoff. Invalid credentials do not retry. Nebius accounting/availability stops can use free Super; transient Super failure can use guarded Qwen. Completed tool results stay in the conversation without replay. Recovery stops after visible answer text. Cancellation closes the transport and releases the concurrency lease.
+Each invocation permits at most one same-model retry for a transient failure, then one provider fallback, within its original deadline. Rejected streams record a fixed cause code, never provider text. HTTP 429 honors numeric/date `Retry-After` without holding a concurrency lease during backoff. Invalid credentials do not retry. Nebius accounting/availability stops can use free Super; transient Super failure can use guarded DeepSeek. Completed tool results stay in the conversation without replay. Recovery stops after visible answer text. Cancellation closes the transport and releases the concurrency lease.
 
 Before each generation request, `provider_route` records request/activity/invocation IDs, provider, publisher, exact model, policy/rule/reason, task facts, input bound, output/context limits, maximum reserved cost and queue duration. Usage traces record tokens, request duration, answer TTFT and token-based cost. Missing usage remains unknown and retains its reservation. Final events include route summaries; activity details show actual model and selection reason. `GET /api/runtime` exposes the profile without credentials.
 
@@ -58,7 +58,7 @@ Before each generation request, `provider_route` records request/activity/invoca
 - Nebius promotional credit is **$100 total**. Paid overage and card charges are forbidden. The operational ceiling is $90, retaining a $10 buffer; the implementation campaign stops at $5 and an application request at $1. `NEBIUS_CAMPAIGN_USD` can lower the campaign cap.
 - The user-confirmed starting balance is $100 at `2026-10-20T22:22:39Z`, with no displayed expiry. The cutoff is **2027-01-01T00:00:00Z**, or an earlier verified promo expiry. Pre-ledger probe reservations consume a further $0.105165 conservatively.
 - A verified observation and exclusive tracked use establish the baseline. Observations expire after 24 hours. External/untracked account use requires reconciliation before paid calls. A key does not establish credit.
-- Every Nebius attempt reserves a conservative input/output maximum before outbound acquisition. The verbose catalog must confirm Qwen's $0.20/M input and $0.60/M output prices and context snapshot. Missing/changing prices, stale/expired credit, unavailable accounting or unknown cost blocks paid acquisition.
+- Every Nebius attempt reserves a conservative input/output maximum before outbound acquisition. The verbose catalog must confirm DeepSeek's $0.14/M input and $0.28/M output prices and 1,024,000-token context snapshot. Missing/changing prices, stale/expired credit, unavailable accounting or unknown cost blocks paid acquisition.
 - Reservations survive restart. Valid usage settles downward; failure, cancellation or missing usage retains the maximum. An over-bound settlement freezes Nebius. A fresh observation never resets consumption or raises an existing credit ceiling; unresolved reservations stay charged conservatively.
 - Native and Docker acceptance share one mounted ledger. Do not delete it, run an independent ledger against this account, or use a detached copy. Stop processes before moving between native and Docker on Windows.
 - These application controls do **not** disable Nebius card billing. Provider-side credit-only billing and automatic balance reads are unverified. Account-wide protection also requires controlled exclusive usage.
@@ -78,20 +78,27 @@ Before each generation request, `provider_route` records request/activity/invoca
 
 ## Verification and handoff
 
-[Acceptance evidence](evidence/ACCEPTANCE_2026-10-20.json) separates native application, browser, controlled model comparison and Linux-container runs. Real UI switching uses the same activity details for Codex and hosted model names, with source inspection and Stop checked.
+[DeepSeek acceptance](evidence/DEEPSEEK_2026-10-20.json) records policy `m11-v2` on the native application with `LIVE_MODE=frozen`, after the defects below were fixed. Both full five-agent workflows complete Data, Quant, Risk Summary and Filings Research on DeepSeek with no provider fallback (131.6 s AMD, 140.2 s Qualcomm, $0.10–0.13 token cost each). Current Developments remains partial because frozen replay has no snapshots for model-written queries, so both requests are **partial**. Route cases: reported figures, filing explanation and Data → Quant → Research complete; amendment and risk comparison are partial on reviewer content judgments; missing scope and price requests return coverage gaps without generation.
 
-The two concurrent full requests invoke Data, Quant, Risk, Research and Current Developments under normal hosted routing. Both remain **partial**. Data and Quant complete in both; Qualcomm risk comparison completes, while filed explanation coverage remains insufficient. AMD's risk classification remains unverified and live acquisition reaches the existing Tavily monthly stop. The capture has 16 successful source inspections and one replayed three-calculation bundle. No passing full-workflow quality result is claimed. Remaining acceptance work includes these model/evidence gaps and budget-safe live/frozen verification before accepting M11 or beginning M12.
+Defects found by real DeepSeek runs and fixed, each with a regression test:
 
-The final filings-only Linux check completes Data → Quant → Research and independent review in 63.220 seconds using NVIDIA and Nebius. All five cited sources inspect successfully and its calculation bundle replays. This runtime retains the independent Quant brief during review repair and exposes handler limits in tool schemas. The evidence distinguishes its working-tree version from the earlier concurrent full-workflow image.
+| Defect | Evidence | Fix |
+| --- | --- | --- |
+| Explicit JSON nulls in stream chunks | Every early fallback recorded `malformed_TypeError` | Null-tolerant parsing |
+| Provider switch before retry | One failure removed DeepSeek for the invocation | Same-model retry first |
+| Planner prescribed S citations to Financial Data | 1 of 6 reproductions cited unregistered `[S1]`; 0 of 6 after | Citation ownership in both prompts |
+| String `"null"` in tool fields | Plan parsing failed; request lost planning and review | Shared schema-aware [`normalize`](../../../src/tool_arguments.py) at the hosted and Codex tool boundaries |
+| Malformed arguments echoed in history | Direct probe: HTTP 400; sanitized echo: HTTP 200 | Echo `{}` and return the parse error |
+| Constraints planned as outputs | "Filings only" became an unaddressed output | Planner prompt rule |
 
-Controlled same-input comparisons complete on both candidate pairs. Lightning/Super financial-worker times are 4.424/4.528 seconds; Super/Qwen filing-worker times are 19.232/42.546 seconds. A single small comparison does not establish Qwen superiority or general accuracy. The route remains a capability policy with measured compatibility limits, rather than a model-quality ranking.
+Rejected streams record a fixed cause code. Bracketed `(F1)`, `【F1】` and `[Source: F1]` resolve for registered IDs; bare labels remain uncited.
 
-Local Nebius accounting retains conservative uncertain cost and stays below the promotional operational limits. The evidence records a dated starting observation and usage/reservations, not an API-read remaining balance. The application does not disable card billing. Current formal RAGAS and Cloud Run results remain pending.
+[Policy `m11-v1` evidence](evidence/ACCEPTANCE_2026-10-20.json) records the earlier Lightning/Super/Qwen routes: both full workflows partial with Research and Risk gaps, a completed filings-only Linux-container run (63.220 s), controlled model comparisons, real UI profile switching, source inspection and Stop. [Direct endpoint evidence](evidence/MODEL_READINESS_2026-10-20.json) covers that model set's streamed tool continuations.
 
-[Direct endpoint evidence](evidence/MODEL_READINESS_2026-10-20.json) records streamed tool continuations and usage on all three selected models, plus unavailable endpoint diagnostics. It is separate from application acceptance.
+Local Nebius accounting retains conservative uncertain cost: $2.441004 accounted with 18 unsettled reservations, inside the $5 campaign stop. The evidence records a dated starting observation and usage/reservations, not an API-read remaining balance. The application does not disable card billing. One run per case does not establish intermittent reliability; formal RAGAS and Cloud Run results remain pending.
 
 The fixed [development cases](../../../tests/fixtures/provider_routes.json) cover reported figures, filing explanation, Data → Quant → Research, amendment, risk comparison, missing scope and unsupported prices. [Provider tests](../../../tests/test_providers.py) cover fragmented streams, structured arguments, terminal failures, credentials, retries without repeated tools, cancellation, atomic reservations, stale/expired balances, refresh without reset, shared rate limits and Cloud Run's closed gate. Ordinary tests block provider HTTP and isolate ledgers.
 
-The [full-workflow cases](../../../tests/fixtures/provider_full_workflows.json) request every specialist for AMD and Qualcomm, including dated real MCP research. [Controlled comparisons](../../../scripts/compare_provider_models.py) run Lightning/Super on the same financial lookup and Super/Qwen on the same filing question. Comparison selection is confined to that development process; the normal client, tool validation and spending guards remain active.
+The [full-workflow cases](../../../tests/fixtures/provider_full_workflows.json) request every specialist for AMD and Qualcomm, including dated real MCP research. [Controlled comparisons](../../../scripts/compare_provider_models.py) run Super and DeepSeek on the same financial lookup and the same filing question. Comparison selection is confined to that development process; the normal client, tool validation and spending guards remain active.
 
 M11 acceptance is an engineering check, not RAGAS or a general accuracy estimate. M12 owns the four required RAGAS metrics over a fixed vector-store-only set with web disabled; Data/Quant/current checks remain separate. M13 owns public deployment, production spending controls, cold/warm latency, concurrency and provider-access terms.

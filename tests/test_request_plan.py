@@ -40,6 +40,22 @@ async def test_decomposition_preserves_the_casual_external_reaction_clause():
 
 
 @pytest.mark.asyncio
+async def test_hosted_tool_boundary_turns_string_null_plan_scopes_into_absent_values():
+    import json
+    from src.generation_tools import ToolConversation
+    from src.request_plan import RequestPlan
+    received = []
+    schema = {'name': 'submit_plan', 'inputSchema': RequestPlan.model_json_schema()}
+    conversation = ToolConversation([schema], lambda name, args: received.append(args) or {}, 'Request Planner')
+    args = {'outputs': [{'kind': 'financial_inputs', 'description': 'Revenue', 'year': 'null', 'end_date': 'null'}],
+            'timeframe': 'recent', 'start_date': 'null', 'end_date': 'None'}
+    call = {'id': 'plan', 'function': {'name': 'submit_plan', 'arguments': json.dumps(args)}}
+    _ = [e async for e in conversation.execute([call], [], '', conversation.available())]
+    assert received and RequestPlan.model_validate(received[0]).start_date is None
+    assert received[0]['outputs'][0] == {'kind': 'financial_inputs', 'description': 'Revenue'}
+
+
+@pytest.mark.asyncio
 async def test_reviewer_cannot_confirm_external_reaction_with_only_a_filing_citation():
     async def model(prompt, tools, handler, **kwargs):
         handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})

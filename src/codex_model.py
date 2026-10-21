@@ -8,6 +8,7 @@ import os
 from collections import deque
 
 from src.codex_transport import connection
+from src.tool_arguments import normalize
 
 
 async def stream(
@@ -101,6 +102,7 @@ async def stream(
             calls = 0
             denied_calls = 0
             reports_outcome = any(tool.get("name") == "report_outcome" for tool in tools)
+            schemas = {tool.get("name"): tool.get("inputSchema", {}) for tool in tools}
             phases = {}
             while True:
                 message = pending.popleft() if pending else await receive()
@@ -112,7 +114,8 @@ async def stream(
                     phases[params["item"]["id"]] = params["item"].get("phase")
                 elif method == "item/tool/call":
                     calls += 1
-                    name, arguments = params["tool"], params["arguments"]
+                    name = params["tool"]
+                    arguments = normalize(params["arguments"], schemas.get(name, {}))
                     if reports_outcome and calls == max_calls and name != "report_outcome" and getattr(handler, "status", None) is None:
                         denied_calls += 1
                         if denied_calls > 2:

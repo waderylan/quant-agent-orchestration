@@ -37,6 +37,10 @@ start_date/end_date using today, so 'summer and early fall' gets that calendar w
 not a fiscal filing anchor. Otherwise both dates are null. Honor no-web/filings-only requests:
 retain an outside-reaction output as unsupported if it cannot be answered without web.
 Keep descriptions specific to the question so omission can be checked later.
+Describe what each output must contain, not which citation identifiers to use;
+workers own their citation types.
+Constraints such as filings-only, no web, or citation style restrict outputs; they are
+never outputs themselves.
 
 Set timeframe/year/start_date/end_date on each outside output when its timing differs.
 A historical reaction and recent news are separate outputs with separate windows.

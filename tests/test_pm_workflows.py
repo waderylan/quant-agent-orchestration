@@ -118,6 +118,11 @@ def test_citation_refusal_ranges_and_positive_unknown_claims_are_distinct():
         "invalid_citation_range"
         in checked_answer("Sources [F1-F999] [S1]", registered, lambda e: None)[1]
     )
+    # Equivalent bracket forms count only for registered IDs; bare labels stay uncited.
+    answer, refs = checked_answer(
+        "A (F1). B 【F2】. C [Source: S1, C1]. D (F9). E F1.", registered, lambda e: None
+    )
+    assert answer == "A [F1]. B [F2]. C [S1][C1]. D (F9). E F1." and refs == {"F1", "F2", "S1", "C1"}
 
 
 def test_outcome_rejects_inconsistent_completion_and_preserves_missing_outputs():

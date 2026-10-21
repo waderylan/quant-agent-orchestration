@@ -12,7 +12,7 @@ from src import generation, provider_client
 from src.provider_limits import CUTOFF, LimitError, ProviderLedger
 from src.provider_policy import route
 from src.generation_context import RoutingContext
-from src.provider_models import NVIDIA_LIGHTNING as LIGHTNING, NVIDIA_SUPER as SUPER, NEBIUS_QWEN as QWEN
+from src.provider_models import NVIDIA_SUPER as SUPER, NEBIUS_DEEPSEEK as DEEPSEEK
 from src.response_contract import OUTCOME_TOOL, OutcomeTools
 
 NOW = datetime(2026, 10, 20, tzinfo=timezone.utc).timestamp()
@@ -61,12 +61,12 @@ def api(monkeypatch):
 
 
 def test_routing_uses_task_complexity_and_independent_review():
-    assert route(RoutingContext(phase="planner",companies=4),agent="Request Planner",input_bound=500).model==LIGHTNING
+    assert route(RoutingContext(phase="planner",companies=4),agent="Request Planner",input_bound=500).model==DEEPSEEK
     assert route(RoutingContext(output="financial_inputs"),agent="Financial Data",input_bound=500).model==SUPER
     assert route(RoutingContext(phase="reviewer"),agent="Answer Reviewer",input_bound=500).model==SUPER
     for context in (RoutingContext(companies=2),RoutingContext(years=2),RoutingContext(source_conflict=True),RoutingContext(output="risk_changes"),RoutingContext(evidence_kinds=("S","F"))):
-        assert route(context,agent="Filings Research",input_bound=500).model==QWEN
-    assert route(RoutingContext(),agent="Filings Research",input_bound=65000).model==QWEN
+        assert route(context,agent="Filings Research",input_bound=500).model==DEEPSEEK
+    assert route(RoutingContext(),agent="Filings Research",input_bound=65000).model==DEEPSEEK
 
 
 def test_reservations_are_atomic_durable_and_cannot_reset(tmp_path):
@@ -74,7 +74,7 @@ def test_reservations_are_atomic_durable_and_cannot_reset(tmp_path):
     ledger.initialize(balance=100,observed_at=NOW,prior_reserved=89,exclusive=True)
     def attempt(_):
         try:
-            return ledger.reserve("0.6",QWEN,str(_))
+            return ledger.reserve("0.6",DEEPSEEK,str(_))
         except LimitError:
             return None
     with ThreadPoolExecutor(max_workers=2) as pool:
@@ -95,30 +95,30 @@ def test_missing_stale_expired_and_overrun_accounting_fail_closed(tmp_path):
     now=[NOW]
     ledger=ProviderLedger(tmp_path/"money.sqlite3",clock=lambda:now[0])
     with pytest.raises(LimitError,match="missing"):
-        ledger.reserve("0.01",QWEN)
+        ledger.reserve("0.01",DEEPSEEK)
     ledger.initialize(balance=100,observed_at=NOW,exclusive=True)
-    reservation=ledger.reserve("0.01",QWEN)
+    reservation=ledger.reserve("0.01",DEEPSEEK)
     with pytest.raises(LimitError,match="exceeds"):
         ledger.settle(reservation,"0.02","complete")
     with pytest.raises(LimitError,match="blocked"):
-        ledger.reserve("0.01",QWEN)
+        ledger.reserve("0.01",DEEPSEEK)
     other=ProviderLedger(tmp_path/"expiry.sqlite3",clock=lambda:now[0])
     other.initialize(balance=100,observed_at=NOW,exclusive=True)
     now[0]+=86401
     with pytest.raises(LimitError,match="stale"):
-        other.reserve("0.01",QWEN)
+        other.reserve("0.01",DEEPSEEK)
     now[0]=CUTOFF
     with pytest.raises(LimitError,match="cutoff"):
-        other.reserve("0.01",QWEN)
+        other.reserve("0.01",DEEPSEEK)
 
 
 def test_request_spend_stop_and_shared_sliding_rate_limit(tmp_path):
     now=[NOW]
     ledger=ProviderLedger(tmp_path/"limits.sqlite3",clock=lambda:now[0])
     ledger.initialize(balance=100,observed_at=NOW,exclusive=True)
-    ledger.reserve("0.6",QWEN,"same-request")
+    ledger.reserve("0.6",DEEPSEEK,"same-request")
     with pytest.raises(LimitError):
-        ledger.reserve("0.6",QWEN,"same-request")
+        ledger.reserve("0.6",DEEPSEEK,"same-request")
     one,two=ledger.try_permit("nvidia"),ledger.try_permit("nvidia")
     assert one and two and ledger.try_permit("nvidia") is None
     ledger.release(one)
@@ -136,13 +136,13 @@ def test_balance_refresh_never_resets_spend_or_releases_unknown_cost(tmp_path, m
     now = [NOW]
     ledger = ProviderLedger(tmp_path / "refresh.sqlite3", clock=lambda: now[0])
     ledger.initialize(balance=100, observed_at=NOW, exclusive=True)
-    ledger.reserve("0.2", QWEN, "unknown")
+    ledger.reserve("0.2", DEEPSEEK, "unknown")
     now[0] += 86401
     ledger.refresh(balance="10.5", observed_at=now[0], exclusive=True)
-    ledger.reserve("0.3", QWEN, "new")
+    ledger.reserve("0.3", DEEPSEEK, "new")
     ledger.refresh(balance=100, observed_at=now[0], exclusive=True)
     with pytest.raises(LimitError, match="spending stop"):
-        ledger.reserve("0.01", QWEN, "another")
+        ledger.reserve("0.01", DEEPSEEK, "another")
     monkeypatch.setenv("K_SERVICE", "test-service")
     with pytest.raises(LimitError, match="global provider accounting"):
         ProviderLedger(tmp_path / "cloud.sqlite3")
@@ -189,12 +189,12 @@ async def test_fragmented_tools_completion_slot_and_final_stream(api):
 
 
 @pytest.mark.asyncio
-async def test_qwen_stop_with_tools_still_executes_and_accounts(api):
+async def test_tool_call_with_stop_finish_still_executes_and_accounts(api):
     ledger=ProviderLedger()
     ledger.initialize(balance=100,observed_at=ledger.clock(),exclusive=True)
     def respond(request):
         if request.method=="GET":
-            return httpx.Response(200,json={"data":[{"id":QWEN,"context_length":262144,"pricing":{"prompt":"0.0000002","completion":"0.0000006"}}]})
+            return httpx.Response(200,json={"data":[{"id":DEEPSEEK,"context_length":1024000,"pricing":{"prompt":"0.00000014","completion":"0.00000028"}}]})
         payload=json.loads(request.content)
         if "tools" in payload:
             return tool("report_outcome",{"status":"complete","missing":[]},finish="stop")
@@ -205,6 +205,26 @@ async def test_qwen_stop_with_tools_still_executes_and_accounts(api):
     assert ledger.status()["unsettled"]==0
     assert Decimal(ledger.status()["accounted_usd"])>0
     assert len([r for r in requests if r.method=="POST"])==2
+
+
+@pytest.mark.asyncio
+async def test_deepseek_nulls_parse_and_transient_failure_retries_before_downgrade(api):
+    ledger=ProviderLedger()
+    ledger.initialize(balance=100,observed_at=ledger.clock(),exclusive=True)
+    posts=[0]
+    def respond(request):
+        if request.method=="GET":
+            return httpx.Response(200,json={"data":[{"id":DEEPSEEK,"context_length":1024000,"pricing":{"prompt":"0.00000014","completion":"0.00000028"}}]})
+        assert request.url.host=="api.tokenfactory.nebius.com"
+        posts[0]+=1
+        if posts[0]==1:
+            return httpx.Response(503)
+        # DeepSeek streams explicit nulls for absent tool calls and functions.
+        return sse({"reasoning_content":"hidden","tool_calls":None},{"content":"Fact [S1].","tool_calls":None})
+    api(respond)
+    events=[e async for e in generation.stream("question",[],Handler(),routing_context=RoutingContext(companies=2))]
+    assert posts[0]==2 and "".join(e["data"] for e in events if e["type"]=="token")=="Fact [S1]."
+    assert [e["data"]["node"] for e in events if e["type"]=="trace" and e["data"]["node"] in ("provider_retry","provider_fallback")]==["provider_retry"]
 
 
 @pytest.mark.asyncio
@@ -230,7 +250,7 @@ async def test_context_selection_does_not_consume_http_recovery_or_fallback_to_a
     api(respond)
     schema = {"name": "submit_plan", "inputSchema": {"type": "object", "properties": {"ready": {"type": "boolean"}}, "required": ["ready"]}}
     handler = Handler()
-    events = [e async for e in generation.stream("e" * 270000, [schema], handler, agent="Risk Summary")]
+    events = [e async for e in generation.stream("e" * 1030000, [schema], handler, agent="Risk Summary")]
     assert calls[0] == 2 and handler.executed == [("submit_plan", {"ready": True})]
     assert len([e for e in events if e["type"] == "trace" and e["data"]["node"] == "provider_retry"]) == 1
 
@@ -368,3 +388,28 @@ async def test_repeated_full_sections_keep_one_complete_copy_and_full_inspection
     result = json.loads(messages[-1]["content"])
     assert result["source_id"] == "S1" and result["text_reference"]["characters"] == len(text)
     assert text in json.loads(prompt)["untrusted_complete_original_section"]
+
+
+def test_null_words_mean_absent_only_where_the_schema_allows_absence():
+    from src.tool_arguments import normalize
+    schema = {"type": "object", "required": ["outputs", "start_date", "kind"],
+              "properties": {"outputs": {"type": "array", "items": {"$ref": "#/$defs/Output"}},
+                             "start_date": {"anyOf": [{"type": "string"}, {"type": "null"}]},
+                             "kind": {"type": "string"},
+                             "section": {"type": "string", "enum": ["mda", "risk_factors"]}},
+              "$defs": {"Output": {"type": "object", "required": ["description"],
+                                   "properties": {"description": {"type": "string"},
+                                                  "end_date": {"anyOf": [{"type": "string"}, {"type": "null"}], "default": None}}}}}
+    args = {"outputs": [{"description": "Revenue", "end_date": "null"}], "start_date": "None", "kind": "null", "section": "null"}
+    assert normalize(args, schema) == {"outputs": [{"description": "Revenue"}], "start_date": None, "kind": "null"}
+
+
+@pytest.mark.asyncio
+async def test_malformed_arguments_are_not_echoed_back_to_the_provider():
+    from src.generation_tools import ToolConversation
+    conversation = ToolConversation([SEARCH], Handler(), "Fixture")
+    call = {"id": "bad", "function": {"name": "search", "arguments": '{"query": "x" "y"}'}}
+    messages = []
+    _ = [e async for e in conversation.execute([call], messages, "", conversation.available())]
+    assert messages[0]["tool_calls"][0]["function"]["arguments"] == "{}"
+    assert "Expecting" in json.loads(messages[1]["content"])["error"]

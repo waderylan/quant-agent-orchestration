@@ -60,7 +60,7 @@ def runtime_profile():
                          {"id": "api", "label": "Hosted (NVIDIA + Nebius)",
                           "available": local and all(os.getenv(p + "_API_KEY") for p in ("NVIDIA", "NEBIUS"))}],
             "policy": provider_policy.POLICY,
-            "models": [provider_models.NVIDIA_LIGHTNING, provider_models.NVIDIA_SUPER, provider_models.NEBIUS_QWEN],
+            "models": list(provider_models.LIMITS),
             "provider_coordination": "shared local ledger"}
 
 

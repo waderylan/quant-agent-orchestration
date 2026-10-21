@@ -12,15 +12,15 @@ from src import provider_models
 
 ENDPOINTS = {"nvidia": "https://integrate.api.nvidia.com/v1",
              "nebius": "https://api.tokenfactory.nebius.com/v1"}
-INPUT_PRICE = Decimal("0.0000002")
-OUTPUT_PRICE = Decimal("0.0000006")
 
 
 class ProviderError(RuntimeError):
-    def __init__(self, provider, status=None, *, retryable=False, retry_after=0):
-        self.status = status
+    def __init__(self, provider, status=None, *, retryable=False, retry_after=0, cause=None):
+        # cause is a fixed internal code, never provider-supplied text.
+        self.status, self.cause = status, cause
         self.retryable, self.retry_after = retryable, retry_after
-        super().__init__(f"{provider} generation unavailable" + (f" (HTTP {status})" if status else ""))
+        super().__init__(f"{provider} generation unavailable" + (f" (HTTP {status})" if status else "")
+                         + (f" [{cause}]" if cause else ""))
 
 
 def client():
@@ -41,7 +41,7 @@ def retry_delay(value):
         return 0
 
 
-async def verify_prices(http, key):
+async def verify_prices(http, key, model):
     try:
         response = await http.get(ENDPOINTS["nebius"] + "/models", params={"verbose": "true"},
                                   headers={"Authorization": "Bearer " + key})
@@ -49,10 +49,10 @@ async def verify_prices(http, key):
             raise ProviderError("nebius", response.status_code)
         if response.status_code != 200:
             raise LimitError("Cannot verify Nebius prices")
-        row = next(r for r in response.json()["data"] if r["id"] == provider_models.NEBIUS_QWEN)
-        prices = row["pricing"]
-        if (Decimal(prices["prompt"]) != INPUT_PRICE or Decimal(prices["completion"]) != OUTPUT_PRICE
-                or row["context_length"] != 262144
+        row = next(r for r in response.json()["data"] if r["id"] == model)
+        prices, limits = row["pricing"], provider_models.LIMITS[model]
+        if (Decimal(prices["prompt"]) != limits.input_price or Decimal(prices["completion"]) != limits.output_price
+                or row["context_length"] != limits.context
                 or any(Decimal(str(prices.get(k) or 0)) != 0 for k in ("request", "image", "price_per_minute"))):
             raise LimitError("Nebius price/context snapshot changed; acquisition blocked")
     except (httpx.HTTPError, KeyError, TypeError, ValueError, DecimalException, StopIteration):
@@ -76,7 +76,7 @@ async def complete(http, selected, payload, *, key):
                                     retryable=response.status_code in (429, 500, 502, 503, 504), retry_after=delay)
             async for line in response.aiter_lines():
                 if len(line) > 1048576:
-                    raise ProviderError(selected.provider)
+                    raise ProviderError(selected.provider, cause="oversized_line")
                 if not line.startswith("data:"):
                     continue
                 data = line[5:].strip()
@@ -85,43 +85,48 @@ async def complete(http, selected, payload, *, key):
                     break
                 message = json.loads(data)
                 if message.get("error"):
-                    raise ProviderError(selected.provider)
+                    raise ProviderError(selected.provider, cause="stream_error_event")
                 if message.get("usage"):
                     usage = message["usage"]
-                for choice in message.get("choices", []):
+                # Providers may send explicit nulls for absent fields.
+                for choice in message.get("choices") or []:
                     if choice.get("finish_reason"):
                         finish = choice["finish_reason"]
-                    delta = choice.get("delta", {})
+                    delta = choice.get("delta") or {}
                     text = delta.get("content") or ""
                     if text:
                         content_size += len(text)
                         if content_size > 262144:
-                            raise ProviderError(selected.provider)
+                            raise ProviderError(selected.provider, cause="oversized_content")
                         yield {"type": "text", "data": text}
-                    for call in delta.get("tool_calls", []):
+                    for call in delta.get("tool_calls") or []:
                         index = call["index"]
                         if type(index) is not int or not 0 <= index < 24:
-                            raise ProviderError(selected.provider)
+                            raise ProviderError(selected.provider, cause="invalid_tool_index")
                         row = calls.setdefault(index, {"id": "", "type": "function", "function": {"name": "", "arguments": ""}})
                         if call.get("id"):
                             if row["id"] and row["id"] != call["id"]:
-                                raise ProviderError(selected.provider)
+                                raise ProviderError(selected.provider, cause="conflicting_tool_id")
                             row["id"] = call["id"]
                         for field in ("name", "arguments"):
-                            value = call.get("function", {}).get(field) or ""
+                            value = (call.get("function") or {}).get(field) or ""
                             argument_size += len(value)
                             if argument_size > 262144:
-                                raise ProviderError(selected.provider)
+                                raise ProviderError(selected.provider, cause="oversized_arguments")
                             row["function"][field] += value
-        if not done or finish not in ("stop", "tool_calls"):
-            raise ProviderError(selected.provider)
+        if not done:
+            raise ProviderError(selected.provider, cause="missing_done")
+        if finish not in ("stop", "tool_calls"):
+            raise ProviderError(selected.provider, cause=f"finish_{finish if finish in ('length', 'content_filter') else 'other'}")
         ordered = [calls[i] for i in sorted(calls)]
-        if (finish == "tool_calls" and not ordered) or any(not c["id"] or not c["function"]["name"] for c in ordered):
-            raise ProviderError(selected.provider)
+        if finish == "tool_calls" and not ordered:
+            raise ProviderError(selected.provider, cause="tool_finish_without_calls")
+        if any(not c["id"] or not c["function"]["name"] for c in ordered):
+            raise ProviderError(selected.provider, cause="incomplete_tool_call")
         if len({c["id"] for c in ordered}) != len(ordered):
-            raise ProviderError(selected.provider)
+            raise ProviderError(selected.provider, cause="duplicate_tool_id")
         yield {"type": "result", "data": {"tool_calls": ordered, "usage": usage, "finish_reason": finish}}
-    except httpx.HTTPError:
-        raise ProviderError(selected.provider, retryable=True) from None
-    except (json.JSONDecodeError, KeyError, TypeError):
-        raise ProviderError(selected.provider) from None
+    except httpx.HTTPError as error:
+        raise ProviderError(selected.provider, retryable=True, cause="transport_" + type(error).__name__) from None
+    except (json.JSONDecodeError, KeyError, TypeError) as error:
+        raise ProviderError(selected.provider, cause="malformed_" + type(error).__name__) from None

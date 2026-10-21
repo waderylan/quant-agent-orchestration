@@ -1,0 +1,322 @@
+{
+  "kind": "M11 policy m11-v2 local engineering acceptance; native application with LIVE_MODE=frozen; not RAGAS, not Cloud Run",
+  "policy": "m11-v2",
+  "base_commit": "2691ee5",
+  "working_tree_sha256": {
+    "src/generation.py": "d68f04b58e9f7e444fce3ab4055d99dd87c1eef11008daf5b4c515d4e353bd9c",
+    "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+    "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+    "src/provider_client.py": "682cdcb0d1bbe8dc2ee69042df0887485316be8b5c7a7eb39a28a3479ee564ed",
+    "src/provider_models.py": "61ff30e16bbba0543ca9bb7529f6dfde6705842339f5e266510163020e8f5c95",
+    "src/provider_policy.py": "d63bf39f0b5505064a5a6037cc27a4f0b5f1f61caf266b79e7836f5f30c7bce6",
+    "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+    "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+    "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+    "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+    "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef"
+  },
+  "models": {
+    "nebius": "deepseek-ai/DeepSeek-V4-Flash-0731 ($0.14/M input, $0.28/M output, 1,024,000 context)",
+    "nvidia": "nvidia/nemotron-3.5-super-vl-120b-a12b"
+  },
+  "selection": "Rylan Wade selected DeepSeek V4 Flash 0731 for the planner and all Nebius routes after reviewing the Nebius catalog; Qwen3-235B Instruct and NVIDIA Lightning were retired.",
+  "probe": "Ledger-guarded stream-shape probe: reasoning in delta.reasoning_content (ignored), forced and auto tool calls finish with tool_calls, reasoning tokens counted in completion_tokens.",
+  "defects_found_and_fixed": [
+    {
+      "defect": "Parser iterated explicit JSON nulls (tool_calls/delta/choices/function = null)",
+      "evidence": "Every DeepSeek fallback recorded cause malformed_TypeError",
+      "fix": "Null-tolerant stream parsing in provider_client"
+    },
+    {
+      "defect": "Transient Nebius errors switched providers before retrying",
+      "evidence": "One failure removed DeepSeek for the remaining invocation",
+      "fix": "Retry the routed model once, then fall back"
+    },
+    {
+      "defect": "Rejected streams had no cause",
+      "evidence": "Fallback traces read only 'nebius generation unavailable'",
+      "fix": "Fixed internal cause codes on ProviderError"
+    },
+    {
+      "defect": "Planner prescribed S citations to Financial Data",
+      "evidence": "1 of 6 supervisor-path reproductions cited unregistered [S1]/[S2]; 0 of 6 after prompt fixes",
+      "fix": "Citation ownership in Financial Data and planner prompts"
+    },
+    {
+      "defect": "String 'null' in optional/nullable tool fields",
+      "evidence": "decompose raised ValueError on start_date='null'; supervisor discarded the plan",
+      "fix": "Shared schema-aware normalize() in src/tool_arguments.py at the hosted and Codex tool boundaries"
+    },
+    {
+      "defect": "Malformed tool arguments echoed in history",
+      "evidence": "Direct probe: malformed echo HTTP 400, sanitized echo HTTP 200",
+      "fix": "Echo {} while returning the parse error for correction"
+    },
+    {
+      "defect": "Planner treated constraints as outputs",
+      "evidence": "'filings-only' became an unaddressed output",
+      "fix": "Planner prompt rule"
+    }
+  ],
+  "routes": {
+    "checked_at": "2026-10-21T03:13:33.525723+00:00",
+    "concurrency": 1,
+    "cases": [
+      {
+        "id": "exact_metric",
+        "status": "completed",
+        "seconds": 8.655,
+        "answer_token_ttft_seconds": 4.943,
+        "worker_outcomes": {
+          "data": "completed"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (provider_recovery)",
+          "Answer Reviewer -> nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b (grounded_synthesis)",
+          "Financial Data -> nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b (grounded_synthesis)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)"
+        ],
+        "recoveries": [
+          {
+            "node": "provider_fallback",
+            "agent": "Answer Reviewer",
+            "reason": "Free synthesis endpoint unavailable; guarded alternate provider"
+          }
+        ],
+        "tool_rejections": [],
+        "deepseek_calls": 2,
+        "max_deepseek_completion_tokens": 252,
+        "nebius_token_cost_usd": 0.000664,
+        "missing_outputs": []
+      },
+      {
+        "id": "filing_drivers",
+        "status": "completed",
+        "seconds": 32.093,
+        "answer_token_ttft_seconds": 26.291,
+        "worker_outcomes": {
+          "research": "partial"
+        },
+        "routes": [
+          "Answer Reviewer -> nvidia:nvidia/nemotron-3.5-super-vl-120b-a12b (grounded_synthesis)",
+          "Filings Research -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 10,
+        "max_deepseek_completion_tokens": 833,
+        "nebius_token_cost_usd": 0.023611,
+        "missing_outputs": []
+      },
+      {
+        "id": "mixed_calculation",
+        "status": "completed",
+        "seconds": 38.149,
+        "answer_token_ttft_seconds": 34.376,
+        "worker_outcomes": {
+          "data": "completed",
+          "quant": "completed",
+          "research": "completed"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Filings Research -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Analysis / Quant -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Data -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 13,
+        "max_deepseek_completion_tokens": 882,
+        "nebius_token_cost_usd": 0.013337,
+        "missing_outputs": []
+      },
+      {
+        "id": "amendment",
+        "status": "partial",
+        "seconds": 34.394,
+        "answer_token_ttft_seconds": 10.931,
+        "worker_outcomes": {
+          "research": "completed"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Filings Research -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 6,
+        "max_deepseek_completion_tokens": 2495,
+        "nebius_token_cost_usd": 0.006394,
+        "missing_outputs": [
+          "Identify AMD's original FY2025 MD&A (10-K) and the amended filing; explain what the MD&A amendment corrects, separating the original content from the amendment provisions, citing both the original and amended filings.: The specific document identifier amd-0000002488-26-000018 and fiscal year end date December 27, 2025 given for the original 10-K appear in no cited excerpt.",
+          "Unsupported claims were removed; the cited evidence does not establish them."
+        ]
+      },
+      {
+        "id": "risk_changes",
+        "status": "partial",
+        "seconds": 63.778,
+        "answer_token_ttft_seconds": 37.208,
+        "worker_outcomes": {
+          "risk": "completed"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)",
+          "Risk Summary -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [
+          {
+            "agent": "Risk Summary",
+            "reason": "Unchanged/relocated requires matching wording; rephrasing is changed"
+          },
+          {
+            "agent": "Answer Reviewer",
+            "reason": "Expecting ',' delimiter: line 1 column 1998 (char 1997)"
+          }
+        ],
+        "deepseek_calls": 9,
+        "max_deepseek_completion_tokens": 3185,
+        "nebius_token_cost_usd": 0.071898,
+        "missing_outputs": [
+          "Compare Qualcomm's FY2024 and FY2025 annual report risk factor disclosures. Identify two material changes in risks (e.g., newly added, removed, materially strengthened or weakened risk language). For each change, cite the before version from the FY2024 filing and the after version from the FY2025 filing so the change is verifiable on both sides.: For both identified material changes, the cited FY2025 after-version language (tariff/global trade policy passage and the strengthened Apple/QCT wording naming Samsung and Xiaomi) is not present in the S2 excerpt, so the before/after verification on the FY2025 side is unsupported; only the S1 before language is verifiable."
+        ]
+      },
+      {
+        "id": "missing_scope",
+        "status": "coverage_gap",
+        "seconds": 0.051,
+        "answer_token_ttft_seconds": null,
+        "worker_outcomes": {},
+        "routes": [],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 0,
+        "max_deepseek_completion_tokens": 0,
+        "nebius_token_cost_usd": 0,
+        "missing_outputs": []
+      },
+      {
+        "id": "unsupported_price",
+        "status": "coverage_gap",
+        "seconds": 0.044,
+        "answer_token_ttft_seconds": null,
+        "worker_outcomes": {},
+        "routes": [],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 0,
+        "max_deepseek_completion_tokens": 0,
+        "nebius_token_cost_usd": 0,
+        "missing_outputs": [
+          "Market prices, quotes, valuation multiples and analyst estimates are outside this application's scope."
+        ]
+      }
+    ]
+  },
+  "full_workflows": {
+    "checked_at": "2026-10-21T03:16:35.163541+00:00",
+    "concurrency": 2,
+    "cases": [
+      {
+        "id": "amd_full_workflow",
+        "status": "partial",
+        "seconds": 131.614,
+        "answer_token_ttft_seconds": 122.982,
+        "worker_outcomes": {
+          "data": "completed",
+          "quant": "completed",
+          "risk": "completed",
+          "research": "completed",
+          "current": "partial"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Current Developments -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Filings Research -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Analysis / Quant -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Data -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)",
+          "Risk Summary -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [],
+        "deepseek_calls": 35,
+        "max_deepseek_completion_tokens": 2518,
+        "nebius_token_cost_usd": 0.131076,
+        "missing_outputs": [
+          "R5 current_developments: no dated AMD development (July 23–October 21, 2026) could be researched because search_web returned repeated 'frozen snapshot missing' errors, so no external/current web evidence could be obtained.",
+          "No dated development found for AMD within the search budget",
+          "Live search unavailable: frozen snapshot missing",
+          "Live search unavailable: request budget stop",
+          "Research one dated development about AMD from the most recent 90 days before today (2026-10-21), e.g., an announcement, product launch, or acquisition, using outside/current web evidence kept separate from filing evidence, with its date.: No dated AMD development from 2026-07-23 to 2026-10-21 was identified; the answer only reports that all web search attempts failed, so no dated external event is established."
+        ]
+      },
+      {
+        "id": "qcom_full_workflow",
+        "status": "partial",
+        "seconds": 140.165,
+        "answer_token_ttft_seconds": 114.714,
+        "worker_outcomes": {
+          "data": "completed",
+          "quant": "completed",
+          "risk": "completed",
+          "research": "completed",
+          "current": "partial"
+        },
+        "routes": [
+          "Answer Reviewer -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Current Developments -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Filings Research -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Analysis / Quant -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Financial Data -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)",
+          "Request Planner -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (structured_plan)",
+          "Risk Summary -> nebius:deepseek-ai/DeepSeek-V4-Flash-0731 (complex_evidence)"
+        ],
+        "recoveries": [],
+        "tool_rejections": [
+          {
+            "agent": "Current Developments",
+            "reason": "Extraction requires one URL returned by this request's search"
+          }
+        ],
+        "deepseek_calls": 33,
+        "max_deepseek_completion_tokens": 3882,
+        "nebius_token_cost_usd": 0.100401,
+        "missing_outputs": [
+          "One concrete, dated Qualcomm development from July 23 to October 21, 2026, with a separate current web citation distinct from the two 10-K filings (R5)",
+          "No dated development found for QCOM within the search budget",
+          "Live search unavailable: frozen snapshot missing",
+          "Live search unavailable: request budget stop",
+          "Identify one material annual risk change by comparing Qualcomm's risk factor disclosures across the FY2025 and FY2024 10-K filings, such as a newly added escalated or materially revised risk.: The claimed FY2025 (S2) revised definitive Apple-modem language, tariff/trade passage, and China-expansion wording are not present in the supplied FY2025 10-K excerpt, so the materially-revised/escalated classification rests on unattested S2 text; only the FY2024 'before' wording (S1) is verifiable.",
+          "Summarize one concrete, dated development about Qualcomm from the past 90 days (about July 23 to October 21, 2026), citing a separate current web source distinct from the two 10-K filings.: The answer explicitly reports that no concrete, dated Qualcomm development within July 23–October 21, 2026 could be established and that no separate current web source was obtained, so the requested dated development summary is absent.",
+          "The requirement to cite a separate current web source for the dated past-90-days development is unmet.",
+          "Unsupported claims were removed; the cited evidence does not establish them."
+        ]
+      }
+    ]
+  },
+  "ledger": {
+    "baseline": {
+      "balance": 100000000,
+      "observed_at": 1792534959.0,
+      "expires_at": 1798761600.0,
+      "prior_reserved": 105165,
+      "exclusive": true
+    },
+    "accounted_usd": "2.441004",
+    "unsettled": 18,
+    "reservations": 849
+  },
+  "limitations": [
+    "Frozen replay has no snapshots for model-written queries, so Current Developments is partial in every full workflow.",
+    "One run per case; intermittent behavior is not statistically established.",
+    "amendment and risk_changes partial results are reviewer content judgments, not transport failures.",
+    "Output caps (16,384 planner, 32,768 workers) exceed measured use deliberately for grading reliability."
+  ]
+}

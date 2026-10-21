@@ -24,16 +24,16 @@ async def run(output):
     report = {"kind": "Controlled real-worker development comparison, not RAGAS", "cases": []}
     cases = [
         ("financial", "What was AMD's reported FY2025 GAAP revenue? Give the exact value and cite the source. No web.",
-         [provider_models.NVIDIA_LIGHTNING, provider_models.NVIDIA_SUPER], ["AMD"], [2025]),
+         [provider_models.NVIDIA_SUPER, provider_models.NEBIUS_DEEPSEEK], ["AMD"], [2025]),
         ("filing", "What did Intel's FY2024 annual filing say about its foundry strategy? Use only the filings and cite the source.",
-         [provider_models.NVIDIA_SUPER, provider_models.NEBIUS_QWEN], ["INTC"], [2024]),
+         [provider_models.NVIDIA_SUPER, provider_models.NEBIUS_DEEPSEEK], ["INTC"], [2024]),
     ]
     for kind, question, models, companies, years in cases:
         for model in models:
             events = []
-            paid = model == provider_models.NEBIUS_QWEN
-            selected = provider_policy.Route("nebius" if paid else "nvidia", model, "Qwen" if paid else "NVIDIA",
-                "controlled_comparison", "Same question, sources and tools; selected comparison model", 262144 if model != provider_models.NVIDIA_SUPER else 1048576)
+            reason = "Same question, sources and tools; selected comparison model"
+            selected = (provider_policy.reasoning("controlled_comparison", reason)
+                        if model == provider_models.NEBIUS_DEEPSEEK else provider_policy.fallback(reason))
             state = {"question": question, "companies": companies, "years": years}
             model_stream = partial(generation.stream, profile="api", routing_context=RoutingContext(
                 companies=len(companies), years=len(years), output="financial_inputs" if kind == "financial" else "filing_explanation"))

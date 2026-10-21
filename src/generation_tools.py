@@ -5,6 +5,16 @@ import hashlib
 
 from jsonschema import Draft202012Validator
 
+from src.tool_arguments import normalize
+
+
+def echoed(call):
+    try:
+        json.loads(call["function"]["arguments"])
+        return call
+    except (TypeError, ValueError):
+        return {**call, "function": {**call["function"], "arguments": "{}"}}
+
 
 class ToolConversation:
     def __init__(self, tools, handler, agent, *, supplied_prompt=""):
@@ -57,7 +67,10 @@ class ToolConversation:
             raise RuntimeError("Unknown or repeated provider tool call")
         permitted = {tool["function"]["name"] for tool in available}
         self.seen_ids.update(call["id"] for call in tool_calls)
-        messages.append({"role": "assistant", "content": text or None, "tool_calls": tool_calls})
+        # Providers reject histories that echo unparseable arguments; the tool
+        # result below still reports the original error for correction.
+        messages.append({"role": "assistant", "content": text or None,
+                         "tool_calls": [echoed(call) for call in tool_calls]})
         remaining = self.limit-self.calls
         violates_slot = self.reports_outcome and (("report_outcome" in names and names.index("report_outcome") != len(names)-1)
                         or (len(names) == remaining and names[-1] != "report_outcome"))
@@ -79,11 +92,7 @@ class ToolConversation:
                     raise ValueError("Submit report_outcome alone, after reading the preceding tool results")
                 arguments = json.loads(call["function"]["arguments"])
                 schema = self.schemas[name]
-                if isinstance(arguments, dict):
-                    # Optional nulls emitted by hosted parsers mean an omitted field.
-                    required, properties = schema.get("required", []), schema.get("properties", {})
-                    arguments = {key: value for key, value in arguments.items()
-                                 if value is not None or key in required or key not in properties}
+                arguments = normalize(arguments, schema)
                 issues = [error.message[:300] for error in self.validators[name].iter_errors(arguments)][:3]
                 if not isinstance(arguments, dict) or issues:
                     raise ValueError("Tool schema violation: " + "; ".join(issues))

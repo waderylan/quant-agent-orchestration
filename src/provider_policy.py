@@ -2,7 +2,7 @@
 from dataclasses import asdict, dataclass
 from src import provider_models
 from src.generation_context import RoutingContext
-POLICY = "m11-v1"
+POLICY = "m11-v2"
 
 
 @dataclass(frozen=True)
@@ -23,11 +23,9 @@ def route(context: RoutingContext, *, agent: str, input_bound: int) -> Route:
                     context.source_conflict or context.output in ("risk_changes", "filing_explanation", "checked_calculations", "current_developments", "public_reaction", "official_update") or
                     len(context.evidence_kinds) > 1 or input_bound > 64000)
     if context.phase == "planner" or agent == "Request Planner":
-        return Route("nvidia", provider_models.NVIDIA_LIGHTNING, "NVIDIA", "structured_plan",
-                     "Bounded request decomposition on the smaller free model", 262144)
+        return reasoning("structured_plan", "Planning errors cascade to every worker; decompose with the reasoning model")
     if complex_task:
-        return Route("nebius", provider_models.NEBIUS_QWEN, "Qwen", "complex_evidence",
-                     "Comparison, source conflict, risk alignment, mixed evidence, or large context", 262144)
+        return reasoning("complex_evidence", "Comparison, source conflict, risk alignment, mixed evidence, or large context")
     if agent == "Answer Reviewer" or context.phase == "reviewer":
         return fallback("Independent review of the original request and cited evidence")
     if agent == "Financial Data" or context.output in ("financial_inputs", "narrow_lookup"):
@@ -35,5 +33,11 @@ def route(context: RoutingContext, *, agent: str, input_bound: int) -> Route:
     return fallback("Grounded specialist synthesis and tool orchestration on the free model")
 
 
+def reasoning(rule: str, reason: str) -> Route:
+    model = provider_models.NEBIUS_DEEPSEEK
+    return Route("nebius", model, "DeepSeek", rule, reason, provider_models.LIMITS[model].context)
+
+
 def fallback(reason: str) -> Route:
-    return Route("nvidia", provider_models.NVIDIA_SUPER, "NVIDIA", "grounded_synthesis", reason, 1048576)
+    model = provider_models.NVIDIA_SUPER
+    return Route("nvidia", model, "NVIDIA", "grounded_synthesis", reason, provider_models.LIMITS[model].context)

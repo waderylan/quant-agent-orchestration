@@ -48,14 +48,14 @@ async def test_provider_route_attaches_to_its_invocation_during_review(page):
       event('activity', {id:'worker-1',agent:'Filings Research',status:'running',elapsed_ms:0});
       event('activity', {id:'review',agent:'Answer Reviewer',status:'running',elapsed_ms:100});
       event('trace', {node:'provider_route',activity_id:'worker-1',agent:'Filings Research',
-        provider:'nebius',model:'Qwen3-235B',reason:'Comparison across fiscal years'});
+        provider:'nebius',model:'DeepSeek-V4-Flash',reason:'Comparison across fiscal years'});
       event('complete', {status:'completed'});
     }""")
     await page.locator('.agent-call').first.click()
     details = await page.locator('#agent-details').inner_text()
-    assert 'nebius' in details and 'Qwen3-235B' in details and 'Comparison across fiscal years' in details
+    assert 'nebius' in details and 'DeepSeek-V4-Flash' in details and 'Comparison across fiscal years' in details
     await page.locator('.agent-call').nth(1).click()
-    assert 'Qwen3-235B' not in await page.locator('#agent-details').inner_text()
+    assert 'DeepSeek-V4-Flash' not in await page.locator('#agent-details').inner_text()
 
 
 @pytest.mark.asyncio

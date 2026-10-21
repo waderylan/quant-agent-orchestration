@@ -61,10 +61,10 @@ flowchart LR
 | Profile / role | Serving route | Dimension |
 | --- | --- | --- |
 | Codex, all generation | Local Codex app-server with a fresh thread | Explicit development selection |
-| Hosted request planner | NVIDIA Lightning | Cost: small free structured planner |
+| Hosted request planner | Nebius DeepSeek V4 Flash | Capability: planning errors cascade to every worker |
 | Hosted narrow financial lookup and simple review | NVIDIA Super | Cost/capability: free grounded answers with citations |
-| Hosted comparison, risk, filing explanation, Quant and outside synthesis | Nebius Qwen | Capability: evidence-heavy synthesis and tool orchestration |
-| Hosted complex review | Separate Qwen invocation | Original-request coverage with mixed evidence |
+| Hosted comparison, risk, filing explanation, Quant and outside synthesis | Nebius DeepSeek V4 Flash | Capability: reasoning over evidence-heavy synthesis and tool orchestration |
+| Hosted complex review | Separate DeepSeek invocation | Original-request coverage with mixed evidence |
 
 [M11](milestones/provider-routing/README.md#models-and-routing) owns exact model IDs, rule precedence, context/output caps and measured compatibility. Immutable routing context carries request/activity IDs, phase, assigned output, company/year counts, evidence kinds and source conflict. Each HTTP attempt emits provider, publisher, exact model, rule/reason and reserved limits; usage traces add latency, tokens and estimated cost. Codex emits the same model-route interface. Activity details retain each actual provider/model used, including a fallback, rather than replacing the display with a configured default.
 

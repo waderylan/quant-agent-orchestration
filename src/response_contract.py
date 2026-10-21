@@ -93,6 +93,17 @@ def normalize_citations(answer, registered):
             result.append(replacement)
         return "".join(result)
 
+    # Equivalent bracket forms resolve only when every ID is registered: (F1),
+    # full-width 【F1】 and labeled [Source: F1]. Bare F1 remains uncited.
+    def alternate(match):
+        ids = re.split(r"\s*[,;]\s*", match[1])
+        return "".join(f"[{sid}]" for sid in ids) if all(sid in registered for sid in ids) else match[0]
+
+    ids = r"([SFCW]\d+(?:\s*[,;]\s*[SFCW]\d+)*)"
+    answer = re.sub(r"\(" + ids + r"\)", alternate, answer)
+    answer = re.sub("【" + ids + "】", alternate, answer)
+    answer = re.sub(r"\[(?:sources?|refs?|citations?)\s*:\s*" + ids + r"\]", alternate, answer, flags=re.I)
+
     # Provider/model Markdown labels resolve through the trusted registry. Discard
     # generated URL targets; the browser owns inspection links for each source ID.
     answer = re.sub(r"\[([SFCW]\d+)(?::\s*[^\]\n]+)?\]\([^\)\n]*\)", r"[\1]", answer)
