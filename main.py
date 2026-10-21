@@ -53,7 +53,7 @@ app.mount("/static", StaticFiles(directory=ROOT / "web"), name="static")
 @app.get("/api/runtime")
 def runtime_profile():
     from src import provider_models, provider_policy
-    # Both profiles are local-only until M13 replaces the development ledger gate.
+    # Both profiles are local-only until M14 replaces the development ledger gate.
     local = not os.getenv("K_SERVICE")
     return {"generation_profile": os.getenv("GENERATION_PROFILE", "codex"),
             "profiles": [{"id": "codex", "label": "Codex", "available": local and bool(os.getenv("CODEX_BRIDGE_URL") or shutil.which("codex"))},

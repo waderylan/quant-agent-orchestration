@@ -46,7 +46,7 @@ Use `--help` on each script for additional commands. [M4](docs/milestones/local-
 
 The default `GENERATION_PROFILE=codex` uses the host subscription. For direct providers, copy `.env.example` to ignored `.env` and supply `NVIDIA_API_KEY` and `NEBIUS_API_KEY`. Select **Hosted (NVIDIA + Nebius)** in the browser Models control, or set `GENERATION_PROFILE=api` as the server default. Each request keeps its selection; model names and reasons share the existing activity details. Both providers are required for normal hosted routing. API mode never uses CLI authentication.
 
-[M11](docs/milestones/provider-routing/README.md) owns model IDs, prices, dashboard links and binding limits: NVIDIA 40 RPM; Nebius $100 promo credit with a $10 buffer, a $5 local campaign cap and a $1 local per-request cap. The SQLite ledger is local test tooling, not an assignment requirement or an intended production component. Application stops do not disable card billing. Reuse the test ledger while testing; M13 chooses production spending controls separately.
+[M11](docs/milestones/provider-routing/README.md) owns model IDs, prices, dashboard links and binding limits: NVIDIA 40 RPM; Nebius $100 promo credit with a $10 buffer, a $5 local campaign cap and a $1 local per-request cap. The SQLite ledger is local test tooling, not an assignment requirement or an intended production component. Application stops do not disable card billing. Reuse the test ledger while testing; M14 chooses production spending controls separately.
 
 ```powershell
 uv run --locked python scripts/providers.py status
@@ -67,7 +67,7 @@ uv run --locked python scripts/compare_provider_models.py --output artifacts/pro
 uv run --locked python scripts/start_local_container.py --profile api --port 8084
 ```
 
-Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run generation stays blocked until M13 resolves production spending controls; the assignment does not require deploying the local ledger.
+Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run generation stays blocked until M14 resolves production spending controls; the assignment does not require deploying the local ledger.
 
 ## Live sources
 

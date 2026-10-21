@@ -20,4 +20,4 @@ The demonstration checks startup, assets, non-root identity, absent credentials,
 
 Verified milestone commit: `66e5517`. [Container](evidence/M4_CONTAINER_RESULTS.json) and [browser](evidence/M4_BROWSER_RESULTS.json) retain the run.
 
-After changing dependencies, index content, mounts, or streaming/cancellation, rebuild the image and repeat the browser/disconnect checks. M13 replaces the local bridge with deployment providers and verifies cold starts and Cloud Run concurrency.
+After changing dependencies, index content, mounts, or streaming/cancellation, rebuild the image and repeat the browser/disconnect checks. M14 replaces the local bridge with deployment providers and verifies cold starts and Cloud Run concurrency.

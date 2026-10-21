@@ -52,7 +52,7 @@ Before each generation request, `provider_route` records request/activity/invoca
 
 ## Account limits and spending policy
 
-**Scope:** the SQLite provider ledger is local development/testing infrastructure. The assignment requires working provider routing and inspectable decisions; it does not require a spending ledger. This ledger is not an assignment deliverable or an intended production component. M13 decides production spending controls separately; it does not inherit a requirement to build a distributed ledger. The $100 promotional no-overage constraint still applies wherever these credentials are used.
+**Scope:** the SQLite provider ledger is local development/testing infrastructure. The assignment requires working provider routing and inspectable decisions; it does not require a spending ledger. This ledger is not an assignment deliverable or an intended production component. M14 decides production spending controls separately; it does not inherit a requirement to build a distributed ledger. The $100 promotional no-overage constraint still applies wherever these credentials are used.
 
 - NVIDIA's allowance is **40 RPM**, shared across models, workers, retries and local processes. SQLite serializes a sliding 60-second window, with at most two active requests per provider. Queue time counts toward the deadline. External account traffic is outside this limiter.
 - Nebius promotional credit is **$100 total**. Paid overage and card charges are forbidden. The operational ceiling is $90, retaining a $10 buffer; the implementation campaign stops at $5 and an application request at $1. `NEBIUS_CAMPAIGN_USD` can lower the campaign cap.
@@ -62,7 +62,7 @@ Before each generation request, `provider_route` records request/activity/invoca
 - Reservations survive restart. Valid usage settles downward; failure, cancellation or missing usage retains the maximum. An over-bound settlement freezes Nebius. A fresh observation never resets consumption or raises an existing credit ceiling; unresolved reservations stay charged conservatively.
 - Native and Docker acceptance share one mounted ledger. Do not delete it, run an independent ledger against this account, or use a detached copy. Stop processes before moving between native and Docker on Windows.
 - These application controls do **not** disable Nebius card billing. Provider-side credit-only billing and automatic balance reads are unverified. Account-wide protection also requires controlled exclusive usage.
-- SQLite coordinates local testing only. The current API profile fails closed when `K_SERVICE` identifies Cloud Run. M13 replaces that development gate only after choosing and verifying appropriate production spending controls, such as provider-enforced credit-only limits. No distributed ledger is assumed or required by the assignment.
+- SQLite coordinates local testing only. The current API profile fails closed when `K_SERVICE` identifies Cloud Run. M14 replaces that development gate only after choosing and verifying appropriate production spending controls, such as provider-enforced credit-only limits. No distributed ledger is assumed or required by the assignment.
 
 ## Provider dashboards
 
@@ -101,4 +101,4 @@ The fixed [development cases](../../../tests/fixtures/provider_routes.json) cove
 
 The [full-workflow cases](../../../tests/fixtures/provider_full_workflows.json) request every specialist for AMD and Qualcomm, including dated real MCP research. [Controlled comparisons](../../../scripts/compare_provider_models.py) run Super and DeepSeek on the same financial lookup and the same filing question. Comparison selection is confined to that development process; the normal client, tool validation and spending guards remain active.
 
-M11 acceptance is an engineering check, not RAGAS or a general accuracy estimate. M12 owns the four required RAGAS metrics over a fixed vector-store-only set with web disabled; Data/Quant/current checks remain separate. M13 owns public deployment, production spending controls, cold/warm latency, concurrency and provider-access terms.
+M11 acceptance is an engineering check, not RAGAS or a general accuracy estimate. M13 owns the four required RAGAS metrics over a fixed vector-store-only set with web disabled; Data/Quant/current checks remain separate. M14 owns public deployment, production spending controls, cold/warm latency, concurrency and provider-access terms.

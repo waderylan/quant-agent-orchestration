@@ -1,10 +1,10 @@
-# M13 — Deployment and submission
+# M14 — Deployment and submission
 
 Owner: Rylan Wade. This milestone turns the verified local application into a public Cloud Run service, repeats acceptance against the deployed runtime, and assembles the assignment deliverables. The [milestone index](../README.md) owns status and order.
 
 ## Release inputs
 
-- M11 supplies two working generation providers with visible routing; M12 supplies the fixed evaluation method and browser checks. M10 supplies real Tavily and shared-MCP traffic. The [assignment](../../reference/assignment/Assignment_2_Description.md) governs the final archive, URL, metrics, and grading requirements.
+- M11 supplies two working generation providers with visible routing; M13 supplies the fixed evaluation method and browser checks. M10 supplies real Tavily and shared-MCP traffic. The [assignment](../../reference/assignment/Assignment_2_Description.md) governs the final archive, URL, metrics, and grading requirements.
 - Use the deployment providers and managed secrets. The authenticated local Codex CLI/bridge is a development tool and cannot serve Cloud Run. Keep the service self-contained or connect it to explicitly deployed source/live MCP services.
 - The app treats turns as self-contained. Add an external state store only if the final product claims memory across instances. Verify analysis bundle links across Cloud Run instances or define a reliable storage/retention path before exposing downloads.
 
