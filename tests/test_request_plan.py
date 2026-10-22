@@ -3,6 +3,18 @@
 import pytest
 
 from src.request_plan import decompose, coverage, remove_unsupported
+
+
+@pytest.mark.asyncio
+async def test_complete_risk_review_preserves_tail_and_filing_time():
+    marker = "Late complete-section export restriction evidence"
+    async def model(prompt, tools, handler, **kwargs):
+        assert marker in prompt and '2026-02-04' in prompt and '2025-12-27' in prompt
+        handler('submit_coverage', {'results': [{'id': 'R1', 'addressed': True, 'citations': ['S1'], 'missing': ''}], 'missing_requests': [], 'unsupported_claims': []})
+        yield {'type': 'token', 'data': ''}
+    row = {'source_id': 'S1', 'section': 'risk_factors', 'complete_section': True, 'filed': '2026-02-04', 'fiscal_end': '2025-12-27', 'text': 'Earlier risk language. ' * 2000 + marker}
+    result = await coverage('Compare risks', [{'id': 'R1', 'kind': 'risk_changes', 'description': 'Risk comparison'}], 'Export risk [S1].', {'S1': row}, model, lambda e: None)
+    assert not result['missing']
 from src.research_workflow import events
 from tests.test_supervisor import source
 

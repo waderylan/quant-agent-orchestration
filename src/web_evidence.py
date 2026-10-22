@@ -94,6 +94,18 @@ def publication_date(row, text):
     for key in ("published_date", "datePublished", "publication_date", "date_published"):
         if parsed := _date(row.get(key)):
             return result(parsed, "tavily" if key == "published_date" else "metadata", str(row[key]))
+    # Issuer filing listings explicitly label publication in their title. An
+    # article's event date in its headline or a date in its URL is not equivalent.
+    title = str(row.get("title") or "")
+    filing_title = re.match(rf"^\s*({DATE}|\d{{2}}/\d{{2}}/20\d{{2}})\s*[-–—]\s*(?:10-[KQ](?:/A)?\b|.*(?:Inc\.|Corporation|Incorporated)\s*$)", title, re.I)
+    if filing_title and source_tier(row.get("url", ""), "") == "official" and "/sec-filings/" in urlsplit(row.get("url", "")).path:
+        value = filing_title[1]
+        try:
+            parsed = datetime.strptime(value, "%m/%d/%Y").date().isoformat() if "/" in value else _date(value)
+        except ValueError:
+            parsed = None
+        if parsed:
+            return result(parsed, "filing_title", title)
     raw = str(text or "")
     soup = BeautifulSoup(raw, "html.parser") if "<" in raw else None
     if soup:

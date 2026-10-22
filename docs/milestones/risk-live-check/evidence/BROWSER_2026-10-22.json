@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-10-22T16:10:39.230877+00:00",
+  "method": "Chromium replay of captured real application SSE; source inspection uses the running native API. No new generation or Tavily calls.",
+  "case": "heldout_05_nvda_full_official_export_update",
+  "variant": "both",
+  "source_capture": "artifacts\\m12\\heldout\\captures.json",
+  "shared_tool_agents": [
+    "Risk Summary",
+    "Filings Research",
+    "Current Developments"
+  ],
+  "inspections": [
+    {
+      "prefix": "S",
+      "characters": 4395,
+      "label": "NVDA · FY2025 · 10-K · 2025-01-26 · original · risk_factors SEC filing · Official retrieval source · Collected original ·"
+    },
+    {
+      "prefix": "F",
+      "characters": 1390,
+      "label": "NVDA · FY2025 · revenue · 2024-01-29 → 2025-01-26 · annual · USD SEC filing · Official retrieval source · Collected original · Collected SEC facts ·"
+    },
+    {
+      "prefix": "C",
+      "characters": 4492,
+      "label": "NVDA FY2026 revenue growth vs FY2025 · percent · 2025-01-27 → 2026-01-25"
+    },
+    {
+      "prefix": "W",
+      "characters": 1800,
+      "label": "reuters.com · 2026-03-18T12:59:07+00:00 · Independent reporting · Retrieved 2026-10-22 · Date from tavily · Open source"
+    }
+  ],
+  "status": "Partial answer · evidence gap",
+  "page_errors": [],
+  "example_preserves_scope": true,
+  "passed": true
+}

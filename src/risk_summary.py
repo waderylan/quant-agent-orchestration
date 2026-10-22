@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import asyncio
+import copy
 import re
 from contextlib import aclosing
 from difflib import SequenceMatcher
@@ -188,6 +189,14 @@ class RiskTools:
             return {"source_id": s["source_id"], **inspect_span(self.index, s["document_id"], s["start"], s["end"])}
         if name == "risk_pairs":
             pairs = self.comparisons[args["comparison"]]["pairs"]
+            if query := args.get("query"):
+                if not isinstance(query, str) or not 1 <= len(query) <= 160:
+                    raise ValueError("Risk navigation query requires 1–160 characters")
+                words = set(re.findall(r"\w+", query.casefold()))
+                def relevance(pair):
+                    text = " ".join(self.sources[pair[k]]["text"] for k in ("before", "after") if pair[k])
+                    return len(words & set(re.findall(r"\w+", text.casefold())))
+                pairs = sorted((p for p in pairs if relevance(p)), key=relevance, reverse=True)
             offset = args.get("offset", 0)
             if type(offset) is not int or not 0 <= offset <= len(pairs):
                 raise ValueError("Invalid comparison offset")
@@ -214,23 +223,27 @@ class RiskTools:
                 raise ValueError("Unchanged/relocated requires matching wording; rephrasing is changed")
             if not isinstance(args["rationale"], str) or not 20 <= len(args["rationale"]) <= 1200:
                 raise ValueError("Supply a concrete wording/subject rationale")
-            self.changes.append(change)
+            if change not in self.changes:
+                self.changes.append(change)
             return {"recorded": change, "qualification": "Language classification; absence of an exact phrase does not prove a new economic exposure"}
         raise ValueError("Unknown Risk Summary tool")
 
 
 TOOLS = [
     tool("inspect_risk", "Read exact risk span or COMPLETE section; full sections establish the comparison universe.", {"source_id": {"type": "string"}}, ["source_id"]),
-    tool("risk_pairs", "Page subject/wording candidates from exhaustive section alignment. Unmatched does not mean added/removed.", {"comparison": {"type": "string"}, "offset": {"type": "integer"}}, ["comparison"]),
+    tool("risk_pairs", "Page subject/wording candidates from exhaustive section alignment. Optional query prioritizes the requested subject's exact span citations. Unmatched does not mean added/removed.", {"comparison": {"type": "string"}, "offset": {"type": "integer"}, "query": {"type": "string", "minLength": 1, "maxLength": 160}}, ["comparison"]),
     tool("record_risk_change", "Record an inspected material classification with both citations. Added/removed uses complete absent-side section. Rephrasing is changed, not new exposure.", {"classification": {"type": "string", "enum": ["added", "removed", "changed", "relocated", "unchanged"]}, "before": {"type": "string", "description": "Registered S source ID from the OLDER year, e.g. S1. Never a year, document ID or comparison name."}, "after": {"type": "string", "description": "Registered S source ID from the NEWER year of the same company, e.g. S2."}, "rationale": {"type": "string", "minLength": 20, "maxLength": 1200}}, ["classification", "before", "after", "rationale"]),
 ]
 
+LIVE_TOOLS = copy.deepcopy(TOOLS)
+LIVE_TOOLS[-1]["inputSchema"]["properties"]["live_query"] = {"type": "string", "minLength": 1, "maxLength": 130, "description": "Focused risk subject and event query. The application supplies company and post-filing dates."}
 
-async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_answer=True):
+
+async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_answer=True, gateway=None):
     # Keep every original section intact. Compare one issuer per bounded model
     # context instead of duplicating eight full sections into a single request.
     if len(state["companies"]) > 1:
-        results, offset = [], state.get("source_offset", 0)
+        results, offset, live_offset = [], state.get("source_offset", 0), state.get("live_offset", 0)
         deadline = asyncio.get_running_loop().time() + RISK_COLLECTION_SECONDS
         for company in state["companies"]:
             try:
@@ -238,7 +251,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
                 if remaining <= 0:
                     raise TimeoutError("Multi-issuer risk collection deadline exhausted")
                 async with asyncio.timeout(remaining):
-                    result = await risk_turn(index, {**state, "companies": [company], "source_offset": offset}, writer, model_stream=model_stream, emit_answer=False)
+                    result = await risk_turn(index, {**state, "companies": [company], "source_offset": offset, "live_offset": live_offset}, writer, model_stream=model_stream, emit_answer=False, gateway=gateway)
             except asyncio.CancelledError:
                 raise
             except Exception as error:
@@ -248,15 +261,17 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
                 writer({"type": "trace", "data": {"agent": "Risk Summary", "company": company, "decision": "preserve_completed_issuers", "reason": gap}})
             results.append(result)
             offset = max([int(s[1:]) for s in result.get("risk_sources", {})], default=offset)
+            live_offset = max([int(s[1:]) for s in result.get("live_sources", {})], default=live_offset)
         sources = {sid: source for result in results for sid, source in result.get("risk_sources", {}).items()}
         if not sources:
             raise ValueError("No issuer risk review completed; " + "; ".join(g for r in results for g in r.get("missing_outputs", [])))
         answer = "\n\n".join(company + ":\n" + result["answer"] for company, result in zip(state["companies"], results))
         if emit_answer:
             writer({"type": "answer", "data": answer})
-            cited = set(re.findall(r"\[(S\d+)\]", answer))
-            writer({"type": "sources", "data": [sources[sid] for sid in sorted(cited, key=lambda s: int(s[1:]))]})
-        return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "reported_missing_outputs": [gap for r in results for gap in r.get("reported_missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
+            registered = {**sources, **{sid: source for r in results for sid, source in r.get("live_sources", {}).items()}}
+            cited = set(re.findall(r"\[([SW]\d+)\]", answer))
+            writer({"type": "sources", "data": [registered[sid] for sid in sorted(cited)]})
+        return {"answer": answer, "risk_answer": answer, "risk_sources": sources, "live_sources": {sid: source for r in results for sid, source in r.get("live_sources", {}).items()}, "risk_live_checks": [c for r in results for c in r.get("risk_live_checks", [])], "risk_changes": [c for result in results for c in result.get("risk_changes", [])], "partial": any(r.get("partial") for r in results), "missing_outputs": [gap for r in results for gap in r.get("missing_outputs", [])], "reported_missing_outputs": [gap for r in results for gap in r.get("reported_missing_outputs", [])], "clarification": any(r.get("clarification") for r in results), "citation_verified": all(r.get("citation_verified") for r in results)}
     tools = RiskTools(index, state["companies"], state["years"], source_offset=state.get("source_offset", 0))
     quarterly = bool(re.search(r"\b(?:Q[1-4]|quarter\w*|10-Q)\b", state["question"], re.I))
     annual_comparison = not quarterly or len(set(state["years"])) > 1 and bool(re.search(r"\b(?:annual|10-K)\b", state["question"], re.I)) and bool(re.search(r"\bbetween\b|\bFY\s*20\d\d\s*(?:to|and|[-–])", state["question"], re.I))
@@ -303,7 +318,7 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
         if emit_answer:
             writer({"type": "token", "data": message})
         return {"answer": message, "partial": True, "missing_outputs": gaps, "risk_sources": {}, "risk_changes": []}
-    overview = [{**{k: s[k] for k in ("source_id", "company", "fiscal_year", "fiscal_start", "fiscal_end", "form", "accession", "start", "end", "complete_section")}, "preview": s["text"][:180]} for s in tools.sources.values() if s["complete_section"]]
+    overview = [{**{k: s[k] for k in ("source_id", "company", "fiscal_year", "fiscal_start", "fiscal_end", "filed", "form", "accession", "start", "end", "complete_section")}, "preview": s["text"][:180]} for s in tools.sources.values() if s["complete_section"]]
     comparisons = [{k: v for k, v in c.items() if k != "pairs"} | {"comparison": key, "pair_count": len(c["pairs"])} for key, c in tools.comparisons.items()]
     full_texts, characters = [], 0
     for s in tools.sources.values():
@@ -313,27 +328,53 @@ async def risk_turn(index, state, writer, *, model_stream=codex_stream, emit_ans
                 characters += len(s["text"])
             else:
                 gaps.append(f"{s['company']} FY{s['fiscal_year']} {s['form']}: complete text exceeds bounded context; inspect separately")
-    role_task = "This supervisor task requests risk_changes only. Other workers own financial figures, calculations, filing drivers. Report completeness only for risk language comparisons; do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
+    from src.risk_live import RiskLiveChecks
+    live = RiskLiveChecks(state, tools, gateway)
+
+    class RiskHandler:
+        max_tool_calls = tools.max_tool_calls
+
+        def __getattr__(self, name):
+            return getattr(tools, name)
+
+        def __call__(self, name, args):
+            if name != "record_risk_change":
+                return tools(name, args)
+            args = dict(args)
+            query = args.pop("live_query", None)
+            if query is not None and (not isinstance(query, str) or not 1 <= len(query) <= 130):
+                raise ValueError("Risk live query requires 1–130 characters")
+            result = tools(name, args)
+            check = live.check(result["recorded"], query)
+            live.flush(writer)
+            return {**result, "post_filing_check": check}
+
+    role_task = "This supervisor task requests risk_changes plus automatic post-filing risk context. Other workers own financial figures, calculations, filing drivers and broad news. Do not list other workers' outputs as missing." if state.get("worker_output") == "risk_changes" else "Direct Risk Summary task"
     prompt = (ROOT / "prompts/risk_summary.md").read_text(encoding="utf-8") + "\nAssigned task: " + role_task + "\n" + json.dumps({"question": assigned_question(state, "risk_changes"), "assigned_companies_only": state["companies"], "complete_sections": overview, "comparisons": comparisons, "missing": gaps, "quarterly": quarterly, "original_section_texts": full_texts, "amendment_scope_context_only": [s for s in tools.sources.values() if s["section"] == "amendment_scope"]}, ensure_ascii=False)
-    outcome, answer = OutcomeTools(tools), ""
-    async with aclosing(model_stream(prompt, [*TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare complete original filing risk inventories; preserve exact before/after evidence")) as stream:
+    prompt += "\nAutomatic post-filing risk checks: " + ("disabled by the request or comparison profile; use filing evidence only." if not live.enabled or live.prohibited else "enabled for EVERY registered finding, including unchanged, relocated and removed wording. record_risk_change automatically searches Tavily once per distinct finding and returns separate W context. Supply a concise live_query naming the risk subject and concrete event to investigate, without dates or site filters. Read its returned sources before report_outcome and the answer.")
+    outcome, answer = OutcomeTools(RiskHandler()), ""
+    async with aclosing(model_stream(prompt, [*LIVE_TOOLS, OUTCOME_TOOL], outcome, agent="Risk Summary", reason="Compare original filing risks and check each registered finding through shared Tavily MCP")) as stream:
         async for event in stream:
             if event["type"] == "token":
                 answer += event["data"]
             if emit_answer or event["type"] != "token":
                 writer(event)
-    answer, cited = checked_answer(answer, tools.sources, writer if emit_answer else lambda e: None)
-    if not cited:
+    live.flush(writer)
+    registered = {**tools.sources, **live.web.sources}
+    answer, cited = checked_answer(answer, registered, writer if emit_answer else lambda e: None)
+    if not cited & tools.sources.keys():
         raise ValueError("Risk Summary returned no registered citations")
-    if cited - tools.sources.keys():
+    if cited - registered.keys():
         raise ValueError("Risk Summary generated unregistered citations; no risk answer is verified")
-    for sid in cited:
+    for sid in cited & tools.sources.keys():
         s = tools.sources[sid]
         if tools("inspect_risk", {"source_id": sid})["text"] != s["text"]:
             raise ValueError("Risk citation changed during generation")
     gaps += outcome.missing
+    gaps += live.missing
     if tools.comparisons and not tools.changes:
         gaps.append("No material risk classification was registered; comparison remains unverified")
     if emit_answer:
-        writer({"type": "sources", "data": [tools.sources[s] for s in sorted(cited, key=lambda s: int(s[1:]))]})
-    return {"answer": answer, "risk_answer": answer, "risk_sources": tools.sources, "risk_changes": tools.changes, "partial": bool(gaps), "missing_outputs": gaps, "reported_missing_outputs": outcome.missing, "clarification": outcome.status == "clarification", "citation_verified": True}
+        writer({"type": "sources", "data": [registered[s] for s in sorted(cited)]})
+    writer({"type": "trace", "data": {"agent": "Risk Summary", "node": "risk_live_checks", "policy": "every_registered_finding", "checks": live.checks}})
+    return {"answer": answer, "risk_answer": answer, "risk_sources": tools.sources, "live_sources": live.web.sources, "risk_live_checks": live.checks, "risk_changes": tools.changes, "partial": bool(gaps), "missing_outputs": gaps, "reported_missing_outputs": outcome.missing, "clarification": outcome.status == "clarification", "citation_verified": True}

@@ -4,6 +4,8 @@ Owner: Rylan Wade. The [milestone index](../README.md) owns status and order.
 
 Current Developments researches dated external events and identifiable outside reactions for selected companies. Filings Research shares Tavily search for an official update to a specific filed statement. The application has five specialists. Prices, multiples and analyst forecasts are outside scope; Quant valuation is unsupported.
 
+[M12](../risk-live-check/README.md) adds Risk Summary as a third caller of the shared search tool. It automatically checks each registered risk finding for focused post-filing context. Broad news/reactions remain with Current Developments; the dated M10 evidence below records its original two-caller integration.
+
 ## Verified behavior
 
 - Semantic request decomposition preserves distinct requested outputs before choosing workers. Casual requests for public reaction receive outside research alongside filing explanations and calculations. A separate answer reviewer checks the original question, including clauses omitted by the plan, against the answer and cited excerpts. Unsupported sentences are removed, followed by one bounded recheck. Final remaining gaps determine completeness; successful review can clear model uncertainty but cannot erase structural evidence gaps or worker failures.

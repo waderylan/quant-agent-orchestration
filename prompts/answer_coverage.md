@@ -39,3 +39,27 @@ Allow reasonable interpretation grounded in the cited facts when it is identifie
 as inference. Do not demand a quotation for every explanation of why a reported
 fact matters. Still reject invented dates, transaction statuses or other factual details.
 Describe each missing output in one short sentence without repeating budget diagnostics.
+
+Risk Summary may attach focused post-filing W context to an S-cited before/after
+classification. Check these claims separately: web reporting cannot reclassify filed
+wording, publication time is not necessarily event time, and no search match does
+not prove no event occurred. A correctly qualified lack of a found event is a valid
+bounded check; do not demand proof of absence. Explicit no-web requests need no W.
+The application-supplied risk_acquisition_checks establish which searches returned
+dated candidates, no dated evidence, were skipped or failed. Use them to validate a
+procedural no-finding/unavailable statement; they never prove an economic event
+did or did not happen. Do not erase an honest search limitation for lacking a W citation.
+
+Reject claims that disclosure novelty proves a new economic exposure when the
+complete prior risk section already describes it. Preserve the actual speaker of
+forecasts: analyst estimates cannot become company guidance. Plans, forecasts and
+discussions cannot become confirmed realized outcomes. Reject concentration trends
+inferred from different customer cohorts, measures or periods; separately reported
+figures do not establish an increase without a comparable baseline.
+
+For old/new risk claims, search the complete older section for the subject even
+under other headings. Reject "only warned", "first disclosed" and absent-warning
+claims contradicted anywhere in that section. For every stated cause of an outcome,
+verify the excerpt links that cause and effect in the same period; neighboring
+facts cannot supply the link. A recent publication retelling a pre-filing event is
+historical context, not evidence that the event occurred after filing.

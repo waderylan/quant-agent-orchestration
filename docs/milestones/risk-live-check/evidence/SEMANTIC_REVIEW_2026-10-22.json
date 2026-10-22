@@ -1,0 +1,115 @@
+{
+  "status": "complete; both hosted semantic reruns and separately labeled native QCOM follow-up inspected",
+  "scope": "Independent local review of hosted api-semantic-validation.json after semantic prompt tightening. Comparison is against preserved hosted-review.json failure evidence, not a new head-to-head score. No implementation inspection, external calls, or writes to original review artifacts.",
+  "reviewed_rows": 2,
+  "cases": [
+    {
+      "id": "risk-qcom",
+      "terminal_status": "completed",
+      "semantic_acceptance": false,
+      "date_bug_recurred": false,
+      "economic_novelty_claim_recurred": false,
+      "improvements": [
+        "Post-filing anchor is correctly 2025-11-05; September 28 is not called the filing date.",
+        "Final explicitly says the heightened Apple warning is not itself a new economic exposure and recognizes FY2024 vertical-integration disclosure.",
+        "The earlier Bank of America Fall-2027 forecast is not attributed to Qualcomm in this new response; the selected evidence and specific claim have changed."
+      ],
+      "remaining_material_errors": [
+        {
+          "severity": "major",
+          "finding": "The older filing is still falsely reduced to its thin-modem mix warning.",
+          "exact_final_claim": "the earlier version only warned Apple’s MDM purchases have \"lower revenue and margin contributions\"",
+          "source_evidence": "Returned S1 also explicitly says Apple acquired Intel modem assets, was developing its own modems and Qualcomm expected own-modem substitution in some or all future devices. This passage is present in the complete FY2024 source.",
+          "assessment": "The exact stronger FY2025 wording is new, but the earlier-only claim remains false. A later caveat that vertical-integration risk was already disclosed does not repair the incorrect account of what S1 contains."
+        },
+        {
+          "severity": "major",
+          "finding": "A realized broad handset-revenue decline is assigned an unsupported Apple-specific cause.",
+          "exact_final_claim": "QCT handset revenue fell 20% year-over-year, aided by Apple C2 modem adoption arriving faster than expected",
+          "source_evidence": "Returned W4 reports the 20% drop to $5.09 billion but attributes it to memory-price inflation pushing OEMs toward lower-tier chips and older inventory. The same excerpt discusses expected future Apple shortfall and seasonal revenue changes separately.",
+          "assessment": "The decline amount is supported. The Apple-specific causal explanation for that realized decline is not supported by this source. The final merges a realized aggregate metric with a prospective Apple mechanism."
+        }
+      ],
+      "other_limits": [
+        "The sentence classifying these as prospective/announced developments does not clearly separate the already reported overall handset decline from prospective Apple revenue effects.",
+        "Patent-renewal reporting supports continuing licensing independent of chip sourcing, but W5 explicitly says the undisclosed terms do not establish preservation of prior royalty economics. Final notes undisclosed terms and does not quantify unchanged royalties."
+      ],
+      "source_checks": {
+        "S1_S2": "Directly inspected the prior Apple own-modem passage and stronger FY2025 QCT wording.",
+        "W1_W3_W4_W5": "Inspected all four surviving web-source bodies; observed conditional future revenue language, renewal announcement/reporting, actual-quarter revenue and the memory-inflation explanation, plus limitations on royalty economics."
+      }
+    },
+    {
+      "id": "heldout_05_nvda_full_official_export_update",
+      "terminal_status": "partial",
+      "semantic_acceptance": false,
+      "improvements": [
+        "The prior unmatched-cohort concentration-growth inference is absent. Final compares the same annual top-direct-customer measure, 12% versus 22%, and describes later differently scoped observations without calling them a like-for-like increase.",
+        "Both years' net income now appears with F3/F6 support: 72.880 and 120.067 billion, alongside the correct revenue, operating-income and C1-C3 calculations.",
+        "The final explicitly acknowledges unavailable filing-driver passages and preserves a partial outcome rather than inventing the missing Item 7 explanation.",
+        "The May 2025 H20 event is stated with its historical year even though W2 was published in May 2026; later publication is not explicitly presented as a newly occurring H20 charge."
+      ],
+      "remaining_material_errors": [
+        {
+          "severity": "major",
+          "finding": "Malformed unverified citation placeholders remain in the delivered answer despite the citation failure being detected.",
+          "exact_final_fragments": ["[W18][unverified source]", "rather than on reported beats [unverified source]"],
+          "evidence": "The final includes both literal unverified-source markers, and Unresolved outputs explicitly says A live citation is unregistered or malformed. These fragments survive rather than becoming a clean bounded evidence gap.",
+          "assessment": "Some associated claims can be found in W18, so this is not proof that every attached statement is fabricated. It is nevertheless a retained evidence/rendering failure and prevents a clean source-verifiable final reaction paragraph."
+        },
+        {
+          "severity": "moderate",
+          "finding": "The EPS-versus-consensus statement is an unresolved alternative rather than an evidenced comparison.",
+          "exact_final_claim": "GAAP diluted EPS was $2.46 and non-GAAP EPS $2.22, both below/above consensus as reported by third parties",
+          "source_evidence": "W13 supports both EPS values. W12 says adjusted EPS 2.22 beat consensus 2.08; no cited excerpt supplies a GAAP EPS consensus figure or resolves the final's below/above wording.",
+          "assessment": "Reported EPS is supported. The final does not supply a coherent supported statement of which basis beat or missed expectations."
+        },
+        {
+          "severity": "moderate",
+          "finding": "The official quarterly update still lacks a publication/filing date, and repair removes its introduction without preserving that limitation clearly.",
+          "evidence": "W9 has published_date=null. Reviewer removes the sentence identifying it as FY2027 Q2 Form 10-Q, leaving a paragraph beginning It confirms. Unlike earlier captures, the final unresolved list does not explicitly name the missing official publication date.",
+          "assessment": "The limited shipments, less-than-1% revenue share and 0.4-billion charge are supported by W9. The explicitly requested clearly dated official update remains incomplete."
+        },
+        {
+          "severity": "moderate",
+          "finding": "The outside-reaction discussion drifts into market-price/valuation material outside the project contract.",
+          "exact_final_fragments": ["a price target of $330", "shares fell roughly 1.2%–1.3%", "roughly 70% year-over-year growth already baked into FY2027 consensus"],
+          "assessment": "The named analyst reaction has source support, but the target/market-price framing is outside the project's stated price/valuation scope and distracts from the requested operating-development context. This is separate from whether the quotes were faithfully retrieved."
+        }
+      ],
+      "source_checks": {
+        "financial": "F1-F6 and C1-C3 support the delivered annual values and checked growth/margins; no recurrence of the earlier missing net-income output.",
+        "concentration": "S1/S2 support annual 12%-to-22% top-customer comparison; W7/W8 later observations retain their different denominators/cohorts without the earlier growing-concentration conclusion.",
+        "official_product_evidence": "W13's latest text is shortened to earnings, but its earlier captured observation explicitly contains the named partner racks, production ramp and Vera CPU announcement. Those product claims are supported by the captured observation and were not incorrectly flagged as missing merely because the latest text was shorter.",
+        "additional_product_reporting": "W23/W24 support reported specs and attributed JPMorgan shipment forecasts. W25 explicitly describes a September 30 CoreWeave/Cognition event, but its recorded publication date is September 21. This may reflect an updated page; no separate update-date provenance is supplied. The event can be described as reported, but the metadata cannot independently date the revised article body.",
+        "reaction": "W18 is a pre-results August 26 forecast and historical reaction analysis; W12 supplies the post-results 1.24% move and non-GAAP consensus beat. The final should not blur their timing or treat the pre-report historical pattern as independently confirmed current-quarter reaction."
+      }
+    }
+  ],
+  "native_same_version_followup": {
+    "file": "artifacts/m12/native-semantic-validation.json",
+    "id": "date_validation_qcom_customer_modems",
+    "terminal_status": "partial",
+    "business_answer_useful": true,
+    "date_bug_recurred": false,
+    "unsupported_economic_novelty_recurred": false,
+    "unsupported_causal_claim_found": false,
+    "evidence": [
+      "Final explicitly says FY2024 already anticipated Apple modem replacement, describes FY2025 as a stronger warning rather than a new exposure, and labels management's QCT impact expectation as neither quantified nor realized.",
+      "Final separates November 5 filing date from September 28 fiscal end, and reports the search window beginning November 6.",
+      "W4 9to5Mac describes already deployed Apple chips without a dated starting point and prospective rumor-based C2 plans. Final explicitly says those excerpts cannot establish whether existing deployments began after the filing.",
+      "W3 Bloomberg reports Xiaomi's August 24 processor announcement. Final distinguishes an announcement from completed handset deployment, displacement volumes or Qualcomm losses.",
+      "Samsung evidence remains a bounded unsupported-event gap, not a claim of absence."
+    ],
+    "process_limit": "Terminal partial and final generic complete-request-could-not-be-checked caveat remain. The trace selects Risk with generic risk_changes output and has no answer_coverage record. This is not a new economic/date error, but it limits whole-request completion assurance.",
+    "acquisition": {"actual_risk_searches": 2, "registered_findings": 2, "all_followups_invoked": true},
+    "integrity": {"source_records": 8, "http_200_inspections": 8, "web_text_hashes_checked": 2, "web_text_hashes_matched": 2}
+  },
+  "hosted_integrity": {"source_records": 34, "http_200_inspections": 34, "web_text_hashes_checked": 17, "web_text_hashes_matched": 17, "malformed_unverified_source_placeholders_in_NVDA_final": 2},
+  "conclusion": "The semantic tightening improves the explicit novelty label, annual concentration comparability and net-income coverage. It does not fully correct the hosted older-section summary or direct causal support, and the full hosted workflow still leaks malformed citations and contains material completion/scope limitations. The separately reviewed native follow-up handles the substantive distinctions correctly but retains a process-coverage caveat.",
+  "limitations": [
+    "Completed status is not semantic acceptance. The hosted QCOM response still contains material source-comparison and causal errors; full hosted NVDA is partial with additional final-answer defects.",
+    "Single changed-runtime hosted rerun per case; different retrieved evidence prevents a controlled causal assessment of individual prompt changes.",
+    "Returned source text and metadata are inspected locally; publication truth is not independently re-fetched."
+  ]
+}

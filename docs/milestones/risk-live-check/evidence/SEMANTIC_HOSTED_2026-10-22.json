@@ -1,0 +1,3923 @@
+{
+  "checked_at": "2026-10-22T16:33:10.629942+00:00",
+  "capture_sha256": "ec59c35c0506641b21265bb83d28e39e45341d1987505607dc39171c95c852ce",
+  "dataset_sha256": "f7f755d3de5412d2095d2f92b16af876aa39035624898dcfe7c6f448b6f1f537",
+  "profile": "api",
+  "method": "Matched native FastAPI/SSE cases; actual generation and Tavily/cache, not formal RAGAS or Cloud Run",
+  "runtime_hashes": {
+    "main.py": "70cc1cec070d68d165f08b20406fb85bd0ba22c408e458a3e625388c149c6e37",
+    "src/analysis_artifacts.py": "2e8d47e085053fd40c7bb71c397141618b931e770e491998f3193dc4ea0f608e",
+    "src/capabilities.py": "36a2b1e51eeb79a4604020b3077e30095e14792d914f10ea1ea8cfa9478472c6",
+    "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+    "src/codex_transport.py": "263fb4de22857bb5ea9a696e968718ea8eb266d04856b93f10ba416090d27386",
+    "src/current_developments.py": "abab9d6af70e997cae690e13a4277be39eaf1704699cb6528204ea1e85ca9f48",
+    "src/filing_financials.py": "da9b3ed23c4f4851d3aea2cee880f256ec9ff7ec134be9f07a4a0bf5161eeadf",
+    "src/financial_data.py": "916ed5f0fc6f5f99fa55f45cda18e75cc58eaf0a06a052da676f37ef23a6a8a8",
+    "src/financial_workflow.py": "153e0fc317b8cc248990cd618d5d01e51487ddedeb8620713a5ccf5d7440b687",
+    "src/generation.py": "984e81794e531734452132bbbc6d1708acdd46e81516460021fc7d2a960a5a42",
+    "src/generation_context.py": "32d8cd9bf283012f517b7a261f8d5a73daa9de7fc6376c55c885308cbfa9918f",
+    "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+    "src/live_mcp.py": "0b4cc076662f0a86a2afa925acab8077f9f470de82c1ab36fb818d35ceac93ef",
+    "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+    "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+    "src/provider_models.py": "61ff30e16bbba0543ca9bb7529f6dfde6705842339f5e266510163020e8f5c95",
+    "src/provider_policy.py": "d63bf39f0b5505064a5a6037cc27a4f0b5f1f61caf266b79e7836f5f30c7bce6",
+    "src/quant_analysis.py": "a1b84bb79de9adf6007393eca204da6ae2153ea486fce22f0ff1b22c5f31a6f6",
+    "src/quant_runner.py": "b626d174dd2c22cc6b132ee6866b7b4ff088404dcabf5312ce6f096675f4d0ef",
+    "src/quant_workflow.py": "0ace26a67fc565947bac9dd616a194e2920823439aa0c2b73ee7543ada728ec7",
+    "src/request_plan.py": "6400c9cf7f1fb37bddcc3176050297ef89cca13ee9061b4a31ba460b7cca518e",
+    "src/request_routing.py": "1974889000baf23e419fec1a011dbf3059fa97d9e939121fb2c49c98086cc04a",
+    "src/research_index.py": "d4dea099c47f0d6f6353a04c50e08f886eb31ab13d63ce5d23bc9e3e4799c5e1",
+    "src/research_workflow.py": "38bc19f58ac5e11b40bfa8deeca3446810bedf16cede41063241d71e69d84808",
+    "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+    "src/risk_live.py": "64efac1fa73ef1021b6aa82fd73a84dc24114216e15fa42d7ac172d6512deb1b",
+    "src/risk_summary.py": "017ae0ea5a49a80397f0cc493d00427ad2a05ca259a482483d9583ad8457e2eb",
+    "src/source_collection.py": "3bbbb3d598e9e04399427e52d26ff03809442db084c538fda8a004902a3420a1",
+    "src/source_inventory.py": "7016cc3a1340d45b3fbfd810f5cbef94e90642aa5d44f5d1eebc28209618022e",
+    "src/supervisor.py": "23eedc9511461bf83d00277198a852922c041d630a1af28227e53346fcd42370",
+    "src/task_scope.py": "21d0db70fbbbb2e7eaab829efaae9fc64aadb334fca22f820940a6c6d4728bd4",
+    "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+    "src/web_evidence.py": "788131ef5ae59a4cabb2706de547f3011d9f415eb3f307d94697fbfe0488b4ae",
+    "prompts/answer_coverage.md": "5df9cbe8a57a36e83c772f83f9b36f01454c213b78288f74087ffafdef16e67a",
+    "prompts/current_developments.md": "45aac934f5960b6a9d308b1ca82f27a9299ca913aa6d286b1fb6735d2f7218dc",
+    "prompts/filing_revenue_inputs.md": "61c86953a1d99250a3391a01a615e1225ac3010355c730e2e25a1d6980807cb9",
+    "prompts/filings_research.md": "9415996f9f16ac9868ae3e87a67cefa1184028a0e3b937d68198c23a1fef3684",
+    "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+    "prompts/quant.md": "d680832a3f6944211cf43a8ddd51b0394af5263441ffa0d4cabcdb9ffda66a66",
+    "prompts/request_plan.md": "482e4d912098d45f7d27c7262873796544667587b92cb8cba57e3c7f11b1d4cd",
+    "prompts/risk_summary.md": "5b6bf7134e065429e3becc1fa256060d07f511df780a605b52fdc8a23c7ab761",
+    "web/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "web/agent-activity.js": "e40dd16a4eb364d40ff13edc969d2eb77f9ceedd9d97d1f98581b62aff87c82d",
+    "web/index.html": "ec676cc355b0d1a33dbdd1611110f505f6e4316bbc26a04ed3cc0d6406796f16"
+  },
+  "runtime_unchanged": true,
+  "cases": [
+    {
+      "id": "risk-qcom",
+      "variant": "both",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Did Qualcomm's customer-concentration risk change from FY2024 to FY2025, or is it mostly the same warning? Give me a concise risk brief.",
+      "answer": "**Risk Changes — QCOM FY2024→FY2025 10-K customer-concentration disclosure**\n\n**Material change [S1]→[S2].** Qualcomm’s FY2025 10-K retains the core warning that a significant portion of revenues derives from a small number of customers/licensees, particularly premium-tier handset sales, but materially revises and sharpens that risk. Three changes matter:\n\n1. **Apple modem transition elevated to explicit forward-looking severity.** FY2025 adds: \"we expect that Apple will increasingly use its own modem products… which will have a significant negative impact on our QCT revenues, results of operations and cash flows\" [S2], language absent in FY2024 [S1] (the earlier version only warned Apple’s MDM purchases have \"lower revenue and margin contributions\"). This is a changed disclosure and a newly thinned revenue source projection from Apple, though not itself a new economic exposure description—vertical-integration risk was already disclosed in FY2024 [S1]. The FY2025 vertical-integration risk factor likewise adds \"Apple, Samsung and Xiaomi\" as named integrators [S2] vs. only Samsung in FY2024 [S1].\n\n2. **Premium-tier language updated.** FY2024 described \"slowing growth… due to a maturing premium-tier smartphone industry\" [S1]; FY2025 says the industry \"has also from time to time experienced declines in sales or slowing growth\" [S2] — broadening but also softening the structural-maturation claim.\n\n3. **Minor rephrasing and reorganization.** FY2025 drops \"more than 300 licensees\" → \"many licensees\" [S2 vs S1]; adds tariff example to government-actions sentence; merged engineering-effort and device-share purchasing-power paragraphs. Same underlying concentration exposure, materially revised wording and heightened Apple-modem severity.\n\n**Post-filing context (after FY2025 filing, 2025-11-05).** Independent reporting indicates the disclosed Apple transition is materializing. In July 2026, Qualcomm's CFO confirmed December-quarter revenue will no longer be the annual peak — driven by Apple's iPhone cadence \"now exiting the model\" — and QCT handset revenue fell 20% year-over-year, aided by Apple C2 modem adoption arriving faster than expected [W4]. In September 2026, Qualcomm announced renewal of its Apple patent-licensing agreement effective April 2027, preserving QTL royalty revenue independent of chip supply, though financial terms were undisclosed and the modem-chip revenue decline remains a \"concrete threat\" [W3], [W5], [W1]. These are prospective/announced developments, not proof of completed revenue loss or of an all-clear.\n\n**Stable risks.** The underlying concentration warning — device-share concentration at premium tier, dependent on Chinese OEMs, government actions, customer vertical integration, and licensing concentration — remains unchanged in substance between years [S1]→[S2].",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "provider_routes": [
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "plan",
+              "invocation_id": "8b2b9d5c7a844e2ba52d74e2b0bf6b34",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 10166,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00601076",
+              "queue_seconds": 0.019
+            },
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "plan",
+              "invocation_id": "8b2b9d5c7a844e2ba52d74e2b0bf6b34",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 11866,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00624876",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "worker-1",
+              "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 316258,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05345116",
+              "queue_seconds": 0.017
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "worker-1",
+              "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 495487,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.07854322",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "worker-1",
+              "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 524676,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.08262968",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "worker-1",
+              "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 523185,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.08242094",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Answer Reviewer",
+              "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+              "activity_id": "review",
+              "invocation_id": "ae6f56951dc147a397abb784307fb7af",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+                "activity_id": "review",
+                "phase": "reviewer",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 331037,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05552022",
+              "queue_seconds": 0.01
+            }
+          ],
+          "request_id": "c889f381a9bd485c98b3a24f8a7b4b2c",
+          "coverage_checked": true
+        }
+      },
+      "seconds": 57.807,
+      "answer_token_ttft_seconds": 38.274,
+      "estimated_uncached_credits": 2,
+      "inspections": [
+        {
+          "source_id": "S1",
+          "status": 200
+        },
+        {
+          "source_id": "S2",
+          "status": 200
+        },
+        {
+          "source_id": "W1",
+          "status": 200
+        },
+        {
+          "source_id": "W3",
+          "status": 200
+        },
+        {
+          "source_id": "W4",
+          "status": 200
+        },
+        {
+          "source_id": "W5",
+          "status": 200
+        }
+      ],
+      "answer_sha256": "ebfc126bc9ea204b302ed009fe0bb982cec15c7ece2b903c9fbd8fa34c97ec55",
+      "agent_seconds": {
+        "Supervisor": [
+          4.435
+        ],
+        "Risk Summary": [
+          35.922
+        ],
+        "Answer Reviewer": [
+          16.422
+        ]
+      },
+      "live_calls": [
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Qualcomm Apple own modem transition QCT revenue impact",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ],
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "risk",
+          "outcome": "completed",
+          "evidence_count": 6,
+          "tool_calls": 3,
+          "missing_inputs": []
+        }
+      ],
+      "risk_live_checks": [
+        {
+          "key": [
+            "qcom-0000804328-24-000075",
+            174919,
+            318364,
+            "qcom-0000804328-25-000085",
+            138512,
+            291288,
+            "changed",
+            "the core customer-concentration warning (reliance on a small number of customers/licensees, premium-tier handset sales) persists unchanged in both fy2024 and fy2025, but the exposure was expanded and sharpened. fy2025 adds that apple's increasingly using its own modem products in future devices \"will have a significant negative impact on our qct revenues, results of operations and cash flows\" — explicit forward-looking severity not present in fy2024. other rephrasing: premium-tier market language changed from \"experienced slowing growth...due to a maturing premium-tier smartphone industry\" to \"from time to time experienced declines in sales or slowing growth\"; licensee-count language changed from \"more than 300 licensees\" to \"many licensees\"; political-actions paragraph added tariff example; paragraph-level reorganization merged engineering-efforts and device-share-purchasing-power content. same underlying warning, materially revised wording and heightened apple-modem severity."
+          ],
+          "classification": "changed",
+          "before": "S1",
+          "after": "S2",
+          "company": "QCOM",
+          "filed": "2025-11-05",
+          "fiscal_end": "2025-09-28",
+          "source_ids": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ],
+          "window": {
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Qualcomm Apple own modem transition QCT revenue impact",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "cache": false
+        }
+      ],
+      "coverage": [
+        {
+          "agent": "Supervisor",
+          "node": "answer_coverage",
+          "results": [
+            {
+              "id": "R1",
+              "addressed": true,
+              "citations": [
+                "S1",
+                "S2",
+                "W3",
+                "W4",
+                "W5"
+              ],
+              "missing": "The substantive request is fully met: the answer compares the FY2024 [S1] vs FY2025 [S2] customer-concentration risk disclosure, identifies changed wording (Apple modem forward-looking severity, premium-tier language, licensee-count phrasing, tariff addition, paragraph reorganization), and concludes the underlying warning persists while materially revised and sharpened, with qualified post-filing W context. One minor unsupported attribution detail noted in unsupported_claims does not undermine the core comparison."
+            }
+          ],
+          "missing": [],
+          "unsupported_claims": []
+        }
+      ],
+      "provider_usage": [
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "8b2b9d5c7a844e2ba52d74e2b0bf6b34",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 1909,
+            "total_tokens": 2436,
+            "completion_tokens": 527,
+            "completion_tokens_details": {
+              "reasoning_tokens": 302
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1792
+            },
+            "prompt_cache_hit_tokens": 1792,
+            "prompt_cache_miss_tokens": 117,
+            "reasoning_tokens": 302
+          },
+          "cost_usd": "0.00041482",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.778,
+          "answer_ttft_seconds": null,
+          "total_seconds": 2.846
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "8b2b9d5c7a844e2ba52d74e2b0bf6b34",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 2294,
+            "total_tokens": 2505,
+            "completion_tokens": 211,
+            "completion_tokens_details": {
+              "reasoning_tokens": 16
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1792
+            },
+            "prompt_cache_hit_tokens": 1792,
+            "prompt_cache_miss_tokens": 502,
+            "reasoning_tokens": 16
+          },
+          "cost_usd": "0.00038024",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.614,
+          "answer_ttft_seconds": null,
+          "total_seconds": 4.478
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 53089,
+            "total_tokens": 53945,
+            "completion_tokens": 856,
+            "completion_tokens_details": {
+              "reasoning_tokens": 776
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1536
+            },
+            "prompt_cache_hit_tokens": 1536,
+            "prompt_cache_miss_tokens": 51553,
+            "reasoning_tokens": 776
+          },
+          "cost_usd": "0.00767214",
+          "cost_basis": "token estimate",
+          "request_seconds": 7.43,
+          "answer_ttft_seconds": null,
+          "total_seconds": 7.477
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 83234,
+            "total_tokens": 84335,
+            "completion_tokens": 1101,
+            "completion_tokens_details": {
+              "reasoning_tokens": 787
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 52992
+            },
+            "prompt_cache_hit_tokens": 52992,
+            "prompt_cache_miss_tokens": 30242,
+            "reasoning_tokens": 787
+          },
+          "cost_usd": "0.01196104",
+          "cost_basis": "token estimate",
+          "request_seconds": 8.05,
+          "answer_ttft_seconds": null,
+          "total_seconds": 15.632
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 91138,
+            "total_tokens": 91644,
+            "completion_tokens": 506,
+            "completion_tokens_details": {
+              "reasoning_tokens": 445
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 83200
+            },
+            "prompt_cache_hit_tokens": 83200,
+            "prompt_cache_miss_tokens": 7938,
+            "reasoning_tokens": 445
+          },
+          "cost_usd": "0.01290100",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.862,
+          "answer_ttft_seconds": null,
+          "total_seconds": 26.016
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5f499e7b6f5746779b2f29b860e9351b",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 90501,
+            "total_tokens": 91246,
+            "completion_tokens": 745,
+            "completion_tokens_details": {
+              "reasoning_tokens": 122
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 90501,
+            "reasoning_tokens": 122
+          },
+          "cost_usd": "0.01287874",
+          "cost_basis": "token estimate",
+          "request_seconds": 9.902,
+          "answer_ttft_seconds": 32.946,
+          "total_seconds": 35.94
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Answer Reviewer",
+          "activity_id": "review",
+          "invocation_id": "ae6f56951dc147a397abb784307fb7af",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 57212,
+            "total_tokens": 59835,
+            "completion_tokens": 2623,
+            "completion_tokens_details": {
+              "reasoning_tokens": 2321
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 57212,
+            "reasoning_tokens": 2321
+          },
+          "cost_usd": "0.00874412",
+          "cost_basis": "token estimate",
+          "request_seconds": 16.419,
+          "answer_ttft_seconds": null,
+          "total_seconds": 16.468
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "S1",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-24-000075",
+          "fiscal_year": 2024,
+          "filed": "2024-11-06",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01",
+          "chunk_id": "d0b3f8a1699c2dce594416043f7455459dfe85485597fbebb1b239558749bde8",
+          "start": 174919,
+          "end": 318364,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=318364"
+        },
+        {
+          "source_id": "S2",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-25-000085",
+          "fiscal_year": 2025,
+          "filed": "2025-11-05",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "chunk_id": "aaf7c994e9b42fd8bd8ecb9a93058f56141e5e9b5b87d87b78706b4363deae59",
+          "start": 138512,
+          "end": 291288,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=138512&end=291288"
+        },
+        {
+          "source_id": "W1",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "3b2a43c3c27061c9c1b4aa0b9dd54d85a892940e3579d81696d6bae1ae17ce1d",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "date_snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "published_date": "2026-09-28T06:10:22+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tech-insider.org",
+          "title": "Qualcomm Renews Apple Patent License Through 2027",
+          "url": "https://tech-insider.org/qualcomm-apple-patent-license-2027-2026",
+          "inspection_url": "/api/live/3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be"
+        },
+        {
+          "source_id": "W3",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "f0ae25aca5378117a3380c45037d667e1ce60ca906d9c098fc165459a31fff7b",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "date_snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "published_date": "2026-09-24T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tradingkey.com",
+          "title": "Qualcomm Extends Long-Term Patent Agreement With Apple, Securing QTL Revenue in Era of In-House iPhone Modems",
+          "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262185027-qualcomm-apple-renew-patent-agreement-qtl-revenue-iphone-baseband-tradingkey",
+          "inspection_url": "/api/live/3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be"
+        },
+        {
+          "source_id": "W4",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "8d8ca39c6f0df392a2bdae10fdfa2e1dfe6d83a21903e3a615f5d738c8c7c882",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "date_snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "published_date": "2026-07-30T18:12:12+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "techtimes.com",
+          "title": "Apple's C2 Modem Arrives Faster Than Qualcomm Expected, Slashing Revenue by Half",
+          "url": "https://www.techtimes.com/articles/322279/20260730/apples-c2-modem-arrives-faster-qualcomm-expected-slashing-revenue-half.htm",
+          "inspection_url": "/api/live/3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be"
+        },
+        {
+          "source_id": "W5",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "bca6d92788173556f7504b34c5c9de26df609248af8cd1a6f54bdbac84fcc4ef",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "date_snapshot_id": "3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be",
+          "published_date": "2026-09-30T08:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "gadgetreview.com",
+          "title": "Chips vs. Patents: Why Apple Renewed Its Qualcomm License While Building Its Own Modems - Gadget Review",
+          "url": "https://www.gadgetreview.com/chips-vs-patents-why-apple-renewed-its-qualcomm-license-while-building-its-own-modems",
+          "inspection_url": "/api/live/3c2c7f97d22f7ca9253c7f4ff27309d4724da5e23a8066edba0f53669992c9be"
+        }
+      ]
+    },
+    {
+      "id": "heldout_05_nvda_full_official_export_update",
+      "variant": "both",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025,
+        2026
+      ],
+      "question": "Give me a research brief on NVIDIA's FY2025 to FY2026 performance and export-control exposure. Show reported GAAP revenue, operating income, and net income for both years; calculate revenue growth and operating margins with the inputs and formulas. Explain the main changes using the filings, compare the export-control and customer-concentration risks, and check for an official NVIDIA or SEC update after the FY2026 10-K on export controls or their business effects. Separately summarize the two most relevant developments in the 90 days ending October 22, 2026, including one identifiable outside reaction if you can substantiate it. Keep historical results, subsequent official updates, and recent events clearly dated.",
+      "answer": "Financial analysis:\n**NVDA Supported Calculations**\n\n- **Revenue growth (FY2025 → FY2026):** 65.47% — formula: (F4/F1 − 1) × 100, where FY2025 revenue = $130.497B [F1] and FY2026 revenue = $215.938B [F4] [C1]\n\n- **FY2025 operating margin:** 62.42% — formula: F2/F1 × 100, where operating income = $81.453B [F2] and revenue = $130.497B [F1] [C2]\n\n- **FY2026 operating margin:** 60.38% — formula: F5/F4 × 100, where operating income = $130.387B [F5] and revenue = $215.938B [F4] [C3]\n\n**Period basis:** Both margins use same-fiscal-year operating income and revenue from the original filings. Revenue growth compares NVDA FY2025 (2024-01-29 → 2025-01-26) with FY2026 (2025-01-27 → 2026-01-25); note these are fiscal-year dates, not common calendar periods, and NVDA's FY2025 is a 52-week period versus FY2026's 52-week period (no week-count adjustment was applied since both are reported annual periods). All inputs are US GAAP consolidated, original-report basis [F1], [F2], [F4], [F5].\n\nResults are available in the generated CSV table and PNG chart.\n\nChanges in filing risks:\n**Export-control risk — changed.** Both filings carry the export-control risk subject [S1][S2], but the FY2026 10-K materially recast its scope and added a realized-event record [S2]. The FY2025 report framed the January 15, 2025 AI Diffusion IFR as a pending worldwide licensing regime covering China and Tier 2 countries [S1]. The FY2026 report replaced that with: the IFR's May 2025 rescission and an uncertain replacement rule; an April 2025 USG licensing requirement on H20-class circuits triggering a $4.5B Q1 FY2026 charge for excess inventory and purchase obligations; roughly $60M in H20 revenue under August 2025 licenses; a February 2026 H200 license subject to a 25% US import tariff; and a stated conclusion that NVIDIA was \"effectively foreclosed\" from China's data-center compute market [S2]. FY2026 also added the September 15, 2025 Chinese antitrust preliminary finding on the Mellanox commitments and exposure to restrictions on open-source foundation models (DeepSeek, Qwen, KIMMI) [S2]. Same exposure class, changed scope and severity.\n\n**Customer-concentration risk — changed.** Both filings disclose concentration risk among Compute & Networking direct and indirect customers [S1][S2]. Disclosed figures changed materially on the same one-year direct-customer measure: FY2025 reported direct Customers A/B/C at 12%/11%/11% of revenue plus one indirect customer at 10%+ [S1]; FY2026 reported one direct customer at 22% and another at 14%, with indirect customers each estimated at 10%+ [S2]. This reflects an increase in top-customer concentration (top direct customer 12% to 22%).\n\nThe April 2025 license requirement and the $4.5B H20 charge were confirmed in May 2025 company results per independent attribution, which also noted $2.5B in unshipped H20 Q1 revenue [W2]. Customer-concentration reporting after filing indicates hyperscalers at roughly half of data-center revenue and a recent filing with three direct customers at 54% of revenue [W7][W8]. These post-filing reports are consistent with, but do not alter, the two filed classifications above.\n\nFrom the filings:\nFilings Research — NVDA FY2025 to FY2026\n\nReported financials (US GAAP consolidated, original filings): revenue rose from $130.497B [F1] to $215.938B [F4], a 65.47% increase [C1]. Operating income rose from $81.453B [F2] to $130.387B [F5]. Net income rose from $72.880B [F3] to $120.067B [F6]. Corresponding operating margins were 62.42% in FY2025 [C2] and 60.38% in FY2026 [C3]. Period basis: FY2025 covered 2024-01-29 to 2025-01-26 [F1]; FY2026 covered 2025-01-27 to 2026-01-25 [F4]; both are 52-week reported annual periods [C1 context].\n\nDriver evidence available from the filings is limited. The FY2026 10-K states NVIDIA \"is now a data center scale AI infrastructure company reshaping all industries,\" with two operating segments: Compute & Networking and Graphics [S12]. The specific FY2026 MD&A narrative attributing the revenue increase to particular Data Center/Compute & Networking drivers was not retrieved, so I cannot cite filed language that names the exact products or end-market demand mix behind the FY2025-to-FY2026 growth.\n\nExport-control disclosures in the FY2026 10-K: NVIDIA says it has been \"effectively foreclosed from the China market by U.S. export controls\" and that Chinese government actions have encouraged customers to buy from China-based competitors [S13]. The filing describes \"a series of shifting and expanding export control restrictions\" over the past three years [S15]. In April 2025 the USG required a license for H20 exports to China, and NVIDIA incurred a $4.5B charge in Q1 FY2026 for H20 excess inventory and purchase obligations [S17]. In August 2025 licenses allowed shipment of certain H20 products, generating approximately $60M in revenue [S17]. In February 2026 the USG granted a license for small amounts of H200 products to specific China-based customers; as of the FY2026 10-K, NVIDIA had not generated any revenue under the H200 licensing program [S17].\n\n It confirms that beginning in February 2026, USG licenses allowed small H200 shipments to specific China-based customers, but PRC government restrictions prevented NVIDIA from selling all licensed product; NVIDIA incurred a $0.4B charge in H1 FY2027 for H200 excess inventory and purchase obligations as demand diminished; it has made only \"a fraction of the allowed shipments,\" which account for less than 1% of Data Center revenue in the most recent quarter [W9]. The update also states that under the current rules and geopolitical landscape, NVIDIA is \"unable to create and deliver a competitive product\" for broad Chinese data center distribution [W9]. Therefore, the FY2026 10-K's prior statement that NVIDIA had generated no H200 revenue [S17] no longer holds; official guidance indicates restricted, minimal H200 revenue and a new $0.4B charge [W9].\n\nNuance and gaps: The FY2025 10-K risk-factor and FY2026 10-K risk-factor summaries are available [S1], [S2], but the complete FY2026 Item 7 MD&A revenue-driver narrative, and the filed commentary explaining operating income and net income changes between FY2025 and FY2026, were not retrieved. Without those passages, I cannot state the filed attribution for the income-statement changes beyond the figures themselves.\n\nOutside research:\n## Current Developments — NVIDIA\n\n**Record fiscal Q2 2027 earnings (August 26, 2026).** NVIDIA reported revenue of $96.2 billion, up 106% year over year and 18% sequentially, with Data Center revenue of $89.0 billion, up 117% year over year; GAAP diluted EPS was $2.46 and non-GAAP EPS $2.22, both below/above consensus as reported by third parties [W13][W12]. The company guided fiscal Q3 revenue to approximately $108 billion [W12][W21]. This was a development squarely within the window and not covered by the risk/official checks. Business significance: growth accelerated for the fourth consecutive quarter, driven overwhelmingly by Data Center (about 92% of revenue), including hyperscale revenue of $49 billion and ACIE revenue of $40 billion (up 138% year over year), a scale that makes hyperscaler capex durability the central driver of NVIDIA's trajectory [W14][W8][W12].\n\n**Vera Rubin platform production ramp.** Alongside Q2 results, NVIDIA announced the Vera Rubin platform is in full production, with racks running at CoreWeave, Google Cloud, Microsoft Azure, Oracle Cloud Infrastructure, and Nebius, and also unveiled the Vera CPU (first CPU for AI agents) [W13]. Third-party reporting confirms earlier GTC 2026 full-production status and, on September 30, 2026, CoreWeave offering Vera Rubin NVL72 early access with Cognition as first production customer [W25]. Independent analysis reports Vera Rubin NVL72 at 3.6 exaFLOPS NVFP4, over three times the Blackwell Ultra GB300 rack's FP4 throughput, with JPMorgan supply-chain estimates of roughly 5.7 million Rubin GPUs shipping in 2026 [W23][W24]. Business significance: the generational transition from Blackwell Ultra to Vera Rubin, with new GPU architecture, custom Vera CPU, and NVSwitch 6 together, positions NVIDIA's next growth cycle; customer and OEM uptake during the window suggests the ramp is gathering commercial traction rather than remaining a paper launch [W23][W25].\n\n**Outside reaction.** Wedbush analyst Matt Bryson, ahead of the August 26 report, expected a beat on both revenue and EPS with a price target of $330, capturing the dynamic that NVIDIA has \"consistently exceeded consensus\" the last three quarters \"yet the stock is roughly unchanged from October of last year\" [W18][unverified source]. After the results, shares fell roughly 1.2%–1.3% despite the record quarter and above-consensus EPS, continuing a pattern where NVIDIA beat estimates five straight quarters yet fell on earnings day four times [W12][W18]. This suggests investors were focused on guidance relative to the buy-side bar—with roughly 70% year-over-year growth already baked into FY2027 consensus—rather than on reported beats [unverified source]. That skeptical reaction to a strong report is a meaningful counterweight to the bullish product narrative.\n\n**Material limitation.** One third-party summary of the earnings reaction is AI-generated [W12]; the substantive analysis from Wedbush and The Motley Fool/24/7 Wall St. is attributable to named analysts and journalists [W18][W19].\n\nUnresolved outputs:\n- Specific Item 7 MD&A narrative attributing the FY2025-to-FY2026 revenue increase to particular Data Center/Compute & Networking drivers (not retrieved; only general overview and risk-factor export-control passages are available)\n- Filed (non-risk) commentary explaining operating income and net income changes between FY2025 and FY2026 (not retrieved)\n- A live citation is unregistered or malformed\n- Explain the main year-over-year changes in NVIDIA's FY2025 to FY2026 financial performance (revenue, operating income, net income) using the drivers, strategy, and disclosures in the filings.: The answer concedes that the FY2026 MD&A revenue-driver narrative and filed commentary explaining the operating income and net income changes were not retrieved, so no filing-based attribution of the main year-over-year changes is provided.\n- Unsupported claims were removed; the cited evidence does not establish them.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "partial",
+          "verified_citations": true,
+          "provider_routes": [
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "plan",
+              "invocation_id": "600a4e352b0f42aeabf779d6c6b355d0",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 10753,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00609294",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Data",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-1",
+              "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Select source-linked financial observations with exact fiscal intervals and original accessions",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "financial_inputs",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 17516,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01162728",
+              "queue_seconds": 0.017
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Data",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-1",
+              "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Select source-linked financial observations with exact fiscal intervals and original accessions",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "financial_inputs",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 22597,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01233862",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Data",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-1",
+              "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Select source-linked financial observations with exact fiscal intervals and original accessions",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "financial_inputs",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 24573,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01261526",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Data",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-1",
+              "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Select source-linked financial observations with exact fiscal intervals and original accessions",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "financial_inputs",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 23880,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01251824",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Analysis / Quant",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-2",
+              "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Generate bounded analysis code; independently check financial calculations and source lineage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-2",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "checked_calculations",
+                "evidence_kinds": [
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 22501,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01232518",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Analysis / Quant",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-2",
+              "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Generate bounded analysis code; independently check financial calculations and source lineage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-2",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "checked_calculations",
+                "evidence_kinds": [
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 27326,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01300068",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Analysis / Quant",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-2",
+              "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Generate bounded analysis code; independently check financial calculations and source lineage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-2",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "checked_calculations",
+                "evidence_kinds": [
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 28931,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01322538",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Financial Analysis / Quant",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-2",
+              "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Generate bounded analysis code; independently check financial calculations and source lineage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-2",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "checked_calculations",
+                "evidence_kinds": [
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 28509,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01316630",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-3",
+              "invocation_id": "56858745d790439bb6fd738b67fd3631",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-3",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [
+                  "C",
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 253456,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.04465888",
+              "queue_seconds": 0.017
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-3",
+              "invocation_id": "56858745d790439bb6fd738b67fd3631",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-3",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [
+                  "C",
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 284427,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.04899482",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-3",
+              "invocation_id": "56858745d790439bb6fd738b67fd3631",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-3",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [
+                  "C",
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 312275,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05289354",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-3",
+              "invocation_id": "56858745d790439bb6fd738b67fd3631",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-3",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [
+                  "C",
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 340244,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05680920",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-3",
+              "invocation_id": "56858745d790439bb6fd738b67fd3631",
+              "round": 4,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-3",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [
+                  "C",
+                  "F"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 338755,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05660074",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 74740,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.01963864",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 78475,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02016154",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 90774,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02188340",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 94520,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02240784",
+              "queue_seconds": 0.011
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 4,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 98266,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02293228",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 5,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 104045,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02374134",
+              "queue_seconds": 0.017
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 6,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 109898,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02456076",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 7,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 124234,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02656780",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Filings Research",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-4",
+              "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+              "round": 8,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Historical filing research using local evidence",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-4",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "filing_explanation",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 125261,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02671158",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 101213,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02334486",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 129181,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.02726038",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 155662,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.03096772",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 181224,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.03454640",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 4,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 190406,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.03583188",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Current Developments",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "worker-5",
+              "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+              "round": 5,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Discover dated developments after the collected filing anchors through Tavily Remote MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "worker-5",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "current_developments",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 189282,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.03567452",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Answer Reviewer",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "review",
+              "invocation_id": "b72d3adab9de46e290f6cf8484b6fdb0",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "review",
+                "phase": "reviewer",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 324184,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05456080",
+              "queue_seconds": 0.008
+            },
+            {
+              "node": "provider_route",
+              "agent": "Answer Reviewer",
+              "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+              "activity_id": "review",
+              "invocation_id": "c280f4b367604a36b015b7be8e228a03",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+                "activity_id": "review",
+                "phase": "reviewer",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [
+                  "C",
+                  "F",
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 318434,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05375580",
+              "queue_seconds": 0.014
+            }
+          ],
+          "request_id": "967bdfd3b54c47ad99a415faee4bb50a",
+          "coverage_checked": true,
+          "missing_outputs": [
+            "Specific Item 7 MD&A narrative attributing the FY2025-to-FY2026 revenue increase to particular Data Center/Compute & Networking drivers (not retrieved; only general overview and risk-factor export-control passages are available)",
+            "Filed (non-risk) commentary explaining operating income and net income changes between FY2025 and FY2026 (not retrieved)",
+            "A live citation is unregistered or malformed",
+            "Explain the main year-over-year changes in NVIDIA's FY2025 to FY2026 financial performance (revenue, operating income, net income) using the drivers, strategy, and disclosures in the filings.: The answer concedes that the FY2026 MD&A revenue-driver narrative and filed commentary explaining the operating income and net income changes were not retrieved, so no filing-based attribution of the main year-over-year changes is provided.",
+            "Unsupported claims were removed; the cited evidence does not establish them."
+          ]
+        }
+      },
+      "seconds": 219.506,
+      "answer_token_ttft_seconds": 160.29,
+      "estimated_uncached_credits": 14,
+      "inspections": [
+        {
+          "source_id": "C1",
+          "status": 200
+        },
+        {
+          "source_id": "C2",
+          "status": 200
+        },
+        {
+          "source_id": "C3",
+          "status": 200
+        },
+        {
+          "source_id": "F1",
+          "status": 200
+        },
+        {
+          "source_id": "F2",
+          "status": 200
+        },
+        {
+          "source_id": "F3",
+          "status": 200
+        },
+        {
+          "source_id": "F4",
+          "status": 200
+        },
+        {
+          "source_id": "F5",
+          "status": 200
+        },
+        {
+          "source_id": "F6",
+          "status": 200
+        },
+        {
+          "source_id": "S1",
+          "status": 200
+        },
+        {
+          "source_id": "S2",
+          "status": 200
+        },
+        {
+          "source_id": "S12",
+          "status": 200
+        },
+        {
+          "source_id": "S13",
+          "status": 200
+        },
+        {
+          "source_id": "S15",
+          "status": 200
+        },
+        {
+          "source_id": "S17",
+          "status": 200
+        },
+        {
+          "source_id": "W2",
+          "status": 200
+        },
+        {
+          "source_id": "W7",
+          "status": 200
+        },
+        {
+          "source_id": "W8",
+          "status": 200
+        },
+        {
+          "source_id": "W9",
+          "status": 200
+        },
+        {
+          "source_id": "W12",
+          "status": 200
+        },
+        {
+          "source_id": "W13",
+          "status": 200
+        },
+        {
+          "source_id": "W14",
+          "status": 200
+        },
+        {
+          "source_id": "W18",
+          "status": 200
+        },
+        {
+          "source_id": "W19",
+          "status": 200
+        },
+        {
+          "source_id": "W21",
+          "status": 200
+        },
+        {
+          "source_id": "W23",
+          "status": 200
+        },
+        {
+          "source_id": "W24",
+          "status": 200
+        },
+        {
+          "source_id": "W25",
+          "status": 200
+        }
+      ],
+      "answer_sha256": "a5d02188678bf57cab0f02840e92d22165f7aa945dd0989f32afdcbdac31b5f3",
+      "agent_seconds": {
+        "Supervisor": [
+          6.313
+        ],
+        "Financial Data": [
+          9.568
+        ],
+        "Financial Analysis / Quant": [
+          10.038
+        ],
+        "Risk Summary": [
+          48.988
+        ],
+        "Filings Research": [
+          40.244
+        ],
+        "Current Developments": [
+          47.119
+        ],
+        "Answer Reviewer": [
+          56.389
+        ]
+      },
+      "live_calls": [
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA H20 export license China charge export controls H200",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "672762430d11e1a15465dc7447f4d98b9e38b8931f15a901701965109eed3392",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA revenue concentration largest customer percentage of data center revenue",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Filings Research",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA export controls China H200 licenses SEC filing official update",
+            "topic": "general",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22",
+            "include_domains": [
+              "nvidia.com",
+              "sec.gov",
+              "www.sec.gov"
+            ]
+          },
+          "result_count": 3,
+          "snapshot_id": "46240eb7356eea4b94ed70631cb665604f35c1f2bd1fbf67b887ace2b49d7db1",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA fiscal second quarter 2027 results August 2026 revenue record",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-07-24",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Nvidia August 26 2026 earnings analyst reaction stock falls Vera Rubin",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-07-24",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "NVIDIA Vera Rubin launch Blackwell Ultra October 2026 announcement",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-07-24",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Current Developments",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_extract",
+          "arguments": {
+            "urls": [
+              "https://finance.yahoo.com/markets/stocks/articles/nvidia-fallen-four-straight-earnings-103457320.html"
+            ],
+            "extract_depth": "basic",
+            "format": "text",
+            "query": "Nvidia second quarter fiscal 2027 earnings beat stock reaction analysts"
+          },
+          "result_count": 1,
+          "snapshot_id": "d0f78cb512be90d5839be5a42c05a222bb945943f372275a13f0b68e4c2f6460",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ],
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "data",
+          "outcome": "completed",
+          "evidence_count": 6,
+          "tool_calls": 3,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "quant",
+          "outcome": "completed",
+          "evidence_count": 9,
+          "tool_calls": 6,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "risk",
+          "outcome": "completed",
+          "evidence_count": 16,
+          "tool_calls": 10,
+          "missing_inputs": []
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "research",
+          "outcome": "partial",
+          "evidence_count": 36,
+          "tool_calls": 18,
+          "missing_inputs": [
+            "Specific Item 7 MD&A narrative attributing the FY2025-to-FY2026 revenue increase to particular Data Center/Compute & Networking drivers (not retrieved; only general overview and risk-factor export-control passages are available)",
+            "Filed (non-risk) commentary explaining operating income and net income changes between FY2025 and FY2026 (not retrieved)"
+          ]
+        },
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "current",
+          "outcome": "partial",
+          "evidence_count": 50,
+          "tool_calls": 23,
+          "missing_inputs": [
+            "Specific Item 7 MD&A narrative attributing the FY2025-to-FY2026 revenue increase to particular Data Center/Compute & Networking drivers (not retrieved; only general overview and risk-factor export-control passages are available)",
+            "Filed (non-risk) commentary explaining operating income and net income changes between FY2025 and FY2026 (not retrieved)",
+            "A live citation is unregistered or malformed"
+          ]
+        }
+      ],
+      "risk_live_checks": [
+        {
+          "key": [
+            "nvda-0001045810-25-000023",
+            71570,
+            186485,
+            "nvda-0001045810-26-000021",
+            64662,
+            183768,
+            "changed",
+            "export-control risk subject retained but materially recast in fy2026 10-k (s2) versus fy2025 10-k (s1). s2 adds april 2025 h20 licensing requirement, the q1 fy2026 $4.5b h20 excess-inventory/purchase-obligation charge, ~$60m h20 licensed revenue, feb 2026 h200 licenses with 25% import tariff, withdrawal/uncertain replacement of the ai diffusion ifr, the \"effectively foreclosed\" china data center conclusion, open-source model restrictions, and the sept 15, 2025 china antitrust preliminary finding on mellanox commitments. s1 framed china as one of several impacted markets; s2 frames slower market exit plus detailed h-series license developments. same exposure class, changed scope and realized-event detail."
+          ],
+          "classification": "changed",
+          "before": "S1",
+          "after": "S2",
+          "company": "NVDA",
+          "filed": "2026-02-25",
+          "fiscal_end": "2026-01-25",
+          "source_ids": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ],
+          "window": {
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "NVIDIA H20 export license China charge export controls H200",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "672762430d11e1a15465dc7447f4d98b9e38b8931f15a901701965109eed3392",
+          "cache": false
+        },
+        {
+          "key": [
+            "nvda-0001045810-25-000023",
+            71570,
+            186485,
+            "nvda-0001045810-26-000021",
+            64662,
+            183768,
+            "changed",
+            "customer-concentration risk subject retained but the disclosed concentration figures materially changed. s1 (fy2025) reported direct customers a, b and c at 12%, 11% and 11% of total revenue plus an indirect customer (primarily through customer b) estimated at 10%+ of revenue. s2 (fy2026) reports one direct customer at 22% and another at 14% of total revenue, and states some indirect customers each represent 10%+ of revenue. concentration is measured across the same direct-customer cohort for the same one-year periods, so this reflects a genuine increase in top-customer concentration (top direct customer 12%->22%). compute & networking attribution retained in both. rephrased detail for changed figures and expanded severity framing."
+          ],
+          "classification": "changed",
+          "before": "S1",
+          "after": "S2",
+          "company": "NVDA",
+          "filed": "2026-02-25",
+          "fiscal_end": "2026-01-25",
+          "source_ids": [
+            "W6",
+            "W7",
+            "W8",
+            "W9",
+            "W10"
+          ],
+          "window": {
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "NVIDIA revenue concentration largest customer percentage of data center revenue",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-26",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "cache": false
+        }
+      ],
+      "coverage": [
+        {
+          "agent": "Supervisor",
+          "node": "answer_coverage",
+          "results": [
+            {
+              "id": "R1",
+              "addressed": true,
+              "citations": [
+                "F1",
+                "F2",
+                "F3",
+                "F4",
+                "F5",
+                "F6"
+              ],
+              "missing": ""
+            },
+            {
+              "id": "R2",
+              "addressed": true,
+              "citations": [
+                "C1",
+                "C2",
+                "C3",
+                "F1",
+                "F2",
+                "F4",
+                "F5"
+              ],
+              "missing": ""
+            },
+            {
+              "id": "R3",
+              "addressed": false,
+              "citations": [
+                "S12"
+              ],
+              "missing": "The answer concedes that the FY2026 MD&A revenue-driver narrative and filed commentary explaining the operating income and net income changes were not retrieved, so no filing-based attribution of the main year-over-year changes is provided."
+            },
+            {
+              "id": "R4",
+              "addressed": true,
+              "citations": [
+                "S1",
+                "S2",
+                "W2",
+                "W7",
+                "W8"
+              ],
+              "missing": ""
+            },
+            {
+              "id": "R5",
+              "addressed": true,
+              "citations": [
+                "S17",
+                "W9"
+              ],
+              "missing": ""
+            },
+            {
+              "id": "R6",
+              "addressed": true,
+              "citations": [
+                "W13",
+                "W12",
+                "W14",
+                "W21",
+                "W23",
+                "W24",
+                "W25"
+              ],
+              "missing": ""
+            },
+            {
+              "id": "R7",
+              "addressed": true,
+              "citations": [
+                "W18",
+                "W12"
+              ],
+              "missing": ""
+            }
+          ],
+          "missing": [
+            "Explain the main year-over-year changes in NVIDIA's FY2025 to FY2026 financial performance (revenue, operating income, net income) using the drivers, strategy, and disclosures in the filings.: The answer concedes that the FY2026 MD&A revenue-driver narrative and filed commentary explaining the operating income and net income changes were not retrieved, so no filing-based attribution of the main year-over-year changes is provided.",
+            "Unsupported claims were removed; the cited evidence does not establish them."
+          ],
+          "unsupported_claims": [
+            "NVIDIA's FY2027 Q2 Form 10-Q (official-tier, investor.nvidia.com PDF) updates this statement."
+          ],
+          "removed_claims": [
+            "in March 2026 NVIDIA's CEO confirmed licenses to resume H200 sales to China, with independent reporting citing a 75,000-unit cap and 25% US revenue share [W4]",
+            "NVIDIA's FY2027 Q2 Form 10-Q (official-tier, investor.nvidia.com PDF) updates this statement."
+          ]
+        }
+      ],
+      "provider_usage": [
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "600a4e352b0f42aeabf779d6c6b355d0",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 2016,
+            "total_tokens": 3450,
+            "completion_tokens": 1434,
+            "completion_tokens_details": {
+              "reasoning_tokens": 887
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1792
+            },
+            "prompt_cache_hit_tokens": 1792,
+            "prompt_cache_miss_tokens": 224,
+            "reasoning_tokens": 887
+          },
+          "cost_usd": "0.00068376",
+          "cost_basis": "token estimate",
+          "request_seconds": 6.303,
+          "answer_ttft_seconds": null,
+          "total_seconds": 6.346
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Data",
+          "activity_id": "worker-1",
+          "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 4727,
+            "total_tokens": 4962,
+            "completion_tokens": 235,
+            "completion_tokens_details": {
+              "reasoning_tokens": 107
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 4727,
+            "reasoning_tokens": 107
+          },
+          "cost_usd": "0.00072758",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.097,
+          "answer_ttft_seconds": null,
+          "total_seconds": 2.133
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Data",
+          "activity_id": "worker-1",
+          "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 6498,
+            "total_tokens": 6681,
+            "completion_tokens": 183,
+            "completion_tokens_details": {
+              "reasoning_tokens": 135
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 4608
+            },
+            "prompt_cache_hit_tokens": 4608,
+            "prompt_cache_miss_tokens": 1890,
+            "reasoning_tokens": 135
+          },
+          "cost_usd": "0.00096096",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.794,
+          "answer_ttft_seconds": null,
+          "total_seconds": 3.941
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Data",
+          "activity_id": "worker-1",
+          "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 7107,
+            "total_tokens": 7225,
+            "completion_tokens": 118,
+            "completion_tokens_details": {
+              "reasoning_tokens": 57
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 6400
+            },
+            "prompt_cache_hit_tokens": 6400,
+            "prompt_cache_miss_tokens": 707,
+            "reasoning_tokens": 57
+          },
+          "cost_usd": "0.00102802",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.992,
+          "answer_ttft_seconds": null,
+          "total_seconds": 5.947
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Data",
+          "activity_id": "worker-1",
+          "invocation_id": "37e5e75db267486daacfb3d5177c9706",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 6642,
+            "total_tokens": 7331,
+            "completion_tokens": 689,
+            "completion_tokens_details": {
+              "reasoning_tokens": 318
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 6642,
+            "reasoning_tokens": 318
+          },
+          "cost_usd": "0.00112280",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.632,
+          "answer_ttft_seconds": 8.511,
+          "total_seconds": 9.594
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Analysis / Quant",
+          "activity_id": "worker-2",
+          "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 5732,
+            "total_tokens": 6015,
+            "completion_tokens": 283,
+            "completion_tokens_details": {
+              "reasoning_tokens": 59
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 5732,
+            "reasoning_tokens": 59
+          },
+          "cost_usd": "0.00088172",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.894,
+          "answer_ttft_seconds": null,
+          "total_seconds": 2.913
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Analysis / Quant",
+          "activity_id": "worker-2",
+          "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 7395,
+            "total_tokens": 7446,
+            "completion_tokens": 51,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 5632
+            },
+            "prompt_cache_hit_tokens": 5632,
+            "prompt_cache_miss_tokens": 1763,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.00104958",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.373,
+          "answer_ttft_seconds": null,
+          "total_seconds": 5.12
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Analysis / Quant",
+          "activity_id": "worker-2",
+          "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 7879,
+            "total_tokens": 7951,
+            "completion_tokens": 72,
+            "completion_tokens_details": {
+              "reasoning_tokens": 11
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 7424
+            },
+            "prompt_cache_hit_tokens": 7424,
+            "prompt_cache_miss_tokens": 455,
+            "reasoning_tokens": 11
+          },
+          "cost_usd": "0.00112322",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.273,
+          "answer_ttft_seconds": null,
+          "total_seconds": 6.409
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Financial Analysis / Quant",
+          "activity_id": "worker-2",
+          "invocation_id": "fda134e7fc6149ef830e5ba11b7a6ab6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 7518,
+            "total_tokens": 8114,
+            "completion_tokens": 596,
+            "completion_tokens_details": {
+              "reasoning_tokens": 263
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 7518,
+            "reasoning_tokens": 263
+          },
+          "cost_usd": "0.00121940",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.623,
+          "answer_ttft_seconds": 8.855,
+          "total_seconds": 10.047
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-3",
+          "invocation_id": "56858745d790439bb6fd738b67fd3631",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 46961,
+            "total_tokens": 47946,
+            "completion_tokens": 985,
+            "completion_tokens_details": {
+              "reasoning_tokens": 907
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 2048
+            },
+            "prompt_cache_hit_tokens": 2048,
+            "prompt_cache_miss_tokens": 44913,
+            "reasoning_tokens": 907
+          },
+          "cost_usd": "0.00685034",
+          "cost_basis": "token estimate",
+          "request_seconds": 8.151,
+          "answer_ttft_seconds": null,
+          "total_seconds": 8.199
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-3",
+          "invocation_id": "56858745d790439bb6fd738b67fd3631",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 53099,
+            "total_tokens": 53817,
+            "completion_tokens": 718,
+            "completion_tokens_details": {
+              "reasoning_tokens": 422
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 46848
+            },
+            "prompt_cache_hit_tokens": 46848,
+            "prompt_cache_miss_tokens": 6251,
+            "reasoning_tokens": 422
+          },
+          "cost_usd": "0.00763490",
+          "cost_basis": "token estimate",
+          "request_seconds": 5.48,
+          "answer_ttft_seconds": null,
+          "total_seconds": 13.738
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-3",
+          "invocation_id": "56858745d790439bb6fd738b67fd3631",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 60849,
+            "total_tokens": 61300,
+            "completion_tokens": 451,
+            "completion_tokens_details": {
+              "reasoning_tokens": 168
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 52992
+            },
+            "prompt_cache_hit_tokens": 52992,
+            "prompt_cache_miss_tokens": 7857,
+            "reasoning_tokens": 168
+          },
+          "cost_usd": "0.00864514",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.511,
+          "answer_ttft_seconds": null,
+          "total_seconds": 23.457
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-3",
+          "invocation_id": "56858745d790439bb6fd738b67fd3631",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 68934,
+            "total_tokens": 69476,
+            "completion_tokens": 542,
+            "completion_tokens_details": {
+              "reasoning_tokens": 481
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 60672
+            },
+            "prompt_cache_hit_tokens": 60672,
+            "prompt_cache_miss_tokens": 8262,
+            "reasoning_tokens": 481
+          },
+          "cost_usd": "0.00980252",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.977,
+          "answer_ttft_seconds": null,
+          "total_seconds": 34.16
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-3",
+          "invocation_id": "56858745d790439bb6fd738b67fd3631",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 4,
+          "usage": {
+            "prompt_tokens": 68296,
+            "total_tokens": 70979,
+            "completion_tokens": 2683,
+            "completion_tokens_details": {
+              "reasoning_tokens": 2064
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1280
+            },
+            "prompt_cache_hit_tokens": 1280,
+            "prompt_cache_miss_tokens": 67016,
+            "reasoning_tokens": 2064
+          },
+          "cost_usd": "0.01031268",
+          "cost_basis": "token estimate",
+          "request_seconds": 14.85,
+          "answer_ttft_seconds": 46.659,
+          "total_seconds": 49.026
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 19808,
+            "total_tokens": 20238,
+            "completion_tokens": 430,
+            "completion_tokens_details": {
+              "reasoning_tokens": 307
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 19808,
+            "reasoning_tokens": 307
+          },
+          "cost_usd": "0.00289352",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.17,
+          "answer_ttft_seconds": null,
+          "total_seconds": 4.192
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 20899,
+            "total_tokens": 21150,
+            "completion_tokens": 251,
+            "completion_tokens_details": {
+              "reasoning_tokens": 127
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 19712
+            },
+            "prompt_cache_hit_tokens": 19712,
+            "prompt_cache_miss_tokens": 1187,
+            "reasoning_tokens": 127
+          },
+          "cost_usd": "0.00299614",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.599,
+          "answer_ttft_seconds": null,
+          "total_seconds": 6.943
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 24298,
+            "total_tokens": 24541,
+            "completion_tokens": 243,
+            "completion_tokens_details": {
+              "reasoning_tokens": 117
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 20736
+            },
+            "prompt_cache_hit_tokens": 20736,
+            "prompt_cache_miss_tokens": 3562,
+            "reasoning_tokens": 117
+          },
+          "cost_usd": "0.00346976",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.881,
+          "answer_ttft_seconds": null,
+          "total_seconds": 10.002
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 25392,
+            "total_tokens": 25517,
+            "completion_tokens": 125,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 24064
+            },
+            "prompt_cache_hit_tokens": 24064,
+            "prompt_cache_miss_tokens": 1328,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.00358988",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.445,
+          "answer_ttft_seconds": null,
+          "total_seconds": 12.699
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 4,
+          "usage": {
+            "prompt_tokens": 26485,
+            "total_tokens": 26691,
+            "completion_tokens": 206,
+            "completion_tokens_details": {
+              "reasoning_tokens": 96
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 25344
+            },
+            "prompt_cache_hit_tokens": 25344,
+            "prompt_cache_miss_tokens": 1141,
+            "reasoning_tokens": 96
+          },
+          "cost_usd": "0.00376558",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.425,
+          "answer_ttft_seconds": null,
+          "total_seconds": 15.27
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 5,
+          "usage": {
+            "prompt_tokens": 28146,
+            "total_tokens": 28311,
+            "completion_tokens": 165,
+            "completion_tokens_details": {
+              "reasoning_tokens": 46
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 26368
+            },
+            "prompt_cache_hit_tokens": 26368,
+            "prompt_cache_miss_tokens": 1778,
+            "reasoning_tokens": 46
+          },
+          "cost_usd": "0.00398664",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.449,
+          "answer_ttft_seconds": null,
+          "total_seconds": 18.114
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 6,
+          "usage": {
+            "prompt_tokens": 29825,
+            "total_tokens": 30025,
+            "completion_tokens": 200,
+            "completion_tokens_details": {
+              "reasoning_tokens": 76
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 27904
+            },
+            "prompt_cache_hit_tokens": 27904,
+            "prompt_cache_miss_tokens": 1921,
+            "reasoning_tokens": 76
+          },
+          "cost_usd": "0.00423150",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.615,
+          "answer_ttft_seconds": null,
+          "total_seconds": 21.166
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 7,
+          "usage": {
+            "prompt_tokens": 33454,
+            "total_tokens": 34393,
+            "completion_tokens": 939,
+            "completion_tokens_details": {
+              "reasoning_tokens": 806
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 33198,
+            "reasoning_tokens": 806
+          },
+          "cost_usd": "0.00494648",
+          "cost_basis": "token estimate",
+          "request_seconds": 7.5,
+          "answer_ttft_seconds": null,
+          "total_seconds": 32.668
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Filings Research",
+          "activity_id": "worker-4",
+          "invocation_id": "f7a25d9c9dbe4de58d7e42a8759db42a",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 8,
+          "usage": {
+            "prompt_tokens": 33411,
+            "total_tokens": 34222,
+            "completion_tokens": 811,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 33411,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.00490462",
+          "cost_basis": "token estimate",
+          "request_seconds": 6.723,
+          "answer_ttft_seconds": 35.826,
+          "total_seconds": 39.408
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 27537,
+            "total_tokens": 28479,
+            "completion_tokens": 942,
+            "completion_tokens_details": {
+              "reasoning_tokens": 829
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 27537,
+            "reasoning_tokens": 829
+          },
+          "cost_usd": "0.00411894",
+          "cost_basis": "token estimate",
+          "request_seconds": 6.302,
+          "answer_ttft_seconds": null,
+          "total_seconds": 6.319
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 35932,
+            "total_tokens": 36312,
+            "completion_tokens": 380,
+            "completion_tokens_details": {
+              "reasoning_tokens": 268
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 27392
+            },
+            "prompt_cache_hit_tokens": 27392,
+            "prompt_cache_miss_tokens": 8540,
+            "reasoning_tokens": 268
+          },
+          "cost_usd": "0.00513688",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.838,
+          "answer_ttft_seconds": null,
+          "total_seconds": 15.586
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 43859,
+            "total_tokens": 44361,
+            "completion_tokens": 502,
+            "completion_tokens_details": {
+              "reasoning_tokens": 393
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 35840
+            },
+            "prompt_cache_hit_tokens": 35840,
+            "prompt_cache_miss_tokens": 8019,
+            "reasoning_tokens": 393
+          },
+          "cost_usd": "0.00628082",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.544,
+          "answer_ttft_seconds": null,
+          "total_seconds": 25.385
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 51673,
+            "total_tokens": 52092,
+            "completion_tokens": 419,
+            "completion_tokens_details": {
+              "reasoning_tokens": 320
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 43776
+            },
+            "prompt_cache_hit_tokens": 43776,
+            "prompt_cache_miss_tokens": 7897,
+            "reasoning_tokens": 320
+          },
+          "cost_usd": "0.00735154",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.111,
+          "answer_ttft_seconds": null,
+          "total_seconds": 35.043
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 4,
+          "usage": {
+            "prompt_tokens": 54080,
+            "total_tokens": 54264,
+            "completion_tokens": 184,
+            "completion_tokens_details": {
+              "reasoning_tokens": 123
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 51456
+            },
+            "prompt_cache_hit_tokens": 51456,
+            "prompt_cache_miss_tokens": 2624,
+            "reasoning_tokens": 123
+          },
+          "cost_usd": "0.00762272",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.344,
+          "answer_ttft_seconds": null,
+          "total_seconds": 39.697
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Current Developments",
+          "activity_id": "worker-5",
+          "invocation_id": "ecf3f838020143b9b260cd15fee64e8d",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 5,
+          "usage": {
+            "prompt_tokens": 53535,
+            "total_tokens": 54230,
+            "completion_tokens": 695,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 53535,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.00768950",
+          "cost_basis": "token estimate",
+          "request_seconds": 7.409,
+          "answer_ttft_seconds": 44.37,
+          "total_seconds": 47.121
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Answer Reviewer",
+          "activity_id": "review",
+          "invocation_id": "b72d3adab9de46e290f6cf8484b6fdb0",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 66176,
+            "total_tokens": 71630,
+            "completion_tokens": 5454,
+            "completion_tokens_details": {
+              "reasoning_tokens": 5028
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 66176,
+            "reasoning_tokens": 5028
+          },
+          "cost_usd": "0.01079176",
+          "cost_basis": "token estimate",
+          "request_seconds": 24.367,
+          "answer_ttft_seconds": null,
+          "total_seconds": 24.406
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Answer Reviewer",
+          "activity_id": "review",
+          "invocation_id": "c280f4b367604a36b015b7be8e228a03",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 64745,
+            "total_tokens": 68933,
+            "completion_tokens": 4188,
+            "completion_tokens_details": {
+              "reasoning_tokens": 3760
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 2816
+            },
+            "prompt_cache_hit_tokens": 2816,
+            "prompt_cache_miss_tokens": 61929,
+            "reasoning_tokens": 3760
+          },
+          "cost_usd": "0.01023694",
+          "cost_basis": "token estimate",
+          "request_seconds": 31.965,
+          "answer_ttft_seconds": null,
+          "total_seconds": 31.99
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "C1",
+          "agent": null,
+          "kind": "calculation",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/analysis/1625f1b7a1fcf8eddba04ab49d388532c7d099b5da041bb5d0926284e598f7e0/calculations/C1"
+        },
+        {
+          "source_id": "C2",
+          "agent": null,
+          "kind": "calculation",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": 2025,
+          "filed": "2025-02-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/analysis/1625f1b7a1fcf8eddba04ab49d388532c7d099b5da041bb5d0926284e598f7e0/calculations/C2"
+        },
+        {
+          "source_id": "C3",
+          "agent": null,
+          "kind": "calculation",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/analysis/1625f1b7a1fcf8eddba04ab49d388532c7d099b5da041bb5d0926284e598f7e0/calculations/C3"
+        },
+        {
+          "source_id": "F1",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-25-000023",
+          "fiscal_year": 2025,
+          "filed": "2025-02-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/43199d72ac9fca950e03d0defe82e169527bcc8677bda4ae2ef20fb8933882ec"
+        },
+        {
+          "source_id": "F2",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-25-000023",
+          "fiscal_year": 2025,
+          "filed": "2025-02-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/18098f51e19581a09260b8c14fa0eb377c5a60ea0cbf4965b56e933aa819de4e"
+        },
+        {
+          "source_id": "F3",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-25-000023",
+          "fiscal_year": 2025,
+          "filed": "2025-02-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2024-01-29",
+          "end": "2025-01-26",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/ec8896f60c89d0c002f4f9915f6a58a5b71183ebcc6803ab6ec9e5b2e8072665"
+        },
+        {
+          "source_id": "F4",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/48f340effb018380dcfb149aa922e5c5261a8e8bfeae0092b163e54a831fb3fd"
+        },
+        {
+          "source_id": "F5",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/c95516aa70b75fadd5c42ea80587500279674eb300bf7d64a40cb08561269e49"
+        },
+        {
+          "source_id": "F6",
+          "agent": null,
+          "kind": "financial_observation",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": null,
+          "chunk_id": null,
+          "start": "2025-01-27",
+          "end": "2026-01-25",
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/financial/observations/8d11905316abb4edca5b68f285ae9af336a51970114ddbcd0c5ffab742b89e6c"
+        },
+        {
+          "source_id": "S1",
+          "agent": null,
+          "kind": null,
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-25-000023",
+          "fiscal_year": 2025,
+          "filed": "2025-02-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "chunk_id": "19718bb8df7a3b7fec98a86863f4ec8f42b2f414ed2ef0924061fd159f37ce0c",
+          "start": 71570,
+          "end": 186485,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/nvda-0001045810-25-000023?start=71570&end=186485"
+        },
+        {
+          "source_id": "S2",
+          "agent": null,
+          "kind": null,
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": "2026-02-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "chunk_id": "3b0e4afd30782ca11ee36b595a277315e688c682bacd6d17bff0f4f310b019f6",
+          "start": 64662,
+          "end": 183768,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/nvda-0001045810-26-000021?start=64662&end=183768"
+        },
+        {
+          "source_id": "S12",
+          "agent": null,
+          "kind": "filing",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "chunk_id": "c80c7601229fc5b07511171785ac8abf7ed2380616d988c4832097bb0c6c2595",
+          "start": 196378,
+          "end": 197595,
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/sources/c80c7601229fc5b07511171785ac8abf7ed2380616d988c4832097bb0c6c2595"
+        },
+        {
+          "source_id": "S13",
+          "agent": null,
+          "kind": "filing",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "chunk_id": "d242d4a8bf3fcccec61b35d307e908f252939b62c7d03263155cafe84d091d03",
+          "start": 159286,
+          "end": 160508,
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/sources/d242d4a8bf3fcccec61b35d307e908f252939b62c7d03263155cafe84d091d03"
+        },
+        {
+          "source_id": "S15",
+          "agent": null,
+          "kind": "filing",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "chunk_id": "7f2f1f111ad67630f58e77e2c19e6a6335b4251bcf1493ea649c184ab6c22a46",
+          "start": 145508,
+          "end": 146658,
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/sources/7f2f1f111ad67630f58e77e2c19e6a6335b4251bcf1493ea649c184ab6c22a46"
+        },
+        {
+          "source_id": "S17",
+          "agent": null,
+          "kind": "filing",
+          "company": "NVDA",
+          "document_id": "nvda-0001045810-26-000021",
+          "fiscal_year": 2026,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "chunk_id": "1b9a2f6a6d557127b36eccc2f9ffb65aa6579fdf39db15bcc5e1fef97e3985ea",
+          "start": 147235,
+          "end": 148311,
+          "complete_section": null,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/sources/1b9a2f6a6d557127b36eccc2f9ffb65aa6579fdf39db15bcc5e1fef97e3985ea"
+        },
+        {
+          "source_id": "W2",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "2f8a1f26bcd9f55c3c1cbafab7e2a03193457efa5409694da4b2cc77b32988e6",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "672762430d11e1a15465dc7447f4d98b9e38b8931f15a901701965109eed3392",
+          "date_snapshot_id": "672762430d11e1a15465dc7447f4d98b9e38b8931f15a901701965109eed3392",
+          "published_date": "2026-05-24T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "hackernoon.com",
+          "title": "U.S. Export Controls May Be Training China’s AI Stack to Survive Without Nvidia",
+          "url": "https://hackernoon.com/us-export-controls-may-be-training-chinas-ai-stack-to-survive-without-nvidia",
+          "inspection_url": "/api/live/672762430d11e1a15465dc7447f4d98b9e38b8931f15a901701965109eed3392"
+        },
+        {
+          "source_id": "W7",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "fd8403cd0a55ea9d077b7cb7d96eff72a7a920e43be7116089ecf384671de8d7",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "date_snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "published_date": "2026-04-24T13:18:19+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "nanalyze.com",
+          "title": "Here's How NVIDIA Hits $670 a Share by 2030 - Nanalyze",
+          "url": "https://www.nanalyze.com/2026/04/heres-how-nvidia-hits-670-a-share-by-2030",
+          "inspection_url": "/api/live/749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc"
+        },
+        {
+          "source_id": "W8",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "44869072b2ac905bc74849fb802c7ae13feb548154831abc1f746752c7e6f3f8",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "date_snapshot_id": "749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc",
+          "published_date": "2026-08-03T15:45:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "fool.com",
+          "title": "Data Center Sales Make Up 92% of Nvidia's Revenue. Here's What Investors Need to Know About Jensen Huang's Bets on AI Growth. | The Motley Fool",
+          "url": "https://www.fool.com/investing/2026/08/03/data-center-sales-make-up-92-of-nvidias-revenue",
+          "inspection_url": "/api/live/749f30cdcd2850a939582f0ce4a250e91b9cdb4b5b6da9c6ef861546f7ff14cc"
+        },
+        {
+          "source_id": "W9",
+          "agent": "Filings Research",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "1fe1b386f6d1f10bbc19f694e6afbe87a31cb50aadc40d0721862a256898bb3a",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "46240eb7356eea4b94ed70631cb665604f35c1f2bd1fbf67b887ace2b49d7db1",
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": "official",
+          "publisher": "nvidia.com",
+          "title": "FORM 10-Q NVIDIA CORPORATION",
+          "url": "https://investor.nvidia.com/files/doc_financials/2027/NVDA-2027-Q2-10Q-Final-including-exhibits.pdf",
+          "inspection_url": "/api/live/46240eb7356eea4b94ed70631cb665604f35c1f2bd1fbf67b887ace2b49d7db1"
+        },
+        {
+          "source_id": "W12",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "5b9dbfb0475b50c686de2a2ad0e716e76a0722ac3e323fec7c7ee3813a3cf0ae",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "date_snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "published_date": "2026-08-26T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tradingkey.com",
+          "title": "Nvidia Q2 Revenue Surges 106% YoY as Data Center Revenue Hits Record High, Yet Shares Dip 1% After Hours",
+          "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262133929-nvidia-nvda-earnings-report-q2-2027-data-center-blackwell-ultra-ai-tradingkey",
+          "inspection_url": "/api/live/50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13"
+        },
+        {
+          "source_id": "W13",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "05910eba8146cdb73d1c5953cf7221890b1d1803bef5bd4a70dd1e5e9edfb07e",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699",
+          "date_snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "published_date": "2026-08-26T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "official",
+          "publisher": "nvidia.com",
+          "title": "NVIDIA Announces Financial Results for Second Quarter Fiscal 2027 | NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+          "inspection_url": "/api/live/ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699"
+        },
+        {
+          "source_id": "W14",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "4b8db2e4cbcc34c867cdc4bb3cbe2048e898d408cf79363077bb2b44f8ff0a87",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "date_snapshot_id": "50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13",
+          "published_date": "2026-08-26T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "yahoo.com",
+          "title": "NVIDIA Corp (NVDA) (Q2 2027) Earnings Call Highlights: Record Revenue of $96 Billion, Fiscal ...",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-corp-nvda-q2-2027-050152280.html",
+          "inspection_url": "/api/live/50cc84af4cd00b22a02aa7ed67e3817808308192f30e48189bca6f1a1801fa13"
+        },
+        {
+          "source_id": "W18",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "ebd74b2bb21d69c6ab2eb133e8903feb8092b820cd8b6700d664a7e6d30d4341",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "d0f78cb512be90d5839be5a42c05a222bb945943f372275a13f0b68e4c2f6460",
+          "date_snapshot_id": "ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699",
+          "published_date": "2026-08-26T10:34:57+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "yahoo.com",
+          "title": "Nvidia Has Fallen After Four Straight Earnings Beats. Here’s Why It Could Happen Again.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-fallen-four-straight-earnings-103457320.html",
+          "inspection_url": "/api/live/d0f78cb512be90d5839be5a42c05a222bb945943f372275a13f0b68e4c2f6460"
+        },
+        {
+          "source_id": "W19",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "44394cdcc2c983486cbea0418125a57e3d1a6348dd155d87efce963b5295e9c6",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699",
+          "date_snapshot_id": "ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699",
+          "published_date": "2026-08-24T08:24:01+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "fool.com",
+          "title": "Will Nvidia Stock Soar After Aug. 26? Here's What History Shows. | The Motley Fool",
+          "url": "https://www.fool.com/investing/2026/08/24/will-nvidia-stock-soar-after-aug-26-here-s-what-history-shows",
+          "inspection_url": "/api/live/ffb4328fab315377b2e087b492b5d8788f46275c68b1749b236a0084201da699"
+        },
+        {
+          "source_id": "W21",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "590befba54d4057aa3b3d7d438212a78a2c7bf9fbfee66258bf385eab32b35f5",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "date_snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "published_date": "2026-10-06T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tradingkey.com",
+          "title": "Nvidia Stock Forecast: Rubin Ramp and $108 Billion Q3 Outlook Keep AI Growth Accelerating",
+          "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262201321-nvidia-nvda-stock-forecast-october-6-2026",
+          "inspection_url": "/api/live/5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec"
+        },
+        {
+          "source_id": "W23",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "15917bcf6d9f7f0877ec42dc9f55e268f8ce7c6fde24b45778077bbcc42b4fba",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "date_snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "published_date": "2026-09-05T11:49:24+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "shattered.io",
+          "title": "Nvidia Vera Rubin NVL72 Full Production: What Changed",
+          "url": "https://shattered.io/nvidia-vera-rubin-nvl72-full-production-2026",
+          "inspection_url": "/api/live/5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec"
+        },
+        {
+          "source_id": "W24",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "aafbf4b86f054c5c8702a48b13263d48a164bc1f861fa0c82c86712fb618e256",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "date_snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "published_date": "2026-09-09T12:37:29+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tech-insider.org",
+          "title": "AMD MI400 vs Nvidia Rubin: 432GB HBM4 GPU War [2026]",
+          "url": "https://tech-insider.org/ca/amd-mi400-hbm4-nvidia-rubin-b300-2026",
+          "inspection_url": "/api/live/5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec"
+        },
+        {
+          "source_id": "W25",
+          "agent": "Current Developments",
+          "kind": "live_source",
+          "company": "NVDA",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "b0a4238132b8070f68ab2488bc75ada3c0e4c6d394bf6e21ec867f85187f549a",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "date_snapshot_id": "5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec",
+          "published_date": "2026-09-21T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "aimultiple.com",
+          "title": "Top 30+ AI Chip Makers: NVIDIA & Its Competitors",
+          "url": "https://aimultiple.com/ai-chip-makers",
+          "inspection_url": "/api/live/5aab72e8bdc724907ad57bcc04c0ca6a320805f6e7a2f126d642ac05bac9d7ec"
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "both": {
+      "n": 2,
+      "terminal_counts": {
+        "completed": 1,
+        "partial": 1
+      },
+      "total_seconds": {
+        "n": 2,
+        "min": 57.807,
+        "median": 138.6565,
+        "max": 219.506
+      },
+      "answer_token_ttft_seconds": {
+        "n": 2,
+        "min": 38.274,
+        "median": 99.282,
+        "max": 160.29
+      },
+      "estimated_uncached_credits": 16,
+      "live_calls_by_agent": {
+        "Current Developments": {
+          "calls": 4,
+          "uncached_attempts": 4,
+          "request_trigger_count": 1
+        },
+        "Filings Research": {
+          "calls": 1,
+          "uncached_attempts": 1,
+          "request_trigger_count": 1
+        },
+        "Risk Summary": {
+          "calls": 3,
+          "uncached_attempts": 3,
+          "request_trigger_count": 2
+        }
+      },
+      "risk_worker_seconds": {
+        "n": 2,
+        "min": 35.922,
+        "median": 42.455,
+        "max": 48.988
+      }
+    }
+  }
+}

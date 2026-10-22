@@ -61,7 +61,8 @@ async def stream(prompt, tools, handler, *, model=None, timeout=180, agent="Fili
                    f"You have {conversation.limit} tool calls. Reserve the last slot for report_outcome when supplied. "
                    "After report_outcome, write the final answer using collected evidence and explicit gaps.")
     if context.phase == "worker" and context.output:
-        instruction += (f" Your assigned output is {context.output} only. "
+        assigned = getattr(handler, "assigned_outputs", (context.output,))
+        instruction += (f" Your assigned outputs are {', '.join(assigned)} only. "
                         "Other outputs in the original question belong to other specialists. "
                         "Assess report_outcome completeness only for your assigned output. "
                         "Do not list other specialists' tasks as missing or repeat their answers.")

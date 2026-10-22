@@ -93,15 +93,15 @@ def run_live(coroutine):
 class LiveTools:
     max_tool_calls = 8
 
-    def __init__(self, state, gateway, *, agent="Current Developments"):
+    def __init__(self, state, gateway, *, agent="Current Developments", windows=None):
         self.state, self.gateway, self.agent = state, gateway, agent
         self.request = {"urls": set(), "search_limit": 3, "extract_limit": 3} if state.get("request_plan") else {"urls": set()}
         self.sources, self.events, self.missing, self.warnings = {}, [], [], []
         self.identifiers = {}
         kinds = {"official_update"} if agent == "Filings Research" else {"current_developments", "public_reaction"}
         self.outputs = [o for o in state.get("request_plan", {}).get("outputs", []) if o["kind"] in kinds]
-        self.output_windows = {o["id"]: research_windows(state, o) for o in self.outputs}
-        self.windows = next(iter(self.output_windows.values()), research_windows(state))
+        self.output_windows = {o["id"]: research_windows(state, o) for o in self.outputs} if windows is None else {}
+        self.windows = next(iter(self.output_windows.values()), research_windows(state)) if windows is None else windows
         self.offset = max([state.get("live_offset", 0), *[int(s[1:]) for s in state.get("analysis_sources", {}) if re.fullmatch(r"W\d+", s)]])
 
     def model_source(self, source):

@@ -59,6 +59,22 @@ async def test_provider_route_attaches_to_its_invocation_during_review(page):
 
 
 @pytest.mark.asyncio
+async def test_shared_tavily_calls_are_visible_in_each_agents_details(page):
+    await page.evaluate("""() => {
+      activity.start();
+      for (const [id, agent] of [['risk', 'Risk Summary'], ['current', 'Current Developments']]) {
+        event('activity', {id, agent, status:'running'});
+        event('trace', {node:'live_mcp', agent, server:'tavily-mcp', tool:'tavily_search'});
+        event('activity', {id, agent, status:'completed'});
+      }
+    }""")
+    for call in await page.locator('.agent-call').all():
+        await call.click()
+        assert 'tavily-mcp · tavily_search' in await page.locator('#agent-details').inner_text()
+    await page.evaluate("activity.finish('stopped')")
+
+
+@pytest.mark.asyncio
 async def test_profile_switch_submits_selection_and_uses_shared_model_details(page):
     requests = []
     async def chat(route):

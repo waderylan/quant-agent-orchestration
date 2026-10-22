@@ -9,6 +9,9 @@ def frozen_live(monkeypatch, tmp_path):
     monkeypatch.setenv("GENERATION_PROFILE", "codex")
     monkeypatch.setenv("PROVIDER_LEDGER", str(tmp_path / "providers.sqlite3"))
     monkeypatch.setenv("LIVE_MODE", "frozen")
+    # Existing filing-only regressions retain their original evidence contract.
+    # Risk live integration cases explicitly enable the new default-on behavior.
+    monkeypatch.setenv("RISK_LIVE_CHECK", "off")
     monkeypatch.setenv("LIVE_LEDGER", str(tmp_path / "usage.sqlite3"))
     monkeypatch.setenv("LIVE_CACHE", str(tmp_path / "cache"))
     from src.live_mcp import LiveGateway

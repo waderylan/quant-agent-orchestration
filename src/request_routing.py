@@ -11,6 +11,12 @@ FILING_PATTERN = r"\b(?:filings?|10-[KQ]|annual report|quarterly report|releases
 NEGATED_LIVE = r"\b(?:(?:do not|don't)\s+(?:use|include|search|retrieve)(?:\s+for)?|without)\s+(?:any\s+)?(?:live(?:\s+news)?|web(?:\s+search)?|news|search)\b|\b(?:do not|don't)\s+search\b"
 
 
+def web_prohibited(question):
+    filings = r"(?:the\s+)?(?:(?:collected|original|selected|annual)\s+)*filings?"
+    pattern = NEGATED_LIVE + rf"|\b(?:no (?:web|live|online|internet)(?: research| search)?|only {filings}|{filings} only|stick to {filings}|(?:do not|don't) browse)\b"
+    return bool(re.search(pattern, question, re.I))
+
+
 def price_request(question) -> bool:
     return bool(re.search(PRICE_PATTERN, question, re.I))
 
@@ -35,7 +41,7 @@ def live_match(question):
     capability = capability_request(question)
     if capability:
         question = capability['question']
-    if re.search(NEGATED_LIVE, question, re.I):
+    if web_prohibited(question):
         return "none", None
     historical = re.search(r"\bhistorical\b|at that fiscal year.end|\bas of (?:FY\s*)?20\d\d\b|\b(?:in|using|use) (?:only (?:the )?filings|the filings only)\b|using only.*filing", question, re.I)
     if historical:

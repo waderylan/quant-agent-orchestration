@@ -1,0 +1,1105 @@
+{
+  "checked_at": "2026-10-22T16:21:20.231315+00:00",
+  "capture_sha256": "71419688326358f4c00319411b99fb83b7ed184cd3146de98c41cf1bfbcc1a05",
+  "dataset_sha256": "3e140565e6bf54290f48c3873c70711770e170c65e94a0ded522666a8019361f",
+  "profile": "codex",
+  "method": "Matched native FastAPI/SSE cases; actual generation and Tavily/cache, not formal RAGAS or Cloud Run",
+  "runtime_hashes": {
+    "main.py": "70cc1cec070d68d165f08b20406fb85bd0ba22c408e458a3e625388c149c6e37",
+    "src/analysis_artifacts.py": "2e8d47e085053fd40c7bb71c397141618b931e770e491998f3193dc4ea0f608e",
+    "src/capabilities.py": "36a2b1e51eeb79a4604020b3077e30095e14792d914f10ea1ea8cfa9478472c6",
+    "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+    "src/codex_transport.py": "263fb4de22857bb5ea9a696e968718ea8eb266d04856b93f10ba416090d27386",
+    "src/current_developments.py": "abab9d6af70e997cae690e13a4277be39eaf1704699cb6528204ea1e85ca9f48",
+    "src/filing_financials.py": "da9b3ed23c4f4851d3aea2cee880f256ec9ff7ec134be9f07a4a0bf5161eeadf",
+    "src/financial_data.py": "916ed5f0fc6f5f99fa55f45cda18e75cc58eaf0a06a052da676f37ef23a6a8a8",
+    "src/financial_workflow.py": "153e0fc317b8cc248990cd618d5d01e51487ddedeb8620713a5ccf5d7440b687",
+    "src/generation.py": "984e81794e531734452132bbbc6d1708acdd46e81516460021fc7d2a960a5a42",
+    "src/generation_context.py": "32d8cd9bf283012f517b7a261f8d5a73daa9de7fc6376c55c885308cbfa9918f",
+    "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+    "src/live_mcp.py": "0b4cc076662f0a86a2afa925acab8077f9f470de82c1ab36fb818d35ceac93ef",
+    "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+    "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+    "src/provider_models.py": "61ff30e16bbba0543ca9bb7529f6dfde6705842339f5e266510163020e8f5c95",
+    "src/provider_policy.py": "d63bf39f0b5505064a5a6037cc27a4f0b5f1f61caf266b79e7836f5f30c7bce6",
+    "src/quant_analysis.py": "a1b84bb79de9adf6007393eca204da6ae2153ea486fce22f0ff1b22c5f31a6f6",
+    "src/quant_runner.py": "b626d174dd2c22cc6b132ee6866b7b4ff088404dcabf5312ce6f096675f4d0ef",
+    "src/quant_workflow.py": "0ace26a67fc565947bac9dd616a194e2920823439aa0c2b73ee7543ada728ec7",
+    "src/request_plan.py": "6400c9cf7f1fb37bddcc3176050297ef89cca13ee9061b4a31ba460b7cca518e",
+    "src/request_routing.py": "1974889000baf23e419fec1a011dbf3059fa97d9e939121fb2c49c98086cc04a",
+    "src/research_index.py": "d4dea099c47f0d6f6353a04c50e08f886eb31ab13d63ce5d23bc9e3e4799c5e1",
+    "src/research_workflow.py": "38bc19f58ac5e11b40bfa8deeca3446810bedf16cede41063241d71e69d84808",
+    "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+    "src/risk_live.py": "64efac1fa73ef1021b6aa82fd73a84dc24114216e15fa42d7ac172d6512deb1b",
+    "src/risk_summary.py": "017ae0ea5a49a80397f0cc493d00427ad2a05ca259a482483d9583ad8457e2eb",
+    "src/source_collection.py": "3bbbb3d598e9e04399427e52d26ff03809442db084c538fda8a004902a3420a1",
+    "src/source_inventory.py": "7016cc3a1340d45b3fbfd810f5cbef94e90642aa5d44f5d1eebc28209618022e",
+    "src/supervisor.py": "23eedc9511461bf83d00277198a852922c041d630a1af28227e53346fcd42370",
+    "src/task_scope.py": "21d0db70fbbbb2e7eaab829efaae9fc64aadb334fca22f820940a6c6d4728bd4",
+    "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+    "src/web_evidence.py": "788131ef5ae59a4cabb2706de547f3011d9f415eb3f307d94697fbfe0488b4ae",
+    "prompts/answer_coverage.md": "3e87a5be22d1c798961b44c71319c1b1c87376b7b96db3b0a6ec056cea56ba7e",
+    "prompts/current_developments.md": "45aac934f5960b6a9d308b1ca82f27a9299ca913aa6d286b1fb6735d2f7218dc",
+    "prompts/filing_revenue_inputs.md": "61c86953a1d99250a3391a01a615e1225ac3010355c730e2e25a1d6980807cb9",
+    "prompts/filings_research.md": "9415996f9f16ac9868ae3e87a67cefa1184028a0e3b937d68198c23a1fef3684",
+    "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+    "prompts/quant.md": "d680832a3f6944211cf43a8ddd51b0394af5263441ffa0d4cabcdb9ffda66a66",
+    "prompts/request_plan.md": "482e4d912098d45f7d27c7262873796544667587b92cb8cba57e3c7f11b1d4cd",
+    "prompts/risk_summary.md": "a11a36af06a83256b30d7f3cdab83a8922981fb2a91a0c4d3cfd126960014a32",
+    "web/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "web/agent-activity.js": "e40dd16a4eb364d40ff13edc969d2eb77f9ceedd9d97d1f98581b62aff87c82d",
+    "web/index.html": "ec676cc355b0d1a33dbdd1611110f505f6e4316bbc26a04ed3cc0d6406796f16"
+  },
+  "runtime_unchanged": true,
+  "cases": [
+    {
+      "id": "date_validation_amd_supply_export",
+      "variant": "both",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Give me a short comparison of AMD's FY2024 and FY2025 manufacturing-dependence and export-control risks. What actually changed, what is mostly a repeated warning, and does later reporting show those risks easing or becoming more concrete? Keep the filed comparison separate from the later context and flag anything the evidence cannot settle.",
+      "answer": "- **Annual filing comparison:** FY2024 ended December 28, 2024; FY2025 ended December 27, 2025. Original 10-Ks filed February 5, 2025, and February 4, 2026, respectively—not the later amendment.\n\n  - **Export controls—substantively more concrete.** FY2024 already warned that licenses could block shipments, including products below existing performance thresholds. FY2025 reports the April 2025 MI308 restriction, inventory consequences, subsequent licenses and fourth-quarter shipments. This is realization and partial mitigation of an existing exposure, not an entirely new risk. China import rules, customer demand and licensing still condition sales. The filing also adds an unformalized U.S. revenue-sharing expectation. [S264][S328]\n\n  - **Manufacturing dependence—mostly repeated warnings.** The TSMC capacity warning is identical: insufficient advanced-node production could force customer allocations and lost sales. Repetition does not establish either deterioration or relief. [S31][S32]\n\n  - **Materials supply—meaningful update.** FY2025 adds an actual industry-wide memory shortage to the existing limited-supplier warning. Manufacturing-input exposure became more concrete; the underlying dependence was already disclosed. [S236][S237]\n\n- **Separate later reporting—after February 4, 2026:**\n  - **Exports:** Reuters’ February 26 report describes permission to resume MI308 shipments as a **2025 development**, not a new post-filing easing. It says DeepSeek’s purchase approval remained unclear. This supports selective relief, not unrestricted China access. [W1]\n  - **Manufacturing and memory:** CNBC reported continuing industry memory, manufacturing and advanced-packaging constraints on May 5. October 9 reporting described broader Samsung supply discussions while noting Lisa Su’s acknowledgment of tight memory supply. These indicate continuing exposure and potential mitigation—not proof that additional qualified capacity was delivered. [W13][W12]\n\n- **Evidence limits:** These excerpts cannot establish AMD-specific lost production, sufficient future capacity, durable China approvals or final revenue-sharing terms. Industry shortages do not prove AMD suffered a particular disruption; partnership discussions do not establish an all-clear. Later reporting does not change the filed classifications.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "provider_routes": [
+            {
+              "agent": "Request Planner",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Understand every requested output and check original-request coverage",
+              "max_tool_calls": 1,
+              "node": "provider_route",
+              "activity_id": "plan",
+              "request_id": "3dd7d9dbb4c149e9a1437701667dba2b",
+              "invocation_id": "6046a8809d894539a8395b8468021b84",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            },
+            {
+              "agent": "Risk Summary",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "max_tool_calls": 16,
+              "node": "provider_route",
+              "activity_id": "worker-1",
+              "request_id": "3dd7d9dbb4c149e9a1437701667dba2b",
+              "invocation_id": "496839f4902f4e33acc49685ce2c415d",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            },
+            {
+              "agent": "Answer Reviewer",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Understand every requested output and check original-request coverage",
+              "max_tool_calls": 1,
+              "node": "provider_route",
+              "activity_id": "review",
+              "request_id": "3dd7d9dbb4c149e9a1437701667dba2b",
+              "invocation_id": "6c87a3061afd4ece8f9d6409841e40b8",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            }
+          ],
+          "request_id": "3dd7d9dbb4c149e9a1437701667dba2b",
+          "coverage_checked": true
+        }
+      },
+      "seconds": 81.438,
+      "answer_token_ttft_seconds": 61.367,
+      "estimated_uncached_credits": 6,
+      "inspections": [
+        {
+          "source_id": "S31",
+          "status": 200
+        },
+        {
+          "source_id": "S32",
+          "status": 200
+        },
+        {
+          "source_id": "S236",
+          "status": 200
+        },
+        {
+          "source_id": "S237",
+          "status": 200
+        },
+        {
+          "source_id": "S264",
+          "status": 200
+        },
+        {
+          "source_id": "S328",
+          "status": 200
+        },
+        {
+          "source_id": "W1",
+          "status": 200
+        },
+        {
+          "source_id": "W12",
+          "status": 200
+        },
+        {
+          "source_id": "W13",
+          "status": 200
+        }
+      ],
+      "answer_sha256": "f129a9e13973c57192135d6d8f477aa643eafd8146e6bbd53e9ab971677724e6",
+      "agent_seconds": {
+        "Supervisor": [
+          10.708
+        ],
+        "Risk Summary": [
+          63.429
+        ],
+        "Answer Reviewer": [
+          6.641
+        ]
+      },
+      "live_calls": [
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Advanced Micro Devices MI308 China export licenses shipments import approval revenue sharing",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "516cb56ee4939b3a7aa8ca88e1cf3ccaecd3a4cc1e3641b7d1fa68a3996f32b4",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "TSMC manufacturing capacity advanced packaging supply constraints AMD mitigation",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "4d2c3231130430626b80a9b731f369a80eddac0c83e2945433391e8fdf20eab8",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Advanced Micro Devices memory shortage supply availability manufacturing constraints",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ],
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "risk",
+          "outcome": "completed",
+          "evidence_count": 9,
+          "tool_calls": 14,
+          "missing_inputs": []
+        }
+      ],
+      "risk_live_checks": [
+        {
+          "key": [
+            "amd-0000002488-25-000012",
+            137265,
+            139491,
+            "amd-0000002488-26-000018",
+            138925,
+            141734,
+            "changed",
+            "both complete original annual inventories read. existing licensing and below-threshold-product warnings persist; fy2025 makes exposure concrete with april mi308 restrictions, inventory consequences, some licenses and q4 shipments, plus unformalized revenue-sharing expectation. changed disclosure of existing exposure, not wholly new export risk."
+          ],
+          "classification": "changed",
+          "before": "S264",
+          "after": "S328",
+          "company": "AMD",
+          "filed": "2026-02-04",
+          "fiscal_end": "2025-12-27",
+          "source_ids": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ],
+          "window": {
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Advanced Micro Devices MI308 China export licenses shipments import approval revenue sharing",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "516cb56ee4939b3a7aa8ca88e1cf3ccaecd3a4cc1e3641b7d1fa68a3996f32b4",
+          "cache": false
+        },
+        {
+          "key": [
+            "amd-0000002488-25-000012",
+            95710,
+            96634,
+            "amd-0000002488-26-000018",
+            96179,
+            97103,
+            "unchanged",
+            "identical warning in same manufacturing subject; complete inventories retain tsmc dependence and supplier capacity constraints. no inferred relocation."
+          ],
+          "classification": "unchanged",
+          "before": "S31",
+          "after": "S32",
+          "company": "AMD",
+          "filed": "2026-02-04",
+          "fiscal_end": "2025-12-27",
+          "source_ids": [
+            "W6",
+            "W7",
+            "W8",
+            "W9",
+            "W10"
+          ],
+          "window": {
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "TSMC manufacturing capacity advanced packaging supply constraints AMD mitigation",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "4d2c3231130430626b80a9b731f369a80eddac0c83e2945433391e8fdf20eab8",
+          "cache": false
+        },
+        {
+          "key": [
+            "amd-0000002488-25-000012",
+            100781,
+            103193,
+            "amd-0000002488-26-000018",
+            101271,
+            103871,
+            "changed",
+            "existing limited-supplier memory and materials exposure now includes an actual industry-wide memory shortage and cost increases; substantive concretization, not a newly created economic exposure."
+          ],
+          "classification": "changed",
+          "before": "S236",
+          "after": "S237",
+          "company": "AMD",
+          "filed": "2026-02-04",
+          "fiscal_end": "2025-12-27",
+          "source_ids": [
+            "W11",
+            "W12",
+            "W13",
+            "W14",
+            "W15"
+          ],
+          "window": {
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Advanced Micro Devices memory shortage supply availability manufacturing constraints",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2026-02-05",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "cache": false
+        }
+      ],
+      "coverage": [
+        {
+          "agent": "Supervisor",
+          "node": "answer_coverage",
+          "results": [
+            {
+              "id": "R1",
+              "addressed": true,
+              "citations": [
+                "S31",
+                "S32",
+                "S236",
+                "S237",
+                "S264",
+                "S328",
+                "W1",
+                "W12",
+                "W13"
+              ],
+              "missing": ""
+            }
+          ],
+          "missing": [],
+          "unsupported_claims": []
+        }
+      ],
+      "provider_usage": [],
+      "sources": [
+        {
+          "source_id": "S31",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-25-000012",
+          "fiscal_year": 2024,
+          "filed": "2025-02-05",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+          "chunk_id": "e26ce0377958c698303a75028a5dc328be1c537c119347efb54a871bcb15149f",
+          "start": 95710,
+          "end": 96634,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=95710&end=96634"
+        },
+        {
+          "source_id": "S32",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-26-000018",
+          "fiscal_year": 2025,
+          "filed": "2026-02-04",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "chunk_id": "3b45379aaf694fc076a307fec6c770585d0f5c5fe5d79a1c97f48bc506a8d7f7",
+          "start": 96179,
+          "end": 97103,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=96179&end=97103"
+        },
+        {
+          "source_id": "S236",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-25-000012",
+          "fiscal_year": 2024,
+          "filed": "2025-02-05",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+          "chunk_id": "bc72c7292810e86f6f78861d2fdda27c38982d8a8d1d132034e5c8ec8b110e15",
+          "start": 100781,
+          "end": 103193,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=100781&end=103193"
+        },
+        {
+          "source_id": "S237",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-26-000018",
+          "fiscal_year": 2025,
+          "filed": "2026-02-04",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "chunk_id": "56e3e52c5897b77d196624eb7f3c882360ef98c25c495ee28c5cd75fca5b6947",
+          "start": 101271,
+          "end": 103871,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=101271&end=103871"
+        },
+        {
+          "source_id": "S264",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-25-000012",
+          "fiscal_year": 2024,
+          "filed": "2025-02-05",
+          "fiscal_start": "2023-12-31",
+          "fiscal_end": "2024-12-28",
+          "text_sha256": "3da0c189c294fbb4bcc51ea1f38bb8be08d2e5849b727735f10e1fcdcd82f429",
+          "chunk_id": "f8b4ea0bd2b8f1e736cdae5d376e70a1951e5a36d098fbb2e0fb773ecefac7ac",
+          "start": 137265,
+          "end": 139491,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-25-000012?start=137265&end=139491"
+        },
+        {
+          "source_id": "S328",
+          "agent": null,
+          "kind": null,
+          "company": "AMD",
+          "document_id": "amd-0000002488-26-000018",
+          "fiscal_year": 2025,
+          "filed": "2026-02-04",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "chunk_id": "96f06ca86bcd91ba8d134159d5ea5642d0d2bbdfc215a2214cf3a11ca9079114",
+          "start": 138925,
+          "end": 141734,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/amd-0000002488-26-000018?start=138925&end=141734"
+        },
+        {
+          "source_id": "W1",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "AMD",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "791dd2c1cf8f5d25d71e42a4f2801a8afc42aa8b68a2907583e530243255e3a1",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "516cb56ee4939b3a7aa8ca88e1cf3ccaecd3a4cc1e3641b7d1fa68a3996f32b4",
+          "date_snapshot_id": "516cb56ee4939b3a7aa8ca88e1cf3ccaecd3a4cc1e3641b7d1fa68a3996f32b4",
+          "published_date": "2026-02-26T15:07:19+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "reuters.com",
+          "title": "EXCLUSIVE: DeepSeek withholds latest AI model from US chipmakers including Nvidia, sources say | Reuters",
+          "url": "https://www.reuters.com/world/china/deepseek-withholds-latest-ai-model-us-chipmakers-including-nvidia-sources-say-2026-02-25",
+          "inspection_url": "/api/live/516cb56ee4939b3a7aa8ca88e1cf3ccaecd3a4cc1e3641b7d1fa68a3996f32b4"
+        },
+        {
+          "source_id": "W12",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "AMD",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "b818060b57512b940f3078634a1d17af3114baa8d22edd1d95c2c9db857ba2ed",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "date_snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "published_date": "2026-10-09T02:41:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "remio.ai",
+          "title": "AMD Samsung HBM Partnership Widens as Memory Supply Meets a Foundry Test",
+          "url": "https://www.remio.ai/post/amd-samsung-hbm-partnership-widens-as-memory-supply-meets-a-foundry-test",
+          "inspection_url": "/api/live/4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236"
+        },
+        {
+          "source_id": "W13",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "AMD",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "783e654181f9fc5307ab6adbf03072d44fc37fe9f264621f0d933598bd4ad8f8",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "date_snapshot_id": "4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236",
+          "published_date": "2026-05-05T20:19:59+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "cnbc.com",
+          "title": "AMD Q1 2026 earnings report",
+          "url": "https://www.cnbc.com/2026/05/05/amd-q1-2026-earnings-report.html",
+          "inspection_url": "/api/live/4a0a0aa008e0d54bf196bfbd16f8f90d127a4d3d67bdc3be14d03481143ba236"
+        }
+      ]
+    },
+    {
+      "id": "date_validation_qcom_customer_modems",
+      "variant": "both",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "How did Qualcomm's customer-concentration and customer-designed-chip risks change from FY2024 to FY2025? Give me a concise risk brief that distinguishes a stronger warning from a new exposure, then connect the comparison to relevant later developments involving major handset customers. Make clear which effects are reported facts and which remain expectations.",
+      "answer": "- **Main change: stronger warnings, not a newly disclosed exposure.** FY2024 already expected Apple to replace Qualcomm modems in some or all future devices. FY2025 says Apple will **increasingly** use its own modems and that this **will have a significant negative impact** on QCT revenue, operating results and cash flows. It also names Xiaomi alongside Apple and Samsung as customer-chip developers. This makes an existing risk more explicit and consequential; naming Xiaomi does not establish that customer-designed chips became a new economic exposure. [S5] [S6]\n\n- **Customer concentration remains structurally similar.** Both years warn about dependence on a few premium-handset customers, their purchasing power, launch timing and development spending without purchase commitments. FY2025 adds the stronger Apple substitution warning directly to this discussion. It distinguishes two mechanisms: lower Qualcomm content when Apple devices using Qualcomm thin modems gain share, and lost modem business when Apple substitutes its own chips. [S3] [S4]\n\n- **Later reported effects versus expectations:**\n  - **October 7, 2026:** Zacks reporting carried by *The Globe and Mail* described a realized decline in Qualcomm’s fiscal-third-quarter handset revenue. Separately, it attributed to management expectations of lower Apple modem share and further Apple-product revenue declines. Those expectations are not completed losses, and the reported overall handset decline does not isolate Apple substitution as its cause. [W9]\n  - **September 20, 2026:** BigGo reported teardown evidence that the U.S. iPhone 18 Pro Max retained a Qualcomm modem, while describing Apple-modem use in other models. This supports partial displacement—not a completed customer exit. [W5]\n  - **September 28, 2026:** *Cult of Mac*, citing Bloomberg reporting, described an expectation that all 2027 iPhones would use Apple modems. That remains a future scenario, not an accomplished transition. The returned evidence did not establish a specific, dated post-filing Samsung or Xiaomi substitution event. [W1]\n\n- **Comparison basis:** Original 10-Ks for FY2024 (September 25, 2023–September 29, 2024), filed November 6, 2024, and FY2025 (September 30, 2024–September 28, 2025), filed November 5, 2025. Later developments above occurred after the newer filing; they do not change the filing-language classifications. [S3] [S4]",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "provider_routes": [
+            {
+              "agent": "Request Planner",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Understand every requested output and check original-request coverage",
+              "max_tool_calls": 1,
+              "node": "provider_route",
+              "activity_id": "plan",
+              "request_id": "6228fa45202544d1ad438adc52cc1d27",
+              "invocation_id": "2ee8929b04f44b51bf34283934e0066c",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            },
+            {
+              "agent": "Risk Summary",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "max_tool_calls": 16,
+              "node": "provider_route",
+              "activity_id": "worker-1",
+              "request_id": "6228fa45202544d1ad438adc52cc1d27",
+              "invocation_id": "96c9e3a64ec24705b0715adff39e2d39",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            },
+            {
+              "agent": "Answer Reviewer",
+              "provider": "Codex subscription",
+              "model": "gpt-6.1-sol",
+              "reason": "Understand every requested output and check original-request coverage",
+              "max_tool_calls": 1,
+              "node": "provider_route",
+              "activity_id": "review",
+              "request_id": "6228fa45202544d1ad438adc52cc1d27",
+              "invocation_id": "8402b570bb3c4d998045d564018a7af3",
+              "policy": "local-subscription",
+              "publisher": "OpenAI",
+              "rule": "selected_profile"
+            }
+          ],
+          "request_id": "6228fa45202544d1ad438adc52cc1d27",
+          "coverage_checked": true
+        }
+      },
+      "seconds": 68.468,
+      "answer_token_ttft_seconds": 44.895,
+      "estimated_uncached_credits": 4,
+      "inspections": [
+        {
+          "source_id": "S3",
+          "status": 200
+        },
+        {
+          "source_id": "S4",
+          "status": 200
+        },
+        {
+          "source_id": "S5",
+          "status": 200
+        },
+        {
+          "source_id": "S6",
+          "status": 200
+        },
+        {
+          "source_id": "W1",
+          "status": 200
+        },
+        {
+          "source_id": "W5",
+          "status": 200
+        },
+        {
+          "source_id": "W9",
+          "status": 200
+        }
+      ],
+      "answer_sha256": "6706d86b8c0acfd4515dba62215155656478921be21915ae4d9f089c21b6a44c",
+      "agent_seconds": {
+        "Supervisor": [
+          8.882
+        ],
+        "Risk Summary": [
+          49.116
+        ],
+        "Answer Reviewer": [
+          9.6
+        ]
+      },
+      "live_calls": [
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Apple own modem substitution Qualcomm reported impact Samsung Xiaomi internally designed handset chips",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "major handset customer concentration Apple Samsung Qualcomm handset demand reported effects modem sourcing",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "cc4df62e6ed1469577c1bb71f30c5ea61d7792de2c4f9724b5398e8d1b274393",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ],
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "risk",
+          "outcome": "completed",
+          "evidence_count": 7,
+          "tool_calls": 10,
+          "missing_inputs": []
+        }
+      ],
+      "risk_live_checks": [
+        {
+          "key": [
+            "qcom-0000804328-24-000075",
+            181662,
+            189771,
+            "qcom-0000804328-25-000085",
+            155428,
+            163727,
+            "changed",
+            "fy2024 already expected apple own-modem substitution and identified samsung and chinese oem integration. fy2025 names apple, samsung and xiaomi together and strengthens apple warning to increasing substitution with significant negative qct revenue, operating-results and cash-flow impact. stronger specificity and certainty, not a newly disclosed economic exposure."
+          ],
+          "classification": "changed",
+          "before": "S5",
+          "after": "S6",
+          "company": "QCOM",
+          "filed": "2025-11-05",
+          "fiscal_end": "2025-09-28",
+          "source_ids": [
+            "W1",
+            "W2",
+            "W4",
+            "W5"
+          ],
+          "window": {
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Apple own modem substitution Qualcomm reported impact Samsung Xiaomi internally designed handset chips",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "cache": false
+        },
+        {
+          "key": [
+            "qcom-0000804328-24-000075",
+            174919,
+            181658,
+            "qcom-0000804328-25-000085",
+            148828,
+            155423,
+            "changed",
+            "core premium handset customer concentration, bargaining power and purchase-timing exposures persist. fy2025 adds explicit expected significant qct harm from increasing apple own-modem use to concentration discussion and narrows apple share-shift wording to devices using qualcomm modems. apple substitution already disclosed elsewhere in fy2024; not a new exposure."
+          ],
+          "classification": "changed",
+          "before": "S3",
+          "after": "S4",
+          "company": "QCOM",
+          "filed": "2025-11-05",
+          "fiscal_end": "2025-09-28",
+          "source_ids": [
+            "W6",
+            "W7",
+            "W8",
+            "W9",
+            "W10"
+          ],
+          "window": {
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "major handset customer concentration Apple Samsung Qualcomm handset demand reported effects modem sourcing",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "cc4df62e6ed1469577c1bb71f30c5ea61d7792de2c4f9724b5398e8d1b274393",
+          "cache": false
+        }
+      ],
+      "coverage": [
+        {
+          "agent": "Supervisor",
+          "node": "answer_coverage",
+          "results": [
+            {
+              "id": "R1",
+              "addressed": true,
+              "citations": [
+                "S3",
+                "S4",
+                "S5",
+                "S6",
+                "W1",
+                "W5",
+                "W9"
+              ],
+              "missing": ""
+            }
+          ],
+          "missing": [],
+          "unsupported_claims": []
+        }
+      ],
+      "provider_usage": [],
+      "sources": [
+        {
+          "source_id": "S3",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-24-000075",
+          "fiscal_year": 2024,
+          "filed": "2024-11-06",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01",
+          "chunk_id": "8dbca3b5d0c8185bceea2295416e73f134f44e9254522549b7835e3d10ad7ca8",
+          "start": 174919,
+          "end": 181658,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=181658"
+        },
+        {
+          "source_id": "S4",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-25-000085",
+          "fiscal_year": 2025,
+          "filed": "2025-11-05",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "chunk_id": "78e064ea03cbc2e04b8f9574fa2b569385f0d35c3606950dd8f8abe9f89fb508",
+          "start": 148828,
+          "end": 155423,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=148828&end=155423"
+        },
+        {
+          "source_id": "S5",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-24-000075",
+          "fiscal_year": 2024,
+          "filed": "2024-11-06",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01",
+          "chunk_id": "c3ba9c2621eb7fd3544deb5be0422f708e703dd207a0364aa52e00375399b310",
+          "start": 181662,
+          "end": 189771,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=181662&end=189771"
+        },
+        {
+          "source_id": "S6",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-25-000085",
+          "fiscal_year": 2025,
+          "filed": "2025-11-05",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "chunk_id": "c58cbfa3e7977ce32fb9be95c12b068005568b743b2715681e0ff23279aebb69",
+          "start": 155428,
+          "end": 163727,
+          "complete_section": false,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=155428&end=163727"
+        },
+        {
+          "source_id": "W1",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "28da2d59a2600ce593f00feed4d6c41034a23aa87dad1165d7fe49bd17175dd0",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "date_snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "published_date": "2026-09-28T17:16:36+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "cultofmac.com",
+          "title": "Apple modems reportedly will come in every 2027 iPhone | Cult of Mac",
+          "url": "https://www.cultofmac.com/news/apple-modems-every-2027-iphone",
+          "inspection_url": "/api/live/11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031"
+        },
+        {
+          "source_id": "W5",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "adcd5a34cf4fff32ab193fbffc00af6331b73b4ddace8c320dc4c544f41dfa2c",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "date_snapshot_id": "11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031",
+          "published_date": "2026-09-20T05:05:32+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "biggo.com",
+          "title": "US iPhone 18 Pro Max Lacks Apple's C2 Modem, Teardown Confirms Qualcomm Chip Instead — BigGo Finance",
+          "url": "https://finance.biggo.com/news/8185a73c-c12d-4ac8-a4e3-6eb31a74951e",
+          "inspection_url": "/api/live/11a09aa27a4dbb2644c94701f2624c3228027f2165bf2a04e9dc7b667e659031"
+        },
+        {
+          "source_id": "W9",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "064ef241518e5dcc180e50afefa5a9498577d108216aa838ceda12b56862b25c",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "cc4df62e6ed1469577c1bb71f30c5ea61d7792de2c4f9724b5398e8d1b274393",
+          "date_snapshot_id": "cc4df62e6ed1469577c1bb71f30c5ea61d7792de2c4f9724b5398e8d1b274393",
+          "published_date": "2026-10-07T15:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "theglobeandmail.com",
+          "title": "QCOM Lags Industry Year to Date: What's the Next Move for Investors? - The Globe and Mail",
+          "url": "https://www.theglobeandmail.com/investing/markets/stocks/INTC/pressreleases/5009047/qcom-lags-industry-year-to-date-whats-the-next-move-for-investors",
+          "inspection_url": "/api/live/cc4df62e6ed1469577c1bb71f30c5ea61d7792de2c4f9724b5398e8d1b274393"
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "both": {
+      "n": 2,
+      "terminal_counts": {
+        "completed": 2
+      },
+      "total_seconds": {
+        "n": 2,
+        "min": 68.468,
+        "median": 74.953,
+        "max": 81.438
+      },
+      "answer_token_ttft_seconds": {
+        "n": 2,
+        "min": 44.895,
+        "median": 53.131,
+        "max": 61.367
+      },
+      "estimated_uncached_credits": 10,
+      "live_calls_by_agent": {
+        "Risk Summary": {
+          "calls": 5,
+          "uncached_attempts": 5,
+          "request_trigger_count": 2
+        }
+      },
+      "risk_worker_seconds": {
+        "n": 2,
+        "min": 49.116,
+        "median": 56.2725,
+        "max": 63.429
+      }
+    }
+  }
+}

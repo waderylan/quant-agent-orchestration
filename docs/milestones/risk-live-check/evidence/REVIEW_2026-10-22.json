@@ -1,0 +1,1397 @@
+{
+  "status": "complete; twelve frozen captures reviewed once against six sealed rubrics",
+  "reviewed_capture_count": 12,
+  "capture_file": "artifacts/m12/heldout/captures.json",
+  "sealed_cases_file_sha256": "55d05d038399ffee553b614ea2b71dd85811885d7eba05d153a58d8e2d2f4321",
+  "capture_dataset_sha256": "5f50d05b6b3b3c00ac8bbf69a15a889896020d478b7c3d220fafb1ced51c366a",
+  "method": "Independent local reading of sealed case rubrics, final answers, returned source bodies and relevant observations, acquisition traces, coverage records, and inspection responses. No implementation inspection or external acquisition.",
+  "scoring": {
+    "coverage": "2: requested substantive outputs fulfilled; 1: meaningful subset with important omission; 0: little requested work fulfilled.",
+    "synthesis": "2: clear supported distinctions useful for the question; 1: some useful comparison but important disconnect; 0: little useful interpretation.",
+    "provenance": "2: material delivered claims supported with appropriate source identity and chronology; 1: material attribution or timing gaps; 0: core claims unsupported or wrongly sourced.",
+    "honest_limits": "2: scope and uncertainty accurate; 1: an avoidable misleading scope statement or unjustified clarification; 0: invented certainty or concealed material failure.",
+    "useful": "A reader can use the response for the question's central decision or a substantial independently actionable part, with remaining limits accurately stated. A clear partial response can be useful.",
+    "critical_failure": "Explicit acquisition prohibition violated; material unsupported/wrong-company quantitative or factual conclusion; or a core requested workflow blocked by unjustified clarification/ownership failure. Honest inability to locate evidence alone is not critical."
+  },
+  "rows": [
+    {
+      "id": "heldout_01_nvda_risk_continuity_no_web",
+      "variant": "research",
+      "scores": {
+        "coverage": 2,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 8
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "completed",
+      "requested_output_audit": [
+        {
+          "output": "Both risk themes compared across both actual fiscal periods",
+          "met": true,
+          "evidence": "Final scope names FY2025/FY2026 dates, filing dates, and original accessions. Customer and export-control comparisons are both substantive."
+        },
+        {
+          "output": "Actual exposure change distinguished from repeated or reworded disclosure",
+          "met": true,
+          "evidence": "Direct-customer shares, indirect-customer wording, China market foreclosure, H20 requirements, regulatory investigation, and changed AI Diffusion policy context are separately interpreted; recurring cancellation, substitution, and channel mechanisms remain identified as recurring."
+        },
+        {
+          "output": "Dated source support and explicit no-web behavior",
+          "met": true,
+          "evidence": "All ten cited filing passages inspect successfully. Five risk_live_checks are skipped for Explicit no-web instruction; zero live_calls."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S261",
+            "S263"
+          ],
+          "finding": "12%/11%/11% versus 22%/14% direct-customer shares match the source text. Final avoids identifying anonymous customers across years or adding direct and indirect shares."
+        },
+        {
+          "sources": [
+            "S262",
+            "S263"
+          ],
+          "finding": "FY2025 one estimated indirect customer above the threshold versus FY2026 some individually above it is accurately described as broader disclosed dependence without claiming an exact count."
+        },
+        {
+          "sources": [
+            "S296",
+            "S338",
+            "S334"
+          ],
+          "finding": "Prospective exclusion versus FY2026 year-end effective foreclosure and April 2025 H20 licensing/inventory consequences match dated filing passages; all events remain historical within the two-period comparison."
+        },
+        {
+          "sources": [
+            "S277",
+            "S278",
+            "S284",
+            "S341"
+          ],
+          "finding": "Preliminary September 15 finding is not called a final determination; May 2025 rescission announcement is not called elimination of all export controls."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 10,
+        "inspected": 10,
+        "http_200": 10,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 0,
+        "by_owner": {},
+        "reported_estimated_uncached_credits": 0,
+        "credit_interpretation": "Consistent with zero recorded invocations; no provider billing verification."
+      },
+      "seconds": 82.117,
+      "risk_increment": "Baseline control only; no Risk acquisition. Final pair comparison finds equivalent useful no-web behavior.",
+      "issues": []
+    },
+    {
+      "id": "heldout_02_amd_risk_change",
+      "variant": "research",
+      "scores": {
+        "coverage": 2,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 8
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "completed",
+      "requested_output_audit": [
+        {
+          "output": "Manufacturing and export risks compared across both years",
+          "met": true,
+          "evidence": "Stable third-party manufacturing dependence is contrasted with realized MI308 restriction, charge, partial reversal, and licensed shipments."
+        },
+        {
+          "output": "Recurring warning distinguished from realized development",
+          "met": true,
+          "evidence": "The first-quarter-2024 contract-manufacturer event is dated correctly rather than attributed to 2025. The FY2025 industry memory shortage is separated from proof of an AMD-specific production interruption."
+        },
+        {
+          "output": "Importance for operating results and residual uncertainty",
+          "met": true,
+          "evidence": "Export-control effects are ranked as the better evidenced realized operating shock. The interpretation explicitly avoids computing an unsupported earnings adjustment and preserves licensing/import/demand uncertainty."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S29",
+            "S30"
+          ],
+          "finding": "The third-party fabrication paragraphs are identical, including TSMC at 7nm or smaller and third-party assembly/testing/packaging."
+        },
+        {
+          "sources": [
+            "S1",
+            "S2"
+          ],
+          "finding": "Both complete annual sections explicitly date the contract-manufacturer inventory loss to first-quarter 2024."
+        },
+        {
+          "sources": [
+            "S236",
+            "S237"
+          ],
+          "finding": "FY2025 adds current industry memory demand exceeding supply and higher prices; FY2024 describes shortage/cost risk conditionally."
+        },
+        {
+          "sources": [
+            "S264",
+            "S328"
+          ],
+          "finding": "MI308 April requirement, $800 million charge, approximately $360 million Q4 reversal, resumed shipments, and proposed but unregulated revenue share support the historical synthesis. The final does not count a proposed payment as an enacted obligation."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 8,
+        "inspected": 8,
+        "http_200": 8,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 0,
+        "by_owner": {},
+        "reported_estimated_uncached_credits": 0,
+        "credit_interpretation": "Consistent with zero recorded invocations; external evidence was optional for this historical question."
+      },
+      "seconds": 60.344,
+      "risk_increment": "A complete useful historical answer already exists without Risk web evidence. The paired both capture uses Research fallback and supplies no W increment.",
+      "issues": []
+    },
+    {
+      "id": "heldout_03_amd_official_correction",
+      "variant": "research",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 7
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Original explanation and exact amendment correction",
+          "met": true,
+          "evidence": "S6 reports the original 31% shipment/15% ASP wording; S9/S11 correct this to 15% shipment/31% ASP. S15 establishes the amendment filing date."
+        },
+        {
+          "output": "Effect on GAAP results and a safe usable summary",
+          "met": true,
+          "evidence": "The unchanged financial results follow the amendment's explicit narrow scope in S9, not an inference from an amended filename. Final supplies a usable dated paraphrase."
+        },
+        {
+          "output": "Bounded later official correction/clarification check",
+          "met": false,
+          "evidence": "One targeted official-domain search occurs for February 5 through October 22, but all five returned SEC items concern other issuers. It supplies no relevant AMD later-update evidence or meaningful inspection of a later AMD publication."
+        },
+        {
+          "output": "Limits of the check",
+          "met": true,
+          "evidence": "Final explicitly labels the check inconclusive and does not claim that no subsequent correction exists."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S6",
+            "S9",
+            "S11",
+            "S15"
+          ],
+          "finding": "The correction, dates, revenue totals, and unchanged-other-disclosures scope are supported. The amendment expressly does not reflect subsequent events."
+        },
+        {
+          "sources": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ],
+          "finding": "Returned text identifies InterDigital, Pacira, Clear Secure, Minerals Technologies, and Newmark. The final correctly identifies the wrong-issuer evidence and does not use those publications as AMD confirmations. Publication dates are not supplied for these W records and are not invented."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 9,
+        "inspected": 9,
+        "http_200": 9,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false,
+        "note": "Wrong-issuer W sources are cited only to explain search irrelevance, not to establish AMD facts."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 1,
+        "by_owner": {
+          "Filings Research": 1
+        },
+        "tools": {
+          "tavily_search": 1
+        },
+        "reported_estimated_uncached_credits": 2,
+        "credit_interpretation": "Consistent with one uncached advanced search estimate; no independent provider billing verification."
+      },
+      "seconds": 52.745,
+      "risk_increment": "No Risk worker involved. Research owns the attempted targeted official check; no relevant update evidence is found in either variant.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Later-update requirement remains unresolved because acquisition returns unrelated issuers.",
+          "evidence": "One official-domain search and five unrelated W source bodies; terminal and final accurately report partial/inconclusive.",
+          "decision_effect": "The historical quote is safe to use, but the response cannot establish whether a further correction supersedes it through the cutoff."
+        }
+      ]
+    },
+    {
+      "id": "heldout_04_qcom_official_customer_update",
+      "variant": "research",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 1,
+        "provenance": 2,
+        "honest_limits": 1,
+        "total": 5
+      },
+      "useful": false,
+      "critical_failure": true,
+      "terminal_status": "needs_clarification",
+      "requested_output_audit": [
+        {
+          "output": "Historical comparison of handset-modem and customer risk",
+          "met": true,
+          "evidence": "S5/S6 support FY2024 Apple substitution expectations versus FY2025 increasing substitution with significant expected QCT impact. The final properly avoids assuming every named customer's integrated circuit is a modem."
+        },
+        {
+          "output": "Official post-filing update check through the cutoff",
+          "met": false,
+          "evidence": "Zero Tavily calls. Research asks what that outlook refers to despite the original question specifying major handset customers using their own modem technology and the answer already identifying the Apple modem outlook."
+        },
+        {
+          "output": "Dated scope of updates and confirmed versus prospective facts",
+          "met": false,
+          "evidence": "No subsequent publication is acquired. The answer labels the update pending and offers Huawei product-revenue outlook as an alternative subject, which is outside the explicit own-modem antecedent."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S5",
+            "S6"
+          ],
+          "finding": "Historical statements and fiscal dates match the source passages; the more definite FY2025 expected impact is not presented as a quantified realized loss."
+        },
+        {
+          "sources": [
+            "S19"
+          ],
+          "finding": "The returned FY2025 passage explicitly repeats Apple's increasing own-modem use and its QCT impact, so the requested subject is identifiable from both the question and source."
+        },
+        {
+          "sources": [
+            "S21"
+          ],
+          "finding": "This passage concerns revoked Huawei export permission and expected lack of further product revenue. It does not make the user's clearly specified own-modem subject ambiguous."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 4,
+        "inspected": 4,
+        "http_200": 4,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 0,
+        "by_owner": {},
+        "reported_estimated_uncached_credits": 0,
+        "credit_interpretation": "Zero spend reflects nonexecution of the explicit official-check workflow, not an efficient completed check."
+      },
+      "seconds": 75.376,
+      "risk_increment": "Risk historical comparison succeeds but Risk acquisition is disabled. Research fails to execute the explicitly requested official check. The paired both capture performs that check and adds attributed Risk context, while official verification remains inconclusive.",
+      "issues": [
+        {
+          "severity": "critical",
+          "finding": "Unjustified clarification blocks a core requested workflow.",
+          "evidence": "Final asks which FY2025 outlook that outlook means, offering Apple substitution or no further Huawei revenue, although the original request explicitly names customers using their own modem technology. No web invocation follows.",
+          "decision_effect": "The response cannot answer whether the filed outlook remains adequate or has an official dated update; the user must repeat already supplied context."
+        },
+        {
+          "severity": "moderate",
+          "finding": "Unavailable-search wording is not substantiated as a provider failure.",
+          "evidence": "Final includes Live search unavailable: official update check was not performed, but live_calls is empty and no provider error is captured. The observable condition is an unperformed check pending unnecessary clarification.",
+          "decision_effect": "The cause of the missing update is obscured, even though the missing output itself is disclosed."
+        }
+      ]
+    },
+    {
+      "id": "heldout_05_nvda_full_official_export_update",
+      "variant": "research",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 1,
+        "honest_limits": 2,
+        "total": 6
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Both years' GAAP revenue, operating income, and net income",
+          "met": false,
+          "evidence": "F1/F2/F4/F5 supply revenue and operating income only. Parent net income is absent from final and registered evidence, explicitly recognized as missing."
+        },
+        {
+          "output": "Checked growth and operating margins with reproducible inputs/formulas",
+          "met": true,
+          "evidence": "C1-C3 reproduce 65.47% revenue growth and 62.42%/60.38% margins from the cited signed GAAP observations."
+        },
+        {
+          "output": "Filing-based performance explanation",
+          "met": true,
+          "evidence": "S350-S352 support Blackwell/networking growth, business-model mix, H20 inventory charges, and increased compensation/compute costs. One unsupported FY2025 driver sentence is removed rather than retained."
+        },
+        {
+          "output": "Export and concentration risk comparison",
+          "met": true,
+          "evidence": "S1/S2 and focused S262/S263/S277/S278/S296/S338 support historical comparisons; claims substantially match the already inspected case01 evidence."
+        },
+        {
+          "output": "Official post-10-K update",
+          "met": true,
+          "evidence": "Research-owned W1 is an official FY2027 Q2 10-Q describing limited H200 shipments, continuing Chinese restrictions, effective foreclosure and a first-half FY2027 $0.4 billion charge. Exact publication/calendar period dates remain unavailable and are explicitly qualified."
+        },
+        {
+          "output": "Two recent developments and attributable outside reaction",
+          "met": true,
+          "evidence": "W7 supports August 26 quarterly results and the distinct China-exclusion outlook assumption; W9 provides September commentary attributed to The Motley Fool. Both dates lie in July 25-October 22. The two development bullets are separate aspects of one earnings release, limiting breadth."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "C1",
+            "C2",
+            "C3"
+          ],
+          "finding": "Revenue 130.497/215.938 billion and operating income 81.453/130.387 billion match observations, fiscal dates and original-report GAAP basis. Arithmetic and rounding are correct; net income is not silently inferred."
+        },
+        {
+          "sources": [
+            "S350",
+            "S351",
+            "S352"
+          ],
+          "finding": "Blackwell/networks and the $4.5 billion H20 charge support revenue/margin interpretation. The FY2025 Hopper sentence was removed because its S347 citation is only generic MD&A overview; a harmless spacing/citation remnant remains after the revenue sentence."
+        },
+        {
+          "sources": [
+            "W1"
+          ],
+          "finding": "The later-quarter account establishes limited licensed shipments and ongoing restrictions, not full China re-entry. The charge is explicitly dated to the FY2027 first half. The source's February 2026 license-start wording is not presented as an exact post-February-25 event."
+        },
+        {
+          "sources": [
+            "W7",
+            "W9"
+          ],
+          "finding": "August 26 announcement covers quarter ended July 26, with revenue 96.2 billion, Data Center 89.0 billion, GAAP gross margin 75%, and no China compute revenue assumed in the next outlook. Final distinguishes outlook from a newly enacted restriction. September commentary reflects that already reported quarter rather than inventing a September operating event."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 22,
+        "inspected": 22,
+        "http_200": 22,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false,
+        "minor_remnant": "A spaced S347 citation remains attached after a removed FY2025-driver sentence; it does not support that deleted claim."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 7,
+        "by_owner": {
+          "Filings Research": 1,
+          "Current Developments": 6
+        },
+        "tools": {
+          "tavily_search": 4,
+          "tavily_extract": 3
+        },
+        "uncached_attempts": 7,
+        "reported_estimated_uncached_credits": 14,
+        "credit_interpretation": "Matches this request's seven attempted uncached calls at the stated two-credit estimation convention; one extract yields zero results. This is an estimate, not a provider bill."
+      },
+      "seconds": 249.357,
+      "risk_increment": "No Risk web acquisition. Research's explicit official-check search supplies W1, a specific limited-shipment and charge update. Current supplies W7/W9, covering earnings, outlook and reaction with some China-topic overlap, but without W1's detailed H200 charge/inspection evidence in registered final sources. The paired both capture adds March/June Risk chronology without resolving the shared financial and official-date omissions.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Explicit net-income output is omitted.",
+          "evidence": "No F3/F6 or substitute net-income support survives; final and terminal disclose the omission.",
+          "decision_effect": "The reader has a useful revenue/operating-margin brief but an incomplete requested GAAP table."
+        },
+        {
+          "severity": "moderate",
+          "finding": "Official-update publication provenance is incomplete.",
+          "evidence": "W1 title is FORM 10-Q NVIDIA CORPORATION; published_date is null. The final identifies its later fiscal quarter and retrieval date but cannot provide the requested exact update publication date.",
+          "decision_effect": "The narrow business update is evidenced, while precise publication dating remains unresolved."
+        }
+      ]
+    },
+    {
+      "id": "heldout_06_intc_full_performance_and_risk",
+      "variant": "research",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 7
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Both years' GAAP revenue, operating loss, net loss and checked arithmetic",
+          "met": true,
+          "evidence": "F1-F6 and C1-C4 support all requested amounts and signed calculations. Values are presented across financial and filing sections rather than a single side-by-side table, a minor format limitation."
+        },
+        {
+          "output": "Main filing-grounded drivers",
+          "met": false,
+          "evidence": "Several segment, expense, divestiture and tax drivers are supported, but the consolidated gross-margin/restructuring bridge explaining much of the operating-loss improvement is explicitly unresolved."
+        },
+        {
+          "output": "Manufacturing and funding risk comparison",
+          "met": true,
+          "evidence": "S78/S79/S89/S263/S265/S278 and financing pairs distinguish actual retrenchment, the conditional 14A customer requirement, tile supply exposure, government-equity effects and continuing financing constraints."
+        },
+        {
+          "output": "Two recent relevant developments and outside reaction",
+          "met": true,
+          "evidence": "August 20 Socionext 18A-P adoption reporting and an August equity offering reported September 10 fall within the recent window. Nikkei-through-TrendForce and named October 3 commentator supply outside interpretation."
+        },
+        {
+          "output": "Connection to risks and uncertainty",
+          "met": true,
+          "evidence": "Final distinguishes customer-adoption progress from commercial yields/volumes and improved funding from proven investment returns; conflicting 20/23-billion offering reports remain unreconciled."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "C1",
+            "C2",
+            "C3",
+            "C4"
+          ],
+          "finding": "Revenue 53.101/52.853 billion, operating losses 11.678/2.214 billion, and net losses 18.756/0.267 billion match observations. Revenue change is minus 248 million, minus 0.4670...%; margins minus 21.992...% and minus 4.1889...% are rounded correctly. Loss signs are preserved through wording and negative margins."
+        },
+        {
+          "sources": [
+            "S291",
+            "S292",
+            "S294",
+            "S296",
+            "S300",
+            "S301",
+            "S302",
+            "S304"
+          ],
+          "finding": "Segment demand/costs, expense reductions, Altera gain, derivative/NAND charges and the prior-year valuation allowance are supported. Final does not pretend these supply a complete operating-loss bridge."
+        },
+        {
+          "sources": [
+            "S78",
+            "S79",
+            "S89",
+            "S263",
+            "S265",
+            "S278"
+          ],
+          "finding": "Facility cancellations and consolidation are reported developments; stopping Intel 14A remains conditional. The final does not equate Socionext 18A-P adoption with fulfillment of the separate significant-external-14A-customer condition."
+        },
+        {
+          "sources": [
+            "W2"
+          ],
+          "finding": "TrendForce August 20 text attributes Socionext adoption to a press release and the options/flexibility interpretation to Nikkei. The final preserves this attribution chain and avoids claiming shipment volume or production yields."
+        },
+        {
+          "sources": [
+            "W7",
+            "W6"
+          ],
+          "finding": "September 10 Reuters-syndicated report dates the approximately 20-billion equity event to August. October 3 named commentator says approximately 23 billion; final calls out the discrepancy rather than blending the figures. Commentary is attributed separately from the event. Primary company confirmation is not in registered evidence, so the event remains reported rather than independently confirmed here."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 33,
+        "inspected": 33,
+        "http_200": 33,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false,
+        "minor_remnant": "Two filing paragraphs retain extra spaces after removal of specific driver sentences; remaining claims have support."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 6,
+        "by_owner": {
+          "Current Developments": 6
+        },
+        "tools": {
+          "tavily_search": 3,
+          "tavily_extract": 3
+        },
+        "uncached_attempts": 6,
+        "reported_estimated_uncached_credits": 12,
+        "credit_interpretation": "Matches six attempted uncached calls at the stated two-credit estimation convention; all return results. Not independently confirmed account spend."
+      },
+      "seconds": 248.924,
+      "risk_increment": "No Risk web acquisition. Current already provides manufacturing-adoption and financing developments connected to the requested historical risks. The paired both capture adds a distinct 14A-continuation report and overlapping construction/funding context.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Incomplete main operating-loss explanation.",
+          "evidence": "Final explicitly lacks the complete consolidated gross-margin and restructuring-charge bridge; reviewer marks the corresponding requested output unaddressed.",
+          "decision_effect": "Useful historical and current-risk analysis remains, but the reader cannot fully attribute the large operating-loss improvement."
+        },
+        {
+          "severity": "minor",
+          "finding": "Reported funding amount lacks registered primary confirmation and has an acknowledged source discrepancy.",
+          "evidence": "W7 says about 20 billion; W6 says about 23 billion. Both are third-party reports, and the final explicitly leaves reconciliation unresolved.",
+          "decision_effect": "The directional funding interpretation is usable with attribution; the exact proceeds should remain provisional."
+        }
+      ]
+    },
+    {
+      "id": "heldout_01_nvda_risk_continuity_no_web",
+      "variant": "both",
+      "scores": {
+        "coverage": 2,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 8
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "completed",
+      "requested_output_audit": [
+        {
+          "output": "Both risk themes, actual periods, changed exposure versus repeated disclosure",
+          "met": true,
+          "evidence": "Final covers both years, customer shares and indirect wording, recurring mechanisms, H20 consequences, foreclosure, diffusion-rule replacement and preliminary Chinese finding."
+        },
+        {
+          "output": "Dated historical sources and no-web constraint",
+          "met": true,
+          "evidence": "S1/S2 are complete original annual sections; eight focused passages substantiate dated events. Five registered Risk findings each have skipped/Explicit no-web instruction outcomes; no Tavily invocation occurs."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S1",
+            "S263"
+          ],
+          "finding": "Direct 12/11/11 to 22/14 shares and indirect one to some wording match returned sources. Final explicitly avoids adding overlapping direct/indirect shares or assuming customer identity continuity."
+        },
+        {
+          "sources": [
+            "S277",
+            "S334",
+            "S296",
+            "S338"
+          ],
+          "finding": "April 2025 H20 restriction and concrete inventory harm support intensification. Competitive-ecosystem causality is explicitly attributed to management, not independently asserted."
+        },
+        {
+          "sources": [
+            "S284",
+            "S341",
+            "S277",
+            "S278"
+          ],
+          "finding": "May rescission/replacement announcement and September preliminary adverse finding are dated and qualified correctly; neither final adjudication nor end of all controls is invented."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 10,
+        "inspected": 10,
+        "http_200": 10,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 0,
+        "by_owner": {},
+        "reported_estimated_uncached_credits": 0,
+        "registered_risk_findings": 5,
+        "risk_followup_attempts": 0,
+        "legitimate_suppressions": 5,
+        "suppression_reason": "Explicit no-web instruction",
+        "credit_interpretation": "No acquisition and no request-attributed estimated credits."
+      },
+      "seconds": 84.487,
+      "risk_increment": "No W increment is expected or observed: explicit no-web legitimately suppresses all five registered finding follow-ups. Equivalent factual usefulness to baseline comes from S selection and phrasing, not external corroboration.",
+      "issues": []
+    },
+    {
+      "id": "heldout_02_amd_risk_change",
+      "variant": "both",
+      "scores": {
+        "coverage": 2,
+        "synthesis": 2,
+        "provenance": 1,
+        "honest_limits": 2,
+        "total": 7
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Manufacturing and export themes compared with actual versus conditional effects",
+          "met": true,
+          "evidence": "Research passages establish continuing foundry/packaging reliance, conditional supply/yield warnings and actual MI308 charges/reversal/shipments."
+        },
+        {
+          "output": "Rank most important change for interpreting results and state uncertainty",
+          "met": true,
+          "evidence": "The MI308 accounting discussion now includes 800-million initial charge, 360-million reversal and filing-reported 440-million net effect, while distinguishing those from demand/pricing/efficiency and preserving licensing uncertainty."
+        },
+        {
+          "output": "Fiscal dates and complete before/after provenance",
+          "met": false,
+          "evidence": "Final uses fiscal labels only; delivered Research chunks lack fiscal_start/fiscal_end and complete annual risk-section comparisons. Material narrow claims are supported, but date/scope provenance is weaker than baseline."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S23",
+            "S24"
+          ],
+          "finding": "TSMC, GlobalFoundries 12/14nm, outsourced assembly/test/packaging and conditional supply/yield warnings match both years' passages; final does not infer actual production failure from conditional warnings."
+        },
+        {
+          "sources": [
+            "S11",
+            "S33",
+            "S13",
+            "S14",
+            "S16",
+            "S29"
+          ],
+          "finding": "2025 MI308 event timing, initial charge, Q4 reversal and net annual charge are supported. The 15% expectation is explicitly distinguished from a published regulation. No post-filing claims or W source exist."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 13,
+        "inspected": 13,
+        "http_200": 13,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 0,
+        "by_owner": {},
+        "reported_estimated_uncached_credits": 0,
+        "registered_risk_findings": 0,
+        "risk_followup_attempts": 0,
+        "legitimate_suppressions": 0,
+        "route_evidence": "task_selection chooses Filings Research alone with generic filing_explanation requested output. No Risk Summary worker or risk_live_checks trace is recorded.",
+        "credit_interpretation": "Zero requests/credits reflects the fallback route, not successful execution of per-finding Risk searches."
+      },
+      "seconds": 46.047,
+      "risk_increment": "None observed. Extra operating-result precision comes from Research S16/S29 rather than W acquisition. This capture does not exercise the per-registered-finding Risk policy because no Risk findings are registered.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Fallback routing prevents this row from testing the advertised Risk-acquisition treatment.",
+          "evidence": "Research alone is selected; final says the complete request could not be checked and only recognized filing tasks are covered. No answer_coverage or Risk-finding records exist.",
+          "decision_effect": "The answer remains useful for the historical question, but its quality or speed difference cannot be credited to Risk Tavily."
+        },
+        {
+          "severity": "minor",
+          "finding": "Date and inventory scope are less inspectable in the delivered brief.",
+          "evidence": "No actual fiscal date ranges are stated; Research excerpts carry fiscal-year labels but null fiscal_start/end. No claim of exhaustive risk removal is made.",
+          "decision_effect": "Narrow assertions are supported, while whole-inventory absence conclusions would exceed this evidence."
+        }
+      ]
+    },
+    {
+      "id": "heldout_03_amd_official_correction",
+      "variant": "both",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 7
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Exact original/amended explanation and GAAP effect",
+          "met": true,
+          "evidence": "S6 provides original 31% shipments/15% ASP; S11 gives corrected 15% shipments/31% ASP, source scope and original filing date; S14 establishes amendment date; S3 says no other items changed."
+        },
+        {
+          "output": "Safe usable wording and date limits",
+          "met": true,
+          "evidence": "Final supplies a supported summary and short exact quotation, explicitly limits the unchanged-GAAP conclusion to the amendment scope rather than claiming a separate line-by-line reconciliation, and preserves the subsequent-event exclusion."
+        },
+        {
+          "output": "Relevant later official correction check",
+          "met": false,
+          "evidence": "One official-domain-filtered search for February 5-October 22 yields ARM and Ocular Therapeutix filings, not AMD correction evidence. Final says inconclusive rather than asserting none exists."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S3",
+            "S6",
+            "S11",
+            "S14"
+          ],
+          "finding": "Original and amended numerical explanation, unchanged stated revenue, same-day filing chronology and narrow correction scope match returned text. No amendment/original conflation identified."
+        },
+        {
+          "sources": [
+            "W1",
+            "W2"
+          ],
+          "finding": "W1 is ARM's filing; W2 concerns ocular disease and the unrelated wet-AMD acronym. Final correctly identifies both as unrelated and does not use their numerical content for the requested company. Null publication dates do not become invented AMD dates."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 6,
+        "inspected": 6,
+        "http_200": 6,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 1,
+        "by_owner": {
+          "Filings Research": 1
+        },
+        "tools": {
+          "tavily_search": 1
+        },
+        "uncached_attempts": 1,
+        "reported_estimated_uncached_credits": 2,
+        "registered_risk_findings": 0,
+        "risk_followup_attempts": 0,
+        "credit_interpretation": "Two credits is consistent with this one uncached attempted advanced search under the capture's estimate convention; not independently confirmed account spend."
+      },
+      "seconds": 52.245,
+      "risk_increment": "None. As in baseline, Research owns a real targeted official check but retrieves only wrong-issuer material. The useful correction answer is supported by S evidence, and different summary wording does not establish a treatment benefit.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Later AMD correction/clarification remains unresolved.",
+          "evidence": "Only ARM and Ocular Therapeutix official filings are returned by the one search. The final and coverage record honestly preserve this gap.",
+          "decision_effect": "The correction can be quoted safely within its stated scope; no conclusion about absence of later changes is established."
+        }
+      ]
+    },
+    {
+      "id": "heldout_04_qcom_official_customer_update",
+      "variant": "both",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 2,
+        "total": 7
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "Historical customer-modem risk comparison",
+          "met": true,
+          "evidence": "S5/S6 support the increased certainty and segment-specific consequences in the Apple outlook, with accurate qualification that the other named customers' own integrated circuits are not all identified as modems."
+        },
+        {
+          "output": "Official investor-relations/SEC post-filing check",
+          "met": true,
+          "evidence": "Research performs one domain-filtered search for November 6, 2025-October 22, 2026. It returns zero results. The check is actually executed, unlike the baseline's unnecessary clarification."
+        },
+        {
+          "output": "Authenticated official update dates, scope and status",
+          "met": false,
+          "evidence": "No official W evidence is returned. The final accurately says no update was found in the check, leaves exact official revisions unverified, and does not convert empty retrieval into proof of absence."
+        },
+        {
+          "output": "Confirmed/adopted behavior distinguished from prospective effects",
+          "met": true,
+          "evidence": "Filed baseline adoption, third-party March 2026 deployment report, March chip-sampling plans and future September-to-December revenue outlook are kept separate."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "S5",
+            "S6",
+            "S19"
+          ],
+          "finding": "Historical statements, period dates and November 5, 2025 filing anchor match the returned filing evidence. Existing Apple adoption is distinguished from prospective substitution and financial harm."
+        },
+        {
+          "sources": [
+            "W3"
+          ],
+          "finding": "TechTimes July 30 text reports C1X reaching iPhone 17e by March 2026. The final identifies this as attributed post-filing reporting, not Qualcomm official confirmation. The same source's roughly 50% September-to-December 2026 revenue reduction is explicitly described as a prospective and unauthenticated outlook, not realized loss."
+        },
+        {
+          "sources": [
+            "W7"
+          ],
+          "finding": "Korea Herald March 26 metadata and brief returned text support Samsung preparing Exynos 2700 samples by midyear. Final does not treat samples as completed customer substitution or claim all three customers use own modems."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 5,
+        "inspected": 5,
+        "http_200": 5,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": false,
+        "minor_remnant": "An official-check acquisition sentence is removed, leaving leading whitespace before the preserved bounded no-update-found statement."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 3,
+        "by_owner": {
+          "Risk Summary": 2,
+          "Filings Research": 1
+        },
+        "tools": {
+          "tavily_search": 3
+        },
+        "uncached_attempts": 3,
+        "reported_estimated_uncached_credits": 6,
+        "registered_risk_findings": 2,
+        "risk_followup_attempts": 2,
+        "legitimate_suppressions": 0,
+        "finding_execution": "Both registered findings have a corresponding focused news search with matching queries and snapshot IDs. Both return dated results; W3/W7 survive in final evidence. Research's separate official-domain query yields zero results.",
+        "credit_interpretation": "Six estimated credits match three request-attributed uncached searches at two each; four are attributed to Risk and two to Research. No provider account bill independently verified."
+      },
+      "seconds": 103.453,
+      "risk_increment": "Risk adds a reported subsequent Apple modem deployment and a clearly qualified Samsung sample-development report. These are meaningful external context beyond S selection, but they do not satisfy official verification. Research's explicit official check is genuinely attempted yet inconclusive. No Current worker exists in this case, so observed context is directly attributable to Risk; whether Current could retrieve it is untested.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Official update remains unauthenticated despite a real check.",
+          "evidence": "The single Research search restricted to investor.qualcomm.com and sec.gov returns zero sources. Final reports the gap without claiming absence of official changes.",
+          "decision_effect": "A reader gains supported historical comparison and attributed subsequent context, but cannot quote an official revised outlook."
+        },
+        {
+          "severity": "minor",
+          "finding": "Reviewer removes an accurate statement of search scope.",
+          "evidence": "answer_coverage.removed_claims contains The search restricted to Qualcomm investor relations and SEC sources returned no sources, precisely matching live_mcp arguments and result_count=0.",
+          "decision_effect": "The final remains honest, but the exact unsuccessful acquisition scope is clearer in trace than in the delivered answer."
+        }
+      ]
+    },
+    {
+      "id": "heldout_05_nvda_full_official_export_update",
+      "variant": "both",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 1,
+        "honest_limits": 2,
+        "total": 6
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "partial",
+      "requested_output_audit": [
+        {
+          "output": "GAAP revenue, operating income and net income for both years",
+          "met": false,
+          "evidence": "Revenue/operating income and periods are correct, but net income is omitted. S354 actually includes the requested 72.880/120.067-billion net-income values; final does not extract them and explicitly marks the output incomplete."
+        },
+        {
+          "output": "Reproducible arithmetic and filing drivers",
+          "met": true,
+          "evidence": "F/C values match baseline and formulas correctly produce 65.47% growth and 62.42%/60.38% margins. S353/S354/S356 support market growth, margin mix, H20 charge and expense growth."
+        },
+        {
+          "output": "Export and concentration comparison with supported subsequent context",
+          "met": true,
+          "evidence": "S261-S263, S284/S341 and S296/S300 support the historical risk themes. Risk-owned W3/W13 add March approval reporting and June licensing-guidance reporting."
+        },
+        {
+          "output": "Precisely dated official export-control update",
+          "met": false,
+          "evidence": "Official W15 supports limited H200 shipments and a 0.4-billion first-half-FY2027 charge, but no publication/filing date is supplied. Final and coverage preserve this exact gap."
+        },
+        {
+          "output": "Two recent developments with outside reaction",
+          "met": true,
+          "evidence": "Current-owned official W20/W21 support August 26 AWS deployment plans and September 28 repurchase authorization. W22 identifies a September 28 analyst reaction reproduced September 30. All publication/event dates are within the requested window; planned deployments and authorizations are not called completed spending or deliveries."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "C1",
+            "C2",
+            "C3",
+            "S354"
+          ],
+          "finding": "Requested revenue/operating observations and formulas are correct. S354 contains net income for both years, so the net-income gap is a synthesis/output omission despite available source evidence, not proof that the data cannot be retrieved."
+        },
+        {
+          "sources": [
+            "S357"
+          ],
+          "finding": "The February 2026 H200 license and lack of program revenue are disclosed in the February 25 filing, after the FY2026 year-end. Final expressly distinguishes filing-date knowledge from fiscal-year-end knowledge."
+        },
+        {
+          "sources": [
+            "W3"
+          ],
+          "finding": "Reuters publication metadata is March 18 while body dateline is March 17. Final says Reuters reported March 18 and attributes approval to sources and purchase orders to management, not a verified completed delivery. This is appropriate report-versus-event qualification."
+        },
+        {
+          "sources": [
+            "W13"
+          ],
+          "finding": "June 1 Hill text quotes BIS guidance preserving restricted-headquarters/parent licensing requirements and describes non-enforcement of destination-based requirements separately. Final's continuing-exposure inference is supported without inventing a completed replacement rule."
+        },
+        {
+          "sources": [
+            "W15"
+          ],
+          "finding": "The first-half charge and less-than-1%-of-quarter Data Center shipments support limited commercial progress. They do not establish unrestricted market re-entry or a precise date for the publication. Reviewer removes a potentially misleading all-products restriction sentence, leaving a citation-only W15 line."
+        },
+        {
+          "sources": [
+            "W20",
+            "W21",
+            "W22"
+          ],
+          "finding": "Two-million-GPU 2027-2028 deployment plan, 150-billion additional/235-billion remaining repurchase authorization and anticipated execution through FY2028 match official text. FinanceFeeds quotes named Emarketer analyst Jacob Bourne and attributes the comments to Reuters on September 28, supporting the stated attribution chain; final does not repeat the page's price predictions."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 24,
+        "inspected": 24,
+        "http_200": 24,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": true,
+        "remnant_evidence": "A standalone [W15] line remains between the official-update paragraph and Outside research after reviewer removal."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 10,
+        "by_owner": {
+          "Risk Summary": 3,
+          "Filings Research": 1,
+          "Current Developments": 6
+        },
+        "tools": {
+          "tavily_search": 7,
+          "tavily_extract": 3
+        },
+        "uncached_attempts": 10,
+        "provider_errors": 1,
+        "reported_estimated_uncached_credits": 20,
+        "registered_risk_findings": 3,
+        "risk_followup_attempts": 3,
+        "legitimate_suppressions": 0,
+        "finding_execution": "Three focused news queries correspond to all three registered findings with matching snapshot evidence. Two produce material final W claims; the concentration query returns results but no qualifying dated customer-loss finding, which is honestly stated.",
+        "credit_interpretation": "Twenty estimated credits follow ten attempted uncached calls, including one Current provider error. Risk is attributed six estimated credits, Research two, Current twelve. Account billing is not independently verified."
+      },
+      "seconds": 245.775,
+      "risk_increment": "Risk-owned W3 and W13 supply two specific earlier post-filing events that baseline Current did not deliver: reported March H200 approval/orders and June guidance preserving headquarters-based licensing. These add risk-timeline detail, not new historical numbers or a solution to the missing official publication date. Risk's third search returns the same W15 official 10-Q identity later cited by Research; this is observable official-source overlap. Current independently supplies the recent AWS/buyback/reaction material, so those broader developments cannot be attributed to Risk's extra calls.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Both years' requested net-income values remain absent despite an available S354 table.",
+          "evidence": "S354 explicitly lists 120,067 and 72,880 million in its Net income row; final lists revenue and operating income only and reviewer marks net income missing.",
+          "decision_effect": "The financial brief is usable but the requested GAAP data set is incomplete."
+        },
+        {
+          "severity": "moderate",
+          "finding": "Official-update publication date remains unresolved.",
+          "evidence": "W15 published_date=null and no separate date evidence is returned. Final properly states this gap; fiscal-period charge timing alone cannot date publication.",
+          "decision_effect": "Specific update content is supported, while the explicit clearly dated official-update output remains incomplete."
+        },
+        {
+          "severity": "minor",
+          "finding": "Citation-only reviewer remnant persists.",
+          "evidence": "Standalone [W15] survives after the removed restriction/publication-date sentences.",
+          "decision_effect": "Small readability defect; it supplies no additional evidence-bearing proposition."
+        }
+      ]
+    },
+    {
+      "id": "heldout_06_intc_full_performance_and_risk",
+      "variant": "both",
+      "scores": {
+        "coverage": 1,
+        "synthesis": 2,
+        "provenance": 2,
+        "honest_limits": 1,
+        "total": 6
+      },
+      "useful": true,
+      "critical_failure": false,
+      "terminal_status": "completed",
+      "independent_completion_assessment": "Partial main-driver explanation despite the completed terminal status; recent risk context is useful.",
+      "requested_output_audit": [
+        {
+          "output": "All GAAP values and checked calculations",
+          "met": true,
+          "evidence": "All ten F/C source texts match the baseline exactly; the final preserves losses, period dates, revenue decrease and negative operating margins."
+        },
+        {
+          "output": "Main filing drivers of financial changes",
+          "met": false,
+          "evidence": "Revenue, segment costs, expense reductions and tax/divestiture effects are discussed, but the principal manufacturing-impairment/accelerated-depreciation explanation is removed. The final leaves a 9.464-billion operating-loss improvement without a complete substantive bridge and does not preserve the baseline's explicit limitation."
+        },
+        {
+          "output": "Two-year manufacturing and funding risks",
+          "met": true,
+          "evidence": "Complete S1/S2 and focused passages distinguish conditional 14A continuation, actual facility retrenchment, tile dependency, government-equity terms and recurring debt/SCIP exposure."
+        },
+        {
+          "output": "Two dated recent developments and attributable outside reaction",
+          "met": true,
+          "evidence": "August offering and October 21 Ohio milestone have dated reports; Futurum analyst, TechInsights analyst and JobsOhio executive are identified. Announced funding/targets are distinguished from completed proceeds, commissioned capacity or binding orders."
+        },
+        {
+          "output": "Connection to historical risks and residual uncertainty",
+          "met": true,
+          "evidence": "Customer discussions, Ohio progress, financing and production economics remain distinct. Final says four risk-subject follow-ups could not be assessed, rather than claiming no event occurred."
+        }
+      ],
+      "material_claim_checks": [
+        {
+          "sources": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "C1",
+            "C2",
+            "C3",
+            "C4"
+          ],
+          "finding": "Inputs and arithmetic match baseline: signed revenue decline, operating losses, parent net losses and rounded negative margins are correct."
+        },
+        {
+          "sources": [
+            "S292",
+            "S293",
+            "S294",
+            "S295",
+            "S296",
+            "S299",
+            "S300",
+            "S301",
+            "S305"
+          ],
+          "finding": "Surviving demand, segment cost, expense, deconsolidation, tax and divestiture claims are supported. S301 actually states Foundry loss fell from 13.3 to 10.3 billion mainly because impairment/accelerated-depreciation charges decreased from 3.3 billion to 950 million. The reviewer deletes the corresponding substantive driver sentence anyway, without marking the remaining main-driver gap."
+        },
+        {
+          "sources": [
+            "W1"
+          ],
+          "finding": "August 30 Igor's Lab text supports a reported second-quarter commitment to complete 14A and more concrete capacity discussions. Final treats these as progress rather than a signed external-customer contract or independently verified manufacturing economics."
+        },
+        {
+          "sources": [
+            "W8",
+            "W14",
+            "W15",
+            "W16"
+          ],
+          "finding": "October 21 CNBC and related reports support an installed truss, prospective 2030/2031 fab targets, and identified outside comments. The original CNBC story is itself available as W8; aVenture W14 is a syndication/aggregation, not a second independent confirmation. JobsOhio directly supports its own CEO's quoted reaction."
+        },
+        {
+          "sources": [
+            "W11",
+            "W15"
+          ],
+          "finding": "Futurum's August 11 page supports a 15-billion offering announced August 10 and a reported upsize to about 20 billion; October Quartz repeats the upsize. Final correctly avoids treating the announcement as completed proceeds. Brendan Burke's tooling interpretation is attributed and distinguished from fact about unrestricted financial capacity."
+        }
+      ],
+      "citation_audit": {
+        "registered_sources": 37,
+        "inspected": 37,
+        "http_200": 37,
+        "unregistered_final_citations": [],
+        "citation_only_remnants": true,
+        "remnant_evidence": "The operating-loss paragraph retains a sentence-final sequence [S301] [S299] [S305] after the substantive manufacturing-driver sentence is removed; extra citation spacing also remains in cost paragraphs."
+      },
+      "acquisition": {
+        "actual_tavily_invocations": 9,
+        "by_owner": {
+          "Risk Summary": 6,
+          "Current Developments": 3
+        },
+        "tools": {
+          "tavily_search": 8,
+          "tavily_extract": 1
+        },
+        "uncached_attempts": 9,
+        "reported_estimated_uncached_credits": 18,
+        "registered_risk_findings": 6,
+        "risk_followup_attempts": 6,
+        "legitimate_suppressions": 0,
+        "finding_execution": "Every registered finding has its focused news query actually invoked, with six results outcomes. Only 14A continuation and construction progress yield surviving Risk-owned final claims. The other subjects return results but final says their implications cannot be assessed; results status alone is not useful corroboration.",
+        "credit_interpretation": "Eighteen estimated credits correspond to nine attempted uncached calls: twelve Risk and six Current. No provider account charge independently verified."
+      },
+      "seconds": 270.296,
+      "risk_increment": "Risk-owned W1 adds a distinct reported 14A-continuation/customer-discussion update not in baseline. W8 adds a current construction milestone relative to baseline, but Current independently retrieves that same milestone via Quartz/JobsOhio/aggregation, so the event is not unique Risk value in this answer. Risk funding/tile searches also list source IDs later delivered by Current, creating observable overlap. Six Risk calls do not yield six useful independent conclusions.",
+      "issues": [
+        {
+          "severity": "moderate",
+          "finding": "Completed status overstates main-driver coverage after repair.",
+          "evidence": "answer_coverage marks every output addressed, yet removed_claims deletes the manufacturing-impairment/accelerated-depreciation explanation. Final never restores that explanation or states the baseline's explicit consolidated bridge limitation, despite available S301 support.",
+          "decision_effect": "The response is useful for financial observations and risk/current context but should be independently judged partial on the operating-results explanation."
+        },
+        {
+          "severity": "minor",
+          "finding": "Syndicated and duplicate milestone sources add apparent breadth without independent confirmation.",
+          "evidence": "W8 is CNBC, W14 republishes CNBC and W15 explicitly cites CNBC; W16 supplies a separate participant reaction. Final uses the attribution chain reasonably but these cannot count as four independent confirmations.",
+          "decision_effect": "Source and call counts overstate distinct event evidence."
+        }
+      ]
+    }
+  ],
+  "source_integrity": {
+    "reviewed_variants": [
+      "research",
+      "both"
+    ],
+    "runtime_unchanged_at_six_baselines": true,
+    "live_text_sha256": {
+      "checked": 27,
+      "matched": 27,
+      "mismatches": []
+    },
+    "filing_identity_hashes": "No conflicting text_sha256 values for any document_id within a reviewed capture. S-source text_sha256 is shared by multiple different passages from the same document; it is a document-identity hash, not an excerpt hash, so comparing it to each shortened passage would be invalid. Whole original documents were not independently re-fetched for this review.",
+    "inspection_status": "All 181 registered source records across twelve reviewed captures have one recorded HTTP 200 inspection. No unregistered final citation IDs found.",
+    "limitation": "Inspection records contain status only; this verifies inspectability and the locally returned W text hashes, not an independent re-fetch of each original publication."
+  },
+  "validation": {
+    "captured_rows": 12,
+    "reviewed_rows": 12,
+    "unique_variant_case_pairs": 12,
+    "cases_per_variant": {
+      "research": 6,
+      "both": 6
+    },
+    "all_captured_question_company_year_tuples_match_sealed_cases": true,
+    "all_score_totals_checked": true,
+    "runtime_unchanged_reported_by_capture": true,
+    "dataset_hash_note": "Raw sealed-cases file SHA256 remains the pre-acquisition value. The capture dataset_sha256 is a different serialization-level identifier; its generating representation was not inspected. Exact question/company/year tuples were independently compared for all twelve captures and match."
+  },
+  "aggregate_results": {
+    "research": {
+      "score_sum": 41,
+      "maximum_score": 48,
+      "useful": 5,
+      "critical_failures": 1,
+      "actual_tavily_invocations": 14,
+      "attributed_calls_by_owner": {
+        "Filings Research": 2,
+        "Risk Summary": 0,
+        "Current Developments": 12
+      },
+      "estimated_uncached_credits": 28,
+      "elapsed_seconds_sum": 768.863,
+      "elapsed_seconds_mean": 128.144
+    },
+    "both": {
+      "score_sum": 41,
+      "maximum_score": 48,
+      "useful": 6,
+      "critical_failures": 0,
+      "actual_tavily_invocations": 23,
+      "attributed_calls_by_owner": {
+        "Filings Research": 3,
+        "Risk Summary": 11,
+        "Current Developments": 9
+      },
+      "estimated_uncached_credits": 46,
+      "elapsed_seconds_sum": 802.303,
+      "elapsed_seconds_mean": 133.717
+    },
+    "difference_both_minus_research": {
+      "score_sum": 0,
+      "useful": 1,
+      "critical_failures": -1,
+      "actual_tavily_invocations": 9,
+      "estimated_uncached_credits": 18,
+      "elapsed_seconds_sum": 33.44,
+      "elapsed_seconds_mean": 5.573
+    },
+    "interpretation": "Descriptive paired observations only. One stochastic generation per variant/case, differing plans and Current searches, one fallback route and a Current provider error prevent causal quality/latency claims. Both completes one previously blocked check but does not improve total rubric score. Eleven Risk searches cost an estimated twenty-two credits; changing Research/Current acquisition elsewhere makes the net variant difference eighteen credits."
+  },
+  "pair_comparison": [
+    {
+      "case": "heldout_01_nvda_risk_continuity_no_web",
+      "research_score": 8,
+      "both_score": 8,
+      "research_useful": true,
+      "both_useful": true,
+      "research_critical": false,
+      "both_critical": false,
+      "seconds_delta": 2.37,
+      "calls_delta": 0,
+      "credits_delta": 0,
+      "finding": "Equivalent useful S-grounded comparison. Five finding follow-ups correctly suppressed by explicit no-web in both configurations; wording differences are not W value."
+    },
+    {
+      "case": "heldout_02_amd_risk_change",
+      "research_score": 8,
+      "both_score": 7,
+      "research_useful": true,
+      "both_useful": true,
+      "research_critical": false,
+      "both_critical": false,
+      "seconds_delta": -14.297,
+      "calls_delta": 0,
+      "credits_delta": 0,
+      "finding": "Both falls back to Research-only with no Risk worker or registered findings. Added 440-million net-charge detail comes from S passages; no Risk treatment was exercised. Generic unverified-coverage caveat and absent period dates reduce inspectability."
+    },
+    {
+      "case": "heldout_03_amd_official_correction",
+      "research_score": 7,
+      "both_score": 7,
+      "research_useful": true,
+      "both_useful": true,
+      "research_critical": false,
+      "both_critical": false,
+      "seconds_delta": -0.5,
+      "calls_delta": 0,
+      "credits_delta": 0,
+      "finding": "Both historical corrections are useful; one Research search in each yields wrong-issuer SEC material. No Risk worker. Equal unresolved later-update status; no acquisition gain."
+    },
+    {
+      "case": "heldout_04_qcom_official_customer_update",
+      "research_score": 5,
+      "both_score": 7,
+      "research_useful": false,
+      "both_useful": true,
+      "research_critical": true,
+      "both_critical": false,
+      "seconds_delta": 28.077,
+      "calls_delta": 3,
+      "credits_delta": 6,
+      "finding": "Both executes two risk checks and a real official-domain Research check, avoiding baseline's unjustified clarification. Risk adds attributed deployment/sampling reports; official revision remains unverified. The improvement combines routing, acquisition and synthesis and cannot be isolated to Risk alone."
+    },
+    {
+      "case": "heldout_05_nvda_full_official_export_update",
+      "research_score": 6,
+      "both_score": 6,
+      "research_useful": true,
+      "both_useful": true,
+      "research_critical": false,
+      "both_critical": false,
+      "seconds_delta": -3.582,
+      "calls_delta": 3,
+      "credits_delta": 6,
+      "finding": "Risk adds dated March approval/orders and June enforcement-guidance context. Research supplies the same narrow official quarterly update in both; Risk and Research overlap on its identity. Both variants omit net income and lack exact update-publication dating. Changed Current stories are not evidence of Risk's causal benefit."
+    },
+    {
+      "case": "heldout_06_intc_full_performance_and_risk",
+      "research_score": 7,
+      "both_score": 6,
+      "research_useful": true,
+      "both_useful": true,
+      "research_critical": false,
+      "both_critical": false,
+      "seconds_delta": 21.372,
+      "calls_delta": 3,
+      "credits_delta": 6,
+      "finding": "Risk adds a specific 14A-continuation report and construction context. Construction and financing evidence overlaps Current. Both silently loses the main-driver limitation after repair despite completed status; baseline's honest gap earns the stronger limits score."
+    }
+  ],
+  "trigger_policy_audit": {
+    "observed_policy": "Risk acquisition occurs on registration of a finding by the Risk worker. It is not a universal search for every request mentioning risk, and it does not replace explicit Research official verification or Current event windows.",
+    "both_registered_findings": 16,
+    "both_attempted_focused_followups": 11,
+    "both_no_web_suppressions": 5,
+    "matching_followup_evidence": "QCOM update 2/2, NVDA full 3/3 and INTC full 6/6 registered findings have actual focused Tavily news invocations, matching query/snapshot evidence. No registered enabled finding silently skipped in these captures.",
+    "zero_call_explanations": [
+      "No-web case: five legitimate explicit-instruction suppressions; no W acquisition is allowed.",
+      "AMD risk both: original historical question is routed to a Research-only fallback with generic filing_explanation; no Risk worker, finding registration or answer-coverage review. This is absence of treatment, not successful suppression or proof that Risk is unnecessary.",
+      "AMD amendment: Research-only request; official search is present but no Risk finding exists.",
+      "Baseline QCOM official update: zero calls arise from unnecessary clarification/ownership failure, not expected no-findings evidence."
+    ],
+    "scope_limit": "Findings classified added/changed can represent more explicit wording within existing exposure. The final answers often recognize this distinction, so invoking a search for each such finding should not be read as proof that each describes a new economic risk."
+  },
+  "capability_value": {
+    "filings_research_official_checks": "Necessary for explicit requests to verify what the company or SEC has officially changed. AMD correction searches show an honest failed search can coexist with a useful historical answer. NVDA quarterly material supplies a concrete limited-shipment/charge update; its publication date remains unresolved. QCOM shows that third-party risk reporting is insufficient to authenticate a revised company outlook.",
+    "risk_followups": "Add specific post-filing context tied to identified risks: QCOM modem deployments, NVDA approval/enforcement chronology, and INTC 14A continuation. They do not fix missing financial observations, missing official publication dates or main-driver synthesis failures. Eleven calls produce a smaller set of useful distinct conclusions; results and source counts alone overstate benefit.",
+    "current_developments": "Already supplies broad dated events and outside reactions. INTC construction/funding and NVDA's official quarterly source show overlap with Risk. NVDA Current stories differ materially across variants, preventing attribution of those differences to Risk.",
+    "recommendation": "Retain both capabilities for their distinct contracts: Research owns official verification; Risk provides focused post-filing checks of identified exposure; Current owns general recent developments and reactions. Prefer the Research-plus-Current path for historical comparisons and explicit official checks without a need for additional risk context. The evidence supports Risk as a targeted complement, not a replacement for Research or a demonstrated improvement from automatically searching every registered wording change.",
+    "risk_only_limit": "No Risk-only variant was acquired. These results cannot establish that Risk alone substitutes for Research, nor isolate the causal effect of adding each capability."
+  },
+  "final_claim_safety": {
+    "unsupported_business_fact_found_in_retained_answers": "No unambiguous retained material business claim was shown to contradict or exceed the inspected source text. This is a source-support audit, not independent verification of publication truth.",
+    "unsupported_operational_claim": "Baseline QCOM's Live search unavailable wording has no corresponding Tavily provider failure; the trace shows a check not performed pending unnecessary clarification.",
+    "important_omissions": [
+      "NVIDIA net income omitted in both full variants, even when S354 contains it in the both capture.",
+      "Exact official NVIDIA quarterly publication date missing in both full variants.",
+      "Intel main operating-loss bridge incomplete; baseline discloses the gap, both is marked completed after removing key supportable driver content."
+    ],
+    "reviewer_remnants": "Both full workflows retain orphaned or extra S/W citation remnants after claim removal. Source URLs and HTTP 200 alone do not establish useful complete output."
+  },
+  "limitations": [
+    "Six authored held-out questions, one run per configuration, local native FastAPI/SSE generation and actual Tavily calls; not Cloud Run, deployed-provider, formal RAGAS or repeated statistical evidence.",
+    "Scoring is qualitative and explicit; useful flags allow independently usable partial answers. The critical baseline QCOM flag is a core-workflow clarification failure, not a financial factual hallucination.",
+    "Publication dates, event dates, outlook dates and retrieval dates were assessed separately. Empty or irrelevant search results are never treated as proof that no event or official update exists.",
+    "Two credits per uncached attempted tool is the capture's conservative attribution convention, including unsuccessful calls; it is not a verified Tavily invoice or actual billing claim.",
+    "All captures match the sealed question/company/year tuples. Runtime_unchanged is reported true. Code was not inspected or edited during review, and earlier development artifacts remain separate."
+  ]
+}

@@ -12,6 +12,16 @@ List every distinct requested output, using these kinds:
 - capabilities: questions about this application's abilities, tools, source coverage or agents.
 - unsupported: market prices, multiples, analyst forecasts, trades or personalized portfolios.
 
+When automatic_risk_live_checks is true, Risk Summary checks each registered risk
+finding for focused post-filing context. A risk comparison asking whether those specific risks materialized stays
+one risk_changes output. Do not add current_developments just to repeat that focused
+check. Add current_developments/public_reaction separately when the user requests
+broader news, recent company activity or outside viewpoints. A specific request to
+verify an official update still belongs to official_update and Filings Research.
+When automatic_risk_live_checks is false, risk_changes covers only the filings;
+preserve any explicitly requested post-filing materialization check as a separate
+current_developments output. Never silently drop that requested result.
+
 A revenue-change explanation normally needs checked_calculations and filing_explanation.
 Data retrieval is an automatic dependency of arithmetic. Do not list financial_inputs
 merely as an internal prerequisite; include it when the user requests reported values.

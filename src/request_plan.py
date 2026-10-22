@@ -1,6 +1,7 @@
 """Bounded semantic request decomposition and an independent answer coverage check."""
 
 import json
+import os
 import re
 from contextlib import aclosing
 from datetime import datetime, timezone
@@ -70,7 +71,7 @@ async def structured(prompt, name, schema, model_stream, emit, *, agent, context
 
 async def decompose(state, model_stream, emit):
     prompt = (ROOT / "prompts/request_plan.md").read_text(encoding="utf-8")
-    value = await structured(prompt + "\nRequest: " + json.dumps({**{k: state[k] for k in ("question", "companies", "years")}, "today": datetime.now(timezone.utc).date().isoformat()}), "submit_plan", RequestPlan.model_json_schema(), model_stream, emit, agent="Request Planner", context=RoutingContext.from_state(state, activity_id="plan", phase="planner"))
+    value = await structured(prompt + "\nRequest: " + json.dumps({**{k: state[k] for k in ("question", "companies", "years")}, "today": datetime.now(timezone.utc).date().isoformat(), "automatic_risk_live_checks": state.get("risk_live_check", os.getenv("RISK_LIVE_CHECK", "on") != "off")}), "submit_plan", RequestPlan.model_json_schema(), model_stream, emit, agent="Request Planner", context=RoutingContext.from_state(state, activity_id="plan", phase="planner"))
     plan = RequestPlan.model_validate(value).model_dump()
     for scope in [plan, *plan["outputs"]]:
         for key in ("start_date", "end_date"):
@@ -83,7 +84,7 @@ async def decompose(state, model_stream, emit):
     return plan
 
 
-async def coverage(question, outputs, answer, sources, model_stream, emit, *, routing_context=None):
+async def coverage(question, outputs, answer, sources, model_stream, emit, *, routing_context=None, risk_live_checks=None):
     cited = set(re.findall(r"\[([SFCW]\d+)\]", answer))
     # Checked calculations retain their original inputs even when only the derived
     # measure belongs in the answer. Make that lineage available to the reviewer.
@@ -98,7 +99,11 @@ async def coverage(question, outputs, answer, sources, model_stream, emit, *, ro
     for sid, source in sources.items():
         if sid not in cited:
             continue
-        excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year")}, "text": source.get("text", "")[:12000]}
+        # A complete-section citation establishes cross-section presence/absence.
+        # Truncating its tail made valid risk findings look unsupported to review.
+        text = source.get("text", "")
+        complete_risk = source.get("section") == "risk_factors" and source.get("complete_section")
+        excerpt = {**{k: source.get(k) for k in ("source_id", "company", "kind", "published_date", "date_source", "date_excerpt", "date_snapshot_id", "source_tier", "title", "value", "unit", "metric", "formula", "source_ids", "fiscal_year", "fiscal_start", "fiscal_end", "filed", "form", "accession", "version", "section", "complete_section")}, "text": text if complete_risk else text[:12000]}
         remaining, observations = 24000, []
         for row in source.get("observations", []):
             if row.get("text") == source.get("text") or not remaining:
@@ -109,7 +114,7 @@ async def coverage(question, outputs, answer, sources, model_stream, emit, *, ro
         excerpt["observations"] = observations
         excerpts.append(excerpt)
     from src.capabilities import capability_request
-    prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "untrusted_source_excerpts": excerpts})
+    prompt = (ROOT / "prompts/answer_coverage.md").read_text(encoding="utf-8") + "\n" + json.dumps({"question": question, "required_outputs": outputs, "answer": answer, "implemented_capabilities": capability_request("What can this system do?")["answer"], "risk_acquisition_checks": risk_live_checks or [], "untrusted_source_excerpts": excerpts})
     context = routing_context or RoutingContext(activity_id="review", phase="reviewer",
                              companies=len({s.get("company") for s in sources.values() if s.get("company")}) or 1,
                              years=len({s.get("fiscal_year") for s in sources.values() if s.get("fiscal_year")}) or 1,

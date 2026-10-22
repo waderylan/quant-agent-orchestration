@@ -1,0 +1,87 @@
+{
+  "status": "complete",
+  "scope": "Independent local review of final targeted hosted and native QCOM captures after the last generic semantic refinement. Earlier hosted, semantic, date-validation and twelve-capture comparison artifacts are preserved. No implementation inspection, external acquisition or transcript writes.",
+  "reviewed_capture_count": 2,
+  "headline": "Both final answers preserve actual filing dates and distinguish historical adoption, forecasts and realized aggregate effects. Native passes the targeted semantic checks. Hosted retains a moderate qualitative-versus-quantified wording error, but the earlier new-economic-exposure and unsupported Apple-causality assertions do not recur.",
+  "cases": [
+    {
+      "file": "artifacts/m12/api-final-validation.json",
+      "id": "risk-qcom",
+      "seconds": 71.874,
+      "terminal_status": "completed",
+      "useful": true,
+      "critical_failure": false,
+      "semantic_assessment": "Usable with a retained material wording qualification; not a clean pass of every interpretation detail.",
+      "date_bug_recurred": false,
+      "unsupported_new_economic_exposure_recurred": false,
+      "unsupported_Apple_cause_for_realized_handset_decline_recurred": false,
+      "supported_improvements": [
+        "Opening correctly distinguishes FY2024 fiscal end 2024-09-29 / filed 2024-11-06 and FY2025 fiscal end 2025-09-28 / filed 2025-11-05. Both check records independently carry filed and fiscal_end, with searches starting 2025-11-06.",
+        "The earlier-only statement is now explicitly scoped to the customer-concentration factor. The next paragraph acknowledges Apple's earlier in-house modem program was described separately in S1 and explicitly calls the change an expansion of existing exposure. This differs materially from the earlier whole-filing absence/new-economic-exposure error.",
+        "The final explicitly dates C1's February 2025 debut before the newer filing even though the cited article was published later. It does not count that old deployment as a new post-filing event.",
+        "Later non-handset and seasonal revenue projections are attributed through third-party reports to management, qualified as non-official and forward-looking, and not offered as proof of realized QCT loss.",
+        "The previously unsupported causal sentence tying the realized 20% handset decline to Apple C2 adoption is absent."
+      ],
+      "remaining_issue": {
+        "severity": "moderate",
+        "exact_final_claim": "This is a new, directly quantified severity statement introducing a specific QCT segment impact that was not in the prior year's disclosure",
+        "evidence": "S2 expresses significant negative impact on QCT revenue, operating results and cash flows without an amount, percentage, range or timing estimate. S1 already warns about own-modem substitution under vertical integration; the final now correctly acknowledges that elsewhere.",
+        "assessment": "New explicit segment-specific qualitative severity is supported. Calling the statement directly quantified is not. This remaining error should be disclosed as a hosted interpretation limit rather than converted into a claim of a new underlying economic exposure."
+      },
+      "source_audit": [
+        {"sources": ["S1", "S2"], "finding": "Complete original annual sections support stable concentration, separate prior Apple substitution language, new explicit QCT consequences, and broader named counterparties. Paragraph-local and whole-inventory claims are now distinguishable."},
+        {"sources": ["W2"], "finding": "April 28 reporting explicitly dates C1 in iPhone 16e to February 2025; final correctly labels that event pre-filing."},
+        {"sources": ["W3"], "finding": "July 30 text reports future seasonal revenue expectations separately from actual handset weakness attributed to memory inflation. Final uses the prospective seasonal statement and does not recreate the earlier unsupported actual-cause inference."},
+        {"sources": ["W4", "W5"], "finding": "W4 includes prospective Apple coverage/revenue commentary; W5 explicitly says management expects fiscal-2027 non-handset growth to replace fiscal-2026 Apple product revenue. Final preserves attribution and expectations rather than asserting accomplished offset."}
+      ],
+      "integrity": {"source_records": 6, "http_200_inspections": 6, "web_text_hashes_checked": 4, "web_text_hashes_matched": 4, "unregistered_final_citations": [], "malformed_unverified_source_markers": 0},
+      "acquisition": {"actual_risk_searches": 2, "registered_findings": 2, "all_followups_invoked": true, "estimated_uncached_credits": 4},
+      "reviewer_limit": "Coverage marks complete with no unsupported claims; it does not flag the quantified-versus-qualitative misdescription."
+    },
+    {
+      "file": "artifacts/m12/native-final-validation.json",
+      "id": "date_validation_qcom_customer_modems",
+      "seconds": 78.130,
+      "terminal_status": "completed",
+      "useful": true,
+      "critical_failure": false,
+      "semantic_assessment": "Passes this targeted source/date/attribution review; no material retained error identified.",
+      "date_bug_recurred": false,
+      "unsupported_new_economic_exposure_recurred": false,
+      "unsupported_Apple_cause_for_realized_handset_decline_recurred": false,
+      "supported_behavior": [
+        "Actual November filing dates and September year-ends are separate, with the correct post-filing search window.",
+        "FY2024's existing Apple modem expectation, Samsung chips and Chinese OEM substitution are explicitly preserved. FY2025's new customer name and stronger QCT impact wording are not treated as new economic exposure or proof that concentration increased.",
+        "July 30 reporting of CEO Amon's approximately halved September-to-December Apple revenue outlook remains a prospective company expectation, not a completed loss.",
+        "September teardown evidence supports partial model-specific substitution while retaining Qualcomm in the U.S. flagship; final does not claim a complete Apple exit.",
+        "September 1 reporting links purchase reductions and older Snapdragon selection to memory costs. Final expressly says this does not establish causation by Apple/Samsung/Xiaomi internal chips.",
+        "Undated underlying Samsung/Xiaomi actions remain a bounded evidence gap, not a no-event conclusion."
+      ],
+      "source_audit": [
+        {"sources": ["S1", "S2", "S3", "S4", "S5", "S6"], "finding": "Both full annual sections and focused concentration/vertical-integration passages support the historical comparison and actual filing metadata."},
+        {"sources": ["W1"], "finding": "Source explicitly attributes the future roughly 50% Apple-product revenue decline to CEO Amon's July 29 interview. Final states the July 30 report date and the future forecast periods accurately."},
+        {"sources": ["W2"], "finding": "Reported model table and U.S. teardown support mixed modem sourcing. Final attributes the report and preserves partial substitution."},
+        {"sources": ["W6", "W8"], "finding": "W6 gives Samsung/Xiaomi commentary without action dates. W8 attributes handset purchasing pressure to memory-cost effects. Final preserves both limitations and does not turn the bank's future phase-out expectation into company guidance."}
+      ],
+      "integrity": {"source_records": 10, "http_200_inspections": 10, "web_text_hashes_checked": 4, "web_text_hashes_matched": 4, "unregistered_final_citations": [], "malformed_unverified_source_markers": 0},
+      "acquisition": {"actual_risk_searches": 2, "registered_findings": 2, "all_followups_invoked": true, "estimated_uncached_credits": 4},
+      "completion": "Unlike the previous native semantic capture, this final trace includes answer_coverage, marks the requested output addressed and has no generic unverified-request caveat."
+    }
+  ],
+  "regression_summary": {
+    "filing_date_substituted_by_fiscal_end": "Not observed in either final response.",
+    "whole_older_inventory_Apple_absence": "Not observed in either final response; hosted explicitly acknowledges the older separate Apple program discussion.",
+    "economic_novelty_from_wording": "Not observed as an underlying new-risk claim; hosted still incorrectly calls qualitative severity quantified.",
+    "forecast_speaker_upgrade": "No recurrence identified in these selected final claims.",
+    "realized_handset_decline_assigned_to_Apple_without_support": "Not observed in either final response.",
+    "historical_retell_as_new_event": "Not observed; hosted explicitly dates the C1 event before filing.",
+    "broader_NVDA_status": "Not retested in this final targeted batch. The preserved semantic-review.json NVDA issues, including malformed citations, missing official-update publication date, inadequate filing drivers and scope drift, are not cleared by these QCOM-only results."
+  },
+  "validation": {"capture_count": 2, "distinct_file_case_pairs": 2, "runtime_unchanged_reported_for_each_capture": true, "total_source_records": 16, "total_http_200_inspections": 16, "total_web_text_hashes_checked": 8, "total_web_text_hashes_matched": 8, "total_actual_risk_searches": 4},
+  "limits": [
+    "One hosted and one native targeted response, using related but different questions and retrieved evidence; no new quality score or causal model/prompt comparison.",
+    "All source support is assessed from locally captured text and observations; no original publication was independently re-fetched.",
+    "Completed tool execution and source-inspection success are separate from semantic correctness. The hosted quantified claim remains a documented limitation.",
+    "Original twelve held-out captures and scores, development reviews, hosted-review.json, semantic-review.json and prior date-validation reviews remain unchanged by this final review."
+  ]
+}

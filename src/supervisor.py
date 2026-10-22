@@ -362,13 +362,13 @@ def cooperative_graph(
         semantic, planning_gap = {}, []
         if not error and (tasks or capability) and os.getenv("REQUEST_PLANNER", "semantic") == "semantic":
             from src.request_plan import decompose
-            from src.request_routing import NEGATED_LIVE
+            from src.request_routing import web_prohibited
             try:
                 semantic = await decompose({**state, "question": original_question, "companies": companies}, model_stream, writer)
                 kinds = {o["kind"] for o in semantic["outputs"]}
                 if "capabilities" in kinds and not capability:
                     capability = capability_request("What can this system do?")
-                forbidden = bool(re.search(NEGATED_LIVE + r"|\b(?:no (?:web|live|online)(?: research| search)?|only (?:the )?filings|filings only)\b", state["question"], re.I))
+                forbidden = web_prohibited(state["question"])
                 needs_live = bool(kinds & {"current_developments", "public_reaction"})
                 intent = "developments" if needs_live else "verify" if "official_update" in kinds else "none"
                 if forbidden and intent != "none":
@@ -590,13 +590,15 @@ def cooperative_graph(
                     + ", ".join(state["companies"])
                     + " in fiscal years "
                     + ", ".join(map(str, state["years"]))
-                    + ". Preserve supplied verified figures and calculations with original filing citations and actual fiscal dates. Do not calculate new figures. Assess only the requested explanation; do not demand unrequested metrics, a full causal bridge or a full reconciliation when a qualified explanation of important differences answers the question. Risk-change and live outputs belong to their assigned specialists."
+                    + ". Preserve supplied verified figures and calculations with original filing citations and actual fiscal dates. Do not calculate new figures. Assess the requested explanation and any enabled official-update check; do not demand unrequested metrics, a full causal bridge or a full reconciliation when a qualified explanation of important differences answers the question. Risk comparisons and broad developments belong to their assigned specialists."
                 + (" Include the requested original annual risk context and its relationship to the business mix; do not infer reduced risk from a calculated mix alone." if not any(t.worker == "risk" for t in task.plan) and re.search(r"\brisks?\b", state["question"], re.I) else "")
                 + (" Explain the release headline versus consolidated GAAP measures with the release's reconciliation and definitions; do not substitute adjusted earnings for GAAP operating income." if re.search(r"\b(release|headline|adjusted|non.GAAP)\b", state["question"], re.I) else "")
                 )
             local["handoff_role_note"] = (
                 "Provide only the requested filing drivers and interpretation of supplied checked figures. Preserve F/C values and bases. Risk Summary outputs are composed separately; do not duplicate their briefs or recalculate their figures."
             )
+            if step.worker == "research" and local["live_check"]:
+                local["handoff_role_note"] += " Also complete the assigned official-update check here using the enabled shared web tool; it has no separate worker. Broad current developments remain with Current Developments."
             if step.worker == "current":
                 local["handoff_role_note"] = "Answer external-research outputs within research_windows with W citations. Filing explanations, figures, calculations and risk comparisons are already in the answer; relate outside findings to them without repeating them."
             async with asyncio.timeout(WORKER_TIMEOUT_SECONDS):
@@ -630,7 +632,7 @@ def cooperative_graph(
                     )
                 elif step.worker == "risk":
                     result = await risk_turn(
-                        index, local, emit, model_stream=bounded_model, emit_answer=last
+                        index, local, emit, model_stream=bounded_model, emit_answer=last, gateway=gateway
                     )
                 elif step.worker == "current":
                     result = await current_turn(local, emit, gateway=gateway, model_stream=bounded_model, emit_answer=last)
@@ -858,11 +860,11 @@ def cooperative_graph(
             writer({"type": "activity", "data": {"id": "review", "agent": "Answer Reviewer", "status": "running", "task": "Check answer"}})
             review_status = "failed"
             try:
-                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"))
+                review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"), risk_live_checks=state.get("risk_live_checks"))
                 answer = remove_unsupported(answer, review["unsupported_claims"])
                 if review["unsupported_claims"]:
                     removed = review["unsupported_claims"]
-                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"))
+                    review = await coverage(state.get("original_question", state["question"]), state["request_plan"]["outputs"], answer, state.get("evidence", {}), model_stream, writer, routing_context=RoutingContext.from_state(state, activity_id="review", phase="reviewer"), risk_live_checks=state.get("risk_live_checks"))
                     # One bounded repair pass. If a second check finds more unsupported
                     # claims, remove them and retain the partial outcome.
                     answer = remove_unsupported(answer, review["unsupported_claims"])

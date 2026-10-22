@@ -68,6 +68,7 @@ class State(TypedDict, total=False):
     live_sources: dict
     risk_sources: dict
     risk_changes: list[dict]
+    risk_live_checks: list[dict]
     risk_answer: str
     question: str
     companies: list[str]
@@ -223,6 +224,9 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
 
     class ResearchHandler:
         max_tool_calls = sources.max_tool_calls
+
+        # Hosted role instructions include all outputs owned by this invocation.
+        assigned_outputs = ("filing_explanation", "official_update") if live else ("filing_explanation",)
 
         def __call__(self, name, arguments):
             if name == "inspect_source" and set(arguments) == {"source_id"} and arguments["source_id"] in analysis_sources:

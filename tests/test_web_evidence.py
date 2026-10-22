@@ -74,3 +74,12 @@ def test_tracking_dedup_preserves_resource_identity():
 ])
 def test_primary_syndication_requires_issuer_attribution(url, text, company, expected):
     assert source_tier(url, text, company) == expected
+
+
+def test_official_filing_title_is_a_publication_label_not_an_event_or_url_date():
+    row = {"url": "https://ir.amd.com/financial-information/sec-filings/content/fixture", "title": "August 5, 2026 - 10-Q: Quarterly report | Advanced Micro Devices, Inc."}
+    result = publication_date(row, "Undated search excerpt discusses earlier events.")
+    assert result["published_date"] == "2026-08-05" and result["date_source"] == "filing_title"
+    assert result["date_excerpt"] == row["title"]
+    assert publication_date({**row, "title": "August 5, 2026 - AMD export disruption reported"}, "")['published_date'] is None
+    assert publication_date({**row, "url": "https://reporter.example/sec-filings/fixture"}, "")['published_date'] is None

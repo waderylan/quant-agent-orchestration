@@ -1,0 +1,977 @@
+{
+  "checked_at": "2026-10-22T16:35:41.527862+00:00",
+  "capture_sha256": "46bf53fee35061cf436eb57b0cafe16f9e9e7f76a831340ce25ef1ce15e31dce",
+  "dataset_sha256": "3afd1630c9a0892a7a5c9ded9d5caf38e2752f2a1a474ad058e21932cd5684c0",
+  "profile": "api",
+  "method": "Matched native FastAPI/SSE cases; actual generation and Tavily/cache, not formal RAGAS or Cloud Run",
+  "runtime_hashes": {
+    "main.py": "70cc1cec070d68d165f08b20406fb85bd0ba22c408e458a3e625388c149c6e37",
+    "src/analysis_artifacts.py": "2e8d47e085053fd40c7bb71c397141618b931e770e491998f3193dc4ea0f608e",
+    "src/capabilities.py": "36a2b1e51eeb79a4604020b3077e30095e14792d914f10ea1ea8cfa9478472c6",
+    "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+    "src/codex_transport.py": "263fb4de22857bb5ea9a696e968718ea8eb266d04856b93f10ba416090d27386",
+    "src/current_developments.py": "abab9d6af70e997cae690e13a4277be39eaf1704699cb6528204ea1e85ca9f48",
+    "src/filing_financials.py": "da9b3ed23c4f4851d3aea2cee880f256ec9ff7ec134be9f07a4a0bf5161eeadf",
+    "src/financial_data.py": "916ed5f0fc6f5f99fa55f45cda18e75cc58eaf0a06a052da676f37ef23a6a8a8",
+    "src/financial_workflow.py": "153e0fc317b8cc248990cd618d5d01e51487ddedeb8620713a5ccf5d7440b687",
+    "src/generation.py": "984e81794e531734452132bbbc6d1708acdd46e81516460021fc7d2a960a5a42",
+    "src/generation_context.py": "32d8cd9bf283012f517b7a261f8d5a73daa9de7fc6376c55c885308cbfa9918f",
+    "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+    "src/live_mcp.py": "0b4cc076662f0a86a2afa925acab8077f9f470de82c1ab36fb818d35ceac93ef",
+    "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+    "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+    "src/provider_models.py": "61ff30e16bbba0543ca9bb7529f6dfde6705842339f5e266510163020e8f5c95",
+    "src/provider_policy.py": "d63bf39f0b5505064a5a6037cc27a4f0b5f1f61caf266b79e7836f5f30c7bce6",
+    "src/quant_analysis.py": "a1b84bb79de9adf6007393eca204da6ae2153ea486fce22f0ff1b22c5f31a6f6",
+    "src/quant_runner.py": "b626d174dd2c22cc6b132ee6866b7b4ff088404dcabf5312ce6f096675f4d0ef",
+    "src/quant_workflow.py": "0ace26a67fc565947bac9dd616a194e2920823439aa0c2b73ee7543ada728ec7",
+    "src/request_plan.py": "6400c9cf7f1fb37bddcc3176050297ef89cca13ee9061b4a31ba460b7cca518e",
+    "src/request_routing.py": "1974889000baf23e419fec1a011dbf3059fa97d9e939121fb2c49c98086cc04a",
+    "src/research_index.py": "d4dea099c47f0d6f6353a04c50e08f886eb31ab13d63ce5d23bc9e3e4799c5e1",
+    "src/research_workflow.py": "38bc19f58ac5e11b40bfa8deeca3446810bedf16cede41063241d71e69d84808",
+    "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+    "src/risk_live.py": "64efac1fa73ef1021b6aa82fd73a84dc24114216e15fa42d7ac172d6512deb1b",
+    "src/risk_summary.py": "017ae0ea5a49a80397f0cc493d00427ad2a05ca259a482483d9583ad8457e2eb",
+    "src/source_collection.py": "3bbbb3d598e9e04399427e52d26ff03809442db084c538fda8a004902a3420a1",
+    "src/source_inventory.py": "7016cc3a1340d45b3fbfd810f5cbef94e90642aa5d44f5d1eebc28209618022e",
+    "src/supervisor.py": "23eedc9511461bf83d00277198a852922c041d630a1af28227e53346fcd42370",
+    "src/task_scope.py": "21d0db70fbbbb2e7eaab829efaae9fc64aadb334fca22f820940a6c6d4728bd4",
+    "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+    "src/web_evidence.py": "788131ef5ae59a4cabb2706de547f3011d9f415eb3f307d94697fbfe0488b4ae",
+    "prompts/answer_coverage.md": "cf75d15bea133bd88f803f241a6cec07733fa750c660a7e2c718260a5ef2a7d1",
+    "prompts/current_developments.md": "45aac934f5960b6a9d308b1ca82f27a9299ca913aa6d286b1fb6735d2f7218dc",
+    "prompts/filing_revenue_inputs.md": "61c86953a1d99250a3391a01a615e1225ac3010355c730e2e25a1d6980807cb9",
+    "prompts/filings_research.md": "9415996f9f16ac9868ae3e87a67cefa1184028a0e3b937d68198c23a1fef3684",
+    "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+    "prompts/quant.md": "d680832a3f6944211cf43a8ddd51b0394af5263441ffa0d4cabcdb9ffda66a66",
+    "prompts/request_plan.md": "482e4d912098d45f7d27c7262873796544667587b92cb8cba57e3c7f11b1d4cd",
+    "prompts/risk_summary.md": "1d60a944355a436898de63ffc0b11f94ca679e8b1607bae16de178066094f209",
+    "web/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "web/agent-activity.js": "e40dd16a4eb364d40ff13edc969d2eb77f9ceedd9d97d1f98581b62aff87c82d",
+    "web/index.html": "ec676cc355b0d1a33dbdd1611110f505f6e4316bbc26a04ed3cc0d6406796f16"
+  },
+  "runtime_unchanged": true,
+  "cases": [
+    {
+      "id": "risk-qcom",
+      "variant": "both",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "question": "Did Qualcomm's customer-concentration risk change from FY2024 to FY2025, or is it mostly the same warning? Give me a concise risk brief.",
+      "answer": "## Risk Brief: Qualcomm Customer-Concentration Disclosure, FY2024 10-K vs FY2025 10-K\n\n**Periods compared:** FY2024 10-K (fiscal year ended September 29, 2024; filed November 6, 2024) [S1] vs. FY2025 10-K (fiscal year ended September 28, 2025; filed November 5, 2025) [S2].\n\n### What changed and why it matters\n\n**1. New severity language on Apple modem transition (material).** In the customer-concentration risk factor, both filings disclose that Apple buys Qualcomm's lower-margin MDM/thin-modem products. S1 stated only that revenues could be negatively impacted to the extent Apple takes device share from Qualcomm's integrated modem+processor customers [S1]. S2 adds an explicit expectation that \"Apple will increasingly use its own modem products, rather than our products, in its future devices, which will have a significant negative impact on our QCT revenues, results of operations and cash flows\" [S2]. This is a new, directly quantified severity statement introducing a specific QCT segment impact that was not in the prior year's disclosure [S1][S2].\n\n**2. Broader named counterparties in vertical integration (material).** S1 named \"Samsung\" as the sole example of a largest customer developing its own integrated circuits, with Apple's in-house modem program described separately [S1]. S2 names \"Apple, Samsung and Xiaomi\" as developing their own integrated circuit products and states Qualcomm expects them to use those products in some or all future devices [S2]. Xiaomi is newly added as a named counterparty [S1][S2]. The underlying warning on customer vertical integration was already present in S1, so this is an expanded, changed scope of the existing concentration exposure rather than a new risk category [S1][S2].\n\n### Largely stable disclosure\nThe core concentration warning — significant revenue from a small number of customers/licensees, premium-tier handset reliance, Chinese OEM concentration, licensing revenue concentrated among a limited number of licensees, and reduced purchases causing revenue/margin harm — is substantially the same between the two filings [S1][S2]. Minor wording changes (e.g., \"more than 300 licensees\" to \"many licensees\"; \"made in China 2025\" to \"prioritized semiconductor self-sufficiency\") do not alter the economic exposure described [S1][S2].\n\n### Post-filing context (window November 6, 2025 onward)\nReporting after the FY2025 filing corroborates the risk Qualcomm disclosed: an Apple C1 in-house modem debuted in the iPhone 16e in February 2025 (an event before this filing), and later reporting indicates Apple will continue expanding in-house modem coverage, with Qualcomm's share of Apple modem volumes expected to be materially lower over subsequent launch cycles [W2][W4]. Third-party reporting attributes to Qualcomm management at a later date projections that fiscal 2027 non-handset growth is expected to replace fiscal 2026 Apple product revenue [W5], and that the December quarter would no longer be Qualcomm's revenue peak season [W3]. These are attributed, non-official, forward-looking accounts and do not change the filed classification; the filed disclosure remains a forward-looking risk statement, and the realized QCT revenue impact is not established by the filings themselves [S1][S2][W3][W5].\n\n**Bottom line:** The FY2025 10-K materially intensifies the disclosed severity of the Apple modem-transition risk (explicit significant QCT impact) and broadens named customer counterparties to include Xiaomi, while the core customer-concentration warning otherwise remains substantially unchanged.",
+      "terminal": {
+        "type": "complete",
+        "data": {
+          "status": "completed",
+          "verified_citations": true,
+          "provider_routes": [
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "plan",
+              "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 10166,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00601076",
+              "queue_seconds": 0.018
+            },
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "plan",
+              "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 11791,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00623826",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Request Planner",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "plan",
+              "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "structured_plan",
+              "reason": "Planning errors cascade to every worker; decompose with the reasoning model; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "plan",
+                "phase": "planner",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 13379,
+              "max_output_tokens": 16384,
+              "maximum_cost_usd": "0.00646058",
+              "queue_seconds": 0.007
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "worker-1",
+              "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 317094,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05356820",
+              "queue_seconds": 0.017
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "worker-1",
+              "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+              "round": 1,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 497445,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.07881734",
+              "queue_seconds": 0.009
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "worker-1",
+              "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+              "round": 2,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 527788,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.08306536",
+              "queue_seconds": 0.006
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "worker-1",
+              "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+              "round": 3,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 558576,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.08737568",
+              "queue_seconds": 0.01
+            },
+            {
+              "node": "provider_route",
+              "agent": "Risk Summary",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "worker-1",
+              "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+              "round": 4,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Compare original filing risks and check each registered finding through shared Tavily MCP",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "worker-1",
+                "phase": "worker",
+                "companies": 1,
+                "years": 2,
+                "output": "risk_changes",
+                "evidence_kinds": [],
+                "source_conflict": false
+              },
+              "input_token_bound": 557176,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.08717968",
+              "queue_seconds": 0.016
+            },
+            {
+              "node": "provider_route",
+              "agent": "Answer Reviewer",
+              "request_id": "24cb783932804dec99d04a57c0e3d69e",
+              "activity_id": "review",
+              "invocation_id": "bd2033bc518a4a4ba6424b480d879afa",
+              "round": 0,
+              "provider": "nebius",
+              "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+              "publisher": "DeepSeek",
+              "rule": "complex_evidence",
+              "reason": "Comparison, source conflict, risk alignment, mixed evidence, or large context; Understand every requested output and check original-request coverage",
+              "context_limit": 1024000,
+              "policy": "m11-v2",
+              "task_context": {
+                "request_id": "24cb783932804dec99d04a57c0e3d69e",
+                "activity_id": "review",
+                "phase": "reviewer",
+                "companies": 1,
+                "years": 2,
+                "output": "",
+                "evidence_kinds": [
+                  "S",
+                  "W"
+                ],
+                "source_conflict": false
+              },
+              "input_token_bound": 333097,
+              "max_output_tokens": 32768,
+              "maximum_cost_usd": "0.05580862",
+              "queue_seconds": 0.011
+            }
+          ],
+          "request_id": "24cb783932804dec99d04a57c0e3d69e",
+          "coverage_checked": true
+        }
+      },
+      "seconds": 71.874,
+      "answer_token_ttft_seconds": 56.048,
+      "estimated_uncached_credits": 4,
+      "inspections": [
+        {
+          "source_id": "S1",
+          "status": 200
+        },
+        {
+          "source_id": "S2",
+          "status": 200
+        },
+        {
+          "source_id": "W2",
+          "status": 200
+        },
+        {
+          "source_id": "W3",
+          "status": 200
+        },
+        {
+          "source_id": "W4",
+          "status": 200
+        },
+        {
+          "source_id": "W5",
+          "status": 200
+        }
+      ],
+      "answer_sha256": "398cbd00708f72f15b6aece105ec2d1b6f3ad22879b41a361cadfebc3ce2de9a",
+      "agent_seconds": {
+        "Supervisor": [
+          7.306
+        ],
+        "Risk Summary": [
+          53.963
+        ],
+        "Answer Reviewer": [
+          9.455
+        ]
+      },
+      "live_calls": [
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Qualcomm Apple modem transition impact on QCT revenues results of operations",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "cache": false,
+          "outcome": "returned"
+        },
+        {
+          "agent": "Risk Summary",
+          "node": "live_mcp",
+          "server": "tavily-mcp",
+          "tool": "tavily_search",
+          "arguments": {
+            "query": "Qualcomm customers developing own integrated circuits Samsung Xiaomi Apple chipset in-house",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "result_count": 5,
+          "snapshot_id": "53eae0b52c67a4150075b77c8ccef81b67132daeb91e4b6af642360241ec08a9",
+          "cache": false,
+          "outcome": "returned"
+        }
+      ],
+      "worker_outcomes": [
+        {
+          "agent": "Supervisor",
+          "node": "worker_outcome",
+          "worker": "risk",
+          "outcome": "completed",
+          "evidence_count": 6,
+          "tool_calls": 4,
+          "missing_inputs": []
+        }
+      ],
+      "risk_live_checks": [
+        {
+          "key": [
+            "qcom-0000804328-24-000075",
+            174919,
+            318364,
+            "qcom-0000804328-25-000085",
+            138512,
+            291288,
+            "changed",
+            "the fy2025 10-k materially expands the severity language in the customer-concentration risk factor. in s1, the apple mdm paragraph only stated that to the extent apple takes share from customers of qualcomm's integrated modem+ap products, revenues could be negatively impacted. in s2, qualcomm adds that it expects apple to increasingly use its own modem products in future devices, \"which will have a significant negative impact on our qct revenues, results of operations and cash flows\" — a new, quantifiable severity statement absent in s1. the underlying customer-concentration warning on premium-tier devices and chinese oems is largely retained, but the apple modem-transition severity is new disclosure. remaining risk-factor wording (customer/licensee concentration, premium-tier reliance) is otherwise substantially unchanged."
+          ],
+          "classification": "changed",
+          "before": "S1",
+          "after": "S2",
+          "company": "QCOM",
+          "filed": "2025-11-05",
+          "fiscal_end": "2025-09-28",
+          "source_ids": [
+            "W1",
+            "W2",
+            "W3",
+            "W4",
+            "W5"
+          ],
+          "window": {
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Qualcomm Apple modem transition impact on QCT revenues results of operations",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "cache": false
+        },
+        {
+          "key": [
+            "qcom-0000804328-24-000075",
+            174919,
+            318364,
+            "qcom-0000804328-25-000085",
+            138512,
+            291288,
+            "changed",
+            "named counterparties in the customer-vertical-integration risk factor broadened. s1 named only \"samsung\" as the example of largest customers developing their own integrated circuits, with a separate detailed apple description (intel modem assets, competitor modem usage). s2 names \"apple, samsung and xiaomi\" as developing their own integrated circuit products and states plainly that qualcomm expects these customers to use their own products in some or all future devices. xiaomi is newly added as a named counterparty, and the apple-specific narrative was consolidated. this is a changed, expanded scope of the customer-concentration risk rather than an entirely new exposure, since s1 already warned that largest customers could vertically integrate and already named apple and samsung."
+          ],
+          "classification": "changed",
+          "before": "S1",
+          "after": "S2",
+          "company": "QCOM",
+          "filed": "2025-11-05",
+          "fiscal_end": "2025-09-28",
+          "source_ids": [
+            "W6",
+            "W7",
+            "W8",
+            "W9",
+            "W10"
+          ],
+          "window": {
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "arguments": {
+            "query": "Qualcomm customers developing own integrated circuits Samsung Xiaomi Apple chipset in-house",
+            "topic": "news",
+            "search_depth": "advanced",
+            "max_results": 5,
+            "include_raw_content": false,
+            "start_date": "2025-11-06",
+            "end_date": "2026-10-22"
+          },
+          "status": "results",
+          "snapshot_id": "53eae0b52c67a4150075b77c8ccef81b67132daeb91e4b6af642360241ec08a9",
+          "cache": false
+        }
+      ],
+      "coverage": [
+        {
+          "agent": "Supervisor",
+          "node": "answer_coverage",
+          "results": [
+            {
+              "id": "R1",
+              "addressed": true,
+              "citations": [
+                "S1",
+                "S2",
+                "W2",
+                "W3",
+                "W4",
+                "W5"
+              ],
+              "missing": ""
+            }
+          ],
+          "missing": [],
+          "unsupported_claims": []
+        }
+      ],
+      "provider_usage": [
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 1909,
+            "total_tokens": 2672,
+            "completion_tokens": 763,
+            "completion_tokens_details": {
+              "reasoning_tokens": 561
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1792
+            },
+            "prompt_cache_hit_tokens": 1792,
+            "prompt_cache_miss_tokens": 117,
+            "reasoning_tokens": 561
+          },
+          "cost_usd": "0.00048090",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.943,
+          "answer_ttft_seconds": null,
+          "total_seconds": 4.003
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 2272,
+            "total_tokens": 2620,
+            "completion_tokens": 348,
+            "completion_tokens_details": {
+              "reasoning_tokens": 156
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 1792
+            },
+            "prompt_cache_hit_tokens": 1792,
+            "prompt_cache_miss_tokens": 480,
+            "reasoning_tokens": 156
+          },
+          "cost_usd": "0.00041552",
+          "cost_basis": "token estimate",
+          "request_seconds": 2.019,
+          "answer_ttft_seconds": null,
+          "total_seconds": 6.038
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Request Planner",
+          "activity_id": "plan",
+          "invocation_id": "322f02b061394ebea2c0ccbcc73f3722",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 2621,
+            "total_tokens": 2819,
+            "completion_tokens": 198,
+            "completion_tokens_details": {
+              "reasoning_tokens": 14
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 2048
+            },
+            "prompt_cache_hit_tokens": 2048,
+            "prompt_cache_miss_tokens": 573,
+            "reasoning_tokens": 14
+          },
+          "cost_usd": "0.00042238",
+          "cost_basis": "token estimate",
+          "request_seconds": 1.303,
+          "answer_ttft_seconds": null,
+          "total_seconds": 7.355
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 53234,
+            "total_tokens": 54301,
+            "completion_tokens": 1067,
+            "completion_tokens_details": {
+              "reasoning_tokens": 960
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 53234,
+            "reasoning_tokens": 960
+          },
+          "cost_usd": "0.00775152",
+          "cost_basis": "token estimate",
+          "request_seconds": 9.05,
+          "answer_ttft_seconds": null,
+          "total_seconds": 9.096
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 1,
+          "usage": {
+            "prompt_tokens": 83668,
+            "total_tokens": 85599,
+            "completion_tokens": 1931,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1621
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 52992
+            },
+            "prompt_cache_hit_tokens": 52992,
+            "prompt_cache_miss_tokens": 30676,
+            "reasoning_tokens": 1621
+          },
+          "cost_usd": "0.01225420",
+          "cost_basis": "token estimate",
+          "request_seconds": 11.715,
+          "answer_ttft_seconds": null,
+          "total_seconds": 20.906
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 2,
+          "usage": {
+            "prompt_tokens": 91956,
+            "total_tokens": 92533,
+            "completion_tokens": 577,
+            "completion_tokens_details": {
+              "reasoning_tokens": 281
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 83456
+            },
+            "prompt_cache_hit_tokens": 83456,
+            "prompt_cache_miss_tokens": 8500,
+            "reasoning_tokens": 281
+          },
+          "cost_usd": "0.01303540",
+          "cost_basis": "token estimate",
+          "request_seconds": 4.818,
+          "answer_ttft_seconds": null,
+          "total_seconds": 32.745
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 3,
+          "usage": {
+            "prompt_tokens": 100161,
+            "total_tokens": 100240,
+            "completion_tokens": 79,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": {
+              "cached_tokens": 91904
+            },
+            "prompt_cache_hit_tokens": 91904,
+            "prompt_cache_miss_tokens": 8257,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.01404466",
+          "cost_basis": "token estimate",
+          "request_seconds": 3.524,
+          "answer_ttft_seconds": null,
+          "total_seconds": 41.359
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Risk Summary",
+          "activity_id": "worker-1",
+          "invocation_id": "5b6e4e56c1a24af286655cf5051111b6",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 4,
+          "usage": {
+            "prompt_tokens": 99540,
+            "total_tokens": 100330,
+            "completion_tokens": 790,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 99540,
+            "reasoning_tokens": 1
+          },
+          "cost_usd": "0.01415680",
+          "cost_basis": "token estimate",
+          "request_seconds": 12.578,
+          "answer_ttft_seconds": 47.752,
+          "total_seconds": 53.968
+        },
+        {
+          "node": "provider_usage",
+          "agent": "Answer Reviewer",
+          "activity_id": "review",
+          "invocation_id": "bd2033bc518a4a4ba6424b480d879afa",
+          "provider": "nebius",
+          "model": "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "round": 0,
+          "usage": {
+            "prompt_tokens": 57879,
+            "total_tokens": 59073,
+            "completion_tokens": 1194,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1066
+            },
+            "prompt_tokens_details": null,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 57879,
+            "reasoning_tokens": 1066
+          },
+          "cost_usd": "0.00843738",
+          "cost_basis": "token estimate",
+          "request_seconds": 9.45,
+          "answer_ttft_seconds": null,
+          "total_seconds": 9.526
+        }
+      ],
+      "sources": [
+        {
+          "source_id": "S1",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-24-000075",
+          "fiscal_year": 2024,
+          "filed": "2024-11-06",
+          "fiscal_start": "2023-09-25",
+          "fiscal_end": "2024-09-29",
+          "text_sha256": "ff9ada09a5caf54970c062900937fbc28de9995f4a957d70604c82783f574c01",
+          "chunk_id": "d0b3f8a1699c2dce594416043f7455459dfe85485597fbebb1b239558749bde8",
+          "start": 174919,
+          "end": 318364,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-24-000075?start=174919&end=318364"
+        },
+        {
+          "source_id": "S2",
+          "agent": null,
+          "kind": null,
+          "company": "QCOM",
+          "document_id": "qcom-0000804328-25-000085",
+          "fiscal_year": 2025,
+          "filed": "2025-11-05",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "chunk_id": "aaf7c994e9b42fd8bd8ecb9a93058f56141e5e9b5b87d87b78706b4363deae59",
+          "start": 138512,
+          "end": 291288,
+          "complete_section": true,
+          "snapshot_id": null,
+          "date_snapshot_id": null,
+          "published_date": null,
+          "date_source": null,
+          "source_tier": null,
+          "publisher": null,
+          "title": null,
+          "url": null,
+          "inspection_url": "/api/risks/qcom-0000804328-25-000085?start=138512&end=291288"
+        },
+        {
+          "source_id": "W2",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "f00c8dfd3ace3dbd82a0178aae7346e4b8060bc78f2acd32ffae305818ae911b",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "date_snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "published_date": "2026-04-28T00:00:00+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "tradingnews.com",
+          "title": "Qualcomm Stock Price Forecast: QCOM Targets $205 on OpenAI Agent Phone Deal",
+          "url": "https://www.tradingnews.com/news/qualcomm-stock-priec-forecast-qcom-eyes-205-usd-target-at-150-usd-as-open-ai",
+          "inspection_url": "/api/live/368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a"
+        },
+        {
+          "source_id": "W3",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "ebab985282ef744ee0ae06919774037d5ffd4a8cc53acbf2cf32c32b60a5825f",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "date_snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "published_date": "2026-07-30T18:12:12+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "techtimes.com",
+          "title": "Apple's C2 Modem Arrives Faster Than Qualcomm Expected, Slashing Revenue by Half",
+          "url": "https://www.techtimes.com/articles/322279/20260730/apples-c2-modem-arrives-faster-qualcomm-expected-slashing-revenue-half.htm",
+          "inspection_url": "/api/live/368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a"
+        },
+        {
+          "source_id": "W4",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "b5d9d0600213bb4dc75019038c5824b6e9bdf5f0ac0f1fb95c7347ab5aa3d7fb",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "date_snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "published_date": "2026-09-27T02:10:52+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "shattered.io",
+          "title": "Qualcomm Renews Apple Patent Deal Through 2027",
+          "url": "https://shattered.io/qualcomm-apple-patent-license-renewal-2027-2026",
+          "inspection_url": "/api/live/368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a"
+        },
+        {
+          "source_id": "W5",
+          "agent": "Risk Summary",
+          "kind": "live_source",
+          "company": "QCOM",
+          "document_id": null,
+          "fiscal_year": null,
+          "filed": null,
+          "fiscal_start": null,
+          "fiscal_end": null,
+          "text_sha256": "7101832c501d1becab3c906ffc308b46ea8814fcb7f9ea93a86ba5cd703fcb0f",
+          "chunk_id": null,
+          "start": null,
+          "end": null,
+          "complete_section": null,
+          "snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "date_snapshot_id": "368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a",
+          "published_date": "2026-09-15T16:55:33+00:00",
+          "date_source": "tavily",
+          "source_tier": "third_party",
+          "publisher": "247wallst.com",
+          "title": "I've Started Accumulating Qualcomm and It Isn't Because of Amazon and Meta - 24/7 Wall St.",
+          "url": "https://247wallst.com/investing/2026/09/15/ive-started-accumulating-qualcomm-and-it-isnt-because-of-amazon-and-meta",
+          "inspection_url": "/api/live/368b4a0b29a21255095ff842063514167b03848f6c388cec85c04050e174718a"
+        }
+      ]
+    }
+  ],
+  "variants": {
+    "both": {
+      "n": 1,
+      "terminal_counts": {
+        "completed": 1
+      },
+      "total_seconds": {
+        "n": 1,
+        "min": 71.874,
+        "median": 71.874,
+        "max": 71.874
+      },
+      "answer_token_ttft_seconds": {
+        "n": 1,
+        "min": 56.048,
+        "median": 56.048,
+        "max": 56.048
+      },
+      "estimated_uncached_credits": 4,
+      "live_calls_by_agent": {
+        "Risk Summary": {
+          "calls": 2,
+          "uncached_attempts": 2,
+          "request_trigger_count": 1
+        }
+      },
+      "risk_worker_seconds": {
+        "n": 1,
+        "min": 53.963,
+        "median": 53.963,
+        "max": 53.963
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "scope": "Independent targeted post-comparison review of two fresh native risk questions on the date-metadata runtime. Original twelve-capture review is unchanged. No head-to-head score, implementation inspection or external acquisition.",
+  "reviewed_rows": 2,
+  "date_regression_observed": false,
+  "critical_issue_observed": false,
+  "result": "Both native answers distinguish fiscal year-end from actual filing date and preserve publication/event/forecast chronology. Neither repeats the hosted new-economic-exposure error.",
+  "cases": [
+    {
+      "id": "date_validation_amd_supply_export",
+      "status": "completed",
+      "useful": true,
+      "date_metadata_bug_recurred": false,
+      "critical_failure": false,
+      "filing_metadata_check": {
+        "FY2024": {"fiscal_end": "2024-12-28", "filed": "2025-02-05"},
+        "FY2025": {"fiscal_end": "2025-12-27", "filed": "2026-02-04"},
+        "final_evidence": "Opening sentence states both year-ends and both actual filing dates separately. Later-reporting section explicitly begins after February 4, 2026.",
+        "check_records": "All three risk checks carry filed=2026-02-04 and fiscal_end=2025-12-27 separately and use start_date=2026-02-05."
+      },
+      "rubric_audit": [
+        {"requirement": "Before/after manufacturing and export comparison preserved", "met": true, "evidence": "S264/S328 support realized MI308 developments within pre-existing exposure. Identical S31/S32 support repeated capacity warnings. S236/S237 support the added actual industry memory-shortage disclosure."},
+        {"requirement": "Later publication does not reset historical event date", "met": true, "evidence": "Final explicitly says Reuters February 26 reporting places permission to resume MI308 shipments in 2025, not after the newer filing. W1 says U.S. authorities last year allowed the chips to resume shipments."},
+        {"requirement": "No invented realized consequence or mitigation", "met": true, "evidence": "W13 supports industry memory/manufacturing/packaging constraints. W12 supports Samsung discussions and tight memory supply. Final treats discussions as potential mitigation and does not claim delivered capacity, AMD-specific lost production, final revenue-sharing terms or unrestricted China access."},
+        {"requirement": "Source attribution and remaining uncertainty clear", "met": true, "evidence": "Reuters, CNBC and October reporting are distinguished from the historical filing classification; uncertainties are explicit."}
+      ],
+      "acquisition": {"actual_risk_searches": 3, "registered_findings": 3, "classifications": ["changed", "unchanged", "changed"], "all_registered_followups_invoked": true, "estimated_uncached_credits": 6, "note": "The unchanged capacity warning is also checked; the final does not describe repeated wording as a new economic risk."},
+      "integrity": {"registered_sources": 9, "http_200_inspections": 9, "web_text_hashes_checked": 3, "web_text_hashes_matched": 3, "unregistered_final_citations": []},
+      "issues": []
+    },
+    {
+      "id": "date_validation_qcom_customer_modems",
+      "status": "completed",
+      "useful": true,
+      "date_metadata_bug_recurred": false,
+      "critical_failure": false,
+      "filing_metadata_check": {
+        "FY2024": {"fiscal_end": "2024-09-29", "filed": "2024-11-06"},
+        "FY2025": {"fiscal_end": "2025-09-28", "filed": "2025-11-05"},
+        "final_evidence": "Comparison-basis paragraph states full fiscal periods and actual November filing dates separately; it never calls September 28 the filing date.",
+        "check_records": "Both risk checks carry filed=2025-11-05 and fiscal_end=2025-09-28 separately and use start_date=2025-11-06."
+      },
+      "rubric_audit": [
+        {"requirement": "Stronger wording distinguished from new economic exposure", "met": true, "evidence": "Final explicitly says FY2024 already expected Apple modem substitution, calls FY2025 more specific/consequential, and rejects inferring new economic exposure merely from Xiaomi's inclusion. S5/S6 support this distinction."},
+        {"requirement": "Concentration comparison preserved", "met": true, "evidence": "S3/S4 support recurring premium-handset dependence, purchase timing/power and development without commitments; the thin-modem mix mechanism is distinguished from lost modem content."},
+        {"requirement": "Realized outcome separated from forecast and causality", "met": true, "evidence": "W9 reports an overall fiscal-Q3 handset-revenue decline and prospective Apple-share/revenue expectations. Final explicitly says the realized overall decline does not isolate Apple substitution as the cause and that the projections are not completed losses."},
+        {"requirement": "Adoption evidence does not become complete customer exit", "met": true, "evidence": "W5 describes Qualcomm in the U.S. iPhone 18 Pro Max and Apple chips elsewhere. Final calls this partial displacement. W1 attributes the every-2027-iPhone scenario to Bloomberg reporting, and final preserves it as an expectation rather than accomplished transition."},
+        {"requirement": "Publication, reporting-period and future-scenario timing preserved", "met": true, "evidence": "October 7 reporting about fiscal-Q3 results, September 20 teardown reporting and September 28 discussion of 2027 expectations remain distinguishable. All concern events or statements later than the November 5, 2025 filing; no later publication is used to redocument 2025 adoption as a new event."}
+      ],
+      "acquisition": {"actual_risk_searches": 2, "registered_findings": 2, "all_registered_followups_invoked": true, "estimated_uncached_credits": 4},
+      "integrity": {"registered_sources": 7, "http_200_inspections": 7, "web_text_hashes_checked": 3, "web_text_hashes_matched": 3, "unregistered_final_citations": []},
+      "issues": []
+    }
+  ],
+  "validation": {"unique_case_ids": 2, "runtime_unchanged_reported": true, "all_five_registered_checks_have_separate_filed_and_fiscal_end_metadata": true, "all_five_actual_search_windows_start_after_the_newer_filing": true},
+  "limits": [
+    "Two targeted native runs demonstrate correct behavior in these answers; they do not prove the bug cannot recur or that hosted generation has the same narrative reliability.",
+    "Later evidence is attributed reporting, not independently re-fetched primary-source verification. Empty/insufficient evidence is not treated as proof of absence.",
+    "The separately reviewed hosted date-validation answer fixes the filing date but still invents economic novelty and overstates forecast realization; native success does not clear that hosted quality issue.",
+    "Original held-out cases, captures, scores and review remain unchanged; this validation is an additional changed-runtime check."
+  ]
+}

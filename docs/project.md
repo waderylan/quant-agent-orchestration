@@ -24,4 +24,6 @@ The assistant handles self-contained requests. It does not retain a conversation
 
 Local development uses Python 3.13 and uv. The default Codex profile supplies subscription generation; the explicit API profile routes planning and evidence-heavy synthesis to Nebius DeepSeek and narrow lookups to NVIDIA through hosted endpoints. [Provider routing](milestones/provider-routing/README.md) defines model identities, inspectable rules and account limits. The local Codex login stays on the host and is not a deployed credential. Cloud Run deployment and formal evaluation remain pending.
 
+Risk Summary also uses Tavily automatically for every registered risk finding, including stable wording, with separate dated context after that finding's newer filing. Web evidence never changes the filed classification. Both additional Tavily uses remain available pending Rylan Wade's comparison decision; explicit no-web instructions prevent acquisition. [M12](milestones/risk-live-check/README.md) owns this comparison.
+
 The final assignment needs the runnable service, provider routing, live/shared MCP, formal RAGAS reporting, deployed checks, and Rylan Wade's own 200–300-word [process log](../PROCESS_LOG.md). [Evaluation](evaluation.md) records what has actually been measured.

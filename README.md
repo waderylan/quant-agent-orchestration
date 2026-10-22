@@ -23,6 +23,7 @@ Try:
 - “Explain Qualcomm's revenue change from the filings, then research how outside commentators reacted.” Select QCOM and FY2024–FY2025; the answer separates filing drivers from reactions around the selected annual release.
 - “Compare reactions to Qualcomm's FY2024 and FY2025 results, then tell me what's new lately.” Select both years; each research output retains its own timeframe.
 - “Is the export-control risk in the latest annual filing still current? Check for an official update.” This example preserves the selected companies.
+- “Compare Qualcomm's customer-concentration risk between FY2024 and FY2025.” Select QCOM and both years. Risk Summary automatically checks every registered finding for dated post-filing context; the browser's “Compare risk changes” example preserves the selected companies and years.
 - “What can this system do, and what does each agent do?” Capability answers use local descriptions without web research. Recognized pure capability questions need no model generation; semantic variants use the request planner/reviewer with the same descriptions.
 - “How much of Qualcomm's FY2025 revenue came from automotive?”
 - “Show Qualcomm FY2024 and FY2025 GAAP revenue, gross profit, operating income, and operating cash flow, then compare them.” Select QCOM and both years.
@@ -64,11 +65,11 @@ uv run --locked python scripts/compare_provider_models.py --output artifacts/pro
 uv run --locked python scripts/start_local_container.py --profile api --port 8084
 ```
 
-Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run generation stays blocked until M14 resolves production spending controls; the assignment does not require deploying the local ledger.
+Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Hosted generation runs on Cloud Run when its keys are present; M14 owns deployment verification and cross-instance coordination.
 
 ## Live sources
 
-**MCP tool sharing (graded):** Current Developments and Filings Research invoke the same Tavily Remote MCP `tavily_search` tool in different contexts. Exercise both with a full five-agent request and the “Check an official update” example; each call appears in the trace as `node=live_mcp`. Live calls need `TAVILY_API_KEY` and remaining monthly credit. [Rationale](docs/architecture.md#mcp-tool-sharing).
+**MCP tool sharing (graded):** Current Developments, Filings Research and Risk Summary invoke the same Tavily Remote MCP `tavily_search` tool in different contexts. Risk Summary uses it automatically for every registered finding, including stable risks. Exercise sharing with a risk comparison plus current developments, or a full five-agent request with an official-update clause to exercise all three callers. Each call appears as `node=live_mcp` with its agent, server and tool. Live calls need `TAVILY_API_KEY` and provider access. [Rationale](docs/architecture.md#mcp-tool-sharing); [M12 comparison](docs/milestones/risk-live-check/README.md).
 
 Copy `.env.example` to ignored `.env` and supply `TAVILY_API_KEY` from your Tavily account. The key stays in the runtime environment. Live mode is the default when a key exists; set `LIVE_MODE=off` to disable acquisition or `LIVE_MODE=frozen` to replay recorded snapshots without new calls. `LIVE_CACHE` defaults to `artifacts/live/cache` and `LIVE_LEDGER` to `artifacts/live/usage.sqlite3`.
 
@@ -91,3 +92,11 @@ uv run --locked python scripts/evaluate_usefulness.py --url http://127.0.0.1:808
 ```
 
 The capture command records actual answers/traces and the Tavily calls made since it started. `--dataset` accepts a JSON case list with `id`, `question`, `companies` and `years`; capture alone does not establish answer quality or a formal evaluation score.
+
+For matched M12 comparisons, start separate server processes with `RISK_LIVE_CHECK=off` (Research baseline) and `RISK_LIVE_CHECK=on` (both uses, the default). Explicit no-web requests suppress acquisition in either process. Run captures serially when comparing wall times and per-host usage:
+
+```powershell
+uv run --locked python scripts/compare_risk_live.py --variant research=http://127.0.0.1:8093 --variant both=http://127.0.0.1:8092 --output artifacts/m12/comparison.json
+```
+
+Generation defaults to the local Codex subscription; Tavily still uses real account credits. `--profile api` selects hosted generation for targeted compatibility checks. `--dataset` accepts the same case format; `--resume` skips completed variant/case pairs after validating the dataset/profile.

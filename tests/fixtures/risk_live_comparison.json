@@ -1,0 +1,232 @@
+{
+  "evaluation": "M12 sealed held-out usefulness comparison",
+  "as_of": "2026-10-22",
+  "construction_scope": "Questions derived only from project scope; no implementation, development cases, prompts, or outputs inspected.",
+  "grading_notes": [
+    "Judge requested outputs against inspected sources, not answer length or the number of web searches.",
+    "Apply the same questions and as-of cutoff to both configurations.",
+    "Record response latency, search latency where available, Tavily credits, source publication dates, and acquisition dates separately from answer usefulness.",
+    "A precise, evidenced statement that no subsequent official update was found can satisfy an update request if the search scope and cutoff are explicit; absence of search results does not prove that no update exists.",
+    "Do not reward external information that displaces requested historical evidence, violates a no-web constraint, or silently changes the reporting period."
+  ],
+  "cases": [
+    {
+      "id": "heldout_01_nvda_risk_continuity_no_web",
+      "category": "risk_comparison",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025,
+        2026
+      ],
+      "web_policy": "prohibited",
+      "question": "Using only the NVIDIA filings already in the collection, compare customer concentration and export-control risks between FY2025 and FY2026. Which exposures actually changed, and which disclosures mostly repeat or reword an existing risk? Show the dated filing passages that justify that distinction. Do not search the web or bring in current news.",
+      "rubric": {
+        "requested_outputs": [
+          "A two-year comparison of both specified risk themes, with actual fiscal period dates.",
+          "Explicit separation of changed underlying exposure, changed disclosure language, and continuing risk.",
+          "A concise explanation of why the distinction matters when reading the company across years."
+        ],
+        "evidence_requirements": [
+          "Traceable passages from the relevant annual filings for each requested year; identify the filing and period for each comparison.",
+          "Claims of changed exposure require substantive reported evidence, not merely stronger wording or a longer risk section.",
+          "Missing or noncomparable disclosure is identified rather than treated as proof that a risk disappeared.",
+          "No web acquisition occurs, including background risk verification."
+        ],
+        "failure_flags": [
+          "Any Tavily or other web acquisition despite the explicit prohibition.",
+          "Current developments substituted for the historical filing comparison.",
+          "Rewording alone described as a new exposure, or a recurring disclosure described as absent without checking all requested years.",
+          "One risk theme or one fiscal year omitted."
+        ],
+        "decision_relevance": "Helps a reader decide whether a year-over-year change in risk wording warrants further investigation into business exposure.",
+        "comparison_focus": "Whether registering Risk Summary search preserves explicit no-web behavior and useful historical risk analysis."
+      }
+    },
+    {
+      "id": "heldout_02_amd_risk_change",
+      "category": "risk_comparison",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "web_policy": "allowed",
+      "question": "What changed between AMD's FY2024 and FY2025 filings in its dependence on outside manufacturing and its exposure to export restrictions? Separate actual developments from recurring warnings, and tell me which change most affects how I should interpret the operating results. Ground the comparison in the filings and identify any uncertainty.",
+      "rubric": {
+        "requested_outputs": [
+          "Comparison of third-party manufacturing dependence and export-restriction exposure in both fiscal years.",
+          "A supported distinction between actual developments and continuing cautionary language.",
+          "A reasoned choice of the most consequential change for interpreting reported operations, or a supported explanation that the evidence does not establish a ranking.",
+          "Clear residual uncertainties."
+        ],
+        "evidence_requirements": [
+          "Citations to specific relevant passages in both annual filings with fiscal dates.",
+          "Any amendment is identified separately and does not silently replace the original filing's wording.",
+          "Any external corroboration adds a dated fact relevant to the requested comparison and is distinguished from what was known during each fiscal period.",
+          "No unsupported claim that a warning became a realized financial effect."
+        ],
+        "failure_flags": [
+          "Generic semiconductor risk list without a two-year comparison.",
+          "Current facts silently projected backward into FY2024 or FY2025.",
+          "External sources substituted for the requested filings.",
+          "A confident causal ranking unsupported by the evidence."
+        ],
+        "decision_relevance": "Identifies which disclosed constraints deserve attention when attributing changes in AMD's historical operating performance.",
+        "comparison_focus": "Whether additional Risk Summary search supplies material corroboration or merely increases latency, credits, and source noise."
+      }
+    },
+    {
+      "id": "heldout_03_amd_official_correction",
+      "category": "official_update",
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "web_policy": "required_for_update",
+      "question": "I want to quote AMD's explanation of its FY2025 results. Check the original FY2025 10-K against its 10-K/A: what explanation was corrected, and did that correction change the reported GAAP numbers? Then check AMD and SEC sources through October 22, 2026 for any later correction or clarification on the same point. Give me the wording I can safely summarize, with dated sources and any limits to the check.",
+      "rubric": {
+        "requested_outputs": [
+          "Identification of the precise subject of the amendment and the original-versus-corrected explanation.",
+          "Evidence-based determination of whether the amendment changes reported GAAP financial values.",
+          "A bounded search for subsequent official corrections or clarifications concerning that same issue through the cutoff.",
+          "A short usable paraphrase with source dates and search limitations."
+        ],
+        "evidence_requirements": [
+          "Direct evidence from the original FY2025 10-K and the separate 10-K/A, with their publication or filing dates.",
+          "The conclusion about financial-number changes follows the amendment's scope and relevant financial evidence.",
+          "Subsequent-update evidence comes from AMD or SEC material and identifies the source publication date separately from access date.",
+          "A no-later-update result states the sources and date range checked without asserting exhaustive absence."
+        ],
+        "failure_flags": [
+          "Silently merging original and amended text or treating the 10-K/A as a restatement without evidence.",
+          "Claiming that numbers changed or remained unchanged without verifying the amendment's scope.",
+          "No official update check, or substituting general AMD news for the requested correction.",
+          "A later update outside the cutoff presented as eligible evidence."
+        ],
+        "decision_relevance": "Prevents an analyst from repeating a superseded explanation or incorrectly treating a textual correction as a financial restatement.",
+        "comparison_focus": "Whether Filings Research's targeted official-update search finds the relevant correction chain more usefully than incidental risk search."
+      }
+    },
+    {
+      "id": "heldout_04_qcom_official_customer_update",
+      "category": "official_update",
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "web_policy": "required_for_update",
+      "question": "Compare what Qualcomm's FY2024 and FY2025 annual filings say about the risk of major handset customers using their own modem technology. Has Qualcomm officially updated that outlook after the FY2025 filing and by October 22, 2026? Check its investor-relations releases and SEC filings, give the dates and exact scope of any update, and distinguish what was confirmed from what remains a risk.",
+      "rubric": {
+        "requested_outputs": [
+          "A historical comparison of the specified customer and modem risk in both annual filings.",
+          "A targeted official-source check from the FY2025 filing date through the cutoff.",
+          "Clear distinction among filed risk, management outlook, confirmed subsequent developments, and uncertainty.",
+          "A concise statement of what an analyst can and cannot conclude from the official evidence."
+        ],
+        "evidence_requirements": [
+          "Relevant passages from both annual filings, with actual fiscal dates and the FY2025 filing date used to anchor the update window.",
+          "Official Qualcomm investor-relations or SEC sources for claimed subsequent updates.",
+          "Dates and scope preserve whether an assertion concerns a product, customer relationship, forecast, or realized financial impact.",
+          "Qualcomm's differing FY2024 and FY2025 year lengths are preserved if financial comparisons are introduced."
+        ],
+        "failure_flags": [
+          "Rumor or third-party interpretation presented as Qualcomm confirmation.",
+          "A pre-filing announcement described as a subsequent update.",
+          "Broad smartphone news substituted for the requested modem and customer issue.",
+          "A risk forecast treated as a realized revenue loss without evidence."
+        ],
+        "decision_relevance": "Clarifies whether the historical customer-dependence discussion remains an adequate description or requires an explicitly dated official update.",
+        "comparison_focus": "Whether targeted official-update retrieval adds precise new evidence beyond the annual risk comparison, with its latency and credit cost."
+      }
+    },
+    {
+      "id": "heldout_05_nvda_full_official_export_update",
+      "category": "full_five_agent_with_official_update",
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025,
+        2026
+      ],
+      "web_policy": "required_for_update_and_current_events",
+      "question": "Give me a research brief on NVIDIA's FY2025 to FY2026 performance and export-control exposure. Show reported GAAP revenue, operating income, and net income for both years; calculate revenue growth and operating margins with the inputs and formulas. Explain the main changes using the filings, compare the export-control and customer-concentration risks, and check for an official NVIDIA or SEC update after the FY2026 10-K on export controls or their business effects. Separately summarize the two most relevant developments in the 90 days ending October 22, 2026, including one identifiable outside reaction if you can substantiate it. Keep historical results, subsequent official updates, and recent events clearly dated.",
+      "rubric": {
+        "requested_outputs": [
+          "Reported GAAP revenue, operating income, and net income for both years, with units and actual fiscal dates.",
+          "Checked revenue-growth and operating-margin calculations showing input values, formulas, and rounding.",
+          "A filing-grounded explanation of performance changes.",
+          "A two-year comparison of export-control and customer-concentration risks.",
+          "A targeted post-FY2026-10-K official update check on export controls or their business effects through the cutoff.",
+          "Two relevant developments in the specified trailing 90-day window and one attributable outside reaction when supported, or an explicit evidence gap."
+        ],
+        "evidence_requirements": [
+          "Financial values trace to the correct annual periods and GAAP statements rather than non-GAAP release headlines.",
+          "Arithmetic can be reproduced directly from the cited values; the same units and denominators are used consistently.",
+          "Explanations and risk comparisons cite relevant passages from each requested year's filings.",
+          "Official updates use NVIDIA or SEC primary material, are dated after the relevant 10-K, and state their specific business scope.",
+          "Recent events meet the explicit 90-day window and the outside reaction is attributed to a named person or organization with a source date.",
+          "Source publication dates, event dates where different, and the research cutoff remain distinguishable."
+        ],
+        "failure_flags": [
+          "A requested workstream disappears because another workstream found related web evidence.",
+          "Non-GAAP and GAAP metrics mixed, fiscal years mislabeled, or calculations use unsupported values.",
+          "A current-event item counted as an official update without verifying source, chronology, and issue relevance.",
+          "Recent developments outside the requested window or fabricated outside reaction.",
+          "Causal certainty beyond the filing evidence, or investment advice."
+        ],
+        "decision_relevance": "Lets a reader reconcile verified historical growth and profitability with dated changes in a central operating risk, without confusing new information with the reported year.",
+        "comparison_focus": "Completeness and provenance when official-update, risk, and current-event searches overlap; assess duplicate evidence and resource use."
+      }
+    },
+    {
+      "id": "heldout_06_intc_full_performance_and_risk",
+      "category": "full_five_agent",
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2024,
+        2025
+      ],
+      "web_policy": "required_for_current_events",
+      "question": "Help me understand Intel's change from FY2024 to FY2025. Put reported GAAP revenue, operating income or loss, and net income or loss side by side, then calculate the dollar and percentage change in revenue and the operating margin for each year. Use the filings to explain the main drivers, compare the manufacturing-execution and funding risks across the two years, and summarize the two most relevant developments from the 90 days ending October 22, 2026 with a sourced outside reaction where available. Tell me which recent facts bear on those risks and which are still uncertain.",
+      "rubric": {
+        "requested_outputs": [
+          "Both years' GAAP revenue, operating income or loss, and net income or loss with signed values, units, and fiscal dates.",
+          "Reproducible dollar and percentage revenue changes and both operating margins.",
+          "A filing-based explanation of the principal performance drivers that distinguishes recurring operations from material special items when supported.",
+          "Comparison of manufacturing-execution and funding risks across both annual periods.",
+          "Two relevant developments in the specified recent window, an attributable outside reaction when available, and a reasoned connection to the requested risks.",
+          "Explicit uncertainties and evidence gaps."
+        ],
+        "evidence_requirements": [
+          "Traceable annual GAAP financial observations, including correct signs for losses and consistent units.",
+          "Calculations show formulas, cited inputs, and sensible rounding; revenue percentage change uses FY2024 as the base.",
+          "Performance explanations and historical risks cite both years' filings and do not infer causality from temporal coincidence alone.",
+          "Current developments have dated, issue-relevant sources within the requested 90-day window, with primary confirmation for consequential company claims where available.",
+          "Any outside reaction is distinguishable from the company's own statements and from the assistant's interpretation.",
+          "The answer explains how subsequent events relate to historical risks without retroactively changing the historical evidence."
+        ],
+        "failure_flags": [
+          "Lost minus signs, absolute-value substitution, non-GAAP substitution, or incorrect denominator.",
+          "A list of risks with no comparison or no connection to the financial explanation.",
+          "Generic current news unrelated to manufacturing execution or funding.",
+          "Requested quantitative, filing, risk, or current-development output omitted.",
+          "Unsupported turnaround conclusion or investment recommendation."
+        ],
+        "decision_relevance": "Helps a reader judge whether Intel's reported performance and subsequent execution or funding evidence support the same operating narrative.",
+        "comparison_focus": "Whether always-on risk search improves a full brief beyond the existing Current Developments work, or adds redundant evidence and resource use."
+      }
+    }
+  ]
+}

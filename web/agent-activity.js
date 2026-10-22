@@ -85,6 +85,12 @@ class AgentActivity {
           call.models.push({provider: data.provider, model: data.model, reason: data.reason});
         if (this.selected === call.id) this.renderDetails();
       }
+    } else if (type === "trace" && data.node === "live_mcp" && this.active) {
+      const call = this.calls.get(this.active);
+      if (call.agent === data.agent) {
+        call.tools.push(`${data.server || "Tavily MCP"} · ${data.tool}`);
+        if (this.selected === call.id) this.renderDetails();
+      }
     } else if (type === "tool" && this.active) {
       this.calls.get(this.active).tools.push(data.name);
       if (this.selected === this.active) this.renderDetails();

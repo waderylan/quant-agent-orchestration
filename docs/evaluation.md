@@ -4,6 +4,7 @@ Formal RAGAS, agent trajectory and Cloud Run reports are pending. Local provider
 
 | Area | Measured evidence |
 | --- | --- |
+| Additional Tavily users | [M12 comparison](milestones/risk-live-check/evidence/COMPARISON_2026-10-22.md): six matched local Codex cases per configuration. Research baseline and both uses each score 41/48 rubric points; useful answers are 5/6 and 6/6, with one and zero critical workflow failures. Calls are 14 and 23; estimated credits 28 and 46. Risk supplies specific later context but does not establish an overall quality win. All 181 source inspections return 200. Hosted, browser replay and post-comparison date validation remain separate; these are not RAGAS scores or Cloud Run measurements. |
 | Hosted provider routing | [M11 acceptance](milestones/provider-routing/evidence/ACCEPTANCE_2026-10-20.json) records real NVIDIA/Nebius application calls, Codex/Hosted browser switching, source inspection, controlled worker comparisons and two concurrent Linux requests invoking every specialist. Both full requests remain partial: filing/risk coverage and completion checks retain gaps, and AMD's live acquisition hits the configured Tavily monthly stop. This is not a passing full-workflow quality result. |
 | Source preparation | 46 verified selected bodies/extractions; source and hash checks in [M2](milestones/source-preparation/README.md) |
 | Filings Research | 19 focused tests; four company turns, one direct worker, browser/source checks, and failure probes in [M3](milestones/filings-research/README.md) |

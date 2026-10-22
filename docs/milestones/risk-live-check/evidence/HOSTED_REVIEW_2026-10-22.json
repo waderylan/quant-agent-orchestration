@@ -1,0 +1,101 @@
+{
+  "scope": "Independent local source-and-trace review of api.json (earlier QCOM and full NVDA) and api-date-validation.json (later QCOM after date-metadata change). No implementation inspection, external calls, edits to prompts/code, or changes to the original twelve-capture comparison.",
+  "headline": "Latest hosted QCOM correctly separates fiscal end and filing date, but retains a major unsupported economic-novelty claim and overstates forecast evidence. Successful provider/MCP transport does not establish answer correctness.",
+  "date_regression": {
+    "earlier_capture": "artifacts/m12/api.json / risk-qcom",
+    "earlier_exact_error": "Post-Filing Context (after FY2025 filing dated September 28, 2025)",
+    "actual_source_metadata": {"FY2025_fiscal_end": "2025-09-28", "FY2025_filed": "2025-11-05", "FY2024_fiscal_end": "2024-09-29", "FY2024_filed": "2024-11-06"},
+    "earlier_acquisition": "The actual risk search already starts 2025-11-06. The error is in the narrative filing anchor, not the acquired search window.",
+    "latest_capture": "artifacts/m12/api-date-validation.json / risk-qcom",
+    "latest_date_bug_recurred": false,
+    "latest_evidence": "Opening fiscal-period sentence correctly gives FY2025 ended 2025-09-28, filed 2025-11-05, and FY2024 ended 2024-09-29, filed 2024-11-06. The check record now carries filed=2025-11-05 and fiscal_end=2025-09-28 separately; window starts 2025-11-06.",
+    "limit": "One latest hosted response demonstrates correct date separation in that response; it does not establish general reliability."
+  },
+  "findings": [
+    {
+      "id": "hosted-qcom-economic-novelty",
+      "capture": "api-date-validation.json / risk-qcom",
+      "severity": "critical",
+      "finding": "The final claims a new economic exposure even though the complete prior filing already discloses the exposure.",
+      "exact_final_claims": [
+        "The FY2024 version contained no such forward-looking chip-loss quantification — it noted only that Apple taking device share from integrated-modem customers could hurt revenues/margins",
+        "This is new, specific economic exposure disclosed as an expectation, not merely rephrased wording."
+      ],
+      "source_evidence": "S1's complete FY2024 risk section says Apple acquired Intel modem assets, was developing its own modems, and Qualcomm expected substitution in some or all future devices. Its linked vertical-integration warning identifies potentially material business, revenue, cash-flow and financial-position harm. S2 sharpens the expectation to increasing substitution and explicitly significant QCT consequences.",
+      "assessment": "The changed classification is defensible for stronger specificity/certainty. The assertion of a new underlying economic exposure and the only-thin-modem characterization of the older filing are not. The phrase significant negative impact is qualitative, not numerical quantification.",
+      "reviewer_gap": "answer_coverage reports the output addressed and unsupported_claims=[]. The central source-supported distinction is nevertheless wrong in the retained final answer."
+    },
+    {
+      "id": "hosted-qcom-forecast-attribution",
+      "capture": "api-date-validation.json / risk-qcom",
+      "severity": "major",
+      "finding": "A bank forecast is attributed to Qualcomm, and prospective evidence is overstated as realized risk.",
+      "exact_final_claims": [
+        "Analysts report Qualcomm expects the Apple chip relationship to wind down (modems phased out of iPhones by Fall 2027)",
+        "they confirm ongoing realization of the disclosed risk"
+      ],
+      "source_evidence": "W5 explicitly attributes the Fall 2027 phase-out expectation to Bank of America analysts, not Qualcomm management. W4 reports a July earnings-call statement about expected acceleration in a subsequent quarter. W1 uses could shrink materially and says the companies have not publicly specified how/when; W2 mixes projections with commentary. These are different speakers and prospective periods.",
+      "assessment": "Reporting that management revised an outlook is itself a dated event, but is not proof that the forecast financial loss occurred. Earlier adoption already disclosed by the filing does not become a newly post-filing event merely because a later article repeats it. The latest summary's shrinking/realization language exceeds this bundle's demonstrated realized outcomes.",
+      "additional_date_point": "W5 is dated March 10; it should not be conflated with the September reporting used elsewhere in the paragraph."
+    },
+    {
+      "id": "hosted-earlier-qcom-chronology",
+      "capture": "api.json / risk-qcom",
+      "severity": "major",
+      "finding": "The wrong filing date is combined with incomplete separation of article timing and adoption timing.",
+      "source_evidence": "S2 metadata filed=2025-11-05. W2 is a January 8, 2026 retrospective saying C1 shipped in iPhone 16e in 2025; its excerpt does not place that shipment after November 5. W1 is an April 21 report of Qualcomm's assumed near-zero 2027 Apple modem revenue, not an authenticated completed loss.",
+      "assessment": "The narrative's September 28 filing date is demonstrably wrong. The final does qualify the absence of official confirmation and a completed revenue-impact event, which limits the overstatement. Its reference to quantitative significant-impact framing is also inaccurate: that phrase is qualitative."
+    },
+    {
+      "id": "hosted-nvda-concentration-inference",
+      "capture": "api.json / heldout_05_nvda_full_official_export_update",
+      "severity": "major",
+      "finding": "The answer asserts increasing post-filing concentration from noncomparable customer counts and reporting periods.",
+      "exact_final_claims": [
+        "Concentration intensified after the filing",
+        "These post-filing observations confirm persistent, growing concentration exposure"
+      ],
+      "source_evidence": "Annual FY2026 top-two revenue share is 36%; W8 reports a quarter's top-three share of 54%; W6 reports a half-year top-three share of 44%. W6 also compares three customers' receivables share of 56% with five customers' share of 70%. These change period, cohort size and sometimes denominator. W6's own text inconsistently labels a first-half period as February 2026-January 2027.",
+      "assessment": "The returned reports support concentrated exposure and reported later observations. They do not establish a like-for-like increase after filing. Larger combined shares for larger customer sets cannot, by themselves, prove greater concentration. The answer should not upgrade the third-party narrative into a checked trend conclusion."
+    },
+    {
+      "id": "hosted-nvda-arithmetic-audit",
+      "capture": "api.json / heldout_05_nvda_full_official_export_update",
+      "severity": "informational",
+      "finding": "No numerical addition error found in the flagged amounts; source-reported subtotals must be distinguished from checked consolidated metrics and analytical inference.",
+      "checked": [
+        "C1-C3 support revenue growth 65.47% and margins 62.42%/60.38%. Their difference is approximately 2.03584 percentage points, consistent with the answer's approximate 2.0-point statement.",
+        "130,141 + 9,156 = 139,297 million. S18 explicitly reports that reportable-segment subtotal; it is not an invented derived amount. It differs from F5's consolidated operating income of 130,387 million by 8,910 million, so it must retain its segment-subtotal label. The final does label the line Segment operating income, but omits a reconciliation.",
+        "36%, 44%, 56% and 70% are arithmetically correct sums and are also printed in the W sources. They have no separate C evidence record. Their principal defect is the unsupported comparability/trend conclusion, not bad addition."
+      ],
+      "limit": "Cited source-reported numbers are not independent primary-source verification of every third-party observation. Only the three registered quant metrics have dedicated checked C records."
+    },
+    {
+      "id": "hosted-nvda-timing-and-completeness",
+      "capture": "api.json / heldout_05_nvda_full_official_export_update",
+      "severity": "moderate",
+      "findings": [
+        "Net income remains absent, and the final explicitly reports it unresolved.",
+        "Official W10 contains the later fiscal-quarter export-control position but no publication/filing date; final acknowledges period-only dating.",
+        "W2's June publication reports absence of H200 sales as of mid-May. The final preserves this earlier event cutoff rather than asserting no sales through October.",
+        "W21's page byline is September 21 local time while published_date is September 22 UTC; these are consistent, not necessarily a date error.",
+        "W23 describes orders with expected samples in December and deliveries in first-quarter 2027. Final calls them orders, not realized current revenue; the revenue-channel interpretation remains prospective.",
+        "The phrase No missing outputs inside the risk worker's section conflicts at whole-answer level with the later unresolved net-income output. Terminal partial is more accurate than that unqualified sentence."
+      ]
+    }
+  ],
+  "transport_and_integrity": {
+    "interpretation": "Actual recorded Tavily calls and successful source inspection demonstrate tool/provider interoperability for these runs. They do not validate economic novelty, source attribution, chronology interpretation or completion.",
+    "source_records": 37,
+    "http_200_inspections": 37,
+    "web_text_sha256_checked": 17,
+    "web_text_sha256_matched": 17,
+    "unregistered_final_citations": [],
+    "reviewer_result": "All three answer-coverage records report no unsupported claims, despite the independently identified novelty, attribution and concentration-inference problems."
+  },
+  "limits": [
+    "Three captured answers across different runtime stages; no matched quality score or replacement of the original sealed comparison.",
+    "No external publication was re-fetched. Findings concern support in returned source text/metadata and trace.",
+    "The date fix is observed working in one later hosted QCOM answer; the separate native follow-up review tests two fresh questions."
+  ]
+}
