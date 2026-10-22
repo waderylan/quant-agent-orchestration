@@ -14,6 +14,27 @@ from src.research_workflow import ResearchTools, events
 from src.source_collection import digest
 
 
+def test_document_filter_is_intersected_with_scope_and_empty_is_not_unfiltered(small_index):
+    assert [r["document_id"] for r in small_index.search("revenue", ["AMD"], [2025], document_ids=["amendment"])] == ["amendment"]
+    assert small_index.search("revenue", ["AMD"], [2025], document_ids=["other-company"]) == []
+    assert small_index.search("revenue", ["AMD"], [2025], document_ids=[]) == []
+
+
+@pytest.mark.asyncio
+async def test_direct_research_preserves_company_year_context_for_provider_routing(small_index):
+    from src.research_workflow import research_turn
+
+    async def model(prompt, tools, handler, **kwargs):
+        assert handler.companies == ["AMD"]
+        assert handler.years == [2024, 2025]
+        handler("report_outcome", {"status": "complete", "missing": []})
+        yield {"type": "token", "data": "Filing evidence [S1]."}
+
+    result = await research_turn(small_index, {"question": "Explain revenue evidence", "companies": ["AMD"], "years": [2024, 2025]},
+                                 lambda event: None, model_stream=model)
+    assert result["citation_verified"]
+
+
 def test_chunks_keep_unicode_offsets_and_page_section_boundaries():
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.WhitespaceSplit()

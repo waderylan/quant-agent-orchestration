@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-22T17:08:03.443120+00:00",
+  "changes": [
+    {
+      "stage": "Compatibility calibration v1",
+      "issue": "Exact-prompt cache collapsed the three AnswerRelevancy question draws into one repeated result.",
+      "resolution": "Adapter v2 keys independent per-metric draw indices and tests uncached draws plus exact replay. Calibration-v2 is accepted; calibration.json remains smoke evidence only."
+    },
+    {
+      "stage": "Preliminary development scores",
+      "issue": "Context export omitted observed period_end and other source metadata, causing a supported annual fiscal-end claim to be rejected.",
+      "resolution": "metadata-v2 exports actual observed source metadata with text, never reference metadata. All final cohort scores use the corrected format; initial scores remain preliminary."
+    },
+    {
+      "stage": "Heldout preliminary scoring",
+      "issue": "Old-format scoring was in progress when metadata defect was confirmed.",
+      "resolution": "Stopped only owned score process tree31052 before any completed row was saved; reuse immutable generation captures for corrected scoring. No product/prompt changes follow held-out freeze."
+    }
+  ]
+}

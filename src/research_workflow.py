@@ -14,6 +14,7 @@ from langchain_core.runnables import RunnableLambda
 from src.generation import stream as codex_stream
 from src.task_scope import assigned_question
 from src.source_collection import ROOT
+from src.filing_scope import filing_scope
 from src.response_contract import OUTCOME_TOOL, OutcomeTools, checked_answer
 from src.request_routing import (
     COMPANY_ALIASES,
@@ -34,6 +35,7 @@ TOOLS = [
                 "query": {"type": "string"},
                 "company": {"type": "string"},
                 "year": {"type": "integer", "description": "One fiscal year. Omit this filter to search all selected years; never pass an array."},
+                "quarter": {"type": "integer", "enum": [1, 2, 3, 4], "description": "Fiscal quarter for a 10-Q; Q4 has no separate 10-Q. Omit to inherit an explicit quarter in the question."},
                 "section": {"type": "string", "enum": ["mda", "risk_factors", "other"]},
                 "form": {
                     "type": "string",
@@ -99,9 +101,10 @@ class State(TypedDict, total=False):
 
 
 class ResearchTools:
-    def __init__(self, index, companies, years, *, source_offset=0):
+    def __init__(self, index, companies, years, *, source_offset=0, question=""):
         self.index, self.companies, self.years = index, companies, years
         self.source_offset = source_offset
+        self.question = question
         self.sources = {}
         self.identifiers = {}
         # Each scope cell can need a search and contextual inspections; keep a hard cap.
@@ -137,7 +140,7 @@ class ResearchTools:
             }
         if name != "search_sources":
             raise ValueError("Unknown research tool")
-        if set(arguments) - {"query", "company", "year", "section", "version", "form"}:
+        if set(arguments) - {"query", "company", "year", "quarter", "section", "version", "form"}:
             raise ValueError("Unknown search argument")
         company, year = arguments.get("company"), arguments.get("year")
         if (
@@ -164,6 +167,11 @@ class ResearchTools:
             "Earnings release",
         ):
             raise ValueError("Unsupported form filter")
+        quarter = arguments.get("quarter")
+        if quarter is not None and (type(quarter) is not int or quarter not in (1, 2, 3, 4)):
+            raise ValueError("Fiscal quarter must be an integer from 1 through 4")
+        if quarter is not None and arguments.get("form") not in (None, "10-Q"):
+            raise ValueError("Quarter filter requires a 10-Q")
         query = arguments["query"]
         if not isinstance(query, str) or not 1 <= len(query) <= 1500:
             raise ValueError("Query must contain 1–1500 characters")
@@ -178,7 +186,8 @@ class ResearchTools:
                     [selected_year],
                     section=arguments.get("section"),
                     version=arguments.get("version"),
-                    form=arguments.get("form"),
+                    **filing_scope(self.question, getattr(self.index, "documents", {}), [selected_company], [selected_year],
+                                   form=arguments.get("form") or ("10-Q" if quarter else None), quarter=quarter),
                     k=6 if len(companies) * len(years) == 1 else 4,
                 )
                 passages.extend(found)
@@ -215,6 +224,7 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
         state["companies"],
         state["years"],
         source_offset=state.get("source_offset", 0),
+        question=assigned_question(state, "filing_explanation", "official_update"),
     )
     live = None
     if state.get("live_check") and state.get("live_intent") in ("verify", "developments"):
@@ -227,6 +237,9 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
 
         # Hosted role instructions include all outputs owned by this invocation.
         assigned_outputs = ("filing_explanation", "official_update") if live else ("filing_explanation",)
+
+        def __getattr__(self, name):
+            return getattr(sources, name)
 
         def __call__(self, name, arguments):
             if name == "inspect_source" and set(arguments) == {"source_id"} and arguments["source_id"] in analysis_sources:
@@ -243,7 +256,8 @@ async def research_turn(index, state, writer, *, model_stream=codex_stream, gate
                 p
                 for c in request["companies"]
                 for y in request["years"]
-                for p in index.search(request["question"], [c], [y], k=4)
+                for p in index.search(request["question"], [c], [y], k=4,
+                                      **filing_scope(request["question"], getattr(index, "documents", {}), [c], [y]))
             ]
         if request.get("worker_output") == "filing_explanation" and analysis_sources:
             # Fixed, scoped supplemental searches keep a mixed request from

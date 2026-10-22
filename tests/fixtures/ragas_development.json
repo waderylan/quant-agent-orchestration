@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "evaluation_scope": "Static local Filings Research retrieve-augment-generate; no web/current developments, structured financial worker, or new arithmetic.",
+  "prompt": "Answer the self-contained question using only the local indexed filing corpus. Cite the retrieved source passages. Preserve company, fiscal/interim period and original/amended version. Distinguish reported facts from conditional statements; state evidence limits. Do not browse or calculate new financial metrics.",
+  "source_manifest": "data/corpus/manifest.json",
+  "source_manifest_sha256": "a5fe98fbfe015981a61eb2bffa4c65deb4ec72e7841772da7932d003d502cffa",
+  "source_span_contract": "start/end are zero-based Python Unicode-codepoint offsets, end exclusive, into the manifest prepared UTF-8 text without normalization. text_sha256 hashes the full immutable document; span_sha256 hashes the included excerpt.",
+  "split": "development",
+  "cases": [
+    {
+      "id": "ragas_dev_01",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "amendment_distinction",
+      "question": "Explain what AMD corrected in its FY2025 Client revenue discussion and whether the 10-K/A changes reported financial results or updates later events. Distinguish the original explanation from the corrected one. Use only the local filing corpus; do not browse.",
+      "reference": "The original FY2025 10-K attributed Client revenue growth to 31% higher processor shipments and 15% higher average selling price. The amendment says these percentages were transposed: the correction is 15% shipment growth and 31% ASP growth. It changes no other items or disclosures and explicitly excludes subsequent events, so it is a correction to the explanation rather than a financial-results restatement or a general update.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_01-f1",
+          "text": "Original explanation uses 31% shipment growth and 15% ASP growth.",
+          "evidence_ids": [
+            "ragas_dev_01-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-f2",
+          "text": "Corrected explanation uses 15% shipment growth and 31% ASP growth.",
+          "evidence_ids": [
+            "ragas_dev_01-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-f3",
+          "text": "The amendment changes no other items or disclosures.",
+          "evidence_ids": [
+            "ragas_dev_01-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-f4",
+          "text": "The amendment does not incorporate subsequent events.",
+          "evidence_ids": [
+            "ragas_dev_01-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "amd-0000002488-26-000018",
+          "start": 230572,
+          "end": 230878,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "span_sha256": "96973386b8143907eefc8b4c11a0757ce0f937a3e2d162a9e73a8c93c1407b7b",
+          "text": "Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 31% increase in unit shipments of processors and a 15% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2026-02-04",
+          "period_end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "context_id": "ragas_dev_01-e1"
+        },
+        {
+          "document_id": "amd-0000002488-26-000021",
+          "start": 5678,
+          "end": 6966,
+          "text_sha256": "f0225112341cafc712f1f52d1e811e70393f816bffb56c9a528bcb820138dd53",
+          "span_sha256": "8e46acbbbd383ad086b4dfdc7979131669958d26a64b8e6e9cb7285da3c1e000",
+          "text": "After filing the Original Filing, the Company identified that the year-over-year changes in average selling price (“ASP”) and unit shipment figures within the Client revenue disclosure were inadvertently transposed, resulting in an incorrect depiction of the year‑over‑year changes in ASP and unit shipments. The correct presentation is “Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.” The corrected MD&A disclosure is included in Part II of this Amendment.\nExcept as described above, this Amendment does not amend, update or change any other items or disclosures contained in the Original Filing. This Amendment does not reflect or purport to reflect any information or events occurring after the date of the Original Filing nor does it modify or update the disclosures contained in the Original Filing that may be affected by subsequent events. Accordingly, this Amendment should be read in conjunction with the Original Filing and the Company’s other filings made with the SEC subsequent to the filing of the Original Filing.",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K/A",
+          "version": "amendment",
+          "filed": "2026-02-04",
+          "period_end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000021/amd-20251227.htm",
+          "context_id": "ragas_dev_01-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_02",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025,
+        2026
+      ],
+      "category": "annual_margin_explanation",
+      "question": "How does NVIDIA's FY2026 10-K explain its lower gross margin compared with FY2025? State the reported margins and the specific transition and charge identified by management; do not calculate an adjusted margin. Use only the local filing corpus; do not browse.",
+      "reference": "Reported gross margin declined from 75.0% in FY2025 to 71.1% in FY2026. NVIDIA attributes this to the transition from Hopper HGX systems to Blackwell full-scale data-center solutions and a $4.5 billion H20 excess-inventory and purchase-obligation charge in the first quarter of FY2026. These are the filing's reported drivers, not an independently computed adjusted margin.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_02-f1",
+          "text": "FY2026 gross margin is 71.1%, versus 75.0% for FY2025.",
+          "evidence_ids": [
+            "ragas_dev_02-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-f2",
+          "text": "The filing identifies the Hopper HGX to Blackwell full-scale data-center transition.",
+          "evidence_ids": [
+            "ragas_dev_02-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-f3",
+          "text": "A $4.5 billion H20 inventory/purchase-obligation charge occurred in FY2026 Q1.",
+          "evidence_ids": [
+            "ragas_dev_02-e1"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "nvda-0001045810-26-000021",
+          "start": 225531,
+          "end": 225857,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "span_sha256": "cca7796e181bc6f3ee5e08ac29222dd17ccfc74454c372a7cba9a550f3281689",
+          "text": "Gross margins decreased to 71.1% in fiscal year 2026 from 75.0% in fiscal year 2025 as our business model transitioned from offering Hopper HGX systems to\nBlackwell full-scale datacenter solutions and a $4.5 billion charge associated with H20 excess inventory and purchase obligations in the first quarter of fiscal\nyear 2026.",
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2026-02-25",
+          "period_end": "2026-01-25",
+          "fiscal_start": "2025-01-27",
+          "fiscal_end": "2026-01-25",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "context_id": "ragas_dev_02-e1"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_03",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "divestiture_reporting_basis",
+      "question": "Explain how Intel's FY2025 filing treats the Altera divestiture in revenue comparisons and in the gain on sale. When does Altera leave consolidated results, are prior periods rewritten, and where does the gain appear? Use only the local filing corpus; do not browse.",
+      "reference": "Intel completed the sale of 51% of Altera on September 12, 2025. Altera results remain in the all-other category through September 11 and are excluded from consolidated and segment results from September 12; prior periods are not changed. The transaction produced a roughly $5.6 billion pre-tax gain in interest and other, net. This below-operating-line gain is distinct from ongoing consolidated revenue.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_03-f1",
+          "text": "Intel sold 51% of Altera on September 12, 2025.",
+          "evidence_ids": [
+            "ragas_dev_03-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-f2",
+          "text": "Altera leaves consolidated/segment results from that date; all-other includes it through September 11.",
+          "evidence_ids": [
+            "ragas_dev_03-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-f3",
+          "text": "Prior-period consolidated and segment results are not rewritten.",
+          "evidence_ids": [
+            "ragas_dev_03-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-f4",
+          "text": "The $5.6 billion pre-tax gain is recognized in interest and other, net.",
+          "evidence_ids": [
+            "ragas_dev_03-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "intc-0000050863-26-000011",
+          "start": 33549,
+          "end": 34033,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "span_sha256": "1e880822c1400a476131e6c5742152ae33ee7a5e28fdb26953a689874ea81f8e",
+          "text": "On September 12, 2025, we completed the divestiture of 51% of Altera. As of that date, Altera's results of operations were no longer included in our consolidated or segment results. Altera's financial results were reported within our \"all other\" category for all periods presented through September 11, 2025. There are no changes to our Consolidated Financial Statements or segment results for any prior periods resulting from the Altera transaction, which is further described below.",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2026-01-23",
+          "period_end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+          "context_id": "ragas_dev_03-e1"
+        },
+        {
+          "document_id": "intc-0000050863-26-000011",
+          "start": 104433,
+          "end": 104846,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "span_sha256": "12a85b4fbf6d129d57232dc600d2857250b72f13750c2787ae486c1a824e2f2f",
+          "text": "The Altera divestiture resulted in a pre-tax gain of $5.6 billion recognized within interest and other, net, which is net of certain costs we have agreed to fund to SLP, as well as direct and incremental costs we incurred to sell the business. Approximately $2.1 billion of the gain resulted from the remeasurement of our non-marketable equity investment in Altera to its fair value at the transaction close date.",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2026-01-23",
+          "period_end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm",
+          "context_id": "ragas_dev_03-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_04",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "tax_expense_cash_distinction",
+      "question": "Why did Qualcomm establish a large federal deferred-tax valuation allowance in FY2025, and why should that expense not be read as an equal cash-tax payment that year? Summarize the filed explanation and amount. Use only the local filing corpus; do not browse.",
+      "reference": "Qualcomm recorded a $5.7 billion income-tax expense in FY2025 Q4 to establish a valuation allowance because it no longer expected to realize substantially all existing federal deferred-tax assets following the OBBB legislation enacted July 4, 2025. The filing says income taxes paid were lower than the provision, driven mainly by this allowance. An expense reducing deferred-tax asset recognition is therefore not the same as an equal contemporaneous cash-tax payment.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_04-f1",
+          "text": "The valuation-allowance charge is $5.7 billion in FY2025 Q4.",
+          "evidence_ids": [
+            "ragas_dev_04-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_04-f2",
+          "text": "OBBB enacted July 4, 2025 changed expected realization of existing federal deferred-tax assets.",
+          "evidence_ids": [
+            "ragas_dev_04-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_04-f3",
+          "text": "Cash income taxes paid were below the tax provision, mainly because of this charge.",
+          "evidence_ids": [
+            "ragas_dev_04-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "qcom-0000804328-25-000085",
+          "start": 321380,
+          "end": 321785,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "span_sha256": "4be7faa9a3b3ba9e6a43306d9a1edf50e42f5e8b338b5bfdbbd234a80d3a04b1",
+          "text": "We recorded a charge of $5.7 billion to income tax expense to establish a valuation allowance in the fourth quarter\n                               of fiscal 2025 as we no longer expect to realize substantially all of our existing federal deferred tax assets as a result\n                               of the tax reform legislation included in the One Big Beautiful Bill Act (OBBB) enacted on July 4, 2025.",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-11-05",
+          "period_end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "context_id": "ragas_dev_04-e1"
+        },
+        {
+          "document_id": "qcom-0000804328-25-000085",
+          "start": 371954,
+          "end": 372705,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "span_sha256": "de5e676854ef38fa5a4f50172a5f07d8e4f228889e0de6f9936d2fdc035031ec",
+          "text": "During fiscal 2025, income taxes paid were less than our provision. This was driven primarily by the $5.7 billion charge\n    to income tax expense to establish a valuation allowance in fiscal 2025 as a result of the tax reform legislation included in the\n    OBBB. This was partially offset by our installment payment for a one-time U.S. repatriation tax accrued in fiscal 2018 of\n    $530 million and the adverse impact of the requirement to capitalize and amortize research and development expenditures for\n    federal income tax purposes. The enactment of the OBBB includes significant corporate tax reforms, including the permanent\n    reinstatement of deducting domestic research and development expenditures as incurred beginning in fiscal 2026.",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-11-05",
+          "period_end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "context_id": "ragas_dev_04-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_05",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "interim_table_period_alignment",
+      "question": "Use AMD's FY2025 second-quarter 10-Q to explain the weaker gross margin. Report the quarter and first-half gross-margin comparisons with their period lengths kept separate, and identify management's stated cause without calculating an adjusted result. Use only the local filing corpus; do not browse.",
+      "reference": "For the three months ended June 28, 2025, gross margin was 40%, versus 49% for the three months ended June 29, 2024. For the six-month periods it was 45% versus 48%. AMD attributes the decline in both periods primarily to approximately $800 million of inventory and related charges associated with U.S. export controls on MI308 products. Quarter and year-to-date values are different reporting windows.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_05-f1",
+          "text": "The three-month gross margins are 40% and 49% for June 28, 2025 and June 29, 2024.",
+          "evidence_ids": [
+            "ragas_dev_05-e1",
+            "ragas_dev_05-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-f2",
+          "text": "The six-month gross margins are 45% and 48% for the corresponding periods.",
+          "evidence_ids": [
+            "ragas_dev_05-e1",
+            "ragas_dev_05-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-f3",
+          "text": "Approximately $800 million of MI308 export-control inventory/related charges mainly explain both declines.",
+          "evidence_ids": [
+            "ragas_dev_05-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "amd-0000002488-25-000108",
+          "start": 78811,
+          "end": 79481,
+          "text_sha256": "eabb2e298588b064db93098ca8d03931626c997ba48c8cb7aa100288b3ad4774",
+          "span_sha256": "f84dae52102e7aee9cffdd1d5da3cda522279337094f0ae551c9e039d26d2a64",
+          "text": "Gross Margin and Expenses\nThe following is a summary of certain consolidated statement of operations data for the periods indicated:\n| | | | | | | | | | | | | | | | | | | | | | | | | |\n| Three Months Ended | | Six Months Ended |\n| June 28,2025 | | June 29,2024 | | June 28,2025 | | June 29,2024 |\n| In millions, except percentages |\nNet revenue | $ | 7,685 | | | $ | 5,835 | | | $ | 15,123 | | | $ | 11,308 | |\nCost of sales | 4,366 | | | 2,740 | | | 7,817 | | | 5,423 | |\nAmortization of acquisition-related intangibles | 260 | | | 231 | | | 511 | | | 461 | |\nGross profit | 3,059 | | | 2,864 | | | 6,795 | | | 5,424 | |\nGross margin | 40 | % | 49 | % | 45 | % | 48 | %",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-08-06",
+          "period_end": "2025-06-28",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+          "context_id": "ragas_dev_05-e1"
+        },
+        {
+          "document_id": "amd-0000002488-25-000108",
+          "start": 80024,
+          "end": 80452,
+          "text_sha256": "eabb2e298588b064db93098ca8d03931626c997ba48c8cb7aa100288b3ad4774",
+          "span_sha256": "2f5c67a37ef8e26894c0a319876de54dc3f673b3168179d73994d976dba46302",
+          "text": "Gross margin was 40% and 49% for the three months ended June 28, 2025 and June 29, 2024, respectively. Gross margin was 45% and 48% for the six months ended June 28, 2025 and June 29, 2024, respectively. The decrease in gross margin in both periods was primarily due to approximately $800 million of inventory and related charges associated with the U.S. government export control on AMD Instinct MI308 Data Center GPU products.",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-08-06",
+          "period_end": "2025-06-28",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000108/amd-20250628.htm",
+          "context_id": "ragas_dev_05-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_06",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "interim_product_transition",
+      "question": "What does NVIDIA's FY2025 Q2 10-Q say drove Data Center growth while Blackwell was still transitioning toward production? Include the reported Data Center revenue and distinguish shipments already made from the planned ramp. Use only the local filing corpus; do not browse.",
+      "reference": "Data Center revenue was $26.3 billion in FY2025 Q2. The filing attributes growth to Hopper demand for training and inference, with cloud providers and consumer-internet and enterprise customers contributing. NVIDIA had shipped Blackwell customer samples and changed the GPU mask to improve production yield. It scheduled the production ramp for FY2025 Q4 into FY2026; those plans are not evidence that volume Blackwell production had already occurred in Q2.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_06-f1",
+          "text": "FY2025 Q2 Data Center revenue is $26.3 billion.",
+          "evidence_ids": [
+            "ragas_dev_06-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-f2",
+          "text": "Hopper demand for training/inference drove Data Center growth.",
+          "evidence_ids": [
+            "ragas_dev_06-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-f3",
+          "text": "Blackwell customer samples shipped and a mask change aimed to improve yield.",
+          "evidence_ids": [
+            "ragas_dev_06-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-f4",
+          "text": "The production ramp was scheduled for Q4 and into FY2026.",
+          "evidence_ids": [
+            "ragas_dev_06-e1"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "nvda-0001045810-24-000264",
+          "start": 144608,
+          "end": 146164,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "span_sha256": "48e7abbceeb9dd9ddbeb91c84a423738303ba57dd4503ee08b965e6005b4880f",
+          "text": "Data Center revenue was up 154% from a year ago and up 16% sequentially. The strong sequential and year-on-year growth was driven by demand for our\nHopper GPU computing platform for training and inferencing of large language models, recommendation engines, and generative AI applications. Sequential\ngrowth was driven by consumer internet and enterprise companies. Cloud service providers represented roughly 45% of our Data Center revenue, and more\nthan 50% stemmed from consumer internet and enterprise companies. Strong year-on-year growth was driven by all customer types from both compute and\nnetworking revenue. Customers continue to accelerate their Hopper architecture purchases while gearing up to adopt Blackwell. Data Center compute revenue\nwas $22.6 billion, up 162% from a year ago and up 17% sequentially. Networking revenue was $3.7 billion, up 114% from a year ago driven by InfiniBand and\nEthernet for AI revenue, which includes Spectrum-X end-to-end ethernet platform. Networking revenue sequentially was up 16% and includes a doubling of\nEthernet for AI revenue.\n\nWe shipped customer samples of our Blackwell architecture in the second quarter. We executed a change to the Blackwell GPU mask to improve production\nyield. Blackwell production ramp is scheduled to begin in the fourth quarter and continue into fiscal year 2026. In the fourth quarter of fiscal year 2025, we expect\nto ship several billion dollars in Blackwell revenue. Hopper demand is strong, and shipments are expected to increase in the second half of fiscal year 2025.",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2024-08-28",
+          "period_end": "2024-07-28",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm",
+          "context_id": "ragas_dev_06-e1"
+        },
+        {
+          "document_id": "nvda-0001045810-24-000264",
+          "start": 147378,
+          "end": 147521,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "span_sha256": "cf181e0dae6728285554668c13fc4b181fe4091097ef09bd1561277b28db3a12",
+          "text": "Data Center revenue for the second quarter of fiscal year 2025 was $26.3 billion, up 16% from the previous quarter and up 154% from a year ago.",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2024-08-28",
+          "period_end": "2024-07-28",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000264/nvda-20240728.htm",
+          "context_id": "ragas_dev_06-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_07",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "NVDA",
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "cross_company_manufacturing",
+      "question": "Explain how NVIDIA and AMD describe wafer fabrication and final assembly in their FY2025 annual filings. What do the named suppliers and outsourcing arrangements show about each company's production model? Use only the local filing corpus; do not browse.",
+      "reference": "NVIDIA describes a fabless and contracting strategy covering fabrication, assembly, testing and packaging. It names TSMC and Samsung for wafers and independent contractors for final assembly/testing/packaging. AMD says third-party foundries fabricate all product wafers, with TSMC supplying its microprocessor/GPU wafers at 7 nm or smaller and primarily GlobalFoundries at larger nodes; it also relies on third-party assembly/test/packaging. Both disclosures establish external manufacturing dependence, rather than self-sufficient internal wafer production.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_07-f1",
+          "text": "NVIDIA describes a fabless and contracting strategy spanning manufacturing phases.",
+          "evidence_ids": [
+            "ragas_dev_07-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-f2",
+          "text": "NVIDIA names TSMC/Samsung wafer foundries and independent final-product contractors.",
+          "evidence_ids": [
+            "ragas_dev_07-e2"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-f3",
+          "text": "AMD relies on third-party foundries for all wafers, including the stated TSMC/GlobalFoundries node split.",
+          "evidence_ids": [
+            "ragas_dev_07-e3"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-f4",
+          "text": "AMD also relies on third-party assembly, testing, marking and packaging.",
+          "evidence_ids": [
+            "ragas_dev_07-e3"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "nvda-0001045810-25-000023",
+          "start": 42973,
+          "end": 43928,
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "span_sha256": "f9ad35e69a4ddf7fced7961b249380dc68359ce1e8d126601bc56477595edd27",
+          "text": "We utilize a fabless and contracting manufacturing strategy, whereby we employ and partner with key suppliers for all phases of the manufacturing process,\nincluding  wafer  fabrication,  assembly,  testing,  and  packaging.  We  use  the  expertise  of  industry-leading  suppliers  that  are  certified  by  the  International\nOrganization for Standardization in such areas as fabrication, assembly, quality control and assurance, reliability, and testing. Additionally, we can avoid many of\nthe significant costs and risks associated with owning and operating manufacturing operations. While we may directly procure certain raw materials used in the\nproduction of our products, such as memory, substrates, and a variety of components, our suppliers are responsible for procurement of most raw materials used\nin the production of our products. As a result, we can focus our resources on product design, quality assurance, marketing, and customer support.",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-02-26",
+          "period_end": "2025-01-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "context_id": "ragas_dev_07-e1"
+        },
+        {
+          "document_id": "nvda-0001045810-25-000023",
+          "start": 44572,
+          "end": 45101,
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "span_sha256": "8820d2a62f16445c25b4fcc5309d15adc9da2942d8d61eb64099a5d01f6683a6",
+          "text": "We  utilize  foundries,  such  as  Taiwan  Semiconductor\nManufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers. We purchase memory from\nSK Hynix Inc., Micron Technology, Inc., and Samsung. We utilize CoWoS technology for semiconductor packaging. We engage with independent subcontractors\nand contract manufacturers such as Hon Hai Precision Industry Co., Ltd., Wistron Corporation, and Fabrinet to perform assembly, testing and packaging of our\nfinal products.",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-02-26",
+          "period_end": "2025-01-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "context_id": "ragas_dev_07-e2"
+        },
+        {
+          "document_id": "amd-0000002488-26-000018",
+          "start": 95210,
+          "end": 96178,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "span_sha256": "0f56706c737927fb68ffa8fd3c0b72686fd91acb7aecaacebea8c10649854a53",
+          "text": "We utilize third-party wafer foundries to fabricate the silicon wafers for all of our products. We rely on Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm. We also utilize TSMC, United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd. for our integrated circuits (IC) in the form of programmable logic devices. We also rely on third-party manufacturers to assemble, test, mark and pack (ATMP) our products. Our third-party package assembly partners are responsible for packaging technology used to fabricate our products. It is important to have reliable relationships with all of these third-party manufacturing suppliers to ensure adequate product supply to respond to customer demand.",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2026-02-04",
+          "period_end": "2025-12-27",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000018/amd-20251227.htm",
+          "context_id": "ragas_dev_07-e3"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_dev_08",
+      "split": "development",
+      "metric_eligible": true,
+      "companies": [
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "interim_licensing_driver",
+      "question": "Explain the nature of Qualcomm's QTL revenue and the stated reason it grew in the third quarter of FY2025. Contrast the revenue-recognition pattern with QCT equipment sales, without calculating growth yourself. Use only the local filing corpus; do not browse.",
+      "reference": "Substantially all QTL revenue is licensing revenue recognized over time, principally royalties generated by licensees' mobile-handset sales. Substantially all QCT revenue is equipment revenue recognized at a point in time. The FY2025 Q3 filing says QTL revenue increased 4% versus the year-earlier quarter, primarily because estimated sales of 3G/4G/5G multimode products increased. The 4% is reported, not a new calculation.",
+      "expected_facts": [
+        {
+          "id": "ragas_dev_08-f1",
+          "text": "QTL licensing revenue is recognized over time and mainly comes from licensee handset-sale royalties.",
+          "evidence_ids": [
+            "ragas_dev_08-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-f2",
+          "text": "QCT equipment revenue is recognized at a point in time.",
+          "evidence_ids": [
+            "ragas_dev_08-e1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-f3",
+          "text": "Reported FY2025 Q3 QTL revenue increased 4% mainly because estimated multimode-product sales rose.",
+          "evidence_ids": [
+            "ragas_dev_08-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "qcom-0000804328-25-000045",
+          "start": 109577,
+          "end": 109907,
+          "text_sha256": "64eebf456d6fa562fc028cd8aedd3ebb0dbcd265c7e2c5edf58bbfc6e114f5ea",
+          "span_sha256": "6f1c3db1db4c476277ee3e9311866378822ad982f96716fe450d3869ff4b53a3",
+          "text": "Substantially all of\nQCT’s revenues consist of equipment revenues that are recognized at a point in time, and substantially all of QTL’s\n(Qualcomm Technology Licensing) revenues represent licensing revenues that are recognized over time and are principally\nfrom royalties generated through our licensees’ sales of mobile handsets.",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-07-30",
+          "period_end": "2025-06-29",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm",
+          "context_id": "ragas_dev_08-e1"
+        },
+        {
+          "document_id": "qcom-0000804328-25-000045",
+          "start": 183197,
+          "end": 183549,
+          "text_sha256": "64eebf456d6fa562fc028cd8aedd3ebb0dbcd265c7e2c5edf58bbfc6e114f5ea",
+          "span_sha256": "0d76523614e1a6c0adf85b8df16a0d66e76c01bec7bc91b31a4e1277830b052f",
+          "text": "QTL revenues                                   increased by                             4%         in the               third           quarter of                       fiscal 2025                         compared to the year ago quarter, primarily due to\n                            an increase in estimated sales of 3G/4G/5G-based multimode products.",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-07-30",
+          "period_end": "2025-06-29",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000045/qcom-20250629.htm",
+          "context_id": "ragas_dev_08-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    }
+  ]
+}

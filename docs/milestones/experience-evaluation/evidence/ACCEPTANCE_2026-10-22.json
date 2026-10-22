@@ -1,0 +1,80 @@
+{
+  "checked_at": "2026-10-22T17:36:32.972656+00:00",
+  "branch": "eval/ragas",
+  "base_commit": "aec3b3c",
+  "m12_separate_commit": "6aa5a47",
+  "scope": "Static direct Filings Research RAGAS; not full M13 or Cloud Run",
+  "tests": {
+    "command": "uv run --locked pytest -q",
+    "passed": 317,
+    "failed": 0,
+    "seconds": 43.93
+  },
+  "required_metrics": {
+    "question_runs": 24,
+    "unique_questions": 12,
+    "metric_values": 96,
+    "available": 96,
+    "unavailable": 0,
+    "arithmetic_replay": 96,
+    "replay_model_calls": 0
+  },
+  "source_integrity": {
+    "reference_spans": 24,
+    "referenced_documents": 12,
+    "returned_contexts": 249,
+    "failures": 0
+  },
+  "native_generation_runs": 22,
+  "hosted_generation_runs": 4,
+  "generation_run_note": "8baseline +8refined +4heldout +2controls; calibration/judge calls separate. Hosted repeats4heldout questions.",
+  "hosted_usage": {
+    "usage_bearing_rounds": 15,
+    "prompt_tokens": 107287,
+    "completion_tokens": 4596,
+    "estimate_usd": "0.00827120",
+    "invoice_verified": false,
+    "fallback_cases": 2
+  },
+  "tavily_calls": 0,
+  "final_product_matches_heldout_freeze": true,
+  "current_evaluator_hashes": {
+    "evaluate_ragas.py": "28d14fd1eeafec5a11991251d39c4824fc32073e153d800f473703a734af5400",
+    "ragas_support.py": "8f03511cee39f4e01f40798241c337511cd57add27606cea48a91819905f5990",
+    "report_ragas.py": "5eb1cb540565cfe475de5abaa36e5f1b55b9c03e2b47abd12db0003e0b0ea8cf",
+    "verify_ragas_report.py": "3541c848b0ec61ccc292041bfa1563d0894bb6920af39bbf4fc62b65d4d99027"
+  },
+  "checks": {
+    "python_compile": "pass",
+    "requirements_export": "Locked non-dev export; RAGAS dev dependency resolution pins fsspec2026.7.0 and rich14.3.4",
+    "Docker": "Built non-root Python3.13 image; real Chroma/fixture Research plus capability SSE pass",
+    "local_path_links": {
+      "checked": 111,
+      "broken": 0
+    },
+    "credential_scan": {
+      "files": 48,
+      "matches": 0
+    },
+    "staged_diff_check": "pass",
+    "documentation_encoding": "Unicode arrows, ranges and milestone titles verified after PowerShell pipe conversion correction",
+    "published_input_replay": {
+      "metric_values": 16,
+      "identical": 16,
+      "new_model_calls": 0,
+      "cached_judgments": 62
+    },
+    "independent_report_audit": {
+      "checks": 164,
+      "factual_mismatches": 0,
+      "max_arithmetic_error": 8.773621396063191e-08
+    }
+  },
+  "remaining_limits": [
+    "4heldout cases and1draw/question/profile; not population accuracy",
+    "Shared model-family judge bias; independent reviewer is an agent, not human",
+    "Hosted faithfulness1misses2source interpretation errors",
+    "Annual-segment wording can admit quarterly initial sources",
+    "Broader M13 agent/browser and M14 deployment work remain"
+  ]
+}

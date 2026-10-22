@@ -67,6 +67,26 @@ uv run --locked python scripts/start_local_container.py --profile api --port 808
 
 Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Hosted generation runs on Cloud Run when its keys are present; M14 owns deployment verification and cross-instance coordination.
 
+## Static filing RAGAS
+
+`uv sync --locked` includes pinned evaluation dependencies. The judge uses the authenticated local Codex subscription and local ONNX embeddings. No hosted judge or embedding key is required. [Evaluation](docs/evaluation.md) reports all four metrics, per-question results, source review, latency, costs and limits. This direct Research evaluation disables web acquisition without changing application live defaults.
+
+```powershell
+uv run --locked python scripts/evaluate_ragas.py calibrate --output artifacts/ragas/calibration.json
+uv run --locked python scripts/evaluate_ragas.py capture --dataset tests/fixtures/ragas_development.json --output artifacts/ragas/development.json
+uv run --locked python scripts/evaluate_ragas.py score --dataset tests/fixtures/ragas_development.json --capture artifacts/ragas/development.json --output artifacts/ragas/development-scores.json
+uv run --locked python scripts/evaluate_ragas.py capture --dataset tests/fixtures/ragas_heldout.json --output artifacts/ragas/heldout.json
+uv run --locked python scripts/evaluate_ragas.py score --dataset tests/fixtures/ragas_heldout.json --reference-errata tests/fixtures/ragas_reference_errata.json --capture artifacts/ragas/heldout.json --output artifacts/ragas/heldout-scores.json
+```
+
+Capture uses the prepared corpus/index from setup; `--corpus` and `--index` select other paths. `--profile api` explicitly selects hosted generation. Controls in `tests/fixtures/ragas_controls.json` run through `capture` and stay outside metric denominators. `--resume` requires matching capture/runtime/data identities. Run scoring commands sequentially when sharing the judge cache. Repeated relevancy draws retain separate cached samples. A new model run can yield different scores.
+
+The committed input artifacts can be rescored without regenerating answers or querying Chroma. The recorded report also supports arithmetic replay with zero model calls:
+
+```powershell
+uv run --locked python scripts/verify_ragas_report.py docs/milestones/experience-evaluation/evidence/RAGAS_2026-10-22.json --output artifacts/ragas/replayed-arithmetic.json
+```
+
 ## Live sources
 
 **MCP tool sharing (graded):** Current Developments, Filings Research and Risk Summary invoke the same Tavily Remote MCP `tavily_search` tool in different contexts. Risk Summary uses it automatically for every registered finding, including stable risks. Exercise sharing with a risk comparison plus current developments, or a full five-agent request with an official-update clause to exercise all three callers. Each call appears as `node=live_mcp` with its agent, server and tool. Live calls need `TAVILY_API_KEY` and provider access. [Rationale](docs/architecture.md#mcp-tool-sharing); [M12 comparison](docs/milestones/risk-live-check/README.md).

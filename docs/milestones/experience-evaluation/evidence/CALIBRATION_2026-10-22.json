@@ -1,0 +1,415 @@
+{
+  "checked_at": "2026-10-22T16:50:48.054011+00:00",
+  "git_commit": "aec3b3c6be80570d1a5cd5a4095f61bbb42ea2f9",
+  "runtime_hashes": {
+    "src/analysis_artifacts.py": "dbfe35f2e4837e41469b781f236dd5ffa2af32f2a456d0de2f0250bf36139004",
+    "src/capabilities.py": "598121d0fd10bea74884aa54c28045e03dd2066659756282015b6e817d8c1c06",
+    "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+    "src/codex_transport.py": "cd56abd9ca1acce0b5a66376428447e926ae5f88d257765f1cf9358379ab334e",
+    "src/current_developments.py": "d2f1f259265f19e7100d2b5987752b183fd707c2d8a0a419cd16b4b54281d9ad",
+    "src/filing_financials.py": "1d77e206897c7f1e66cc768dba12d27eb7904cc73b4a883ee39a4d5233c102f6",
+    "src/financial_data.py": "36ddded093d224992f7a14a87c5fcfc6e71617048bcdb68587f1d78f1b7ee8ba",
+    "src/financial_workflow.py": "150baa6e57b322cf4ff679933b9e86c9f7e1ca5cbda3f18286f7afd7e2eec563",
+    "src/generation.py": "dc7078127f05e2f4d1666ba696e383c7ba370d20d0b84e90c4c8acd24aa42d29",
+    "src/generation_context.py": "3943b21874c4da0530f9992ed39b2fb62197616fa26d656961f63647ea4ba6e7",
+    "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+    "src/live_mcp.py": "3e10890b7f609f255bc9f9acadd48c8bb05f7efbc5e824fffed6df17889ebc65",
+    "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+    "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+    "src/provider_models.py": "eaa646225deaf1321bf32b059ee198023fd775a717e58835e9dee71c7aae3f78",
+    "src/provider_policy.py": "0452d7f6e2d40f174e180ece00122dd1ac83f3d089ff230b06272cb881a730b0",
+    "src/quant_analysis.py": "941ccbd3f4f95778d1919d4551fad72e8c996c9b3e3033b49e4f4f34200360eb",
+    "src/quant_runner.py": "88870c6e9a5fbfbfef530b12871a1c09274bc97c4046ae8f0346ac96971faad0",
+    "src/quant_workflow.py": "c1dda1aea4382ab3486e4995b6248dd753df260798098055a74caaffede5a0d3",
+    "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+    "src/request_routing.py": "15d35ab2b14c6d79b0ea7db537aafd2de7b985ad2f5b868625f634801677f9cf",
+    "src/research_index.py": "a01b8606847f2beb9dd3550d29062af4b74824289a9494674430ccab1597ca3a",
+    "src/research_workflow.py": "10e2686ea1d029b1373479082f982c8e9987b99b42310cf6695d9b173a3f423e",
+    "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+    "src/risk_summary.py": "927351ae033b39cd5745a514f59e60ad15aad19206691fe836936cd01c516f27",
+    "src/source_collection.py": "41a3bde568828f040886bba940ef4838d71939b9351c0130f3c2657881b14254",
+    "src/source_inventory.py": "cd550c2a42fd1af0665bfbdb85b6557a342831ceb06bce6c1f525567901b8bc6",
+    "src/supervisor.py": "2a84b361ae150d5761310603e9a70d0b4879c07afbe221362278e001845fa38c",
+    "src/task_scope.py": "48c79e6c5bf74a552db2007f5010df44d3714a428c290ff185d3bb8adafa1c1b",
+    "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+    "src/web_evidence.py": "c40cfad8b0fc995ab33db5bb7ec80b9a68c6762dbcb5a4a1c94a9d2cdf625db1",
+    "prompts/answer_coverage.md": "30ad2fddcdb468328e49c7a8d7647a693193fa6e6643c037f7fb57c4d6c021b9",
+    "prompts/current_developments.md": "a2d97aacea9ec191cf30ae0efc90f6b096a4fa382e90fb8692f78dd7874f2f71",
+    "prompts/filing_revenue_inputs.md": "7bbe86065ad438be525021ac6c39d6729ed045ba0e5d6f61e82640c4cbfcf194",
+    "prompts/filings_research.md": "23a8083ac5be5ae36c3ed32ef3147500aa3d8c387d6d10c91e7fd3612e6552e7",
+    "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+    "prompts/quant.md": "08d54c757d0133e4b88c746d81733074413fa24a6a0707b2f281a915161e936a",
+    "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+    "prompts/risk_summary.md": "b1274b30711f3288f1815d3b413f003c2f62670da6ee2f62e3a554b3b171cec2"
+  },
+  "adapter": "codex-ragas-v2",
+  "evaluator_hashes": {
+    "evaluate_ragas.py": "a0179914ed109cf060bd5f8a8708748e37031df5b7f785c1386e2bb5f342f429",
+    "ragas_support.py": "8f03511cee39f4e01f40798241c337511cd57add27606cea48a91819905f5990"
+  },
+  "versions": {
+    "ragas": "0.4.3",
+    "langchain-community": "0.4.1",
+    "langchain-core": "1.6.10",
+    "chromadb": "1.5.9",
+    "onnxruntime": "1.31.0",
+    "pydantic": "2.14.1"
+  },
+  "embedding": {
+    "schema": 1,
+    "model": "all-MiniLM-L6-v2",
+    "dimensions": 384,
+    "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+    "tokens": 220,
+    "overlap": 40,
+    "distance": "cosine"
+  },
+  "judge": "Codex subscription / gpt-6.1-sol",
+  "web": "disabled by direct static Research invocation; no live_check supplied",
+  "kind": "Synthetic judge calibration, not corpus evaluation",
+  "question": "What were Northstar's FY2025 revenue and largest-customer revenue share?",
+  "reference": "Northstar reported $120 million of revenue and a 25% largest-customer revenue share in FY2025.",
+  "contexts": [
+    "Northstar's FY2025 revenue was $120 million. Its largest customer accounted for 25% of revenue.",
+    "Paris is the capital of France."
+  ],
+  "cases": [
+    {
+      "id": "supported",
+      "status": "scored",
+      "answer_sha256": "ac70001820b7b4d2a77f29695194b636edaad20e87e574c5a2260040be654d28",
+      "contexts": 2,
+      "metrics": {
+        "context_recall": {
+          "value": 1.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 16.953
+        },
+        "context_precision": {
+          "value": 0.9999999999,
+          "status": "scored",
+          "reason": null,
+          "seconds": 21.18
+        },
+        "answer_relevancy": {
+          "value": 0.957078368174634,
+          "status": "scored",
+          "reason": null,
+          "seconds": 25.035
+        },
+        "faithfulness": {
+          "value": 1.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 26.206
+        }
+      },
+      "seconds": 26.207
+    },
+    {
+      "id": "contradicted",
+      "status": "scored",
+      "answer_sha256": "72fd8777ecda227a0e64f09d71ccaaf4e5fd3b6d79c833fa5b191403904f432b",
+      "contexts": 1,
+      "metrics": {
+        "context_precision": {
+          "value": 0.9999999999,
+          "status": "scored",
+          "reason": null,
+          "seconds": 0.012
+        },
+        "context_recall": {
+          "value": 1.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 9.929
+        },
+        "faithfulness": {
+          "value": 0.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 20.831
+        },
+        "answer_relevancy": {
+          "value": 0.9566024774113698,
+          "status": "scored",
+          "reason": null,
+          "seconds": 24.061
+        }
+      },
+      "seconds": 24.077
+    },
+    {
+      "id": "irrelevant",
+      "status": "scored",
+      "answer_sha256": "557be7eca214f1889cdb6dfa348eb7c937648c9d6be72bfc1b8204adf7552a43",
+      "contexts": 1,
+      "metrics": {
+        "context_precision": {
+          "value": 0.9999999999,
+          "status": "scored",
+          "reason": null,
+          "seconds": 0.002
+        },
+        "context_recall": {
+          "value": 1.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 0.014
+        },
+        "faithfulness": {
+          "value": 0.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 16.607
+        },
+        "answer_relevancy": {
+          "value": 0.16585820211188246,
+          "status": "scored",
+          "reason": null,
+          "seconds": 24.091
+        }
+      },
+      "seconds": 24.105
+    },
+    {
+      "id": "missing_context",
+      "status": "scored",
+      "answer_sha256": "ac70001820b7b4d2a77f29695194b636edaad20e87e574c5a2260040be654d28",
+      "contexts": 1,
+      "metrics": {
+        "context_precision": {
+          "value": 0.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 0.013
+        },
+        "answer_relevancy": {
+          "value": 0.957078368174634,
+          "status": "scored",
+          "reason": null,
+          "seconds": 0.401
+        },
+        "faithfulness": {
+          "value": 0.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 9.237
+        },
+        "context_recall": {
+          "value": 0.0,
+          "status": "scored",
+          "reason": null,
+          "seconds": 11.782
+        }
+      },
+      "seconds": 11.871
+    }
+  ],
+  "judge_calls": [
+    {
+      "key": "374a588314ca5bf88777b96a2ff084917142efa725198b57d18cb154133059c2",
+      "context": "supported:answer_relevancy",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 7.352
+    },
+    {
+      "key": "6070b02e82bdbe73f01bfa2377556be29c9a9057a610a1dc5aca8bb09dad8853",
+      "context": "supported:context_precision",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 8.129
+    },
+    {
+      "key": "64f226c226c6cb101358bac1d8406331cb0572628fe208eec783ba70147e3057",
+      "context": "supported:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 10.449
+    },
+    {
+      "key": "b9ac99f03a7a145bb831dbdd9095d6b21071a5b9f923cfcb6f20826af41276fc",
+      "context": "supported:context_recall",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.622
+    },
+    {
+      "key": "7585b15a97b273c9a82a37b34e86dbbe725f59f6a4d38a08e11ecb182775c3e4",
+      "context": "supported:answer_relevancy",
+      "sample_index": 1,
+      "cached": false,
+      "seconds": 8.887
+    },
+    {
+      "key": "60edf5bec18a9d336930ebfc6e871370d52cfef9be67a4d9197a6a85a3f27c1b",
+      "context": "supported:context_precision",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 10.755
+    },
+    {
+      "key": "451ed9efb2682cec9ced2abc39639cb7597ea954069bade14be4a22b2b36e549",
+      "context": "supported:answer_relevancy",
+      "sample_index": 2,
+      "cached": false,
+      "seconds": 7.089
+    },
+    {
+      "key": "0525958fe32be01ecaf907fa58410587d655d0f603afd0f0f0c56d8280bf1b67",
+      "context": "supported:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.184
+    },
+    {
+      "key": "6070b02e82bdbe73f01bfa2377556be29c9a9057a610a1dc5aca8bb09dad8853",
+      "context": "contradicted:context_precision",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "fac844b8a19d39c1efd9f31d91b4438ee91a6cf76bfbec54e4f0fec710c4981b",
+      "context": "contradicted:answer_relevancy",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.899
+    },
+    {
+      "key": "8c36b9aee37f2648509de76a5219d03e1ee00d2410f02784cbeec740c2173c57",
+      "context": "contradicted:context_recall",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.921
+    },
+    {
+      "key": "22d9e5b525f3d876999cae445fae46b413a2625a1987fac428191f71aba73a9d",
+      "context": "contradicted:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.977
+    },
+    {
+      "key": "f7c93594367b9323d474ffe619bfdd1c76911c0e1a4a7c5c0d949fa1d1224793",
+      "context": "contradicted:answer_relevancy",
+      "sample_index": 1,
+      "cached": false,
+      "seconds": 6.711
+    },
+    {
+      "key": "7ccaac03de9e3c1d2193e82bb4ccd371ed1459de7581718b4e5ec1bf5193abb0",
+      "context": "contradicted:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 10.835
+    },
+    {
+      "key": "22829fb869f1c4d260ff24a9ec220c9cc2e5f46a2e2ac9410a33c952c586e2b8",
+      "context": "contradicted:answer_relevancy",
+      "sample_index": 2,
+      "cached": false,
+      "seconds": 7.16
+    },
+    {
+      "key": "6070b02e82bdbe73f01bfa2377556be29c9a9057a610a1dc5aca8bb09dad8853",
+      "context": "irrelevant:context_precision",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "8c36b9aee37f2648509de76a5219d03e1ee00d2410f02784cbeec740c2173c57",
+      "context": "irrelevant:context_recall",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "e05125e2df343c6fea18e0f3235564094968a2344e7728bafb2c106c9288de53",
+      "context": "irrelevant:answer_relevancy",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 7.671
+    },
+    {
+      "key": "d8a44b66d62bcb26bcbec2d98a147c08224e2d6b2292156598471a59dc6d469e",
+      "context": "irrelevant:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 7.722
+    },
+    {
+      "key": "cb58c79fa5714de8d07b22be0929464a2239c2129424c3ea3aad205cf2b722c8",
+      "context": "irrelevant:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 8.874
+    },
+    {
+      "key": "9cd132663db4e689a2e68543a0aa80f337ffccec762a6d808f428ff978815c37",
+      "context": "irrelevant:answer_relevancy",
+      "sample_index": 1,
+      "cached": false,
+      "seconds": 8.942
+    },
+    {
+      "key": "ed01ccf2527054ae77446c26e97b1d13fc85abd0129a38c99984c6c05deb8e2c",
+      "context": "irrelevant:answer_relevancy",
+      "sample_index": 2,
+      "cached": false,
+      "seconds": 7.153
+    },
+    {
+      "key": "64f226c226c6cb101358bac1d8406331cb0572628fe208eec783ba70147e3057",
+      "context": "missing_context:faithfulness",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "374a588314ca5bf88777b96a2ff084917142efa725198b57d18cb154133059c2",
+      "context": "missing_context:answer_relevancy",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "7585b15a97b273c9a82a37b34e86dbbe725f59f6a4d38a08e11ecb182775c3e4",
+      "context": "missing_context:answer_relevancy",
+      "sample_index": 1,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "451ed9efb2682cec9ced2abc39639cb7597ea954069bade14be4a22b2b36e549",
+      "context": "missing_context:answer_relevancy",
+      "sample_index": 2,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "60edf5bec18a9d336930ebfc6e871370d52cfef9be67a4d9197a6a85a3f27c1b",
+      "context": "missing_context:context_precision",
+      "sample_index": 0,
+      "cached": true,
+      "seconds": 0
+    },
+    {
+      "key": "2e776c4f5e240204fb20b2ed6161cab1eb18dc09975ec6bb93c4bbc32565aefa",
+      "context": "missing_context:faithfulness",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 9.219
+    },
+    {
+      "key": "a6b6a139ceacc85eba4de02e7bbcbc8870f43ac1873c3e7de83be02d2c768809",
+      "context": "missing_context:context_recall",
+      "sample_index": 0,
+      "cached": false,
+      "seconds": 11.772
+    }
+  ]
+}

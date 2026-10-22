@@ -30,7 +30,9 @@ pythonpath = ["."]
 
 [dependency-groups]
 dev = [
+    "langchain-community==0.4.1",
     "playwright==1.64.0",
     "pytest==9.1.1",
     "pytest-asyncio==1.4.0",
+    "ragas==0.4.3",
 ]

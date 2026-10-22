@@ -1,0 +1,1517 @@
+{
+  "checked_at": "2026-10-22T17:26:58.574093+00:00",
+  "method": "Recorded structured judgments and pinned local embeddings; no model/API calls",
+  "verified_metric_values": 96,
+  "tolerance": 1e-06,
+  "checks": [
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "answer_relevancy",
+      "recorded": 0.8161245561481957,
+      "recomputed": 0.8161246180534363,
+      "generated_questions": [
+        "What did AMD’s FY2025 10-K/A correct in the Client revenue growth discussion, and did it change reported financial results or update subsequent events?",
+        "What did AMD’s FY2025 10-K/A correct in its Client revenue growth discussion, and did it change reported financial results?",
+        "What did AMD’s FY2025 10-K/A correct in the Client revenue growth discussion, and did it change reported financial results or update subsequent events?"
+      ],
+      "cosine_similarities": [
+        0.815339207649231,
+        0.8176952600479126,
+        0.815339207649231
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 3,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 14,
+      "total_statements": 14,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "context_precision",
+      "recorded": 0.551587301573512,
+      "recomputed": 0.551587301573512,
+      "relevant_contexts": 4,
+      "retrieved_contexts": 10,
+      "verdicts": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "answer_relevancy",
+      "recorded": 0.8266828363640619,
+      "recomputed": 0.8266828656196594,
+      "generated_questions": [
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management cite for the decline?",
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management cite for the decline?",
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management attribute the decline to?"
+      ],
+      "cosine_similarities": [
+        0.8217189311981201,
+        0.8217189311981201,
+        0.836610734462738
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 7,
+      "total_statements": 7,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 3,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "context_precision",
+      "recorded": 0.22829670329213736,
+      "recomputed": 0.22829670329213736,
+      "relevant_contexts": 5,
+      "retrieved_contexts": 17,
+      "verdicts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "answer_relevancy",
+      "recorded": 0.6920687460337406,
+      "recomputed": 0.6920687556266785,
+      "generated_questions": [
+        "How did Intel’s September 2025 sale of a 51% stake in Altera affect its consolidated results, revenue comparisons, and recognition of the sale gain?",
+        "How did Intel’s September 2025 sale of a 51% stake in Altera affect its operating results, revenue comparisons, and recognition of the sale gain?",
+        "How does Intel’s sale of a 51% stake in Altera affect its 2025 operating results, prior-period revenue comparisons, and recognition of the sale gain?"
+      ],
+      "cosine_similarities": [
+        0.6955553293228149,
+        0.6768101453781128,
+        0.7038407325744629
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 14,
+      "total_statements": 14,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "context_precision",
+      "recorded": 0.9999999999875,
+      "recomputed": 0.9999999999875,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 8,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "answer_relevancy",
+      "recorded": 0.8563884163975501,
+      "recomputed": 0.8563883304595947,
+      "generated_questions": [
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?",
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?",
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?"
+      ],
+      "cosine_similarities": [
+        0.8563883304595947,
+        0.8563883304595947,
+        0.8563883900642395
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "context_recall",
+      "recorded": 0.6666666666666666,
+      "recomputed": 0.6666666666666666,
+      "attributed_reference_statements": 2,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 15,
+      "total_statements": 15,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "context_precision",
+      "recorded": 0.9888888888779013,
+      "recomputed": 0.9888888888779013,
+      "relevant_contexts": 9,
+      "retrieved_contexts": 10,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "answer_relevancy",
+      "recorded": 0.87342889829969,
+      "recomputed": 0.873429000377655,
+      "generated_questions": [
+        "What were NVIDIA’s FY2025 Q2 Data Center revenue results and growth drivers, and how did Blackwell shipments during the quarter differ from its planned production ramp?",
+        "What were NVIDIA’s FY2025 Q2 Data Center revenue and growth drivers, and how did Blackwell’s completed milestones differ from its planned production ramp and revenue expectations?",
+        "What were NVIDIA’s FY2025 Q2 Data Center revenue and growth drivers, and how did Blackwell’s Q2 milestones differ from its planned production ramp?"
+      ],
+      "cosine_similarities": [
+        0.8796161413192749,
+        0.8763210773468018,
+        0.8643496036529541
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 17,
+      "total_statements": 17,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "context_precision",
+      "recorded": 0.6151515151438257,
+      "recomputed": 0.6151515151438257,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 15,
+      "verdicts": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "answer_relevancy",
+      "recorded": 0.7304709095437972,
+      "recomputed": 0.7304708957672119,
+      "generated_questions": [
+        "How did AMD’s gross margin change in the quarter and first half ended June 28, 2025, compared with the prior-year periods, and what caused the declines?",
+        "How did AMD’s gross margin change in the second quarter and first half of 2025 compared with 2024, and what caused the declines?",
+        "What were AMD’s gross margins for the second quarter and first half of 2025 compared with 2024, and what caused the declines?"
+      ],
+      "cosine_similarities": [
+        0.7456070780754089,
+        0.7274724245071411,
+        0.7183332443237305
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "faithfulness",
+      "recorded": 0.8333333333333334,
+      "recomputed": 0.8333333333333334,
+      "supported_statements": 5,
+      "total_statements": 6,
+      "rejected_statements": [
+        {
+          "statement": "The answer does not calculate an adjusted gross margin.",
+          "reason": "The context contains source excerpts but no answer whose calculation of an adjusted gross margin can be assessed.",
+          "verdict": 0
+        }
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "context_precision",
+      "recorded": 0.30757575756806815,
+      "recomputed": 0.30757575756806815,
+      "relevant_contexts": 4,
+      "retrieved_contexts": 15,
+      "verdicts": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "answer_relevancy",
+      "recorded": 0.8864141199462052,
+      "recomputed": 0.8864140510559082,
+      "generated_questions": [
+        "What drove Qualcomm’s QTL licensing revenue growth in Q3 FY2025, and how does QTL revenue recognition differ from QCT?",
+        "What primarily drove Qualcomm’s QTL licensing revenue growth in Q3 FY2025, and how does QTL revenue recognition differ from QCT?",
+        "What primarily drove Qualcomm’s QTL licensing revenue growth in Q3 FY2025, and how does QTL revenue recognition differ from QCT?"
+      ],
+      "cosine_similarities": [
+        0.8887965083122253,
+        0.8852227926254272,
+        0.8852229118347168
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 8,
+      "total_statements": 8,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "context_precision",
+      "recorded": 0.8551587301444776,
+      "recomputed": 0.8551587301444776,
+      "relevant_contexts": 6,
+      "retrieved_contexts": 9,
+      "verdicts": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "answer_relevancy",
+      "recorded": 0.7745151883952707,
+      "recomputed": 0.7745151519775391,
+      "generated_questions": [
+        "How do NVIDIA’s and AMD’s FY2025 outsourced manufacturing strategies compare in wafer fabrication, assembly, testing and packaging?",
+        "How do NVIDIA’s and AMD’s FY2025 outsourced manufacturing strategies compare across wafer fabrication, assembly, testing and packaging?",
+        "How do NVIDIA and AMD compare in their FY2025 outsourced wafer fabrication, assembly, testing and packaging strategies and supplier arrangements?"
+      ],
+      "cosine_similarities": [
+        0.7856137156486511,
+        0.7738927602767944,
+        0.764039158821106
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 26,
+      "total_statements": 26,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "context_precision",
+      "recorded": 0.7762225428805849,
+      "recomputed": 0.7762225428805849,
+      "relevant_contexts": 9,
+      "retrieved_contexts": 12,
+      "verdicts": [
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "answer_relevancy",
+      "recorded": 0.8366106864629539,
+      "recomputed": 0.8366107940673828,
+      "generated_questions": [
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management attribute the decline to?",
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management attribute the decline to?",
+        "How did NVIDIA's gross margin change from FY2025 to FY2026, and what factors did management attribute the decline to?"
+      ],
+      "cosine_similarities": [
+        0.8366107940673828,
+        0.8366107940673828,
+        0.836610734462738
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 5,
+      "total_statements": 5,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 3,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "context_precision",
+      "recorded": 0.3893939393861515,
+      "recomputed": 0.3893939393861515,
+      "relevant_contexts": 5,
+      "retrieved_contexts": 14,
+      "verdicts": [
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "answer_relevancy",
+      "recorded": 0.7841596260085408,
+      "recomputed": 0.7841596007347107,
+      "generated_questions": [
+        "What did AMD correct in its FY2025 10-K/A regarding Client processor unit shipment and average selling price growth, and did the correction change reported financial results?",
+        "What did AMD correct about FY2025 Client revenue growth in its amended 10-K, and did the amendment change reported financial results or update subsequent events?",
+        "What did AMD correct about FY2025 Client processor unit shipment and ASP growth in its 10-K/A, and did the amendment change reported financial results or update subsequent events?"
+      ],
+      "cosine_similarities": [
+        0.8024752140045166,
+        0.8200668096542358,
+        0.7299367785453796
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 3,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 17,
+      "total_statements": 17,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "context_precision",
+      "recorded": 0.6428571428410713,
+      "recomputed": 0.6428571428410713,
+      "relevant_contexts": 4,
+      "retrieved_contexts": 9,
+      "verdicts": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "answer_relevancy",
+      "recorded": 0.7083807108611907,
+      "recomputed": 0.7083806991577148,
+      "generated_questions": [
+        "How did Intel’s sale of a 51% stake in Altera affect its FY2025 consolidated and segment results, prior-period revenue comparisons, and recognition of the pretax gain?",
+        "How did Intel’s September 2025 sale of a 51% stake in Altera affect consolidation, prior-period revenue comparisons, and recognition of the sale gain?",
+        "How did Intel’s sale of a 51% stake in Altera affect its consolidated results, prior-period revenue comparisons, and recognition of the pretax gain?"
+      ],
+      "cosine_similarities": [
+        0.7589855790138245,
+        0.6918864250183105,
+        0.6742700934410095
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 15,
+      "total_statements": 15,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "context_precision",
+      "recorded": 0.9999999999875,
+      "recomputed": 0.9999999999875,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 8,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "answer_relevancy",
+      "recorded": 0.8563884163975501,
+      "recomputed": 0.8563883304595947,
+      "generated_questions": [
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?",
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?",
+        "Why did Qualcomm record a $5.7 billion income-tax expense in Q4 FY2025, and did it represent an equivalent cash-tax payment?"
+      ],
+      "cosine_similarities": [
+        0.8563883304595947,
+        0.8563883304595947,
+        0.8563883900642395
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 3,
+      "reference_statements": 3
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 13,
+      "total_statements": 13,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "context_precision",
+      "recorded": 0.9403069152983671,
+      "recomputed": 0.9403069152983671,
+      "relevant_contexts": 11,
+      "retrieved_contexts": 13,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "answer_relevancy",
+      "recorded": 0.7267272903256692,
+      "recomputed": 0.7267272472381592,
+      "generated_questions": [
+        "How did AMD's gross margin change in the second quarter and first half of 2025 versus the comparable 2024 periods, and what primarily caused the declines?",
+        "What were AMD's gross margins for the second quarter and first half of 2025 compared with 2024, and what caused the declines?",
+        "How did AMD's gross margin change in the second quarter and first half of 2025 compared with 2024, and what primarily caused the declines?"
+      ],
+      "cosine_similarities": [
+        0.7346067428588867,
+        0.7185640931129456,
+        0.7270110249519348
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "faithfulness",
+      "recorded": 0.8571428571428571,
+      "recomputed": 0.8571428571428571,
+      "supported_statements": 6,
+      "total_statements": 7,
+      "rejected_statements": [
+        {
+          "statement": "The answer does not calculate an adjusted gross margin.",
+          "reason": "The context contains filing excerpts, not the referenced answer, so whether that answer calculates an adjusted gross margin cannot be inferred.",
+          "verdict": 0
+        }
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "context_precision",
+      "recorded": 0.4124999999896875,
+      "recomputed": 0.4124999999896875,
+      "relevant_contexts": 4,
+      "retrieved_contexts": 9,
+      "verdicts": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "answer_relevancy",
+      "recorded": 0.8440633831763433,
+      "recomputed": 0.8440632820129395,
+      "generated_questions": [
+        "What were NVIDIA’s Q2 FY2025 Data Center revenue and growth drivers, and what was the status of its Blackwell rollout?",
+        "What were NVIDIA’s Q2 FY2025 Data Center revenue and growth drivers, and what was the status of Blackwell shipments and its production ramp?",
+        "What were NVIDIA’s FY2025 Q2 Data Center revenue and growth drivers, and what was the status of Hopper demand and the Blackwell rollout?"
+      ],
+      "cosine_similarities": [
+        0.8549220561981201,
+        0.8743362426757812,
+        0.8029316663742065
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 16,
+      "total_statements": 16,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "context_precision",
+      "recorded": 0.8528571428400857,
+      "recomputed": 0.8528571428400857,
+      "relevant_contexts": 5,
+      "retrieved_contexts": 10,
+      "verdicts": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "answer_relevancy",
+      "recorded": 0.9037311654346896,
+      "recomputed": 0.9037311673164368,
+      "generated_questions": [
+        "How does Qualcomm’s QTL revenue model and recognition differ from QCT’s, and what drove QTL’s reported revenue growth in Q3 FY2025?",
+        "How does Qualcomm’s QTL revenue model and recognition differ from QCT’s, and what drove QTL’s reported revenue growth in Q3 FY2025?",
+        "How does Qualcomm QTL generate and recognize revenue compared with QCT, and what drove QTL revenue growth in Q3 FY2025?"
+      ],
+      "cosine_similarities": [
+        0.9019424319267273,
+        0.9019424319267273,
+        0.9073085784912109
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 9,
+      "total_statements": 9,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "context_precision",
+      "recorded": 0.8766666666491334,
+      "recomputed": 0.8766666666491334,
+      "relevant_contexts": 5,
+      "retrieved_contexts": 6,
+      "verdicts": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "answer_relevancy",
+      "recorded": 0.7154112789935464,
+      "recomputed": 0.715411365032196,
+      "generated_questions": [
+        "How do NVIDIA and AMD compare in their FY2025 use of external wafer foundries and outsourced assembly, packaging, and testing?",
+        "How do NVIDIA’s and AMD’s FY2025 manufacturing models compare in their reliance on external foundries, contract manufacturers, and packaging and testing providers?",
+        "How do NVIDIA and AMD compare in their FY2025 use of external wafer foundries and outsourced assembly, packaging, and testing providers?"
+      ],
+      "cosine_similarities": [
+        0.7197539806365967,
+        0.7094134092330933,
+        0.7170665264129639
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 29,
+      "total_statements": 29,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "context_precision",
+      "recorded": 0.8297979797876073,
+      "recomputed": 0.8297979797876073,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 11,
+      "verdicts": [
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 10,
+      "total_statements": 10,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_precision",
+      "recorded": 0.9999999999857143,
+      "recomputed": 0.9999999999857143,
+      "relevant_contexts": 7,
+      "retrieved_contexts": 7,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "answer_relevancy",
+      "recorded": 0.8291716356542836,
+      "recomputed": 0.8291716575622559,
+      "generated_questions": [
+        "When did AMD close its ZT Systems acquisition relative to Q1 FY2025, what were its purpose and closing consideration, and had the manufacturing business been sold?",
+        "When did AMD close its acquisition of ZT Systems relative to FY2025 Q1, what were its purpose and closing consideration, and had the manufacturing business been sold?",
+        "When did AMD close its acquisition of ZT Systems relative to FY2025 Q1, what were its purpose and closing consideration, and had the manufacturing business been sold?"
+      ],
+      "cosine_similarities": [
+        0.8361209630966187,
+        0.8256970047950745,
+        0.8256970047950745
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 22,
+      "total_statements": 22,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_precision",
+      "recorded": 0.7260912698321936,
+      "recomputed": 0.7260912698321936,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 10,
+      "verdicts": [
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "answer_relevancy",
+      "recorded": 0.7080449424230286,
+      "recomputed": 0.7080449461936951,
+      "generated_questions": [
+        "What conditions could cause Intel to pause or discontinue Intel 14A, and what would the consequences be for its manufacturing strategy and financial commitments?",
+        "What conditions could cause Intel to pause or discontinue Intel 14A, and what would be the manufacturing and financial consequences?",
+        "Under what conditions might Intel pause or discontinue Intel 14A, and what manufacturing, third-party foundry, and financial consequences could follow?"
+      ],
+      "cosine_similarities": [
+        0.7237104177474976,
+        0.705173909664154,
+        0.6952505707740784
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 12,
+      "total_statements": 12,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_precision",
+      "recorded": 0.5413691246964428,
+      "recomputed": 0.5413691246964428,
+      "relevant_contexts": 9,
+      "retrieved_contexts": 13,
+      "verdicts": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_recall",
+      "recorded": 0.75,
+      "recomputed": 0.75,
+      "attributed_reference_statements": 3,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "answer_relevancy",
+      "recorded": 0.8941426185760776,
+      "recomputed": 0.8941426277160645,
+      "generated_questions": [
+        "How does NVIDIA’s FY2025 definition of an indirect customer differ from Qualcomm’s FY2025 QTL licensee relationship?",
+        "How does NVIDIA’s FY2025 definition of an indirect customer differ from Qualcomm’s FY2025 QTL licensee relationship, and does QTL licensee status imply purchasing Qualcomm chips?",
+        "How does NVIDIA’s FY2025 definition of an indirect customer differ from Qualcomm’s FY2025 QTL licensee relationship, and does QTL licensee status imply purchasing Qualcomm chips?"
+      ],
+      "cosine_similarities": [
+        0.876579225063324,
+        0.9029242992401123,
+        0.9029242992401123
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 22,
+      "total_statements": 22,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "answer_relevancy",
+      "recorded": 0.7926538764827006,
+      "recomputed": 0.7926538586616516,
+      "generated_questions": [
+        "What were NVIDIA's FY2024 reportable segments, their revenues and included businesses, and how was Data Center classified?",
+        "What were NVIDIA’s FY2024 reportable segments, their revenues and included businesses, and how was Data Center classified?",
+        "What were NVIDIA's FY2024 reportable segments, their revenues and included businesses, and how was Data Center classified?"
+      ],
+      "cosine_similarities": [
+        0.7917019128799438,
+        0.7945576310157776,
+        0.7917020320892334
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 5,
+      "reference_statements": 5
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_precision",
+      "recorded": 0.99999999998,
+      "recomputed": 0.99999999998,
+      "relevant_contexts": 5,
+      "retrieved_contexts": 8,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_precision",
+      "recorded": 0.999999999975,
+      "recomputed": 0.999999999975,
+      "relevant_contexts": 4,
+      "retrieved_contexts": 4,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 11,
+      "total_statements": 11,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "answer_relevancy",
+      "recorded": 0.8868749463674511,
+      "recomputed": 0.8868749737739563,
+      "generated_questions": [
+        "What were the closing date, purpose, payment terms, and manufacturing-business sale status of AMD's acquisition of ZT Systems as disclosed in its FY2025 Q1 Form 10-Q?",
+        "What does AMD's FY2025 Q1 Form 10-Q disclose about the ZT Systems acquisition's closing date, consideration, strategic purpose, and manufacturing business sale status?",
+        "What were the closing date, purpose, consideration, and manufacturing business sale status of AMD's ZT Systems acquisition as disclosed in its FY2025 Q1 Form 10-Q?"
+      ],
+      "cosine_similarities": [
+        0.8829787969589233,
+        0.8857293128967285,
+        0.8919167518615723
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "answer_relevancy",
+      "recorded": 0.7582685234677718,
+      "recomputed": 0.7582685351371765,
+      "generated_questions": [
+        "What conditions does Intel’s FY2025 Q2 Form 10-Q identify for continuing Intel 14A development, and what consequences could follow a pause or discontinuation?",
+        "According to Intel's FY2025 Q2 Form 10-Q, what conditions could lead Intel to pause or discontinue Intel 14A development, and what consequences could follow?",
+        "What conditions does Intel's FY2025 Q2 Form 10-Q identify for continuing Intel 14A development, and what potential consequences could follow a pause or discontinuation?"
+      ],
+      "cosine_similarities": [
+        0.7546820640563965,
+        0.764539361000061,
+        0.7555841207504272
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 31,
+      "total_statements": 31,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_precision",
+      "recorded": 0.7155328798083722,
+      "recomputed": 0.7155328798083722,
+      "relevant_contexts": 7,
+      "retrieved_contexts": 9,
+      "verdicts": [
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 4,
+      "reference_statements": 4
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "answer_relevancy",
+      "recorded": 0.875467365487542,
+      "recomputed": 0.8754673004150391,
+      "generated_questions": [
+        "How does NVIDIA's definition of an indirect customer differ from Qualcomm's QTL licensee, and why are they not the same kind of chip buyer?",
+        "How does NVIDIA's definition of an indirect customer differ from Qualcomm's definition of a QTL licensee, and why are they not the same kind of chip buyer?",
+        "How does NVIDIA define an indirect customer, and how does that role differ from a Qualcomm QTL licensee?"
+      ],
+      "cosine_similarities": [
+        0.8802403807640076,
+        0.8873831033706665,
+        0.8587785959243774
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 25,
+      "total_statements": 25,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_precision",
+      "recorded": 0.49433106575257535,
+      "recomputed": 0.49433106575257535,
+      "relevant_contexts": 7,
+      "retrieved_contexts": 12,
+      "verdicts": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_recall",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "attributed_reference_statements": 5,
+      "reference_statements": 5
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "answer_relevancy",
+      "recorded": 0.8205366887192899,
+      "recomputed": 0.8205366134643555,
+      "generated_questions": [
+        "What are NVIDIA's FY2024 reportable segments, what does each include, how much revenue did each report, and how does Data Center fit within this structure?",
+        "What are NVIDIA's FY2024 reportable segments, their revenues and business activities, and how does Data Center relate to those segments?",
+        "What are NVIDIA’s FY2024 reportable segments, what were their revenues, and how does Data Center relate to those segments?"
+      ],
+      "cosine_similarities": [
+        0.8228040933609009,
+        0.8168896436691284,
+        0.8219161033630371
+      ],
+      "noncommittal": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "faithfulness",
+      "recorded": 1.0,
+      "recomputed": 1.0,
+      "supported_statements": 33,
+      "total_statements": 33,
+      "rejected_statements": []
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_precision",
+      "recorded": 0.9999999999875,
+      "recomputed": 0.9999999999875,
+      "relevant_contexts": 8,
+      "retrieved_contexts": 10,
+      "verdicts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    }
+  ]
+}

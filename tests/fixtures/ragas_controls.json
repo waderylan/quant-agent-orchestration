@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "evaluation_scope": "Static local Filings Research retrieve-augment-generate; no web/current developments, structured financial worker, or new arithmetic.",
+  "prompt": "Answer the self-contained question using only the local indexed filing corpus. Cite the retrieved source passages. Preserve company, fiscal/interim period and original/amended version. Distinguish reported facts from conditional statements; state evidence limits. Do not browse or calculate new financial metrics.",
+  "source_manifest": "data/corpus/manifest.json",
+  "source_manifest_sha256": "a5fe98fbfe015981a61eb2bffa4c65deb4ec72e7841772da7932d003d502cffa",
+  "source_span_contract": "start/end are zero-based Python Unicode-codepoint offsets, end exclusive, into the manifest prepared UTF-8 text without normalization. text_sha256 hashes the full immutable document; span_sha256 hashes the included excerpt.",
+  "split": "controls",
+  "cases": [
+    {
+      "id": "ragas_control_missing_coverage",
+      "split": "controls",
+      "metric_eligible": false,
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2026
+      ],
+      "question": "Using only the local corpus, explain the revenue drivers in Intel's complete FY2026 annual 10-K. Do not substitute a different company or fiscal year.",
+      "reference": "State that the local corpus does not contain Intel's FY2026 annual 10-K; do not fabricate that filing or use FY2025 as its substitute.",
+      "expected_facts": [],
+      "reference_contexts": [],
+      "behavior_checks": [
+        "Honest missing annual coverage.",
+        "No invented filing, values or explanation.",
+        "No substitution of NVDA FY2026 or INTC FY2025."
+      ],
+      "coverage_evidence": {
+        "source_manifest_sha256": "a5fe98fbfe015981a61eb2bffa4c65deb4ec72e7841772da7932d003d502cffa",
+        "matching_annual_documents": 0
+      }
+    },
+    {
+      "id": "ragas_control_missing_referent",
+      "split": "controls",
+      "metric_eligible": false,
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "question": "For AMD FY2025, explain why that number changed. Use only the local filing corpus.",
+      "reference": "Ask which number or metric and which comparison period the user means; do not invent a referent or provide an arbitrary financial explanation.",
+      "expected_facts": [],
+      "reference_contexts": [],
+      "behavior_checks": [
+        "Specific clarification for missing metric/referent.",
+        "No invented user context.",
+        "Do not claim that every AMD FY2025 explanation is unavailable."
+      ]
+    }
+  ]
+}

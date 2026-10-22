@@ -1,0 +1,364 @@
+{
+  "schema_version": 1,
+  "evaluation_scope": "Static local Filings Research retrieve-augment-generate; no web/current developments, structured financial worker, or new arithmetic.",
+  "prompt": "Answer the self-contained question using only the local indexed filing corpus. Cite the retrieved source passages. Preserve company, fiscal/interim period and original/amended version. Distinguish reported facts from conditional statements; state evidence limits. Do not browse or calculate new financial metrics.",
+  "source_manifest": "data/corpus/manifest.json",
+  "source_manifest_sha256": "a5fe98fbfe015981a61eb2bffa4c65deb4ec72e7841772da7932d003d502cffa",
+  "source_span_contract": "start/end are zero-based Python Unicode-codepoint offsets, end exclusive, into the manifest prepared UTF-8 text without normalization. text_sha256 hashes the full immutable document; span_sha256 hashes the included excerpt.",
+  "split": "heldout",
+  "cases": [
+    {
+      "id": "ragas_holdout_01",
+      "split": "heldout",
+      "metric_eligible": true,
+      "companies": [
+        "AMD"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "interim_subsequent_event",
+      "question": "Explain how AMD's FY2025 Q1 filing describes the ZT Systems acquisition and its intended manufacturing-business disposition. Does this show the acquisition closed within the reported quarter, and had the manufacturing sale already been completed? Use only the local filing corpus; do not browse.",
+      "reference": "The reported quarter ended March 29, 2025. The Subsequent Events note says AMD completed the ZT Systems acquisition on March 31, after quarter-end, to accelerate end-to-end AI-infrastructure design and deployment. AMD was actively seeking a strategic partner to acquire ZT's manufacturing business. That is not a statement that the manufacturing-business disposition had already closed.",
+      "expected_facts": [
+        {
+          "id": "ragas_holdout_01-f1",
+          "text": "The reported quarter ended March 29, 2025.",
+          "evidence_ids": [
+            "ragas_holdout_01-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_01-f2",
+          "text": "ZT Systems acquisition closed March 31 and is described under Subsequent Events.",
+          "evidence_ids": [
+            "ragas_holdout_01-e2"
+          ]
+        },
+        {
+          "id": "ragas_holdout_01-f3",
+          "text": "The stated purpose was accelerating AI infrastructure design and deployment.",
+          "evidence_ids": [
+            "ragas_holdout_01-e2"
+          ]
+        },
+        {
+          "id": "ragas_holdout_01-f4",
+          "text": "A manufacturing-business buyer/partner was being sought, not reported as a completed sale.",
+          "evidence_ids": [
+            "ragas_holdout_01-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "amd-0000002488-25-000047",
+          "start": 551,
+          "end": 596,
+          "text_sha256": "80bdc02b7dbca846a5bc0bdd8ec4f0853a28d62d3c8ff063f6867213e01debce",
+          "span_sha256": "d2d7992fa9d637ea189fbc1aa180d7ec2a214a514c412edab676bfcc4ec17ffd",
+          "text": "For the quarterly period ended March 29, 2025",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-05-07",
+          "period_end": "2025-03-29",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+          "context_id": "ragas_holdout_01-e1"
+        },
+        {
+          "document_id": "amd-0000002488-25-000047",
+          "start": 44343,
+          "end": 45041,
+          "text_sha256": "80bdc02b7dbca846a5bc0bdd8ec4f0853a28d62d3c8ff063f6867213e01debce",
+          "span_sha256": "51d5a6e0503f2e310bb9932c5ab1a5915017c1059fe4d6fda51fcc2468cc4d5d",
+          "text": "NOTE 14 – Subsequent Events\nAcquisition of ZT Systems\nOn March 31, 2025, the Company completed the acquisition of ZT Group Int’l Inc. (ZT Systems) to help accelerate the end-to-end design and deployment of AMD-powered AI infrastructure at scale for the cloud. At the close of the acquisition, the Company paid $3.375 billion in cash, subject to certain purchase price adjustments, and issued 8,335,849 shares of the Company’s common stock. To the extent certain conditions are met, the Company will pay an additional $300 million in cash and issue up to 740,961 shares of the Company’s common stock. The Company is actively seeking a strategic partner to acquire ZT Systems' manufacturing business.",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-05-07",
+          "period_end": "2025-03-29",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248825000047/amd-20250329.htm",
+          "context_id": "ragas_holdout_01-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_holdout_02",
+      "split": "heldout",
+      "metric_eligible": true,
+      "companies": [
+        "INTC"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "interim_conditional_execution",
+      "question": "What does Intel's FY2025 second-quarter filing say about the condition for continuing Intel 14A development? Explain the potential manufacturing consequences without treating a conditional plan as an already completed cancellation. Use only the local filing corpus; do not browse.",
+      "reference": "Intel says it remains focused on 14A development and securing a significant external customer. Without that customer and important customer milestones, continuing 14A and successor nodes may not be economical; Intel may pause or discontinue them and some expansion projects. It keeps internal-versus-external foundry options for future products. The statement that most products could remain internally manufactured through at least 2030 applies if discontinuation occurs, not as proof it already occurred.",
+      "expected_facts": [
+        {
+          "id": "ragas_holdout_02-f1",
+          "text": "Intel remains focused on 14A and securing a significant external customer.",
+          "evidence_ids": [
+            "ragas_holdout_02-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_02-f2",
+          "text": "Absent a significant customer and important milestones, economics may lead to pause/discontinuation.",
+          "evidence_ids": [
+            "ragas_holdout_02-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_02-f3",
+          "text": "Future internal/external sourcing options remain open.",
+          "evidence_ids": [
+            "ragas_holdout_02-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_02-f4",
+          "text": "Internal manufacturing through at least 2030 is described conditionally if 14A is discontinued.",
+          "evidence_ids": [
+            "ragas_holdout_02-e1"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "intc-0000050863-25-000109",
+          "start": 106828,
+          "end": 107983,
+          "text_sha256": "03946854df7a65ebbf00e74fbedae80ead82c39400985764d5ccb1282b5ec1b0",
+          "span_sha256": "12b61d31ccb3f222f85cb31fec9469c33bb0422da619a1dc4e356a9581182273",
+          "text": "We are focused on the continued development of Intel 14A, the next generation node beyond Intel 18A and Intel 18A-P, and on securing a significant external customer for such node. However, if we are unable to secure a significant external customer and meet important customer milestones for Intel 14A, we face the prospect that it will not be economical to develop and manufacture Intel 14A and successor leading-edge nodes on a go-forward basis. In such event, we may pause or discontinue our pursuit of Intel 14A and successor nodes and various of our manufacturing expansion projects. While we continue to evaluate Intel 14A for use in future Intel products and our plan includes an initial product designed to utilize Intel 14A, at present we are maintaining the option to design future Intel products requiring nodes with performance beyond Intel 18A and Intel 18A-P to be produced internally or by an external foundry. If we were to discontinue development of Intel 14A and successor nodes, we expect that a majority of our products would continue to be manufactured in our own facilities utilizing our nodes up to Intel 18A-P through at least 2030.",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "filed": "2025-07-24",
+          "period_end": "2025-06-28",
+          "fiscal_start": "2024-12-29",
+          "fiscal_end": "2025-12-27",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/50863/000005086325000109/intc-20250628.htm",
+          "context_id": "ragas_holdout_02-e1"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_holdout_03",
+      "split": "heldout",
+      "metric_eligible": true,
+      "companies": [
+        "NVDA",
+        "QCOM"
+      ],
+      "years": [
+        2025
+      ],
+      "category": "cross_company_customer_terminology",
+      "question": "In their FY2025 annual filings, what does NVIDIA mean by an indirect customer and what relationship does Qualcomm describe with a QTL licensee? Explain why these labels should not be treated as the same kind of chip buyer. Use only the local filing corpus; do not browse.",
+      "reference": "NVIDIA's indirect customers generally buy through OEMs, ODMs, integrators, distributors or other channel partners rather than directly from NVIDIA. Qualcomm grants QTL licensees rights to cellular standard-essential patents and other patents; the licensees manufacture cellular devices. The first label describes a distribution route for NVIDIA products, while the second describes an intellectual-property licensing relationship. Neither passage makes those categories identical to direct chip purchasers.",
+      "expected_facts": [
+        {
+          "id": "ragas_holdout_03-f1",
+          "text": "NVIDIA indirect customers obtain products through channel intermediaries rather than directly.",
+          "evidence_ids": [
+            "ragas_holdout_03-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_03-f2",
+          "text": "Qualcomm grants cellular patent rights to QTL licensees.",
+          "evidence_ids": [
+            "ragas_holdout_03-e2"
+          ]
+        },
+        {
+          "id": "ragas_holdout_03-f3",
+          "text": "QTL licensees manufacture cellular products; the relationship is IP licensing rather than necessarily direct chip purchases.",
+          "evidence_ids": [
+            "ragas_holdout_03-e2"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "nvda-0001045810-25-000023",
+          "start": 130620,
+          "end": 130784,
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "span_sha256": "496c9719d94687bb2e50fa6b17a48e3a81df527db40555eafeabb027894a8053",
+          "text": "Many of our indirect customers often do not\npurchase directly from us but through multiple OEMs, ODMs, system integrators, distributors, and other channel partners.",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-02-26",
+          "period_end": "2025-01-26",
+          "fiscal_start": "2024-01-29",
+          "fiscal_end": "2025-01-26",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+          "context_id": "ragas_holdout_03-e1"
+        },
+        {
+          "document_id": "qcom-0000804328-25-000085",
+          "start": 109208,
+          "end": 110313,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "span_sha256": "2f480d542fc6ab5d9d3d6e98666ccf0f203f658747a99bb9df391f874a4b48f2",
+          "text": "We grant licenses or otherwise provide rights to use our cellular standard-essential patents (including 3G,\n   4G and 5G) for cellular devices on a worldwide basis. We also offer licenses to our cellular standard-essential patents\n   together with other Qualcomm patents that may be useful to such licensed products for licensees that desire to obtain the\n   commercial benefits of receiving such broad patent rights from us. While we offer license rights to patents that we do not\n   have a duty or obligation to grant, those rights may be negotiated at our discretion. A significant portion of QTL’s licensing\n   revenues is derived from licensees under Qualcomm’s cellular standard-essential patents. Our licensees manufacture wireless\n   cellular products such as mobile devices (including handsets), other consumer devices (e.g., tablets and PCs), plug-in end\n   user data modem cards and embedded modules for incorporation into machine-to-machine devices and certain other devices,\n   connected vehicle units and connected vehicle modules used in automobiles, wireless access points and small cells.",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2025-11-05",
+          "period_end": "2025-09-28",
+          "fiscal_start": "2024-09-30",
+          "fiscal_end": "2025-09-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/804328/000080432825000085/qcom-20250928.htm",
+          "context_id": "ragas_holdout_03-e2"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    },
+    {
+      "id": "ragas_holdout_04",
+      "split": "heldout",
+      "metric_eligible": true,
+      "companies": [
+        "NVDA"
+      ],
+      "years": [
+        2024
+      ],
+      "category": "annual_segment_table_and_business_scope",
+      "question": "Use NVIDIA's FY2024 annual segment disclosures to explain the difference between Compute & Networking and Graphics. State each segment's reported FY2024 revenue in the table's units, and explain where Data Center belongs rather than treating it as a third reportable segment. Use only the local filing corpus; do not browse.",
+      "reference": "The FY2024 table reports revenue of $47,405 million for Compute & Networking and $13,517 million for Graphics. Compute & Networking includes the Data Center accelerated-computing platform, networking and other platforms/software. Graphics includes GeForce gaming/PC products and enterprise workstation/visual-computing products. NVIDIA identifies two operating segments, so Data Center is within Compute & Networking, not a third reportable segment.",
+      "expected_facts": [
+        {
+          "id": "ragas_holdout_04-f1",
+          "text": "FY2024 Compute & Networking revenue is 47,405 million dollars.",
+          "evidence_ids": [
+            "ragas_holdout_04-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_04-f2",
+          "text": "FY2024 Graphics revenue is 13,517 million dollars.",
+          "evidence_ids": [
+            "ragas_holdout_04-e1"
+          ]
+        },
+        {
+          "id": "ragas_holdout_04-f3",
+          "text": "Compute & Networking includes Data Center accelerated computing.",
+          "evidence_ids": [
+            "ragas_holdout_04-e2"
+          ]
+        },
+        {
+          "id": "ragas_holdout_04-f4",
+          "text": "Graphics includes GeForce and workstation/visual-computing products.",
+          "evidence_ids": [
+            "ragas_holdout_04-e2"
+          ]
+        },
+        {
+          "id": "ragas_holdout_04-f5",
+          "text": "The filing identifies two operating segments, not a separate third Data Center segment.",
+          "evidence_ids": [
+            "ragas_holdout_04-e3"
+          ]
+        }
+      ],
+      "reference_contexts": [
+        {
+          "document_id": "nvda-0001045810-24-000029",
+          "start": 219997,
+          "end": 221147,
+          "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+          "span_sha256": "1a5bea3fefc39787e678efb82109145ce9f74389e29d35a11ce70072742d43f8",
+          "text": "Revenue by Reportable Segments\n                                                                                                                                        Year Ended\n                                                                                              Jan 28, 2024                 Jan 29, 2023                   Change$                   Change%\n\n                                                                                                                                       ($ in millions)\nCompute & Networking                                                                     $                47,405      $                15,068       $           32,337                        215  %\nGraphics                                                                                                  13,517                       11,906                     1,611                        14  %\nTotal                                                                                    $                60,922      $                26,974       $           33,948                        126  %\n\n\nOperating Income by Reportable Segments",
+          "company": "NVDA",
+          "fiscal_year": 2024,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2024-02-21",
+          "period_end": "2024-01-28",
+          "fiscal_start": "2023-01-30",
+          "fiscal_end": "2024-01-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+          "context_id": "ragas_holdout_04-e1"
+        },
+        {
+          "document_id": "nvda-0001045810-24-000029",
+          "start": 429812,
+          "end": 430614,
+          "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+          "span_sha256": "5a383622657930d5c3a646bde4201ed4b0e3ff5f218f034e048395f9133a7b50",
+          "text": "The Compute & Networking segment includes our Data Center accelerated computing platform; networking; automotive artificial intelligence, or AI, Cockpit,\nautonomous driving development agreements, and autonomous vehicle solutions; electric vehicle computing platforms; Jetson for robotics and other embedded\nplatforms; NVIDIA AI Enterprise and other software; and DGX Cloud.\n\nThe Graphics segment includes GeForce GPUs for gaming and PCs, the GeForce NOW game streaming service and related infrastructure, and solutions for\ngaming platforms; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics; virtual GPU software for cloud-based visual and virtual computing; automotive\nplatforms for infotainment systems; and Omniverse Enterprise software for building and operating 3D internet applications.",
+          "company": "NVDA",
+          "fiscal_year": 2024,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2024-02-21",
+          "period_end": "2024-01-28",
+          "fiscal_start": "2023-01-30",
+          "fiscal_end": "2024-01-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+          "context_id": "ragas_holdout_04-e2"
+        },
+        {
+          "document_id": "nvda-0001045810-24-000029",
+          "start": 190945,
+          "end": 191168,
+          "text_sha256": "9dbd28137c1abc09dafa4be53514fe4ab9508be9a74c50d5deb2b81e84380098",
+          "span_sha256": "0147de6641e5c900e3fc99043999c237c4be2fdb04e477ce14b1e3b6c9b4a9b6",
+          "text": "Our two operating segments are \"Compute & Networking\" and \"Graphics.\" Refer to Note 17 of the Notes to the Consolidated Financial Statements in Part IV,\nItem 15 of this Annual Report on Form 10-K for additional information.",
+          "company": "NVDA",
+          "fiscal_year": 2024,
+          "form": "10-K",
+          "version": "original",
+          "filed": "2024-02-21",
+          "period_end": "2024-01-28",
+          "fiscal_start": "2023-01-30",
+          "fiscal_end": "2024-01-28",
+          "canonical_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000029/nvda-20240128.htm",
+          "context_id": "ragas_holdout_04-e3"
+        }
+      ],
+      "expected_worker": "research",
+      "failure_flags": [
+        "Material claim unsupported by the cited filing passages.",
+        "Wrong company, reporting period, original/amended version, or accounting basis.",
+        "Invented arithmetic, current event, realized consequence, or investment recommendation."
+      ]
+    }
+  ]
+}

@@ -16,7 +16,7 @@ This is the authoritative order and status. Completed records describe verified 
 | M10 | [Current Developments](current-developments/README.md) | Verified locally; usefulness review passed |
 | M11 | [Provider routing](provider-routing/README.md) | Policy m11-v2 implemented locally; full workflows partial only on frozen Current Developments |
 | M12 | [Risk Summary live check: implement and compare](risk-live-check/README.md) | Verified locally; matched comparison complete; caller selection pending |
-| M13 | [Experience and evaluation](experience-evaluation/README.md) | Planned |
+| M13 | [Experience and evaluation](experience-evaluation/README.md) | Static RAGAS implemented and measured; broader experience/agent checks remain |
 | M14 | [Deployment and submission](deployment/README.md) | Planned |
 | C1 | [Codebase cleanup](cleanup/README.md) | Verified locally |
 
