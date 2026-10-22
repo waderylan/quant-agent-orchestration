@@ -82,7 +82,7 @@ frozenlist==1.8.0
     # via
     #   aiohttp
     #   aiosignal
-fsspec==2026.9.0
+fsspec==2026.7.0
     # via huggingface-hub
 googleapis-common-protos==1.75.5
     # via opentelemetry-exporter-otlp-proto-grpc
@@ -315,7 +315,7 @@ requests-oauthlib==2.0.0
     # via kubernetes
 requests-toolbelt==1.0.0
     # via langsmith
-rich==15.0.0
+rich==14.3.4
     # via
     #   chromadb
     #   typer

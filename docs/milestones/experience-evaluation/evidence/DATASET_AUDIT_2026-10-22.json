@@ -1,0 +1,32 @@
+{
+  "status": "source-reviewed and mechanically validated before capture",
+  "source_manifest_sha256": "a5fe98fbfe015981a61eb2bffa4c65deb4ec72e7841772da7932d003d502cffa",
+  "files": [
+    {
+      "path": "tests/fixtures/ragas_development.json",
+      "cases": 8,
+      "metric_cases": 8,
+      "sha256": "89e8ce4e0c60244c722a73f075c17cc228375df6dc6e749d2028572e1804628e"
+    },
+    {
+      "path": "artifacts/ragas/heldout-sealed.json",
+      "cases": 4,
+      "metric_cases": 4,
+      "sha256": "6475894df8b95f1253700196438e626c8bc13f8322751563c8601ec5cd99efd6"
+    },
+    {
+      "path": "tests/fixtures/ragas_controls.json",
+      "cases": 2,
+      "metric_cases": 0,
+      "sha256": "8aea810733cb0e33a8bfa3e750014ab0f9c16e693b4ee5ef75e829779e5d7dab"
+    }
+  ],
+  "unique_cases": 14,
+  "metric_cases": 12,
+  "nonmetric_controls": 2,
+  "verified_source_documents": 12,
+  "verified_exact_spans": 24,
+  "manual_reference_review": "All twelve concise references and atomic fact-to-span mappings were read against the immutable corpus excerpts. Numerical values are reported filing facts; no new arithmetic or current-event reference is included.",
+  "controls": "Missing coverage and absent metric referent are separate behavioral cases with no reference contexts, excluded from all four metric denominators.",
+  "scope": "Research RAG over original annual/interim filings and the explicitly identified AMD amendment; no web/provider capture/model output inspected to author the questions."
+}

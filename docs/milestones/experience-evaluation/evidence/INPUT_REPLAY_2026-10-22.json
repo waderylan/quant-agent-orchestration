@@ -1,0 +1,10 @@
+{
+  "checked_at": "2026-10-22T17:41:35.299589+00:00",
+  "input": "HELDOUT_INPUTS_2026-10-22.json",
+  "cases": 4,
+  "identical_metric_values": 16,
+  "cached_judgments": 62,
+  "new_model_calls": 0,
+  "Chroma_queries": 0,
+  "method": "Actual evaluate_ragas.py score command on published input artifact and unchanged original fixture plus explicit reference erratum"
+}

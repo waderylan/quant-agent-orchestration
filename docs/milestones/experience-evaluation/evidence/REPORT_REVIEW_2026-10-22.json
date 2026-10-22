@@ -1,0 +1,1866 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-22T17:42:17.598215+00:00",
+  "scope": "Independent final report consistency audit against immutable generation captures, corrected scoring artifacts, published structured judgments, source reviews, erratum and acceptance/container records. No generation, implementation edits, score edits, or external calls.",
+  "report_sha256": "45e203062846c72c2eeb1bd6a7562f47dcca18221ab49d76bbca5a4360ccb2b3",
+  "documentation_sha256": "3400244682f22a9c58ceaddf646abd25bfe8faffed98786d8273e2d80d2aa6ad",
+  "summary": {
+    "pass": true,
+    "factual_mismatches": 0,
+    "checks": 164,
+    "metric_runs": 24,
+    "unique_answerable_questions": 12,
+    "metric_values": 96,
+    "returned_contexts": 249,
+    "max_arithmetic_error": 8.773621396063191e-08
+  },
+  "checks": [
+    {
+      "check": "baseline input hashes",
+      "pass": true,
+      "evidence": {
+        "capture": "baseline-captures.json",
+        "scores": "baseline-corrected-scores.json"
+      }
+    },
+    {
+      "check": "baseline unique rows",
+      "pass": true,
+      "evidence": 8
+    },
+    {
+      "check": "baseline/ragas_dev_01 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 10
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_01/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_01/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8161245561481957
+    },
+    {
+      "check": "baseline/ragas_dev_01/context_precision saved value",
+      "pass": true,
+      "evidence": 0.551587301573512
+    },
+    {
+      "check": "baseline/ragas_dev_01/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_02 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 17
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_02/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_02/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8266828363640619
+    },
+    {
+      "check": "baseline/ragas_dev_02/context_precision saved value",
+      "pass": true,
+      "evidence": 0.22829670329213736
+    },
+    {
+      "check": "baseline/ragas_dev_02/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_03 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 8
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_03/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_03/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.6920687460337406
+    },
+    {
+      "check": "baseline/ragas_dev_03/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9999999999875
+    },
+    {
+      "check": "baseline/ragas_dev_03/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_04 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 10
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_04/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_04/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8563884163975501
+    },
+    {
+      "check": "baseline/ragas_dev_04/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9888888888779013
+    },
+    {
+      "check": "baseline/ragas_dev_04/context_recall saved value",
+      "pass": true,
+      "evidence": 0.6666666666666666
+    },
+    {
+      "check": "baseline/ragas_dev_06 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 15
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_06/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_06/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.87342889829969
+    },
+    {
+      "check": "baseline/ragas_dev_06/context_precision saved value",
+      "pass": true,
+      "evidence": 0.6151515151438257
+    },
+    {
+      "check": "baseline/ragas_dev_06/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_05 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 15
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_05/faithfulness saved value",
+      "pass": true,
+      "evidence": 0.8333333333333334
+    },
+    {
+      "check": "baseline/ragas_dev_05/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7304709095437972
+    },
+    {
+      "check": "baseline/ragas_dev_05/context_precision saved value",
+      "pass": true,
+      "evidence": 0.30757575756806815
+    },
+    {
+      "check": "baseline/ragas_dev_05/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_08 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 9
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_08/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_08/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8864141199462052
+    },
+    {
+      "check": "baseline/ragas_dev_08/context_precision saved value",
+      "pass": true,
+      "evidence": 0.8551587301444776
+    },
+    {
+      "check": "baseline/ragas_dev_08/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_07 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 12
+      }
+    },
+    {
+      "check": "baseline/ragas_dev_07/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline/ragas_dev_07/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7745151883952707
+    },
+    {
+      "check": "baseline/ragas_dev_07/context_precision saved value",
+      "pass": true,
+      "evidence": 0.7762225428805849
+    },
+    {
+      "check": "baseline/ragas_dev_07/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "baseline means",
+      "pass": true,
+      "evidence": {
+        "faithfulness": 0.9791666666666666,
+        "answer_relevancy": 0.8070117088910639,
+        "context_precision": 0.6653601799335008,
+        "context_recall": 0.9583333333333334
+      }
+    },
+    {
+      "check": "baseline headline table",
+      "pass": true,
+      "evidence": "| Development baseline | 8 | 0.9792 | 0.8070 | 0.6654 | 0.9583 |"
+    },
+    {
+      "check": "baseline source integrity totals",
+      "pass": true,
+      "evidence": 96
+    },
+    {
+      "check": "refined input hashes",
+      "pass": true,
+      "evidence": {
+        "capture": "refined-captures.json",
+        "scores": "refined-corrected-scores.json"
+      }
+    },
+    {
+      "check": "refined unique rows",
+      "pass": true,
+      "evidence": 8
+    },
+    {
+      "check": "refined/ragas_dev_02 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 14
+      }
+    },
+    {
+      "check": "refined/ragas_dev_02/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_02/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8366106864629539
+    },
+    {
+      "check": "refined/ragas_dev_02/context_precision saved value",
+      "pass": true,
+      "evidence": 0.3893939393861515
+    },
+    {
+      "check": "refined/ragas_dev_02/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_01 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 9
+      }
+    },
+    {
+      "check": "refined/ragas_dev_01/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_01/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7841596260085408
+    },
+    {
+      "check": "refined/ragas_dev_01/context_precision saved value",
+      "pass": true,
+      "evidence": 0.6428571428410713
+    },
+    {
+      "check": "refined/ragas_dev_01/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_03 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 8
+      }
+    },
+    {
+      "check": "refined/ragas_dev_03/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_03/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7083807108611907
+    },
+    {
+      "check": "refined/ragas_dev_03/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9999999999875
+    },
+    {
+      "check": "refined/ragas_dev_03/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_04 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 13
+      }
+    },
+    {
+      "check": "refined/ragas_dev_04/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_04/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8563884163975501
+    },
+    {
+      "check": "refined/ragas_dev_04/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9403069152983671
+    },
+    {
+      "check": "refined/ragas_dev_04/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_05 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 9
+      }
+    },
+    {
+      "check": "refined/ragas_dev_05/faithfulness saved value",
+      "pass": true,
+      "evidence": 0.8571428571428571
+    },
+    {
+      "check": "refined/ragas_dev_05/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7267272903256692
+    },
+    {
+      "check": "refined/ragas_dev_05/context_precision saved value",
+      "pass": true,
+      "evidence": 0.4124999999896875
+    },
+    {
+      "check": "refined/ragas_dev_05/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_06 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 10
+      }
+    },
+    {
+      "check": "refined/ragas_dev_06/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_06/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8440633831763433
+    },
+    {
+      "check": "refined/ragas_dev_06/context_precision saved value",
+      "pass": true,
+      "evidence": 0.8528571428400857
+    },
+    {
+      "check": "refined/ragas_dev_06/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_08 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 6
+      }
+    },
+    {
+      "check": "refined/ragas_dev_08/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_08/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.9037311654346896
+    },
+    {
+      "check": "refined/ragas_dev_08/context_precision saved value",
+      "pass": true,
+      "evidence": 0.8766666666491334
+    },
+    {
+      "check": "refined/ragas_dev_08/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_07 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 11
+      }
+    },
+    {
+      "check": "refined/ragas_dev_07/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined/ragas_dev_07/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7154112789935464
+    },
+    {
+      "check": "refined/ragas_dev_07/context_precision saved value",
+      "pass": true,
+      "evidence": 0.8297979797876073
+    },
+    {
+      "check": "refined/ragas_dev_07/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "refined means",
+      "pass": true,
+      "evidence": {
+        "faithfulness": 0.9821428571428571,
+        "answer_relevancy": 0.7969340697075605,
+        "context_precision": 0.7430474733474505,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "check": "refined headline table",
+      "pass": true,
+      "evidence": "| Development refined | 8 | 0.9821 | 0.7969 | 0.7430 | 1.0000 |"
+    },
+    {
+      "check": "refined source integrity totals",
+      "pass": true,
+      "evidence": 80
+    },
+    {
+      "check": "heldout input hashes",
+      "pass": true,
+      "evidence": {
+        "capture": "heldout-captures.json",
+        "scores": "heldout-final-scores.json"
+      }
+    },
+    {
+      "check": "heldout unique rows",
+      "pass": true,
+      "evidence": 4
+    },
+    {
+      "check": "heldout/ragas_holdout_01 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 7
+      }
+    },
+    {
+      "check": "heldout/ragas_holdout_01/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_01/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8291716356542836
+    },
+    {
+      "check": "heldout/ragas_holdout_01/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9999999999857143
+    },
+    {
+      "check": "heldout/ragas_holdout_01/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_02 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 10
+      }
+    },
+    {
+      "check": "heldout/ragas_holdout_02/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_02/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7080449424230286
+    },
+    {
+      "check": "heldout/ragas_holdout_02/context_precision saved value",
+      "pass": true,
+      "evidence": 0.7260912698321936
+    },
+    {
+      "check": "heldout/ragas_holdout_02/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_03 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 13
+      }
+    },
+    {
+      "check": "heldout/ragas_holdout_03/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_03/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8941426185760776
+    },
+    {
+      "check": "heldout/ragas_holdout_03/context_precision saved value",
+      "pass": true,
+      "evidence": 0.5413691246964428
+    },
+    {
+      "check": "heldout/ragas_holdout_03/context_recall saved value",
+      "pass": true,
+      "evidence": 0.75
+    },
+    {
+      "check": "heldout/ragas_holdout_04 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 8
+      }
+    },
+    {
+      "check": "heldout/ragas_holdout_04/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout/ragas_holdout_04/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7926538764827006
+    },
+    {
+      "check": "heldout/ragas_holdout_04/context_precision saved value",
+      "pass": true,
+      "evidence": 0.99999999998
+    },
+    {
+      "check": "heldout/ragas_holdout_04/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "heldout means",
+      "pass": true,
+      "evidence": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8060032682840226,
+        "context_precision": 0.8168650986235877,
+        "context_recall": 0.9375
+      }
+    },
+    {
+      "check": "heldout headline table",
+      "pass": true,
+      "evidence": "| Native held-out | 4 | 1.0000 | 0.8060 | 0.8169 | 0.9375 |"
+    },
+    {
+      "check": "heldout source integrity totals",
+      "pass": true,
+      "evidence": 38
+    },
+    {
+      "check": "hosted_heldout input hashes",
+      "pass": true,
+      "evidence": {
+        "capture": "hosted-heldout-captures.json",
+        "scores": "hosted-heldout-final-scores.json"
+      }
+    },
+    {
+      "check": "hosted_heldout unique rows",
+      "pass": true,
+      "evidence": 4
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_01 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 4
+      }
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_01/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_01/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8868749463674511
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_01/context_precision saved value",
+      "pass": true,
+      "evidence": 0.999999999975
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_01/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_02 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 9
+      }
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_02/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_02/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.7582685234677718
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_02/context_precision saved value",
+      "pass": true,
+      "evidence": 0.7155328798083722
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_02/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_03 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 12
+      }
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_03/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_03/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.875467365487542
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_03/context_precision saved value",
+      "pass": true,
+      "evidence": 0.49433106575257535
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_03/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_04 exact answer/contexts",
+      "pass": true,
+      "evidence": {
+        "contexts": 10
+      }
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_04/faithfulness saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_04/answer_relevancy saved value",
+      "pass": true,
+      "evidence": 0.8205366887192899
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_04/context_precision saved value",
+      "pass": true,
+      "evidence": 0.9999999999875
+    },
+    {
+      "check": "hosted_heldout/ragas_holdout_04/context_recall saved value",
+      "pass": true,
+      "evidence": 1.0
+    },
+    {
+      "check": "hosted_heldout means",
+      "pass": true,
+      "evidence": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8352868810105137,
+        "context_precision": 0.8024659863808619,
+        "context_recall": 1.0
+      }
+    },
+    {
+      "check": "hosted_heldout headline table",
+      "pass": true,
+      "evidence": "| Hosted held-out | 4 | 1.0000 | 0.8353 | 0.8025 | 1.0000 |"
+    },
+    {
+      "check": "hosted_heldout source integrity totals",
+      "pass": true,
+      "evidence": 35
+    },
+    {
+      "check": "CSV rows/pairs",
+      "pass": true,
+      "evidence": {
+        "rows": 24
+      }
+    },
+    {
+      "check": "CSV96 metric values",
+      "pass": true,
+      "evidence": "Full-precision CSV values match all published per-case metrics."
+    },
+    {
+      "check": "24 metric runs and12 unique questions",
+      "pass": true,
+      "evidence": {
+        "runs": 24,
+        "unique_questions": 12
+      }
+    },
+    {
+      "check": "249 source contexts",
+      "pass": true,
+      "evidence": {
+        "baseline": {
+          "n": 8,
+          "means": {
+            "faithfulness": 0.9791666666666666,
+            "answer_relevancy": 0.8070117088910639,
+            "context_precision": 0.6653601799335008,
+            "context_recall": 0.9583333333333334
+          },
+          "review_claims": 90,
+          "review_unsupported": 0,
+          "contexts": 96
+        },
+        "refined": {
+          "n": 8,
+          "means": {
+            "faithfulness": 0.9821428571428571,
+            "answer_relevancy": 0.7969340697075605,
+            "context_precision": 0.7430474733474505,
+            "context_recall": 1.0
+          },
+          "review_claims": 93,
+          "review_unsupported": 0,
+          "contexts": 80
+        },
+        "heldout": {
+          "n": 4,
+          "means": {
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.8060032682840226,
+            "context_precision": 0.8168650986235877,
+            "context_recall": 0.9375
+          },
+          "review_claims": 54,
+          "review_unsupported": 0,
+          "contexts": 38
+        },
+        "hosted_heldout": {
+          "n": 4,
+          "means": {
+            "faithfulness": 1.0,
+            "answer_relevancy": 0.8352868810105137,
+            "context_precision": 0.8024659863808619,
+            "context_recall": 1.0
+          },
+          "review_claims": 67,
+          "review_unsupported": 2,
+          "contexts": 35
+        }
+      }
+    },
+    {
+      "check": "96 arithmetic checks",
+      "pass": true,
+      "evidence": {
+        "values": 96
+      }
+    },
+    {
+      "check": "all96 within1e-6",
+      "pass": true,
+      "evidence": {
+        "max_error": 8.773621396063191e-08,
+        "note": "Independent local arithmetic from saved binary verdicts/counts and saved cosine values; no model or embedding calls in this audit."
+      }
+    },
+    {
+      "check": "faithfulness paired deltas",
+      "pass": true,
+      "evidence": {
+        "mean": 0.0029761904761904656,
+        "improved": 1,
+        "unchanged": 7,
+        "worse": 0
+      }
+    },
+    {
+      "check": "answer_relevancy paired deltas",
+      "pass": true,
+      "evidence": {
+        "mean": -0.01007763918350342,
+        "improved": 3,
+        "unchanged": 1,
+        "worse": 4
+      }
+    },
+    {
+      "check": "context_precision paired deltas",
+      "pass": true,
+      "evidence": {
+        "mean": 0.0776872934139496,
+        "improved": 6,
+        "unchanged": 1,
+        "worse": 1
+      }
+    },
+    {
+      "check": "context_recall paired deltas",
+      "pass": true,
+      "evidence": {
+        "mean": 0.04166666666666667,
+        "improved": 1,
+        "unchanged": 7,
+        "worse": 0
+      }
+    },
+    {
+      "check": "judge selected-run counts",
+      "pass": true,
+      "evidence": {
+        "recorded": 393,
+        "new_calls": 240,
+        "cache_hits": 153
+      }
+    },
+    {
+      "check": "source-scope counts",
+      "pass": true,
+      "evidence": {
+        "baseline": {
+          "initial_sources": 46,
+          "explicit_scope_violations": 20,
+          "explicitly_scoped_case_sources": 38,
+          "outside_reference_identities": 22,
+          "same_subject_support_outside_reference_identity": 2
+        },
+        "refined": {
+          "initial_sources": 45,
+          "explicit_scope_violations": 0,
+          "explicitly_scoped_case_sources": 37,
+          "outside_reference_identities": 2,
+          "same_subject_support_outside_reference_identity": 2
+        }
+      }
+    },
+    {
+      "check": "hosted ceiling despite2 semantic flags",
+      "pass": true,
+      "evidence": {
+        "faithfulness": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "independent_unsupported": 2
+      }
+    },
+    {
+      "check": "explicit source-backed erratum hashes",
+      "pass": true,
+      "evidence": {
+        "original": "6e24325964dd3f4338abad44f1b0a1020b5cd81855223f791a069e421fff85aa",
+        "corrected": "e60273cdc3f8d84c19652729f37b3d90314b088061d188b4e287ec09e853a58b"
+      }
+    },
+    {
+      "check": "heldout records reference correction",
+      "pass": true,
+      "evidence": "Both held-out profiles use explicit erratum; unchanged answers and source inputs."
+    },
+    {
+      "check": "hosted_heldout records reference correction",
+      "pass": true,
+      "evidence": "Both held-out profiles use explicit erratum; unchanged answers and source inputs."
+    },
+    {
+      "check": "hosted usage/provider amounts",
+      "pass": true,
+      "evidence": {
+        "nvidia": {
+          "rounds": 8,
+          "prompt_tokens": 56113,
+          "completion_tokens": 643,
+          "cost": "0"
+        },
+        "nebius": {
+          "rounds": 7,
+          "prompt_tokens": 51174,
+          "completion_tokens": 3953,
+          "cost": "0.00827120"
+        }
+      }
+    },
+    {
+      "check": "provider request participation",
+      "pass": true,
+      "evidence": {
+        "route_attempt_cases": {
+          "nvidia": [
+            "ragas_holdout_01",
+            "ragas_holdout_02",
+            "ragas_holdout_04"
+          ],
+          "nebius": [
+            "ragas_holdout_02",
+            "ragas_holdout_03",
+            "ragas_holdout_04"
+          ]
+        },
+        "usage_bearing_cases": {
+          "nvidia": [
+            "ragas_holdout_01",
+            "ragas_holdout_04"
+          ],
+          "nebius": [
+            "ragas_holdout_02",
+            "ragas_holdout_03",
+            "ragas_holdout_04"
+          ]
+        },
+        "note": "NVIDIA participates in3 route-attempt requests but has observed usage in2; docs distinguish routes/fallbacks from usage-bearing rounds."
+      }
+    },
+    {
+      "check": "test-record claim",
+      "pass": true,
+      "evidence": {
+        "command": "uv run --locked pytest -q",
+        "passed": 317,
+        "failed": 0,
+        "seconds": 43.93
+      }
+    },
+    {
+      "check": "container-record claim",
+      "pass": true,
+      "evidence": {
+        "image": "sha256:af0391a597494237762cc10cb92ec0f63db5620c1a373ce45744184740da07ae",
+        "result": {
+          "kind": "Linux actual Chroma + deterministic Research tool fixture + actual FastAPI capability SSE",
+          "filing_scoped_retrieval": "pass",
+          "cited_research": "pass",
+          "capability_sse": "pass",
+          "root_http": 200,
+          "generation_api_calls": 0,
+          "tavily_calls": 0,
+          "ragas_scores": false,
+          "corpus_fingerprint": "ff72787c66808cdb032fefaa66667777a53e20364340f0016068b95094064c3b"
+        },
+        "initial_harness_failure": "ASGI test omitted FastAPI lifespan; initialized lifespan and repeated successfully. No product fix was needed.",
+        "onnx_warning": "Read-only cache cannot persist telemetry ID; uses an in-memory identifier, inference passed."
+      }
+    },
+    {
+      "check": "baseline published input equivalence",
+      "pass": true,
+      "evidence": "BASELINE_INPUTS_2026-10-22.json"
+    },
+    {
+      "check": "refined published input equivalence",
+      "pass": true,
+      "evidence": "REFINED_INPUTS_2026-10-22.json"
+    },
+    {
+      "check": "heldout published input equivalence",
+      "pass": true,
+      "evidence": "HELDOUT_INPUTS_2026-10-22.json"
+    },
+    {
+      "check": "hosted-heldout published input equivalence",
+      "pass": true,
+      "evidence": "HOSTED_INPUTS_2026-10-22.json"
+    }
+  ],
+  "issues": [],
+  "arithmetic_checks": [
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8161245584487915,
+      "recorded": 0.8161245561481957,
+      "absolute_error": 2.3005958249555647e-09
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_01",
+      "metric": "context_precision",
+      "independent_recomputed": 0.551587301573512,
+      "recorded": 0.551587301573512,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8266828656196594,
+      "recorded": 0.8266828363640619,
+      "absolute_error": 2.9255597500110753e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_02",
+      "metric": "context_precision",
+      "independent_recomputed": 0.22829670329213736,
+      "recorded": 0.22829670329213736,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.6920687357584635,
+      "recorded": 0.6920687460337406,
+      "absolute_error": 1.0275277073645839e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_03",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9999999999875,
+      "recorded": 0.9999999999875,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8563883503278097,
+      "recorded": 0.8563884163975501,
+      "absolute_error": 6.606974045642033e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "context_recall",
+      "independent_recomputed": 0.6666666666666666,
+      "recorded": 0.6666666666666666,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_04",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9888888888779013,
+      "recorded": 0.9888888888779013,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8734289407730103,
+      "recorded": 0.87342889829969,
+      "absolute_error": 4.2473320305269624e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_06",
+      "metric": "context_precision",
+      "independent_recomputed": 0.6151515151438257,
+      "recorded": 0.6151515151438257,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7304709156354269,
+      "recorded": 0.7304709095437972,
+      "absolute_error": 6.091629645155194e-09
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "faithfulness",
+      "independent_recomputed": 0.8333333333333334,
+      "recorded": 0.8333333333333334,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_05",
+      "metric": "context_precision",
+      "independent_recomputed": 0.3075757575680682,
+      "recorded": 0.30757575756806815,
+      "absolute_error": 5.551115123125783e-17
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8864140709241232,
+      "recorded": 0.8864141199462052,
+      "absolute_error": 4.902208206036818e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_08",
+      "metric": "context_precision",
+      "independent_recomputed": 0.8551587301444774,
+      "recorded": 0.8551587301444776,
+      "absolute_error": 2.220446049250313e-16
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7745152115821838,
+      "recorded": 0.7745151883952707,
+      "absolute_error": 2.3186913167272394e-08
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "baseline",
+      "id": "ragas_dev_07",
+      "metric": "context_precision",
+      "independent_recomputed": 0.7762225428805849,
+      "recorded": 0.7762225428805849,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8366107741991679,
+      "recorded": 0.8366106864629539,
+      "absolute_error": 8.773621396063191e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_02",
+      "metric": "context_precision",
+      "independent_recomputed": 0.3893939393861515,
+      "recorded": 0.3893939393861515,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7841596007347107,
+      "recorded": 0.7841596260085408,
+      "absolute_error": 2.5273830139838083e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_01",
+      "metric": "context_precision",
+      "independent_recomputed": 0.6428571428410713,
+      "recorded": 0.6428571428410713,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7083806991577148,
+      "recorded": 0.7083807108611907,
+      "absolute_error": 1.1703475855107115e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_03",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9999999999875,
+      "recorded": 0.9999999999875,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8563883503278097,
+      "recorded": 0.8563884163975501,
+      "absolute_error": 6.606974045642033e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_04",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9403069152983672,
+      "recorded": 0.9403069152983671,
+      "absolute_error": 1.1102230246251565e-16
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.726727286974589,
+      "recorded": 0.7267272903256692,
+      "absolute_error": 3.3510801911162957e-09
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "faithfulness",
+      "independent_recomputed": 0.8571428571428571,
+      "recorded": 0.8571428571428571,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_05",
+      "metric": "context_precision",
+      "independent_recomputed": 0.4124999999896875,
+      "recorded": 0.4124999999896875,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8440633217493693,
+      "recorded": 0.8440633831763433,
+      "absolute_error": 6.142697406286146e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_06",
+      "metric": "context_precision",
+      "independent_recomputed": 0.8528571428400857,
+      "recorded": 0.8528571428400857,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.9037311474482218,
+      "recorded": 0.9037311654346896,
+      "absolute_error": 1.7986467759634195e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_08",
+      "metric": "context_precision",
+      "independent_recomputed": 0.8766666666491333,
+      "recorded": 0.8766666666491334,
+      "absolute_error": 1.1102230246251565e-16
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7154113054275513,
+      "recorded": 0.7154112789935464,
+      "absolute_error": 2.6434004873898687e-08
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "refined",
+      "id": "ragas_dev_07",
+      "metric": "context_precision",
+      "independent_recomputed": 0.8297979797876073,
+      "recorded": 0.8297979797876073,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9999999999857143,
+      "recorded": 0.9999999999857143,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_01",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8291716575622559,
+      "recorded": 0.8291716356542836,
+      "absolute_error": 2.190797221413021e-08
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_precision",
+      "independent_recomputed": 0.7260912698321936,
+      "recorded": 0.7260912698321936,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_02",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.70804496606191,
+      "recorded": 0.7080449424230286,
+      "absolute_error": 2.3638881407883616e-08
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_precision",
+      "independent_recomputed": 0.5413691246964428,
+      "recorded": 0.5413691246964428,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_recall",
+      "independent_recomputed": 0.75,
+      "recorded": 0.75,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_03",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8941426078478495,
+      "recorded": 0.8941426185760776,
+      "absolute_error": 1.072822808367846e-08
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7926538586616516,
+      "recorded": 0.7926538764827006,
+      "absolute_error": 1.7821048969857145e-08
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_precision",
+      "independent_recomputed": 0.99999999998,
+      "recorded": 0.99999999998,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_precision",
+      "independent_recomputed": 0.999999999975,
+      "recorded": 0.999999999975,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_01",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8868749539057413,
+      "recorded": 0.8868749463674511,
+      "absolute_error": 7.53829021427066e-09
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.7582685152689616,
+      "recorded": 0.7582685234677718,
+      "absolute_error": 8.198810297344039e-09
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_02",
+      "metric": "context_precision",
+      "independent_recomputed": 0.7155328798083722,
+      "recorded": 0.7155328798083722,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8754673600196838,
+      "recorded": 0.875467365487542,
+      "absolute_error": 5.467858166241513e-09
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_03",
+      "metric": "context_precision",
+      "independent_recomputed": 0.49433106575257535,
+      "recorded": 0.49433106575257535,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_recall",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "answer_relevancy",
+      "independent_recomputed": 0.8205366134643555,
+      "recorded": 0.8205366887192899,
+      "absolute_error": 7.525493439519693e-08
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "faithfulness",
+      "independent_recomputed": 1.0,
+      "recorded": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "cohort": "hosted_heldout",
+      "id": "ragas_holdout_04",
+      "metric": "context_precision",
+      "independent_recomputed": 0.9999999999875,
+      "recorded": 0.9999999999875,
+      "absolute_error": 0.0
+    }
+  ],
+  "interpretation_notes": [
+    "Headline n values count captured question-runs, not24 independent questions. Two controls and calibration are excluded;12unique questions are reused across profiles/before-after.",
+    "Faithfulness changes on AMD gross-margin answers reflect procedural sentence decomposition:5/6 versus6/7, not changed financial support. Metadata-v2 separately clears the fiscal-end evidence omission.",
+    "The hosted judge accepts both manually flagged semantic overstatements. For QTL it rephrases the answer as the relationship not constituting chip purchasing, a more charitable reading than categorical licensee exclusion. For Data Center it accepts whole-market nesting using narrower platform evidence. Arithmetic replay validates computations, not those judgments.",
+    "The reference erratum corrects only the source-backed platform/two-segment wording; questions, atomic facts, evidence spans and generation remain preserved. It does not repair or excuse the hosted overstatement.",
+    "Correct source-form identities and average precision are different: the annual held-out question still includes2interim initial sources; average precision1 can occur because irrelevant contexts rank after all relevant contexts.",
+    "Test/container claims match saved acceptance/output records. This audit does not rerun the317tests or rebuildDocker and does not independently establish full application or CloudRun quality.",
+    "All observed numerical/method claims checked are consistent. Single stochastic pairs, shared model family, nonblinded automated reviewer and bounded cases remain explicitly disclosed."
+  ]
+}

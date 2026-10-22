@@ -1,0 +1,32 @@
+{
+  "inputs": [
+    {
+      "cohort": "baseline",
+      "file": "BASELINE_INPUTS_2026-10-22.json",
+      "sha256": "e32a4785be1b3e5d0ec58f072dfa03e9819fedaf23a9f19974aac098a813bc51",
+      "original_capture_sha256": "fb57ea58b1dc0132e57afda059c8cb4d5e556bb1b01014b7c6c1188948be2acb",
+      "input_equivalence": "Exact context dictionaries and answer strings"
+    },
+    {
+      "cohort": "refined",
+      "file": "REFINED_INPUTS_2026-10-22.json",
+      "sha256": "7cd8989d532a6de881c44244762cc90f99a694e5ed5422e7616a8813be345383",
+      "original_capture_sha256": "a1617990cb7e5f1a365b969069975a7f617163de1eaa0d3cd22c0177a510f81a",
+      "input_equivalence": "Exact context dictionaries and answer strings"
+    },
+    {
+      "cohort": "heldout",
+      "file": "HELDOUT_INPUTS_2026-10-22.json",
+      "sha256": "cfa7cbd3911ddd97d5461104340e8e67df15a2a65af958ee29089e75cff1eab8",
+      "original_capture_sha256": "0c0ccdbf8212bddc689c9960d872904bb30342065d8eebb881920ed7aa2990cc",
+      "input_equivalence": "Exact context dictionaries and answer strings"
+    },
+    {
+      "cohort": "hosted-heldout",
+      "file": "HOSTED_INPUTS_2026-10-22.json",
+      "sha256": "7be12a3431002edf87f7e2edfd50daa961d8ecf322e16fb1dc3f76927d08cd64",
+      "original_capture_sha256": "68b6b173dc9530aaf0da9877a598d88232fd8764d6ec6ae174d3921a2a65944c",
+      "input_equivalence": "Exact context dictionaries and answer strings"
+    }
+  ]
+}

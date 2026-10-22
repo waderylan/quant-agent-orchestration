@@ -64,7 +64,27 @@ uv run --locked python scripts/compare_provider_models.py --output artifacts/pro
 uv run --locked python scripts/start_local_container.py --profile api --port 8084
 ```
 
-Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run generation stays blocked until M14 resolves production spending controls; the assignment does not require deploying the local ledger.
+Capture makes real calls against seven development cases; it is not formal RAGAS scoring. Stop native generation before Docker acceptance so the test ledger has a single operating-system owner. The API container receives keys at runtime without a host bridge. Cloud Run deployment and deployed verification remain M14 work.
+
+## Static filing RAGAS
+
+`uv sync --locked` includes pinned evaluation dependencies. The judge uses the authenticated local Codex subscription and local ONNX embeddings. No hosted judge or embedding key is required. [Evaluation](docs/evaluation.md) reports all four metrics, per-question results, source review, latency, costs and limits. This direct Research evaluation disables web acquisition without changing application live defaults.
+
+```powershell
+uv run --locked python scripts/evaluate_ragas.py calibrate --output artifacts/ragas/calibration.json
+uv run --locked python scripts/evaluate_ragas.py capture --dataset tests/fixtures/ragas_development.json --output artifacts/ragas/development.json
+uv run --locked python scripts/evaluate_ragas.py score --dataset tests/fixtures/ragas_development.json --capture artifacts/ragas/development.json --output artifacts/ragas/development-scores.json
+uv run --locked python scripts/evaluate_ragas.py capture --dataset tests/fixtures/ragas_heldout.json --output artifacts/ragas/heldout.json
+uv run --locked python scripts/evaluate_ragas.py score --dataset tests/fixtures/ragas_heldout.json --reference-errata tests/fixtures/ragas_reference_errata.json --capture artifacts/ragas/heldout.json --output artifacts/ragas/heldout-scores.json
+```
+
+Capture uses the prepared corpus/index from setup; `--corpus` and `--index` select other paths. `--profile api` explicitly selects hosted generation. Controls in `tests/fixtures/ragas_controls.json` run through `capture` and stay outside metric denominators. `--resume` requires matching capture/runtime/data identities. Run scoring commands sequentially when sharing the judge cache. Repeated relevancy draws retain separate cached samples. A new model run can yield different scores.
+
+The committed input artifacts can be rescored without regenerating answers or querying Chroma. The recorded report also supports arithmetic replay with zero model calls:
+
+```powershell
+uv run --locked python scripts/verify_ragas_report.py docs/milestones/experience-evaluation/evidence/RAGAS_2026-10-22.json --output artifacts/ragas/replayed-arithmetic.json
+```
 
 ## Live sources
 

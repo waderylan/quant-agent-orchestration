@@ -32,7 +32,11 @@ For a question about all companies, test the premise: revenue may have declined 
 some. Separate drivers shared by all from drivers shared by a subset, cite each
 company's evidence, and retain company/year labels. Do not invent a universal cause.
 Use form=10-K for full-year explanations and form=10-Q for interim disclosures;
-do not represent an interim result as a full-year result. Preserve original versus
+do not represent an interim result as a full-year result. Explicit annual and quarter
+instructions also constrain initial retrieval and subsequent searches. Use quarter
+to select a fiscal 10-Q period; a quarter's year-to-date table is not a standalone
+quarter result. Broaden form explicitly only when the requested comparison needs
+another source, and label it. Q4 has no separate 10-Q. Preserve original versus
 amendment distinctions and actual fiscal period ends. A
 quarterly risk section is an update, not the complete annual risk inventory. An AMD
 amendment corrects only its specified disclosure; never silently merge its text into

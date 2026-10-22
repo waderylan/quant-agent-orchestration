@@ -1,0 +1,3736 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-22T17:03:25.541996+00:00",
+  "reviewer": "independent source/dataset author sub-agent",
+  "capture_sha256": "a1617990cb7e5f1a365b969069975a7f617163de1eaa0d3cd22c0177a510f81a",
+  "scope": "Eight refined development Research answers; independent initial source identity comparison; two separate nonmetric controls. No held-out access.",
+  "method": "Manual material-claim support review with mechanical source hash/span/metadata verification. Counts cover material affirmative factual/interpretive propositions; repeated claims and nonfactual scope disclaimers are not counted twice. Expected fact completion uses the fixed authored facts strictly; partial details are reported separately and do not imply the central question was unanswered.",
+  "runtime_unchanged": true,
+  "cases": [
+    {
+      "id": "ragas_dev_01",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_01-claim-1",
+          "claim": "The FY2025 amendment corrects transposed Client growth figures, not Client revenue.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-2",
+          "claim": "Original processor unit shipment growth was stated as 31%.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-3",
+          "claim": "Original average selling price growth was stated as 15%.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-4",
+          "claim": "Corrected processor unit shipment growth is 15%.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-5",
+          "claim": "Corrected average selling price growth is 31%.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-6",
+          "claim": "Strong desktop/mobile Ryzen demand remains the explanation.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-7",
+          "claim": "Client revenue remains $10.6 billion in FY2025.",
+          "status": "supported",
+          "evidence": [
+            "S1",
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-8",
+          "claim": "Prior-year Client revenue was $7.1 billion.",
+          "status": "supported",
+          "evidence": [
+            "S1",
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-9",
+          "claim": "Client revenue growth remains 51%.",
+          "status": "supported",
+          "evidence": [
+            "S1",
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-10",
+          "claim": "The amendment changes no other items/disclosures.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-11",
+          "claim": "The amendment excludes subsequent information/events and updates.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_01-claim-12",
+          "claim": "The original filing date was February 4, 2026.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        }
+      ],
+      "claim_counts": {
+        "supported": 12,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 4,
+        "total": 4,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_01-f1",
+          "expected": "Original explanation uses 31% shipment growth and 15% ASP growth.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_01-f2",
+          "expected": "Corrected explanation uses 15% shipment growth and 31% ASP growth.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_01-f3",
+          "expected": "The amendment changes no other items or disclosures.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_01-f4",
+          "expected": "The amendment does not incorporate subsequent events.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S1",
+          "document_id": "amd-0000002488-26-000021",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K/A",
+          "version": "amendment",
+          "period_end": "2025-12-27",
+          "start": 5271,
+          "end": 6297,
+          "text_sha256": "f0225112341cafc712f1f52d1e811e70393f816bffb56c9a528bcb820138dd53",
+          "model_visible_text": "026.\n| |\nDOCUMENTS INCORPORATED BY REFERENCE:\nPortions of the registrant’s proxy statement for the 2026 Annual Meeting of Stockholders (2026 Proxy Statement) are incorporated into Part III of the Annual Report on Form 10-K. The 2026 Proxy Statement will be filed with the U.S. Securities and Exchange Commission within 120 days after the registrant’s fiscal year ended December 27, 2025.\nExplanatory Note\nAdvanced Micro Devices, Inc. (the “Company”) is filing this Amendment No. 1 (this “Amendment”) to its Annual Report on Form 10-K for the fiscal year ended December 27, 2025, previously filed with the Securities and Exchange Commission (“SEC”) on February 4, 2026 (the “Original Filing”), solely for the purpose of correcting an inadvertent error in the presentation of certain numerical disclosures in the Management’s Discussion and Analysis of Financial Condition and Results of Operations (“MD&A”). After filing the Original Filing, the Company identified that the year-over-year changes in average selling price (“ASP”) and unit shipment figures within the Client revenue disclosure were inadvertently transposed, resulting in an incorrect depiction of the year‑over‑year changes in ASP and unit shipments. The correct presentation is “Client net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.” The corrected MD&A disclosure is included in Part II of this Amendment.\nExcept as described above, this Amendment does not amend, update or change any other items or disclosures contained in the Original Filing. This Amendment does not reflect or purport to reflect any information or events occurring after the date of the Original Filing nor does it modify or update the disclosures contained in the Original Filing that may be affected by subsequent events. Accordingly,"
+        },
+        {
+          "source_id": "S4",
+          "document_id": "amd-0000002488-26-000021",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K/A",
+          "version": "amendment",
+          "period_end": "2025-12-27",
+          "start": 6106,
+          "end": 6974,
+          "text_sha256": "f0225112341cafc712f1f52d1e811e70393f816bffb56c9a528bcb820138dd53",
+          "model_visible_text": "7.1 billion in 2024, primarily driven by a 15% increase in unit shipments of processors and a 31% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.” The corrected MD&A disclosure is included in Part II of this Amendment.\nExcept as described above, this Amendment does not amend, update or change any other items or disclosures contained in the Original Filing. This Amendment does not reflect or purport to reflect any information or events occurring after the date of the Original Filing nor does it modify or update the disclosures contained in the Original Filing that may be affected by subsequent events. Accordingly, this Amendment should be read in conjunction with the Original Filing and the Company’s other filings made with the SEC subsequent to the filing of the Original Filing.\nPART II"
+        },
+        {
+          "source_id": "S6",
+          "document_id": "amd-0000002488-26-000018",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 230535,
+          "end": 231486,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "model_visible_text": "net revenue of $9.6 billion in 2024.\nClient net revenue of $10.6 billion in 2025 increased by 51%, compared to net revenue of $7.1 billion in 2024, primarily driven by a 31% increase in unit shipments of processors and a 15% increase in average selling price of processors, reflecting strong demand for AMD desktop and mobile Ryzen processors.\nGaming net revenue of $3.9 billion in 2025 increased by 51%, compared to net revenue of $2.6 billion in 2024. The increase was primarily driven by higher semi-custom revenue and strong demand of our Radeon™ gaming GPUs.\nClient and Gaming operating income was $2.9 billion in 2025, compared to operating income of $1.2 billion in 2024. The increase in operating income was primarily driven by higher revenue, partially offset by higher cost of sales and operating expenses.\n52\nTable of Contents\nEmbedded\nEmbedded net revenue of $3.5 billion in 2025 decreased by 3%, compared to net revenue of $3.6 billion in"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S1",
+          "S4",
+          "S6"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_02",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_02-claim-1",
+          "claim": "FY2026 gross margin was 71.1%.",
+          "status": "supported",
+          "evidence": [
+            "S11"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-claim-2",
+          "claim": "FY2025 gross margin was 75.0%.",
+          "status": "supported",
+          "evidence": [
+            "S11"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-claim-3",
+          "claim": "The Hopper HGX to Blackwell full-scale datacenter transition contributed to the margin decline.",
+          "status": "supported",
+          "evidence": [
+            "S11"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-claim-4",
+          "claim": "The decline also reflects a $4.5 billion H20 excess-inventory/purchase-obligation charge.",
+          "status": "supported",
+          "evidence": [
+            "S11"
+          ]
+        },
+        {
+          "id": "ragas_dev_02-claim-5",
+          "claim": "The H20 charge was recorded in FY2026 Q1.",
+          "status": "supported",
+          "evidence": [
+            "S11"
+          ]
+        }
+      ],
+      "claim_counts": {
+        "supported": 5,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 3,
+        "total": 3,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_02-f1",
+          "expected": "FY2026 gross margin is 71.1%, versus 75.0% for FY2025.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_02-f2",
+          "expected": "The filing identifies the Hopper HGX to Blackwell full-scale data-center transition.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_02-f3",
+          "expected": "A $4.5 billion H20 inventory/purchase-obligation charge occurred in FY2026 Q1.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S11",
+          "document_id": "nvda-0001045810-26-000021",
+          "company": "NVDA",
+          "fiscal_year": 2026,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2026-01-25",
+          "start": 225378,
+          "end": 226467,
+          "text_sha256": "d6ce19168cce04b8b82a439c756146a860406256d34b84f900fa741b60347b0c",
+          "model_visible_text": "and development and service arrangements, IP-related costs, and stock-based compensation related to personnel\nassociated with manufacturing operations.\n\nGross margins decreased to 71.1% in fiscal year 2026 from 75.0% in fiscal year 2025 as our business model transitioned from offering Hopper HGX systems to\nBlackwell full-scale datacenter solutions and a $4.5 billion charge associated with H20 excess inventory and purchase obligations in the first quarter of fiscal\nyear 2026.\n\nProvisions for inventory and excess inventory purchase obligations totaled $7.2      billion and $3.7      billion for fiscal years 2026 and 2025, respectively, including $4.5\nbillion associated with H20 excess inventory and purchase obligations for the first quarter of fiscal year 2026. Sales of previously reserved inventory and\nsettlements of excess inventory purchase obligations resulted in a provision release of $1.5      billion and $689      million for fiscal years 2026 and 2025, respectively.\nThe net effect on our gross margin was an unfavorable impact of 2.6% and 2.3% in fiscal years 2026 and"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S11"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_03",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_03-claim-1",
+          "claim": "Intel sold 51% of Altera on September 12, 2025.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-2",
+          "claim": "Altera leaves consolidated/segment operating results September 12.",
+          "status": "supported",
+          "evidence": [
+            "S2",
+            "S3"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-3",
+          "claim": "Altera remained in all other through September 11.",
+          "status": "supported",
+          "evidence": [
+            "S3"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-4",
+          "claim": "The retained interest thereafter uses equity-method accounting.",
+          "status": "supported",
+          "evidence": [
+            "S3"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-5",
+          "claim": "Prior periods are not rewritten for this transaction.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-6",
+          "claim": "The FY2025 and prior-year revenue comparison consequently uses different Altera inclusion periods.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-7",
+          "claim": "The sale produced a $5.6 billion pretax gain.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-8",
+          "claim": "The gain is in interest and other, net, outside revenue/operating income.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-9",
+          "claim": "The gain includes fair value of the retained interest.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-10",
+          "claim": "The gain deducts net assets and transaction-related costs.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_03-claim-11",
+          "claim": "The gain is consequently not just cash proceeds received.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        }
+      ],
+      "claim_counts": {
+        "supported": 11,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 4,
+        "total": 4,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_03-f1",
+          "expected": "Intel sold 51% of Altera on September 12, 2025.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_03-f2",
+          "expected": "Altera leaves consolidated/segment results from that date; all-other includes it through September 11.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_03-f3",
+          "expected": "Prior-period consolidated and segment results are not rewritten.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_03-f4",
+          "expected": "The $5.6 billion pre-tax gain is recognized in interest and other, net.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S2",
+          "document_id": "intc-0000050863-26-000011",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 363147,
+          "end": 364193,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "model_visible_text": "5, we completed the divestiture of 51% of Altera. As of that date, Altera's results of operations are no longer included in our consolidated or segment results. Altera's financial results were included within our \"all other\" category for all periods presented through September 11, 2025. There are no changes to our Consolidated Financial Statements for any prior periods resulting from our organizational change in the first quarter of 2025 or the Altera transaction, which is further described below.\nWe organize our business as follows:\n▪Intel Products:\n▪Client Computing Group (CCG)\n▪Data Center and AI (DCAI)\n▪Intel Foundry\n▪All Other:\n▪Mobileye\n▪Other\nCCG, DCAI and Intel Foundry qualify as reportable operating segments. When we enter into federal contracts, they are aligned to the sponsoring operating segment.\nThe accounting policies applied to our segments follow those applied to Intel as a whole. A summary of the basis for which we report our operating segment revenues and operating margin is as follows:\nIntel Products: CCG and DC"
+        },
+        {
+          "source_id": "S3",
+          "document_id": "intc-0000050863-26-000011",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 126832,
+          "end": 127656,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "model_visible_text": "was deconsolidated from our Consolidated Financial Statements following the closing of the sale of 51% of Altera's issued and outstanding common stock. Altera's financial results of operations were included in our \"all other\" category through September 11, 2025. As of September 12, 2025, our retained non-marketable equity interest in Altera is accounted for as an equity method investment. See \"Note 10: Acquisitions and Divestitures\" within Notes to Consolidated Financial Statements for further information.\nAll Other Financial Performance1\n| | | | | | | | | | | | | | | | | | | |\nYears Ended ($ In Millions) | | Dec 27, 2025 | | Dec 28, 2024 | | Dec 30, 2023\nRevenue | | $ | 3,563 | | | $ | 3,601 | | | $ | 5,463 |\nCost of sales and operating expenses | | 3,299 | | | 3,658 | | | 3,956 |\nOperating income (loss) | | $ |"
+        },
+        {
+          "source_id": "S5",
+          "document_id": "intc-0000050863-26-000011",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 102897,
+          "end": 103887,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "model_visible_text": "stock of Altera, our wholly owned subsidiary as of that date. On September 12, 2025, we completed the divestiture of 51% of Altera for net purchase consideration of $4.3 billion, consisting of $4.8 billion in cash proceeds received within the third quarter of 2025, $500 million in deferred cash proceeds payable to us no later than December 31, 2027, an offset of $400 million for cash transferred to Altera with the sale, an offset of approximately $469 million in separation and employee-related costs we have agreed to fund to the purchaser, and an offset for other direct and incremental costs incurred in connection with the sale. As of December 27, 2025, we recorded $463 million within other long-term assets for the present value of deferred consideration outstanding from SLP and $327 million and $97 million within other accrued liabilities and other long-term liabilities, respectively, for amounts payable to SLP for separation and employee-related costs that have not yet been"
+        },
+        {
+          "source_id": "S6",
+          "document_id": "intc-0000050863-26-000011",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 103692,
+          "end": 104710,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "model_visible_text": "million and $97 million within other accrued liabilities and other long-term liabilities, respectively, for amounts payable to SLP for separation and employee-related costs that have not yet been paid.\n| | | | | | | |\n| MD&A | 18\nTable of Contents\nUpon closing the transaction, we deconsolidated Altera from our Consolidated Financial Statements and retained a 49% minority investment in Altera which we accounted for under the equity method of accounting. The $3.2 billion value of our non-marketable equity method investment in Altera is classified within equity investments in the Consolidated Balance Sheets at December 27, 2025, and was recognized as a non-cash investing activity within the 2025 Consolidated Statements of Cash Flows. The Altera divestiture resulted in a pre-tax gain of $5.6 billion recognized within interest and other, net, which is net of certain costs we have agreed to fund to SLP, as well as direct and incremental costs we incurred to sell the business. Approximately $2.1 billion of the"
+        },
+        {
+          "source_id": "S7",
+          "document_id": "intc-0000050863-26-000011",
+          "company": "INTC",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 432216,
+          "end": 433086,
+          "text_sha256": "7d217cd9ec795bc5e517f973b301e1c67bc5256a073dcff50bab54608d7b5d4b",
+          "model_visible_text": "costs we agreed to fund to SLP, as well as direct and incremental costs we incurred to sell the business, resulted in a pre-tax gain of $5.6 billion recognized within interest and other, net in 2025. Our pre-tax gain was calculated as follows:\n| | | | | | | |\n(In Millions) | |\nProceeds from divestiture, net of cash sold and direct selling costs | | $ | 4,266 |\nDeferred consideration1 | | 457 |\nFair value of retained interest in Altera1 | | 3,246 |\nLess: net assets of Altera, net of cash sold | | (1,962) |\nLess: separation and employee-related costs and other1 | | (454) |\nGain on divestiture of Altera | | $ | 5,553 |\n1 Certain aspects of the net purchase consideration have yet to result in cash inflows and outflows and therefore reflect non-cash investing and financing activities within our Consolidated Statements of Cash Flows for the year ended December 27,"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S2",
+          "S3",
+          "S5",
+          "S6",
+          "S7"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_04",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "claim": "Qualcomm recorded a $5.7 billion income-tax charge in FY2025 Q4.",
+          "status": "supported",
+          "evidence": [
+            "S8"
+          ],
+          "id": "ragas_dev_04-claim-1"
+        },
+        {
+          "claim": "The charge establishes an allowance against federal deferred-tax assets.",
+          "status": "supported",
+          "evidence": [
+            "S8"
+          ],
+          "id": "ragas_dev_04-claim-2"
+        },
+        {
+          "claim": "OBBB enacted July 4, 2025 triggered the changed recoverability assessment.",
+          "status": "supported",
+          "evidence": [
+            "S8"
+          ],
+          "id": "ragas_dev_04-claim-3"
+        },
+        {
+          "claim": "The law restores immediate domestic R&D deductions beginning FY2026.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ],
+          "id": "ragas_dev_04-claim-4"
+        },
+        {
+          "claim": "The law changes preferential taxation of foreign-derived income.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ],
+          "id": "ragas_dev_04-claim-5"
+        },
+        {
+          "claim": "Qualcomm expected CAMT exposure beginning FY2026.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ],
+          "id": "ragas_dev_04-claim-6"
+        },
+        {
+          "claim": "Qualcomm expected to remain subject to CAMT perpetually.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ],
+          "id": "ragas_dev_04-claim-7"
+        },
+        {
+          "claim": "CAMT imposes a 15% minimum tax on adjusted financial-statement income, reduced by credits.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ],
+          "id": "ragas_dev_04-claim-8"
+        },
+        {
+          "claim": "Qualcomm therefore no longer expected to realize substantially all existing federal deferred-tax assets.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ],
+          "id": "ragas_dev_04-claim-9"
+        },
+        {
+          "claim": "The expense reduces expected future tax benefits rather than representing an equal current cash payment.",
+          "status": "supported",
+          "evidence": [
+            "S10",
+            "S13"
+          ],
+          "id": "ragas_dev_04-claim-10"
+        },
+        {
+          "claim": "Policy reduces deferred-tax assets to the amount more likely than not to be realized.",
+          "status": "supported",
+          "evidence": [
+            "S10"
+          ],
+          "id": "ragas_dev_04-claim-11"
+        },
+        {
+          "claim": "FY2025 cash income taxes were below the provision.",
+          "status": "supported",
+          "evidence": [
+            "S13"
+          ],
+          "id": "ragas_dev_04-claim-12"
+        },
+        {
+          "claim": "The primary reason was the valuation-allowance charge.",
+          "status": "supported",
+          "evidence": [
+            "S13"
+          ],
+          "id": "ragas_dev_04-claim-13"
+        },
+        {
+          "claim": "R&D capitalization also affected FY2025 cash taxes.",
+          "status": "supported",
+          "evidence": [
+            "S13"
+          ],
+          "id": "ragas_dev_04-claim-14"
+        },
+        {
+          "claim": "A $530 million repatriation-tax installment accrued in FY2018 also affected FY2025 cash taxes.",
+          "status": "supported",
+          "evidence": [
+            "S13"
+          ],
+          "id": "ragas_dev_04-claim-15"
+        }
+      ],
+      "claim_counts": {
+        "supported": 15,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 3,
+        "total": 3,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_04-f1",
+          "expected": "The valuation-allowance charge is $5.7 billion in FY2025 Q4.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_04-f2",
+          "expected": "OBBB enacted July 4, 2025 changed expected realization of existing federal deferred-tax assets.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_04-f3",
+          "expected": "Cash income taxes paid were below the tax provision, mainly because of this charge.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S2",
+          "document_id": "qcom-0000804328-25-000085",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-09-28",
+          "start": 864066,
+          "end": 866494,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "model_visible_text": "[PDF page 74]\n                                                                                                                                                                        QUALCOMM Incorporated\n                                                                                                         NOTES TO CONSOLIDATED FINANCIAL STATEMENTS\n               As a result of these changes, we expect to be subject to CAMT beginning in fiscal 2026. CAMT imposes a                                                                                                                                                                                                                                                                                    15%              federal\nminimum tax on adjusted financial statement income, reduced by general business credits, including research and\ndevelopment credits. As we expect to perpetually be subject to CAMT, we no longer expect to realize substantially all of our\nexisting federal deferred tax assets and recognized a charge of                                                                                                                                                             $5.7 billion                              to income tax expense to establish a valuation\nallowance in the fourth quarter of fiscal 2025.                                                                                                                    Changes in future taxable income (including less of our income                                                                                                                                                                   qualifying for\npreferential treatment as FDDEI)                                                                                    , tax laws (including changes to the CAMT rules) and other factors may change our\ndetermination regarding whether we will be able to realize our deferred tax assets.                                                                                                                                                                                                               Our policy is to consider the impact of\nfuture years’ CAMT in our valuation allowance assessment of deferred tax assets.\n               Beginning in fiscal 2023 and through fiscal 2025, for federal income tax purposes, we"
+        },
+        {
+          "source_id": "S8",
+          "document_id": "qcom-0000804328-25-000085",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-09-28",
+          "start": 320007,
+          "end": 322542,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "model_visible_text": "[PDF page 39]\n   Fiscal                2025             Overview\n                 Revenues were                                     $44.3 billion                           , an          increase                   of       14%             compared to revenues of                                                         $39.0 billion                             in fiscal                   2024           , with net income\n   of       $5.5 billion                        ,   a decrease                       of        45%            compared to net income of                                                               $10.1 billion                            in fiscal                   2024            . Key items from fiscal                                                    2025\n   included:\n                 •             QCT revenues increased by                                                                 16%            in       fiscal 2025                         compared to the prior year, primarily due to higher handsets, IoT and\n                               automotive revenues.\n                 •             QTL revenues remained approximately flat in                                                                                                        fiscal 2025                         compared to the prior year.\n                 •             We recorded a charge of $5.7 billion to income tax expense to establish a valuation allowance in the fourth quarter\n                               of fiscal 2025 as we no longer expect to realize substantially all of our existing federal deferred tax assets as a result\n                               of the tax reform legislation included in the One Big Beautiful Bill Act (OBBB) enacted on July 4, 2025.\n   Results of Operations\n                Revenues (in millions)\n\n                                                                                                                                                                                                                                                                            2025                                               2024                                          Change\n     Equipment and services                                                                                                                                                                                                                                  $           37,869                                 $           32,"
+        },
+        {
+          "source_id": "S9",
+          "document_id": "qcom-0000804328-25-000085",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-09-28",
+          "start": 861248,
+          "end": 864065,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "model_visible_text": "(114)\n  Other                                                                                                                                                                                                                                                                                                                              233                                                                 9                                                          124\n                                                                                                                                                                                                                                                                                                                      $          7,122                                                $             226                                              $             104\n  Effective tax rate                                                                                                                                                                                                                                                                                                                                         56%                                                                 2%                                                             1%\n\n                 On July 4, 2025, tax reform legislation included in the OBBB was enacted in the United States. The OBBB includes\nsignificant corporate tax reforms, including the permanent reinstatement of deducting domestic research and development\nexpenditures as incurred beginning in fiscal 2026 (under prior law such expenditures were capitalized and amortized over\nfive years). The legislation also modifies international tax provisions, including changes to the FDII regime. Specifically, it\nrenames FDII as FDDEI, maintains the current FDDEI effective tax rate of                                                                                                                                                                                                                                 13%                through fiscal 2026 and adjusts the FDDEI\neffective tax rate to a permanent                                                                                                14%                rate in fiscal 2027 (compared to                                                                                                 16%                under prior law).\n\n\n\n                                                                                                                                                                                                                                              F-18"
+        },
+        {
+          "source_id": "S10",
+          "document_id": "qcom-0000804328-25-000085",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-09-28",
+          "start": 792603,
+          "end": 793970,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "model_visible_text": ".                                          Certain foreign subsidiaries use a local currency as the functional currency. Resulting translation\ngains or losses are recorded as a component of accumulated other comprehensive income. Transaction gains or losses related\nto balances denominated in a currency other than the functional currency of the entity involved are recognized in the\nconsolidated statements of operation                                                                         s.\n             Income Taxes.                                 The asset and liability approach is used to recognize deferred tax assets and liabilities for the expected\nfuture tax consequences of temporary differences between the carrying amounts and the tax bases of assets and liabilities.\nTax law and rate changes are reflected in income in the period such changes are enacted. We record a valuation allowance to\nreduce deferred tax assets to the amount that is more likely than not to be realized. We include interest and penalties related\nto income taxes, including unrecognized tax benefits, within income tax expense. We classify all deferred tax assets and\nliabilities as noncurrent in the consolidated balance sheets. We recognize excess tax benefits and shortfall tax detriments\nassociated with share-based awards in the consolidated statements of operations, as a"
+        },
+        {
+          "source_id": "S13",
+          "document_id": "qcom-0000804328-25-000085",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-09-28",
+          "start": 371324,
+          "end": 372837,
+          "text_sha256": "711f89c46cbba381d65ab94ff681ed567e40f48a11c7c8bbba6104edfa8316cc",
+          "model_visible_text": "partially\n    offset by cash provided by operating activities, proceeds from the issuance of                                                                                                                                                                                                                               $1.5 billion                                  of unsecured fixed-rate notes in\n    May 2025 and                                              $404 million                                       in proceeds from the issuance of common stock (primarily under our Employee Stock Purchase\n    Plan).\n                     During fiscal 2025, income taxes paid were less than our provision. This was driven primarily by the $5.7 billion charge\n    to income tax expense to establish a valuation allowance in fiscal 2025 as a result of the tax reform legislation included in the\n    OBBB. This was partially offset by our installment payment for a one-time U.S. repatriation tax accrued in fiscal 2018 of\n    $530 million and the adverse impact of the requirement to capitalize and amortize research and development expenditures for\n    federal income tax purposes. The enactment of the OBBB includes significant corporate tax reforms, including the permanent\n    reinstatement of deducting domestic research and development expenditures as incurred beginning in fiscal 2026. We expect\n    this change will have a favorable effect on our cash flows from operations due to lower cash tax payments compared to"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S2",
+          "S8",
+          "S9",
+          "S10",
+          "S13"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_05",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_05-claim-1",
+          "claim": "Three-month gross margin to June 28, 2025 was 40%.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-claim-2",
+          "claim": "The comparable three months to June 29, 2024 had 49% gross margin.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-claim-3",
+          "claim": "Six-month gross margin to June 28, 2025 was 45%.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-claim-4",
+          "claim": "The comparable six months to June 29, 2024 had 48% gross margin.",
+          "status": "supported",
+          "evidence": [
+            "S4"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-claim-5",
+          "claim": "Both declines were primarily due to about $800 million inventory/related charges.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        },
+        {
+          "id": "ragas_dev_05-claim-6",
+          "claim": "The charges were associated with US export controls on MI308 Data Center GPU products.",
+          "status": "supported",
+          "evidence": [
+            "S6"
+          ]
+        }
+      ],
+      "claim_counts": {
+        "supported": 6,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 3,
+        "total": 3,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_05-f1",
+          "expected": "The three-month gross margins are 40% and 49% for June 28, 2025 and June 29, 2024.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_05-f2",
+          "expected": "The six-month gross margins are 45% and 48% for the corresponding periods.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_05-f3",
+          "expected": "Approximately $800 million of MI308 export-control inventory/related charges mainly explain both declines.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S4",
+          "document_id": "amd-0000002488-25-000108",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2025-06-28",
+          "start": 79605,
+          "end": 80312,
+          "text_sha256": "eabb2e298588b064db93098ca8d03931626c997ba48c8cb7aa100288b3ad4774",
+          "model_visible_text": "640 | | | 1,877 | | | 1,247 | |\nAmortization of acquisition-related intangibles | 308 | | | 372 | | | 624 | | | 764 | |\nInterest expense | (38) | | | (25) | | | (58) | | | (50) | |\nOther income (expense), net | 98 | | | 55 | | | 137 | | | 108 | |\nIncome tax provision (benefit) | (834) | | | 41 | | | (711) | | | (11) | |\nIncome from discontinued operations, net of tax | 104 | | | — | | | 104 | | | — | |\nGross Margin\nGross margin was 40% and 49% for the three months ended June 28, 2025 and June 29, 2024, respectively. Gross margin was 45% and 48% for the six months ended June 28, 2025 and June 29, 2024, respectively. The decrease in gross margin in both periods was primarily due to approximately $800"
+        },
+        {
+          "source_id": "S6",
+          "document_id": "amd-0000002488-25-000108",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2025-06-28",
+          "start": 80140,
+          "end": 81177,
+          "text_sha256": "eabb2e298588b064db93098ca8d03931626c997ba48c8cb7aa100288b3ad4774",
+          "model_visible_text": "was 45% and 48% for the six months ended June 28, 2025 and June 29, 2024, respectively. The decrease in gross margin in both periods was primarily due to approximately $800 million of inventory and related charges associated with the U.S. government export control on AMD Instinct MI308 Data Center GPU products.\nExpenses\nResearch and Development Expenses\nResearch and development expenses of $1.9 billion for the three months ended June 28, 2025 increased by $311 million, or 20%, compared to $1.6 billion for the prior year period. Research and development expenses of $3.6 billion for the six months ended June 28, 2025 increased by $514 million, or 17%, compared to $3.1 billion for the prior year period. The increase in both periods was primarily due to higher employee-related costs from an increase in headcount from acquisitions, in support of our continued focus on our AI strategy.\nMarketing, General and Administrative Expenses\nMarketing, general and administrative expenses of $991 million for the three months ended June 28"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S4",
+          "S6"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_06",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_06-claim-1",
+          "claim": "FY2025 Q2 ended July 28, 2024.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-2",
+          "claim": "Data Center revenue was $26,272 million.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-3",
+          "claim": "Data Center revenue rose 154% year over year.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-4",
+          "claim": "Data Center revenue rose 16% sequentially.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-5",
+          "claim": "Hopper training/inference demand drove Data Center growth.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-6",
+          "claim": "Consumer internet and enterprise companies drove sequential growth.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-7",
+          "claim": "All customer types contributed to year-over-year compute/networking growth.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-8",
+          "claim": "Customers accelerated Hopper purchases while preparing for Blackwell.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-9",
+          "claim": "InfiniBand and Ethernet for AI including Spectrum-X drove networking year-over-year growth.",
+          "status": "supported",
+          "evidence": [
+            "S7"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-10",
+          "claim": "Blackwell customer samples shipped in Q2.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-11",
+          "claim": "A Blackwell GPU mask change was executed to improve yield.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-12",
+          "claim": "Blackwell production ramp was scheduled for FY2025 Q4 into FY2026.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-13",
+          "claim": "NVIDIA expected several billion dollars of Blackwell revenue in Q4.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-14",
+          "claim": "NVIDIA expected Hopper shipments to increase in FY2025 second half.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_06-claim-15",
+          "claim": "Those ramp/revenue/shipment expectations are prospective, not completed Q2 results.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        }
+      ],
+      "claim_counts": {
+        "supported": 15,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 4,
+        "total": 4,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_06-f1",
+          "expected": "FY2025 Q2 Data Center revenue is $26.3 billion.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_06-f2",
+          "expected": "Hopper demand for training/inference drove Data Center growth.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_06-f3",
+          "expected": "Blackwell customer samples shipped and a mask change aimed to improve yield.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_06-f4",
+          "expected": "The production ramp was scheduled for Q4 and into FY2026.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S1",
+          "document_id": "nvda-0001045810-24-000264",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2024-07-28",
+          "start": 146720,
+          "end": 147887,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "model_visible_text": "[PDF page 27]\nAutomotive revenue was up 37% from a year ago and up 5% sequentially. These increases were driven by AI Cockpit solutions and self-driving platforms.\n\nGross margin increased from a year ago on strong Data Center revenue growth primarily driven by our Hopper GPU computing platform. Sequentially, gross\nmargin decreased primarily driven by inventory provisions for low-yielding Blackwell material and a higher mix of new products within Data Center.\n\nOperating expenses were up 48% from a year ago and up 12% sequentially, largely driven by compensation and benefits, reflecting growth in employees and\ncompensation.\n\nMarket Platform Highlights\nData Center revenue for the second quarter of fiscal year 2025 was $26.3 billion, up 16% from the previous quarter and up 154% from a year ago. We unveiled\nan array of NVIDIA Blackwell-powered systems featuring NVIDIA Grace CPUs, networking and infrastructure from top manufacturers. We announced broad\nadoption  of  the  NVIDIA  Spectrum-X  Ethernet  networking  platform  by  cloud  service  providers,  GPU  cloud  providers  and  enterprises,  as  well  as  partners\nincorporating it into their offerings."
+        },
+        {
+          "source_id": "S2",
+          "document_id": "nvda-0001045810-24-000264",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2024-07-28",
+          "start": 126654,
+          "end": 129276,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "model_visible_text": "[PDF page 23]\n                                                                           NVIDIA Corporation and Subsidiaries\n                                                      Notes to Condensed Consolidated Financial Statements (Continued)\n                                                                                            (Unaudited)\n\n\n\n\nThe following table summarizes revenue by specialized markets:\n\n                                                                                                     Three Months Ended                                         Six Months Ended\n                                                                                             Jul 28, 2024                Jul 30, 2023                 Jul 28, 2024                Jul 30, 2023\n                                                                                                                                        (In millions)\nRevenue:\n   Data Center                                                                          $               26,272      $               10,323       $               48,835      $               14,607\n         Compute                                                                                         22,604                        8,612                      41,996                       11,969\n         Networking                                                                                       3,668                        1,711                       6,839                        2,638\n   Gaming                                                                                                 2,880                       2,486                       5,527                        4,726\n   Professional Visualization                                                                               454                         379                          881                         674\n   Automotive                                                                                               346                         253                          675                         549\n   OEM and Other                                                                                             88                           66                         166                         143\nTotal revenue                                                                           $               30,040      $               13,507       $               56,084      $               20,699\n\n\n\n                                                                                                  23"
+        },
+        {
+          "source_id": "S5",
+          "document_id": "nvda-0001045810-24-000264",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2024-07-28",
+          "start": 132972,
+          "end": 134190,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "model_visible_text": "Objectives and Challenges\nDemand and Supply\nRevenue growth in the second quarter of fiscal year 2025 was driven by data center compute platforms and networking for accelerated computing and AI\nsolutions. Hopper architecture demand is strong, and shipments are expected to increase in the second half of fiscal 2025. We shipped customer samples of our\nBlackwell architecture in the second quarter. We executed a change to the Blackwell GPU mask to improve production yield. Blackwell production ramp is\nscheduled to begin in the fourth quarter and continue into fiscal year 2026. In the fourth quarter of fiscal year 2025, we expect to ship several billion dollars in\nBlackwell revenue.\n\nDemand estimates for our new products, applications, and services can be incorrect and create volatility in our revenue or supply levels. We may not be able to\ngenerate significant revenue from them. Recent technologies, such as generative AI models, have emerged, and while they have driven increased demand for\nData Center, the long-term trajectory is unknown.\n\nWe continue to increase our supply and capacity purchases with existing and new suppliers to support our demand projections. With these additions, we have\nalso entered"
+        },
+        {
+          "source_id": "S7",
+          "document_id": "nvda-0001045810-24-000264",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2024-07-28",
+          "start": 144566,
+          "end": 145650,
+          "text_sha256": "c2b0ac2a91a3d8c71ab2af3c87a69815f04367707456de5c8d1391fd1057dfa1",
+          "model_visible_text": "from a year ago and up 15% sequentially.\n\nData Center revenue was up 154% from a year ago and up 16% sequentially. The strong sequential and year-on-year growth was driven by demand for our\nHopper GPU computing platform for training and inferencing of large language models, recommendation engines, and generative AI applications. Sequential\ngrowth was driven by consumer internet and enterprise companies. Cloud service providers represented roughly 45% of our Data Center revenue, and more\nthan 50% stemmed from consumer internet and enterprise companies. Strong year-on-year growth was driven by all customer types from both compute and\nnetworking revenue. Customers continue to accelerate their Hopper architecture purchases while gearing up to adopt Blackwell. Data Center compute revenue\nwas $22.6 billion, up 162% from a year ago and up 17% sequentially. Networking revenue was $3.7 billion, up 114% from a year ago driven by InfiniBand and\nEthernet for AI revenue, which includes Spectrum-X end-to-end ethernet platform. Networking revenue sequentially was up 16% and includes"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S1",
+          "S2",
+          "S5",
+          "S7"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_07",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_07-claim-1",
+          "claim": "NVIDIA FY2025 ended January 26, 2025.",
+          "status": "supported",
+          "evidence": [
+            "metadata:S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-2",
+          "claim": "NVIDIA describes a fabless contract strategy across wafer fabrication, assembly, testing, packaging.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-3",
+          "claim": "NVIDIA names TSMC and Samsung as wafer foundries.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-4",
+          "claim": "NVIDIA names Hon Hai, Wistron and Fabrinet for final-product assembly/testing/packaging.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-5",
+          "claim": "NVIDIA uses CoWoS packaging.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ]
+        },
+        {
+          "claim": "NVIDIA directly purchases some components.",
+          "status": "supported",
+          "evidence": [
+            "S9"
+          ],
+          "note": "S1 says it may directly procure raw materials; S9 explicitly says it purchases memory. The local S1-only sentence citation is less direct than citing S9, but returned evidence supports actual purchases.",
+          "id": "ragas_dev_07-claim-6"
+        },
+        {
+          "id": "ragas_dev_07-claim-7",
+          "claim": "NVIDIA suppliers procure most raw materials.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-8",
+          "claim": "This model avoids many facility ownership/operation costs and risks.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-9",
+          "claim": "NVIDIA says it can focus on design, QA, marketing and support.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-10",
+          "claim": "AMD FY2025 ended December 27, 2025.",
+          "status": "supported",
+          "evidence": [
+            "metadata:S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-11",
+          "claim": "AMD names TSMC for HPC, FPGA and adaptive SoC wafers.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-12",
+          "claim": "AMD names GlobalFoundries for HPC 12nm/14nm wafers.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-13",
+          "claim": "AMD names TSMC, UMC and Samsung for programmable-logic ICs.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-14",
+          "claim": "AMD outsources board-level graphics manufacturing.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-15",
+          "claim": "Foundries sort wafers or deliver them to Asia-Pacific ATMP providers.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-16",
+          "claim": "AMD ATMP providers package and test final semiconductors.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-17",
+          "claim": "AMD names two Tongfu joint ventures, SPIL and KYEC as ATMP providers.",
+          "status": "supported",
+          "evidence": [
+            "S5"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-18",
+          "claim": "Both disclosures show externally sourced wafer fabrication/downstream production.",
+          "status": "supported",
+          "evidence": [
+            "S1",
+            "S5",
+            "S9"
+          ]
+        },
+        {
+          "id": "ragas_dev_07-claim-19",
+          "claim": "The disclosures differ in emphasis: NVIDIA contractor strategy versus AMD process/product assignments and ATMP joint ventures.",
+          "status": "supported",
+          "evidence": [
+            "S1",
+            "S5",
+            "S9"
+          ]
+        },
+        {
+          "claim": "TSMC supplies all AMD microprocessor/GPU wafers at 7nm or smaller.",
+          "status": "supported",
+          "evidence": [
+            "S8"
+          ],
+          "id": "ragas_dev_07-claim-20"
+        },
+        {
+          "claim": "GlobalFoundries primarily supplies larger-node AMD microprocessor/GPU wafers.",
+          "status": "supported",
+          "evidence": [
+            "S8"
+          ],
+          "id": "ragas_dev_07-claim-21"
+        }
+      ],
+      "claim_counts": {
+        "supported": 21,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 4,
+        "total": 4,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_07-f1",
+          "expected": "NVIDIA describes a fabless and contracting strategy spanning manufacturing phases.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_07-f2",
+          "expected": "NVIDIA names TSMC/Samsung wafer foundries and independent final-product contractors.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_07-f3",
+          "expected": "AMD relies on third-party foundries for all wafers, including the stated TSMC/GlobalFoundries node split.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_07-f4",
+          "expected": "AMD also relies on third-party assembly, testing, marking and packaging.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [
+        "The direct-component-purchase sentence cites S1, which uses may; actual memory purchases are stated in also-returned/cited S9. No unsupported claim across the returned evidence."
+      ],
+      "cited_evidence": [
+        {
+          "source_id": "S1",
+          "document_id": "nvda-0001045810-25-000023",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-01-26",
+          "start": 42802,
+          "end": 44041,
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "model_visible_text": "automotive. Our desktop gaming products\ntypically see stronger revenue in the second half of our fiscal year. Historical seasonality trends may not repeat.\n\nManufacturing\nWe utilize a fabless and contracting manufacturing strategy, whereby we employ and partner with key suppliers for all phases of the manufacturing process,\nincluding  wafer  fabrication,  assembly,  testing,  and  packaging.  We  use  the  expertise  of  industry-leading  suppliers  that  are  certified  by  the  International\nOrganization for Standardization in such areas as fabrication, assembly, quality control and assurance, reliability, and testing. Additionally, we can avoid many of\nthe significant costs and risks associated with owning and operating manufacturing operations. While we may directly procure certain raw materials used in the\nproduction of our products, such as memory, substrates, and a variety of components, our suppliers are responsible for procurement of most raw materials used\nin the production of our products. As a result, we can focus our resources on product design, quality assurance, marketing, and customer support. In periods\n\n\n\n                                                                                                 8"
+        },
+        {
+          "source_id": "S5",
+          "document_id": "amd-0000002488-26-000018",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 48885,
+          "end": 49859,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "model_visible_text": "o actively contributing to numerous industry open-source software initiatives and industry consortia across a broad range of technologies. We conduct product and system R&D activities for our products in the United States with additional design and development engineering teams located in various countries who undertake specific activities at the direction of our U.S. headquarters.\nManufacturing Arrangements and Assembly and Test Facilities\nThird-Party Wafer Foundry Facilities\nWe utilize Taiwan Semiconductor Manufacturing Company Limited (TSMC) for the production of wafers for our HPC, FPGA and adaptive SoC products and GLOBALFOUNDRIES Inc. (GF), with respect to wafer purchases for our HPC products at the 12 nm and 14 nm technology nodes. Additionally, we utilize TSMC, United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd. for the production of our ICs in the form of programmable logic devices.\nOther Third-Party Manufacturers\nWe outsource board-level graphics product manufacturing to third-party manufacturers.\nAssembly, Test, Mark and Packaging Facilities\nWafers for our products are either sorted by the foundry or delivered by the foundry to our assembly, test, mark and packaging (ATMP) partners or subcontractors located in the Asia-Pacific region, who package and test our final semiconductor products. We are party to two ATMP joint ventures (collectively, the ATMP JVs) with Tongfu Microelectronics Co., Ltd. The ATMP JVs, Siliconware Precision Industries Ltd. (SPIL) and King Yuan Electronics Company (KYEC) provide ATMP services for our products.\n10\nTable of Contents\nIntellectual Property and Licensing\nWe rely on contracts and intellectual property rights to protect our products and technologies from unauthorized third-party copying and use. Intellectual property rights include copyrights, patents, patent applications, trademarks, trade secrets and mask work rights. As of December 27, 2025, we had approximately 7,200 pat"
+        },
+        {
+          "source_id": "S8",
+          "document_id": "amd-0000002488-26-000018",
+          "company": "AMD",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-12-27",
+          "start": 95338,
+          "end": 96405,
+          "text_sha256": "6817ef4c0babfc854211a04133624156a0de8045703a5550cc144941e3afd90c",
+          "model_visible_text": "Manufacturing Company Limited (TSMC) for the production of all wafers for microprocessor and GPU products at 7 nanometer (nm) or smaller nodes, and we rely primarily on GLOBALFOUNDRIES Inc. (GF) for wafers for microprocessor and GPU products manufactured at process nodes larger than 7 nm. We also utilize TSMC, United Microelectronics Corporation (UMC) and Samsung Electronics Co., Ltd. for our integrated circuits (IC) in the form of programmable logic devices. We also rely on third-party manufacturers to assemble, test, mark and pack (ATMP) our products. Our third-party package assembly partners are responsible for packaging technology used to fabricate our products. It is important to have reliable relationships with all of these third-party manufacturing suppliers to ensure adequate product supply to respond to customer demand.\nWe cannot guarantee that these manufacturers or our other third-party manufacturing suppliers will be able to meet our near-term or long-term manufacturing requirements. If we experience supply constraints from our third-party"
+        },
+        {
+          "source_id": "S9",
+          "document_id": "nvda-0001045810-25-000023",
+          "company": "NVDA",
+          "fiscal_year": 2025,
+          "form": "10-K",
+          "version": "original",
+          "period_end": "2025-01-26",
+          "start": 44042,
+          "end": 45174,
+          "text_sha256": "72ee9f912ed2bcc380a0d852c9e95aed618e431c4da5df7f357a817a36e47e32",
+          "model_visible_text": "[PDF page 9]\nTable of Contents\n\n\n\nof growth, we may place non-cancellable inventory orders for certain product components in advance of our historical lead times, pay premiums, or provide\ndeposits to secure future supply and capacity and may need to continue to do so.\n\nWe have expanded our supplier relationships to build redundancy and resilience in our operations to provide long-term manufacturing capacity aligned with\ngrowing  customer  demand.  Our  supply  chain  is  mainly  concentrated  in  the  Asia-Pacific  region.  We  utilize  foundries,  such  as  Taiwan  Semiconductor\nManufacturing Company Limited, or TSMC, and Samsung Electronics Co., Ltd., or Samsung, to produce our semiconductor wafers. We purchase memory from\nSK Hynix Inc., Micron Technology, Inc., and Samsung. We utilize CoWoS technology for semiconductor packaging. We engage with independent subcontractors\nand contract manufacturers such as Hon Hai Precision Industry Co., Ltd., Wistron Corporation, and Fabrinet to perform assembly, testing and packaging of our\nfinal products.\n\nCompetition\nThe market for our products is intensely competitive and is"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S1",
+          "S5",
+          "S8",
+          "S9"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    },
+    {
+      "id": "ragas_dev_08",
+      "useful": true,
+      "critical_failure": false,
+      "terminal_partial": false,
+      "claims": [
+        {
+          "id": "ragas_dev_08-claim-1",
+          "claim": "Substantially all QTL revenue is licensing revenue.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-2",
+          "claim": "QTL revenue principally comes from royalties on licensees handset sales.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-3",
+          "claim": "QTL licensing revenue is recognized over time.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-4",
+          "claim": "Q3 FY2025 ended June 29, 2025.",
+          "status": "supported",
+          "evidence": [
+            "metadata:S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-5",
+          "claim": "Q3 QTL growth primarily reflected increased estimated 3G/4G/5G multimode-product sales.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-6",
+          "claim": "Substantially all QCT revenue is equipment revenue.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "id": "ragas_dev_08-claim-7",
+          "claim": "QCT equipment revenue is recognized at a point in time.",
+          "status": "supported",
+          "evidence": [
+            "S1"
+          ]
+        },
+        {
+          "claim": "Reported FY2025 Q3 QTL revenue increased 4% year over year.",
+          "status": "supported",
+          "evidence": [
+            "S2"
+          ],
+          "id": "ragas_dev_08-claim-8"
+        }
+      ],
+      "claim_counts": {
+        "supported": 8,
+        "unsupported": 0,
+        "contradicted": 0
+      },
+      "requested_fact_completion": {
+        "complete": 3,
+        "total": 3,
+        "partial": 0,
+        "missing": 0
+      },
+      "expected_fact_checks": [
+        {
+          "id": "ragas_dev_08-f1",
+          "expected": "QTL licensing revenue is recognized over time and mainly comes from licensee handset-sale royalties.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_08-f2",
+          "expected": "QCT equipment revenue is recognized at a point in time.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        },
+        {
+          "id": "ragas_dev_08-f3",
+          "expected": "Reported FY2025 Q3 QTL revenue increased 4% mainly because estimated multimode-product sales rose.",
+          "status": "complete",
+          "reason": "Present with supporting target filing evidence."
+        }
+      ],
+      "finance_period_version_issues": [],
+      "limits": [],
+      "cited_evidence": [
+        {
+          "source_id": "S1",
+          "document_id": "qcom-0000804328-25-000045",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2025-06-29",
+          "start": 108496,
+          "end": 111676,
+          "text_sha256": "64eebf456d6fa562fc028cd8aedd3ebb0dbcd265c7e2c5edf58bbfc6e114f5ea",
+          "model_visible_text": "s and marketable\nsecurities, in addition to changes in the fair value of our outstanding debt                                                                                                                                                                                                                                        .\n                   Revenues.                                     We disaggregate our revenues by segment (Note 6), by products and services (as presented on our condensed\nconsolidated statements of operations), and for our QCT (Qualcomm CDMA Technologies) segment, by revenue stream,\nwhich is based on the industry and application in which our products are sold                                                                                                                                                                                                                                                          (as presented below). In certain cases, the\ndetermination of QCT revenues by industry and application requires the use of certain assumptions. Substantially all of\nQCT’s revenues consist of equipment revenues that are recognized at a point in time, and substantially all of QTL’s\n(Qualcomm Technology Licensing) revenues represent licensing revenues that are recognized over time and are principally\nfrom royalties generated through our licensees’ sales of mobile handsets.\n                   QCT revenue streams were as follows (in millions):\n\n                                                                                                                                                                                                                                                                                              Three Months Ended                                                                                                                         Nine Months Ended\n                                                                                                                                                                                                                                                                                       June 29,                                                            June 23,                                                            June 29,                                                            June 23,\n                                                                                                                                                                                                                                                                                              2025                                                                2024                                                                2025                                                                2024\n  Handsets (1)                                                                                                                                                                                                                                                            $"
+        },
+        {
+          "source_id": "S2",
+          "document_id": "qcom-0000804328-25-000045",
+          "company": "QCOM",
+          "fiscal_year": 2025,
+          "form": "10-Q",
+          "version": "original",
+          "period_end": "2025-06-29",
+          "start": 181811,
+          "end": 183938,
+          "text_sha256": "64eebf456d6fa562fc028cd8aedd3ebb0dbcd265c7e2c5edf58bbfc6e114f5ea",
+          "model_visible_text": "that may affect our business, financial condition, results of operations and prospects.\nThird               Quarter Fiscal 2025 Overview\n              Revenues for the                                       third          quarter of                        fiscal 2025                        were              $10.4 billion                           ,   an increase                         of        10%            compared to the year ago quarter,\nwith net income of                                          $2.7 billion                        , an increase of                                  25%            compared to the year ago quarter. Key items from the                                                                                                                       third          quarter of\nfiscal 2025                        included:\n              •             QCT revenues increased by                                                               11%             in the              third           quarter of                       fiscal 2025                         compared to the year ago quarter                                                                         due to higher\n                            handsets,                     IoT and automotive                                             revenues                     .\n              •             QTL revenues                                   increased by                             4%         in the               third           quarter of                       fiscal 2025                         compared to the year ago quarter, primarily due to\n                            an increase in estimated sales of 3G/4G/5G-based multimode products.\nOur Business and Operating Segments\n              We develop and commercialize foundational technologies and products used in mobile devices and other wireless\nproducts. We derive revenues principally from sales of integrated circuit products and licensing our intellectual property,\nincluding patents and other rights.\n              We are organized on the basis of products and services"
+        }
+      ],
+      "citation_checks": {
+        "all_ids_exist": true,
+        "cited_ids": [
+          "S1",
+          "S2"
+        ],
+        "empty_or_unverified_placeholders": false
+      }
+    }
+  ],
+  "summary": {
+    "reviewed": 8,
+    "useful": 8,
+    "critical_failures": 0,
+    "supported_claims": 93,
+    "unsupported_claims": 0,
+    "completed_expected_facts": 28,
+    "expected_facts": 28,
+    "partial_expected_facts": 0,
+    "baseline_comparison": "Manual strict reference completion rises from 24/28 to28/28; all8 central answers were already useful and all90 baseline material claims supported. The new observed benefit is cleaner form/quarter scope and complete reference detail, not established faithfulness improvement. One stochastic answer per case does not isolate causality."
+  },
+  "source_integrity": {
+    "checked_contexts": 80,
+    "checks": [
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S1",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S2",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S3",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S4",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S5",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S6",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S7",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S8",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S9",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S10",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S11",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S12",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S13",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_02",
+        "source_id": "S14",
+        "document_id": "nvda-0001045810-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S1",
+        "document_id": "amd-0000002488-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S2",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S3",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S4",
+        "document_id": "amd-0000002488-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S5",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S6",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S7",
+        "document_id": "amd-0000002488-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S8",
+        "document_id": "amd-0000002488-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_01",
+        "source_id": "S9",
+        "document_id": "amd-0000002488-26-000021",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S1",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S2",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S3",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S4",
+        "document_id": "intc-0000050863-25-000179",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S5",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S6",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S7",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_03",
+        "source_id": "S8",
+        "document_id": "intc-0000050863-26-000011",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S1",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S2",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S3",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S4",
+        "document_id": "qcom-fy2025-earnings",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S5",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S6",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S7",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S8",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S9",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S10",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S11",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S12",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_04",
+        "source_id": "S13",
+        "document_id": "qcom-0000804328-25-000085",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S1",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S2",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S3",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S4",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S5",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S6",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S7",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S8",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_05",
+        "source_id": "S9",
+        "document_id": "amd-0000002488-25-000108",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S1",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S2",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S3",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S4",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S5",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S6",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S7",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S8",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S9",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_06",
+        "source_id": "S10",
+        "document_id": "nvda-0001045810-24-000264",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S1",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S2",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S3",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S4",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S5",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_08",
+        "source_id": "S6",
+        "document_id": "qcom-0000804328-25-000045",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S1",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S2",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S3",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S4",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S5",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S6",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S7",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S8",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S9",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S10",
+        "document_id": "nvda-0001045810-25-000023",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      },
+      {
+        "case_id": "ragas_dev_07",
+        "source_id": "S11",
+        "document_id": "amd-0000002488-26-000018",
+        "checks": {
+          "document_hash": true,
+          "chunk_span": true,
+          "context_in_document": true,
+          "company": true,
+          "fiscal_year": true,
+          "form": true,
+          "version": true,
+          "period_end": true
+        }
+      }
+    ],
+    "failures": [],
+    "display_alias": "Manifest null form for an earnings_release can display as Earnings release."
+  },
+  "initial_scope_review": {
+    "method": "Use the first evidence event following initial_retrieval, counting source/chunk rows actually shown to the model, not unique documents or all later search results. The hand-authored identity sets derive from the question and verified corpus references; comparison annual10-K and original-plus-amendment documents are allowed. Scope compliance is distinct from passage relevance.",
+    "allowed_target_document_ids": {
+      "ragas_dev_01": [
+        "amd-0000002488-26-000018",
+        "amd-0000002488-26-000021"
+      ],
+      "ragas_dev_02": [
+        "nvda-0001045810-25-000023",
+        "nvda-0001045810-26-000021"
+      ],
+      "ragas_dev_03": [
+        "intc-0000050863-26-000011"
+      ],
+      "ragas_dev_04": [
+        "qcom-0000804328-25-000085"
+      ],
+      "ragas_dev_05": [
+        "amd-0000002488-25-000108"
+      ],
+      "ragas_dev_06": [
+        "nvda-0001045810-24-000264"
+      ],
+      "ragas_dev_07": [
+        "amd-0000002488-26-000018",
+        "nvda-0001045810-25-000023"
+      ],
+      "ragas_dev_08": [
+        "qcom-0000804328-25-000045"
+      ]
+    },
+    "summary": {
+      "baseline": {
+        "initial_sources": 46,
+        "explicit_scope_violations": 20,
+        "explicitly_scoped_case_sources": 38,
+        "outside_reference_identities": 22,
+        "same_subject_support_outside_reference_identity": 2
+      },
+      "refined": {
+        "initial_sources": 45,
+        "explicit_scope_violations": 0,
+        "explicitly_scoped_case_sources": 37,
+        "outside_reference_identities": 2,
+        "same_subject_support_outside_reference_identity": 2
+      }
+    },
+    "cases": [
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_01",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 10,
+        "explicit_scope_violations": 3,
+        "outside_reference_identities": 3,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "amd-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-12-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S3",
+            "document_id": "amd-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-12-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S4",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S5",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S6",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S7",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S8",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S9",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S10",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_02",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 8,
+        "explicit_scope_violations": 6,
+        "outside_reference_identities": 6,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-24-000316",
+            "form": "10-Q",
+            "period_end": "2024-10-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-01-26",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-24-000316",
+            "form": "10-Q",
+            "period_end": "2024-10-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S5",
+            "document_id": "nvda-fy2026-earnings",
+            "form": "Earnings release",
+            "period_end": "2026-01-25",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S6",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S7",
+            "document_id": "nvda-fy2026-earnings",
+            "form": "Earnings release",
+            "period_end": "2026-01-25",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S8",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_03",
+        "explicit_form_or_quarter_scope": false,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 1,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "intc-0000050863-25-000179",
+            "form": "10-Q",
+            "period_end": "2025-09-27",
+            "classification": "same_subject_support_outside_reference_identity",
+            "reason": "The question asks how the FY2025 filing treats the Altera transaction without explicitly requiring a 10-K; a FY2025 Q3 filing about that transaction is allowed supporting evidence, though annual context remains needed for the full-year comparison."
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_04",
+        "explicit_form_or_quarter_scope": false,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 1,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "qcom-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-09-28",
+            "classification": "same_subject_support_outside_reference_identity",
+            "reason": "The question asks for the filed tax explanation/amount but does not explicitly restrict form; the same FY2025 release cash-flow table can support provision-versus-payment interpretation. It cannot replace the filed explanation, which is separately present and cited."
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_05",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 3,
+        "outside_reference_identities": 3,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "amd-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-12-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S2",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "amd-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-12-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S4",
+            "document_id": "amd-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-12-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_06",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 2,
+        "outside_reference_identities": 2,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-24-000316",
+            "form": "10-Q",
+            "period_end": "2024-10-27",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_07",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 8,
+        "explicit_scope_violations": 3,
+        "outside_reference_identities": 3,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-24-000124",
+            "form": "10-Q",
+            "period_end": "2024-04-28",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S5",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S6",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S7",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S8",
+            "document_id": "amd-0000002488-25-000047",
+            "form": "10-Q",
+            "period_end": "2025-03-29",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          }
+        ]
+      },
+      {
+        "variant": "baseline",
+        "case_id": "ragas_dev_08",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 3,
+        "outside_reference_identities": 3,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "qcom-0000804328-25-000031",
+            "form": "10-Q",
+            "period_end": "2025-03-30",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S2",
+            "document_id": "qcom-0000804328-25-000045",
+            "form": "10-Q",
+            "period_end": "2025-06-29",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "qcom-0000804328-25-000011",
+            "form": "10-Q",
+            "period_end": "2024-12-29",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          },
+          {
+            "source_id": "S4",
+            "document_id": "qcom-0000804328-25-000011",
+            "form": "10-Q",
+            "period_end": "2024-12-29",
+            "classification": "explicit_scope_violation",
+            "reason": "Outside the question explicit annual/amendment or named-quarter identity."
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_01",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 9,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S5",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S6",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S7",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S8",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S9",
+            "document_id": "amd-0000002488-26-000021",
+            "form": "10-K/A",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_02",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 8,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S5",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S6",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S7",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S8",
+            "document_id": "nvda-0001045810-26-000021",
+            "form": "10-K",
+            "period_end": "2026-01-25",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_03",
+        "explicit_form_or_quarter_scope": false,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 1,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "intc-0000050863-26-000011",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "intc-0000050863-25-000179",
+            "form": "10-Q",
+            "period_end": "2025-09-27",
+            "classification": "same_subject_support_outside_reference_identity",
+            "reason": "The question asks how the FY2025 filing treats the Altera transaction without explicitly requiring a 10-K; a FY2025 Q3 filing about that transaction is allowed supporting evidence, though annual context remains needed for the full-year comparison."
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_04",
+        "explicit_form_or_quarter_scope": false,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 1,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "qcom-0000804328-25-000085",
+            "form": "10-K",
+            "period_end": "2025-09-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "qcom-fy2025-earnings",
+            "form": "Earnings release",
+            "period_end": "2025-09-28",
+            "classification": "same_subject_support_outside_reference_identity",
+            "reason": "The question asks for the filed tax explanation/amount but does not explicitly restrict form; the same FY2025 release cash-flow table can support provision-versus-payment interpretation. It cannot replace the filed explanation, which is separately present and cited."
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_05",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "amd-0000002488-25-000108",
+            "form": "10-Q",
+            "period_end": "2025-06-28",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_06",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-24-000264",
+            "form": "10-Q",
+            "period_end": "2024-07-28",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_07",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 8,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "nvda-0001045810-25-000023",
+            "form": "10-K",
+            "period_end": "2025-01-26",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S5",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S6",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S7",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S8",
+            "document_id": "amd-0000002488-26-000018",
+            "form": "10-K",
+            "period_end": "2025-12-27",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      },
+      {
+        "variant": "refined",
+        "case_id": "ragas_dev_08",
+        "explicit_form_or_quarter_scope": true,
+        "initial_sources": 4,
+        "explicit_scope_violations": 0,
+        "outside_reference_identities": 0,
+        "sources": [
+          {
+            "source_id": "S1",
+            "document_id": "qcom-0000804328-25-000045",
+            "form": "10-Q",
+            "period_end": "2025-06-29",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S2",
+            "document_id": "qcom-0000804328-25-000045",
+            "form": "10-Q",
+            "period_end": "2025-06-29",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S3",
+            "document_id": "qcom-0000804328-25-000045",
+            "form": "10-Q",
+            "period_end": "2025-06-29",
+            "classification": "requested_identity",
+            "reason": null
+          },
+          {
+            "source_id": "S4",
+            "document_id": "qcom-0000804328-25-000045",
+            "form": "10-Q",
+            "period_end": "2025-06-29",
+            "classification": "requested_identity",
+            "reason": null
+          }
+        ]
+      }
+    ],
+    "limits": [
+      "The Altera question says FY2025 filing without explicit annual form; its Q3 transaction disclosure is a permissible supporting identity, not a hard scope violation.",
+      "The tax question does not explicitly require only an annual10-K. Its same-year release supports cash-flow comparison but is outside the fixed reference identity; primary filed explanation still comes from the10-K.",
+      "Refined dev02 initial annual10-K sources include debt, tax and lease passages. Correct identity filtering removes wrong forms/quarters but does not establish high topical context precision.",
+      "These independent identity counts do not predict or replace RAGAS context precision judgments."
+    ]
+  },
+  "nonmetric_controls": {
+    "included_in_metric_denominator": false,
+    "reviewed": 2,
+    "passed": 2,
+    "cases": [
+      {
+        "id": "ragas_control_missing_coverage",
+        "metric_eligible": false,
+        "answer": "Unsupported coverage: [('INTC', 2026)]. Available fiscal years: {'AMD': [2024, 2025], 'INTC': [2024, 2025], 'NVDA': [2024, 2025, 2026], 'QCOM': [2024, 2025]}.",
+        "pass": true,
+        "contexts": 0,
+        "assessment": "Correctly refuses unsupported Intel FY2026 coverage and reports available years; no substitute year/company or invented drivers. The raw exception-style string is less polished than a plain explanation but honest.",
+        "partial": true,
+        "clarification": null
+      },
+      {
+        "id": "ragas_control_missing_referent",
+        "metric_eligible": false,
+        "answer": "- Which AMD FY2025 metric does “that number” refer to, and which period should it be compared with?",
+        "pass": true,
+        "contexts": 4,
+        "assessment": "Correctly asks which metric and comparison period the missing referent means. It invents no metric, amount or explanation. Four initially retrieved AMD contexts were unnecessary to the clarification but do not contaminate the answer.",
+        "partial": null,
+        "clarification": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,3590 @@
+{
+  "status": "Preserved method development; not submission headline scores",
+  "records": {
+    "calibration.json": {
+      "checked_at": "2026-10-22T16:49:18.909259+00:00",
+      "git_commit": "aec3b3c6be80570d1a5cd5a4095f61bbb42ea2f9",
+      "runtime_hashes": {
+        "src/analysis_artifacts.py": "dbfe35f2e4837e41469b781f236dd5ffa2af32f2a456d0de2f0250bf36139004",
+        "src/capabilities.py": "598121d0fd10bea74884aa54c28045e03dd2066659756282015b6e817d8c1c06",
+        "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+        "src/codex_transport.py": "cd56abd9ca1acce0b5a66376428447e926ae5f88d257765f1cf9358379ab334e",
+        "src/current_developments.py": "d2f1f259265f19e7100d2b5987752b183fd707c2d8a0a419cd16b4b54281d9ad",
+        "src/filing_financials.py": "1d77e206897c7f1e66cc768dba12d27eb7904cc73b4a883ee39a4d5233c102f6",
+        "src/financial_data.py": "36ddded093d224992f7a14a87c5fcfc6e71617048bcdb68587f1d78f1b7ee8ba",
+        "src/financial_workflow.py": "150baa6e57b322cf4ff679933b9e86c9f7e1ca5cbda3f18286f7afd7e2eec563",
+        "src/generation.py": "dc7078127f05e2f4d1666ba696e383c7ba370d20d0b84e90c4c8acd24aa42d29",
+        "src/generation_context.py": "3943b21874c4da0530f9992ed39b2fb62197616fa26d656961f63647ea4ba6e7",
+        "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+        "src/live_mcp.py": "3e10890b7f609f255bc9f9acadd48c8bb05f7efbc5e824fffed6df17889ebc65",
+        "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+        "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+        "src/provider_models.py": "eaa646225deaf1321bf32b059ee198023fd775a717e58835e9dee71c7aae3f78",
+        "src/provider_policy.py": "0452d7f6e2d40f174e180ece00122dd1ac83f3d089ff230b06272cb881a730b0",
+        "src/quant_analysis.py": "941ccbd3f4f95778d1919d4551fad72e8c996c9b3e3033b49e4f4f34200360eb",
+        "src/quant_runner.py": "88870c6e9a5fbfbfef530b12871a1c09274bc97c4046ae8f0346ac96971faad0",
+        "src/quant_workflow.py": "c1dda1aea4382ab3486e4995b6248dd753df260798098055a74caaffede5a0d3",
+        "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+        "src/request_routing.py": "15d35ab2b14c6d79b0ea7db537aafd2de7b985ad2f5b868625f634801677f9cf",
+        "src/research_index.py": "a01b8606847f2beb9dd3550d29062af4b74824289a9494674430ccab1597ca3a",
+        "src/research_workflow.py": "10e2686ea1d029b1373479082f982c8e9987b99b42310cf6695d9b173a3f423e",
+        "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+        "src/risk_summary.py": "927351ae033b39cd5745a514f59e60ad15aad19206691fe836936cd01c516f27",
+        "src/source_collection.py": "41a3bde568828f040886bba940ef4838d71939b9351c0130f3c2657881b14254",
+        "src/source_inventory.py": "cd550c2a42fd1af0665bfbdb85b6557a342831ceb06bce6c1f525567901b8bc6",
+        "src/supervisor.py": "2a84b361ae150d5761310603e9a70d0b4879c07afbe221362278e001845fa38c",
+        "src/task_scope.py": "48c79e6c5bf74a552db2007f5010df44d3714a428c290ff185d3bb8adafa1c1b",
+        "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+        "src/web_evidence.py": "c40cfad8b0fc995ab33db5bb7ec80b9a68c6762dbcb5a4a1c94a9d2cdf625db1",
+        "prompts/answer_coverage.md": "30ad2fddcdb468328e49c7a8d7647a693193fa6e6643c037f7fb57c4d6c021b9",
+        "prompts/current_developments.md": "a2d97aacea9ec191cf30ae0efc90f6b096a4fa382e90fb8692f78dd7874f2f71",
+        "prompts/filing_revenue_inputs.md": "7bbe86065ad438be525021ac6c39d6729ed045ba0e5d6f61e82640c4cbfcf194",
+        "prompts/filings_research.md": "23a8083ac5be5ae36c3ed32ef3147500aa3d8c387d6d10c91e7fd3612e6552e7",
+        "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+        "prompts/quant.md": "08d54c757d0133e4b88c746d81733074413fa24a6a0707b2f281a915161e936a",
+        "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+        "prompts/risk_summary.md": "b1274b30711f3288f1815d3b413f003c2f62670da6ee2f62e3a554b3b171cec2"
+      },
+      "adapter": "codex-ragas-v1",
+      "versions": {
+        "ragas": "0.4.3",
+        "langchain-community": "0.4.1",
+        "langchain-core": "1.6.10",
+        "chromadb": "1.5.9",
+        "onnxruntime": "1.31.0",
+        "pydantic": "2.14.1"
+      },
+      "embedding": {
+        "schema": 1,
+        "model": "all-MiniLM-L6-v2",
+        "dimensions": 384,
+        "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+        "tokens": 220,
+        "overlap": 40,
+        "distance": "cosine"
+      },
+      "judge": "Codex subscription / gpt-6.1-sol",
+      "web": "disabled by direct static Research invocation; no live_check supplied",
+      "kind": "Synthetic judge calibration, not corpus evaluation",
+      "question": "What were Northstar's FY2025 revenue and largest-customer revenue share?",
+      "reference": "Northstar reported $120 million of revenue and a 25% largest-customer revenue share in FY2025.",
+      "contexts": [
+        "Northstar's FY2025 revenue was $120 million. Its largest customer accounted for 25% of revenue.",
+        "Paris is the capital of France."
+      ],
+      "cases": [
+        {
+          "id": "supported",
+          "status": "scored",
+          "answer_sha256": "ac70001820b7b4d2a77f29695194b636edaad20e87e574c5a2260040be654d28",
+          "contexts": 2,
+          "metrics": {
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 19.151
+            },
+            "answer_relevancy": {
+              "value": 0.957078368174634,
+              "status": "scored",
+              "reason": null,
+              "seconds": 8.496
+            },
+            "context_precision": {
+              "value": 0.9999999999,
+              "status": "scored",
+              "reason": null,
+              "seconds": 17.007
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 9.114
+            }
+          },
+          "seconds": 53.768
+        },
+        {
+          "id": "contradicted",
+          "status": "scored",
+          "answer_sha256": "72fd8777ecda227a0e64f09d71ccaaf4e5fd3b6d79c833fa5b191403904f432b",
+          "contexts": 1,
+          "metrics": {
+            "faithfulness": {
+              "value": 0.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 16.092
+            },
+            "answer_relevancy": {
+              "value": 0.9909620610055042,
+              "status": "scored",
+              "reason": null,
+              "seconds": 8.592
+            },
+            "context_precision": {
+              "value": 0.9999999999,
+              "status": "scored",
+              "reason": null,
+              "seconds": 0.016
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 8.419
+            }
+          },
+          "seconds": 33.119
+        },
+        {
+          "id": "irrelevant",
+          "status": "scored",
+          "answer_sha256": "557be7eca214f1889cdb6dfa348eb7c937648c9d6be72bfc1b8204adf7552a43",
+          "contexts": 1,
+          "metrics": {
+            "faithfulness": {
+              "value": 0.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 14.8
+            },
+            "answer_relevancy": {
+              "value": 0.16585820211188246,
+              "status": "scored",
+              "reason": null,
+              "seconds": 7.504
+            },
+            "context_precision": {
+              "value": 0.9999999999,
+              "status": "scored",
+              "reason": null,
+              "seconds": 0.001
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 0.008
+            }
+          },
+          "seconds": 22.313
+        },
+        {
+          "id": "missing_context",
+          "status": "scored",
+          "answer_sha256": "ac70001820b7b4d2a77f29695194b636edaad20e87e574c5a2260040be654d28",
+          "contexts": 1,
+          "metrics": {
+            "faithfulness": {
+              "value": 0.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 9.636
+            },
+            "answer_relevancy": {
+              "value": 0.957078368174634,
+              "status": "scored",
+              "reason": null,
+              "seconds": 0.202
+            },
+            "context_precision": {
+              "value": 0.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 0.01
+            },
+            "context_recall": {
+              "value": 0.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 11.951
+            }
+          },
+          "seconds": 21.799
+        }
+      ],
+      "judge_calls": [
+        {
+          "key": "656f4c8434a2fcd29cd8ebe254cad4270646fcda48f2f9b5ca9ba36ccf0aedfc",
+          "cached": false,
+          "seconds": 10.14
+        },
+        {
+          "key": "df0a087d3e03f2f9578db8bb5d918493c4bb68649c4d2f9f7d7d199642c1e2e8",
+          "cached": false,
+          "seconds": 9.003
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": false,
+          "seconds": 7.989
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "7c14f0fd456be7ba21d88d664f5e0b6cf05fe9c3016322f12e72010738c6d91f",
+          "cached": false,
+          "seconds": 8.365
+        },
+        {
+          "key": "5acded4bf1c6d77e03f204a14042209bcb3f95fc41d59f274336837ece327b2e",
+          "cached": false,
+          "seconds": 8.635
+        },
+        {
+          "key": "752b92c71c30e50628204910c28a8d90e9a1261356cec5fe5d764c2fbf40d666",
+          "cached": false,
+          "seconds": 9.11
+        },
+        {
+          "key": "f0902aa7c3ed1b74c4f5c2b0340b226721ff4a8701b0a643061753ac29f7eede",
+          "cached": false,
+          "seconds": 7.08
+        },
+        {
+          "key": "25a41eec83baf80a672e5e814832ab9cf6b8f93d6148bb8dacca72e99ed27a9a",
+          "cached": false,
+          "seconds": 9.0
+        },
+        {
+          "key": "85fe26e17e6e1f4eb341052d28ab337098524d3c53685a10ba6dadb98146a1ce",
+          "cached": false,
+          "seconds": 8.288
+        },
+        {
+          "key": "85fe26e17e6e1f4eb341052d28ab337098524d3c53685a10ba6dadb98146a1ce",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "85fe26e17e6e1f4eb341052d28ab337098524d3c53685a10ba6dadb98146a1ce",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "7c14f0fd456be7ba21d88d664f5e0b6cf05fe9c3016322f12e72010738c6d91f",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "9508ab53a6a7fe54c7f787d04332bb7f50eb4e29d837836fafd07b70fde63596",
+          "cached": false,
+          "seconds": 8.416
+        },
+        {
+          "key": "d2f91607eed070fc3a1d44c291e086d382ba8902bdbd41b2a2d6cfaaa935403f",
+          "cached": false,
+          "seconds": 7.024
+        },
+        {
+          "key": "fe79938572f7bf1407cd5e24d328b8e42fbdbbebf1d21b6b4bb64d077ac9c959",
+          "cached": false,
+          "seconds": 7.768
+        },
+        {
+          "key": "acf747338adbb1d35cd19f81aec680d4b0891435adf12093e40ede94677920b6",
+          "cached": false,
+          "seconds": 7.314
+        },
+        {
+          "key": "acf747338adbb1d35cd19f81aec680d4b0891435adf12093e40ede94677920b6",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "acf747338adbb1d35cd19f81aec680d4b0891435adf12093e40ede94677920b6",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "7c14f0fd456be7ba21d88d664f5e0b6cf05fe9c3016322f12e72010738c6d91f",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "9508ab53a6a7fe54c7f787d04332bb7f50eb4e29d837836fafd07b70fde63596",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "656f4c8434a2fcd29cd8ebe254cad4270646fcda48f2f9b5ca9ba36ccf0aedfc",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "050c7560265a05f524e2616ada2062ef152ef02a7f6d24544fa1e9e0381c7bff",
+          "cached": false,
+          "seconds": 9.625
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "183776034e6416aac3b3cf032f66c8040a18e68218f627207a3241cf4ee41b87",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "5acded4bf1c6d77e03f204a14042209bcb3f95fc41d59f274336837ece327b2e",
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "0d4200d5909382e50e3ee0b1bc3d0b0b1c14010a6aba650ae9f6aac18b079ded",
+          "cached": false,
+          "seconds": 11.947
+        }
+      ]
+    },
+    "baseline-scores.json": {
+      "checked_at": "2026-10-22T16:52:29.423373+00:00",
+      "git_commit": "aec3b3c6be80570d1a5cd5a4095f61bbb42ea2f9",
+      "runtime_hashes": {
+        "src/analysis_artifacts.py": "dbfe35f2e4837e41469b781f236dd5ffa2af32f2a456d0de2f0250bf36139004",
+        "src/capabilities.py": "598121d0fd10bea74884aa54c28045e03dd2066659756282015b6e817d8c1c06",
+        "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+        "src/codex_transport.py": "cd56abd9ca1acce0b5a66376428447e926ae5f88d257765f1cf9358379ab334e",
+        "src/current_developments.py": "d2f1f259265f19e7100d2b5987752b183fd707c2d8a0a419cd16b4b54281d9ad",
+        "src/filing_financials.py": "1d77e206897c7f1e66cc768dba12d27eb7904cc73b4a883ee39a4d5233c102f6",
+        "src/financial_data.py": "36ddded093d224992f7a14a87c5fcfc6e71617048bcdb68587f1d78f1b7ee8ba",
+        "src/financial_workflow.py": "150baa6e57b322cf4ff679933b9e86c9f7e1ca5cbda3f18286f7afd7e2eec563",
+        "src/generation.py": "dc7078127f05e2f4d1666ba696e383c7ba370d20d0b84e90c4c8acd24aa42d29",
+        "src/generation_context.py": "3943b21874c4da0530f9992ed39b2fb62197616fa26d656961f63647ea4ba6e7",
+        "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+        "src/live_mcp.py": "3e10890b7f609f255bc9f9acadd48c8bb05f7efbc5e824fffed6df17889ebc65",
+        "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+        "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+        "src/provider_models.py": "eaa646225deaf1321bf32b059ee198023fd775a717e58835e9dee71c7aae3f78",
+        "src/provider_policy.py": "0452d7f6e2d40f174e180ece00122dd1ac83f3d089ff230b06272cb881a730b0",
+        "src/quant_analysis.py": "941ccbd3f4f95778d1919d4551fad72e8c996c9b3e3033b49e4f4f34200360eb",
+        "src/quant_runner.py": "88870c6e9a5fbfbfef530b12871a1c09274bc97c4046ae8f0346ac96971faad0",
+        "src/quant_workflow.py": "c1dda1aea4382ab3486e4995b6248dd753df260798098055a74caaffede5a0d3",
+        "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+        "src/request_routing.py": "15d35ab2b14c6d79b0ea7db537aafd2de7b985ad2f5b868625f634801677f9cf",
+        "src/research_index.py": "a01b8606847f2beb9dd3550d29062af4b74824289a9494674430ccab1597ca3a",
+        "src/research_workflow.py": "10e2686ea1d029b1373479082f982c8e9987b99b42310cf6695d9b173a3f423e",
+        "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+        "src/risk_summary.py": "927351ae033b39cd5745a514f59e60ad15aad19206691fe836936cd01c516f27",
+        "src/source_collection.py": "41a3bde568828f040886bba940ef4838d71939b9351c0130f3c2657881b14254",
+        "src/source_inventory.py": "cd550c2a42fd1af0665bfbdb85b6557a342831ceb06bce6c1f525567901b8bc6",
+        "src/supervisor.py": "2a84b361ae150d5761310603e9a70d0b4879c07afbe221362278e001845fa38c",
+        "src/task_scope.py": "48c79e6c5bf74a552db2007f5010df44d3714a428c290ff185d3bb8adafa1c1b",
+        "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+        "src/web_evidence.py": "c40cfad8b0fc995ab33db5bb7ec80b9a68c6762dbcb5a4a1c94a9d2cdf625db1",
+        "prompts/answer_coverage.md": "30ad2fddcdb468328e49c7a8d7647a693193fa6e6643c037f7fb57c4d6c021b9",
+        "prompts/current_developments.md": "a2d97aacea9ec191cf30ae0efc90f6b096a4fa382e90fb8692f78dd7874f2f71",
+        "prompts/filing_revenue_inputs.md": "7bbe86065ad438be525021ac6c39d6729ed045ba0e5d6f61e82640c4cbfcf194",
+        "prompts/filings_research.md": "23a8083ac5be5ae36c3ed32ef3147500aa3d8c387d6d10c91e7fd3612e6552e7",
+        "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+        "prompts/quant.md": "08d54c757d0133e4b88c746d81733074413fa24a6a0707b2f281a915161e936a",
+        "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+        "prompts/risk_summary.md": "b1274b30711f3288f1815d3b413f003c2f62670da6ee2f62e3a554b3b171cec2"
+      },
+      "adapter": "codex-ragas-v2",
+      "evaluator_hashes": {
+        "evaluate_ragas.py": "a0179914ed109cf060bd5f8a8708748e37031df5b7f785c1386e2bb5f342f429",
+        "ragas_support.py": "8f03511cee39f4e01f40798241c337511cd57add27606cea48a91819905f5990"
+      },
+      "versions": {
+        "ragas": "0.4.3",
+        "langchain-community": "0.4.1",
+        "langchain-core": "1.6.10",
+        "chromadb": "1.5.9",
+        "onnxruntime": "1.31.0",
+        "pydantic": "2.14.1"
+      },
+      "embedding": {
+        "schema": 1,
+        "model": "all-MiniLM-L6-v2",
+        "dimensions": 384,
+        "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+        "tokens": 220,
+        "overlap": 40,
+        "distance": "cosine"
+      },
+      "judge": "Codex subscription / gpt-6.1-sol",
+      "web": "disabled by direct static Research invocation; no live_check supplied",
+      "kind": "Unmodified ragas.metrics.collections algorithms and prompts with custom local transports",
+      "capture_sha256": "fb57ea58b1dc0132e57afda059c8cb4d5e556bb1b01014b7c6c1188948be2acb",
+      "dataset_sha256": "89e8ce4e0c60244c722a73f075c17cc228375df6dc6e749d2028572e1804628e",
+      "context_policy": "All unique model-visible chunks in first-seen adaptive retrieval order; inspected context replaces its chunk text; no reference injection",
+      "cases": [
+        {
+          "id": "ragas_dev_01",
+          "status": "scored",
+          "answer_sha256": "87e5592070f22483a50202b1274e542b69e5da5cce9efe11e5895436195f78a9",
+          "contexts": 10,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 23.171
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 51.833
+            },
+            "answer_relevancy": {
+              "value": 0.8161245561481957,
+              "status": "scored",
+              "reason": null,
+              "seconds": 60.391
+            },
+            "context_precision": {
+              "value": 0.551587301573512,
+              "status": "scored",
+              "reason": null,
+              "seconds": 124.959
+            }
+          },
+          "seconds": 124.985
+        },
+        {
+          "id": "ragas_dev_03",
+          "status": "scored",
+          "answer_sha256": "cc9a9bb4abad4180f2c114ba1fde8bdf8d4d0cf884101228400d0fc37ddc6ec3",
+          "contexts": 8,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 24.767
+            },
+            "answer_relevancy": {
+              "value": 0.6920687460337406,
+              "status": "scored",
+              "reason": null,
+              "seconds": 38.329
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 43.2
+            },
+            "context_precision": {
+              "value": 0.9999999999875,
+              "status": "scored",
+              "reason": null,
+              "seconds": 88.172
+            }
+          },
+          "seconds": 88.207
+        },
+        {
+          "id": "ragas_dev_02",
+          "status": "scored",
+          "answer_sha256": "dac4d6956a6cc243949e8dbd3277495be96ff83afe0b5e196ac011f5c1b704db",
+          "contexts": 17,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 35.693
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 49.989
+            },
+            "answer_relevancy": {
+              "value": 0.8266828363640619,
+              "status": "scored",
+              "reason": null,
+              "seconds": 65.331
+            },
+            "context_precision": {
+              "value": 0.22829670329213736,
+              "status": "scored",
+              "reason": null,
+              "seconds": 215.588
+            }
+          },
+          "seconds": 215.692
+        },
+        {
+          "id": "ragas_dev_04",
+          "status": "scored",
+          "answer_sha256": "1418e5886a570a62c339833ce638260d24875ea3a312f7d108fa6fee7d2b4d12",
+          "contexts": 10,
+          "metrics": {
+            "context_recall": {
+              "value": 0.6666666666666666,
+              "status": "scored",
+              "reason": null,
+              "seconds": 24.028
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 57.829
+            },
+            "answer_relevancy": {
+              "value": 0.8563884163975501,
+              "status": "scored",
+              "reason": null,
+              "seconds": 65.813
+            },
+            "context_precision": {
+              "value": 0.9214285714154082,
+              "status": "scored",
+              "reason": null,
+              "seconds": 143.979
+            }
+          },
+          "seconds": 144.063
+        },
+        {
+          "id": "ragas_dev_06",
+          "status": "scored",
+          "answer_sha256": "376556d2f461bdcab1adbcb455c1f7b54a6e5f4937839fc80daeb683c38a3018",
+          "contexts": 15,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 39.317
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 68.47
+            },
+            "answer_relevancy": {
+              "value": 0.87342889829969,
+              "status": "scored",
+              "reason": null,
+              "seconds": 72.969
+            },
+            "context_precision": {
+              "value": 0.6370610870540085,
+              "status": "scored",
+              "reason": null,
+              "seconds": 211.023
+            }
+          },
+          "seconds": 211.035
+        },
+        {
+          "id": "ragas_dev_05",
+          "status": "scored",
+          "answer_sha256": "95e9e9ef8c9e056c1326bd30ce07be3dc68de5db2db7997553d41d9e3b2c4c32",
+          "contexts": 15,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 27.32
+            },
+            "faithfulness": {
+              "value": 0.8333333333333334,
+              "status": "scored",
+              "reason": null,
+              "seconds": 38.898
+            },
+            "answer_relevancy": {
+              "value": 0.7304709095437972,
+              "status": "scored",
+              "reason": null,
+              "seconds": 45.424
+            },
+            "context_precision": {
+              "value": 0.30757575756806815,
+              "status": "scored",
+              "reason": null,
+              "seconds": 167.884
+            }
+          },
+          "seconds": 168.161
+        },
+        {
+          "id": "ragas_dev_08",
+          "status": "scored",
+          "answer_sha256": "9c9e93231bb32d160c3ba4cad535867e39a90002a5b69b4d717164926a8bcfe0",
+          "contexts": 9,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 24.333
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 36.992
+            },
+            "answer_relevancy": {
+              "value": 0.8864141199462052,
+              "status": "scored",
+              "reason": null,
+              "seconds": 44.524
+            },
+            "context_precision": {
+              "value": 0.8551587301444776,
+              "status": "scored",
+              "reason": null,
+              "seconds": 103.914
+            }
+          },
+          "seconds": 104.349
+        },
+        {
+          "id": "ragas_dev_07",
+          "status": "scored",
+          "answer_sha256": "91d94e34c3b8d25976aeeae8632cf2bf99b89a4ec486b7990275032a217302a4",
+          "contexts": 12,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 26.733
+            },
+            "answer_relevancy": {
+              "value": 0.7745151883952707,
+              "status": "scored",
+              "reason": null,
+              "seconds": 36.864
+            },
+            "faithfulness": {
+              "value": 0.9615384615384616,
+              "status": "scored",
+              "reason": null,
+              "seconds": 58.233
+            },
+            "context_precision": {
+              "value": 0.7762225428805849,
+              "status": "scored",
+              "reason": null,
+              "seconds": 136.988
+            }
+          },
+          "seconds": 137.064
+        }
+      ],
+      "judge_calls": [
+        {
+          "key": "a2119916644702ff29848816b81cf6dbaecc612095db1960877b290bb3509372",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.397
+        },
+        {
+          "key": "0d02e3b4526ac9a008b09c239afd5b13288f73f35b1e06e64f8b9cf57e5dd062",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.814
+        },
+        {
+          "key": "7b9ac9b54368bf2c700f3a3ae33ae54344de7a634dfbb24cd17eb3515cdf2bf6",
+          "context": "ragas_dev_01:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.01
+        },
+        {
+          "key": "f32633ce6d2cce93861f96fae47aeef8aef3774ecc789b0d41042c4abc255c42",
+          "context": "ragas_dev_02:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.06
+        },
+        {
+          "key": "6d8d9a1944c761037b8726dd4561fbdc295da5bdcf281a22ff48d6664f84467f",
+          "context": "ragas_dev_01:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.78
+        },
+        {
+          "key": "59d66fb7230cb1e10a0706162b966ed55880138461bba6c34f98c84456c6eaaf",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.264
+        },
+        {
+          "key": "ebf08d10661e42655fca170a63a3e39b787fb119d210156839b301640696e2c2",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.374
+        },
+        {
+          "key": "10549a6d17d4ab41fa44ad6ac12237d0ddb7168f2ab9186aa60aa91d6a517c8e",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 7.775
+        },
+        {
+          "key": "b8b84fb56d447cd43bd0fc81ee1bba70a9cccf1a93138e722e1d08a0fefeed72",
+          "context": "ragas_dev_02:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.519
+        },
+        {
+          "key": "2ff340b5561ffa87766ee4ea5eaea3c6e6f399f46d424f44507f8a6c65d7c918",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.007
+        },
+        {
+          "key": "3c9fea57066afab74eb1362342ea505ae21c4a5910106037fd5d3baa7f8a140b",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 8.218
+        },
+        {
+          "key": "bcf6955714ce0b613f682e5727aef97b070e57e47acdcc2bea0bfb2bb4074966",
+          "context": "ragas_dev_02:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.289
+        },
+        {
+          "key": "dfb4fd0b17ceb8e94cb4a8bd97cd784fe9fe8b5e510856d54a2f912b8de39246",
+          "context": "ragas_dev_01:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 19.739
+        },
+        {
+          "key": "b20d3382366c53cc2cd45cece7cbf86dee637f0ddb7bb32113735f2ed14837a3",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.802
+        },
+        {
+          "key": "5feab8376904370769bb6dd34004c385effb3c28914cb0ea3d206a6e86bfbbeb",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.115
+        },
+        {
+          "key": "603f24b29d53a6197ed7df0d77dc20f8c13ae13f5a7ea89e7b6203e7d2e8bd7c",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.661
+        },
+        {
+          "key": "ef299509cd7c5ba7f199bcbbe5cf595f08696add98d7f2f2a9e1ab3d1f72079c",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 8.502
+        },
+        {
+          "key": "a5847ebcced5bf5ff7c1b64b2e9edcf23fc5951fb7ffd15ad0c2d781a7ff51c2",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.837
+        },
+        {
+          "key": "7ba33b1761ea16aedd2aea45ab0e75b9a53268764cc89afea3d30b81cd3a56a3",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.654
+        },
+        {
+          "key": "400ede47f19459dd7da101b91c6f94a0ab8bb41e37734320efa6ccb09a5d1999",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.418
+        },
+        {
+          "key": "dc40a45b53928416da93a7559d701c2d9fbaa4d2d043114c58d4edf38921f3ce",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.999
+        },
+        {
+          "key": "76eb354bf6c5dae75af68a38382f5863ed59412486b65dd919ffc549b2cf9e4f",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.385
+        },
+        {
+          "key": "68c760415c64e44c30185dc07457ff036b82352337810d9a6c236032b816cc28",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.323
+        },
+        {
+          "key": "6be1bd7178bc518859c87863430a24ecf4a540c009b58aca8bc57ca9c1e108a0",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.764
+        },
+        {
+          "key": "b0f7c13d6e61463de208d4bca1edfe80b0ec44a94cff6c69f33a0ffe69ddc3d5",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.846
+        },
+        {
+          "key": "797ba1238e9ea90f5779bffa44bb7a398a8c4cf98ca02abcb1b16d637fd18c81",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.707
+        },
+        {
+          "key": "b9cd4e3d04a4ff6528fa0eb69faf19a8c82892a40fe7a2a9d738692fdb44e640",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.611
+        },
+        {
+          "key": "c77a7a5f68bf74dbaffccc000b8f19ce60b15ffa669f8b3a58960795b7a0cb19",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.978
+        },
+        {
+          "key": "b6a430be6fcc2f323d574881ce09a8ada421c50d67cfa32812cfe15481cdaec1",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.986
+        },
+        {
+          "key": "b863d5e61137dcde3791d263cbb9d84b886f634b79b448ebeb6c1e28a2c7b9ac",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.886
+        },
+        {
+          "key": "d0f92bdfa6b51fa4e5462e1a042daff368161149c3c2c76a205d12be99ceb504",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.023
+        },
+        {
+          "key": "487a41a332d0835714dc888ea17861fa440d29755344202ebf31a950b67f7516",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.376
+        },
+        {
+          "key": "2f38e7fef8131fb28ba761ed921ad3f07630876020afd410235fa9b9d7b3edcb",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.98
+        },
+        {
+          "key": "6f9424234863013e86b6434b806c756bd4a256d4f0e02d41524024b494443fe8",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.83
+        },
+        {
+          "key": "b40f32ab0861114ac186f6cf4fba36e389e38d24092040e277d61605613e796b",
+          "context": "ragas_dev_03:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.763
+        },
+        {
+          "key": "8ba885fa21d58d491a253aa52648b83b7895e7120eb450c83d7e22838e09ecee",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.851
+        },
+        {
+          "key": "5427e8deab55d0cc0a27d4d80c06dbafa1e7a64245c1566e11fb9a3d7d2f1723",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 10.742
+        },
+        {
+          "key": "b73af7d7cf6e303dfe497e0cccd653c1a15be52a8d51f7404c504ca3074efe63",
+          "context": "ragas_dev_03:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.799
+        },
+        {
+          "key": "f839189ee1ba831693950b564a7db6fb5ffea4100c624ce3dba8f645dabdb231",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.945
+        },
+        {
+          "key": "179b5e7c4b01a8daffdda637f7d26962d21be066cb134b6a26826ed3e4c4d91d",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.446
+        },
+        {
+          "key": "7346aa9d7d497ec74b08b10b08f46c0a87a3a8f188c82d3c2fcc6e53319373fb",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.785
+        },
+        {
+          "key": "6d78224e7734833de274c07beb57e06657d7fe6dba2f3727e13b02dc15cb0d3f",
+          "context": "ragas_dev_03:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 19.668
+        },
+        {
+          "key": "aae4aee2c3606372d46d9b8ebf4e88afa8632f56d7a98f5ddf7e003a1adf7b71",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.45
+        },
+        {
+          "key": "615bd9eeec110c33bd01f1b95c5fa65eaad6e836faf8fb47b966e0cc297f127c",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.865
+        },
+        {
+          "key": "42ccc848aaec7aff60c5931cddb6bb8754ae44104bdc0e3b7ed7470568fed974",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.133
+        },
+        {
+          "key": "6ea53809cb9eeffda3f20629f7a62c9b204380eb456bea0fd461959285872207",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.782
+        },
+        {
+          "key": "a4be4c175572b48b22cbd5726eddfc74596fc1f0e4adaf1b20e392a0a2e50b58",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.607
+        },
+        {
+          "key": "9ecd4275c5820e0ebd766a9b52884f8716189f9e088f8f170d8966880c7be8fc",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.38
+        },
+        {
+          "key": "895152bf00dbc8b4042d63d31f72e5beff50fe5c241bd1fec5a65bc42cf9eabc",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.63
+        },
+        {
+          "key": "ecea70fde0449167c0ede49c7b58f07c9d6e41330982139dec373240068d1ec3",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.995
+        },
+        {
+          "key": "4dd2ad9c076b1b1300859e179d820ad6a64a8c926fc090a2201bd373c651dfd1",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.073
+        },
+        {
+          "key": "ffa6f399a08e8c81dfbd8fd0a023468d3b06b72b02fe28bca2e9fe48449a387f",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.018
+        },
+        {
+          "key": "9c554b5913ee362b243310869d02f27f24af452f22e6e3b27d8af2bf87ed5cc7",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.556
+        },
+        {
+          "key": "97fe975270d430f9a838cdb578750716d3f712460b90382823e5eba173fe61a5",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.59
+        },
+        {
+          "key": "de0d08095afb7d1549127b105869d9c1bded7a4d0fcee3bb6f102036278afdbf",
+          "context": "ragas_dev_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.471
+        },
+        {
+          "key": "b5cbeceed32d3c7efce7ae60440a5bbdc81aec2b07e6383f818ff8a7fcd2990c",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 13.126
+        },
+        {
+          "key": "ae5985cea854bb961e663dbef9c4e79d3c7a0ffeff60d9c3817bd3979d7c60b4",
+          "context": "ragas_dev_04:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.451
+        },
+        {
+          "key": "9929c7c3412b3cc73ff3a6df84b5405bb7399d73a0d6d079e7ac56f14c44668f",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.582
+        },
+        {
+          "key": "3d2306fc277a92af796d860be778f2fcceae0445a994b2d59d0fc8f235837f3a",
+          "context": "ragas_dev_06:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.513
+        },
+        {
+          "key": "8ffb05b5ee0aa08c88b97fce0119114747b4b36db9bbb7dde24609087a277454",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.165
+        },
+        {
+          "key": "6db2bab3482b8b8dbbc72061ffb4c6e720cb3df7470cb5aaf03bb62278612a43",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 10.037
+        },
+        {
+          "key": "34007b382b1b626ee4700cefb5988abd48d5ef6603749d474aa9f9bef5a82b67",
+          "context": "ragas_dev_06:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 17.669
+        },
+        {
+          "key": "a1fe654f51144f808d7b27e6ebd4e5c09b37110d85c4b6616246f0c15006b35c",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.602
+        },
+        {
+          "key": "a5967f19bb872c93dcdba11f3ebb6f9a35b1d40e2fb6ea036ee2253e26abf261",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 9.572
+        },
+        {
+          "key": "2d49fb18a51d5b22f7e4c9d7e90991534ab78e88d166bea9fbd1023674e10601",
+          "context": "ragas_dev_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 23.537
+        },
+        {
+          "key": "ba448110d64386516a215c3f229f760dc50f68176379a8bafb4a3806ae8ebce9",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.344
+        },
+        {
+          "key": "d85e102f9a4cb654d77df620c40265a19909c347924531bceb7ba15b26b47a0e",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 7.661
+        },
+        {
+          "key": "5f7b5394f990de93ee130b427848e6a673fd053bbc1bfa3eb581e604229422ad",
+          "context": "ragas_dev_06:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 22.299
+        },
+        {
+          "key": "fe895157c260d93f4c6132395d48bc43cbab80a56ad54b80364a1715bcf2af41",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.685
+        },
+        {
+          "key": "b6479cc5938192e7000f17d6a6d5f1247ddca6c3c2fbeb0feb84bdd82121d663",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.45
+        },
+        {
+          "key": "ce90ca90b73dab2613e02a8fbd95899663dc77fcb4652b822300866a2133e279",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.774
+        },
+        {
+          "key": "9b0565672516578b6b1c475486e7dd123f316ff2ad9650f8cfe772be4548ded8",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.015
+        },
+        {
+          "key": "8166a7badaeb011f09d16ae22a06ff16ec4d3ae2a4829af73d9c792d82c0104b",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.126
+        },
+        {
+          "key": "ed15689491d2809eaa68a159741a0bd93290761a6fb824fd8f085cc4f5ca22b4",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.01
+        },
+        {
+          "key": "79431e2da58164f328a024fc0f0a1ac32fae548b9bd9025db3069f9b194374f2",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.77
+        },
+        {
+          "key": "ff413f8ba5507511ba220cc25594c8e5103cc19505f827fcea0c464a498f45ad",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.559
+        },
+        {
+          "key": "5f9cae3dba437abe4dd8c85becc59e682e6598c9003a19b4fb4cc0f9686f37fd",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.467
+        },
+        {
+          "key": "4fcf468bd9e84bbba23af89ae909bd22b2250c66fd3bc01dc2f5f2e1bec0a48b",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.247
+        },
+        {
+          "key": "ded8c2bd58c30498051e6cf02d096b0b83e2a47841bedbaa8e611b32f97fd941",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.806
+        },
+        {
+          "key": "7b987ed55c38018322fec778ed88e846b937edf4d234e4ce97335f123a8004c1",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.943
+        },
+        {
+          "key": "1564af3a834548888f5645a1f80cc4e8de7fcd872a1d1f968a78b8b6755d7933",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.661
+        },
+        {
+          "key": "77498d9b0ea0b6e80be40463547b19d76a3a69aaadc40d1b2172cc6b0bcec8f3",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.546
+        },
+        {
+          "key": "59cdf82fd917346a87a8b99eacdce7cd56404dfc1709d588bca159ed329fc808",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.469
+        },
+        {
+          "key": "23941957865d9c30982bad2fae97a634be7f8f57267bea4ae614739a36cbfcd2",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.175
+        },
+        {
+          "key": "87e502e5de8cb94085714c57bbf823ea5053069ff373d99b7206b3d5791ff73a",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.826
+        },
+        {
+          "key": "3ba3b0246e01695c9e3508aa98704b3201237a823da20d8b324ee7b37c478879",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.262
+        },
+        {
+          "key": "4c28818661b2ba0ca52ee52852e89592ee62d08146e8f9e17cc35297ae4b5d90",
+          "context": "ragas_dev_05:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.485
+        },
+        {
+          "key": "e8737bbc27745bac96f67958266734b3361f89f620266a75973b7a5d4eabfcd4",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.143
+        },
+        {
+          "key": "f197e205f48077f9b5e8d3434bab99d81e4a38768fb8680fead443521db25eaa",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.999
+        },
+        {
+          "key": "642e95af5ad464bfc53293fd504770050ed27e3eb9c1b5a0389524441a16c868",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 9.322
+        },
+        {
+          "key": "8327b2b45483bd0b036a9d6c313a5a5c3a871048394313600d22ee3839c9c988",
+          "context": "ragas_dev_05:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.193
+        },
+        {
+          "key": "94ab47c31407407a96a6733440cded400486914cb3e96c19059428cf9255d829",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.921
+        },
+        {
+          "key": "c574e5c2a443cedd91a00a0c9ec10aff740e9c9033fd5267b266130c5bdb9923",
+          "context": "ragas_dev_05:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 16.358
+        },
+        {
+          "key": "1b941ba8f5383f0f4ba70e0a3d8133ca5baac64152a1e53d7d6e1f838d85c9c1",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.362
+        },
+        {
+          "key": "663ad099d3e437811766ed750bafc076b9f03cf22f7e51b0ba1e7ab034a11ae1",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 8.594
+        },
+        {
+          "key": "aa15cd6cb87159a2c2965b126b8fd4cb5877b3c8a1188de14376efa491eafcbc",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.223
+        },
+        {
+          "key": "60036c8bc02e11549fdae43e7ac5c6e1923888b1adb86c405a7b1c10f41bc545",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.252
+        },
+        {
+          "key": "0d457b9f123e5ab9a0e0007aa27e3a3cd4b04d383f8bfd8a0b15ef66ea159bcf",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.718
+        },
+        {
+          "key": "31bfdb661a068ce294f11011fd2e7ae2db6c781ed66b9a922a309acfc6905ae2",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.415
+        },
+        {
+          "key": "a64edd1b9bc7810b54efbb81da1814c3fcb57fffad8033202164ec930ed5c564",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.974
+        },
+        {
+          "key": "5aee672fe997f4ca1f174272daebec63f04d88087c4cbdb1d28f70cffe472ad9",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.789
+        },
+        {
+          "key": "dc13e7f2795085d0f6cf080b648ffdeef77016c2ac15395ad865beb036ae07f6",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.828
+        },
+        {
+          "key": "57483745daefd3cedf107be5b942e61a579fef244ede3fc5f9a1fae91206bf2e",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.454
+        },
+        {
+          "key": "45c902f32b7b6c8d2b73bde7ef13c1b5c6234abcec322ca0a1d320232493d76a",
+          "context": "ragas_dev_08:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.667
+        },
+        {
+          "key": "96bfa39794596e7e96e66627f5adf45855bff82f6c13e3952917296e57a1879e",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.731
+        },
+        {
+          "key": "9c54705a9c8aa6222c75027c1f525a90170984c616696473830e83b640dfd7f8",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.201
+        },
+        {
+          "key": "788937112242c04372816ad1a42c6c4b9b6c83e1271d903dd2a9ed50a2cd2b92",
+          "context": "ragas_dev_08:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.913
+        },
+        {
+          "key": "15d40d2af66a306df0937dd09f3a1f782d26d33ee98df26df9529b6d9b7ce9a6",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 10.592
+        },
+        {
+          "key": "3fe5fc7fab314c5898952eb8b4c0c8e8ec89b88dfe03d4be229133e1aa5adc31",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.861
+        },
+        {
+          "key": "b9f32b8cdc19bd2e9e7179bc9d45b562ecac4776cbc31454307161aef65d87d2",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.036
+        },
+        {
+          "key": "0f11dfa838b9313a58075dff17de558626ce97198808e2407c6fb992e12f2494",
+          "context": "ragas_dev_08:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.085
+        },
+        {
+          "key": "db79d22eb6e8c2eb01a035a288218ab4551ad9de1df6acf7b2242d506f3c0391",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 7.956
+        },
+        {
+          "key": "b866f214b23625de4503278bba7d1e37b8af0de3780a73d1f733f1cdfc1a43ee",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.039
+        },
+        {
+          "key": "38a6e2859ca2d519d4f5e5568181cc478a10b0fb40d475505852698b19298922",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.372
+        },
+        {
+          "key": "f285da605ff83a0afd6308e4a15833ef24e3673377cd306e427d0d91e4bf7ced",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.125
+        },
+        {
+          "key": "506ca5113942503a59d9acac1f502c4ff46c517ff239ea5d017f25e31cc72f28",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.919
+        },
+        {
+          "key": "ce16f169d8d72016e5ec7e40e8f7378f1098142a269fc96c7f7521e4a65221c8",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.769
+        },
+        {
+          "key": "ec0006563ab1ac586ff73ffa51121668367cba8b202a546a8ef2c5b1e4e14fd0",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.62
+        },
+        {
+          "key": "4b3cf6cc6663843ba2f6285b0266470465faac259b28d1ba2b469d624a767db6",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.811
+        },
+        {
+          "key": "0c38c6a397d5035bad2cc8154b5a0b5dc0d85dfded77e97bdd8f16900c180c0c",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.521
+        },
+        {
+          "key": "c1712523113c385deb780b255b5feac7738a4dab3d497ac41aff7c9595a6280c",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.932
+        },
+        {
+          "key": "062b6dda5978fd85509556e5acdf471bfa9f27a8afa9e59db5099241fd61dc52",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.308
+        },
+        {
+          "key": "4116586e210d171d71e655ae3d73726573c37d4f6a39264b3efbe2cb0a15eefe",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.35
+        },
+        {
+          "key": "08bc7156294f304af9e73bf61a8592e60f597aca068bd372e6d636bacecbe2b3",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.819
+        },
+        {
+          "key": "054fa5d32dbe547bd981c0e7a297d24a57267eca91b8621e9599a38ff8c3951e",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 7.55
+        },
+        {
+          "key": "838cd9211c1788e8f17dbe87194192ed55282256ae5a5f1d4b9d42589d1d834d",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.125
+        },
+        {
+          "key": "e75ab2a340d3dd1ac86366368ee75cb4e144c6c58afe35b40ede16c421a3469a",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.509
+        },
+        {
+          "key": "472f3181cf5d3feb118fb715cba21fa10a2dcdbd7c484f227a7782bba37227af",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.389
+        },
+        {
+          "key": "3b9a1cfe6f29865e5fe522789e24fac166b91904a71cd3be135c32b60114c8f5",
+          "context": "ragas_dev_07:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 17.902
+        },
+        {
+          "key": "ff6edf304b70669d18b2b244b898abfd1b7b0da44481adc815ceeaa171262db8",
+          "context": "ragas_dev_07:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 17.241
+        },
+        {
+          "key": "b3d0de71c1ce8b53bbd3de2b30b735bfbdd298c64020a83b5d5df6a0cd77ceaf",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 10.87
+        },
+        {
+          "key": "7328a0efa182878e10f1a1ef37e4bfb299ad51cebcd140b18d70c0a95960cf2a",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.839
+        },
+        {
+          "key": "021f6b8699d4b00fd79933ca9e84308ecd07f5bb0eecf09942c23d856602e596",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.383
+        },
+        {
+          "key": "3b80e9c58b934c2c8da39eea6d74b9e93c39dc3e235087a23ba80a459786df33",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.205
+        },
+        {
+          "key": "eb5d9ded28d59def37b8669169e10cff18c52b74f59ff0c1fab6e3591caedaf3",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.81
+        },
+        {
+          "key": "f00074f9c184e14892bdf33bb4a081bdd535c4b2cc0b6e918fd7e89baeb6e448",
+          "context": "ragas_dev_07:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 31.411
+        },
+        {
+          "key": "0577a3e768dfad89ccd1e98a2897c86dcb8a7028f1a8bb000e00908f7527366b",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.052
+        },
+        {
+          "key": "541f2b4a5d5e9af7bf09867d0945b24ac6cc709a9b1be8cc5ee986a326568883",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.867
+        },
+        {
+          "key": "33d0db237d7472098958d4d48c30b0267f88df8f68db9584319644a7d0f0e4b8",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.518
+        },
+        {
+          "key": "84370863aa3d70906204034da6cbda588c413a17496240cfb2a0bfa242695b15",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.042
+        },
+        {
+          "key": "b2c4963d27aeb9ab11c46ada27e9d66b59a118fb7a99d7f9ec8d4b096c2e8b77",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.97
+        },
+        {
+          "key": "a3ca76ad90fdd784a124409379509b2f67a62f7b4f81814976a6d1d873a2f830",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.812
+        },
+        {
+          "key": "8cb208d6db6c4e97202473325ff6e855d5fdddc51c840099233a6de24b6fdd72",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.212
+        },
+        {
+          "key": "c6cdbd3a0a8c57c7eaa32985a87f34bcdd9f13f35d5e02efbedf856311c4025d",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.535
+        }
+      ]
+    },
+    "refined-scores.json": {
+      "checked_at": "2026-10-22T17:01:29.678610+00:00",
+      "git_commit": "aec3b3c6be80570d1a5cd5a4095f61bbb42ea2f9",
+      "runtime_hashes": {
+        "src/analysis_artifacts.py": "dbfe35f2e4837e41469b781f236dd5ffa2af32f2a456d0de2f0250bf36139004",
+        "src/capabilities.py": "598121d0fd10bea74884aa54c28045e03dd2066659756282015b6e817d8c1c06",
+        "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+        "src/codex_transport.py": "cd56abd9ca1acce0b5a66376428447e926ae5f88d257765f1cf9358379ab334e",
+        "src/current_developments.py": "d2f1f259265f19e7100d2b5987752b183fd707c2d8a0a419cd16b4b54281d9ad",
+        "src/filing_financials.py": "1d77e206897c7f1e66cc768dba12d27eb7904cc73b4a883ee39a4d5233c102f6",
+        "src/filing_scope.py": "17dec4c15409390eab5259351083f2f077f338f388e45b4ac95d0e4d9dea71f3",
+        "src/financial_data.py": "36ddded093d224992f7a14a87c5fcfc6e71617048bcdb68587f1d78f1b7ee8ba",
+        "src/financial_workflow.py": "150baa6e57b322cf4ff679933b9e86c9f7e1ca5cbda3f18286f7afd7e2eec563",
+        "src/generation.py": "dc7078127f05e2f4d1666ba696e383c7ba370d20d0b84e90c4c8acd24aa42d29",
+        "src/generation_context.py": "3943b21874c4da0530f9992ed39b2fb62197616fa26d656961f63647ea4ba6e7",
+        "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+        "src/live_mcp.py": "3e10890b7f609f255bc9f9acadd48c8bb05f7efbc5e824fffed6df17889ebc65",
+        "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+        "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+        "src/provider_models.py": "eaa646225deaf1321bf32b059ee198023fd775a717e58835e9dee71c7aae3f78",
+        "src/provider_policy.py": "0452d7f6e2d40f174e180ece00122dd1ac83f3d089ff230b06272cb881a730b0",
+        "src/quant_analysis.py": "941ccbd3f4f95778d1919d4551fad72e8c996c9b3e3033b49e4f4f34200360eb",
+        "src/quant_runner.py": "88870c6e9a5fbfbfef530b12871a1c09274bc97c4046ae8f0346ac96971faad0",
+        "src/quant_workflow.py": "c1dda1aea4382ab3486e4995b6248dd753df260798098055a74caaffede5a0d3",
+        "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+        "src/request_routing.py": "15d35ab2b14c6d79b0ea7db537aafd2de7b985ad2f5b868625f634801677f9cf",
+        "src/research_index.py": "661fe8f70c9d279111c68ba5d22c2b7dcde29c5e4846c033a95229a733408ce5",
+        "src/research_workflow.py": "33a6915963cb8e3f0ea5b64756c9c7e696f6276639f31858591ccdb85c595127",
+        "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+        "src/risk_summary.py": "927351ae033b39cd5745a514f59e60ad15aad19206691fe836936cd01c516f27",
+        "src/source_collection.py": "41a3bde568828f040886bba940ef4838d71939b9351c0130f3c2657881b14254",
+        "src/source_inventory.py": "cd550c2a42fd1af0665bfbdb85b6557a342831ceb06bce6c1f525567901b8bc6",
+        "src/supervisor.py": "2a84b361ae150d5761310603e9a70d0b4879c07afbe221362278e001845fa38c",
+        "src/task_scope.py": "48c79e6c5bf74a552db2007f5010df44d3714a428c290ff185d3bb8adafa1c1b",
+        "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+        "src/web_evidence.py": "c40cfad8b0fc995ab33db5bb7ec80b9a68c6762dbcb5a4a1c94a9d2cdf625db1",
+        "prompts/answer_coverage.md": "30ad2fddcdb468328e49c7a8d7647a693193fa6e6643c037f7fb57c4d6c021b9",
+        "prompts/current_developments.md": "a2d97aacea9ec191cf30ae0efc90f6b096a4fa382e90fb8692f78dd7874f2f71",
+        "prompts/filing_revenue_inputs.md": "7bbe86065ad438be525021ac6c39d6729ed045ba0e5d6f61e82640c4cbfcf194",
+        "prompts/filings_research.md": "4bebf9c421efcf3c374ed499be08454b8349b543ff1389b76159aeddbb914da4",
+        "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+        "prompts/quant.md": "08d54c757d0133e4b88c746d81733074413fa24a6a0707b2f281a915161e936a",
+        "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+        "prompts/risk_summary.md": "b1274b30711f3288f1815d3b413f003c2f62670da6ee2f62e3a554b3b171cec2"
+      },
+      "adapter": "codex-ragas-v2",
+      "evaluator_hashes": {
+        "evaluate_ragas.py": "a801b88d656a583a0b932aca84001af6f5384b6510ee3461e51e9ef8b1d5d456",
+        "ragas_support.py": "8f03511cee39f4e01f40798241c337511cd57add27606cea48a91819905f5990"
+      },
+      "versions": {
+        "ragas": "0.4.3",
+        "langchain-community": "0.4.1",
+        "langchain-core": "1.6.10",
+        "chromadb": "1.5.9",
+        "onnxruntime": "1.31.0",
+        "pydantic": "2.14.1"
+      },
+      "embedding": {
+        "schema": 1,
+        "model": "all-MiniLM-L6-v2",
+        "dimensions": 384,
+        "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+        "tokens": 220,
+        "overlap": 40,
+        "distance": "cosine"
+      },
+      "judge": "Codex subscription / gpt-6.1-sol",
+      "web": "disabled by direct static Research invocation; no live_check supplied",
+      "kind": "Unmodified ragas.metrics.collections algorithms and prompts with custom local transports",
+      "capture_sha256": "a1617990cb7e5f1a365b969069975a7f617163de1eaa0d3cd22c0177a510f81a",
+      "dataset_sha256": "89e8ce4e0c60244c722a73f075c17cc228375df6dc6e749d2028572e1804628e",
+      "context_policy": "All unique model-visible chunks in first-seen adaptive retrieval order; inspected context replaces its chunk text; no reference injection",
+      "cases": [
+        {
+          "id": "ragas_dev_01",
+          "status": "scored",
+          "answer_sha256": "4deefc4a83971d3ee25eca5f9ee17931f47ee22e8744d410ae79b10cefc71a2a",
+          "contexts": 9,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 44.386
+            },
+            "context_precision": {
+              "value": 0.6428571428410713,
+              "status": "scored",
+              "reason": null,
+              "seconds": 58.457
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 70.271
+            },
+            "answer_relevancy": {
+              "value": 0.7841596260085408,
+              "status": "scored",
+              "reason": null,
+              "seconds": 73.33
+            }
+          },
+          "seconds": 73.471
+        },
+        {
+          "id": "ragas_dev_03",
+          "status": "scored",
+          "answer_sha256": "0010eb96548c802e118925f59fa2a32e240b86255a33a2e60d264ca234d2a20f",
+          "contexts": 8,
+          "metrics": {
+            "context_precision": {
+              "value": 0.9999999999875,
+              "status": "scored",
+              "reason": null,
+              "seconds": 14.717
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 25.396
+            },
+            "answer_relevancy": {
+              "value": 0.7083807108611907,
+              "status": "scored",
+              "reason": null,
+              "seconds": 36.161
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 50.03
+            }
+          },
+          "seconds": 50.03
+        },
+        {
+          "id": "ragas_dev_02",
+          "status": "scored",
+          "answer_sha256": "558c89de3955d7a3cb971162d8b63ea1e7e83014c0f160926a965562fd986510",
+          "contexts": 14,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 27.242
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 47.719
+            },
+            "answer_relevancy": {
+              "value": 0.8366106864629539,
+              "status": "scored",
+              "reason": null,
+              "seconds": 70.262
+            },
+            "context_precision": {
+              "value": 0.3893939393861515,
+              "status": "scored",
+              "reason": null,
+              "seconds": 148.441
+            }
+          },
+          "seconds": 148.636
+        },
+        {
+          "id": "ragas_dev_04",
+          "status": "scored",
+          "answer_sha256": "852f0035f2b5a8f563fb817f71a93bb5ca23fe8da9dcfa62518a476d19fcaa47",
+          "contexts": 13,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 23.236
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 46.976
+            },
+            "answer_relevancy": {
+              "value": 0.8563884163975501,
+              "status": "scored",
+              "reason": null,
+              "seconds": 56.32
+            },
+            "context_precision": {
+              "value": 0.8676638176541769,
+              "status": "scored",
+              "reason": null,
+              "seconds": 85.914
+            }
+          },
+          "seconds": 86.231
+        },
+        {
+          "id": "ragas_dev_05",
+          "status": "scored",
+          "answer_sha256": "884e0135426fdfadc0ede01b9036048e5b7f03f874cd0d125a3bbb5f80948db4",
+          "contexts": 9,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 34.235
+            },
+            "faithfulness": {
+              "value": 0.8571428571428571,
+              "status": "scored",
+              "reason": null,
+              "seconds": 47.026
+            },
+            "answer_relevancy": {
+              "value": 0.7267272903256692,
+              "status": "scored",
+              "reason": null,
+              "seconds": 53.608
+            },
+            "context_precision": {
+              "value": 0.4124999999896875,
+              "status": "scored",
+              "reason": null,
+              "seconds": 123.377
+            }
+          },
+          "seconds": 123.388
+        },
+        {
+          "id": "ragas_dev_06",
+          "status": "scored",
+          "answer_sha256": "ee2cf73db9d3ff09668b2bbe85f4d518f9ae76cfa776063fbae377c020419a15",
+          "contexts": 10,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 27.381
+            },
+            "answer_relevancy": {
+              "value": 0.8440633831763433,
+              "status": "scored",
+              "reason": null,
+              "seconds": 48.071
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 52.112
+            },
+            "context_precision": {
+              "value": 0.8528571428400857,
+              "status": "scored",
+              "reason": null,
+              "seconds": 105.219
+            }
+          },
+          "seconds": 105.424
+        },
+        {
+          "id": "ragas_dev_08",
+          "status": "scored",
+          "answer_sha256": "aeda436082b2aa025803894b7d8fb757279b70129e189191876b510dc81c0d4b",
+          "contexts": 6,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 28.611
+            },
+            "context_precision": {
+              "value": 0.8766666666491334,
+              "status": "scored",
+              "reason": null,
+              "seconds": 39.725
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 45.069
+            },
+            "answer_relevancy": {
+              "value": 0.9037311654346896,
+              "status": "scored",
+              "reason": null,
+              "seconds": 62.373
+            }
+          },
+          "seconds": 62.445
+        },
+        {
+          "id": "ragas_dev_07",
+          "status": "scored",
+          "answer_sha256": "552086b582e10a7241dde7475c8501cc7c9026eb6d83e38de600b35e45fc11e2",
+          "contexts": 11,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 36.775
+            },
+            "context_precision": {
+              "value": 0.8297979797876073,
+              "status": "scored",
+              "reason": null,
+              "seconds": 37.374
+            },
+            "answer_relevancy": {
+              "value": 0.7154112789935464,
+              "status": "scored",
+              "reason": null,
+              "seconds": 47.355
+            },
+            "faithfulness": {
+              "value": 0.9655172413793104,
+              "status": "scored",
+              "reason": null,
+              "seconds": 55.338
+            }
+          },
+          "seconds": 55.338
+        }
+      ],
+      "judge_calls": [
+        {
+          "key": "0d02e3b4526ac9a008b09c239afd5b13288f73f35b1e06e64f8b9cf57e5dd062",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "098287f5a62cb5c6c7d9f23ef59b056cdcb92d43624e4726744c1a3bdbadb186",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.749
+        },
+        {
+          "key": "ff9248b15c7b11945d05c228e46175e9a3272fc937234f7db8891138e9ffb09d",
+          "context": "ragas_dev_02:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.922
+        },
+        {
+          "key": "8a987fe9e45649885c9975f139c7ac935f48c67e7f0b4ea405a4b2e4bd19e3ab",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.961
+        },
+        {
+          "key": "a2fd0c3fdd1a06514305ef0e3a3168ec332fec4955ff7c1379fc599a9b2a993e",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.02
+        },
+        {
+          "key": "095dde572cb835f025f86eb46708a4577919ba15a599f581bd30b8bf96a1962e",
+          "context": "ragas_dev_02:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.509
+        },
+        {
+          "key": "a0cfe6dd99b498dc2d15adcf6d5a01716ef4a917de85f6aacc93d5fcd2108485",
+          "context": "ragas_dev_01:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.506
+        },
+        {
+          "key": "02e78eb04760a8a4669171334240fcb04c7ad6fcf663d6a718a38484301776fe",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.695
+        },
+        {
+          "key": "ac922fe1404c41e469a52194a0f9510d2b9d08f3834b397d63972fcc9dd157c1",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.986
+        },
+        {
+          "key": "c44b5fafdb84fbbd70bce5509c808a734d7fa88bc5652536b1875cb66fb70545",
+          "context": "ragas_dev_01:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 17.179
+        },
+        {
+          "key": "09e312cbc9030a56fcf00d13843aa1868cfe9ee01ebbe3955c7b1c7519605a9a",
+          "context": "ragas_dev_02:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.929
+        },
+        {
+          "key": "546714ce03119411c86fdeff19812e517b0e1af972e5c0236694972528821642",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 10.31
+        },
+        {
+          "key": "b14a4c859a153d178de1610badab65ec720e096af5895cb82f8764e8a2dfad7f",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 9.745
+        },
+        {
+          "key": "85239b9a568848d4998d9eccaa25c7163ae4dcbee756769fd45e91f93b264086",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.419
+        },
+        {
+          "key": "b6a430be6fcc2f323d574881ce09a8ada421c50d67cfa32812cfe15481cdaec1",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "dc40a45b53928416da93a7559d701c2d9fbaa4d2d043114c58d4edf38921f3ce",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "68c760415c64e44c30185dc07457ff036b82352337810d9a6c236032b816cc28",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b0f7c13d6e61463de208d4bca1edfe80b0ec44a94cff6c69f33a0ffe69ddc3d5",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b9cd4e3d04a4ff6528fa0eb69faf19a8c82892a40fe7a2a9d738692fdb44e640",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "d0f92bdfa6b51fa4e5462e1a042daff368161149c3c2c76a205d12be99ceb504",
+          "context": "ragas_dev_01:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "4a2c04d1afee398ca1637b7c3189a2510d889ca995fa15debb4a601530050771",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.309
+        },
+        {
+          "key": "3c225ae8697871bff6b38242646c6fda0b5528cbd4823eca73e47d8224935e86",
+          "context": "ragas_dev_02:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.453
+        },
+        {
+          "key": "3bb8ff54cbfdad994757cd42c225b3dfc33d962e457e8b288ff5334789139338",
+          "context": "ragas_dev_01:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 22.671
+        },
+        {
+          "key": "ff05fda059fd10547804b4b4e80f8028f19d290ef4e2ba76764bcffbd27aec83",
+          "context": "ragas_dev_01:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.225
+        },
+        {
+          "key": "6f9424234863013e86b6434b806c756bd4a256d4f0e02d41524024b494443fe8",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "f839189ee1ba831693950b564a7db6fb5ffea4100c624ce3dba8f645dabdb231",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "aae4aee2c3606372d46d9b8ebf4e88afa8632f56d7a98f5ddf7e003a1adf7b71",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "42ccc848aaec7aff60c5931cddb6bb8754ae44104bdc0e3b7ed7470568fed974",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "895152bf00dbc8b4042d63d31f72e5beff50fe5c241bd1fec5a65bc42cf9eabc",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "a4be4c175572b48b22cbd5726eddfc74596fc1f0e4adaf1b20e392a0a2e50b58",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "4dd2ad9c076b1b1300859e179d820ad6a64a8c926fc090a2201bd373c651dfd1",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "c3524663405576eed5430134419a7a1ddd0b3e6716ce02836f64c4ef6a63974c",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.23
+        },
+        {
+          "key": "6be1bd7178bc518859c87863430a24ecf4a540c009b58aca8bc57ca9c1e108a0",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "c77a7a5f68bf74dbaffccc000b8f19ce60b15ffa669f8b3a58960795b7a0cb19",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "9e809c4fdf5cfc592eb204bd50dff4dd3c8753c258c3513726edd5f25661e253",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.812
+        },
+        {
+          "key": "31e2661e127ec8fbc63b6337e7cd741e6287d813118c0e1fc3b3a6577e66f85c",
+          "context": "ragas_dev_03:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.775
+        },
+        {
+          "key": "c707ea8e96995b9a8c45a46d46c5bd174c1e8f14187f89f3225496805ca2f48a",
+          "context": "ragas_dev_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.93
+        },
+        {
+          "key": "ec1f42b9b1bf66102f9cf96b7f4c06e71ce4629525dd532dbea4a09d36072fb6",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.035
+        },
+        {
+          "key": "05d40e50f4e9f81b7bb2178e2952e3646113486ce6ad6abdaf25f7e9133a4f56",
+          "context": "ragas_dev_03:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 16.993
+        },
+        {
+          "key": "fd9e976767b857f09398c49e2d517fa832501f79c401280be13ecd5ee760704f",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 11.107
+        },
+        {
+          "key": "50105399fed59fdeb3808d01c1000724d820e8f9892c7c6ccf7ce5e118baa78c",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.557
+        },
+        {
+          "key": "179b5e7c4b01a8daffdda637f7d26962d21be066cb134b6a26826ed3e4c4d91d",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b42b1a7b7537d6ad3f4d2e149b373f9bb6e3cfd79d730f89f6d2a54b629bf988",
+          "context": "ragas_dev_03:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.612
+        },
+        {
+          "key": "0dba7ecb72107f5a2c5506fe672cbf5cd6333d1027e83cc31d0c173e0c7689e0",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.902
+        },
+        {
+          "key": "615bd9eeec110c33bd01f1b95c5fa65eaad6e836faf8fb47b966e0cc297f127c",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "76b2a1ce3b74d240f06ffb4502ae5acca42a2dc3546c22df0370d1e43e51397b",
+          "context": "ragas_dev_03:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 24.149
+        },
+        {
+          "key": "b5cbeceed32d3c7efce7ae60440a5bbdc81aec2b07e6383f818ff8a7fcd2990c",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "a1fe654f51144f808d7b27e6ebd4e5c09b37110d85c4b6616246f0c15006b35c",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "fe895157c260d93f4c6132395d48bc43cbab80a56ad54b80364a1715bcf2af41",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "9b0565672516578b6b1c475486e7dd123f316ff2ad9650f8cfe772be4548ded8",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "ed15689491d2809eaa68a159741a0bd93290761a6fb824fd8f085cc4f5ca22b4",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "ff413f8ba5507511ba220cc25594c8e5103cc19505f827fcea0c464a498f45ad",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "77498d9b0ea0b6e80be40463547b19d76a3a69aaadc40d1b2172cc6b0bcec8f3",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "bfeb6941c93ad3ff18d41ac2ad7b26524c79599f5f91b9c94716c97cdb1879d3",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.556
+        },
+        {
+          "key": "9c554b5913ee362b243310869d02f27f24af452f22e6e3b27d8af2bf87ed5cc7",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "4c956d6872afa6b099186289c616923780e06fa536afe0187fb43b12a27f0bd5",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.574
+        },
+        {
+          "key": "8f45bf14ae151929eed288a97b6f0e919b9cb6f82335d8c40c9719e10e8948e1",
+          "context": "ragas_dev_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.544
+        },
+        {
+          "key": "e26213b06761a6ac655b378768be4c1912fe807b53ee366ca862dbc8574efb22",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.469
+        },
+        {
+          "key": "4fcf468bd9e84bbba23af89ae909bd22b2250c66fd3bc01dc2f5f2e1bec0a48b",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "f7e7cef60ba10511e3bbd8fad2bee6a3bc8326adf0383c225a63ef541a13e795",
+          "context": "ragas_dev_04:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 14.169
+        },
+        {
+          "key": "005bd0685b48af17a7dd07a0900479c15d011930d7c613ee2e58ba59b433f525",
+          "context": "ragas_dev_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.396
+        },
+        {
+          "key": "94ab47c31407407a96a6733440cded400486914cb3e96c19059428cf9255d829",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "a0d6b5c9c0c26f2145fd306ad844eedbfd445d0158c2f5ff80f1f7953985b51c",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 8.845
+        },
+        {
+          "key": "2b0fd3ac18e63f32197b0cf45727a4fdf41a9ec983f9f344050c11372fbf92ed",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.534
+        },
+        {
+          "key": "abcb0ff7aaa41cd74fb1aae571081318e507f958027c84c87efbf9cedf77acaa",
+          "context": "ragas_dev_05:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.521
+        },
+        {
+          "key": "3054a276afe932fdb13c45a9b2cd0b83804d3764fa9116c2dc54af2d8a4a177c",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.561
+        },
+        {
+          "key": "cc483d50adb7f195318f65f62d595de5e5e8c00faed658f87559aa73d793d010",
+          "context": "ragas_dev_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 22.994
+        },
+        {
+          "key": "b17854856924c5538bbd7093cc5f11b95cf25cbeb4d3e170d8c2a87bdbf98673",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.183
+        },
+        {
+          "key": "38869b95963af2a25208ba36bae4b51b6376574d053d62c1148a9f6174420fa1",
+          "context": "ragas_dev_04:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.298
+        },
+        {
+          "key": "174fa5b27fd05ca9b7a4b488f65b0f2b43fa59bbb1bb95e26c1aba4ec5925d9f",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.789
+        },
+        {
+          "key": "0cee93e2185f525c26877dd9ed2d27af1757d95ef49726283022335dc405072d",
+          "context": "ragas_dev_05:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.299
+        },
+        {
+          "key": "e6071e58f61cf38cdb9faab04f9687bff211a8f16e3f0ed86b45f9a78bbc1c75",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 9.707
+        },
+        {
+          "key": "d27b059eb614e7d10fe111d6cd4a5f24e09e859af0f2e1329af252cdee4d2646",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.643
+        },
+        {
+          "key": "2776379d4928835c74960bb85893cba6ca3f7653445eb4f20badcab6202ed387",
+          "context": "ragas_dev_05:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.855
+        },
+        {
+          "key": "d7d1c6510e7489497bd65ebde2b3bbc9cff759e9e721c2204016cbead5cd7914",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.022
+        },
+        {
+          "key": "1ab6c98d72ad8705648273e4613b401b6383b9d02921268345fdc7fe02c5ee40",
+          "context": "ragas_dev_05:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.092
+        },
+        {
+          "key": "c7cca654ab90907993be95e58a134d736ba62f3a072a0e97c8da2546113672d6",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.502
+        },
+        {
+          "key": "9b14b7b6543de35a013343e2d17344ba50a4ba0af3adacf724dab3ac3fe03849",
+          "context": "ragas_dev_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.441
+        },
+        {
+          "key": "8ffb05b5ee0aa08c88b97fce0119114747b4b36db9bbb7dde24609087a277454",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "ce90ca90b73dab2613e02a8fbd95899663dc77fcb4652b822300866a2133e279",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "46680d448a544ce18ad25ccae9a7ddfda3ad8758959418fc93858abb3205a479",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.233
+        },
+        {
+          "key": "d26a5f2bd0e9d6e7211e6e8ae606fd49e2b8e6fa0bf7b8435bf8a44b8d4b4777",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.605
+        },
+        {
+          "key": "e5eddde95088be13b21243ee7e3733b705a08e14b0fa6abeabc2d2fb1b895b72",
+          "context": "ragas_dev_06:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 16.294
+        },
+        {
+          "key": "e5bb312c974331259f7aecc15a2d92d5298175d3b7496ea2137d4e3ab85432b1",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.791
+        },
+        {
+          "key": "58f8bf5d8b9b78b5f964afed47835ca14cc2771d550e10ab28b1172a423a6ba7",
+          "context": "ragas_dev_06:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 18.991
+        },
+        {
+          "key": "234116e18d9dfad16bf711316316e83ceb544649076c8a0e8b96dc0629ed1f85",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.525
+        },
+        {
+          "key": "c20142cfe9602568bbc3d318e14d6dbac79d398126d8c9a6b5fad3a45e0b45cf",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 11.498
+        },
+        {
+          "key": "f6820508f078cb62e93247fbc4e776d51c011d9fa382c7a2de15d2de146e8fab",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.608
+        },
+        {
+          "key": "ec303e8bd2b3c5ab665afcb0abeace6e2a2ce7f5549b61031977fbf43385d46e",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.858
+        },
+        {
+          "key": "5f9cae3dba437abe4dd8c85becc59e682e6598c9003a19b4fb4cc0f9686f37fd",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "7f6cc0befdc1dd7cc1c28912fb1258137e0738a2bcffccf1e21f0114be46da7c",
+          "context": "ragas_dev_06:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 8.819
+        },
+        {
+          "key": "faa9c0b8e80d4f3b3c4507e3350ef72cdaf382ceda8b3452fce67012008b3f56",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.447
+        },
+        {
+          "key": "f1b280d7d109567d2650b779fcfeea43ef6a7accdc9cc7346f449317ec6b126d",
+          "context": "ragas_dev_06:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 24.378
+        },
+        {
+          "key": "1fbe3a169fef36e9e519585dfd2695beee066be1d1e76e4a826294a8c8b9c6bd",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.689
+        },
+        {
+          "key": "1b941ba8f5383f0f4ba70e0a3d8133ca5baac64152a1e53d7d6e1f838d85c9c1",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "be67e8703447b79cd5a94151073e7682ae0c6e5376e0068e73dd56f3eefe83b2",
+          "context": "ragas_dev_05:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.99
+        },
+        {
+          "key": "3fe5fc7fab314c5898952eb8b4c0c8e8ec89b88dfe03d4be229133e1aa5adc31",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "08bc7156294f304af9e73bf61a8592e60f597aca068bd372e6d636bacecbe2b3",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "656b6c51b0f1c49137ed67ab9d5d94f4f0e6aaa5b4c35ed024bbc806e6c30574",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.094
+        },
+        {
+          "key": "c87f1fa0d311b4f5298bb3b3d032cc85b2e0cbe548ced6865bca3525a8b7395c",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.657
+        },
+        {
+          "key": "2a0b5c0a6c0ea0210d14413b22dbbac5ea1f952d37ec97538bdfe127deb1c808",
+          "context": "ragas_dev_08:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 13.079
+        },
+        {
+          "key": "afa2d4889918fd65b662f7df6209e16fbde767d30ae2be8d3dd833eb31747975",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.492
+        },
+        {
+          "key": "584578306415714bd913b96569011a1981eda58bfd65ef00562c0943b757b2f1",
+          "context": "ragas_dev_08:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 18.112
+        },
+        {
+          "key": "d8ab99a4c8f776f513880ee9e31d3d7af41799e1c174904ec9bd40d23d12f92b",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.873
+        },
+        {
+          "key": "d453a5dd9c9c19623fc103f49c58698d56bb66d49a74cb2a1d2055824ea5259b",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 13.852
+        },
+        {
+          "key": "fd015350364d6cdae66195423b15259cdf24a77281fa0fdfa6278c7b97f242d0",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.765
+        },
+        {
+          "key": "c1712523113c385deb780b255b5feac7738a4dab3d497ac41aff7c9595a6280c",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "4b3cf6cc6663843ba2f6285b0266470465faac259b28d1ba2b469d624a767db6",
+          "context": "ragas_dev_08:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "95a311e249992d62d978d6e1aaef56f08dead78756b54530728dd9c425192e25",
+          "context": "ragas_dev_06:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.407
+        },
+        {
+          "key": "472f3181cf5d3feb118fb715cba21fa10a2dcdbd7c484f227a7782bba37227af",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "7328a0efa182878e10f1a1ef37e4bfb299ad51cebcd140b18d70c0a95960cf2a",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "eb5d9ded28d59def37b8669169e10cff18c52b74f59ff0c1fab6e3591caedaf3",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "61893d28194e97d70fb6ff41ef419bc4a32e0cac485e27fdaa776c7683e04750",
+          "context": "ragas_dev_08:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 16.179
+        },
+        {
+          "key": "07ef4e6cf632228ec82952ecf77b3284872c83773b80d32bfb342ef1446579dc",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.683
+        },
+        {
+          "key": "8586f17b1998b7e30717cc4044a5c7619c9f6b6062a1bcc8059a64088075a43b",
+          "context": "ragas_dev_07:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 18.377
+        },
+        {
+          "key": "d5e23c82ab249c77a90dfdbd641e694bc81e0009385189bad2d22db8d5ebe0bb",
+          "context": "ragas_dev_08:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 21.804
+        },
+        {
+          "key": "2c44d23a0372b5b1e52313d7546be55d37a03e859e597346b4bd7f3af2d5acde",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.472
+        },
+        {
+          "key": "0577a3e768dfad89ccd1e98a2897c86dcb8a7028f1a8bb000e00908f7527366b",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "33d0db237d7472098958d4d48c30b0267f88df8f68db9584319644a7d0f0e4b8",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "66d86d035cbbc0120e39e05281fe1831089bc4e0355678055444dcd83d96f34c",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 8.66
+        },
+        {
+          "key": "dc4c046ee6d691db381eb7a4b986987cc57a742a9887651110f53e2daf2726b9",
+          "context": "ragas_dev_07:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 18.671
+        },
+        {
+          "key": "62bf04457388f24e6cf2650403c7dd9d89d3d7ad002dac747de62c68a1f22318",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.966
+        },
+        {
+          "key": "8cb208d6db6c4e97202473325ff6e855d5fdddc51c840099233a6de24b6fdd72",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b2c4963d27aeb9ab11c46ada27e9d66b59a118fb7a99d7f9ec8d4b096c2e8b77",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "a3ca76ad90fdd784a124409379509b2f67a62f7b4f81814976a6d1d873a2f830",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "c6cdbd3a0a8c57c7eaa32985a87f34bcdd9f13f35d5e02efbedf856311c4025d",
+          "context": "ragas_dev_07:context_precision",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "767bbee0ce506a11bbd410c31ca6cda0da7b24ab320f275d95405f976d723472",
+          "context": "ragas_dev_07:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 9.805
+        },
+        {
+          "key": "f4fdf63a781e4408a12135f5756222c35d25a40a75070d913d92ae93162dcf17",
+          "context": "ragas_dev_07:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 34.091
+        }
+      ]
+    },
+    "heldout-corrected-scores.json": {
+      "checked_at": "2026-10-22T17:08:23.345175+00:00",
+      "git_commit": "aec3b3c6be80570d1a5cd5a4095f61bbb42ea2f9",
+      "runtime_hashes": {
+        "src/analysis_artifacts.py": "dbfe35f2e4837e41469b781f236dd5ffa2af32f2a456d0de2f0250bf36139004",
+        "src/capabilities.py": "598121d0fd10bea74884aa54c28045e03dd2066659756282015b6e817d8c1c06",
+        "src/codex_model.py": "55e05a23ba90687242b3c4f99052b221253aecd18197b554d5c5965df70d3c89",
+        "src/codex_transport.py": "cd56abd9ca1acce0b5a66376428447e926ae5f88d257765f1cf9358379ab334e",
+        "src/current_developments.py": "d2f1f259265f19e7100d2b5987752b183fd707c2d8a0a419cd16b4b54281d9ad",
+        "src/filing_financials.py": "1d77e206897c7f1e66cc768dba12d27eb7904cc73b4a883ee39a4d5233c102f6",
+        "src/filing_scope.py": "17dec4c15409390eab5259351083f2f077f338f388e45b4ac95d0e4d9dea71f3",
+        "src/financial_data.py": "36ddded093d224992f7a14a87c5fcfc6e71617048bcdb68587f1d78f1b7ee8ba",
+        "src/financial_workflow.py": "150baa6e57b322cf4ff679933b9e86c9f7e1ca5cbda3f18286f7afd7e2eec563",
+        "src/generation.py": "dc7078127f05e2f4d1666ba696e383c7ba370d20d0b84e90c4c8acd24aa42d29",
+        "src/generation_context.py": "3943b21874c4da0530f9992ed39b2fb62197616fa26d656961f63647ea4ba6e7",
+        "src/generation_tools.py": "580f17f42822c8d501305423df037f96edbc3292a020d0561132adb8975a18a3",
+        "src/live_mcp.py": "3e10890b7f609f255bc9f9acadd48c8bb05f7efbc5e824fffed6df17889ebc65",
+        "src/provider_client.py": "4b3625da5b59c15f94a76a3ad13c836dbf9c6011f0ef009fee0ffa14de74a5b7",
+        "src/provider_limits.py": "87f92362d418f15847d37b0c42fb4890d613da3206e91cc80f632c19074864a0",
+        "src/provider_models.py": "eaa646225deaf1321bf32b059ee198023fd775a717e58835e9dee71c7aae3f78",
+        "src/provider_policy.py": "0452d7f6e2d40f174e180ece00122dd1ac83f3d089ff230b06272cb881a730b0",
+        "src/quant_analysis.py": "941ccbd3f4f95778d1919d4551fad72e8c996c9b3e3033b49e4f4f34200360eb",
+        "src/quant_runner.py": "88870c6e9a5fbfbfef530b12871a1c09274bc97c4046ae8f0346ac96971faad0",
+        "src/quant_workflow.py": "c1dda1aea4382ab3486e4995b6248dd753df260798098055a74caaffede5a0d3",
+        "src/request_plan.py": "14931e8b465e0835d5761884d52660484dcdd20293d709d698e84f24155f4f89",
+        "src/request_routing.py": "15d35ab2b14c6d79b0ea7db537aafd2de7b985ad2f5b868625f634801677f9cf",
+        "src/research_index.py": "661fe8f70c9d279111c68ba5d22c2b7dcde29c5e4846c033a95229a733408ce5",
+        "src/research_workflow.py": "33a6915963cb8e3f0ea5b64756c9c7e696f6276639f31858591ccdb85c595127",
+        "src/response_contract.py": "a80ea9825af858e3b21777629ac3ff69b18ae128da64bc2d927c408943c83124",
+        "src/risk_summary.py": "927351ae033b39cd5745a514f59e60ad15aad19206691fe836936cd01c516f27",
+        "src/source_collection.py": "41a3bde568828f040886bba940ef4838d71939b9351c0130f3c2657881b14254",
+        "src/source_inventory.py": "cd550c2a42fd1af0665bfbdb85b6557a342831ceb06bce6c1f525567901b8bc6",
+        "src/supervisor.py": "2a84b361ae150d5761310603e9a70d0b4879c07afbe221362278e001845fa38c",
+        "src/task_scope.py": "48c79e6c5bf74a552db2007f5010df44d3714a428c290ff185d3bb8adafa1c1b",
+        "src/tool_arguments.py": "602f0523bdc6e25b151a160ae712a456375e7c1fcbd7306e159c890d5e6a53e9",
+        "src/web_evidence.py": "c40cfad8b0fc995ab33db5bb7ec80b9a68c6762dbcb5a4a1c94a9d2cdf625db1",
+        "prompts/answer_coverage.md": "30ad2fddcdb468328e49c7a8d7647a693193fa6e6643c037f7fb57c4d6c021b9",
+        "prompts/current_developments.md": "a2d97aacea9ec191cf30ae0efc90f6b096a4fa382e90fb8692f78dd7874f2f71",
+        "prompts/filing_revenue_inputs.md": "7bbe86065ad438be525021ac6c39d6729ed045ba0e5d6f61e82640c4cbfcf194",
+        "prompts/filings_research.md": "4bebf9c421efcf3c374ed499be08454b8349b543ff1389b76159aeddbb914da4",
+        "prompts/financial_data.md": "9fb86f2f87d5ee167644da5dedd516978251e154bff9c69c9b0ae4de3f5896ef",
+        "prompts/quant.md": "08d54c757d0133e4b88c746d81733074413fa24a6a0707b2f281a915161e936a",
+        "prompts/request_plan.md": "424fd1f207e55d24bbcd0a6e33fc970cef6cd5db2162840ff301f4abd31985cf",
+        "prompts/risk_summary.md": "b1274b30711f3288f1815d3b413f003c2f62670da6ee2f62e3a554b3b171cec2"
+      },
+      "adapter": "codex-ragas-v2",
+      "evaluator_hashes": {
+        "evaluate_ragas.py": "794f079fcaec310ecba045f637ca939cb973b4f463b3ca13166659a6c6a70247",
+        "ragas_support.py": "8f03511cee39f4e01f40798241c337511cd57add27606cea48a91819905f5990"
+      },
+      "versions": {
+        "ragas": "0.4.3",
+        "langchain-community": "0.4.1",
+        "langchain-core": "1.6.10",
+        "chromadb": "1.5.9",
+        "onnxruntime": "1.31.0",
+        "pydantic": "2.14.1"
+      },
+      "embedding": {
+        "schema": 1,
+        "model": "all-MiniLM-L6-v2",
+        "dimensions": 384,
+        "artifact_sha256": "913d7300ceae3b2dbc2c50d1de4baacab4be7b9380491c27fab7418616a16ec3",
+        "tokens": 220,
+        "overlap": 40,
+        "distance": "cosine"
+      },
+      "judge": "Codex subscription / gpt-6.1-sol",
+      "web": "disabled by direct static Research invocation; no live_check supplied",
+      "kind": "Unmodified ragas.metrics.collections algorithms and prompts with custom local transports",
+      "capture_sha256": "0c0ccdbf8212bddc689c9960d872904bb30342065d8eebb881920ed7aa2990cc",
+      "dataset_sha256": "6475894df8b95f1253700196438e626c8bc13f8322751563c8601ec5cd99efd6",
+      "context_policy": "All unique model-visible chunks in first-seen adaptive retrieval order; inspected context replaces its chunk text; no reference injection",
+      "context_format": "metadata-v2: actual observed source metadata plus widest observed text; no reference metadata",
+      "cases": [
+        {
+          "id": "ragas_holdout_01",
+          "status": "scored",
+          "answer_sha256": "4da9f1f324097f41c4830831c0ff22cb9f78736e84c6ad4ca5595f383b8f141d",
+          "contexts": 7,
+          "metrics": {
+            "answer_relevancy": {
+              "value": 0.8291716356542836,
+              "status": "scored",
+              "reason": null,
+              "seconds": 2.203
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 20.523
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 20.207
+            },
+            "context_precision": {
+              "value": 0.9999999999857143,
+              "status": "scored",
+              "reason": null,
+              "seconds": 92.924
+            }
+          },
+          "seconds": 93.16
+        },
+        {
+          "id": "ragas_holdout_02",
+          "status": "scored",
+          "answer_sha256": "34447dc0b8bbb99f0600dc9e94b8b8bde9021cde755ff34a798205f78f45b053",
+          "contexts": 10,
+          "metrics": {
+            "answer_relevancy": {
+              "value": 0.7080449424230286,
+              "status": "scored",
+              "reason": null,
+              "seconds": 2.046
+            },
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 35.919
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 37.949
+            },
+            "context_precision": {
+              "value": 0.7260912698321936,
+              "status": "scored",
+              "reason": null,
+              "seconds": 144.156
+            }
+          },
+          "seconds": 144.835
+        },
+        {
+          "id": "ragas_holdout_04",
+          "status": "scored",
+          "answer_sha256": "70e7ec37717935ad81efae83f2a376c659ba3f2cadbfa9e440ea08bf236401e7",
+          "contexts": 8,
+          "metrics": {
+            "context_recall": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 26.798
+            },
+            "answer_relevancy": {
+              "value": 0.7926538764827006,
+              "status": "scored",
+              "reason": null,
+              "seconds": 44.747
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 47.118
+            },
+            "context_precision": {
+              "value": 0.99999999998,
+              "status": "scored",
+              "reason": null,
+              "seconds": 97.589
+            }
+          },
+          "seconds": 97.793
+        },
+        {
+          "id": "ragas_holdout_03",
+          "status": "scored",
+          "answer_sha256": "241711a8995e30a44a571331291078f5b9f07485759527fc652b8ceaf07abbf9",
+          "contexts": 13,
+          "metrics": {
+            "answer_relevancy": {
+              "value": 0.8941426185760776,
+              "status": "scored",
+              "reason": null,
+              "seconds": 9.421
+            },
+            "faithfulness": {
+              "value": 1.0,
+              "status": "scored",
+              "reason": null,
+              "seconds": 22.043
+            },
+            "context_recall": {
+              "value": 0.75,
+              "status": "scored",
+              "reason": null,
+              "seconds": 28.107
+            },
+            "context_precision": {
+              "value": 0.5413691246964428,
+              "status": "scored",
+              "reason": null,
+              "seconds": 170.119
+            }
+          },
+          "seconds": 170.637
+        }
+      ],
+      "judge_calls": [
+        {
+          "key": "e33fcbcd93b375821ab12d9b9674374f9b62e42299e32a202d644e0b8715ab6b",
+          "context": "ragas_holdout_01:faithfulness",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "c9a0f05eb1d9323b8234ed2d1141c1f5ba89879fdf5892c70e6f67a2585b03d5",
+          "context": "ragas_holdout_01:answer_relevancy",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "3be84fef517f0b21d2af29c4739791962c20779fb5dee1f575505ab617e3ccc8",
+          "context": "ragas_holdout_01:answer_relevancy",
+          "sample_index": 1,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "5f51ee94d521e24fdf9b9445b7cafa4fefc7c57632906a98b9eb0762c7c81da9",
+          "context": "ragas_holdout_01:answer_relevancy",
+          "sample_index": 2,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "4e72b184be657704ebd03665c5500903d18399f1ecbb67bef470208ffa1118c1",
+          "context": "ragas_holdout_02:faithfulness",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b1bd4a723b47d0a461de77e490220c615929649d680a518d1c3376d07fba35cc",
+          "context": "ragas_holdout_02:answer_relevancy",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "1e48f39fdc50d85e8857db2764e72519b3d2a16a475cd927b945c017803c74db",
+          "context": "ragas_holdout_02:answer_relevancy",
+          "sample_index": 1,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "6393338a9b340fba547cd96dc5764081c089bd5596279df37803d12faa0818be",
+          "context": "ragas_holdout_02:answer_relevancy",
+          "sample_index": 2,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "d17e3a15f7743639811151c259c40578670eab096f3a5c7e2d23ba6de3c0f3b3",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.283
+        },
+        {
+          "key": "a5e7f9825f4be658bcfdfe19fc0564236ab60ba840ea617c7d27712aedcd12ec",
+          "context": "ragas_holdout_01:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 20.46
+        },
+        {
+          "key": "f179784ff954f41c6a8e41be3af57993639c3252d8d2a378c5c7ac5864149367",
+          "context": "ragas_holdout_01:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 20.192
+        },
+        {
+          "key": "c28db764d047df541f00b82bba769de19d1b29922c0644c22a92273894efb874",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.485
+        },
+        {
+          "key": "27b1a9ef6a692077859f1690f1f58119be39b1e65dc14648bc7f30f24de95f30",
+          "context": "ragas_holdout_02:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.987
+        },
+        {
+          "key": "04e88e1776a846ff3701f993979e7f5cb12f27a5c3e3bda765db9b13f4b9f38e",
+          "context": "ragas_holdout_02:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 28.761
+        },
+        {
+          "key": "ddf91d342362387a99b05c256b9c72d2d2f8f9cae4995a26d75e03a5935faafd",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.592
+        },
+        {
+          "key": "7f5cd53cb14d8198a6bb1cb10f293bfeae9b587b40feaad6c5ac8f5e9f58dc00",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.743
+        },
+        {
+          "key": "b694089b8b19b5dc1aa4cdf4338909641c30b1d8f42e40d2edf7be8c0f625350",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.921
+        },
+        {
+          "key": "1b7aefe3b6893b0e526ecd013b125756a6f957c0f2b119a9c459ecc2dff04584",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.12
+        },
+        {
+          "key": "6c25c05ad099f44c4e826d00ea2bab30c445c8c810f253bdda3392f11978263c",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.463
+        },
+        {
+          "key": "c7c0d88b315f7f959dee2961457483cdfa9bbf241ae53acf8977263ac11a8422",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.386
+        },
+        {
+          "key": "b2aab299af3da65bcf17f42f35aec51ba6d5592bf042b1b32098c568ce42f3cb",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.494
+        },
+        {
+          "key": "49fad62c15aaf38d9b667090d605997a13b421807594c790983ea2def231e31a",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.947
+        },
+        {
+          "key": "b4b22a340248aa2769b2216ce66f46f16903e1dcb5329ab93373748552cba85a",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.722
+        },
+        {
+          "key": "74d065015d65ab9aeb61b2ada41999d8cdf42f9443f5eeb140489c198ea0167b",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.315
+        },
+        {
+          "key": "2d02fc0de56b16032284c79c9399dbede333426dfef2955c07575de1cbf677e1",
+          "context": "ragas_holdout_01:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.838
+        },
+        {
+          "key": "02cefcc50e8baaf0c8d3aebf0f68770d2cff57a41a0d25e32d3fca0ec0a232ce",
+          "context": "ragas_holdout_03:faithfulness",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "cb2894ef35fb473f4c8d5ac7b66075f682d1b6898df9c1785ab571643a62b2e1",
+          "context": "ragas_holdout_03:answer_relevancy",
+          "sample_index": 0,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b075df24fc76675ddc5cd1a5711602ec4c729bb40d09f7c4915ee0cba24a97fe",
+          "context": "ragas_holdout_03:answer_relevancy",
+          "sample_index": 1,
+          "cached": true,
+          "seconds": 0
+        },
+        {
+          "key": "b609df9feb4a50d77589810ec3a5c64209688eeb3396056fc25021c882e73c51",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.28
+        },
+        {
+          "key": "b9887b9eb434168f3e2272a2db04c984038ef598ac59fdfb1415933b0f5fb0dc",
+          "context": "ragas_holdout_03:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 8.575
+        },
+        {
+          "key": "155ea133e27b6e58a5132088a18affff17a7f760cccc2e3fec266e0fe89e3778",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.933
+        },
+        {
+          "key": "93cd85b10885f79edc96747a322b08764eae7cbee5acf1fa867bc47929085da3",
+          "context": "ragas_holdout_03:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 21.919
+        },
+        {
+          "key": "2898a4c1cee540f0607f6388e8c74c0c3ec4498889c38ea2965fe0a6681e050d",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.209
+        },
+        {
+          "key": "24f064f01e131696d92b63075068c4d3b6bc8b4651d3b20a645e13ec6664b1e3",
+          "context": "ragas_holdout_03:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 19.604
+        },
+        {
+          "key": "0628049147812243ff5fdda3573b4f0d03b015e7f4d5ed41887331104745a19d",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.266
+        },
+        {
+          "key": "5bf2e6235af2ee81d60f91b7d8adbdc392271617bfb3eaac69aab3e6c34550df",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 12.148
+        },
+        {
+          "key": "5ae7f7ddbc960d5033cb13aac6779f2b9b1a0132450dceebd9977f537ebaea35",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.294
+        },
+        {
+          "key": "7d359c05599980b3d47a08cb4106037be7033c33cec8dbf76cfc47fa10a197a2",
+          "context": "ragas_holdout_02:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.976
+        },
+        {
+          "key": "c190352f5de7641d9e5b326d0d38ca28c75894f2ecc9d9fa45b94ff8da933779",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.538
+        },
+        {
+          "key": "09322a7e47580804e3457d131d9b7b1701524b9ed367ffcb4dbc2c8b11f1a09b",
+          "context": "ragas_holdout_04:answer_relevancy",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.003
+        },
+        {
+          "key": "aa3e5b948c7089ebdb1d844c5bd047458d3dc9fb3e0ae9c44554f4430101c154",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.73
+        },
+        {
+          "key": "69ac3159416e836c118be72b6771a0afa4b23d83703d22ebd5b9ad5118c92918",
+          "context": "ragas_holdout_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.94
+        },
+        {
+          "key": "4f0862bd15a33a52848a944021dab1e93aae7d76a8fb247c53c3fe3bd9b4db79",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.904
+        },
+        {
+          "key": "01e254ad68d7d2eba8c94729dbd0f28ac1cd345bbbb3febb12f31745703685b9",
+          "context": "ragas_holdout_04:answer_relevancy",
+          "sample_index": 1,
+          "cached": false,
+          "seconds": 8.901
+        },
+        {
+          "key": "81be7c3be7407f809c46cf9357275adee61900f393b6c0b92e2a2aec8054df3e",
+          "context": "ragas_holdout_04:context_recall",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 15.859
+        },
+        {
+          "key": "b30e4bc7a24bd508354bccbde9ef04c4597c66203e20745e2f86acf03fe3e76e",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.541
+        },
+        {
+          "key": "7b1b233ae06a03c00cc622e448102c75ef260322e50e17c7c1389bdcdfbcb4a7",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.376
+        },
+        {
+          "key": "45416017a4e0ca6553eb4f1fa22475f6b987270a2cd7da9a0adef7ec1eab777b",
+          "context": "ragas_holdout_04:answer_relevancy",
+          "sample_index": 2,
+          "cached": false,
+          "seconds": 11.47
+        },
+        {
+          "key": "95db34b6e09325e7d5e314cd9c83a81322aa9c1e4ded55aa5eecbc19261f2b06",
+          "context": "ragas_holdout_04:faithfulness",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 22.212
+        },
+        {
+          "key": "7d86d3b2b77a01fd519dae76c8dfa1cd317a2f2752fcb4c93c3c8e287401f9d0",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.499
+        },
+        {
+          "key": "8875f733d0d8ef517c21ee553cb70628a77e78dc94698adf0eecef089768b52f",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.051
+        },
+        {
+          "key": "65fcd9a0719dea142ee2ac3af7721a4cc01f2f0519d96530469ec55ce6b22f9c",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.904
+        },
+        {
+          "key": "67b1d3c36725ea5b3bfe0cbd1ace844b51d4005f8c6d59e577ad7df7e989ba4f",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.296
+        },
+        {
+          "key": "be6befa39cbd7eba7773c14a5ce0fd616f44a777c686cbd63ba2cbb972fbbff2",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.193
+        },
+        {
+          "key": "7485807cc91d0e0d16ab9d18b7fcf490d4c7965297553b11768e9a7592916a83",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 11.227
+        },
+        {
+          "key": "ddd63c21ec511639018eb3fed27da5a89e9bf3b15f3ef2e7d5c1d5e420959ab7",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 8.733
+        },
+        {
+          "key": "14ade4a87cc510626ddd9b83f8895a77146b0fe41bf7368684e131eb057ce88f",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.687
+        },
+        {
+          "key": "1e285abc013fd4751f626e6dbb9145252db81ae523ef9a2e136968b089c8646e",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 9.823
+        },
+        {
+          "key": "d18f3dcc8c65a41adeb70eac9c3190e2f48d743ef43a36dfa89b0fc0e4baaaae",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.137
+        },
+        {
+          "key": "0443f4dd7c29860e9dd2237434d5ae9c749355e754413195dea80124dce04971",
+          "context": "ragas_holdout_04:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.128
+        },
+        {
+          "key": "11d18d1e41a21ef6ae5e58fb314bfce838d204eb9e6a637d6ecac80658ccc12e",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.765
+        },
+        {
+          "key": "432b11e23d70eb5181baea95b6eda3b32f62b70bea53261f99665361ffb488c7",
+          "context": "ragas_holdout_03:context_precision",
+          "sample_index": 0,
+          "cached": false,
+          "seconds": 10.447
+        }
+      ]
+    }
+  }
+}

@@ -205,11 +205,16 @@ class ResearchIndex:
         section=None,
         version=None,
         form=None,
+        document_ids=None,
         k=6,
     ):
         if not companies or not years or not 1 <= k <= 12:
             raise ValueError("Specify companies, fiscal years, and k between 1 and 12")
+        if document_ids is not None and not document_ids:
+            return []
         filters = [{"company": {"$in": companies}}, {"fiscal_year": {"$in": years}}]
+        if document_ids is not None:
+            filters.append({"document_id": {"$in": document_ids}})
         for name, value in (("section", section), ("version", version), ("form", form)):
             if value:
                 filters.append({name: value})

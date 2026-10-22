@@ -1,0 +1,16 @@
+{
+  "image": "sha256:af0391a597494237762cc10cb92ec0f63db5620c1a373ce45744184740da07ae",
+  "result": {
+    "kind": "Linux actual Chroma + deterministic Research tool fixture + actual FastAPI capability SSE",
+    "filing_scoped_retrieval": "pass",
+    "cited_research": "pass",
+    "capability_sse": "pass",
+    "root_http": 200,
+    "generation_api_calls": 0,
+    "tavily_calls": 0,
+    "ragas_scores": false,
+    "corpus_fingerprint": "ff72787c66808cdb032fefaa66667777a53e20364340f0016068b95094064c3b"
+  },
+  "initial_harness_failure": "ASGI test omitted FastAPI lifespan; initialized lifespan and repeated successfully. No product fix was needed.",
+  "onnx_warning": "Read-only cache cannot persist telemetry ID; uses an in-memory identifier, inference passed."
+}

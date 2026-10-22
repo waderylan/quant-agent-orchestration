@@ -1,26 +1,24 @@
 # M13 — Experience and evaluation
 
-Owner: Rylan Wade. This milestone makes the full browser workflow easy to inspect and produces a reproducible local evaluation report over a fixed, source-reviewed question set. The [milestone index](../README.md) owns status and order.
+Owner: Rylan Wade. The [milestone index](../README.md) owns order and status. This increment implements and measures static Filings Research RAGAS; broader experience and agent evaluation remain.
 
-## Inputs and boundaries
+## Implemented contract
 
-- Start from the five-worker graph, actual MCP paths, two-provider routing, and the existing [PM exploration](../../research/pm-exploration/README.md). Use exploratory failures to design cases, but keep a held-out set separate from cases used to tune prompts or routing.
-- The [assignment](../../reference/assignment/Assignment_2_Description.md) requires RAGAS faithfulness, answer relevance, context precision, and context recall. The [evaluation page](../../evaluation.md) is the reporting home. M14 adds deployed cold/warm, cost, and provider results.
-- Maintain separate labels for deterministic fixtures, direct worker runs, full local application/browser runs, actual MCP/provider calls, and later Cloud Run runs.
+- Fixed source-reviewed development, held-out and nonmetric control fixtures live under [tests/fixtures](../../../tests/fixtures/README.md). Questions cover reported disclosures, periods, amendment scope, conditional events and cross-company interpretation. References and exact immutable spans remain outside answer generation.
+- [evaluate_ragas.py](../../../scripts/evaluate_ragas.py) captures the real Research worker and runs the four pinned RAGAS collection metrics using local Codex judging and ONNX embeddings. Missing or invalid metrics remain unavailable rather than becoming zero. Explicit reference errata preserve original datasets/captures.
+- [report_ragas.py](../../../scripts/report_ragas.py) exports full-precision per-question scores, timings, usage, source identities and structured judge responses. [verify_ragas_report.py](../../../scripts/verify_ragas_report.py) replays arithmetic without model calls. Recorded metric inputs retain every model-visible context, including uncited retrievals and inspected metadata.
+- Explicit annual/interim/quarter scope filters improve retrieval before semantic ranking. Mixed-form requests and original/amended versions remain available; empty scope filters cannot fall back to the whole index. Company/year context remains visible to direct hosted routing.
+- [Evaluation](../../evaluation.md) owns measured values, paired changes, calibration, independent source/claim reviews, hosted costs, methodological corrections and remaining limits. [Dated evidence](evidence/RAGAS_2026-10-22.json) preserves the original cohort identities and source/code hashes.
 
-## Work to implement
+## Verification and reproduction
 
-- Define supported task families and a versioned fixed dataset: filing explanation, cross-company comparison, exact GAAP figures, calculations, risk changes, current developments, official-update verification, missing coverage, ambiguity, and source conflict. Review expected source passages, periods, units, formulas, and acceptable partial outcomes by hand.
-- Build a repeatable evaluator command using pinned dependencies and recorded dataset/code/model versions. Verify RAGAS client and judge compatibility before scoring; never label an unavailable metric as zero or silently substitute a paid judge. Calibrate model-judged cases against reviewed good and bad answers.
-- Report all four required RAGAS metrics with sample sizes and method. Separately measure claim-level citation support, financial correctness, requested-output completion, agent trajectory/delegation, shared-MCP use, prompt-injection resistance, and failure handling. Allow more than one valid tool path where the outcome is correct.
-- Capture retrieval, model, and total wall time plus answer-token time to first token for local runs. Record token counts and dated price estimates for both real serving providers where exposed. Cloud cold-start and actual billing results follow in M14.
-- Refine the vanilla browser to make selected scope, worker/provider route and reason, progress, citations, missing outputs, partial/gap/clarification, charts, and downloads understandable. Preserve SSE streaming, Stop/cancellation, safe text rendering, and keyboard/browser usability.
+Use the [root README](../../../README.md#static-filing-ragas) for setup and commands. The [acceptance record](evidence/ACCEPTANCE_2026-10-22.json) identifies regression and documentation checks. The [container record](evidence/CONTAINER_2026-10-22.json) separates Linux real retrieval/fixture generation and capability SSE from native/hosted model scores.
 
-## Acceptance evidence
+The fixed question set is now published. Further tuning on its held-out cases requires fresh held-out questions. Hosted semantic defects remain visible even where model-judged faithfulness reaches its ceiling.
 
-1. A clean checkout can run the fixed dataset and reproduce the report method. [Evaluation](../../evaluation.md) contains actual values for all four RAGAS metrics, sample sizes, evaluator/model versions, and source references; unresolved judge compatibility blocks that claim.
-2. Independently checked numerical cases validate dates, definitions, units, formulas, chart/table values, and bundle replay. Human-reviewed risk/current-source cases inspect both cited text and whether it supports the claim.
-3. Browser checks exercise all major completion states, long/multi-worker traces, provider routing, mobile/narrow layout, source/attachment opening, chart downloads, and Stop. Run unfamiliar questions in addition to fixed demonstrations.
-4. Report concrete failure counts, latency distributions, cost assumptions, remaining limits, and the chosen release criteria. Run the full local suite and Docker application checks; store dated raw results under `evidence/`.
+## Remaining M13 work
 
-Choose dataset size, holdout split, judge adapter, and numerical release thresholds after a baseline run and Rylan Wade's feedback. No invented benchmark score or cloud measurement belongs in this milestone.
+- Broader whole-supervisor evaluation of checked arithmetic, agent handoffs, shared live MCP, prompt injection and failure recovery.
+- Additional browser completion-state, narrow-layout, source/download and cancellation acceptance over the final integrated release.
+- Integration of the selected M12 Tavily configuration; this branch starts from remote main independently of that local implementation.
+- M14 owns Cloud Run cold/warm, deployment concurrency, serving-provider release checks and operating cost. PROCESS_LOG.md remains Rylan Wade's personal reflection template.
